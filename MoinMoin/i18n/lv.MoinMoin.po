@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -1119,18 +1119,6 @@ msgstr "Augšuplādēt jaunu piesaisti \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Iekļautais attēls: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Izveidot jaunu attēlu \"%(filename)s (atvērs jaunā logā)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Labot attēlu %(filename)s (atvērs jaunā logā)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikšķināms attēls %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Pārslēgt rindu numerāciju"
 
@@ -1301,9 +1289,6 @@ msgstr "Mainīta lapa"
 msgid "Page changed"
 msgstr "Mainītā lapa"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1336,6 +1321,9 @@ msgstr "saskaņa"
 
 msgid "matches"
 msgstr "saskaņas"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "PēdējāsIzmaiņas"
@@ -2377,6 +2365,29 @@ msgstr "Nevar izdzēst Jūsu ātrsaiti uz šo lapu."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Nepieciešama ātrsaite uz šo lapu, lai to varētu izdzēst."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slīdrāde"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slīdrāde"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2547,9 +2558,6 @@ msgstr "instalēt"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Lapai %(pagename)s nav piesaistes"
 
-msgid "Edit drawing"
-msgstr "Labot attēlu"
-
 msgid "New Attachment"
 msgstr "Jauna Piesaiste"
 
@@ -2602,9 +2610,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Piesaite '%(target)s' (veidota no faila '%(filename)s') jau eksistē."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
@@ -3189,6 +3194,27 @@ msgstr "Nav lietotājs:"
 msgid "You are not allowed to perform this action."
 msgstr "Jums nav tiesību veikt šo darbību."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Izveidot jaunu attēlu \"%(filename)s (atvērs jaunā logā)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Labot attēlu %(filename)s (atvērs jaunā logā)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikšķināms attēls %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Labot attēlu"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Lūdzu, pirms veidot papildus lapas, izveidojiet mājas lapu."
 
@@ -3242,6 +3268,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages pārvaldīšana"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Tikai superlietotājs drīkst lietot šo kontu."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Virslapa nav atrasta!"
 
 #, fuzzy
 msgid "page package"
@@ -3357,9 +3390,6 @@ msgstr "Darbība %(actionname)s ir veikta šajā Viki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Jums nav tiesību izmantot darbību %(actionname)s šajā lapā."
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Tikai superlietotājs drīkst lietot šo kontu."
-
 msgid "Views/day"
 msgstr "Skatīta (dienā)"
 
@@ -3429,6 +3459,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Jums nav tiesību labot šo lapu."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -1126,18 +1126,6 @@ msgstr "Качване на ново приложение \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Вмъкнато изображение: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Създаване на нова рисунка \"%(filename)s (отваря се в нов прозорец)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Редакция на рисунка %(filename)s (отваря се в нов прозорец)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Рисунка, по която може да се цъка: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Превключи показването на номерата на редовете"
 
@@ -1316,9 +1304,6 @@ msgstr "Страници в пакета"
 msgid "Page changed"
 msgstr "Запис на промените"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1352,6 +1337,9 @@ msgstr "съвпадение"
 
 msgid "matches"
 msgstr "съвпадения"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "СкорошниПромени"
@@ -2407,6 +2395,29 @@ msgstr "Бързата връзка до тази страница не може
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Бързата връзка до тази страница беше премахната."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Презентация"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Презентация"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2585,9 +2596,6 @@ msgstr "инсталирай"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Няма съхранени приложения към %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Редакция на чертежа"
-
 msgid "New Attachment"
 msgstr "Ново приложение"
 
@@ -2643,9 +2651,6 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "Приложението '%(target)s' (отдалечено име '%(filename)s') вече съществува."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Не Ви е позволено да записвате чертежи на тази страница."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Не Ви е позволено да изтривате приложения от тази страница."
@@ -3253,6 +3258,27 @@ msgstr "Не е потребител:"
 msgid "You are not allowed to perform this action."
 msgstr "Не Ви е позволено да извършвате това действие."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Създаване на нова рисунка \"%(filename)s (отваря се в нов прозорец)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Редакция на рисунка %(filename)s (отваря се в нов прозорец)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Рисунка, по която може да се цъка: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Не Ви е позволено да записвате чертежи на тази страница."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Редакция на чертежа"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Моля, създайте Ваша домашна страница преди да започнете да създавате други."
@@ -3312,6 +3338,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Управление на МоитеСтраници"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Не Ви е позволено да използвате това действие."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Не са открити родителски страници!"
 
 #, fuzzy
 msgid "page package"
@@ -3432,10 +3466,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 "Не Ви е позволено да използвате действие %(actionname)s на тази страница."
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Не Ви е позволено да използвате това действие."
-
 msgid "Views/day"
 msgstr "Прегледа/ден"
 
@@ -3505,6 +3535,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Не е позволено да редактирате тази страница."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2009-04-20 16:16+0100\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1142,18 +1142,6 @@ msgstr "Carica nuovo allegato \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Immagine in linea: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Crea un nuovo disegno \"%(filename)s (apre in una nuova finestra)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Modifica disegno %(filename)s (apre in una nuova finestra)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Disegno selezionabile: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Dis/Attivare numerazione delle righe"
 
@@ -1338,9 +1326,6 @@ msgstr "Pagina modificata"
 msgid "Page changed"
 msgstr "La pagina è stata modificata"
 
-msgid "about"
-msgstr "informazioni"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1373,6 +1358,9 @@ msgstr "corrispondenza"
 
 msgid "matches"
 msgstr "corrispondenze"
+
+msgid "about"
+msgstr "informazioni"
 
 msgid "RecentChanges"
 msgstr "ModificheRecenti"
@@ -2400,6 +2388,29 @@ msgstr ""
 "È necessario avere un collegamento rapido a questa pagina per poterlo "
 "rimuovere."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Diapositive"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Diapositive"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2603,9 +2614,6 @@ msgstr "installa"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Non ci sono allegati nella pagina %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Modifica il disegno"
-
 msgid "New Attachment"
 msgstr "Nuovo allegato"
 
@@ -2660,9 +2668,6 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "L'allegato \"%(target)s\" (nome originale \"%(filename)s\") esiste già."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Non si è autorizzati a salvare un disegno in questa pagina."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Non si è autorizzati a eliminare i file allegati."
@@ -3274,6 +3279,27 @@ msgstr "Non è un utente:"
 msgid "You are not allowed to perform this action."
 msgstr "Non è consentito eseguire questa azione."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Crea un nuovo disegno \"%(filename)s (apre in una nuova finestra)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Modifica disegno %(filename)s (apre in una nuova finestra)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Disegno selezionabile: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Non si è autorizzati a salvare un disegno in questa pagina."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Modifica il disegno"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Crea una pagina personale prima di creare altre pagine."
 
@@ -3329,6 +3355,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Amministrazione di MyPages"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Solo al super-utente è consentito usare questa azione."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "La pagina sovrastante non è stata trovata."
 
 #, fuzzy
 msgid "page package"
@@ -3451,9 +3484,6 @@ msgstr "L'azione %(actionname)s è stata disabilitata in questo wiki."
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Non è consentito usare l'azione %(actionname)s su questa pagina."
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Solo al super-utente è consentito usare questa azione."
-
 msgid "Views/day"
 msgstr "N. richieste a giornata"
 
@@ -3522,6 +3552,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimo"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Non è consentito modificare questa pagina."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

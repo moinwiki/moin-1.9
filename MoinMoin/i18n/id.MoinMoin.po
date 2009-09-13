@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -1131,18 +1131,6 @@ msgstr "Upload lampiran baru \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Gambar segaris: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Buat penggambaran baru \"%(filename)s (buka dalam jendela baru)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Sunting penggambaran %(filename)s (buka dalam jendela baru)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Penggambaran yang dapat di-klik: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "On/Off nomor baris"
 
@@ -1325,9 +1313,6 @@ msgstr "Halaman paket"
 msgid "Page changed"
 msgstr "Simpan Perubahan"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1360,6 +1345,9 @@ msgstr "cocok"
 
 msgid "matches"
 msgstr "cocok"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "PerubahanTerbaru"
@@ -2414,6 +2402,29 @@ msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 "Anda harus mempunyai taut cepat Anda ke halaman ini untuk menghapusnya."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slideshow"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slideshow"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2592,9 +2603,6 @@ msgstr "instal"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Tak ada lampiran tersimpan di %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Sunting penggambaran"
-
 msgid "New Attachment"
 msgstr "Lampiran Baru"
 
@@ -2649,9 +2657,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Lampiran '%(target)s' (nama remote '%(filename)s') sudah ada."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Anda tidak diizinkan menyimpan penggambaran pada halaman ini"
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Anda tidak diizinkan menghapus lampiran pada halaman ini."
@@ -3257,6 +3262,27 @@ msgstr "Bukan pengguna:"
 msgid "You are not allowed to perform this action."
 msgstr "Anda tidak diizinkan melakukan aksi ini."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Buat penggambaran baru \"%(filename)s (buka dalam jendela baru)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Sunting penggambaran %(filename)s (buka dalam jendela baru)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Penggambaran yang dapat di-klik: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Anda tidak diizinkan menyimpan penggambaran pada halaman ini"
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Sunting penggambaran"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Silakan buat laman dulu sebelum membuat halaman tambahan."
 
@@ -3312,6 +3338,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Manajemen HalamanSaya"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Anda tidak diizinkan menggunakan aksi ini."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Tidak ditemukan halaman induk!"
 
 #, fuzzy
 msgid "page package"
@@ -3432,10 +3466,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 "Anda tidak diizinkan untuk menggunakan aksi %(actionname)s di halaman ini!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Anda tidak diizinkan menggunakan aksi ini."
-
 msgid "Views/day"
 msgstr "Tilik/hari"
 
@@ -3505,6 +3535,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Anda tidak diizinkan menyunting halaman ini."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

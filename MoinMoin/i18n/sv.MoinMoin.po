@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
-"PO-Revision-Date: 2009-07-11 16:05+0200\n"
-"Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"PO-Revision-Date: 2009-07-28 14:35+0200\n"
+"Last-Translator: thomas marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -760,21 +760,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Förknippa detta namn"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Verifieringen avbröts."
+msgstr "OpenID-verifieringen avbröts."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID tillagt."
+msgstr "OpenID klar. id: %s"
 
-#, fuzzy
 msgid "OpenID failure"
-msgstr "OpenID fel."
+msgstr "OpenID-fel"
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "Ingen OpenID given."
+msgstr "Ingen OpenID hittades i sessionen."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Ditt konto är nu förknippat med din OpenID."
@@ -782,21 +779,20 @@ msgstr "Ditt konto är nu förknippat med din OpenID."
 msgid "The password you entered is not valid."
 msgstr "Lösenordet du skrev in är inte giltigt."
 
-#, fuzzy
 msgid "OpenID: handle verify continuation"
-msgstr "OpenID Trust verification"
+msgstr "OpenID: handtag-verifiering fortsättning"
 
 msgid "OpenID: handle name continuation"
-msgstr ""
+msgstr "OpenID: handtag-namn fortsättning"
 
 msgid "OpenID: handle associate continuation"
-msgstr ""
+msgstr "OpenID: handtag-anknytning fortsättning"
 
 msgid "OpenID: unknown continuation stage"
-msgstr ""
+msgstr "OpenID: okänd fortsättningssteg"
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "OpenID-fel: okänd fortsättningssteg"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Anonyma sessioner måste vara aktiverade för inloggning med OpenID."
@@ -824,17 +820,17 @@ msgstr "LDAP-server %(server)s misslyckades."
 msgid "Failed to connect to database."
 msgstr "Fel att ansluta till databasen."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "Om du inte har ett konto, kan du <a href=\"%(userprefslink)s\">skapa ett nu</"
-"a>. <a href=\"%(sendmypasswordlink)s\">Glömt ditt lösenord?</a>"
+"a>."
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Glömt ditt lösenord?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1118,18 +1114,6 @@ msgstr "Ladda upp ny bilaga \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Inbäddad bild: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Skapa ny teckning \"%(filename)s (öppnas i nytt fönster)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Redigera teckning %(filename)s (opens in new window)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klickbar teckning %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Slå av/på radnumrering"
 
@@ -1306,9 +1290,6 @@ msgstr "Ändrad sida"
 msgid "Page changed"
 msgstr "Sidan har förändrats"
 
-msgid "about"
-msgstr "om"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1341,6 +1322,9 @@ msgstr "träff"
 
 msgid "matches"
 msgstr "träffar"
+
+msgid "about"
+msgstr "om"
 
 msgid "RecentChanges"
 msgstr "SenasteÄndringar"
@@ -1573,9 +1557,8 @@ msgstr "HjälpMedÄndringar/UnderSidor"
 msgid "HelpOnGraphicalEditor"
 msgstr "HjälpMedGrafiskaEditorn"
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "HjälpMedMakron"
+msgstr "HjälpMedGrupper"
 
 msgid "HelpOnHeadlines"
 msgstr "HjälpMedRubriker"
@@ -2355,6 +2338,29 @@ msgstr "Din snabblänk till den här sidan kunde inte tas bort."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Du måste ha en snabblänk till den här sidan för att ta bort den."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Bildspel"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Bildspel"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2554,9 +2560,6 @@ msgstr "installera"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Inga bifogade filer på %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Redigera teckning"
-
 msgid "New Attachment"
 msgstr "Ny bilaga"
 
@@ -2608,9 +2611,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Bilagan \"%(target)s\" (fjärrnamn \"%(filename)s\") existerar redan."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Du får inte spara en teckning på den här sidan."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Du får inte ta bort bilagor från den här sidan."
@@ -3212,6 +3212,27 @@ msgstr "Inte en användare:"
 msgid "You are not allowed to perform this action."
 msgstr "Du får inte utföra den här åtgärden."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Skapa ny teckning \"%(filename)s (öppnas i nytt fönster)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Redigera teckning %(filename)s (opens in new window)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klickbar teckning %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Du får inte spara en teckning på den här sidan."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Redigera teckning"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Var god skapa en hemsida innan du skapar övriga sidor."
 
@@ -3267,16 +3288,22 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Hantering av MinaSidor"
 
+msgid "Only superuser is allowed to use this action."
+msgstr "Bara administratorn får använda den här åtgärden."
+
 #, fuzzy
+msgid "No page packages found."
+msgstr "Ingen föräldrasida hittad!"
+
 msgid "page package"
-msgstr "Ändrad sida"
+msgstr "sidopaket"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Välj:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Installera språkpaket för '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Din prenumeration på den här sidan har avslutats."
@@ -3385,9 +3412,6 @@ msgstr "Åtgärd %(actionname)s är exkluderad i den här wikin!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Du får inte använda åtgärden %(actionname)s på den här sidan!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Bara administratorn får använda den här åtgärden."
-
 msgid "Views/day"
 msgstr "Visningar/dag"
 
@@ -3457,6 +3481,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Du får inte redigera den här sidan."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

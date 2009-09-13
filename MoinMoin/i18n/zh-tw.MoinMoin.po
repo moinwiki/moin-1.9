@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -1086,18 +1086,6 @@ msgstr "上傳新附件 \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Inlined 圖像：%(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "建立新圖 \"%(filename)s (在新視窗開啟)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "編輯圖片 \"%(filename)s (在新視窗開啟)\""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "可點擊的圖片 \"%(filename)s\""
-
 msgid "Toggle line numbers"
 msgstr "切換行號"
 
@@ -1261,9 +1249,6 @@ msgstr "改變過的頁面"
 msgid "Page changed"
 msgstr "頁面已改變"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1296,6 +1281,9 @@ msgstr "筆"
 
 msgid "matches"
 msgstr "筆"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "最新更動"
@@ -2349,6 +2337,29 @@ msgstr "無法取消本頁之捷徑。"
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "本頁並未設成捷徑。"
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "簡報模式"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "簡報模式"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2528,9 +2539,6 @@ msgstr "安裝"
 msgid "No attachments stored for %(pagename)s"
 msgstr "頁面 \"%(pagename)s\" 沒有附件"
 
-msgid "Edit drawing"
-msgstr "編輯圖片"
-
 msgid "New Attachment"
 msgstr "新增附件"
 
@@ -2581,9 +2589,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "附件 '%(target)s' 已經存在 (遠端名稱 '%(filename)s')"
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "你無權在本頁儲存圖片。"
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "你無權刪除本頁附件。"
@@ -3159,6 +3164,27 @@ msgstr "不合法帳號:"
 msgid "You are not allowed to perform this action."
 msgstr "你無權執行本項操作。"
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "建立新圖 \"%(filename)s (在新視窗開啟)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "編輯圖片 \"%(filename)s (在新視窗開啟)\""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "可點擊的圖片 \"%(filename)s\""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "你無權在本頁儲存圖片。"
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "編輯圖片"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "建立其他頁面之前，請先建立個人首頁。"
 
@@ -3210,6 +3236,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "管理我的頁面"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "只有管理者才能使用本項操作。"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "找不到上層頁面！"
 
 #, fuzzy
 msgid "page package"
@@ -3320,9 +3353,6 @@ msgstr "本 Wiki 站不使用「%(actionname)s」操作！"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "你無權在本頁進行「%(actionname)s」操作。"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "只有管理者才能使用本項操作。"
-
 msgid "Views/day"
 msgstr "每日瀏覽"
 
@@ -3390,6 +3420,10 @@ msgstr "抱歉，本站不允許 \"%(content)s\"，頁面無法儲存。"
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "你無權編輯本頁。"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

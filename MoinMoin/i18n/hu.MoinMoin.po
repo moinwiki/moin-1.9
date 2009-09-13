@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: MARTON Jozsef <jmarton@omikk.bme.hu>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -1097,18 +1097,6 @@ msgstr "A(z) \"%(filename)s\" melléklet feltöltése"
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "\"%(filename)s\" nevű új rajz készítése"
-
-#, fuzzy, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "A(z) %(filename)s nevű rajz szerkesztése"
-
-#, fuzzy, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "A(z) %(filename)s nevű rajz szerkesztése"
-
 msgid "Toggle line numbers"
 msgstr "Sorszámozás megjelenítése/elrejtése"
 
@@ -1281,9 +1269,6 @@ msgstr "Oldalak csomagolása"
 msgid "Page changed"
 msgstr "Változások mentése"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1318,6 +1303,9 @@ msgstr "találat"
 
 msgid "matches"
 msgstr "találatok"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "ÚjabbVáltozások"
@@ -2379,6 +2367,29 @@ msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Diavetítés"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Diavetítés"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2555,9 +2566,6 @@ msgstr "telepít"
 msgid "No attachments stored for %(pagename)s"
 msgstr "A(z) %(pagename)s laphoz nem tartozik melléklet"
 
-msgid "Edit drawing"
-msgstr "Rajz szerkesztése"
-
 msgid "New Attachment"
 msgstr "Új melléklet"
 
@@ -2613,9 +2621,6 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "A(z) '%(target)s' (a távoli neve '%(filename)s') melléklet már létezik."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "A rajz elmentése nem engedélyezett ezen a lapon."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "A mellékletek törlése nem engedélyezett ezen a lapon."
@@ -3211,6 +3216,27 @@ msgstr "Nem felhasználó:"
 msgid "You are not allowed to perform this action."
 msgstr "Ezt a műveletet nem hajthatja végre."
 
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "\"%(filename)s\" nevű új rajz készítése"
+
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "A(z) %(filename)s nevű rajz szerkesztése"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "A(z) %(filename)s nevű rajz szerkesztése"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "A rajz elmentése nem engedélyezett ezen a lapon."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Rajz szerkesztése"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Mielőtt további oldalakat készít kérjük, készítse el a honlapját!"
 
@@ -3264,6 +3290,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Saját (személyes) lapok kezelése"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Nem használhatja ezt a műveletet."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Nincs szülőlap!"
 
 #, fuzzy
 msgid "page package"
@@ -3381,10 +3415,6 @@ msgstr "A(z) %(actionname)s művelet kizárt ebben a wikiben."
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Nem használhatja ezt a műveletet."
-
 msgid "Views/day"
 msgstr "Nézet/nap"
 
@@ -3457,6 +3487,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "A lap szerkesztése nem engedélyezett."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

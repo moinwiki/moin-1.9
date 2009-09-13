@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2009-03-24 20:06+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1136,18 +1136,6 @@ msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Afbeelding in de tekst: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Nieuwe tekening maken \"%(filename)s\" (opent in een nieuw venster)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Tekening bewerken \"%(filename)s\" (opent in een nieuw venster)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikbare tekening: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Regelnummers aan/uit doen"
 
@@ -1329,9 +1317,6 @@ msgstr "Pagina gewijzigd"
 msgid "Page changed"
 msgstr "Pagina gewijzigd"
 
-msgid "about"
-msgstr "over"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1364,6 +1349,9 @@ msgstr "overeenkomst"
 
 msgid "matches"
 msgstr "overeenkomsten"
+
+msgid "about"
+msgstr "over"
 
 msgid "RecentChanges"
 msgstr "RecenteWijzigingen"
@@ -2431,6 +2419,29 @@ msgstr "Uw quicklink naar deze pagina kon niet verwijderd worden."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "U moet een quicklink naar deze pagina hebben om het te verwijderen."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Diavoorstelling"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Diavoorstelling"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2633,9 +2644,6 @@ msgstr "installeren"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Geen bijlagen opgeslagen voor %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Tekening bewerken"
-
 msgid "New Attachment"
 msgstr "Nieuwe bijlage"
 
@@ -2690,9 +2698,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Bijlage '%(target)s' bestaat al (externe naam '%(filename)s')."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "U hebt geen toestemming bijlagen van deze pagina te verwijderen."
@@ -3307,6 +3312,27 @@ msgstr "Geen gebruiker:"
 msgid "You are not allowed to perform this action."
 msgstr "U hebt geen toestemming om deze actie uit te voeren."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Nieuwe tekening maken \"%(filename)s\" (opent in een nieuw venster)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Tekening bewerken \"%(filename)s\" (opent in een nieuw venster)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikbare tekening: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Tekening bewerken"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Maak eerst een thuispagina voor u extra pagina's aanmaakt alstublieft."
 
@@ -3366,6 +3392,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MijnPagina's beheer"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Enkel de beheerder mag deze actie gebruiken."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Geen bovenliggende pagina gevonden!"
 
 #, fuzzy
 msgid "page package"
@@ -3485,9 +3518,6 @@ msgstr ""
 "U hebt geen toestemming niet om de actie %(actionname)s op deze pagina uit "
 "te voeren!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Enkel de beheerder mag deze actie gebruiken."
-
 msgid "Views/day"
 msgstr "Weergaven/dag"
 
@@ -3557,6 +3587,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "U hebt geen toestemming deze pagina te bewerken."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

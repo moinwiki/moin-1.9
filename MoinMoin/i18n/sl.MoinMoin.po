@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1119,18 +1119,6 @@ msgstr "Naloži novo priponko \"%(filename)s\" na strežnik"
 msgid "Inlined image: %(url)s"
 msgstr "Vsebovana slika: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Ustvari novo risbo \"%(filename)s (odpre novo okno)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Spremeni risbo %(filename)s (odpre novo okno)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Risba s povezavo: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Vklopi/izklopi številke vrstic"
 
@@ -1315,9 +1303,6 @@ msgstr "Spremenjena stran"
 msgid "Page changed"
 msgstr "Stran je bila spremenjena"
 
-msgid "about"
-msgstr "več o tem"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1350,6 +1335,9 @@ msgstr "zadetek"
 
 msgid "matches"
 msgstr "zadetkov"
+
+msgid "about"
+msgstr "več o tem"
 
 msgid "RecentChanges"
 msgstr "ZadnjeSpremembe"
@@ -2413,6 +2401,29 @@ msgstr "Vaše hitra povezava na to stran ni bilo mogoče odstraniti."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Da bi jo odstranili je treba imeti hitro povezavo na to stran."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Samodejna predstava"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Samodejna predstava"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2610,9 +2621,6 @@ msgstr "namesti"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Stran %(pagename)s nima priponk."
 
-msgid "Edit drawing"
-msgstr "Spremeni risbo"
-
 msgid "New Attachment"
 msgstr "Nova priponka"
 
@@ -2667,9 +2675,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Priponka '%(target)s' (ime '%(filename)s') že obstaja na strežniku."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Na to stran ni dovoljeno shraniti risb."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Ni vam dovoljeno odstraniti priponk s te strani."
@@ -3276,6 +3281,27 @@ msgstr "Ni uporabnik:"
 msgid "You are not allowed to perform this action."
 msgstr "Te akcije vam ni dovoljeno izvesti."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Ustvari novo risbo \"%(filename)s (odpre novo okno)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Spremeni risbo %(filename)s (odpre novo okno)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Risba s povezavo: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Na to stran ni dovoljeno shraniti risb."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Spremeni risbo"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Prosimo, da naredite domačo stran preden dodajate druge strani."
 
@@ -3330,6 +3356,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Upravljanje z MyPages"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Ta akcija je na voljo le administratorju."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Ta stran nima nadrejene strani!"
 
 #, fuzzy
 msgid "page package"
@@ -3449,9 +3482,6 @@ msgstr "Akcije %(actionname)s ta viki ne dovoljuje!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Akcija %(actionname)s nad to stranjo vam ni dovoljena!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Ta akcija je na voljo le administratorju."
-
 msgid "Views/day"
 msgstr "obiskov/dan"
 
@@ -3521,6 +3551,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Te strani vam ni dovoljeno spreminjati."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

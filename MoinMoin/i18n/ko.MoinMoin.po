@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -1098,18 +1098,6 @@ msgstr "새 첨부 \"%(filename)s\"를(을) 업로드"
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "새 그림 \"%(filename)s\" 그리기 (새 창)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "그림 \"%(filename)s\" 수정하기 (새 창)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "클릭 가능 그림 \"%(filename)s\""
-
 msgid "Toggle line numbers"
 msgstr "줄 번호 보이기/숨기기"
 
@@ -1289,9 +1277,6 @@ msgstr "문서 묶기"
 msgid "Page changed"
 msgstr "변경 사항 저장"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1323,6 +1308,9 @@ msgstr "개 포함"
 
 msgid "matches"
 msgstr " 개 포함"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "최근바뀜"
@@ -2375,6 +2363,29 @@ msgstr "이 문서를 즐겨찾기에서 삭제할 수 없었습니다."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "이 문서는 즐겨찾기에 없으므로 삭제할 수 없었습니다."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "슬라이드 쇼"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "슬라이드 쇼"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2549,9 +2560,6 @@ msgstr "설치"
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)s 에는 첨부 파일이 없음."
 
-msgid "Edit drawing"
-msgstr "그림 수정"
-
 msgid "New Attachment"
 msgstr "새 첨부"
 
@@ -2608,9 +2616,6 @@ msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "첨부 파일 '%(target)s' (하드디스크에서의 이름 '%(filename)s') 가(이) 이미 있"
 "습니다."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다."
@@ -3188,6 +3193,27 @@ msgstr "사용자가 아님:"
 msgid "You are not allowed to perform this action."
 msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "새 그림 \"%(filename)s\" 그리기 (새 창)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "그림 \"%(filename)s\" 수정하기 (새 창)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "클릭 가능 그림 \"%(filename)s\""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "그림 수정"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "다른 문서를 만들기 전에 홈페이지부터 만들어주세요."
 
@@ -3221,6 +3247,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages 관리"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "상위 문서가 없습니다!"
 
 #, fuzzy
 msgid "page package"
@@ -3332,10 +3366,6 @@ msgstr "%(actionname)s 액션은 이 위키에서 제외되었습니다."
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "이 문서에 %(actionname)s 작업을 수행할 수 있는 권한이 없습니다!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
-
 msgid "Views/day"
 msgstr "조회/일"
 
@@ -3409,6 +3439,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "이 문서를 고칠 수 있는 권한이 없습니다."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

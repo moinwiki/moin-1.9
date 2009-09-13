@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: HiroshiIwasaki <iwskhrs@gmail.com>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1117,18 +1117,6 @@ msgstr "添付ファイル\"%(filename)s\"のアップロード"
 msgid "Inlined image: %(url)s"
 msgstr "インライン画像: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "drawing\"%(filename)s\"の新規作成 (別ウィンドウにて)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "drawing\"%(filename)s\"を編集 (別ウィンドウにて)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "クリック可能なdrawing: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "行番号表示/非表示切替"
 
@@ -1314,9 +1302,6 @@ msgstr "変更されたページ"
 msgid "Page changed"
 msgstr "ページが変更されました"
 
-msgid "about"
-msgstr "約"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1349,6 +1334,9 @@ msgstr "箇所一致"
 
 msgid "matches"
 msgstr "箇所一致"
+
+msgid "about"
+msgstr "約"
 
 msgid "RecentChanges"
 msgstr "更新履歴"
@@ -2360,6 +2348,29 @@ msgstr "このページへのクイックリンクを削除できませんでし
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "追加していないページへのクイックリンクは削除できません。"
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "スライドショー"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "スライドショー"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2555,9 +2566,6 @@ msgstr "インストール"
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)sに添付ファイルはありません。"
 
-msgid "Edit drawing"
-msgstr "drawingを編集"
-
 msgid "New Attachment"
 msgstr "ファイルの新規添付"
 
@@ -2613,9 +2621,6 @@ msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "添付ファイル'%(target)s'(サーバでのファイル名'%(filename)s')はすでに存在しま"
 "す。"
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "このページにdrawingを保存する権限がありません。"
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "このページの添付ファイルを削除する権限がありません。"
@@ -3208,6 +3213,27 @@ msgstr "存在しないユーザ:"
 msgid "You are not allowed to perform this action."
 msgstr "このアクションを行う権限がありません。"
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "drawing\"%(filename)s\"の新規作成 (別ウィンドウにて)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "drawing\"%(filename)s\"を編集 (別ウィンドウにて)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "クリック可能なdrawing: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "このページにdrawingを保存する権限がありません。"
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "drawingを編集"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "最初にホームページを作成してください。"
 
@@ -3261,6 +3287,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "マイページの管理"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "このアクションを行うことができるのはスーパーユーザのみです。"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "親ページが存在しません。"
 
 #, fuzzy
 msgid "page package"
@@ -3381,9 +3414,6 @@ msgstr "アクション %(actionname)s はこのWikiに含まれていません�
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "このページでアクション %(actionname)s を使用する権限がありません。"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "このアクションを行うことができるのはスーパーユーザのみです。"
-
 msgid "Views/day"
 msgstr "表示/日"
 
@@ -3453,6 +3483,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "このページを編集する権限がありません。"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

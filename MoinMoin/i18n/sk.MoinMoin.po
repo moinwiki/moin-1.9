@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -93,7 +93,7 @@ msgid ""
 msgstr ""
 "Počas Vášho editovania túto stránku uložil niekto iný!\n"
 "Neukladajte stránku v jej terajšej podobe! Zrevidujte ju a až potom ju "
-"prípadneuložte!"
+"prípadne uložte!"
 
 msgid "[Content loaded from draft]"
 msgstr "[Obsah nahraný z návrhu]"
@@ -465,13 +465,12 @@ msgstr "Očakávala sa hodnota pre kľúč „%(token)s“"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Neplatný regulárny výraz pre zvýrazňovanie: „%(regex)s“: %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"Záložný obsah tejto stránky je zastaraný a nezahrnie sa dovýsledkov "
-"vyhľadávania!"
+"Záložný obsah tejto stránky je zastaraný a vo výsledkoch vyhľadávania bude "
+"zaradený s nižšou prioritou!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -751,20 +750,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Overenie bolo zrušené."
+msgstr "OpenID Overenie bolo zrušené."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID chyba: %s."
+msgstr "OpenID úspešné. id: %s."
 
-#, fuzzy
 msgid "OpenID failure"
-msgstr "OpenID server"
+msgstr "OpenID zlyhalo"
 
 msgid "No OpenID found in session."
-msgstr ""
+msgstr "V sedení nie je žiadne OpenID"
 
 msgid "Your account is now associated to your OpenID."
 msgstr ""
@@ -811,17 +808,16 @@ msgstr "LDAP server %(server)s zlyhal."
 msgid "Failed to connect to database."
 msgstr "Zlyhalo pripojenie k databáze."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "Ak nemáte konto, <a href=\"%(userprefslink)s\">môžete si ho  vytvoriť</a>. "
-"<a href=\"%(sendmypasswordlink)s\">Zabudli ste heslo?</a>"
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Zabudli ste heslo?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1074,18 +1070,6 @@ msgstr "Pridať novú prílohu „%(filename)s“"
 msgid "Inlined image: %(url)s"
 msgstr "Vložený obrázok : %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Vytvoriť novú kresbu „ %(filename)s “ (v novom okne)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Úprava obrázka %(filename)s (v novom okne)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikateľná kresba %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Prepnúť zobrazenia čísel riadkov"
 
@@ -1254,9 +1238,6 @@ msgstr "Zmenená stránka"
 msgid "Page changed"
 msgstr "Stránka bola zmenená"
 
-msgid "about"
-msgstr "približne"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1290,6 +1271,9 @@ msgstr "zhoda"
 msgid "matches"
 msgstr "zhody"
 
+msgid "about"
+msgstr "približne"
+
 msgid "RecentChanges"
 msgstr "PoslednéZmeny"
 
@@ -1314,9 +1298,8 @@ msgstr "ChýbajúcaDomovskáStránka"
 msgid "WikiHomePage"
 msgstr "DomovskáStránka"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Meno"
+msgstr "WikiMeno"
 
 msgid "WikiWikiWeb"
 msgstr "WikiWikiWeb"
@@ -1493,7 +1476,7 @@ msgid "HelpOnAccessControlLists"
 msgstr ""
 
 msgid "HelpOnActions"
-msgstr "PomocnSAkciami"
+msgstr "PomocSAkciami"
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
@@ -1522,9 +1505,8 @@ msgstr ""
 msgid "HelpOnGraphicalEditor"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "PomocnSAkciami"
+msgstr "PomocnSoSkupinami"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -1659,7 +1641,7 @@ msgid "WikiCourse/04 Creating a wiki account"
 msgstr ""
 
 msgid "WikiCourse/05 User preferences"
-msgstr "Užívateľské nastavenia sú uložené!"
+msgstr ""
 
 msgid "WikiCourse/06 Your own wiki homepage"
 msgstr ""
@@ -2297,6 +2279,29 @@ msgstr ""
 "Ak chcete odstrániť rýchly odkaz na túto stránku, musí nejaký najprv "
 "existovať."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Prezentácia obrázkov"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Prezentácia obrázkov"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2435,7 +2440,7 @@ msgstr ""
 "Na tejto stránke sú uložené <a href=\"%(link)s\">%(count)s prílohy</a>."
 
 msgid "Filename of attachment not specified!"
-msgstr "Názov súboru prílohy nie je špecifikovaný!"
+msgstr "Názov prílohy nie je špecifikovaný!"
 
 #, python-format
 msgid "Attachment '%(filename)s' does not exist!"
@@ -2474,9 +2479,6 @@ msgstr "nainštalovať"
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nijaké prílohy uložené na %(pagename)s"
-
-msgid "Edit drawing"
-msgstr "Upraviť kresbu"
 
 msgid "New Attachment"
 msgstr "Nová príloha"
@@ -2531,9 +2533,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Príloha „%(target)s“ (vzdialené meno „%(filename)s“) už existuje."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Nemáte oprávnenie uložiť kresbu na túto stránku."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Nemáte oprávnenie vymazať prílohy tejto stránky."
@@ -2744,7 +2743,7 @@ msgstr "Nemôžete kontrolovať pravopis na stránke, ktorú nemôžete čítať
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
-"Nemáte oprávnenie prihlásiť sa na odoberanie stránky, ktorú nemôžete čítať. "
+"Nemáte oprávnenie prihlásiť sa na odoberanie stránky, ktorú nemôžete čítať."
 
 msgid "This wiki is not enabled for mail/Jabber processing."
 msgstr "Táto wiki neumožňuje posielanie mailov alebo jabber správ."
@@ -3133,6 +3132,27 @@ msgstr "Nie je užívateľ:"
 msgid "You are not allowed to perform this action."
 msgstr "Nemáte oprávnenie uskutočniť túto akciu."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Vytvoriť novú kresbu „ %(filename)s “ (v novom okne)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Úprava obrázka %(filename)s (v novom okne)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikateľná kresba %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Nemáte oprávnenie uložiť kresbu na túto stránku."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Upraviť kresbu"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Prosím, najskôr vytvorte domovskú stránku a až potom vytvorte dodatočné "
@@ -3169,16 +3189,22 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Manažment MojeStránky"
 
+msgid "Only superuser is allowed to use this action."
+msgstr "Iba superužívateľ má oprávnenie uskutočniť túto akciu."
+
 #, fuzzy
+msgid "No page packages found."
+msgstr "Rodičovská stránka sa nenašla!"
+
 msgid "page package"
-msgstr "Zmenená stránka"
+msgstr "balíček stránky"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Vyberte si:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Nainštalovať jazykové balíčky pre '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Vaše odoberanie tejto stránky bolo zrušené."
@@ -3244,7 +3270,7 @@ msgid "Load"
 msgstr "Stiahnuť"
 
 msgid "Pagename not specified!"
-msgstr "Názor súboru ako prílohy nie je špecifikovaný!"
+msgstr "Názov stránky nie je špecifikovaný!"
 
 msgid "Upload page content"
 msgstr ""
@@ -3282,9 +3308,6 @@ msgstr "Akcia %(actionname)s je na tejto wiki zakázaná!"
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Nemáte oprávnenie použiť túto akciu %(actionname)s na tejto stránke."
-
-msgid "Only superuser is allowed to use this action."
-msgstr "Iba superužívateľ má oprávnenie uskutočniť túto akciu."
 
 msgid "Views/day"
 msgstr "Počet zobrazení za deň"
@@ -3356,5 +3379,6 @@ msgstr ""
 msgid "anonymous"
 msgstr "anonym"
 
-#~ msgid "WikiMeno"
-#~ msgstr "WikiMeno"
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Nemáte oprávnenie zmeniť túto stránku."

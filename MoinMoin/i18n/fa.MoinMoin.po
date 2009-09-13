@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1132,18 +1132,6 @@ msgstr "ارسال ضمیمه جدید \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "تصویر توکار: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "ترسیم جدید \"%(filename)s\" را بساز (در پنجره جدید باز میشود)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "ویرایش ترسیم %(filename)s (در پنجره جدید باز میشود)\""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "ترسیم قابل کلیک: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "شماره خطوط"
 
@@ -1325,9 +1313,6 @@ msgstr "صفحه بروز شده"
 msgid "Page changed"
 msgstr "صفحه بروز شد"
 
-msgid "about"
-msgstr "درباره"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1360,6 +1345,9 @@ msgstr "نتیجه"
 
 msgid "matches"
 msgstr "نتایج"
+
+msgid "about"
+msgstr "درباره"
 
 msgid "RecentChanges"
 msgstr "آخرین تغییرات"
@@ -2420,6 +2408,29 @@ msgstr ""
 "شما می‌بایست برای این صفحه لینک دسترسی سریع داشته باشید تا قادر به حذف آن "
 "باشید."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "نمایش اسلاید گونه"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "نمایش اسلاید گونه"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2619,9 +2630,6 @@ msgstr "نصب"
 msgid "No attachments stored for %(pagename)s"
 msgstr "صفحه %(pagename)s ضمیمه ندارد"
 
-msgid "Edit drawing"
-msgstr "ویرایش ترسیمات"
-
 msgid "New Attachment"
 msgstr "ضمیمه جدید"
 
@@ -2675,9 +2683,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "ضمیمه '%(target)s' (نام را دور '%(filename)s') هم‌اکنون وجود دارد."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "شما مجاز به ذخیره ترسیمات در این صفحه نیستید."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "شما مجاز به حذف ضمیمه‌های این صفحه نمی‌باشید."
@@ -3265,6 +3270,27 @@ msgstr "کاربر ثبت نشده:"
 msgid "You are not allowed to perform this action."
 msgstr "عملیات غیر مجاز"
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "ترسیم جدید \"%(filename)s\" را بساز (در پنجره جدید باز میشود)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "ویرایش ترسیم %(filename)s (در پنجره جدید باز میشود)\""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "ترسیم قابل کلیک: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "شما مجاز به ذخیره ترسیمات در این صفحه نیستید."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "ویرایش ترسیمات"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "لطفا پیش از ساخت صفحات بیشتر، یک صفحه خانگی برای خود بسازید."
 
@@ -3321,6 +3347,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "مدیریت صفحات من"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "فقط مدیر سیستم مجار به انجام این عملیات است."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "صفحه والد بالاتر یافت نشد!"
 
 #, fuzzy
 msgid "page package"
@@ -3440,9 +3473,6 @@ msgstr "عملیات %(actionname)s در این ویکی حذف شده است!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "شما مجاز به انجام عملیات %(actionname)s روی این صفحه نیستید!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "فقط مدیر سیستم مجار به انجام این عملیات است."
-
 msgid "Views/day"
 msgstr "نمایش/روز"
 
@@ -3512,6 +3542,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "شما مجاز به ویرایش این صفحه نمی‌باشید"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

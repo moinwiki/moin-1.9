@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -1100,18 +1100,6 @@ msgstr "Tải lên file \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Tạo bản vẽ \"%(filename)s\" mới"
-
-#, fuzzy, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Sửa bản vẽ \"%(filename)s\""
-
-#, fuzzy, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Sửa bản vẽ \"%(filename)s\""
-
 msgid "Toggle line numbers"
 msgstr ""
 
@@ -1289,9 +1277,6 @@ msgstr ""
 msgid "Page changed"
 msgstr "Lưu các thay đổi"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1326,6 +1311,9 @@ msgstr "phù hợp"
 
 msgid "matches"
 msgstr "phù hợp"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "Các thay đổi gần đây"
@@ -2396,6 +2384,29 @@ msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slideshow"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slideshow"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2571,9 +2582,6 @@ msgstr ""
 msgid "No attachments stored for %(pagename)s"
 msgstr "Không có file gửi kèm trong trang %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Sửa bản vẽ"
-
 msgid "New Attachment"
 msgstr "Gửi kèm file mới"
 
@@ -2628,9 +2636,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "File gửi kèm '%(target)s' (tên ở máy chủ '%(filename)s') đã tồn tại."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Bạn không thể tạo một bản vẽ ở trang này."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Bạn không thể xoá file gửi kèm."
@@ -3215,6 +3220,27 @@ msgstr ""
 msgid "You are not allowed to perform this action."
 msgstr "Bạn không thể sửa trang này."
 
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Tạo bản vẽ \"%(filename)s\" mới"
+
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Sửa bản vẽ \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Sửa bản vẽ \"%(filename)s\""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Bạn không thể tạo một bản vẽ ở trang này."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Sửa bản vẽ"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 
@@ -3248,6 +3274,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr ""
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Bạn không thể sửa trang này."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Không tìm thấy trang trên!"
 
 #, fuzzy
 msgid "page package"
@@ -3363,10 +3397,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Bạn không thể tạo một bản vẽ ở trang này."
 
 #, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Bạn không thể sửa trang này."
-
-#, fuzzy
 msgid "Views/day"
 msgstr "Xem"
 
@@ -3436,6 +3466,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Bạn không được phép sửa trang này."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

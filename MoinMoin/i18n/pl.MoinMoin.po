@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -1121,18 +1121,6 @@ msgstr "Wgraj nowy załącznik \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Obraz typu inline: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Utwórz nowy rysunek \"%(filename)s\" (otwiera nowe okno)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Edytuj rysunek %(filename)s (otwiera nowe okno)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikalny rysunek %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Ustaw numery linii"
 
@@ -1313,9 +1301,6 @@ msgstr "Zmieniona strona"
 msgid "Page changed"
 msgstr "Strona zmieniona"
 
-msgid "about"
-msgstr "około"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1348,6 +1333,9 @@ msgstr "porównanie"
 
 msgid "matches"
 msgstr "porównania"
+
+msgid "about"
+msgstr "około"
 
 msgid "RecentChanges"
 msgstr "OstatnieZmiany"
@@ -2413,6 +2401,29 @@ msgstr "Szybki odnośnik do tej strony nie może zostać usunięty."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Musiałbyś najpierw mieć szybki odnośnik do tej strony aby go usunąć."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Pokaz slajdów"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Pokaz slajdów"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2610,9 +2621,6 @@ msgstr "instaluj"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Strona %(pagename)s nie ma żadnych załączników"
 
-msgid "Edit drawing"
-msgstr "Edytuj rysunek"
-
 msgid "New Attachment"
 msgstr "Nowy załącznik"
 
@@ -2665,9 +2673,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Załącznik '%(target)s' (nazwa zdalna '%(filename)s') już istnieje."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Nie możesz zachowywać rysunków na niniejszej stronie."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Nie możesz kasować załączników tej strony."
@@ -3273,6 +3278,27 @@ msgstr "Nie-użytkownik:"
 msgid "You are not allowed to perform this action."
 msgstr "Nie możesz wykonać tej akcji."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Utwórz nowy rysunek \"%(filename)s\" (otwiera nowe okno)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Edytuj rysunek %(filename)s (otwiera nowe okno)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikalny rysunek %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Nie możesz zachowywać rysunków na niniejszej stronie."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Edytuj rysunek"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Proszę utowrzyć stronę domową przed stworzeniem dodatkowych stron."
 
@@ -3330,6 +3356,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Zarządzanie MyPages"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Tylko nadczytelnik może użyć tej akcji."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Nie znaleziono strony nadrzędnej!"
 
 #, fuzzy
 msgid "page package"
@@ -3449,9 +3482,6 @@ msgstr "Akcja %(actionname)s jest w tej wiki wykluczona!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Nie możesz użyć akcji %(actionname)s na niniejszej stronie."
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Tylko nadczytelnik może użyć tej akcji."
-
 msgid "Views/day"
 msgstr "Odsłon/dzień"
 
@@ -3523,6 +3553,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Nie możesz zmieniać zawartości tej strony."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

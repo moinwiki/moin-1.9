@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -1138,18 +1138,6 @@ msgstr "Додај нови прилог „%(filename)s“"
 msgid "Inlined image: %(url)s"
 msgstr "Слика у линији: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Направи нови цртеж „%(filename)s (отвара се у новом прозору)“"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Уреди цртеж %(filename)s (отвара се у новом прозору)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Цртеж на који се може притиснути: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Укључи/искучи бројеве редова"
 
@@ -1334,9 +1322,6 @@ msgstr "Странице пакета"
 msgid "Page changed"
 msgstr "Сачувај измене"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1369,6 +1354,9 @@ msgstr "поклапај"
 
 msgid "matches"
 msgstr "поклапа"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "ПоследњеПромене"
@@ -2425,6 +2413,29 @@ msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 "Морате прво направити брзу везу на ову страницу да би је могли избацити."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Приказ слајдова"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Приказ слајдова"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2603,9 +2614,6 @@ msgstr "инсталирај"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Нема прилога закачених за %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Уреди цртеж"
-
 msgid "New Attachment"
 msgstr "Нови прилог"
 
@@ -2660,9 +2668,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Прилог  '%(target)s' (даљинско име '%(filename)s') већ постоји."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Није вам дозвољено да сачувате цртеж на овој страници."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Није вам дозвољено да бришете прилоге на овој страници."
@@ -3264,6 +3269,27 @@ msgstr "Није корисник:"
 msgid "You are not allowed to perform this action."
 msgstr "Није вам дозвољено да изведете ову радњу."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Направи нови цртеж „%(filename)s (отвара се у новом прозору)“"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Уреди цртеж %(filename)s (отвара се у новом прозору)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Цртеж на који се може притиснути: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Није вам дозвољено да сачувате цртеж на овој страници."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Уреди цртеж"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Прво направите личну страницу пре него што направите додатне странице."
 
@@ -3321,6 +3347,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Руковођење [[МојеСтранице|МојимСтраницама]]"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Није вам дозвољено да користите ову радњу."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Ово није подстраница!"
 
 #, fuzzy
 msgid "page package"
@@ -3441,10 +3475,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 "Вама није дозвољено да користите радњу %(actionname)s на овој страници!."
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Није вам дозвољено да користите ову радњу."
-
 msgid "Views/day"
 msgstr "Прегледа на дан"
 
@@ -3514,6 +3544,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Није вам дозвољено да уређујете ову страницу."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

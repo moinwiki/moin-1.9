@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -1126,18 +1126,6 @@ msgstr "Yeni ek dosya gönder \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Hizalı resim: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Yeni çizim oluştur: \"%(filename)s (yeni pencerede açılır)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "%(filename)s çizimini düzenle (yeni pencerede açılır)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Tıklanabilir çizim: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Satır numaralandırmayı aç/kapa"
 
@@ -1318,9 +1306,6 @@ msgstr "Paket sayfaları"
 msgid "Page changed"
 msgstr "Değişiklikleri Kaydet"
 
-msgid "about"
-msgstr ""
-
 #, fuzzy, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1354,6 +1339,9 @@ msgstr "eşle"
 
 msgid "matches"
 msgstr "eşleniyor"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "SonDüzenlemeler"
@@ -2411,6 +2399,29 @@ msgstr "Bu sayfa için sahip olduğunuz hızlı erişim bağlantısı silinemedi
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Sayfa için sahip olduğunuz hızlı erişim bağlantısı kaldırıldı."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slayt Gösterimi"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slayt Gösterimi"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2587,9 +2598,6 @@ msgstr "yükle"
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)s sayfası için ek bulunmamakta."
 
-msgid "Edit drawing"
-msgstr "Çizimi düzenle"
-
 msgid "New Attachment"
 msgstr "Yeni Ek"
 
@@ -2646,9 +2654,6 @@ msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "'%(target)s' adlı dosya eki zaten mevcut. (Dosyanın karşı taraftaki adı: '%"
 "(filename)s')"
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Sayfa üzerindeki ekleri silmek için yeterli izne sahip değilsiniz."
@@ -3259,6 +3264,27 @@ msgstr "Kullanıcı değil:"
 msgid "You are not allowed to perform this action."
 msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Yeni çizim oluştur: \"%(filename)s (yeni pencerede açılır)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "%(filename)s çizimini düzenle (yeni pencerede açılır)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Tıklanabilir çizim: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Çizimi düzenle"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Alt sayfa yaratmadan önce lütfen kişisel sayfanızı oluşturun."
 
@@ -3312,6 +3338,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages yönetimi"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Komşu sayfa bulunamadı!"
 
 #, fuzzy
 msgid "page package"
@@ -3438,10 +3472,6 @@ msgstr ""
 "Sayfa üzerinde %(actionname)s işlemini yapmak için yeterli izne sahip "
 "değilsiniz."
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
-
 msgid "Views/day"
 msgstr "Gösterim Sayısı/Gün"
 
@@ -3511,6 +3541,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr ""
+#~ "Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -1118,18 +1118,6 @@ msgstr "Overfør ny vedhæftning \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "integreret billede: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Opret ny tegning \"%(filename)s\" (åbner i et nyt vindue)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Redigér tegning \"%(filename)s\" (åbner i et nyt vindue)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Redigérbar tegning: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Skift linjenummerering"
 
@@ -1309,9 +1297,6 @@ msgstr "Pakkesider"
 msgid "Page changed"
 msgstr "Gem ændringer"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1345,6 +1330,9 @@ msgstr "resultat"
 
 msgid "matches"
 msgstr "resultater"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "SenesteRettelser"
@@ -2398,6 +2386,29 @@ msgstr "Din genvej til denne side kunne ikke fjernes."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Din genvej til denne side er fjernet."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slideshow"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slideshow"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2575,9 +2586,6 @@ msgstr "installere"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Ingen vedhæftninger tilknyttet %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Redigér tegning"
-
 msgid "New Attachment"
 msgstr "Ny vedhæftning"
 
@@ -2633,9 +2641,6 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "Vedhæftning '%(target)s' (eksternt navn '%(filename)s') eksisterer allerede."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Du har ikke lov til at gemme en tegning på denne side!"
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Du har ikke lov til at slette vedhæftninger på denne side."
@@ -3242,6 +3247,27 @@ msgstr "Ikke en bruger:"
 msgid "You are not allowed to perform this action."
 msgstr "Du har ikke lov til at udføre denne rutine."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Opret ny tegning \"%(filename)s\" (åbner i et nyt vindue)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Redigér tegning \"%(filename)s\" (åbner i et nyt vindue)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Redigérbar tegning: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Du har ikke lov til at gemme en tegning på denne side!"
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Redigér tegning"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Opret venligst en hjemmeside før du opretter flere sider"
 
@@ -3299,6 +3325,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MineSider administration"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Du har ikke lov til at anvende denne rutine."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Ingen overliggende side fundet!"
 
 #, fuzzy
 msgid "page package"
@@ -3419,10 +3453,6 @@ msgstr "Rutinen %(actionname)s er udeladt fra denne wiki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Du har ikke lov til at anvende rutinen %(actionname)s på denne side!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Du har ikke lov til at anvende denne rutine."
-
 msgid "Views/day"
 msgstr "Visninger/dag"
 
@@ -3492,6 +3522,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Du har ikke lov til at redigere denne side."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

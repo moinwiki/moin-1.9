@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -1138,18 +1138,6 @@ msgstr "Subir un novo anexo \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Crear un novo debuxo \"%(filename)s\""
-
-#, fuzzy, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Editar debuxo %(filename)s"
-
-#, fuzzy, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Editar debuxo %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "[des]activar nros. de liña"
 
@@ -1330,9 +1318,6 @@ msgstr "Empaquetar páxinas"
 msgid "Page changed"
 msgstr "Gardar os cambios"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1367,6 +1352,9 @@ msgstr "coincidencia"
 
 msgid "matches"
 msgstr "coincidencias"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "CambiosRecentes"
@@ -2438,6 +2426,29 @@ msgstr "Eliminou a súa ligazón rápida a esta páxina."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Eliminou a súa ligazón rápida a esta páxina."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Proxectar diapositivas"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Proxectar diapositivas"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2619,9 +2630,6 @@ msgstr "instalar"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Non se gardaron os anexos para %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Editar debuxo"
-
 msgid "New Attachment"
 msgstr "Novo anexo"
 
@@ -2676,9 +2684,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "O anexo '%(target)s' (nome remoto '%(filename)s') xa existe."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Non ten permiso para gardar debuxos nesta páxina."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Non ten permiso para borrar anexos nesta páxina."
@@ -3275,6 +3280,27 @@ msgstr "Non é un usuario:"
 msgid "You are not allowed to perform this action."
 msgstr "Non ten permiso para facer esta acción."
 
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Crear un novo debuxo \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Editar debuxo %(filename)s"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Editar debuxo %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Non ten permiso para gardar debuxos nesta páxina."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Editar debuxo"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Por favor, cree unha páxina persoal antes de crear páxinas adicionais."
 
@@ -3335,6 +3361,14 @@ msgstr ""
 # 
 msgid "MyPages management"
 msgstr "Administración de AsMiñasPáxinas"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Non ten permiso para usar esta acción."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Non se achou unha páxina superior!"
 
 #, fuzzy
 msgid "page package"
@@ -3451,10 +3485,6 @@ msgstr "A accion %(actionname)s non está presente neste wiki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Non ten permiso para usar esta acción."
-
 msgid "Views/day"
 msgstr "Vistas/día"
 
@@ -3525,6 +3555,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "No ten permiso para editar esta páxina."
 
 # 
 #~ msgid ""

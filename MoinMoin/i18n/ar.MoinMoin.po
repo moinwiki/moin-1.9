@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -1033,18 +1033,6 @@ msgstr ""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr ""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr ""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr ""
-
 msgid "Toggle line numbers"
 msgstr ""
 
@@ -1196,9 +1184,6 @@ msgstr "صفحات مشابه"
 msgid "Page changed"
 msgstr "إحفظ التغييرات"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1235,6 +1220,9 @@ msgstr "تطابق"
 #, fuzzy
 msgid "matches"
 msgstr "تطابق"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr ""
@@ -2277,6 +2265,28 @@ msgstr ""
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "تم إزالة رابطك السريع لهذه الصفحة."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "حجم المحرر"
+
+msgid "Quit"
+msgstr ""
+
+msgid "Quit slide show"
+msgstr ""
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2447,9 +2457,6 @@ msgstr "تثبيت"
 msgid "No attachments stored for %(pagename)s"
 msgstr ""
 
-msgid "Edit drawing"
-msgstr ""
-
 msgid "New Attachment"
 msgstr "ملف مرفق جديد"
 
@@ -2499,9 +2506,6 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr ""
-
-msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
 msgid "You are not allowed to delete attachments on this page."
@@ -3079,6 +3083,27 @@ msgstr "ليس مستدخما:"
 msgid "You are not allowed to perform this action."
 msgstr "لا يسمح لك القيام بهذا الإجراء."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr ""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr ""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr ""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr ""
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 
@@ -3112,6 +3137,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr ""
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "لا يسمح لك استعمال هذا الإجراء"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "صفحات مشابه"
 
 #, fuzzy
 msgid "page package"
@@ -3222,10 +3255,6 @@ msgstr "لا يسمح للويكي بتنفيذ عملية %(actionname)s!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "لا يسمح لك استعمال هذا الإجراء"
-
 msgid "Views/day"
 msgstr ""
 
@@ -3292,6 +3321,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
 #, fuzzy
 #~ msgid "BadContent"
