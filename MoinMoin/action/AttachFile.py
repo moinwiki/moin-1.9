@@ -975,6 +975,10 @@ def send_viewfile(pagename, request):
             fmt.url(0))
     request.write('%s<br><br>' % link)
 
+    if filename.endswith('.tdraw') or filename.endswith('.adraw'):
+        request.write(fmt.attachment_drawing(filename, ''))
+        return
+
     mt = wikiutil.MimeType(filename=filename)
 
     # destinguishs if browser need a plugin in place
@@ -1060,6 +1064,8 @@ def _do_view(pagename, request):
         return _('You are not allowed to view attachments of this page.')
     if not filename:
         return
+
+    request.formatter.page = Page(request, pagename)
 
     # send header & title
     # Use user interface language for this generated page
