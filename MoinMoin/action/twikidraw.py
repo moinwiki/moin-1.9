@@ -19,21 +19,12 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil, config
 from MoinMoin.action import AttachFile, do_show
+from MoinMoin.action.AttachFile import _write_stream
 from MoinMoin.Page import Page
 from MoinMoin.security.textcha import TextCha
 
 action_name = __name__.split('.')[-1]
 
-
-def _write_stream(content, stream, bufsize=8192):
-    if hasattr(content, 'read'): # looks file-like
-        import shutil
-        shutil.copyfileobj(content, stream, bufsize)
-    elif isinstance(content, str):
-        stream.write(content)
-    else:
-        logging.error("unsupported content object: %r" % content)
-        raise
 
 def gedit_drawing(self, url, text, **kw):
     # This is called for displaying a drawing image by gui editor.
@@ -55,6 +46,7 @@ def gedit_drawing(self, url, text, **kw):
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
     kw['src'] = ci.member_url('drawing.png')
     return self.image(**kw)
+
 
 def attachment_drawing(self, url, text, **kw):
     # This is called for displaying a clickable drawing image by text_html formatter.
@@ -238,5 +230,4 @@ def execute(pagename, request):
         return
 
     TwikiDraw(request, pagename, target).render()
-
 
