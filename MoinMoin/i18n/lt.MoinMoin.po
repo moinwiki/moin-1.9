@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -1129,18 +1129,6 @@ msgstr "Įkelti naują priedą „%(filename)s“"
 msgid "Inlined image: %(url)s"
 msgstr "Paveiksliukas: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Sukurti naują piešinį „%(filename)s (atsidaro naujame lange)“"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Redaguoti piešinį %(filename)s (atsidaro naujame lange)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Paspaudžiamas piešinys: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Keisti eilučių numerius"
 
@@ -1324,9 +1312,6 @@ msgstr "Pakeistas puslapis"
 msgid "Page changed"
 msgstr "Puslapis pakeistas"
 
-msgid "about"
-msgstr "apie"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1359,6 +1344,9 @@ msgstr "sutapimas"
 
 msgid "matches"
 msgstr "sutapimai(-ų)"
+
+msgid "about"
+msgstr "apie"
 
 msgid "RecentChanges"
 msgstr "PaskutiniaiPakeitimai"
@@ -2377,6 +2365,29 @@ msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 "Jums reikia turėti greitąją nuorodą šiam puslapiui, kad pašalintumėte ją."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Skaidrių peržiūra"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Skaidrių peržiūra"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2573,9 +2584,6 @@ msgstr "įdiegti"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nėra priedų puslapiui %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Redaguoti priešinį"
-
 msgid "New Attachment"
 msgstr "Naujas priedas"
 
@@ -2630,9 +2638,6 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "Priedas '%(target)s' (nuotolinis pavadinimas '%(filename)s') jau egzistuoja."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Jums neleidžiama išsaugoti piešinio šiame puslapyje."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Jums neleidžiama pašalinti priedo šiame puslapyje."
@@ -3237,6 +3242,27 @@ msgstr "Ne naudotojas:"
 msgid "You are not allowed to perform this action."
 msgstr "Jums neleidžiama vykdyti šio veiksmo."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Sukurti naują piešinį „%(filename)s (atsidaro naujame lange)“"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Redaguoti piešinį %(filename)s (atsidaro naujame lange)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Paspaudžiamas piešinys: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Jums neleidžiama išsaugoti piešinio šiame puslapyje."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Redaguoti priešinį"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Prašome pirma sukurti namų puslapį prieš sukuriant papildomus puslapius."
@@ -3295,6 +3321,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages valdymas"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Tik administratoriui leidžiama vykdyti šį veiksmą."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Pirminių puslapių nerasta!"
 
 #, fuzzy
 msgid "page package"
@@ -3413,9 +3446,6 @@ msgstr "Veiksmas %(actionname)s yra neįtrauktas į šį wiki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Jums neleidžiama naudoti veiksmo %(actionname)s šiame puslapyje!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Tik administratoriui leidžiama vykdyti šį veiksmą."
-
 msgid "Views/day"
 msgstr "Peržiūros per dieną"
 
@@ -3485,6 +3515,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Jums neleidžiama redaguoti šio puslapio"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

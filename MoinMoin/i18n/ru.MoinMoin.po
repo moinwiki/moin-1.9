@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -119,12 +119,12 @@ msgid ""
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
-"'''<<BR>>Ваш черновик, который базуется на ревизии %(draft_rev)d (сохранен %"
-"(draft_timestamp_str)s)может быть загружен вместо текущей ревизии %(page_rev)"
-"d используя кнопку загрузки черновика - в случае, если вы потеряли вашу "
-"последнюю сессию редактирования каким-то образом без сохранения''' Черновик "
-"сохраняется для вас когда вы делаете предпросмотр, отменяете редактирование "
-"или безуспешно сохраняетесь."
+"'''<<BR>>Ваш черновик, основанный на ревизии %(draft_rev)d (сохранен %"
+"(draft_timestamp_str)s) может быть загружен вместо текущей ревизии %"
+"(page_rev)d с помощью кнопки загрузки черновика - в случае, если вы потеряли "
+"вашу последнюю сессию редактирования каким-то образом без сохранения''' "
+"Черновик сохраняется для вас когда вы делаете предпросмотр, отменяете "
+"редактирование или безуспешно сохраняетесь."
 
 #, python-format
 msgid "Describe %s here."
@@ -177,7 +177,7 @@ msgid "Remove trailing whitespace from each line"
 msgstr "Стереть хвостовые пробелы из каждой строки"
 
 msgid "Edit was cancelled."
-msgstr "Исправления отменены."
+msgstr "Исправления были отменены."
 
 msgid "You can't copy to an empty pagename."
 msgstr "Нельзя скопировать на страницу без имени."
@@ -214,7 +214,7 @@ msgstr "Вам не разрешено удалять эту страницу!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
-"Спасибо за ваши исправления. Мы признательны за ваше внимание к деталям."
+"Благодарим Вас за исправления. Мы признательны за Ваше внимание к деталям."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -222,11 +222,10 @@ msgstr "Страница \"%s\" успешно удалена!"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr "Неожиданная ошибка при попытке блокировки страницы (errno=%d)."
+msgstr "Невозможно заблокировать страницу. Неожиданная ошибка (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr ""
-"Ошибка при попытке блокировки страницы. Может быть 'текущего' файла нет?"
+msgstr "Невозможно заблокировать страницу. Отсутствует 'текуий' файл?"
 
 #, python-format
 msgid ""
@@ -234,7 +233,7 @@ msgid ""
 "s is damaged and cannot be edited right now."
 msgstr ""
 "Невозможно определить текущуюю ревизию страницы из 'текущего' файла. "
-"Страница %s повреждена и не может быть отредактирована прямо сейчас."
+"Страница %s повреждена и не может быть отредактирована немедленно."
 
 #, python-format
 msgid "Cannot save page %s, no storage space left."
@@ -243,7 +242,7 @@ msgstr "Невозможно сохранить страницу %s, нет св
 #, python-format
 msgid "An I/O error occurred while saving page %s (errno=%d)"
 msgstr ""
-"Произошла ошибка ввода/вывода во время сохранения страницы %s (errno=%d)"
+"Во время сохранения страницы %s (errno=%d) произошла ошибка ввода/вывода"
 
 msgid "You are not allowed to edit this page!"
 msgstr "Вам не разрешено редактировать эту страницу!"
@@ -252,14 +251,14 @@ msgid "You cannot save empty pages."
 msgstr "Нельзя записать пустую страницу."
 
 msgid "You already saved this page!"
-msgstr "Вы уже запомнили эту страницу!"
+msgstr "Вы уже сохранили эту страницу!"
 
 msgid "You already edited this page! Please do not use the back button."
 msgstr ""
 "Вы уже отредактировали эту страницу! Пожалуйста, не пользуйтесь кнопкой Назад"
 
 msgid "You did not change the page content, not saved!"
-msgstr "Вы не сделали никаких изменений - страница не перезаписана!"
+msgstr "Вы не изменили содержание страницы, страница не перезаписана!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
@@ -268,7 +267,7 @@ msgstr ""
 "прав администратора на неё!"
 
 msgid "Notifications sent to:"
-msgstr "Уведомление отправлено для:"
+msgstr "Уведомления отправлены:"
 
 #, python-format
 msgid ""
@@ -362,21 +361,21 @@ msgstr "Неизвестное действие %(action_name)s ."
 
 #, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Вам нельзя делать %(action_name)s на этой странице!"
+msgstr "Вам нельзя выполнить %(action_name)s на этой странице!"
 
 msgid "Login and try again."
 msgstr "Войдите и повторите еще раз."
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Этому пакету нужна более новая версия МойнМойн (как минимум %s)."
+msgstr "Этому пакету нужна более новая версия MoinMoin (как минимум %s)."
 
 msgid "The theme name is not set."
 msgstr "Имя темы не задано."
 
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
-msgstr ""
+msgstr "Файлы темы не установлены! Отсутствуют права на запись для %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -384,7 +383,7 @@ msgstr "Установка '%(filename)s' не удалась."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr "Файл %s не является пакетом МойнМойн."
+msgstr "Файл %s не является пакетом MoinMoin."
 
 #, python-format
 msgid "The page %s does not exist."
@@ -417,7 +416,7 @@ msgstr "Аргумент должен быть булевым значением
 
 #, python-format
 msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Аргумент \"%s\" должен быть числовым значением, а не \"%s\""
+msgstr "Аргумент \"%s\" должен быть целым числом, а не \"%s\""
 
 #, python-format
 msgid "Argument must be an integer value, not \"%s\""
@@ -1139,18 +1138,6 @@ msgstr "Загрузить новое вложение \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Вставленная картинка: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Создать новый рисунов \"%(filename)s (открывается в новом окне)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Изменить рисунок %(filename)s (открывается в новом окне)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Нажимаемый рисунок: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Переключить отображение номеров строк"
 
@@ -1332,9 +1319,6 @@ msgstr "Измененная страница"
 msgid "Page changed"
 msgstr "Страница изменена"
 
-msgid "about"
-msgstr "примерно"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1367,6 +1351,9 @@ msgstr "совпадение"
 
 msgid "matches"
 msgstr "совпадений"
+
+msgid "about"
+msgstr "примерно"
 
 msgid "RecentChanges"
 msgstr "ПоследниеИзменения"
@@ -2430,6 +2417,29 @@ msgstr "Ваша закладка на эту страницу не может �
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Вам нужно иметь закладку на эту страницу, чтобы удалить её."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Презентация"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Презентация"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2633,9 +2643,6 @@ msgstr "установить"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Нет вложений к %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Редактировать рисунок"
-
 msgid "New Attachment"
 msgstr "Новое вложение"
 
@@ -2689,9 +2696,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Вложение '%(target)s' (из файла '%(filename)s') уже существует."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Вам нельзя делать рисунки на этой странице."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Вам нельзя удалять вложения с этой страницы."
@@ -3297,6 +3301,27 @@ msgstr "Не пользователь:"
 msgid "You are not allowed to perform this action."
 msgstr "Вам нельзя это делать."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Создать новый рисунов \"%(filename)s (открывается в новом окне)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Изменить рисунок %(filename)s (открывается в новом окне)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Нажимаемый рисунок: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Вам нельзя делать рисунки на этой странице."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Редактировать рисунок"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Создайте домашнюю страницу перед созданием других страниц."
 
@@ -3351,6 +3376,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Управление Моими Страницами"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Только суперпользователю разрешено активировать это действие"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Родительская страница не найдена!"
 
 #, fuzzy
 msgid "page package"
@@ -3468,9 +3500,6 @@ msgstr "Действие %(actionname)s исключено в этой вики!
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Вам не разрешено выполнять действие %(actionname)s на этой странице!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Только суперпользователю разрешено активировать это действие"
-
 msgid "Views/day"
 msgstr "Просмотров/день"
 
@@ -3540,6 +3569,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Вам не разрешено менять эту страницу."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

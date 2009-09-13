@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1127,18 +1127,6 @@ msgstr "Lähetä uusi liitetiedosto \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Sisällytetty kuvatiedosto: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Luo uusi piirros \"%(filename)s (avaa uuden sivun)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Muokkaa piirrosta %(filename)s (avaa uuden sivun)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Napsautettava piirros: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Rivinumerot päälle/pois"
 
@@ -1318,9 +1306,6 @@ msgstr "Muutettu sivu"
 msgid "Page changed"
 msgstr "Sivua on muutettu"
 
-msgid "about"
-msgstr "noin"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1353,6 +1338,9 @@ msgstr "osuma"
 
 msgid "matches"
 msgstr "osumaa"
+
+msgid "about"
+msgstr "noin"
 
 msgid "RecentChanges"
 msgstr "UusimmatMuutokset"
@@ -2418,6 +2406,29 @@ msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 "Et voi poistaa pikalinkkiä, sillä et ole lisännyt tätä sivua pikalinkkeihisi."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Diaesitys"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Diaesitys"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2618,9 +2629,6 @@ msgstr "asenna"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Sivulla %(pagename)s ei ole liitetiedostoja."
 
-msgid "Edit drawing"
-msgstr "Muokkaa piirrosta"
-
 msgid "New Attachment"
 msgstr "Uusi liitetiedosto"
 
@@ -2677,9 +2685,6 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "Liitetiedosto '%(target)s' (alkuperäinen nimi '%(filename)s') on jo olemassa."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Sinulla ei ole oikeutta tallentaa piirrosta tälle sivulle."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta."
@@ -3286,6 +3291,27 @@ msgstr "Ei käyttäjä:"
 msgid "You are not allowed to perform this action."
 msgstr "Sinulla ei ole oikeutta suorittaa tätä toimintoa."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Luo uusi piirros \"%(filename)s (avaa uuden sivun)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Muokkaa piirrosta %(filename)s (avaa uuden sivun)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Napsautettava piirros: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Sinulla ei ole oikeutta tallentaa piirrosta tälle sivulle."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Muokkaa piirrosta"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Luo kotisivu, ennen kuin luot muita sivuja."
 
@@ -3341,6 +3367,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Omien sivujen hallinta"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Vain pääkäyttäjä voi käyttää tätä toimintoa."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Yläsivua ei löytynyt!"
 
 #, fuzzy
 msgid "page package"
@@ -3460,9 +3493,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 "Sinulla ei ole oikeutta käyttää toimintoa %(actionname)s tällä sivulla!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Vain pääkäyttäjä voi käyttää tätä toimintoa."
-
 msgid "Views/day"
 msgstr "Katseluita/päivä"
 
@@ -3533,6 +3563,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -842,7 +842,6 @@ msgstr ""
 "Wenn Sie kein Konto haben, können Sie <a href=\"%(userprefslink)s\">nun eins "
 "anlegen</a>."
 
-
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr "<a href=\"%(sendmypasswordlink)s\">Passwort vergessen?</a>"
@@ -1137,18 +1136,6 @@ msgstr "Neuen Dateianhang \"%(filename)s\" hochladen"
 msgid "Inlined image: %(url)s"
 msgstr "Eingebettetes Bild: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Neue Zeichnung \"%(filename)s\" anlegen (öffnet ein neues Fenster)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Zeichnung %(filename)s bearbeiten (öffnet ein neues Fenster)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Anklickbare Zeichnung %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Zeilennummern ein/ausschalten"
 
@@ -1335,9 +1322,6 @@ msgstr "Geänderte Seite"
 msgid "Page changed"
 msgstr "Seite geändert"
 
-msgid "about"
-msgstr "ungefähr"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1370,6 +1354,9 @@ msgstr "Treffer"
 
 msgid "matches"
 msgstr "Treffer"
+
+msgid "about"
+msgstr "ungefähr"
 
 msgid "RecentChanges"
 msgstr "AktuelleÄnderungen"
@@ -2391,6 +2378,27 @@ msgstr ""
 "Sie müssen einen Expressverweis zu dieser Seite haben, um ihn entfernen zu "
 "können."
 
+msgid "Edit slide show"
+msgstr "Diaschau bearbeiten"
+
+msgid "Quit"
+msgstr "Verlassen"
+
+msgid "Quit slide show"
+msgstr "Diaschau verlassen"
+
+msgid "Show first slide (up arrow)"
+msgstr "Erstes Dia (Pfeil nach oben)"
+
+msgid "Show last slide (down arrow)"
+msgstr "Letztes Dia (Pfeil nach unten)"
+
+msgid "Show previous slide (left arrow)"
+msgstr "Vorhergendes Dia (Pfeil nach links)"
+
+msgid "Show next slide (right arrow)"
+msgstr "Nächstes Dia (Pfeil nach rechts)"
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2594,9 +2602,6 @@ msgstr "installieren"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Es wurden keine Anhänge für die Seite %(pagename)s gespeichert."
 
-msgid "Edit drawing"
-msgstr "Zeichnung editieren"
-
 msgid "New Attachment"
 msgstr "Neuer Dateianhang"
 
@@ -2653,9 +2658,6 @@ msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "Dateianhang '%(target)s' (ursprünglicher Name '%(filename)s') existiert "
 "bereits."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Sie dürfen auf dieser Seite keine Zeichnung speichern."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Sie dürfen keine Anhänge dieser Seite löschen!"
@@ -3276,6 +3278,27 @@ msgstr "Kein Benutzer:"
 msgid "You are not allowed to perform this action."
 msgstr "Sie dürfen diese Aktion nicht ausführen."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Neue Zeichnung \"%(filename)s\" anlegen (öffnet ein neues Fenster)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Zeichnung %(filename)s bearbeiten (öffnet ein neues Fenster)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Anklickbare Zeichnung %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Sie dürfen auf dieser Seite keine Zeichnung speichern."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Zeichnung editieren"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Bitte erzeugen Sie zuerst eine Homepage, bevor Sie weitere Seiten anlegen."
@@ -3333,6 +3356,12 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Verwaltung meiner Seiten"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Nur dem Superuser ist es erlaubt diese Aktion auszuführen."
+
+msgid "No page packages found."
+msgstr "Keine Seiten-Pakete gefunden."
 
 msgid "page package"
 msgstr "Seiten-Paket"
@@ -3450,9 +3479,6 @@ msgstr "Aktion %(actionname)s ist ausgeschlossen in diesem Wiki!"
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Sie dürfen die Aktion %(actionname)s auf dieser Seite nicht benutzen!"
-
-msgid "Only superuser is allowed to use this action."
-msgstr "Nur dem Superuser ist es erlaubt diese Aktion auszuführen."
 
 msgid "Views/day"
 msgstr "Lesezugriffe/Tag"

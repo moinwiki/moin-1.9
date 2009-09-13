@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1122,18 +1122,6 @@ msgstr "Відвантажити нове вкладення \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Зображення у рядку: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Створити малюнок \"%(filename)s (відкривати у новому вікні)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Змінити малюнок %(filename)s (відкривати у новому вікні)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Малюнок-посилання: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Увімкнути/вимкнути нумерацію рядків"
 
@@ -1312,9 +1300,6 @@ msgstr "Змінена сторінка"
 msgid "Page changed"
 msgstr "Сторінку змінено"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1347,6 +1332,9 @@ msgstr "відповідність"
 
 msgid "matches"
 msgstr "відповідностей"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "ОстанніЗміни"
@@ -2403,6 +2391,29 @@ msgstr "Ваше посилання на цю сторінку не може б�
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Щоб видалити посилання на цю сторінку, воно має існувати."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Показ слайдів"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Показ слайдів"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2582,9 +2593,6 @@ msgstr "встановити"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Немає вкладень до %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Змінити малюнок"
-
 msgid "New Attachment"
 msgstr "Нове вкладення"
 
@@ -2639,9 +2647,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Програма '%(target)s' (з файлу '%(filename)s') вже існує."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Ви не можете зберігати малюнки на цій сторінці."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Ви не можете стирати вкладення на цій сторінці."
@@ -3238,6 +3243,27 @@ msgstr "Не є користувачем:"
 msgid "You are not allowed to perform this action."
 msgstr "Ви не можете виконувати цю дію."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Створити малюнок \"%(filename)s (відкривати у новому вікні)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Змінити малюнок %(filename)s (відкривати у новому вікні)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Малюнок-посилання: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Ви не можете зберігати малюнки на цій сторінці."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Змінити малюнок"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Створіть домашню сторінку перед створенням інших сторінок."
 
@@ -3291,6 +3317,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Керування сторінками МоїСторінки"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Це може робити лише адміністратор."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Батьківська сторінка не існує!"
 
 #, fuzzy
 msgid "page package"
@@ -3410,10 +3444,6 @@ msgstr "%(actionname)s виконано у цьому wiki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Ви не можете робити %(actionname)s на цій сторінці!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Це може робити лише адміністратор."
-
 msgid "Views/day"
 msgstr "Переглядів за день"
 
@@ -3482,6 +3512,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Ви не можете редагувати цю сторінку."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-11-20 23:40+0000\n"
 "Last-Translator: Evandro Villa Verde <evandro.villaverde.hackerteen@gmail.\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -465,13 +465,12 @@ msgstr "Esperado um valor para \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Expressão regular para destaque inválida \"%(regex)s\": %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"O conteúdo de backup desta página é velho e não será incluso nos resultados "
-"das buscas!"
+"O backup desta página está obsoleto e e vai ter menores posições nos "
+"resultados das buscas!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -762,21 +761,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Associe este nome"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Verificação cancelada."
+msgstr "Verificação de OpenID cancelada."
 
 #, fuzzy, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID adicionado com sucesso."
+msgstr "Sucesso do OpenID. Id: %s."
 
-#, fuzzy
 msgid "OpenID failure"
-msgstr "Falha OpenID"
+msgstr "Falha do OpenID"
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "Nenhuma OpenID fornecida."
+msgstr "Nenhum OpenID encontrado na sessão."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Sua conta está agora associada a sua OpenID"
@@ -786,19 +782,21 @@ msgstr "A senha que você informou não é válida."
 
 #, fuzzy
 msgid "OpenID: handle verify continuation"
-msgstr "Verificação de Confiança do OpenID"
+msgstr "OpenID: tratar continuação de verificação"
 
+#, fuzzy
 msgid "OpenID: handle name continuation"
-msgstr ""
+msgstr "OpenID: tratar continuação de nome"
 
+#, fuzzy
 msgid "OpenID: handle associate continuation"
-msgstr ""
+msgstr "OpenID: tratar continuação de associação"
 
 msgid "OpenID: unknown continuation stage"
-msgstr ""
+msgstr "OpenID: estágio de continuação desconhecido"
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "Erro de OpenID: estágio de continuação desconhecido"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Sessões anônimas necessitam ser habilitadas para login OpenID"
@@ -826,13 +824,13 @@ msgstr "Servidor LDAP %(server)s falhou"
 msgid "Failed to connect to database."
 msgstr "Falha em conectar a base de dados"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "Se você não tem uma conta, <a href=\"%(userprefslink)s\">você pode criar uma "
-"agora</a>. <a href=\"%(sendmypasswordlink)s\">Esqueceu sua senha?</a>"
+"agora</a>. "
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
@@ -1133,18 +1131,6 @@ msgstr "Enviar novo anexo \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Imagem em linha: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Criar novo desenho \"%(filename)s (abrir em uma nova janela)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Editar desenho %(filename)s (abrir em uma nova janela)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Editar desenho %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Esconder número das linhas"
 
@@ -1154,7 +1140,7 @@ msgstr "Reverter para a revisão %(rev)d."
 
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "Renomeados de '%(oldpagename)s'."
+msgstr "Renomeado de '%(oldpagename)s'."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Opções --pages e --search são mutuamente exclusivas!"
@@ -1327,9 +1313,6 @@ msgstr "Página modificada"
 msgid "Page changed"
 msgstr "Página alterada"
 
-msgid "about"
-msgstr "sobre"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1362,6 +1345,9 @@ msgstr "acerto"
 
 msgid "matches"
 msgstr "acertos"
+
+msgid "about"
+msgstr "sobre"
 
 msgid "RecentChanges"
 msgstr "MudançasRecentes"
@@ -1594,9 +1580,8 @@ msgstr "AjudaComEdição/SubPáginas"
 msgid "HelpOnGraphicalEditor"
 msgstr "AjudaComEditorGráfico"
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "AjudaComMacros"
+msgstr "AjudaComGrupos"
 
 msgid "HelpOnHeadlines"
 msgstr "AjudaComTítulos"
@@ -2381,6 +2366,29 @@ msgstr "Sua inscrição a esta página não pode ser removida."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Você precisa ter um link rápido para esta página para poder removê-lo."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Diapositivos"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Diapositivos"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2570,9 +2578,6 @@ msgstr "instalar"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nenhum anexo armazenado para %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Editar desenho"
-
 msgid "New Attachment"
 msgstr "Novo Anexo"
 
@@ -2612,9 +2617,9 @@ msgstr ""
 "Sem arquivo. Apague os caracteres não ASCII do nome do arquivo e tente "
 "novamente."
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Você não tem permissão para ver arquivos anexados a esta página."
+msgstr ""
+"Você não tem permissão para sobrescrever arquivos anexados a esta página."
 
 #, python-format
 msgid ""
@@ -2627,9 +2632,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Anexo '%(target)s' (nome remoto '%(filename)s') já existe."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Você não tem permissão para salvar um desenho nesta página."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Você não tem permissão para remover arquivos anexados a esta página."
@@ -3040,7 +3042,7 @@ msgid "This page is already deleted or was never created!"
 msgstr "Esta página já está removida ou nunca foi criada!"
 
 msgid "Delete all /subpages too?"
-msgstr "Excluir todas as /subpáginas também?"
+msgstr "Excluir todas as subpáginas também?"
 
 msgid "Optional reason for the deletion"
 msgstr "Razão para a exclusão (opcional)"
@@ -3140,7 +3142,7 @@ msgid "Please choose:"
 msgstr "Por favor escolha:"
 
 msgid "Rename all /subpages too?"
-msgstr "Renomear tudo /subpáginas também?"
+msgstr "Renomear todas as subpáginas também?"
 
 msgid "New name"
 msgstr "Novo nome"
@@ -3152,7 +3154,7 @@ msgid "Really rename this page?"
 msgstr "Realmente renomear esta página?"
 
 msgid "Copy all /subpages too?"
-msgstr "Copiar tudo /subpáginas também?"
+msgstr "Copiar todas as subpáginas também?"
 
 msgid "Optional reason for the copying"
 msgstr "Razão para copiar a página (opcional)"
@@ -3228,6 +3230,27 @@ msgstr "Não a usuário:"
 msgid "You are not allowed to perform this action."
 msgstr "Você não tem permissão para executar esta ação."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Criar novo desenho \"%(filename)s (abrir em uma nova janela)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Editar desenho %(filename)s (abrir em uma nova janela)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Editar desenho %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Você não tem permissão para salvar um desenho nesta página."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Editar desenho"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Por favor primeiro crie uma página antes de criar uma página adicional."
@@ -3288,12 +3311,17 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Gerenciando MinhasPáginas"
 
-#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Somente o superusuário tem permissão para usar esta ação."
+
+msgid "No page packages found."
+msgstr "Nenhum pacote de páginas encontrado."
+
 msgid "page package"
-msgstr "Página modificada"
+msgstr "pacote de página"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Escolha:"
 
 #, python-format
 msgid "Install language packs for '%s'"
@@ -3406,9 +3434,6 @@ msgstr "Ação %(actionname)s foi excluída desta wiki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Você não tem permissão para fazer a ação %(actionname)s nesta página!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Somente o superusuário tem permissão para usar esta ação."
-
 msgid "Views/day"
 msgstr "Visualizações/dia"
 
@@ -3478,6 +3503,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anônimo"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Você não tem permissão para editar esta página!"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

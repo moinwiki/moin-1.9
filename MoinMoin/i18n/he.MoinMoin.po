@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -1088,18 +1088,6 @@ msgstr "שליחת קובץ מצורף חדש \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "תמונות משולבות: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "צור איור חדש \"%(filename)s (נפתח בחלון חדש)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "ערוך איור %(filename)s (נפתח בחלון חדש)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "איור לחיץ: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "סמן מספרי שורות"
 
@@ -1277,9 +1265,6 @@ msgstr "הדף ששונה"
 msgid "Page changed"
 msgstr "הדף שונה"
 
-msgid "about"
-msgstr "אודות"
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1312,6 +1297,9 @@ msgstr "התאמה"
 
 msgid "matches"
 msgstr "התאמות"
+
+msgid "about"
+msgstr "אודות"
 
 msgid "RecentChanges"
 msgstr "שינויים אחרונים"
@@ -2365,6 +2353,29 @@ msgstr "לא ניתן להסיר את הקישור המהיר שלך לדף זה
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "חובה להוסיף קישור מהיר לדף זה בכדי להסירו."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "מצגת שקפים"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "מצגת שקפים"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2544,9 +2555,6 @@ msgstr "התקן"
 msgid "No attachments stored for %(pagename)s"
 msgstr "אין קבצים מצורפים ל–%(pagename)s"
 
-msgid "Edit drawing"
-msgstr "ערוך איור"
-
 msgid "New Attachment"
 msgstr "קובץ מצורף חדש"
 
@@ -2598,9 +2606,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "קובץ מצורף \"%(target)s\" (שם מרוחק \"%(filename)s\") כבר קיים."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "אין לכם הרשאות לשמור איור בדף."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "אין לכם הרשאות למחוק קבצים מצורפים לדף."
@@ -3181,6 +3186,27 @@ msgstr "לא משתמש:"
 msgid "You are not allowed to perform this action."
 msgstr "אינך מורשה לבצע פעולה זאת."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "צור איור חדש \"%(filename)s (נפתח בחלון חדש)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "ערוך איור %(filename)s (נפתח בחלון חדש)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "איור לחיץ: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "אין לכם הרשאות לשמור איור בדף."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "ערוך איור"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "אנא צור דף בית ראשית ליצירת דפים נוספים."
 
@@ -3233,6 +3259,13 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "ניהול העמודים שלי"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "רק מנהל רשאי לבצע פעולה זו"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "לא נמצא דף אב."
 
 #, fuzzy
 msgid "page package"
@@ -3347,9 +3380,6 @@ msgstr "פעולה %(actionname)s בוטלה במערכת זאת!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "אינך מורשה להשתמש בפעולה %(actionname)s בדף זה!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "רק מנהל רשאי לבצע פעולה זו"
-
 msgid "Views/day"
 msgstr "צפיות ליום"
 
@@ -3417,6 +3447,10 @@ msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "אין לך הרשאות לערוך את הדף"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

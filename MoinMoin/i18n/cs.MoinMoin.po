@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1112,18 +1112,6 @@ msgstr "Upload nové přílohy \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Vložený obrázek: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Vytvořit novou kresbu \"%(filename)s (v novém okně)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Upravit kresbu %(filename)s (v novém okně)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikací kresba %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Přepnout zobrazení čísel řádků"
 
@@ -1304,9 +1292,6 @@ msgstr "Zbalit stránky"
 msgid "Page changed"
 msgstr "Uložit změny"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1339,6 +1324,9 @@ msgstr "nález"
 
 msgid "matches"
 msgstr "nálezů"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "PosledniZmeny"
@@ -2390,6 +2378,29 @@ msgstr "Pohotový odkaz na tuto stránku nelze odebrat."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Odebrali jste tuto stránku z pohotových odkazů."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Prezentace"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Prezentace"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2565,9 +2576,6 @@ msgstr "instalovat"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nebyly uloženy žádné přílohy ke stránce %(pagename)s."
 
-msgid "Edit drawing"
-msgstr "Editace kresby"
-
 msgid "New Attachment"
 msgstr "Nová příloha"
 
@@ -2620,9 +2628,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Příloha '%(target)s' (původní jméno '%(filename)s') již existuje."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Nemáte dostatečná práva k uložení obrázku k této stránce."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Nemáte dostatečná práva ke smazání přílohy u této stránky!"
@@ -3220,6 +3225,27 @@ msgstr "Není uživatel:"
 msgid "You are not allowed to perform this action."
 msgstr "Nemáte dovoleno provést tuto akci."
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Vytvořit novou kresbu \"%(filename)s (v novém okně)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Upravit kresbu %(filename)s (v novém okně)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikací kresba %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Nemáte dostatečná práva k uložení obrázku k této stránce."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Editace kresby"
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Prosím, nejdříve vytvořte domovskou stránku."
 
@@ -3273,6 +3299,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Správa MyPages"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Nemáte dovoleno provést tuto akci."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Rodičovská stránka nenalezena!"
 
 #, fuzzy
 msgid "page package"
@@ -3391,10 +3425,6 @@ msgstr "Akce %(actionname)s je v této wiki vyloučena!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Nemáte dovoleno spustit na této stránce akci %(actionname)s!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Nemáte dovoleno provést tuto akci."
-
 msgid "Views/day"
 msgstr "Počet zobrazení za den"
 
@@ -3464,6 +3494,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Nemáte dovoleno editovat tuto stránku."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

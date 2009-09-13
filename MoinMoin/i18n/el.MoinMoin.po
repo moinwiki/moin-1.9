@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"POT-Creation-Date: 2009-09-14 01:03+0200\n"
 "PO-Revision-Date: 2007-12-22 17:56+0200\n"
 "Last-Translator: YiannisValassakis <tungolcild@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -1042,18 +1042,6 @@ msgstr ""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr ""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr ""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr ""
-
 msgid "Toggle line numbers"
 msgstr ""
 
@@ -1227,9 +1215,6 @@ msgstr "Σελίδες πακέτου"
 msgid "Page changed"
 msgstr "Αποθήκευση αλλαγών"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1260,6 +1245,9 @@ msgstr "ταίριασμα"
 
 msgid "matches"
 msgstr "ταιριάζουν"
+
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr ""
@@ -2285,6 +2273,29 @@ msgstr ""
 msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slideshow"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slideshow"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -2453,9 +2464,6 @@ msgstr ""
 msgid "No attachments stored for %(pagename)s"
 msgstr ""
 
-msgid "Edit drawing"
-msgstr ""
-
 msgid "New Attachment"
 msgstr ""
 
@@ -2505,9 +2513,6 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr ""
-
-msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
 msgid "You are not allowed to delete attachments on this page."
@@ -3072,6 +3077,27 @@ msgstr ""
 msgid "You are not allowed to perform this action."
 msgstr ""
 
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr ""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr ""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr ""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr ""
+
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 
@@ -3105,6 +3131,14 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr ""
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Δε βρέθηκε σελίδα!"
 
 #, fuzzy
 msgid "page package"
@@ -3214,10 +3248,6 @@ msgstr ""
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
-
 msgid "Views/day"
 msgstr ""
 
@@ -3283,6 +3313,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
 
 #, fuzzy
 #~ msgid "BadContent"
