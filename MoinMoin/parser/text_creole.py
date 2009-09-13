@@ -343,6 +343,7 @@ class Emitter:
                     return self.formatter.attachment_image(
                         url, alt=text, html_class='image')
                 elif scheme == 'drawing':
+                    url = wikiutil.drawing2fname(url)
                     return self.formatter.attachment_drawing(url, text, alt=text)
                 else:
                     pass
