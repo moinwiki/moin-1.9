@@ -82,15 +82,47 @@ def absoluteName(url, pagename):
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
 
-def getAttachUrl(pagename, filename, request, addts=0, do='get', drawing=''):
+
+def get_action(request, filename, do):
+    ext_mapping = {
+        # file extension -> do -> action
+        '.tdraw': {
+            'modify': 'twikidraw',
+        },
+        '.adraw': {
+            'modify': 'anywikidraw',
+        },
+    }
+    generic_do_mapping = {
+        # do -> action
+        'get': action_name,
+        'view': action_name,
+        'move': action_name,
+        'del': action_name,
+        'unzip': action_name,
+        'install': action_name,
+        'upload_form': action_name,
+    }
+    basename, ext = os.path.splitext(filename)
+    do_mapping = ext_mapping.get(ext, {})
+    action = do_mapping.get(do, None)
+    if action is None:
+        # we have no special support for this,
+        # look up whether we have generic support:
+        action = generic_do_mapping.get(do, None)
+    return action
+
+
+def getAttachUrl(pagename, filename, request, addts=0, do='get'):
     """ Get URL that points to attachment `filename` of page `pagename`.
-        For upload url (files, not drawings), call with do='upload_form'.
+        For upload url, call with do='upload_form'.
+        Returns the URL to do the specified "do" action or None,
+        if this action is not supported.
     """
-    if not drawing:
-        url = request.href(pagename, action=action_name, do=do, target=filename)
-    else:
-        url = request.href(pagename, action=request.cfg.drawing_action, target=drawing)
-    return url
+    action = get_action(request, filename, do)
+    if action:
+        url = request.href(pagename, action=action, do=do, target=filename)
+        return url
 
 
 def getIndicator(request, pagename):
@@ -281,6 +313,10 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
         label_unzip = _("unzip")
         label_install = _("install")
 
+        may_read = request.user.may.read(pagename)
+        may_write = request.user.may.write(pagename)
+        may_delete = request.user.may.delete(pagename)
+
         html.append(fmt.bullet_list(1))
         for file in files:
             mt = wikiutil.MimeType(filename=file)
@@ -293,7 +329,6 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                        }
 
             links = []
-            may_delete = request.user.may.delete(pagename)
             if may_delete and not readonly:
                 links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='del')) +
                              fmt.text(label_del) +
@@ -308,18 +343,16 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                          fmt.text(label_get) +
                          fmt.url(0))
 
-            if ext == '.tdraw':
-                links.append(fmt.url(1, getAttachUrl(pagename, file, request, drawing=base)) +
-                             fmt.text(label_edit) +
-                             fmt.url(0))
-            elif ext == '.adraw':
-                links.append(fmt.url(1, getAttachUrl(pagename, file, request, drawing=base)) +
-                             fmt.text(label_edit) +
-                             fmt.url(0))
-            else:
-                links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='view')) +
-                             fmt.text(label_view) +
-                             fmt.url(0))
+            links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='view')) +
+                         fmt.text(label_view) +
+                         fmt.url(0))
+
+            if may_write and not readonly:
+                edit_url = getAttachUrl(pagename, file, request, do='modify')
+                if edit_url:
+                    links.append(fmt.url(1, edit_url) +
+                                 fmt.text(label_edit) +
+                                 fmt.url(0))
 
             try:
                 is_zipfile = zipfile.is_zipfile(fullpath)
@@ -330,9 +363,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                                      fmt.text(label_install) +
                                      fmt.url(0))
                     elif (not is_package and mt.minor == 'zip' and
-                          may_delete and
-                          request.user.may.read(pagename) and
-                          request.user.may.write(pagename)):
+                          may_read and may_write and may_delete):
                         links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
                                      fmt.text(label_unzip) +
                                      fmt.url(0))

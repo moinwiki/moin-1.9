@@ -840,7 +840,6 @@ options_no_group_name = {
     ('changed_time_fmt', '%H:%M', "Time format used on Recent``Changes for page edits within the last 24 hours"),
     ('date_fmt', '%Y-%m-%d', "System date format, used mostly in Recent``Changes"),
     ('datetime_fmt', '%Y-%m-%d %H:%M:%S', 'Default format for dates and times (when the user has no preferences or chose the "default" date format)'),
-    ('drawing_action', 'twikidraw', "action for manipulating drawings"),
     ('chart_options', None, "If you have gdchart, use something like chart_options = {'width': 720, 'height': 540}"),
 
     ('edit_bar', ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'],

@@ -655,10 +655,12 @@ class Formatter(FormatterBase):
     def attachment_drawing(self, url, text, **kw):
         # ToDo try to move this to a better place e.g. __init__
         try:
+            drawing_action = AttachFile.get_action(self.request, url, do='modify')
+            assert drawing_action is not None
             attachment_drawing = wikiutil.importPlugin(self.request.cfg, 'action',
-                                              self.request.cfg.drawing_action, 'attachment_drawing')
+                                              drawing_action, 'attachment_drawing')
             return attachment_drawing(self, url, text, **kw)
-        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError):
+        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError, AssertionError):
             return url
 
     # Text ##############################################################

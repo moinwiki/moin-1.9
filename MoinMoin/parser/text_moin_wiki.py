@@ -765,6 +765,7 @@ class Parser:
                             pagename = self.formatter.page.page_name
                             return m.execute('EmbedObject', u'target=%s' % url)
                 elif scheme == 'drawing':
+                    url = wikiutil.drawing2fname(url)
                     desc = self._transclude_description(desc, url)
                     if desc:
                         tag_attrs= {'alt': desc, 'title': desc, }
@@ -903,6 +904,7 @@ class Parser:
                             self._link_description(desc, target, url) +
                             self.formatter.attachment_link(0))
                 elif scheme == 'drawing':
+                    url = wikiutil.drawing2fname(url)
                     return self.formatter.attachment_drawing(url, desc, alt=desc, **tag_attrs)
             else:
                 if desc:
