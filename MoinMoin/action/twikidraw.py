@@ -88,7 +88,8 @@ def attachment_drawing(self, url, text, **kw):
         map = map.replace(u'%MAPNAME%', mapid)
         # add alt and title tags to areas
         map = re.sub(ur'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', ur'href="\1" alt="\1" title="\1"', map)
-        map = map.replace(u'%TWIKIDRAW%"', u'%s" alt="%s" title="%s"' % (drawing_url, title, title))
+        map = map.replace(u'%TWIKIDRAW%"', u'%s" alt="%s" title="%s"' % (
+            wikiutil.escape(drawing_url, 1), title, title))
         # unxml, because 4.01 concrete will not validate />
         map = map.replace(u'/>', u'>')
         title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}

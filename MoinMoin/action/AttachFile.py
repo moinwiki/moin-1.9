@@ -82,7 +82,7 @@ def absoluteName(url, pagename):
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
 
-def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing=''):
+def getAttachUrl(pagename, filename, request, addts=0, do='get', drawing=''):
     """ Get URL that points to attachment `filename` of page `pagename`.
         For upload url (files, not drawings), call with do='upload_form'.
     """
@@ -389,9 +389,10 @@ def error_msg(pagename, request, msg):
 def send_link_rel(request, pagename):
     files = _get_files(request, pagename)
     for fname in files:
-        url = getAttachUrl(pagename, fname, request, do='view', escaped=1)
+        url = getAttachUrl(pagename, fname, request, do='view')
         request.write(u'<link rel="Appendix" title="%s" href="%s">\n' % (
-                      wikiutil.escape(fname, 1), url))
+                      wikiutil.escape(fname, 1),
+                      wikiutil.escape(url, 1)))
 
 def send_uploadform(pagename, request):
     """ Send the HTML code for the list of already stored attachments and
@@ -947,8 +948,9 @@ def send_viewfile(pagename, request):
 
     # destinguishs if browser need a plugin in place
     if mt.major == 'image' and mt.minor in config.browser_supported_images:
+        url = getAttachUrl(pagename, filename, request)
         request.write('<img src="%s" alt="%s">' % (
-            getAttachUrl(pagename, filename, request, escaped=1),
+            wikiutil.escape(url, 1),
             wikiutil.escape(filename, 1)))
         return
     elif mt.major == 'text':

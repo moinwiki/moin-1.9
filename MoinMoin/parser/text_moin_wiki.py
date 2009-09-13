@@ -741,7 +741,7 @@ class Parser:
                         from MoinMoin.action import AttachFile
                         pagename = self.formatter.page.page_name
                         if AttachFile.exists(self.request, pagename, url):
-                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
+                            href = AttachFile.getAttachUrl(pagename, url, self.request)
                             tag_attrs, query_args = self._get_params(params,
                                                                      tag_attrs={'title': desc, },
                                                                      acceptable_attrs=acceptable_attrs_object)
