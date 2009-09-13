@@ -20,7 +20,6 @@ logging = log.getLogger(__name__)
 from MoinMoin import config, wikiutil
 from MoinMoin.action import AttachFile, do_show
 from MoinMoin.action.AttachFile import _write_stream
-from MoinMoin.Page import Page
 
 action_name = __name__.split('.')[-1]
 
@@ -80,23 +79,20 @@ def attachment_drawing(self, url, text, **kw):
 class AnyWikiDraw(object):
     """ anywikidraw action """
     def __init__(self, request, pagename, target):
-        self._ = request.getText
         self.request = request
         self.pagename = pagename
         self.target = target
 
-    def render_msg(self, msg, msgtype):
-        """ Called to display some message (can also be the action form) """
-        self.request.theme.add_msg(msg, msgtype)
-        do_show(self.pagename, self.request)
-
     def save(self):
-        _ = self._
-        pagename = self.pagename
         request = self.request
+        _ = request.getText
+        pagename = self.pagename
         target = self.target
         if not request.user.may.write(pagename):
             return _('You are not allowed to save a drawing on this page.')
+        if not target:
+            return _("Empty target given.")
+
         file_upload = request.files.get('filepath')
         if not file_upload:
             # This might happen when trying to upload file names
@@ -131,10 +127,15 @@ class AnyWikiDraw(object):
             ci.put('drawing' + ext, filecontent, content_length)
 
     def render(self):
-        _ = self._
         request = self.request
+        _ = request.getText
         pagename = self.pagename
         target = self.target
+        if not request.user.may.read(pagename):
+            return _('You are not allowed to view attachments of this page.')
+        if not target:
+            return _("Empty target given.")
+
         ci = AttachFile.ContainerItem(request, pagename, target)
         if ci.exists():
             drawurl = ci.member_url('drawing.svg')
@@ -191,24 +192,15 @@ class AnyWikiDraw(object):
 
 
 def execute(pagename, request):
-    _ = request.getText
-    msg = None
-    if not request.user.may.read(pagename):
-        msg = '<p>%s</p>' % _('You are not allowed to view this page.')
-        AnyWikiDraw(request, pagename, target).render_msg(msg, 'error')
-        return
+    target = request.values.get('target')
+    awd = AnyWikiDraw(request, pagename, target)
 
-    target = request.values.get('target', '')
-    if not target:
-        msg = '<p>%s</p>' % _("Empty target given.")
-        AnyWikiDraw(request, pagename, target).render_msg(msg, 'error')
-        return
-
-    do = request.values.get('do', '')
-    if do == 'save' and request.user.may.write(pagename):
-        msg = AnyWikiDraw(request, pagename, target).save()
-        AnyWikiDraw(request, pagename, target).render_msg(msg, 'error')
-        return
-
-    AnyWikiDraw(request, pagename, target).render()
+    do = request.values.get('do')
+    if do == 'save':
+        msg = awd.save()
+    else:
+        msg = awd.render()
+    if msg:
+        request.theme.add_msg(msg, 'error')
+        do_show(pagename, request)
 
