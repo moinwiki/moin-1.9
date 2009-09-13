@@ -40,7 +40,7 @@ def gedit_drawing(self, url, text, **kw):
     drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
-        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
+        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': self.text(containername)}
         img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
         css = 'nonexistent'
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
@@ -58,12 +58,12 @@ def attachment_drawing(self, url, text, **kw):
     drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, do='modify')
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
-        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
+        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': self.text(containername)}
         img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
         css = 'nonexistent'
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
 
-    title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
+    title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(containername)}
     kw['src'] = src = ci.member_url('drawing.png')
     kw['css'] = 'drawing'
 
@@ -84,13 +84,13 @@ def attachment_drawing(self, url, text, **kw):
             wikiutil.escape(drawing_url, 1), title, title))
         # unxml, because 4.01 concrete will not validate />
         map = map.replace(u'/>', u'>')
-        title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
+        title = _('Clickable drawing: %(filename)s') % {'filename': self.text(containername)}
         if 'title' not in kw:
             kw['title'] = title
         if 'alt' not in kw:
             kw['alt'] = kw['title']
         kw['usemap'] = '#'+mapid
-        return map + self.image(**kw)
+        return self.url(1, drawing_url) + map + self.image(**kw) + self.url(0)
     else:
         if 'title' not in kw:
             kw['title'] = title

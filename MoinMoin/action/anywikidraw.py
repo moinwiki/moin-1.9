@@ -25,26 +25,7 @@ from MoinMoin.Page import Page
 action_name = __name__.split('.')[-1]
 
 
-def gedit_drawing(self, url, text, **kw):
-    # This is called for displaying a drawing image by gui editor.
-    _ = self.request.getText
-    # TODO: this 'text' argument is kind of superfluous, replace by using alt=... kw arg
-    # ToDo: make this clickable for the gui editor
-    if 'alt' not in kw or not kw['alt']:
-        kw['alt'] = text
-    # we force the title here, needed later for html>wiki converter
-    kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
-    pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing)
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request)
-    ci = AttachFile.ContainerItem(self.request, pagename, containername)
-    if not ci.exists():
-        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': containername}
-        img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
-        css = 'nonexistent'
-        return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
-    kw['src'] = ci.member_url('drawing.png')
-    return self.image(**kw)
+from MoinMoin.action.twikidraw import gedit_drawing
 
 
 def attachment_drawing(self, url, text, **kw):
