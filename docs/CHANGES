@@ -35,10 +35,15 @@ Version 1.9.0current:
     * Minimum Xapian requirement is 1.0.6 now.
     * Outdated and unmaintained xapwrap lib was removed.
   * raw action mimetype support: ...?action=raw&mimetype=text/css
-  * new config variable drawing_action for selecting the drawing action
-  * the AttachFile TWikiDraw code refactored to an action.
-  * TextCha feature added to TWikiDraw
-  * AnyWikiDraw applet and source also added a new drawing action anywikidraw
+  * TWikiDraw:
+    * support code was refactored/moved to the twikidraw action.
+    * use drawing:example.tdraw to invoke it (drawing:example also still
+      works for backwards compatibility)
+    * TextCha feature added
+  * AnyWikiDraw:
+    * java applet added, source code see contrib/
+    * support code for it is in anywikidraw action.
+    * use drawing:example.adraw to invoke it
   * SlideShow action and css from moin/extensions for modernized theme added
 
   Bug fixes:

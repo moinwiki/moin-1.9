@@ -95,10 +95,12 @@ class Formatter(text_html.Formatter):
     def attachment_drawing(self, url, text, **kw):
         # Todo get it to start the drawing editor on a click
         try:
+            drawing_action = AttachFile.get_action(self.request, url, do='modify')
+            assert drawing_action is not None
             attachment_drawing = wikiutil.importPlugin(self.request.cfg, 'action',
-                                              self.request.cfg.drawing_action, 'gedit_drawing')
+                                              drawing_action, 'gedit_drawing')
             return attachment_drawing(self, url, text, **kw)
-        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError):
+        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError, AssertionError):
             return url
 
     def icon(self, type):

@@ -45,8 +45,8 @@ def gedit_drawing(self, url, text, **kw):
     # we force the title here, needed later for html>wiki converter
     kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing) + ".tdraw"
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing)
+    containername = wikiutil.taintfilename(drawing)
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
         title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
@@ -61,9 +61,9 @@ def attachment_drawing(self, url, text, **kw):
     # XXX text arg is unused!
     _ = self.request.getText
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing) + ".tdraw"
+    containername = wikiutil.taintfilename(drawing)
 
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing)
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, do='modify')
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
         title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
@@ -139,11 +139,11 @@ class TwikiDraw(object):
         filename = request.form['filename']
         basepath, basename = os.path.split(filename)
         basename, ext = os.path.splitext(basename)
-        ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
+        ci = AttachFile.ContainerItem(request, pagename, target)
         filecontent = file_upload.stream
         content_length = None
         if ext == '.draw': # TWikiDraw POSTs this first
-            AttachFile._addLogEntry(request, 'ATTDRW', pagename, target + '.tdraw')
+            AttachFile._addLogEntry(request, 'ATTDRW', pagename, target)
             ci.truncate()
             filecontent = filecontent.read() # read file completely into memory
             filecontent = filecontent.replace("\r", "")
@@ -168,7 +168,7 @@ class TwikiDraw(object):
         request = self.request
         pagename = self.pagename
         target = self.target
-        ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
+        ci = AttachFile.ContainerItem(request, pagename, target)
         if ci.exists():
             drawurl = ci.member_url('drawing.draw')
             pngurl = ci.member_url('drawing.png')

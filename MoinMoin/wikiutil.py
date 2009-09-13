@@ -2228,6 +2228,20 @@ def taintfilename(basename):
     return basename
 
 
+def drawing2fname(drawing):
+    config.drawing_extensions = ['.tdraw', '.adraw',
+                                 '.svg',
+                                 '.png', '.jpg', '.jpeg', '.gif',
+                                ]
+    fname, ext = os.path.splitext(drawing)
+    # note: do not just check for empty extension or stuff like drawing:foo.bar
+    # will fail, instead of being expanded to foo.bar.tdraw
+    if ext not in config.drawing_extensions:
+        # for backwards compatibility, twikidraw is the default:
+        drawing += '.tdraw'
+    return drawing
+
+
 def mapURL(request, url):
     """
     Map URLs according to 'cfg.url_mappings'.

@@ -43,11 +43,11 @@ def gedit_drawing(self, url, text, **kw):
     # we force the title here, needed later for html>wiki converter
     kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing) + ".adraw"
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing)
+    containername = wikiutil.taintfilename(drawing)
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
-        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
+        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': containername}
         img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
         css = 'nonexistent'
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
@@ -59,17 +59,17 @@ def attachment_drawing(self, url, text, **kw):
     # XXX text arg is unused!
     _ = self.request.getText
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing) + ".adraw"
+    containername = wikiutil.taintfilename(drawing)
 
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing)
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, do='modify')
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
-        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
+        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': self.text(containername)}
         img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
         css = 'nonexistent'
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
 
-    title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
+    title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(containername)}
     kw['src'] = src = ci.member_url('drawing.png')
     kw['css'] = 'drawing'
 
@@ -88,7 +88,7 @@ def attachment_drawing(self, url, text, **kw):
         map = map.replace(u'name="%s.svg"' % drawing, u'name="%s"' % mapid)
         # unxml, because 4.01 concrete will not validate />
         map = map.replace(u'/>', u'>')
-        title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
+        title = _('Clickable drawing: %(filename)s') % {'filename': self.text(containername)}
         if 'title' not in kw:
             kw['title'] = title
         if 'alt' not in kw:
@@ -132,11 +132,11 @@ class AnyWikiDraw(object):
         basepath, basename = os.path.split(filename)
         basename, ext = os.path.splitext(basename)
 
-        ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
+        ci = AttachFile.ContainerItem(request, pagename, target)
         filecontent = file_upload.stream
         content_length = None
         if ext == '.svg': # AnyWikiDraw POSTs this first
-            AttachFile._addLogEntry(request, 'ATTDRW', pagename, target + '.adraw')
+            AttachFile._addLogEntry(request, 'ATTDRW', pagename, target)
             ci.truncate()
             filecontent = filecontent.read() # read file completely into memory
             filecontent = filecontent.replace("\r", "")
@@ -160,7 +160,7 @@ class AnyWikiDraw(object):
         request = self.request
         pagename = self.pagename
         target = self.target
-        ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
+        ci = AttachFile.ContainerItem(request, pagename, target)
         if ci.exists():
             drawurl = ci.member_url('drawing.svg')
         else:
