@@ -19,19 +19,11 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config, wikiutil
 from MoinMoin.action import AttachFile, do_show
+from MoinMoin.action.AttachFile import _write_stream
 from MoinMoin.Page import Page
 
 action_name = __name__.split('.')[-1]
 
-def _write_stream(content, stream, bufsize=8192):
-    if hasattr(content, 'read'): # looks file-like
-        import shutil
-        shutil.copyfileobj(content, stream, bufsize)
-    elif isinstance(content, str):
-        stream.write(content)
-    else:
-        logging.error("unsupported content object: %r" % content)
-        raise
 
 def gedit_drawing(self, url, text, **kw):
     # This is called for displaying a drawing image by gui editor.
@@ -53,6 +45,7 @@ def gedit_drawing(self, url, text, **kw):
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
     kw['src'] = ci.member_url('drawing.png')
     return self.image(**kw)
+
 
 def attachment_drawing(self, url, text, **kw):
     # This is called for displaying a clickable drawing image by text_html formatter.
@@ -101,6 +94,7 @@ def attachment_drawing(self, url, text, **kw):
         if 'alt' not in kw:
             kw['alt'] = kw['title']
         return self.url(1, drawing_url) + self.image(**kw) + self.url(0)
+
 
 class AnyWikiDraw(object):
     """ anywikidraw action """
@@ -213,6 +207,7 @@ class AnyWikiDraw(object):
         request.write(request.formatter.endContent())
         request.theme.send_footer(pagename)
         request.theme.send_closing_html()
+
 
 def execute(pagename, request):
     _ = request.getText
