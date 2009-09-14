@@ -142,7 +142,7 @@ def access_denied_decorator(fn):
     """
     if sys.platform == 'win32':
         def wrapper(*args, **kwargs):
-            max_retries = 10
+            max_retries = 42
             retry = 0
             while True:
                 try:

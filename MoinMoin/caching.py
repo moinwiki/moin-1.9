@@ -131,7 +131,7 @@ class CacheEntry:
 
         return needsupdate
 
-    def lock(self, mode, timeout=1.0):
+    def lock(self, mode, timeout=10.0):
         """
         acquire a lock for <mode> ("r" or "w").
         we just raise a CacheError if this doesn't work.
@@ -143,11 +143,14 @@ class CacheEntry:
         """
         lock_dir = os.path.join(self.arena_dir, '__lock__')
         if 'r' in mode:
-            self._lock = lock.LazyReadLock(lock_dir, 60.0)
+            _lock = lock.LazyReadLock(lock_dir, 60.0)
         elif 'w' in mode:
-            self._lock = lock.LazyWriteLock(lock_dir, 60.0)
-        acquired = self._lock.acquire(timeout)
-        if not acquired:
+            _lock = lock.LazyWriteLock(lock_dir, 60.0)
+        acquired = _lock.acquire(timeout)
+        if acquired:
+            self._lock = _lock
+        else:
+            self._lock = None
             err = "Can't acquire %s lock in %s" % (mode, lock_dir)
             logging.error(err)
             raise CacheError(err)

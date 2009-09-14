@@ -602,7 +602,7 @@ class Formatter(FormatterBase):
 
     # Attachments ######################################################
 
-    def attachment_link(self, on, url=None, **kw):
+    def attachment_link(self, on, url=None, querystr=None, **kw):
         """ Link to an attachment.
 
             @param on: 1/True=start link, 0/False=end link
@@ -610,7 +610,8 @@ class Formatter(FormatterBase):
         """
         assert on in (0, 1, False, True) # make sure we get called the new way, not like the 1.5 api was
         _ = self.request.getText
-        querystr = kw.get('querystr', {})
+        if querystr is None:
+            querystr = {}
         assert isinstance(querystr, dict) # new in 1.6, only support dicts
         if 'do' not in querystr:
             querystr['do'] = 'view'
@@ -620,13 +621,14 @@ class Formatter(FormatterBase):
             fname = wikiutil.taintfilename(filename)
             if AttachFile.exists(self.request, pagename, fname):
                 target = AttachFile.getAttachUrl(pagename, fname, self.request, do=querystr['do'])
-                title = "attachment:%s" % url
-                css = 'attachment'
+                if not 'title' in kw:
+                    kw['title'] = "attachment:%s" % url
+                kw['css'] = 'attachment'
             else:
                 target = AttachFile.getAttachUrl(pagename, fname, self.request, do='upload_form')
-                title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
-                css = 'attachment nonexistent'
-            return self.url(on, target, css=css, title=title)
+                kw['title'] = _('Upload new attachment "%(filename)s"') % {'filename': fname}
+                kw['css'] = 'attachment nonexistent'
+            return self.url(on, target, **kw)
         else:
             return self.url(on)
 

@@ -231,7 +231,8 @@ def import_mail_from_message(request, message):
 
     for att in msg['attachments']:
         i = 0
-        while 1:
+        while i < 1000: # do not create a gazillion attachments if something
+                        # strange happens, give up after 1000.
             if i == 0:
                 fname = att.filename
             else:
@@ -243,13 +244,16 @@ def import_mail_from_message(request, message):
                 else:
                     fname = att.filename + new_suffix
             try:
-                # get the fname again, it might have changed
-                fname, fsize = add_attachment(request, pagename, fname, att.data)
-                attachments.append(fname)
+                # att.data can be None for forwarded message content - we can
+                # just ignore it, the forwarded message's text will be present
+                # nevertheless
+                if att.data is not None:
+                    # get the fname again, it might have changed
+                    fname, fsize = add_attachment(request, pagename, fname, att.data)
+                    attachments.append(fname)
+                break
             except AttachmentAlreadyExists:
                 i += 1
-            else:
-                break
 
     # build an attachment link table for the page with the e-mail
     attachment_links = [""] + [u'''[[attachment:%s|%s]]''' % ("%s/%s" % (pagename, att), att) for att in attachments]
