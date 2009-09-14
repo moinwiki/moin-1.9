@@ -208,9 +208,37 @@ Version 1.9.0beta1:
       See HelpOnAuthentication.
 
 
-Version 1.8.current:
+Version 1.8.5:
+  Bug fixes:
+    * Attachment links: fix processing of attributes (e.g. 'target', 'title')
+    * Upgrade FCKeditor from 2.6.4 to 2.6.4.1.
+    * PDF embedding: fix html, works better with PDF browser plugins now.
+    * Fix typo in rightsidebar CSS.
+    * Action revert: avoids reverting to a deleted current revision.
+    * Action diff: enable prev/next button only in the range of given revisions.
+    * Add a Auto-Submitted: auto-generated header to generated mails.
+    * Include comment in email notifies.
+    * mailimport: fix endless looping while trying to import a forwarded mail.
+    * fuid: keep same fake_mtime for intervals of max_staleness duration.
+    * Fixes a bug with empty list items in the GUI editor.
+    * Improve filesys.rename compatibility code (win32).
+    * Fix locking for CacheEntry.
+    * Xapian indexing: catch exception when a bad zip file is encountered.
+    * openidrp / botbouncer: fix param count for CancelLogin().
+
+  New features:
+    * Added CAS authentication.
+    * Added httponly cookie support and use it for session cookie.
+
   Other changes:
-    * moin maint cleancache purges now also drafts
+    * HTTP auth: added debug logging.
+    * Minor LDAP auth improvements.
+    * Data browser widget:
+      * Add (h)column<idx> css class to make it styleable.
+      * Include only necessary autofilter options.
+    * moin maint cleancache purges now drafts, too.
+    * Add gopher and apt protocols to url_schemas.
+    * Add .csv, .flv, .swf to MIMETYPES_MORE.
 
 
 Version 1.8.4:

@@ -75,7 +75,7 @@ del c
 url_schemas = ['http', 'https', 'ftp', 'file',
                'mailto', 'nntp', 'news',
                'ssh', 'telnet', 'irc', 'ircs', 'xmpp', 'mumble',
-               'webcal', 'ed2k', 'rootz',
+               'webcal', 'ed2k', 'apt', 'rootz',
                'gopher',
                'notes',
               ]

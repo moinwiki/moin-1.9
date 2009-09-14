@@ -129,7 +129,8 @@ class DataBrowserWidget(base.Widget):
                 col = self.data.columns[idx]
                 if col.hidden:
                     continue
-                result.append(fmt.table_cell(1))
+                cell_attrs = {'class': 'hcolumn%d' % idx}
+                result.append(fmt.table_cell(1, cell_attrs))
                 result.append(fmt.strong(1))
                 result.append(col.label or col.name)
                 result.append(fmt.strong(0))
@@ -183,11 +184,12 @@ class DataBrowserWidget(base.Widget):
                 for idx in range(len(row)):
                     if self.data.columns[idx].hidden:
                         continue
+                    cell_attrs = {'class': 'column%d' % idx}
                     if isinstance(row[idx], tuple):
-                        result.append(fmt.table_cell(1, abbr=unicode(row[idx][1])))
+                        result.append(fmt.table_cell(1, cell_attrs, abbr=unicode(row[idx][1])))
                         result.append(unicode(row[idx][0]))
                     else:
-                        result.append(fmt.table_cell(1))
+                        result.append(fmt.table_cell(1, cell_attrs))
                         result.append(unicode(row[idx]))
                     result.append(fmt.table_cell(0))
                 result.append(fmt.table_row(0))

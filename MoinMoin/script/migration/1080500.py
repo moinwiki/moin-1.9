@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - migration from base rev 1080200
+    MoinMoin - migration from base rev 1080500
 
     Nothing to do, we just return the new data dir revision.
 
@@ -9,5 +9,5 @@
 """
 
 def execute(script, data_dir, rev):
-    return 1080400
+    return 1089999
 
