@@ -131,15 +131,22 @@ class EditLog:
         """ read complete edit-log from disk """
         data = {}
         try:
+            lineno = 0
             f = file(self.fname, 'r')
             for line in f:
+                lineno += 1
                 line = line.replace('\r', '').replace('\n', '')
                 if not line.strip(): # skip empty lines
                     continue
                 fields = line.split('\t') + [''] * 9
                 timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
                 timestamp = int(timestamp)
-                rev = int(rev)
+                try:
+                    rev = int(rev)
+                except ValueError, err:
+                    print "Error: %r has a damaged timestamp in log line %d [%s] - skipping this entry" % (
+                        self.fname, lineno, str(err))
+                    continue # ignore this line, do not terminate - to find all those errors in one go
                 pagename = wikiutil.unquoteWikiname(pagename)
                 data[(timestamp, rev, pagename)] = (timestamp, rev, action, pagename, ip, hostname, userid, extra, comment)
             f.close()
