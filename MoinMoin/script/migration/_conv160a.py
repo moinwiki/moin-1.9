@@ -140,11 +140,11 @@ class EditLog:
                     continue
                 fields = line.split('\t') + [''] * 9
                 timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
-                timestamp = int(timestamp)
                 try:
+                    timestamp = int(timestamp)
                     rev = int(rev)
                 except ValueError, err:
-                    print "Error: %r has a damaged timestamp in log line %d [%s] - skipping this entry" % (
+                    print "Error: %r has a damaged timestamp or revision number in log line %d [%s] - skipping this entry" % (
                         self.fname, lineno, str(err))
                     continue # ignore this line, do not terminate - to find all those errors in one go
                 pagename = wikiutil.unquoteWikiname(pagename)
