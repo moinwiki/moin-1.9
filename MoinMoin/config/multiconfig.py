@@ -711,7 +711,7 @@ options_no_group_name = {
      "The session service."),
     ('cookie_secure', None,
      'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
-    ('cookie_httponly', True,
+    ('cookie_httponly', False,
      'Use a httponly cookie that can only be used by the server, not by clientside scripts.'),
     ('cookie_domain', None,
      'Domain used in the session cookie. (None = do not specify domain).'),
