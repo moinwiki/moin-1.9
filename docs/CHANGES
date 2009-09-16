@@ -154,7 +154,11 @@ Version 1.9.0beta2:
       of the cookie in hours, accepting floats, for anon sessions and logged in
       sessions. Default is (0, 12). 0 means not to use a session cookie (== not
       to establish a session) and makes only sense for anon users.
-  * cfg.cookie_httponly is new and defaults to True.
+  * cfg.cookie_httponly is new and defaults to False. Please note that if you
+    set it to True, TWikiDraw and similar stuff won't be able to use the session
+    cookie. Thus, if your wiki page doesn't allow writing for everybody, saving
+    a drawing will fail, because there is no session (== no logged in user) for
+    the TWikiDraw applet's saving POSTs.
 
   Removed features:
   * Removed cfg.traceback_* settings (use logging configuration)
