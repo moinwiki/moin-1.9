@@ -382,5 +382,5 @@ called "python%d.%d-dev(el)".
 
 Please contact the system administrator to have it installed.
 """ % sys.version_info[:2]
-    sys.exit(1)
+        sys.exit(1)
 
