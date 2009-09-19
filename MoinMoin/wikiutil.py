@@ -118,7 +118,11 @@ def url_unquote(s, want_unicode=None):
 
 
 def parseQueryString(qstr, want_unicode=None):
-    """ see werkzeug.url_decode """
+    """ see werkzeug.url_decode
+
+        Please note: this returns a MultiDict, you might need to use dict() on
+                     the result if your code expects a "normal" dict.
+    """
     try:
         assert want_unicode is None
     except AssertionError:

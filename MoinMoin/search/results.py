@@ -676,7 +676,7 @@ class SearchResults(object):
         """
         _ = self.request.getText
         f = self.formatter
-        querydict = wikiutil.parseQueryString(self.request.query_string)
+        querydict = dict(wikiutil.parseQueryString(self.request.query_string))
 
         def page_url(n):
             querydict.update({'from': n * hitsPerPage})
