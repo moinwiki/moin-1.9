@@ -165,6 +165,14 @@ class DictsBackendTest(object):
 
         assert u'SomeNotExistingDict' not in dicts
 
+    def test_update(self):
+        dicts = self.request.dicts
+
+        d = {}
+        d.update(dicts['SomeTestDict'])
+
+        assert u'First' in d
+
     def test_get(self):
         dicts = self.request.dicts
 
