@@ -110,8 +110,6 @@ class TwikiDraw(object):
         _ = request.getText
         pagename = self.pagename
         target = self.target
-        if not TextCha(request).check_answer_from_form():
-            return _('TextCha: Wrong answer! Go back and try again...')
         if not request.user.may.write(pagename):
             return _('You are not allowed to save a drawing on this page.')
         if not target:
@@ -169,10 +167,6 @@ class TwikiDraw(object):
         pageurl = request.href(pagename)
         saveurl = request.href(pagename, action=action_name, do='save', target=target)
         helpurl = request.href("HelpOnActions/AttachFile")
-        if TextCha(request).is_enabled():
-            textchaquestion = TextCha(request).question
-        else:
-            textchaquestion = ''
 
         html = """
 <p>
@@ -184,7 +178,6 @@ class TwikiDraw(object):
     <param name="basename" value="%(basename)s">
     <param name="viewpath" value="%(pageurl)s">
     <param name="helppath" value="%(helpurl)s">
-    <param name="textchaquestion" value="%(textchaquestion)s">
     <strong>NOTE:</strong> You need a Java enabled browser to edit the drawing.
 </applet>
 </p>
@@ -196,7 +189,6 @@ class TwikiDraw(object):
     pageurl=wikiutil.escape(pageurl, 1),
     saveurl=wikiutil.escape(saveurl, 1),
     helpurl=wikiutil.escape(helpurl, 1),
-    textchaquestion=wikiutil.escape(textchaquestion, 1),
 )
 
         title = "%s %s:%s" % (_("Edit drawing"), pagename, target)

@@ -5,8 +5,6 @@
  * modified, and distributed without fee provided that this 
  * copyright notice appears in all copies.
  * Portions Copyright (C) 2001 Motorola - All Rights Reserved
- *
- * 2009 MoinMoin:ReimarBauer TextCha feature added
  */
 
 package CH.ifa.draw.twiki;
@@ -36,8 +34,6 @@ public class TWikiFrame extends DrawFrame {
      * Parameter names
      */
     static private String UNTITLED_PARAMETER   = "untitled";
-    static private String TEXTCHA_QUESTION_PARAMETER   = "textchaquestion";
-    static private String TEXTCHA_SEND_PARAMETER   = "textchaanswer";
     static private String DRAWPATH_PARAMETER   = "drawpath";
     static private String GIFPATH_PARAMETER    = "gifpath";
     static private String PNGPATH_PARAMETER    = "pngpath";
@@ -47,8 +43,7 @@ public class TWikiFrame extends DrawFrame {
     static private String HELPPATH_PARAMETER   = "helppath";
     static private String BORDERSIZE_PARAMETER = "bordersize";
 
-    private Label fStatusLabel, fTextChaLabel;
-    private TextField fTextChaTextField;
+    private Label fStatusLabel;
 
     public TWikiFrame(Application applet) {
         super("TWikiDraw", applet);
@@ -245,16 +240,7 @@ public class TWikiFrame extends DrawFrame {
 
         button = new CommandButton(new SendToBackCommand("Send To Back", view()));
         buttons.add(button);
-        
-        String question = getApplication().getParameter(TEXTCHA_QUESTION_PARAMETER);
-        if (question.length() > 0) {
-            fTextChaLabel = new Label(question);
-            panel.add(fTextChaLabel);
-            fTextChaTextField = new TextField(40);
-            panel.add(fTextChaTextField);
-        };
-                
-        
+
         button = new Button("Help");
 	button.addActionListener(
 	    new ActionListener() {
@@ -275,7 +261,7 @@ public class TWikiFrame extends DrawFrame {
 	else
 	    getApplication().showStatus(s);
     }
-    
+
     /**
      * Workaround to get it work without update button
      */
@@ -351,8 +337,8 @@ public class TWikiFrame extends DrawFrame {
 	
     public boolean doSaveDrawing() {
 		TWikiDraw app = (TWikiDraw)getApplication();
-		boolean savedDraw, savedSvg, savedGif, savedPng, savedMap, savedTextCha, sendTextCha;
-		savedDraw = savedSvg = savedGif = savedPng = savedMap = savedTextCha = sendTextCha = false;
+		boolean savedDraw, savedSvg, savedGif, savedPng, savedMap;
+		savedDraw = savedSvg = savedGif = savedPng = savedMap = false;
 		
 		// set wait cursor
 		setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -376,21 +362,7 @@ public class TWikiFrame extends DrawFrame {
 			String savePath = app.getParameter(SAVEPATH_PARAMETER);
 			if (savePath == null)
 				savePath = "";
-
-            // textcha question
-            String textchaquestion = getApplication().getParameter(TEXTCHA_QUESTION_PARAMETER);
-            if (textchaquestion == null)
-				textchaquestion = "";
-
-			// sends textcha Answer
-            String textchaanswer = "";
-            if (textchaquestion.length() > 0) {
-                textchaanswer =  fTextChaTextField.getText();
-			    if (textchaanswer == null)
-				    textchaanswer = "";
-            } 
-
-
+			
 			// gets base filename
 			String baseName = app.getParameter(BASENAME_PARAMETER);
 			if (baseName == null)
@@ -398,10 +370,10 @@ public class TWikiFrame extends DrawFrame {
 			
 			// submit POST command to the server three times:
 			// *.draw, *.map and *.gif
+			// first upload *.draw file
 			showStatus("Saving " + baseName + ".draw");
-			savedDraw = app.post(savePath, baseName + ".draw", "text/plain", 
-                        drawingPath, out.toString(), textchaquestion,
-                        textchaanswer, "TWikiDraw draw file");
+			savedDraw = app.post(savePath, baseName + ".draw", "text/plain", drawingPath,
+								 out.toString(), "TWikiDraw draw file");
 			
 			// calculate the minimum size of the gif image
 			Dimension d = new Dimension(0, 0); // not this.view().getSize();
@@ -449,14 +421,12 @@ public class TWikiFrame extends DrawFrame {
 					(d.width + iBorder) + "," + (d.height + iBorder) +
 					"\" href=\"%TWIKIDRAW%\" />\n" +
 					"</map>";
-				savedMap = app.post(savePath, baseName + ".map", "text/plain",
-                                    mapPath + ".map", map, textchaquestion,
-                                    textchaanswer, "TWikiDraw map file");
+				savedMap = app.post(savePath, baseName + ".map", "text/plain", mapPath + ".map",
+									map, "TWikiDraw map file");
 			} else {
 				// erase any previous map file
 				String mapPath = drawingPath.substring(0, drawingPath.length() - 5);
-				savedMap = app.post( savePath, baseName + ".map", "text/plain",
-                        mapPath + ".map", "", textchaquestion,  textchaanswer, "");
+				savedMap = app.post( savePath, baseName + ".map", "text/plain", mapPath + ".map", "", "");
             }
 			
             // get pathname of the SVG file
@@ -505,7 +475,6 @@ public class TWikiFrame extends DrawFrame {
 					// upload *.png file
 					savedPng = app.post(savePath, baseName + ".png", "image/png",
 										pngPath, String.valueOf( aChar, 0, size),
-                                        textchaquestion,  textchaanswer,
 										"TWikiDraw PNG file");
 				}
 				
@@ -526,7 +495,7 @@ public class TWikiFrame extends DrawFrame {
 					// upload *.gif file
 					savedGif = app.post(savePath, baseName + ".gif", "image/gif",
 										gifPath, String.valueOf( aChar, 0, size),
-										textchaquestion,  textchaanswer, "TWikiDraw GIF file");
+										"TWikiDraw GIF file");
 				}
 			}
 		} catch (MalformedURLException e) {

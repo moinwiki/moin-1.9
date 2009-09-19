@@ -5,8 +5,6 @@
  * modified, and distributed without fee provided that this 
  * copyright notice appears in all copies.
  * Portions Copyright (C) 2001 Motorola - All Rights Reserved
- *
- * 2009 MoinMoin:ReimarBauer TextCha feature added
  */
 
 package CH.ifa.draw.twiki;
@@ -76,8 +74,6 @@ public  class TWikiDraw extends LightweightDrawApplet {
 	String type,
 	String path,
 	String content,
-    String textchaquestion,
-    String textchaanswer,
 	String comment)
 	throws MalformedURLException, IOException {
 
@@ -86,7 +82,7 @@ public  class TWikiDraw extends LightweightDrawApplet {
 	    sep += "x";
 
 	String message = makeMimeForm(fileName, type,
-				      path, content, textchaquestion, textchaanswer, comment, sep);
+				      path, content, comment, sep);
 
         // for test
         //URL server = new URL("http", "localhost", 80, savePath);
@@ -183,8 +179,6 @@ public  class TWikiDraw extends LightweightDrawApplet {
 	String type,
 	String path,
 	String content,
-    String textchaquestion,
-    String textchaanswer,
 	String comment,
 	String sep) {
 
@@ -209,12 +203,6 @@ public  class TWikiDraw extends LightweightDrawApplet {
 	    + binary + NL
 	    + content
 	    + mime_sep
-        + "Content-Disposition: form-data; name=\"textcha-question\"" + NLNL
-	    + textchaquestion
-        + mime_sep
-        + "Content-Disposition: form-data; name=\"textcha-answer\"" + NLNL
-	    + textchaanswer
-        + mime_sep
 	    + "Content-Disposition: form-data; name=\"filecomment\"" + NLNL
 	    + comment
 	    + NL + "--" + sep + "--" + NL;

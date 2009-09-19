@@ -144,10 +144,6 @@ class AnyWikiDraw(object):
         pageurl = request.href(pagename)
         saveurl = request.href(pagename, action=action_name, do='save', target=target)
         helpurl = request.href("HelpOnActions/AttachFile")
-        #if TextCha(request).is_enabled():
-        #    textchaquestion = TextCha(request).question
-        #else:
-        #    textchaquestion = ''
 
         html = """
 <p>
