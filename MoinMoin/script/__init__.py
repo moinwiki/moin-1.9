@@ -164,7 +164,7 @@ class MoinScript(Script):
         )
         self.parser.add_option(
             "--wiki-url", metavar="WIKIURL", dest="wiki_url",
-            help="URL of a single wiki to migrate e.g. localhost/mywiki/ [default: CLI]"
+            help="URL of a single wiki to migrate e.g. http://localhost/mywiki/ [default: CLI]"
         )
         self.parser.add_option(
             "--page", dest="page", default='',
