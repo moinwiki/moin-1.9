@@ -282,6 +282,9 @@ def getText(original, request, lang, **kw):
                 translation.formatted[key] = translated # remember it
     else:
         try:
+            if languages is None:
+                # languages not initialized yet
+                raise KeyError
             language = languages[lang]['x-language-in-english']
             dictpagename = "%sDict" % language.replace(' ', '')
             dicts = request.dicts
