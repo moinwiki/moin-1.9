@@ -164,7 +164,10 @@ class AnyWikiDraw(object):
     <!-- The following parameters are used to configure Sun's Java Plug-In -->
     <param name="codebase_lookup" value="false">
     <param name="classloader_cache" value="false">
-    <param name="java_arguments" value="-Djnlp.packEnabled=true">
+    <!-- The following makes trouble with FF3 on Ubuntu 9.04 as client and
+         Apache2 / mod_wsgi on Debian Lenny as server, it seems to confuse
+         .gz files with gzip content-encoding and fails miserably somehow:
+         param name="java_arguments" value="-Djnlp.packEnabled=true" -->
     <param name="boxborder" value="false">
     <param name="centerimage" value="true">
     <strong>NOTE:</strong> You need a Java enabled browser to edit the drawing.
