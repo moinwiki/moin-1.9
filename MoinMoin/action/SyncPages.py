@@ -106,7 +106,7 @@ class ActionClass(object):
             "password": None,
         }
 
-        options.update(request.dicts[self.pagename])
+        options.update(self.request.dicts[self.pagename])
 
         # Convert page and group list strings to lists
         if options["pageList"] is not None:
