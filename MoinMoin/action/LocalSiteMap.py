@@ -68,6 +68,7 @@ class LocalSiteMap:
         """
         if not name:
             return
+        _ = request.getText
         pg = Page(request, name)
         action = __name__.split('.')[-1]
         self.append('&nbsp;' * (5*depth+1))
