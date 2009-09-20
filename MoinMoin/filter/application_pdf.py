@@ -2,7 +2,9 @@
 """
     MoinMoin - PDF filter
 
-    Depends on: pdftotext command from xpdf-utils package
+    Depends on: pdftotext command from either xpdf-utils or poppler-utils
+                or any other package that provides a pdftotext command that
+                is callable with: pdftotext -enc UTF-8 filename.pdf -
 
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
