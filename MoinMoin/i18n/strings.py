@@ -153,6 +153,7 @@ optional_help_pages = [
     _('HelpOnGraphicalEditor'),
     _('HelpOnGroups'),
     _('HelpOnHeadlines'),
+    _('HelpOnImages'),
     _('HelpOnLanguages'),
     _('HelpOnLinking'),
     _('HelpOnLinking/NotesLinks'),
