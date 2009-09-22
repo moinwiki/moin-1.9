@@ -84,15 +84,6 @@ def absoluteName(url, pagename):
 
 
 def get_action(request, filename, do):
-    ext_mapping = {
-        # file extension -> do -> action
-        '.tdraw': {
-            'modify': 'twikidraw',
-        },
-        '.adraw': {
-            'modify': 'anywikidraw',
-        },
-    }
     generic_do_mapping = {
         # do -> action
         'get': action_name,
@@ -104,7 +95,7 @@ def get_action(request, filename, do):
         'upload_form': action_name,
     }
     basename, ext = os.path.splitext(filename)
-    do_mapping = ext_mapping.get(ext, {})
+    do_mapping = request.cfg.extensions_mapping.get(ext, {})
     action = do_mapping.get(do, None)
     if action is None:
         # we have no special support for this,
