@@ -698,6 +698,14 @@ class DefaultExpression(object):
 # information on the layout of this structure.
 #
 options_no_group_name = {
+  # =========================================================================
+  'attachment_extension': ("Mapping of attachment extensions to actions", None,
+  (
+   ('extensions_mapping',
+       {'.tdraw': {'modify': 'twikidraw'},
+        '.adraw': {'modify': 'anywikidraw'},
+       }, "file extension -> do -> action"),
+  )),
   # ==========================================================================
   'datastruct': ('Datastruct settings', None, (
     ('dicts', lambda cfg, request: datastruct.WikiDicts(request),
