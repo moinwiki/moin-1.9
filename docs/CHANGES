@@ -16,6 +16,12 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Current:
+  * TextCha feature of TWikiDraw removed because of anywikidraw does miss the TextCha feature yet
+
+  New features:
+  * config var extensions_mapping added for mapping of attachment extensions to actions
+
 Version 1.9.0beta4:
 
   Please note:
@@ -34,6 +40,7 @@ Version 1.9.0beta4:
     * It is now based on the xappy library (see MoinMoin.support.xappy).
     * Minimum Xapian requirement is 1.0.6 now.
     * Outdated and unmaintained xapwrap lib was removed.
+    * now regex search with Xapian enabled also is based on the xapian index
   * raw action mimetype support: ...?action=raw&mimetype=text/css
   * TWikiDraw:
     * support code was refactored/moved to the twikidraw action.
