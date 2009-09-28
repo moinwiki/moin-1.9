@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2009-04-20 16:16+0100\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1599,6 +1599,10 @@ msgstr "AiutoSuLineeOrizzontali"
 
 msgid "HelpOnHeadlines"
 msgstr "AiutoSuTitoliSezioni"
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "AiutoSuPagineXml"
 
 msgid "HelpOnLanguages"
 msgstr "AiutoSuLingue"

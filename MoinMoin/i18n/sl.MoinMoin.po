@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -366,6 +366,7 @@ msgstr "Ime teme (izgleda) ni nastavljeno."
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
+"Datoteke teme (izgleda) niso bile nameščene. Pisanje ni dovoljeno za %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -464,11 +465,11 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Neveljaven regularni izraz za poudarjanje besedila \"%(regex)s\": %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr "Vsebina varnostne kopije je zastarela in ne bo upoštevana pri iskanju!"
+msgstr ""
+"Vsebina varnostne kopije je zastarela in bo manj upoštevana pri iskanju!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -489,7 +490,7 @@ msgid "You are not allowed to view this page."
 msgstr "Ogled te strani vam ni dovoljen."
 
 msgid "Switch user"
-msgstr "Preklopi na uporabnika"
+msgstr "Preklopi na drugega uporabnika"
 
 msgid "No user selected"
 msgstr "Uporabnik ni izbran"
@@ -554,7 +555,7 @@ msgid "OpenID is already present."
 msgstr "OpenID je že prisoten."
 
 msgid "Failed to resolve OpenID."
-msgstr "OpenID ni bilo mogoče razviti/najti."
+msgstr "OpenID ni bilo mogoče najti."
 
 msgid "OpenID discovery failure, not a valid OpenID."
 msgstr "Napaka pri ugotavljanju OpenID, identiteta OpenID ni veljavna."
@@ -564,7 +565,7 @@ msgid "OpenID error: %s."
 msgstr "Napaka pri OpenID: %s."
 
 msgid "Verification canceled."
-msgstr "Preverjanje je bilo preklicana."
+msgstr "Preverjanje je bilo preklicano."
 
 msgid "This OpenID is already used for another account."
 msgstr "Ta OpenID je že uporabljen pri drugem uporabniškem računu."
@@ -758,21 +759,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Poveži to ime"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Preverjanje je bilo preklicana."
+msgstr "Preverjanje OpenID je bilo preklicano."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID je bil uspešno dodan."
+msgstr "OpenID uspešen. id: %s"
 
-#, fuzzy
 msgid "OpenID failure"
-msgstr "Napaka pri OpenID."
+msgstr "Napaka pri OpenID"
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "OpenID ni podan."
+msgstr "V seji ni bilo najdenega OpenID."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Vaš uporabniški račun je sedaj povezan z vašim OpenID."
@@ -780,21 +778,20 @@ msgstr "Vaš uporabniški račun je sedaj povezan z vašim OpenID."
 msgid "The password you entered is not valid."
 msgstr "Geslo, ki ste ga vnesli, ni veljavno."
 
-#, fuzzy
 msgid "OpenID: handle verify continuation"
-msgstr "Preverjanje zaupanja OpenID"
+msgstr "OpenID: nadaljevanje preverjanja"
 
 msgid "OpenID: handle name continuation"
-msgstr ""
+msgstr "OpenID: nadaljevanje imena"
 
 msgid "OpenID: handle associate continuation"
-msgstr ""
+msgstr "OpenID: nadaljevanje povezovanja (asociacije)"
 
 msgid "OpenID: unknown continuation stage"
-msgstr ""
+msgstr "OpenID: neznana faza nadaljevanja"
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "OpenID: napaka: neznana faza nadaljevanja"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Za prijavo prek OpenID morajo biti anonimne seje omogočene."
@@ -817,22 +814,22 @@ msgstr "Manjka geslo. Prosimo vnesite uporabniško ime in geslo."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr "Strežnik LDAP %(server)s ne deluje."
+msgstr "Strežnik LDAP %(server)s je odpovedal."
 
 msgid "Failed to connect to database."
 msgstr "Neuspešna priključitev na podatkovno bazo."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
-"Če ga še nimate, lahko <a href=\"%(userprefslink)s\">ustvarite uporabniški "
-"račun</a>. <a href=\"%(sendmypasswordlink)s\">Ste pozabili geslo?</a>"
+"Če ga še nimate, lahko tukaj <a href=\"%(userprefslink)s\">ustvarite svoj "
+"uporabniški račun</a>. "
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Ste pozabili geslo?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -867,7 +864,6 @@ msgstr ""
 "\n"
 "(!) Več o tem: HelpOnEditing, HelpOnCreoleSyntax.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -900,7 +896,7 @@ msgstr ""
 " Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
 "na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.\n"
 "\n"
-"(!) Več o tem: HelpOnEditing, SyntaxReference.\n"
+"(!) Več o tem na HelpOnEditing ali HelpOnMoinWikiSyntax.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1343,7 +1339,7 @@ msgid "RecentChanges"
 msgstr "ZadnjeSpremembe"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "VikiNamigDneva"
 
 msgid "TitleIndex"
 msgstr "KazaloNaslovov"
@@ -1355,477 +1351,431 @@ msgid "FindPage"
 msgstr "PoiščiStran"
 
 msgid "MissingPage"
-msgstr "ManjkajočeStrani"
+msgstr "ManjkajočaStran"
 
 msgid "MissingHomePage"
-msgstr "ManjkajočeOsebneStrani"
+msgstr "ManjkajočaOsebnaStran"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "ManjkajočeOsebneStrani"
+msgstr "DomačaVikiStran"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Ime"
+msgstr "VikiIme"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "WikiWikiWeb"
 
 msgid "FrontPage"
 msgstr "PrvaStran"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "VikiPeskovnik"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Viki"
+msgstr "InterViki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "ZapuščeneStrani"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "Spremenjena stran"
+msgstr "OsiroteleStrani"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "PoiščiStran"
+msgstr "ManjkajočeStrani"
 
 msgid "EventStats"
-msgstr ""
+msgstr "StatistikaDogodkov"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "StatistikaDogodkov/ŠtevciZadetkov"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "StatistikaDogodkov/Jeziki"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "StatistikaDogodkov/UporabnikoviBralniki"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "Velikost"
+msgstr "VelikostStrani"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "Strani"
+msgstr "ZadetkiStrani"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "PreimenujStran"
+msgstr "NaključnaStran"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Različica interpreterja Python"
+msgstr "XsltVerzija"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "PiškotiSreče"
 
 msgid "WikiLicense"
 msgstr "VikiLicenca"
 
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "katerakoli kategorija"
+msgstr "KategorijaKategorije"
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "Kategorije"
+msgstr "DomačaStranKategorije"
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "Kategorije"
+msgstr "ŠablonaKategorije"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "ŠablonaDomačeStrani"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "ŠablonaPomoči"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "ŠablonaBralnoPisalneDomačeStrani"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "ŠablonaBralneDomačeStrani"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "ŠablonaZasebneStraniDomačeStrani"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "ŠablonaGrupDomačeStrani"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "ŠablonaIzročkovPrikazaSlik"
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Samodejna predstava"
+msgstr "ŠablonaPrikazaSlik"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "ŠablonaSlike"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "ŠablonaZaSyncJob"
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriNastavitvah"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "PomočPriNastavitvah/PodporaEpošte"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "PomočPriNastavitvah/VarnostnaPolitika"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "PomočPriNastavitvah/DatotečnePriponke"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "PomočPriNastavitvah/StranDodatkov"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "PomočPriNastavitvah/ZaščitaPredŠpicami"
 
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr ""
+msgstr "PomočPriNastavitvah/UporabniškePreference"
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "PomočPriNameščevalcuPaketov"
 
-#, fuzzy
 msgid "HelpOnUpdating"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriAžuriranju"
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriAžuriranjuPythona"
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriUpravljanju"
 
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "PomočPriPreverjanjuIstovetnosti"
 
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "PomočPriPreverjanjuIstovetnosti/ZunanjiPiškot"
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriMoinUkazu"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "PomočPriMoinUkazu/IzvozPosnetkaStanja"
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "Obvestila"
+msgstr "PomočPriObveščanju"
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriSejah"
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriRokovanjuZUporabnikom"
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriXapianu"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "PomočPriMoinVikiSintaksi"
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriKreolskiSintaksi"
 
 msgid "HelpOnFormatting"
 msgstr "PomočPriOblikovanju"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "Različica MoinMoin"
+msgstr "MoinMoin"
 
 msgid "HelpContents"
-msgstr "PomočPriVsebini"
+msgstr "VsebinaPomoči"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "PomočZačetnikom"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "PomočUporabnikom"
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "KazaloNaslovov"
+msgstr "KazaloPomoči"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "PomočPriKontroliDostopaACL"
 
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriAkcijah"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "PomočPriAkcijah/PripniDatoteko"
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriOpozarjanju"
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriAvtoAdmin"
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "Kategorije"
+msgstr "PomočPriKategorijah"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "PomočPriSlovarjih"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "PomočPriZaklepanjuObUrejanju"
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriUrejanju"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "PomočPriUrejanju/Podstrani"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "PomočPriGrafičnemUrejevalniku"
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriGrupah"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "PomočPriNaslovih"
 
 #, fuzzy
+msgid "HelpOnImages"
+msgstr "PomočPriXmlStraneh"
+
 msgid "HelpOnLanguages"
-msgstr "Jezik"
+msgstr "PomočPriJezikih"
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriPovezavah"
 
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "PomočPriPovezavah/OpombnePovezave"
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriSeznamih"
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriPrijavi"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "PomočPriMakrojih"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
+msgstr "PomočPriMakrojih/EmbedObject"
 
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "PomočPriMakrojih/Include"
 
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "PomočPriMakrojih/MailTo"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "PomočPriMakrojih/MonthCalendar"
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "Navigacija"
+msgstr "PomočPriNavigaciji"
 
-#, fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "Strežnik OpenID"
+msgstr "PomočPriOpenIDPonudniku"
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriTvorjenjuStrani"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "PomočPriBrisanjuStrani"
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "PomočPriSintaktičnihAnalizatorjih"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "PomočPriSintaktičnihAnalizatorjih/ReStructuredText"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "PomočPriSintaktičnihAnalizatorjih/ReStructuredText/RstPrimer"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "PomočPriNavodilihZaObdelavo"
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriPravilih"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriIskanju"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Samodejna predstava"
+msgstr "PomočPriPrikazuSlik"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "HelpOnSlideShows/000 Introduction"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "HelpOnSlideShows/100 Creating the slides"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "HelpOnSlideShows/900 Last but not least: Running your presentation"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "PomočPriSmejčkih"
 
 msgid "HelpOnSpam"
-msgstr ""
+msgstr "PomočPriSpamu"
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "PreveriČrkovanje"
+msgstr "PomočPriPreverbiČrkovanja"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "PomočPriSuperUporabniku"
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "Sinhronizacija se je začela -"
+msgstr "PomočPriSinhronizaciji"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "PomočPriTabelah"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "PomočPriŠablonah"
 
 msgid "HelpOnThemes"
-msgstr ""
+msgstr "PomočPriTemah"
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "Nastavitve"
+msgstr "PomočPriUporabniškihNastavitvah"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "PomočPriSpremenljivkah"
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriXmlStraneh"
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "PomočPriVsebini"
+msgstr "PomočPriKomentarjih"
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "Preklic naročenosti"
+msgstr "PomočPriNaročanju"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "GrbasteBesede"
 
 msgid "WikiCourse"
-msgstr ""
+msgstr "WikiCourse"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr ""
+msgstr "WikiCourse/01 What is a MoinMoin wiki?"
 
 msgid "WikiCourse/02 Finding information"
-msgstr ""
+msgstr "WikiCourse/02 Finding information"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr ""
+msgstr "WikiCourse/03 Staying up to date"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr ""
+msgstr "WikiCourse/04 Creating a wiki account"
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "Uporabniške nastavitve so shranjene!"
+msgstr "WikiCourse/05 User preferences"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr ""
+msgstr "WikiCourse/06 Your own wiki homepage"
 
 msgid "WikiCourse/07 The text editor"
-msgstr ""
+msgstr "WikiCourse/07 The text editor"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr ""
+msgstr "WikiCourse/08 Hot Keys"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr ""
+msgstr "WikiCourse/10 Text layout with wiki markup"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr ""
+msgstr "WikiCourse/11 Paragraphs"
 
 msgid "WikiCourse/12 Headlines"
-msgstr ""
+msgstr "WikiCourse/12 Headlines"
 
 msgid "WikiCourse/13 Lists"
-msgstr ""
+msgstr "WikiCourse/13 Lists"
 
 msgid "WikiCourse/14 Text styles"
-msgstr ""
+msgstr "WikiCourse/14 Text styles"
 
 msgid "WikiCourse/15 Tables"
-msgstr ""
+msgstr "WikiCourse/15 Tables"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr ""
+msgstr "WikiCourse/16 Wiki internal links"
 
 msgid "WikiCourse/17 External links"
-msgstr ""
+msgstr "WikiCourse/17 External links"
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "Nova priponka"
+msgstr "WikiCourse/18 Attachments"
 
 msgid "WikiCourse/19 Symbols"
-msgstr ""
+msgstr "WikiCourse/19 Symbols"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr ""
+msgstr "WikiCourse/20 Dynamic content"
 
 msgid "WikiCourse/21 Macros"
-msgstr ""
+msgstr "WikiCourse/21 Macros"
 
 msgid "WikiCourse/22 Parsers"
-msgstr ""
+msgstr "WikiCourse/22 Parsers"
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "Druge možnosti:"
+msgstr "WikiCourse/23 Actions"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr ""
+msgstr "WikiCourse/30 The graphical editor"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr ""
+msgstr "WikiCourse/40 Creating more pages"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr ""
+msgstr "WikiCourse/50 Wiki etiquette"
 
 msgid "WikiCourse/51 Applications"
-msgstr ""
+msgstr "WikiCourse/51 Applications"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr ""
+msgstr "WikiCourse/52 Structure in the wiki"
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "WikiCourseHandOut"
 
 msgid "Sun"
 msgstr "ned"
@@ -2358,6 +2308,8 @@ msgstr "Slika %(pos)d od %(size)d"
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
+"<<%(macro_name)s: izvajanje ni bilo uspešno [%(error_msg)s] (glej tudi "
+"dnevnik)>>"
 
 msgid "Go To Page"
 msgstr "Pojdi na stran"
@@ -2401,28 +2353,26 @@ msgstr "Vaše hitra povezava na to stran ni bilo mogoče odstraniti."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Da bi jo odstranili je treba imeti hitro povezavo na to stran."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Samodejna predstava"
+msgstr "Uredi samodejno predstavo"
 
 msgid "Quit"
-msgstr ""
+msgstr "Izhod"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Samodejna predstava"
+msgstr "Zapusti samodejno predstavo"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "Prikaži prvo sliko (puščica gor)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "Prikaži zadnjo sliko (puščica dol)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "Prikaži prejšnjo sliko (puščica levo)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "Prikaži naslednjo sliko (puščica desno)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2914,7 +2864,7 @@ msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr "Za akcijo %(actionname)s uporabite interaktivni uporabniški vmesnik!"
 
 msgid "You are now logged out."
-msgstr "Odjavljeni ste."
+msgstr "Sedaj ste odjavljeni."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -3297,7 +3247,7 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "Na to stran ni dovoljeno shraniti risb."
 
 msgid "Empty target given."
-msgstr ""
+msgstr "Podan je bil prazen cilj."
 
 msgid "Edit drawing"
 msgstr "Spremeni risbo"
@@ -3360,20 +3310,18 @@ msgstr "Upravljanje z MyPages"
 msgid "Only superuser is allowed to use this action."
 msgstr "Ta akcija je na voljo le administratorju."
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "Ta stran nima nadrejene strani!"
+msgstr "Nobenih paketov strani ni najti."
 
-#, fuzzy
 msgid "page package"
-msgstr "Spremenjena stran"
+msgstr "paket strani"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Izberi:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Namesti pakete jezikov za '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Naročilo na obvestila s te strani je bilo umaknjeno."
@@ -3550,36 +3498,4 @@ msgstr ""
 "tem vikiju."
 
 msgid "anonymous"
-msgstr ""
-
-#, fuzzy
-#~ msgid "you may need to login to edit this page"
-#~ msgstr "Te strani vam ni dovoljeno spreminjati."
-
-#~ msgid ""
-#~ "Installing theme files is only supported for standalone type servers."
-#~ msgstr ""
-#~ "Namestitev datotek teme (izgleda) je podprto le za samostoječi tip "
-#~ "strežnikov."
-
-#, fuzzy
-#~ msgid "InterWikiMap"
-#~ msgstr "Označevanje viki"
-
-#, fuzzy
-#~ msgid "BadContent"
-#~ msgstr "Vsebina"
-
-#, fuzzy
-#~ msgid "LocalBadContent"
-#~ msgstr "Vsebina"
-
-#, fuzzy
-#~ msgid "EditedSystemPages"
-#~ msgstr "Brez sistemskih strani"
-
-#~ msgid "Created the package %s containing the pages %s."
-#~ msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
-
-#~ msgid "You need to log in."
-#~ msgstr "Treba se je prijaviti."
+msgstr "anonimno"

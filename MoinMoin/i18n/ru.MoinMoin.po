@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -477,11 +477,11 @@ msgstr "Нужно значение для ключа \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Неправильное регулярное выражение подсветки \"%(regex)s\": %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr "Сохраненная версия страницы устарела и не войдет в результаты поиска!"
+msgstr ""
+"Сохраненная версия страницы устарела и может не войти в результаты поиска!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -772,19 +772,16 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Связать это имя"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Проверка отменена."
+msgstr "Проверка OpenID прервана."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID успешно добавлен."
+msgstr "OpenID '%s' успешно добавлен."
 
-#, fuzzy
 msgid "OpenID failure"
 msgstr "Ошибка OpenID."
 
-#, fuzzy
 msgid "No OpenID found in session."
 msgstr "Не задано ни одного OpenID."
 
@@ -794,9 +791,8 @@ msgstr "Ваша учетная запись связана с вашим OpenID
 msgid "The password you entered is not valid."
 msgstr "Введенный вами пароль не верен."
 
-#, fuzzy
 msgid "OpenID: handle verify continuation"
-msgstr "Проверка OpenID Trust"
+msgstr ""
 
 msgid "OpenID: handle name continuation"
 msgstr ""
@@ -836,18 +832,17 @@ msgstr "LDAP-сервер %(server)s недоступен."
 msgid "Failed to connect to database."
 msgstr "Ошибка при соединении с базой данных."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "Если у вас нет учетной записи, <a href=\"%(userprefslink)s\">вы можете "
-"создать его сейчас</a>. <a href=\"%(sendmypasswordlink)s\">Забыли ваш пароль?"
-"</a>"
+"создать её сейчас</a>. "
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Забыли ваш пароль?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -880,7 +875,6 @@ msgstr ""
 " Таблицы:: |= текст заголовка ячейки |ячейка|ещё ячейка|;\n"
 "(!) Подробная помощь КакРедактировать и HelpOnCreoleSyntax.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -909,8 +903,8 @@ msgstr ""
 "нумерованный список; 1.#n - начать нумерацию с n; пробелы увеличивают "
 "уровень отступа.\n"
 " Ссылки:: <<Verbatim(ЗаглавныеСловаСлитно)>>; <<Verbatim([[название страницы|"
-"описание ссылки]])>>; <<Verbatim([[www.что-то.ru|описание внешней ссылки]])"
-">>.\n"
+"описание ссылки]])>>; <<Verbatim([[http://сайт.example.com/пример.html|"
+"описание внешней ссылки]])>>.\n"
 " Таблицы:: || текст ячейки |||| ячейка, растянутая на 2 колонки ||; после "
 "таблиц и заголовков нельзя оставлять пробелы.\n"
 "\n"
@@ -1157,7 +1151,8 @@ msgstr "Вы должны указать файл вывода!"
 
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
-"Страницы не указаны используя --pager или --search, использую весь пакет."
+"Не задействованы --pages или --search для указания страниц, использую весь "
+"пакет."
 
 msgid "All attachments included into the package."
 msgstr "Все вложения включены в пакет."
@@ -1359,7 +1354,7 @@ msgid "RecentChanges"
 msgstr "ПоследниеИзменения"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "ВикиСоветДня"
 
 msgid "TitleIndex"
 msgstr "АлфавитныйУказатель"
@@ -1376,386 +1371,342 @@ msgstr "НетСтраницы"
 msgid "MissingHomePage"
 msgstr "НетДомашнейСтраницы"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "НетДомашнейСтраницы"
+msgstr "ВикиДомашняяСтраница"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Полное имя"
+msgstr "ВикиИмя"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "ВикиВикиСеть"
 
 msgid "FrontPage"
 msgstr "Начало"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "ВикиПесочница"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Вики"
+msgstr "ИнтерВики"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "БрошенныеСтраницы"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "Измененная страница"
+msgstr "ОдинокиеСтраницы"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "НайтиСтраницу"
+msgstr "НенаписанныеСтраницы"
 
 msgid "EventStats"
-msgstr ""
+msgstr "Статистика"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "Статистика/Счётчик"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "Статистика/Языки"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "Статистика/Браузеры"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "Размер"
+msgstr "РазмерыСтраниц"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "Страницы"
+msgstr "ЗапросыСтраниц"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "ПереименоватьСтраницу"
+msgstr "СтраницаНаугад"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Версия Python"
+msgstr "ВерсияXslt"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "КраткиеПодсказки"
 
 msgid "WikiLicense"
 msgstr "ВикиЛицензия"
 
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "любая категория"
+msgstr "КатегорияКатегория"
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "Категории"
+msgstr "КатегорияДомашняяСтраница"
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "Категории"
+msgstr "КатегорияШаблон"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "ШаблонДомашняяСтраница"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "ШаблонПомощь"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "ШаблонДомашняяСтраницаЧтениеЗапись"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "ШаблонДомашняяСтраницаЧтение"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "ШаблонДомашняяСтраницаЧастная"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "ШаблонДомашняяСтраницаГруппа"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "ШаблонПрезентацияРаздаточныйМатериал"
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Презентация"
+msgstr "ШаблонПрезентация"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "ШаблонПрезентацияКадр"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "ШаблонСинхронизация"
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "КакФорматировать"
+msgstr "КакНастраивать"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "КакНастраивать/ПоддержкаПочты"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "КакНастраивать/ПравилаДоступа"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "КакНастраивать/ФайлыПриложений"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "КакНастраивать/ВспомогательнаяСтраница"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "КакНастраивать/ЗащитаОтДурака"
 
-#, fuzzy
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr "ВашиНастройки"
+msgstr "КакНастраивать/ВашиНастройки"
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "ПомощьПоУстановкеПакетов"
 
-#, fuzzy
 msgid "HelpOnUpdating"
-msgstr "КакФорматировать"
+msgstr "КакОбновлятьМойнМойн"
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "КакФорматировать"
+msgstr "КакОбновлятьПитон"
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "КакФорматировать"
+msgstr "ПомощьПоАдминистрированию"
 
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "ПомощьПоИдентификации"
 
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "ПомощьПоИдентификации/ExternalCookie"
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "КакФорматировать"
+msgstr "ПомощьПоКомандамМойн"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "ПомощьПоКомандамМойн/ExportDump"
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "Уведомление"
+msgstr "ПомощьПоОповещению"
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоСеансам"
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "КакФорматировать"
+msgstr "КакУправлятьПользователями"
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "КакФорматировать"
+msgstr "ПомощьПоXapian"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "СправочникПоСинтаксису"
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "ПомощьПоГлавам"
+msgstr "СправочникПоСинтаксисCreoleу"
 
 msgid "HelpOnFormatting"
 msgstr "КакФорматировать"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "Версия МойнМойн"
+msgstr "МойнМойн"
 
 msgid "HelpContents"
 msgstr "ПомощьПоГлавам"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "ПомощьНовичкам"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "ПомощьПользователям"
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "АлфавитныйУказатель"
+msgstr "СправочныйУказатель"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "ПомощьПоСпискамДоступа"
 
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоДействиям"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "ПомощьПоДействиям/AttachFile"
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоВыноскам"
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "КакФорматировать"
+msgstr "ПомощьПоAutoAdmin"
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "Категории"
+msgstr "ПомощьПоКатегориям"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "ПомощьПоСловарям"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "ПомощьПоБлокировкам"
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "КакФорматировать"
+msgstr "КакРедактировать"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "КакРедактировать/ВложенныеСтраницы"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "ПомощьПоГрафическомуРедактору"
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоГруппам"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "КакПисатьЗаголовки"
 
 #, fuzzy
+msgid "HelpOnImages"
+msgstr "ПомощьПоXmlСтраницам"
+
 msgid "HelpOnLanguages"
-msgstr "Язык"
+msgstr "ПомощьПоПоддержкеЯзыков"
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "КакФорматировать"
+msgstr "КакСвязыватьСтраницы"
 
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "КакСвязыватьСтраницы/СсылкиNotes"
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоСпискам"
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "КакФорматировать"
+msgstr "КакВойти"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "ПомощьПоМакросам"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
+msgstr "ПомощьПоМакросам/EmbedObject"
 
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "ПомощьПоМакросам/Include"
 
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "ПомощьПоМакросам/MailTo"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "ПомощьПоМакросам/MonthCalendar"
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "НавигацияПоСайту"
+msgstr "КакОриентироваться"
 
-#, fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "OpenID сервер"
+msgstr "ПомощьПоOpenID"
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "КакФорматировать"
+msgstr "КакСоздавать"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "КакУдалятьСтраницы"
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "ПомощьПоПарсерам"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "ПомощьПоПарсерам/ReStructuredText"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "ПомощьПоПарсерам/ReStructuredText/RstPrimer"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "ПомощьПоИнструкциям"
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоЛиниям"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "КакФорматировать"
+msgstr "КакИскать"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Презентация"
+msgstr "КакДелатьСлайды"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "КакДелатьСлайды/000 Введение"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "КакДелатьСлайды/100 Создание слайдов"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "КакДелатьСлайды/900 И самое главное: как показывать слайды"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "КакУлыбаться"
 
 msgid "HelpOnSpam"
-msgstr ""
+msgstr "КакБоротьсяСоСпамом"
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "Правописание"
+msgstr "КакПроверятьПравописание"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "ПомощьПоСуперПользователю"
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "Синхронизация началась -"
+msgstr "ПомощьПоСинхронизации"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "ПомощьПоТаблицам"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "ПомощьПоШаблонам"
 
 msgid "HelpOnThemes"
-msgstr ""
+msgstr "ПомощьПоТемам"
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "ВашиНастройки"
+msgstr "КакМенятьНастройки"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "ПомощьПоПеременным"
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "КакФорматировать"
+msgstr "ПомощьПоXmlСтраницам"
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "ПомощьПоГлавам"
+msgstr "ПомощьПоКомментариям"
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "Отписаться"
+msgstr "ПомощьПоПодписке"
 
 msgid "CamelCase"
 msgstr ""
 
 msgid "WikiCourse"
-msgstr ""
+msgstr "ВикиКурс"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
 msgstr ""
@@ -1769,9 +1720,8 @@ msgstr ""
 msgid "WikiCourse/04 Creating a wiki account"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "ВашиНастройки"
+msgstr ""
 
 msgid "WikiCourse/06 Your own wiki homepage"
 msgstr ""
@@ -1806,9 +1756,8 @@ msgstr ""
 msgid "WikiCourse/17 External links"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "Новое вложение"
+msgstr ""
 
 msgid "WikiCourse/19 Symbols"
 msgstr ""
@@ -1822,9 +1771,8 @@ msgstr ""
 msgid "WikiCourse/22 Parsers"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "Другие действия:"
+msgstr ""
 
 msgid "WikiCourse/30 The graphical editor"
 msgstr ""
@@ -1842,7 +1790,7 @@ msgid "WikiCourse/52 Structure in the wiki"
 msgstr ""
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "ВикиКурсРаздатка"
 
 msgid "Sun"
 msgstr "Вс"
@@ -2374,6 +2322,8 @@ msgstr "Кадр %(pos)d из %(size)d"
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
+"<<%(macro_name)s: выполнение завершилос с ошибкой[%(error_msg)s] (см. "
+"диагностику)>>"
 
 msgid "Go To Page"
 msgstr "Перейти к странице"
@@ -2417,28 +2367,26 @@ msgstr "Ваша закладка на эту страницу не может �
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Вам нужно иметь закладку на эту страницу, чтобы удалить её."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Презентация"
+msgstr "Редактировать слайды"
 
 msgid "Quit"
-msgstr ""
+msgstr "Завершить"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Презентация"
+msgstr "Завершить презентацию"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "Показать первый слайд (стрелка вверх)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "Показать последний слайд (стрелка вниз)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "Показать предыдущий слайд (стрелка слево)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "Показать следующий слайд (стрелка вправо)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -3380,20 +3328,18 @@ msgstr "Управление Моими Страницами"
 msgid "Only superuser is allowed to use this action."
 msgstr "Только суперпользователю разрешено активировать это действие"
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "Родительская страница не найдена!"
+msgstr "Пакеты страниц не найдены."
 
-#, fuzzy
 msgid "page package"
-msgstr "Измененная страница"
+msgstr "пакет страниц"
 
 msgid "Choose:"
 msgstr ""
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Установить языковой пакет для '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Ваша подписка на эту страницу удалена."
@@ -3568,7 +3514,7 @@ msgstr ""
 "в этом вики."
 
 msgid "anonymous"
-msgstr ""
+msgstr "анонимно"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"
