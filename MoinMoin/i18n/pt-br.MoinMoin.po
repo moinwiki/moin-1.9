@@ -11,11 +11,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.6\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
-"PO-Revision-Date: 2007-11-20 23:40+0000\n"
-"Last-Translator: Evandro Villa Verde <evandro.villaverde.hackerteen@gmail.\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"PO-Revision-Date: 2009-09-27\n"
+"Last-Translator: Renato Silva\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -130,7 +130,7 @@ msgid "Describe %s here."
 msgstr "Descreva %s aqui."
 
 msgid "Check Spelling"
-msgstr "Verificar ortografia"
+msgstr "Verificar Ortografia"
 
 msgid "Save Changes"
 msgstr "Salvar Mudanças"
@@ -342,6 +342,11 @@ msgid ""
 "go to the password recovery page again and enter your username and the\n"
 "recovery token.\n"
 msgstr ""
+"Alguém requisitou enviar a você um email de recuperação de senha.\n"
+"\n"
+"Se você perdeu sua senha, por favor visite a URL de redefinição de senha "
+"abaixo ou vá para a página de recuperação de senha novamente e digite seu "
+"login e a chave de recuperação de senha.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -463,7 +468,7 @@ msgstr "Esperado um valor para \"%(token)s\""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr "Expressão regular para destaque inválida \"%(regex)s\": %(error)s"
+msgstr "Expressão regular de destaque inválida \"%(regex)s\": %(error)s"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -615,10 +620,10 @@ msgstr ""
 "preferências gerais."
 
 msgid "Subscribed events"
-msgstr "Eventos inscritos"
+msgstr "Eventos acompanhados"
 
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Páginas wiki inscritas<<BR>> (uma expressão regular por linha)"
+msgstr "Páginas acompanhadas<<BR>> (uma expressão regular por linha)"
 
 msgid "Save"
 msgstr "Salvar"
@@ -764,7 +769,7 @@ msgstr "Associe este nome"
 msgid "OpenID verification canceled."
 msgstr "Verificação de OpenID cancelada."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
 msgstr "Sucesso do OpenID. Id: %s."
 
@@ -780,15 +785,12 @@ msgstr "Sua conta está agora associada a sua OpenID"
 msgid "The password you entered is not valid."
 msgstr "A senha que você informou não é válida."
 
-#, fuzzy
 msgid "OpenID: handle verify continuation"
 msgstr "OpenID: tratar continuação de verificação"
 
-#, fuzzy
 msgid "OpenID: handle name continuation"
 msgstr "OpenID: tratar continuação de nome"
 
-#, fuzzy
 msgid "OpenID: handle associate continuation"
 msgstr "OpenID: tratar continuação de associação"
 
@@ -834,9 +836,8 @@ msgstr ""
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Esqueceu sua senha?</a>"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
 ">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
@@ -853,26 +854,22 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-" Ênfase:: <<Verbatim('')>>''itálico''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''negrito'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negrito "
-"itálico'''''<<Verbatim(''''')>>; <<Verbatim('')>>''misto ''<<Verbatim(''')"
-">>'''''negrito'''<<Verbatim(''')>> e itálico''<<Verbatim('')>>; <<Verbatim"
-"(----)>> linha horizontal.\n"
-" Títulos:: <<Verbatim(=)>> Título 1 <<Verbatim(=)>>; <<Verbatim(==)>> Título "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Título 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Título 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Título 5 "
-"<<Verbatim(=====)>>.\n"
-" Listas:: sspaço com um dos seguintes: * marcadores; 1., a., A., i., I. "
-"listas numeradas; 1.#n começar numeração em n; espaço sozinho identa a "
-"linha.\n"
-" Links:: <<Verbatim(PalavrasComIniciaisMaiúsculas)>>; <<Verbatim([\"Aspas "
-"duplas\"])>>; url; [url]; [Título da URL].\n"
-" Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas "
-"||;    espaços em branco não são permitidos após tabelas ou títulos.\n"
+" Ênfase:: <<Verbatim(//)>>''itálico''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''negrito'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''negrito "
+"itálico'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''misto ''<<Verbatim(**)"
+">>'''''negrito'''<<Verbatim(**)>> e itálico''<<Verbatim(//)>>;\n"
+" Linha horizontal:: <<Verbatim(----)>>\n"
+" Forçar quebra de linha:: <<Verbatim(\\\\)>>\n"
+" Títulos:: = Título 1 =; == Título 2 ==; === Título 3 ===; ==== Título 4 "
+"====; ===== Título 5 =====.\n"
+" Listas:: * pontos; ** sub-pontos; # itens numerados; ## subitens "
+"numerados.\n"
+" Links:: <<Verbatim([[endereço]])>>; <<Verbatim([[endereço|texto de "
+"exibição]])>>.\n"
+" Tabelas:: |= cabeçalho | texto de célula | mais texto de célula |;\n"
 "\n"
-"(!) Para mais ajuda, veja AjudaNaEdição ou ReferênciaDeSintaxe.\n"
+"(!) Para mais ajuda, veja AjudaComEdição or AjudaComSintaxeCreole.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -895,19 +892,16 @@ msgstr ""
 "itálico'''''<<Verbatim(''''')>>; <<Verbatim('')>>''misto ''<<Verbatim(''')"
 ">>'''''negrito'''<<Verbatim(''')>> e itálico''<<Verbatim('')>>; <<Verbatim"
 "(----)>> linha horizontal.\n"
-" Títulos:: <<Verbatim(=)>> Título 1 <<Verbatim(=)>>; <<Verbatim(==)>> Título "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Título 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Título 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Título 5 "
-"<<Verbatim(=====)>>.\n"
-" Listas:: sspaço com um dos seguintes: * marcadores; 1., a., A., i., I. "
-"listas numeradas; 1.#n começar numeração em n; espaço sozinho identa a "
-"linha.\n"
-" Links:: <<Verbatim(PalavrasComIniciaisMaiúsculas)>>; <<Verbatim([\"Aspas "
-"duplas\"])>>; url; [url]; [Título da URL].\n"
-" Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas "
+" Títulos:: = Título 1 =; == Título 2 ==; === Título 3 ===; ==== Título 4 "
+"====; ===== Título 5 =====.\n"
+" Listas:: espaço acompanhado de: * pontos; 1., a., A., i., I. itens "
+"numerados; 1.#n começa a numeração em n; indentações somente com espaços.\n"
+" Links:: <<Verbatim(PalavrasJuntasEmMaiúsculo)>>; <<Verbatim([[endereço|"
+"texto de exibição]])>>.\n"
+" Tabelas:: || texto de célula |||| texto de célula mesclando duas colunas "
 "||;    espaços em branco não são permitidos após tabelas ou títulos.\n"
 "\n"
-"(!) Para mais ajuda, veja AjudaNaEdição ou ReferênciaDeSintaxe.\n"
+"(!) Para mais ajuda, veja AjudaComEdição ou AjudaComSintaxeMoin.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -931,7 +925,6 @@ msgstr ""
 "Renderização de texto reStructured não é possível, por favor instale o "
 "Docutils."
 
-#, fuzzy
 msgid ""
 "{{{\n"
 "Emphasis: *italic* **bold** ``monospace``\n"
@@ -952,7 +945,7 @@ msgid ""
 "reStructuredText Quick Reference]].\n"
 msgstr ""
 "{{{\n"
-"Ênfase: *itálico* **negrito** ``monospace``\n"
+"Ênfase: *itálico* **negrito** ``monoespaçado``\n"
 "\n"
 "Títulos: Título 1  Título 2  Título 3\n"
 "         ========  --------  ~~~~~~~~\n"
@@ -964,7 +957,7 @@ msgstr ""
 "\n"
 ".. _externo: http://external-site.example.org/foo/\n"
 "\n"
-"Listas: * bullets; 1., a. itens numerados.\n"
+"Listas: * pontos; 1., a. itens numerados.\n"
 "}}}\n"
 "(!) Para mais ajuda, veja a\n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|Referência "
@@ -1015,10 +1008,10 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "UnSubscribe"
-msgstr "RemoverInscrição"
+msgstr "Deixar de acompanhar"
 
 msgid "Subscribe"
-msgstr "Inscrever"
+msgstr "Acompanhar"
 
 msgid "Raw"
 msgstr "TextoBruto"
@@ -1296,7 +1289,7 @@ msgid "A page has been reverted to a previous state"
 msgstr "Uma página foi revertida para um estado anterior"
 
 msgid "A user has subscribed to a page"
-msgstr "Um usuário se inscreveu na página"
+msgstr "Um usuário passou a acompanhar uma página"
 
 msgid "A new account has been created"
 msgstr "Uma nova conta foi criada"
@@ -1443,16 +1436,16 @@ msgid "HelpTemplate"
 msgstr "TemplateDeAjuda"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "TemplateDePáginaDeLeituraEscritaDeHomepage"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "TemplateDePáginaDeLeituraDeHomepage"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "TemplateDePáginaPrivadaDeHomepage"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "TemplateDeGruposDeHomepage"
 
 msgid "SlideShowHandOutTemplate"
 msgstr "TemplateDeResumoDeSlideShow"
@@ -1585,6 +1578,10 @@ msgstr "AjudaComGrupos"
 
 msgid "HelpOnHeadlines"
 msgstr "AjudaComTítulos"
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "AjudaComPáginasXml"
 
 msgid "HelpOnLanguages"
 msgstr "AjudaComIdiomas"
@@ -1902,7 +1899,7 @@ msgid "Or try one of these actions:"
 msgstr "Ou tente uma da seguintes ações: "
 
 msgid "Unsubscribe"
-msgstr "Remover inscrição"
+msgstr "Deixar de acompanhar"
 
 msgid "Home"
 msgstr "Home"
@@ -1964,7 +1961,7 @@ msgid "My Pages"
 msgstr "Minhas Páginas"
 
 msgid "Subscribe User"
-msgstr "Inscrever usuário"
+msgstr "Fazer Usuário Acompanhar"
 
 msgid "Remove Spam"
 msgstr "Remover Spam"
@@ -2297,7 +2294,7 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Tipo inadequado de gráfico \"%s\"!"
 
 msgid "Contents"
-msgstr "Conteúdos"
+msgstr "Conteúdo"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -2358,7 +2355,7 @@ msgid "You must login to remove a quicklink."
 msgstr "Você precisa se logar para remover links rápidos."
 
 msgid "Your quicklink to this page has been removed."
-msgstr "Sua inscrição a esta página foi removida."
+msgstr "Seu link rápido para esta página foi removido."
 
 msgid "Your quicklink to this page could not be removed."
 msgstr "Sua inscrição a esta página não pode ser removida."
@@ -2366,28 +2363,26 @@ msgstr "Sua inscrição a esta página não pode ser removida."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Você precisa ter um link rápido para esta página para poder removê-lo."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Diapositivos"
+msgstr "Editar slide show"
 
 msgid "Quit"
-msgstr ""
+msgstr "Sair"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Diapositivos"
+msgstr "Sair do slide show"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "Mostrar primeiro slide (seta para cima)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "Mostrar último slide (seta para baixo)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "Mostrar slide anterior (seta para a esquerda)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "Mostrar próximo slide (seta para a direita)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2407,7 +2402,7 @@ msgstr "Verificação de Confiança do OpenID"
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr "O site %s pediu sua identidade."
+msgstr "O site %s solicitou sua identidade."
 
 #, python-format
 msgid ""
@@ -2516,6 +2511,12 @@ msgid ""
 "used to change your password. The email will also contain further\n"
 "instructions."
 msgstr ""
+"\n"
+"== Recuperando senhas perdidas ==\n"
+"Se você esqueceu sua senha, forneça seu endereço de email ou login e clique "
+"em '''Envie os dados de minha conta por email'''.\n"
+"Você vai receber um email contento uma chave de recuperação que pode ser "
+"usada para alterar sua senha. O email também incluirá mais informações."
 
 msgid ""
 "\n"
@@ -2523,6 +2524,10 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+"\n"
+"=== Redefinição de senha ===\n"
+"Se você já recebeu o email com a chave de recuperação, digite seu login, a "
+"chave de recuperação e uma nova senha (duas vezes) abaixo."
 
 #, python-format
 msgid "[%d attachments]"
@@ -2708,9 +2713,7 @@ msgid ""
 msgstr ""
 "O anexo '%(filename)s' não foi descompactado porque alguns arquivos no "
 "pacote zip ou não estão no mesmo diretório, ou excederam o limite de tamanho "
-"por arquivo (%(maxsize_file)d kB).Anexo '%(filename)s' não descompactado "
-"porque o arquivo é muito grande, somente arquivos .zip que já existam ou que "
-"estejam em pastas."
+"por arquivo (%(maxsize_file)d kB)."
 
 #, python-format
 msgid ""
@@ -2848,13 +2851,13 @@ msgstr ""
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
-"Você não tem permissão para se inscrever em uma página que você não pode ler."
+"Você não tem permissão para acompanhar uma página que você não pode ler."
 
 msgid "This wiki is not enabled for mail/Jabber processing."
 msgstr "Esta wiki não está habilitada para processamento de email/Jabber."
 
 msgid "You must log in to use subscriptions."
-msgstr "Você precisa fazer o login antes de se inscrever."
+msgstr "Você precisa se logar antes de acompanhar páginas."
 
 msgid ""
 "Add your email address or Jabber ID in your user settings to use "
@@ -2864,13 +2867,13 @@ msgstr ""
 "para usar as inscrições."
 
 msgid "You are already subscribed to this page."
-msgstr "Você já está inscrito nesta página."
+msgstr "Você já está acompanhando esta página."
 
 msgid "You have been subscribed to this page."
-msgstr "Sua inscrição a esta página foi efetivada."
+msgstr "Você passou a acompanhar esta página."
 
 msgid "You could not get subscribed to this page."
-msgstr "Você não pode se inscrever a esta página."
+msgstr "Você não pôde passar a acompanhar esta página."
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
@@ -3061,7 +3064,7 @@ msgid "SHA digest of this page's content is:"
 msgstr "SHA digest para o conteúdo desta página é:"
 
 msgid "The following users subscribed to this page:"
-msgstr "Os seguintes usuários se inscreveram nesta página:"
+msgstr "Os seguintes usuários acompanham esta página:"
 
 msgid "This page links to the following pages:"
 msgstr "Esta página tem links para as seguintes páginas:"
@@ -3127,6 +3130,18 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= Baixando backups =\n"
+"\n"
+"Por favor lembre-se de:\n"
+" * Guardar os backups num lugar protegido e seguro - eles contém informações "
+"sensíveis.\n"
+" * Assegure-se de que os valores backup_* na configuração da sua wiki estão "
+"corretos e completos.\n"
+" * Assegure-se de que o arquivo de backup que você obter contenha tudo que "
+"você precisa em caso de problemas.\n"
+" * Assegure-se de que seja baixado sem problemas.\n"
+"\n"
+"Para obter o backup, clique aqui:"
 
 msgid "Backup"
 msgstr "Backup"
@@ -3205,7 +3220,7 @@ msgid "Include all attachments?"
 msgstr "Incluir todos os anexos?"
 
 msgid "Package pages"
-msgstr "Páginas do Pacote"
+msgstr "Empacotar páginas"
 
 msgid "Package name"
 msgstr "Nome do Pacote"
@@ -3215,14 +3230,14 @@ msgstr "Lista de páginas - separadas por vírgula"
 
 #, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Inscrever usuários na página %s"
+msgstr "Fazer usuários acompanharem a página %s"
 
 msgid "Enter user names (comma separated):"
-msgstr "Entre com os nomes de usuários (separado por aspas):"
+msgstr "Entre com os nomes de usuário (separados por vírgula):"
 
 #, python-format
 msgid "Subscribed for %s:"
-msgstr "Inscrito para %s:"
+msgstr "Acompanhando %s:"
 
 msgid "Not a user:"
 msgstr "Não a usuário:"
@@ -3246,7 +3261,7 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "Você não tem permissão para salvar um desenho nesta página."
 
 msgid "Empty target given."
-msgstr ""
+msgstr "Destino não especificado."
 
 msgid "Edit drawing"
 msgstr "Editar desenho"
@@ -3255,7 +3270,7 @@ msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Por favor primeiro crie uma página antes de criar uma página adicional."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -3282,30 +3297,30 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
-"Você pode adicionar subpáginas à sua homepage já existente aqui.\n"
+"Você pode adicionar subpáginas adicionais à sua homepage já existente aqui.\n"
 "\n"
 "Você pode escolher quão abertas a outros leitores ou escritores tais páginas "
 "serão,\n"
-"o acesso é controlado pela membresia de grupo da página de grupo "
+"o acesso é controlado pela associação ao grupo da página de grupo "
 "correspondente.\n"
 "\n"
-"Apencas entre o nome  da subpágina e pressione o botão para criar uma nova "
+"Apencas entre o nome da subpágina e pressione o botão para criar uma nova "
 "página.\n"
 "\n"
 "Antes de criar páginas com acesso restrito, confirme que a página de grupo "
 "correspondente\n"
-"existe e contem os membros apropriados. Use o HomepageGroupsTemplate para "
+"existe e contém os membros apropriados. Use o HomepageGroupsTemplate para "
 "criar\n"
 "as páginas de grupo.\n"
 "\n"
-"||'''Adicionar nova página pessoal:'''||'''Grupo de lista de controle de "
-"acesso relacionado:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
+"||'''Adicionar nova página pessoal:'''||'''Grupo de controle de acesso (ACL) "
+"relacionado:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,página leitura e escrita,%"
+"(username)s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,página somente leitura,%(username)s)>>||"
+"[\"%(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,página privada,%(username)s)>>||"
+"somente %(username)s||\n"
 "\n"
 
 msgid "MyPages management"
@@ -3325,21 +3340,20 @@ msgstr "Escolha:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Instalar pacotes de linguagem para '%s'"
 
 msgid "Your subscription to this page has been removed."
-msgstr "Sua inscrição a esta página foi removida."
+msgstr "Você deixou de acompanhar esta página."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Não é possível remover a expressão regular inscrita!"
+msgstr "Não é possível remover o acompanhamento de expressão regular!"
 
 msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
-"Edite as expressões regulares para inscrições nas suas preferências de "
-"usuário."
+"Edite as expressões regulares de acompanhamento nas suas configurações."
 
 msgid "You need to be subscribed to unsubscribe."
-msgstr "Você precisa estar inscrito para remover a inscrição."
+msgstr "Para deixar de acompanhar a página você precisa já estar acompanhando."
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -3504,9 +3518,8 @@ msgstr ""
 msgid "anonymous"
 msgstr "anônimo"
 
-#, fuzzy
 #~ msgid "you may need to login to edit this page"
-#~ msgstr "Você não tem permissão para editar esta página!"
+#~ msgstr "você pode precisar se logar para editar esta página"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."

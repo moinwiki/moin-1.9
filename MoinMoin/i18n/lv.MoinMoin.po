@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -470,13 +470,11 @@ msgstr "Nepieciešama vērtība atslēgai \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Nepareiza izcelšanas regulārā izteiksme \"%(regex)s\": %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"Saglabātais lapas saturs ir novecojis un netiks iekļauts meklēšanas "
-"rezultātā!"
+"Saglabātais lapas saturs ir novecojis un tam būs zemāks meklēšanas kritērijiem atbilstības līmenis!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -756,15 +754,12 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Verificēšanās tika atsaukta."
+msgstr "OpenID verificēšana tika atsaukta."
 
-#, fuzzy, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID identifikators pievienots veiksmīgi."
+msgstr "OpenID veiksmīgs. ID: %s"
 
-#, fuzzy
 msgid "OpenID failure"
 msgstr "OpenID kļūda."
 
@@ -1460,24 +1455,20 @@ msgstr ""
 msgid "HelpOnConfiguration/SurgeProtection"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr "JūsuIestatījumi"
+msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdating"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnAuthentication"
 msgstr ""
@@ -1485,45 +1476,38 @@ msgstr ""
 msgid "HelpOnAuthentication/ExternalCookie"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnMoinCommand/ExportDump"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNotification"
 msgstr "Notifikācija"
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnMoinWikiSyntax"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
 msgid "HelpOnFormatting"
 msgstr "FormatēšanasPalīdzība"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoin versija"
+msgstr ""
 
 msgid "HelpContents"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
 msgid "HelpForBeginners"
 msgstr ""
@@ -1531,9 +1515,8 @@ msgstr ""
 msgid "HelpForUsers"
 msgstr ""
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "VirsrakstuRādītājs"
+msgstr ""
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
@@ -1577,7 +1560,11 @@ msgid "HelpOnGroups"
 msgstr "PalīdzībasSaturaRādītājs"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "VirsrakstuPalīdzība"
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "FormatēšanasPalīdzība"
 
 #, fuzzy
 msgid "HelpOnLanguages"

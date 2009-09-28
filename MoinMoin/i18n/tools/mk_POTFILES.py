@@ -14,7 +14,12 @@ else:
 
 # Define a blacklist.
 
-blacklist = ["_tests", os.path.join("script", "old"), "support", "filter/EXIF.py"]
+blacklist = ["_tests",
+             os.path.join("script", "old"),
+             "support",
+             os.path.join("filter", "EXIF.py"),
+             os.path.join("web", "static", "htdocs"),
+            ]
 
 # Define an output file for the filenames.
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1564,6 +1564,10 @@ msgstr "帮助目录"
 
 msgid "HelpOnHeadlines"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "帮助-排版"
 
 #, fuzzy
 msgid "HelpOnLanguages"

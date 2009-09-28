@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: MARTON Jozsef <jmarton@omikk.bme.hu>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -1571,6 +1571,10 @@ msgstr "SegédletTartalomjegyzék"
 
 msgid "HelpOnHeadlines"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "FormázásiSegédlet"
 
 msgid "HelpOnLanguages"
 msgstr ""

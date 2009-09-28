@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -1613,6 +1613,10 @@ msgstr "DaftarBantuan"
 
 msgid "HelpOnHeadlines"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "BantuanPemformatan"
 
 #, fuzzy
 msgid "HelpOnLanguages"

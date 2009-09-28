@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1604,6 +1604,10 @@ msgstr "ДовідкаЗміст"
 
 msgid "HelpOnHeadlines"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "ДовідкаФорматування"
 
 #, fuzzy
 msgid "HelpOnLanguages"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-14 01:03+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2009-08-30 19:04-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -1639,6 +1639,10 @@ msgstr "ContenidosDeAyuda"
 
 msgid "HelpOnHeadlines"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "AyudaSobreFormato"
 
 #, fuzzy
 msgid "HelpOnLanguages"
