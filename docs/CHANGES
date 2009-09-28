@@ -16,13 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Current:
-  * TextCha feature of TWikiDraw removed because of anywikidraw does miss the TextCha feature yet
-
-  New features:
-  * config var extensions_mapping added for mapping of attachment extensions to actions
-
-Version 1.9.0beta4:
+Version 1.9.0current:
 
   Please note:
   * This is a BETA version, not meant for production usage, but just to
@@ -34,6 +28,20 @@ Version 1.9.0beta4:
     We know that translations and system / help pages are not yet finished and
     that  they still require much more work.
     Please see http://master19.moinmo.in/ and help cleaning up there.
+
+  New features:
+  * config attribute extensions_mapping added for mapping of attachment file
+    extensions to actions (currently used for anywikidraw/twikidraw action)
+
+  Bug fixes:
+  * setup.py: fix wrong exitcode
+
+  Other changes:
+  * TextCha feature of TWikiDraw removed again because AnyWikiDraw misses the
+    TextCha feature still, language detection problems.
+
+
+Version 1.9.0beta4:
 
   New features:
   * Moin's Xapian based search code was refactored:
