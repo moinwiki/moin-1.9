@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-28 12:24+0200\n"
-"PO-Revision-Date: 2009-09-27\n"
+"PO-Revision-Date: 2009-09-28\n"
 "Last-Translator: Renato Silva\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
@@ -399,7 +399,7 @@ msgstr "Função %(func)s não reconhecida na linha %(lineno)i."
 
 #, python-format
 msgid "The file %s was not found in the package."
-msgstr "O arquivo %s não foi encontrado no pacote do MoinMoin."
+msgstr "O arquivo %s não foi encontrado no pacote."
 
 msgid "Text mode"
 msgstr "Modo texto"
@@ -868,7 +868,7 @@ msgstr ""
 "exibição]])>>.\n"
 " Tabelas:: |= cabeçalho | texto de célula | mais texto de célula |;\n"
 "\n"
-"(!) Para mais ajuda, veja AjudaComEdição or AjudaComSintaxeCreole.\n"
+"(!) Para mais ajuda, veja HelpOnEditing or HelpOnCreoleSyntax.\n"
 
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
@@ -901,7 +901,7 @@ msgstr ""
 " Tabelas:: || texto de célula |||| texto de célula mesclando duas colunas "
 "||;    espaços em branco não são permitidos após tabelas ou títulos.\n"
 "\n"
-"(!) Para mais ajuda, veja AjudaComEdição ou AjudaComSintaxeMoin.\n"
+"(!) Para mais ajuda, veja HelpOnEditing ou HelpOnMoinWikiSyntax.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -975,7 +975,7 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Não foi possível encontrar a página referenciada: %s**"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "A opção XSLT está desabilitada, por favor vejja AjudaNaConfiguração."
+msgstr "A opção XSLT está desabilitada, por favor vejja HelpOnConfiguration."
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr ""
@@ -1014,7 +1014,7 @@ msgid "Subscribe"
 msgstr "Acompanhar"
 
 msgid "Raw"
-msgstr "TextoBruto"
+msgstr "Texto Puro"
 
 msgid "XML"
 msgstr "XML"
@@ -1057,7 +1057,7 @@ msgid "Show fancy diffs"
 msgstr "Útilizar visualização agradável para diffs"
 
 msgid "Add spaces to displayed wiki names"
-msgstr "Adicionar espaços aos WikiNome"
+msgstr "Adicionar espaços ao exibir nomes wiki"
 
 msgid "Remember login information"
 msgstr "Lembrar das informações de login"
@@ -1579,9 +1579,8 @@ msgstr "AjudaComGrupos"
 msgid "HelpOnHeadlines"
 msgstr "AjudaComTítulos"
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "AjudaComPáginasXml"
+msgstr "AjudaComImagens"
 
 msgid "HelpOnLanguages"
 msgstr "AjudaComIdiomas"
@@ -2087,7 +2086,7 @@ msgid "Python Version"
 msgstr "Versão Python"
 
 msgid "MoinMoin Version"
-msgstr "Versão MoinMoin"
+msgstr "Versão do MoinMoin"
 
 #, python-format
 msgid "Release %s [Revision %s]"
@@ -2606,7 +2605,7 @@ msgstr "Você não tem permissão para anexar arquivos a esta página."
 
 #, python-format
 msgid "Unsupported AttachFile sub-action: %s"
-msgstr "Sub-ação do AnexarArquivo não suportada: %s"
+msgstr "Subação de AttachFile não suportada: %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
@@ -2916,7 +2915,7 @@ msgid ""
 "Refer to HelpOnSynchronisation for help."
 msgstr ""
 "Parâmetros incorretos. Por favor forneça ao menos o parâmetro ''remoteWiki''."
-"Veja HelpOnSynchronisation para lhe ajudar."
+"Veja HelpOnSynchronisation para ajuda."
 
 msgid "The ''remoteWiki'' is unknown."
 msgstr "A ''remoteWiki'' é desconhecida."
@@ -3324,7 +3323,7 @@ msgstr ""
 "\n"
 
 msgid "MyPages management"
-msgstr "Gerenciando MinhasPáginas"
+msgstr "Gerenciamento das MinhasPáginas"
 
 msgid "Only superuser is allowed to use this action."
 msgstr "Somente o superusuário tem permissão para usar esta ação."

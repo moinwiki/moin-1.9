@@ -1528,7 +1528,7 @@ msgid "HelpOnMoinWikiSyntax"
 msgstr "СправочникПоСинтаксису"
 
 msgid "HelpOnCreoleSyntax"
-msgstr "СправочникПоСинтаксисCreoleу"
+msgstr "СправочникПоСинтаксисуCreole"
 
 msgid "HelpOnFormatting"
 msgstr "КакФорматировать"
@@ -1587,9 +1587,8 @@ msgstr "ПомощьПоГруппам"
 msgid "HelpOnHeadlines"
 msgstr "КакПисатьЗаголовки"
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "ПомощьПоXmlСтраницам"
+msgstr "ПомощьПоКартинкам"
 
 msgid "HelpOnLanguages"
 msgstr "ПомощьПоПоддержкеЯзыков"
@@ -1703,94 +1702,94 @@ msgid "HelpOnSubscribing"
 msgstr "ПомощьПоПодписке"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "ВерблюжийРегистр"
 
 msgid "WikiCourse"
 msgstr "ВикиКурс"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr ""
+msgstr "ВикиКурс/01 Что такое МойнМойн?"
 
 msgid "WikiCourse/02 Finding information"
-msgstr ""
+msgstr "ВикиКурс/02 Поиск информации"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr ""
+msgstr "ВикиКурс/03 Быть в курсе событий"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr ""
+msgstr "ВикиКурс/04 Создание учётной записи"
 
 msgid "WikiCourse/05 User preferences"
-msgstr ""
+msgstr "ВикиКурс/05 Пользовательские настройки"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr ""
+msgstr "ВикиКурс/06 Собственная домашняя страница"
 
 msgid "WikiCourse/07 The text editor"
-msgstr ""
+msgstr "ВикиКурс/07 Текстовый редактор"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr ""
+msgstr "ВикиКурс/08 Сочетания клавиш"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr ""
+msgstr "ВикиКурс/10 Форматирование текста с использованием вики-разметки"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr ""
+msgstr "ВикиКурс/11 Разбивка на абзацы"
 
 msgid "WikiCourse/12 Headlines"
-msgstr ""
+msgstr "ВикиКурс/12 Заголовки"
 
 msgid "WikiCourse/13 Lists"
-msgstr ""
+msgstr "ВикиКурс/13 Списки"
 
 msgid "WikiCourse/14 Text styles"
-msgstr ""
+msgstr "ВикиКурс/14 Стили текста"
 
 msgid "WikiCourse/15 Tables"
-msgstr ""
+msgstr "ВикиКурс/15 Таблицы"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr ""
+msgstr "ВикиКурс/16 Внутренние ссылки на вики"
 
 msgid "WikiCourse/17 External links"
-msgstr ""
+msgstr "ВикиКурс/17 Внешние ссылки"
 
 msgid "WikiCourse/18 Attachments"
-msgstr ""
+msgstr "ВикиКурс/18 Прикрепляемые файлы"
 
 msgid "WikiCourse/19 Symbols"
-msgstr ""
+msgstr "ВикиКурс/19 Символы"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr ""
+msgstr "ВикиКурс/20 Динамическое содержимое"
 
 msgid "WikiCourse/21 Macros"
-msgstr ""
+msgstr "ВикиКурс/21 Макрокоманды"
 
 msgid "WikiCourse/22 Parsers"
-msgstr ""
+msgstr "ВикиКурс/22 Парсеры входных форматов"
 
 msgid "WikiCourse/23 Actions"
-msgstr ""
+msgstr "ВикиКурс/23 Действия"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr ""
+msgstr "ВикиКурс/30 Графический редактор"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr ""
+msgstr "ВикиКурс/40 Создание новых страниц"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr ""
+msgstr "ВикиКурс/50 Этикет использования вики"
 
 msgid "WikiCourse/51 Applications"
-msgstr ""
+msgstr "ВикиКурс/51 Примеры использования вики"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr ""
+msgstr "ВикиКурс/52 Структура вики"
 
 msgid "WikiCourseHandOut"
-msgstr "ВикиКурсРаздатка"
+msgstr "ВикиКурсРаздаточныеМатериалы"
 
 msgid "Sun"
 msgstr "Вс"
@@ -3335,7 +3334,7 @@ msgid "page package"
 msgstr "пакет страниц"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Выберите:"
 
 #, python-format
 msgid "Install language packs for '%s'"

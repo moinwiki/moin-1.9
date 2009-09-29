@@ -474,7 +474,8 @@ msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"Saglabātais lapas saturs ir novecojis un tam būs zemāks meklēšanas kritērijiem atbilstības līmenis!"
+"Saglabātais lapas saturs ir novecojis un tam būs zemāks meklēšanas "
+"kritērijiem atbilstības līmenis!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -757,6 +758,7 @@ msgstr ""
 msgid "OpenID verification canceled."
 msgstr "OpenID verificēšana tika atsaukta."
 
+#, python-format
 msgid "OpenID success. id: %s"
 msgstr "OpenID veiksmīgs. ID: %s"
 
