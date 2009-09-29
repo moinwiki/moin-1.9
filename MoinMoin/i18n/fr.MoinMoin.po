@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-28 12:24+0200\n"
-"PO-Revision-Date: 2009-09-06 20:08+0200\n"
+"PO-Revision-Date: 2009-09-29 00:06+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
 "MIME-Version: 1.0\n"
@@ -1621,9 +1621,8 @@ msgstr "AideDesGroupes"
 msgid "HelpOnHeadlines"
 msgstr "AideDesTitres"
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "AideDesPagesXml"
+msgstr "AideDesImages"
 
 msgid "HelpOnLanguages"
 msgstr "AideDesLangues"
@@ -2406,28 +2405,26 @@ msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 "Il doit y avoir un lien rapide sur cette page pour pouvoir le supprimer."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Lancer"
+msgstr "Modifier la présentation"
 
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Lancer"
+msgstr "Quitter la présentation"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "Premier transparent (flèche haut)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "Dernier transparent (flèche bas)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "Transparent précédent (flèche gauche)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "Transparent précédent (flèche droite)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -3594,7 +3591,3 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonyme"
-
-#, fuzzy
-#~ msgid "you may need to login to edit this page"
-#~ msgstr "Vous n'êtes pas autorisé à modifier cette page."
