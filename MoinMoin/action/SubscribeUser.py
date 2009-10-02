@@ -8,11 +8,11 @@
 """
 
 import sys, os
-#sys.path.append("YOUR CONFIG DIRECTORY HERE")
 
 from MoinMoin.Page import Page
 from MoinMoin import user
 from MoinMoin import wikiutil
+
 
 def show_form(pagename, request):
     _ = request.getText
@@ -30,6 +30,7 @@ def show_form(pagename, request):
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
+
 def show_result(pagename, request):
     _ = request.getText
     request.emit_http_headers()
@@ -44,6 +45,7 @@ def show_result(pagename, request):
 
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
+
 
 def subscribe_users(request, usernamelist, pagename, formatter):
     _ = request.getText
@@ -79,9 +81,13 @@ def subscribe_users(request, usernamelist, pagename, formatter):
             result.append(formatter.url(0))
             result.append(formatter.linebreak(preformatted=0))
 
-    result.extend([''.join([formatter.smiley('{X}'), formatter.text(" " + _("Not a user:") + " " + username), formatter.linebreak(preformatted=0)]) for username in usernamelist if username not in realusers])
+    result.extend([''.join([formatter.smiley('{X}'),
+                            formatter.text(" " + _("Not a user:") + " " + username),
+                            formatter.linebreak(preformatted=0)])
+                   for username in usernamelist if username not in realusers])
 
     return ''.join(result)
+
 
 def execute(pagename, request):
     _ = request.getText
@@ -94,9 +100,10 @@ def execute(pagename, request):
     else:
         show_result(pagename, request)
 
+
 if __name__ == '__main__':
     args = sys.argv
-    if not len(args) > 1:
+    if len(args) < 2:
         print >>sys.stderr, """Subscribe users
 
 %(myname)s pagename username[,username[,username[,...]]] [URL]
