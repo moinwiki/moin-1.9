@@ -1189,7 +1189,7 @@ class RequestBase(object):
             pg = Page(self, pname)
             if pg.exists():
                 url = pg.url(self)
-                self.http_redirect(url)
+                self.http_redirect(url, status='301')
                 return True
         return False
 
@@ -1332,13 +1332,17 @@ class RequestBase(object):
 
         return self.finish()
 
-    def http_redirect(self, url):
+    def http_redirect(self, url, status='302'):
         """ Redirect to a fully qualified, or server-rooted URL
 
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)
-        self.emit_http_headers(["Status: 302 Found", "Location: %s" % url])
+        header = {
+            "301": "Status: 301 Moved Permanently",
+            "302": "Status: 302 Found",
+        }[status]
+        self.emit_http_headers([header, "Location: %s" % url])
 
     def emit_http_headers(self, more_headers=[], testing=False):
         """ emit http headers after some preprocessing / checking

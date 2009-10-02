@@ -129,8 +129,10 @@ class Request(RequestBase):
             else:
                 self.twistd.setHeader(key, value)
 
-    def http_redirect(self, url):
+    def http_redirect(self, url, status='302'):
         """ Redirect to a fully qualified, or server-rooted URL
+
+        TODO: use status '301' or '302' to generate correct header
 
         @param url: relative or absolute url, ascii using url encoding.
         """
