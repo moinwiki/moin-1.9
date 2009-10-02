@@ -164,7 +164,7 @@ def handle_action(context, pagename, action_name='show'):
     # Try action
     else:
         from MoinMoin import action
-        handler = action.getHandler(cfg, action_name)
+        handler = action.getHandler(context, action_name)
         if handler is None:
             msg = _("You are not allowed to do %(action_name)s on this page.") % {
                     'action_name': wikiutil.escape(action_name), }

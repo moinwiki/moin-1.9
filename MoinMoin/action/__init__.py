@@ -320,11 +320,12 @@ def get_names(config):
         config.cache.action_names = actions # remember it
     return config.cache.action_names
 
-def getHandler(cfg, action, identifier="execute"):
+def getHandler(request, action, identifier="execute"):
     """ return a handler function for a given action or None.
 
     TODO: remove request dependency
     """
+    cfg = request.cfg
     # check for excluded actions
     if action in cfg.actions_excluded:
         return None
