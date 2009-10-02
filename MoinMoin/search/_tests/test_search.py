@@ -8,13 +8,14 @@
 """
 
 
-import py, os, time
+import py, os, StringIO
 
 from MoinMoin.search import QueryError, _get_searcher
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search.builtin import MoinSearch
-from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
+from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page, append_page
 from MoinMoin.wikiutil import Version
+from MoinMoin.action import AttachFile
 
 PY_MIN_VERSION = '1.0.0'
 if Version(version=py.version) < Version(version=PY_MIN_VERSION):
@@ -81,6 +82,9 @@ class BaseSearchTest(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
+    # key - page name, value - page content. If value is None page
+    # will not be created but will be used for a search. None should
+    # be used for pages which already exist.
     pages = {u'SearchTestPage': u'this is a test page',
              u'SearchTestLinks': u'SearchTestPage',
              u'SearchTestLinksLowerCase': u'searchtestpage',
@@ -97,12 +101,17 @@ class BaseSearchTest(object):
 
     searcher_class = None
 
-    def setup_class(self):
-        become_trusted(self.request)
+    def _wait_for_index_update(self):
+        pass
 
-        for page, text in self.pages.iteritems():
+    @classmethod
+    def setup_class(cls):
+        request = cls.request
+        become_trusted(request)
+
+        for page, text in cls.pages.iteritems():
             if text:
-                create_page(self.request, page, text)
+                create_page(request, page, text)
 
     def teardown_class(self):
         for page, text in self.pages.iteritems():
@@ -274,15 +283,42 @@ class BaseSearchTest(object):
         self.pages['TestCreatePage'] = 'some text' # Moin serarch must search this page
 
         create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
-        time.sleep(1) # Wait while created pages are being indexed in other thread.
+        self._wait_for_index_update()
 
         result = self.search(u'TestCreatePage')
 
         nuke_page(self.request, 'TestCreatePage')
-        time.sleep(1) # Wait while the xapian index is being updated.
+        self._wait_for_index_update()
 
         del self.pages['TestCreatePage']
         assert len(result.hits) == 1
+
+    def test_attachment(self):
+        page_name = u'TestAttachment'
+        self.pages[page_name] = 'some text' # Moin serarch must search this page
+
+        filename = "AutoCreatedSillyAttachmentForSearching.png"
+        data = "Test content"
+        filecontent = StringIO.StringIO(data)
+
+        result = self.search(filename)
+        assert len(result.hits) == 0
+
+        create_page(self.request, page_name, self.pages[page_name])
+        AttachFile.add_attachment(self.request, page_name, filename, filecontent, True)
+        append_page(self.request, page_name, '[[attachment:%s]]' % filename)
+        self._wait_for_index_update()
+
+        result = self.search(filename)
+
+        nuke_page(self.request, page_name)
+        del self.pages[page_name]
+        self._wait_for_index_update()
+
+        assert len(result.hits) > 0
+
+        result = self.search(filename)
+        assert len(result.hits) == 0
 
     def test_get_searcher(self):
         assert isinstance(_get_searcher(self.request, ''), self.searcher_class)
@@ -311,6 +347,12 @@ class TestXapianSearch(BaseSearchTest):
 
         xapian_search = True
 
+    def _wait_for_index_update(self):
+        from MoinMoin.search.Xapian import XapianIndex
+        index = XapianIndex(self.request)
+        index.lock.acquire()
+        index.lock.release()
+
     def get_searcher(self, query):
         from MoinMoin.search.Xapian.search import XapianSearch
         return XapianSearch(self.request, query)
@@ -319,7 +361,7 @@ class TestXapianSearch(BaseSearchTest):
         from MoinMoin.search.Xapian import MoinSearchConnection
         return  MoinSearchConnection(os.path.join(self.request.cfg.cache_dir, 'xapian/index'))
 
-    def setup_method(self, method):
+    def setup_class(self):
 
         try:
             from MoinMoin.search.Xapian import XapianIndex
@@ -334,9 +376,14 @@ class TestXapianSearch(BaseSearchTest):
 
         nuke_xapian_index(self.request)
         index = XapianIndex(self.request)
-        index.indexPages(mode='add', pages=self.pages)
+        # Additionally, pages which were not created but supposed to be searched
+        # are indexed.
+        pages_to_index = [page for page in self.pages if not self.pages[page]]
+        index.indexPages(mode='add', pages=pages_to_index)
 
-    def teardown_method(self, method):
+        super(TestXapianSearch, self).setup_class()
+
+    def teardown_class(self):
         nuke_xapian_index(self.request)
 
     def test_get_all_documents(self):
@@ -412,6 +459,7 @@ class TestXapianIndexingInNewThread(object):
         index.indexPagesInNewThread(mode='add')
 
         nuke_xapian_index(self.request)
+
 
 class TestGetSearcher(object):
 
