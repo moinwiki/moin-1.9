@@ -1,9 +1,10 @@
 """
    MoinMoin - Subscribeuser - Action
-   Subscribe a user to a page
+   Subscribe (or unsubscribe) a user to a page.
 
    @copyright: 2003 Daniela Nicklas <nicklas@informatik.uni-stuttgart.de>,
-               2005 MoinMoin:AlexanderSchremmer
+               2005 MoinMoin:AlexanderSchremmer,
+               2009 MoinMoin:ThomasWaldmann
    @license: GNU GPL, see COPYING for details.
 """
 
@@ -140,9 +141,13 @@ if __name__ == '__main__':
     if len(args) < 2:
         print >>sys.stderr, """Subscribe users
 
-%(myname)s pagename username[,username[,username[,...]]] [URL]
+%(myname)s pagename [+|-][re:]username[,username[,username[,...]]] [URL]
 
-Subscribes the users to a page.
++username: subscribes user <username> to page <pagename>.
+-username: unsubscribes user <username> from page <pagename>.
++re:username_re: subscribes users who match <username_re> regex.
+-re:username_re: unsubscribes users who match <username_re> regex.
+
 URL is just needed for a farmconfig scenario.
 
 Example:
