@@ -1,0 +1,27 @@
+
+    com.wombatinvasion.pmwikidraw.PmWikiDrawing 2 1 
+        org.jhotdraw.figures.GroupFigure 24 
+            org.jhotdraw.contrib.PolygonFigure "attributes" "attributes" 1 "FillColor" "Color" 255 255 255 4 7 23 34 2 61 31 50 40  
+            org.jhotdraw.figures.LineFigure "no_attributes" 2 31 1 31 6 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 235 199 158 2 61 31 31 1 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FillColor" "Color" 235 199 158 2 51 111 61 101 NULL NULL 0 0 0  
+            org.jhotdraw.figures.RectangleFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 255 199 158 1 41 50 50  
+            org.jhotdraw.contrib.TriangleFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 255 199 158 1 21 50 20 5  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 235 199 158 2 1 21 51 41 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 235 199 158 2 1 91 51 111 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 235 199 158 2 1 21 1 91 NULL NULL 0 0 0  
+            org.jhotdraw.contrib.TriangleFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 255 199 158 1 91 50 20 1  
+            org.jhotdraw.figures.RectangleFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 255 199 158 51 41 10 60  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FillColor" "Color" 235 199 158 2 61 31 61 101 NULL NULL 0 0 0  
+            org.jhotdraw.contrib.TriangleFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 255 199 158 51 31 10 10 3  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 0 0 0 2 51 41 61 31 NULL NULL 0 0 0  
+            org.jhotdraw.contrib.TriangleFigure "attributes" "attributes" 2 "FillColor" "Color" 235 199 158 "FrameColor" "Color" 255 199 158 51 101 10 10 7  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FillColor" "Color" 235 199 158 2 51 41 51 111 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 53 39 9 21 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 59 32 31 5 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 58 34 28 7 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 54 37 14 18 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 56 36 18 15 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 56 34 22 12 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 1 "FrameColor" "Color" 192 192 192 2 56 34 25 10 NULL NULL 0 0 0  
+            org.jhotdraw.figures.LineFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FrameColor" "Color" 192 192 192 2 7 23 31 4 NULL NULL 0 0 0    
