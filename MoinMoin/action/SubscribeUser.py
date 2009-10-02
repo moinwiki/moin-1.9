@@ -7,7 +7,7 @@
    @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os
+import sys, os, re
 
 from MoinMoin.Page import Page
 from MoinMoin import user
@@ -31,6 +31,30 @@ def show_form(pagename, request):
     request.theme.send_closing_html()
 
 
+def parse_re(usernames):
+    username_regexes = []
+    for name in usernames:
+        if name.startswith("re:"):
+            name = name[3:]
+        else:
+            name = re.escape(name)
+        username_regexes.append(name)
+    return username_regexes
+
+
+def parse_userlist(usernames):
+    subscribe = []
+    unsubscribe = []
+    for name in usernames:
+        if name.startswith("-"):
+            unsubscribe.append(name[1:])
+        elif name.startswith("+"):
+            subscribe.append(name[1:])
+        else:
+            subscribe.append(name)
+    return parse_re(subscribe), parse_re(unsubscribe)
+
+
 def show_result(pagename, request):
     _ = request.getText
     request.emit_http_headers()
@@ -40,51 +64,61 @@ def show_result(pagename, request):
     from MoinMoin.formatter.text_html import Formatter
     formatter = Formatter(request)
 
-    result = subscribe_users(request, request.form['users'][0].split(","), pagename, formatter)
+    usernames = request.form['users'][0].split(",")
+    subscribe, unsubscribe = parse_userlist(usernames)
+
+    result = subscribe_users(request, subscribe, unsubscribe, pagename, formatter)
     request.write(result)
 
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
 
-def subscribe_users(request, usernamelist, pagename, formatter):
+def subscribe_users(request, subscribe, unsubscribe, pagename, formatter):
     _ = request.getText
 
     if not Page(request, pagename).exists():
         return u"Page does not exist."
 
     result = []
-
-    realusers = []              # usernames that are really wiki users
+    did_match = {}
 
     # get user object - only with IDs!
     for userid in user.getUserList(request):
-        success = False
         userobj = user.User(request, userid)
+        name = userobj.name
 
-        if userobj.name in usernamelist:   # found a user
-            realusers.append(userobj.name)
-            if userobj.isSubscribedTo([pagename]):
-                success = True
-            elif not userobj.email and not userobj.jid:
-                success = False
-            elif userobj.subscribe(pagename):
-                success = True
-            if success:
-                result.append(formatter.smiley('{OK}'))
-                result.append(formatter.text(" "))
-            else:
-                result.append(formatter.smiley('{X}'))
-                result.append(formatter.text(" "))
-            result.append(formatter.url(1, Page(request, userobj.name).url(request)))
-            result.append(formatter.text(userobj.name))
-            result.append(formatter.url(0))
-            result.append(formatter.linebreak(preformatted=0))
+        matched = subscribed = False
+
+        for name_re in unsubscribe:
+            if re.match(name_re, name, re.U):
+                matched = did_match[name_re] = True
+                if (not userobj.isSubscribedTo([pagename]) or
+                    userobj.unsubscribe(pagename)):
+                    subscribed = False
+                break
+
+        for name_re in subscribe:
+            if re.match(name_re, name, re.U):
+                matched = did_match[name_re] = True
+                if (userobj.isSubscribedTo([pagename]) or
+                    (userobj.email or userobj.jid) and userobj.subscribe(pagename)):
+                    subscribed = True
+                break
+
+        if matched:
+            result.extend([formatter.smiley(subscribed and '{*}' or '{o}'),
+                           formatter.text(" "),
+                           formatter.url(1, Page(request, name).url(request)),
+                           formatter.text(name),
+                           formatter.url(0),
+                           formatter.linebreak(preformatted=0),
+                          ])
 
     result.extend([''.join([formatter.smiley('{X}'),
-                            formatter.text(" " + _("Not a user:") + " " + username),
+                            formatter.text(" " + _("Not a user:") + " " + name_re),
                             formatter.linebreak(preformatted=0)])
-                   for username in usernamelist if username not in realusers])
+                   for name_re in subscribe + unsubscribe if name_re not in did_match])
 
     return ''.join(result)
 
@@ -118,7 +152,7 @@ Example:
         raise SystemExit
 
     pagename = args[1]
-    usernames = args[2]
+    usernames = args[2].split(",")
 
     if len(args) > 3:
         request_url = args[3]
@@ -133,5 +167,7 @@ Example:
     from MoinMoin.formatter.text_plain import Formatter
     formatter = Formatter(request)
 
-    print subscribe_users(request, usernames.split(","), pagename, formatter)
+    subscribe, unsubscribe = parse_userlist(usernames)
+
+    print subscribe_users(request, subscribe, unsubscribe, pagename, formatter)
 
