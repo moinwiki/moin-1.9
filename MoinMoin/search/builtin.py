@@ -123,7 +123,6 @@ class BaseIndex(object):
         self.sig_file = os.path.join(main_dir, 'complete')
         lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir, timeout=3600.0, readlocktimeout=60.0)
-        #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
         self.update_queue = PageQueue(request, main_dir, 'update-queue')
         self.remove_queue = PageQueue(request, main_dir, 'remove-queue')
 
@@ -159,13 +158,7 @@ class BaseIndex(object):
 
         @param query: the search query objects to pass to the index
         """
-        #if not self.read_lock.acquire(1.0):
-        #    raise self.LockedException
-        #try:
-        hits = self._search(query, **kw)
-        #finally:
-        #    self.read_lock.release()
-        return hits
+        return self._search(query, **kw)
 
     def update_page(self, pagename, now=1):
         """ Update a single page in the index
