@@ -266,9 +266,9 @@ class HTTPContext(BaseContext):
             self.headers.set('Pragma', 'no-cache')
         self.request.expires = time.time() - 3600 * 24 * 365
 
-    def http_redirect(self, url):
+    def http_redirect(self, url, status='302'):
         """ Raise a simple redirect exception. """
-        abort(redirect(url))
+        abort(redirect(url, code=int(status)))
 
     # the output related methods
     def write(self, *data):

@@ -1035,7 +1035,7 @@ class Page(object):
             redirect_url = Page(request, pagename).url(request,
                                                        querystr={'action': 'show', 'redirect': self.page_name, },
                                                        anchor=anchor)
-            request.http_redirect(redirect_url)
+            request.http_redirect(redirect_url, status='301')
             return
 
         # if necessary, load the formatter
