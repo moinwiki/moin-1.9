@@ -231,15 +231,15 @@ username and leave the password field blank.""")))
         _ = request.getText
         oidstage = request.values.get('oidstage')
         if oidstage == '1':
-            logging.debug(_('OpenID: handle verify continuation'))
+            logging.debug('OpenID: handle verify continuation')
             return self._handle_verify_continuation(request)
         elif oidstage == '2':
-            logging.debug(_('OpenID: handle name continuation'))
+            logging.debug('OpenID: handle name continuation')
             return self._handle_name_continuation(request)
         elif oidstage == '3':
-            logging.debug(_('OpenID: handle associate continuation'))
+            logging.debug('OpenID: handle associate continuation')
             return self._handle_associate_continuation(request)
-        logging.debug(_('OpenID: unknown continuation stage'))
+        logging.debug('OpenID error: unknown continuation stage')
         return CancelLogin(_('OpenID error: unknown continuation stage'))
 
     def _openid_form(self, request, form, oidhtml):
