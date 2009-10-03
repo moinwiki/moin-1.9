@@ -94,7 +94,7 @@ class Request(RequestBase):
         """ private method to send out preprocessed list of HTTP headers """
         pass
 
-    def http_redirect(self, url):
+    def http_redirect(self, url, code=302):
         """ Redirect to a fully qualified, or server-rooted URL
 
         TODO: Does this work for rendering redirect pages?
