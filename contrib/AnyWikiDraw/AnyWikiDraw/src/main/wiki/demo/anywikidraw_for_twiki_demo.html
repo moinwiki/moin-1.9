@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- 
+    Document   : anywikidraw_for_twiki_demo
+    Created on : May 13, 2008, 7:32:27 AM
+    Author     : werni
+    Version    : $Id: anywikidraw_for_twiki_demo.html 107 2009-06-15 19:33:05Z rawcoder $
+-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>AnyWikiDraw for TWiki Demonstration</title>
+    </head>
+    <body>
+        <p>
+            This is a demonstration of the AnyWikiDraw drawing applet for TWiki.<br/>
+            This demo is running without TWiki, thus you can only edit the drawing, but you can not save it.<br/>
+        </p>
+        <applet codebase="." 
+                archive="lib/AnyWikiDrawForTWiki.jar" 
+                code="org.anywikidraw.twiki.TWikiDrawingApplet.class" 
+                width="600" height="540">
+                  
+           <!-- The following parameters are used to tell AnyWikiDraw how to communicate with TWiki.
+                Replace /~/ with the URL path to TWiki
+           -->
+           <param name="DrawingName" value="lion.svg"/>
+           <param name="DrawingWidth" value="600"/>
+           <param name="DrawingHeight" value="480"/>
+           <param name="DrawingURL" value="data/lion.svg"/>
+           <param name="PageURL" value="anywikidraw_for_twiki_demo.html"/>
+           <param name="UploadURL" value="/~/twiki/bin/upload/..."/>
+           
+           <!-- The following parameters are used to configure the drawing applet -->
+           <param name="Locale" value="en"/>
+           
+           <!-- The following parameters are used to configure Sun's Java Plug-In -->
+           <param name="codebase_lookup" value="false"/>
+           <param name="classloader_cache" value="false"/>
+           <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
+           <param name="image" value="lib/Splash.gif"/>
+           <param name="boxborder" value="false"/>
+           <param name="centerimage" value="true"/>
+        </applet>
+    </body>
+</html>

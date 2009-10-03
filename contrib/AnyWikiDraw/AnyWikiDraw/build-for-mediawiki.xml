@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Builds the AnyWikiDraw extension for MediaWiki. -->
+<project name="build-mediawikidraw" default="all" basedir=".">
+    <target name="init">
+        <property name="version" value="0.13.3"/>
+        
+        <property name="lib" value="lib"/>
+        <property name="src.main" value="src/main/java"/>
+        <property name="src.jhotdraw" value="src/jhotdraw7/java"/>
+        <property name="src.mediawiki1.7" value="src/main/wiki/mediawiki 1.7 to 1.10/extensions/AnyWikiDraw"/>
+        <property name="src.mediawiki1.12" value="src/main/wiki/mediawiki 1.12 to 1.15/extensions/AnyWikiDraw"/>
+        <property name="build" value="build/classes"/>
+        <property name="dist" value="dist/AnyWikiDraw ${version}/anywikidraw"/>
+        <property name="dist.extensions1.7" value="${dist}/mediawiki 1.7 to 1.10/extensions/AnyWikiDraw"/>
+        <property name="dist.extensions1.12" value="${dist}/mediawiki 1.12 to 1.15/extensions/AnyWikiDraw"/>
+        <property name="author" value="Werner Randelshofer, AnyWikiDraw.org"/>
+        <property name="keystore.file" value="../../../../_Keystore/JavaKeystore"/>
+        <property name="keystore.alias" value="werner"/>
+        <property name="keystore.storepass" value="werner"/>
+        <property name="debug" value="false"/>
+    </target>
+    <target name="clean" depends="init">
+        <delete dir="${build}" />
+    </target>
+    <target name="dist" depends="clean,applet.signedjar">
+    </target>
+    <target name="applet.compile" depends="init,clean">
+        <mkdir dir="${build}"/>
+        <javac
+                destdir="${build}"
+                srcdir="${src.main}:${src.jhotdraw}"
+                debug="${debug}"
+                source="1.5"
+                encoding="UTF-8"
+                optimize="true"
+         >
+            <classpath path="${lib}/java_30.zip"/>
+            <classpath path="${lib}/swing-layout.jar"/>
+            <include name="org/anywikidraw/mediawiki/MediaWikiDrawingApplet.java"/> 
+            <include name="net/n3/nanoxml/StdXMLParser.java" />
+        </javac>
+        <copy todir="${build}">
+            <fileset dir="${src.main}">
+                <include name="org/anywikidraw/any/*.properties"/>
+                <include name="org/anywikidraw/any/**/*.png"/>
+            </fileset>
+        </copy>
+        <copy todir="${build}">
+            <fileset dir="${src.jhotdraw}" >
+                <include name="org/jhotdraw/app/action/images/editCut.png"/>
+                <include name="org/jhotdraw/app/action/images/editCopy.png"/>
+                <include name="org/jhotdraw/app/action/images/editPaste.png"/>
+                <include name="org/jhotdraw/app/action/images/spacerIcon.png"/>
+                <include name="org/jhotdraw/app/Label*.properties"/>
+
+                <include name="org/jhotdraw/gui/Label*.properties"/>
+
+                <include name="org/jhotdraw/draw/Label*.properties"/>
+                <include name="org/jhotdraw/draw/action/images/*.png"/>
+
+                <include name="org/jhotdraw/samples/svg/action/images/*.png"/>
+                <include name="org/jhotdraw/samples/svg/Label*.properties"/>
+
+                <include name="org/jhotdraw/undo/images/*.png"/>
+                <include name="org/jhotdraw/undo/Label*.properties"/>
+            </fileset>
+        </copy>
+        <echo file="${build}/org/anywikidraw/any/version.txt"
+            message="${version}"/>
+    </target>
+    <target name="applet.jar" depends="init,applet.compile">
+        <!--delete dir="${dist}" /-->
+        <mkdir dir="${dist}"/>
+        <copy todir="${dist}">
+            <fileset dir=".">
+                <include name="*.html"/>
+            </fileset>
+        </copy>
+        <delete dir="${dist.extensions1.7}"/>
+        <delete dir="${dist.extensions1.12}"/>
+        <mkdir dir="${dist.extensions1.7}"/>
+        <mkdir dir="${dist.extensions1.12}"/>
+        <jar destfile="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar" basedir="${build}"
+        index="true" compress="true">
+            <manifest>
+                <attribute name="Built-By" value="${author}"/>
+                <attribute name="Main-Class" value="org.anywikidraw.mediawiki.MediaWikiDrawingApplet"/>
+            </manifest>
+        </jar>
+        <exec executable="pack200">
+            <arg value="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar.pack.gz"/>
+            <arg value="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar"/>
+        </exec>
+        <copy todir="${dist.extensions1.12}">
+            <fileset dir="${dist.extensions1.7}">
+                <include name="*.jar*"/>
+            </fileset>
+        </copy>
+        <copy todir="${dist.extensions1.7}">
+            <fileset dir="${src.mediawiki1.7}"/>
+        </copy>
+        <copy todir="${dist.extensions1.12}">
+            <fileset dir="${src.mediawiki1.12}"/>
+        </copy>
+    </target>
+    <target name="applet.signedjar" depends="applet.jar">
+
+        <!-- create a signed version of the .jar file -->
+        <exec executable="pack200">
+            <arg value="-r"/>
+            <arg value="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar"/>
+        </exec>
+        <signjar alias="${keystore.alias}"
+                storepass="${keystore.storepass}"
+                keystore="${keystore.file}" 
+                jar="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar"
+                
+                >
+        </signjar>
+
+        <!-- create a signed version of the .jar.pack.gz file -->
+        <exec executable="pack200">
+            <arg value="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar.pack.gz"/>
+            <arg value="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar"/>
+        </exec>
+        <copy todir="${dist.extensions1.12}">
+            <fileset dir="${dist.extensions1.7}">
+                <include name="*.jar*"/>
+            </fileset>
+        </copy>
+        <copy todir="${dist.extensions1.7}">
+            <fileset dir="${src.mediawiki1.7}"/>
+        </copy>
+        <copy todir="${dist.extensions1.12}">
+            <fileset dir="${src.mediawiki1.12}"/>
+        </copy>
+    </target>
+    <target name="applet.run-compiled" depends="init">
+        <java classname="org.anywikidraw.mediawiki.MediaWikiDrawingApplet">
+            <classpath>
+                <pathelement location="${build}"/>
+            <pathelement location="${lib}/java_30.zip"/>
+            <pathelement location="${lib}/swing-layout.jar"/>
+            </classpath>
+        </java>
+    </target>
+    <target name="applet.run-jar" depends="init">
+        <java fork="true" jar="${dist.extensions1.7}/AnyWikiDrawForMediaWiki.jar">
+        </java>
+    </target>
+    <target name="applet.appletviewer" depends="init">
+        <exec executable="appletviewer">
+        <arg value="${build}/mediawikidraw.html"/>
+        </exec>
+    </target>
+</project>

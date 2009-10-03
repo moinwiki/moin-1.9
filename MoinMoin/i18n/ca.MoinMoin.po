@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-09-28 12:24+0200\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -340,16 +340,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Les dades del vostre compte wiki"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "L'acció %(action_name)s és desconeguda."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
+
+msgid "Login and try again."
+msgstr "Entreu i torneu a provar."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "El paquet necessita una versió més nova del MoinMoin (almenys %s)."
 
 msgid "The theme name is not set."
 msgstr "No s'ha establert el nom del tema."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"La instal·lació de fitxers de tema només està implementada per a servidors "
-"de tipus individual."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -446,8 +456,9 @@ msgstr "S'esperava un valor per a la clau «%(token)s»"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "La còpia de seguretat dels continguts d'aquesta pàgina és obsoleta i no "
@@ -701,9 +712,8 @@ msgstr "Les supressions es marquen així."
 msgid "Additions are marked like this."
 msgstr "Els afegiments es marquen així."
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "Heu sortit del vostre compte."
+msgid "Please log in first."
+msgstr "Entreu amb el vostre compte abans."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -730,10 +740,41 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "S'ha cancel·lat la verificació."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "S'ha afegit l'OpenID amb èxit."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "L'OpenID ha fallat."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "No s'ha donat cap OpenID"
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID: handle verify continuation"
+msgstr ""
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -763,7 +804,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 #, fuzzy
@@ -801,6 +846,7 @@ msgstr ""
 "\n"
 "(!) Per a obtindre'n més ajuda, vegeu HelpOnEditing o SyntaxReference.\n"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -816,7 +862,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Èmfasi:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negreta'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negreta "
@@ -1054,18 +1100,6 @@ msgstr "Apuja una nova adjunció «%(filename)s»"
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Crea un dibuix nou «%(filename)s» (s'obre en una finestra nova)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Edita el dibuix %(filename)s (s'obre en una finestra nova)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Dibuix clicable: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Commuta els números de línia"
 
@@ -1076,17 +1110,6 @@ msgstr "Torna a la revisió %(rev)d."
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Reanomenada des de «%(oldpagename)s»."
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "L'acció %(action_name)s és desconeguda."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
-
-msgid "Login and try again."
-msgstr "Entreu i torneu a provar."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1256,9 +1279,6 @@ msgstr "Llengua"
 msgid "Page changed"
 msgstr "Desa els canvis"
 
-msgid "about"
-msgstr ""
-
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -1290,11 +1310,14 @@ msgstr "coincidència"
 msgid "matches"
 msgstr "coincidències"
 
-msgid "FrontPage"
-msgstr "PàginaPrincipal"
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "CanvisRecents"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "ÍndexTítols"
@@ -1305,23 +1328,481 @@ msgstr "ÍndexParaules"
 msgid "FindPage"
 msgstr "CercaUnaPàgina"
 
-msgid "SiteNavigation"
-msgstr "NavegacióLloc"
-
-msgid "HelpContents"
-msgstr "ContingutsAjuda"
-
-msgid "HelpOnFormatting"
-msgstr "QuantAlFormat"
-
-msgid "WikiLicense"
-msgstr "LlicènciaDelWiki"
-
 msgid "MissingPage"
 msgstr "PàginaInexistent"
 
 msgid "MissingHomePage"
 msgstr "PàginaInicialInexistent"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "PàginaInicialInexistent"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Nom"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "PàginaPrincipal"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Llengua"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "CercaUnaPàgina"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Mida"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Pàgines"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "ReanomenaPàgina"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Versió de Python"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "LlicènciaDelWiki"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Presentació"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "PreferènciesUsuari"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "ContingutsAjuda"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "ContingutsAjuda"
+
+msgid "HelpOnFormatting"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "Versió de MoinMoin"
+
+msgid "HelpContents"
+msgstr "ContingutsAjuda"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "ÍndexTítols"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "ContingutsAjuda"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "ContingutsAjuda"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "ContingutsAjuda"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Llengua"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "ContingutsAjuda"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "NavegacióLloc"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "Servidor d'OpenID"
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "QuantAlFormat"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "ContingutsAjuda"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Presentació"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "ComprovacióOrtogràfica"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+msgid "HelpOnSynchronisation"
+msgstr ""
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "PreferènciesUsuari"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "QuantAlFormat"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "ContingutsAjuda"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Desubscriu-me"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "PreferènciesUsuari"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Adjunció nova"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Més accions:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "dm"
 
 msgid "Mon"
 msgstr "dl"
@@ -1340,9 +1821,6 @@ msgstr "dv"
 
 msgid "Sat"
 msgstr "ds"
-
-msgid "Sun"
-msgstr "dm"
 
 msgid "AttachFile"
 msgstr "AdjuntaFitxer"
@@ -1841,6 +2319,10 @@ msgstr "Inici"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Diapositiva %(pos)d de %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Vés a la pàgina"
 
@@ -1886,6 +2368,29 @@ msgstr "No s'ha pogut suprimir el vostre enllaç ràpid a aquesta pàgina."
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Presentació"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Presentació"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2064,9 +2569,6 @@ msgstr "instal·la"
 msgid "No attachments stored for %(pagename)s"
 msgstr "No hi ha cap adjunció emmagatzemada per a %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Edita el dibuix"
-
 msgid "New Attachment"
 msgstr "Adjunció nova"
 
@@ -2099,16 +2601,16 @@ msgstr "Adjuncions per a «%(pagename)s»"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "No hi ha contingut del fitxer. Suprimiu els caracters no ASCII del nom del "
 "fitxer i torneu-ho a provar."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
 
 #, python-format
 msgid ""
@@ -2121,9 +2623,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "L'adjunció «%(target)s» (remote name «%(filename)s») ja existeix."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "No teniu permís per a desar un dibuix en aquesta pàgina."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
@@ -2662,10 +3161,6 @@ msgstr "Descarta els canvis en la quantitat d'espai en blanc"
 msgid "Invalid filename \"%s\"!"
 msgstr ""
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr ""
-
 #, fuzzy
 msgid "Include all attachments?"
 msgstr "[%d adjuncions]"
@@ -2696,8 +3191,26 @@ msgstr "No és un usuari:"
 msgid "You are not allowed to perform this action."
 msgstr ""
 
-msgid "Please log in first."
-msgstr "Entreu amb el vostre compte abans."
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Crea un dibuix nou «%(filename)s» (s'obre en una finestra nova)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Edita el dibuix %(filename)s (s'obre en una finestra nova)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Dibuix clicable: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "No teniu permís per a desar un dibuix en aquesta pàgina."
+
+msgid "Empty target given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Edita el dibuix"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Creeu primer una pàgina principal abans d'afegir pàgines addicionals."
@@ -2732,6 +3245,25 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Gestió de Les meues pàgines"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "No teniu permís per a utilitzar aquesta acció."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "No s'ha trobat la pàgina pare."
+
+#, fuzzy
+msgid "page package"
+msgstr "Llengua"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "S'ha suprimit la vostra subscripció a aquesta pàgina."
@@ -2837,10 +3369,6 @@ msgstr ""
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "No teniu permís per a utilitzar aquesta acció."
-
 msgid "Views/day"
 msgstr "Visualitzacions/dia"
 
@@ -2909,6 +3437,36 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "No teniu permís per a editar aquesta pàgina."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "La instal·lació de fitxers de tema només està implementada per a "
+#~ "servidors de tipus individual."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Marcat del Wiki"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Contingut"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Contingut"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Exclou les pàgines del sistema"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Heu sortit del vostre compte."
 
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "Còpia de seguretat / Restauració del wiki"
@@ -3030,9 +3588,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "PreferènciesUsuari"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Subscriu-me a canvis trivials"

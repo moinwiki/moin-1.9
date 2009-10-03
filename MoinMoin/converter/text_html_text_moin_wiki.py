@@ -1211,7 +1211,7 @@ class convert_tree(visitor):
         href = attrs.pop('href', None)
         css_class = attrs.get('class')
 
-        scriptname = self.request.getScriptname()
+        scriptname = self.request.script_root
         if scriptname == "":
             scriptname = "/"
 

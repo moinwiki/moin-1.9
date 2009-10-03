@@ -36,6 +36,7 @@ class TestGetVal:
     def testGetValAfterADictPageIsDeleted(self):
         """ macro GetVal test: 'reads Dict var after another Dict is removed' """
         request = self.request
+        become_trusted(request)
         page = create_page(request, u'SomeDict', u" EXAMPLE:: This is an example text")
         page.deletePage()
         page = create_page(request, self.pagename, u' VAR:: This is a brand new example')

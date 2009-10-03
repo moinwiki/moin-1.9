@@ -22,12 +22,12 @@ def checkTitleSearch(request):
     'fullsearch' with localized string. If both missing, default to
     True (might happen with Safari) if this isn't an advanced search.
 """
-    form = request.form
+    form = request.values
     if 'titlesearch' in form and 'fullsearch' in form:
         ret = -1 # spammer / bot
     else:
         try:
-            ret = int(form['titlesearch'][0])
+            ret = int(form['titlesearch'])
         except ValueError:
             ret = 1
         except KeyError:
@@ -37,7 +37,7 @@ def checkTitleSearch(request):
 def isAdvancedSearch(request):
     """ Return True if advanced search is requested """
     try:
-        return int(request.form['advancedsearch'][0])
+        return int(request.values['advancedsearch'])
     except KeyError:
         return False
 
@@ -66,38 +66,40 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
 
     advancedsearch = isAdvancedSearch(request)
 
+    form = request.values
+
     # context is relevant only for full search
     if titlesearch:
         context = 0
     elif advancedsearch:
         context = 180 # XXX: hardcoded context count for advancedsearch
     else:
-        context = int(request.form.get('context', [0])[0])
+        context = int(form.get('context', 0))
 
     # Get other form parameters
-    needle = request.form.get(fieldname, [''])[0]
-    case = int(request.form.get('case', [0])[0])
-    regex = int(request.form.get('regex', [0])[0]) # no interface currently
-    hitsFrom = int(request.form.get('from', [0])[0])
+    needle = form.get(fieldname, '')
+    case = int(form.get('case', 0))
+    regex = int(form.get('regex', 0)) # no interface currently
+    hitsFrom = int(form.get('from', 0))
     mtime = None
     msg = ''
     historysearch = 0
 
     # if advanced search is enabled we construct our own search query
     if advancedsearch:
-        and_terms = request.form.get('and_terms', [''])[0].strip()
-        or_terms = request.form.get('or_terms', [''])[0].strip()
-        not_terms = request.form.get('not_terms', [''])[0].strip()
-        #xor_terms = request.form.get('xor_terms', [''])[0].strip()
-        categories = request.form.get('categories', [''])
-        timeframe = request.form.get('time', [''])[0].strip()
-        language = request.form.get('language', [''])
-        mimetype = request.form.get('mimetype', [0])
-        excludeunderlay = request.form.get('excludeunderlay', [0])[0]
-        nosystemitems = request.form.get('nosystemitems', [0])[0]
-        historysearch = request.form.get('historysearch', [0])[0]
+        and_terms = form.get('and_terms', '').strip()
+        or_terms = form.get('or_terms', '').strip()
+        not_terms = form.get('not_terms', '').strip()
+        #xor_terms = form.get('xor_terms', '').strip()
+        categories = form.getlist('categories') or ['']
+        timeframe = form.get('time', '').strip()
+        language = form.getlist('language') or ['']
+        mimetype = form.getlist('mimetype') or [0]
+        excludeunderlay = form.get('excludeunderlay', 0)
+        nosystemitems = form.get('nosystemitems', 0)
+        historysearch = form.get('historysearch', 0)
 
-        mtime = request.form.get('mtime', [''])[0]
+        mtime = form.get('mtime', '')
         if mtime:
             mtime_parsed = None
 
@@ -208,7 +210,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
             return
     if not results.hits: # no hits?
         f = request.formatter
-        querydict = wikiutil.parseQueryString(request.query_string)
+        querydict = dict(wikiutil.parseQueryString(request.query_string))
         querydict.update({'titlesearch': 0})
 
         request.theme.add_msg(_('Your search query {{{"%s"}}} didn\'t return any results. '
@@ -224,12 +226,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         Page(request, pagename).send_page()
         return
 
-    request.emit_http_headers()
-
     # This action generates data using the user language
     request.setContentLanguage(request.lang)
 
-    request.theme.send_title(title % needle, form=request.form, pagename=pagename)
+    request.theme.send_title(title % needle, pagename=pagename)
 
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
@@ -239,7 +239,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     hints = []
 
     if titlesearch:
-        querydict = wikiutil.parseQueryString(request.query_string)
+        querydict = dict(wikiutil.parseQueryString(request.query_string))
         querydict.update({'titlesearch': 0})
 
         hints.append(''.join([
