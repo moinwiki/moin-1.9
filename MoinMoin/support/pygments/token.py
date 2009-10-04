@@ -5,8 +5,8 @@
 
     Basic token types and the standard tokens.
 
-    :copyright: 2006-2007 by Georg Brandl.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 try:
     set
@@ -201,21 +201,3 @@ STANDARD_TYPES = {
     Generic.Subheading:            'gu',
     Generic.Traceback:             'gt',
 }
-
-
-
-if __name__ == '__main__':
-    import sys
-    # sanity check for token name dict: no duplicate entries!
-    stp = STANDARD_TYPES.copy()
-    stp[Token] = '---' # Token and Text do conflict, that is okay
-    t = {}
-    for k, v in stp.iteritems():
-        t.setdefault(v, []).append(k)
-    if len(t) == len(stp):
-        print 'Okay!'
-        sys.exit()
-
-    for k, v in t.iteritems():
-        if len(v) > 1:
-            print "%r has more than one key: %r" % (k, v)

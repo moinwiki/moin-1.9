@@ -5,8 +5,8 @@
 
     Lexers for assembly languages.
 
-    :copyright: 2007 by Frits van Bommel.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 
 import re
@@ -15,8 +15,7 @@ try:
 except NameError:
     from sets import Set as set
 
-from pygments.lexer import RegexLexer, include, bygroups, using, \
-                           this, DelegatingLexer
+from pygments.lexer import RegexLexer, include, bygroups, using, DelegatingLexer
 from pygments.lexers.compiled import DLexer, CppLexer, CLexer
 from pygments.token import *
 
@@ -92,6 +91,8 @@ class GasLexer(RegexLexer):
         ]
     }
 
+    def analyse_text(text):
+        return re.match(r'^\.\w+', text, re.M)
 
 class ObjdumpLexer(RegexLexer):
     """

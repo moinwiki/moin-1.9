@@ -5,14 +5,14 @@
 
     Command line interface.
 
-    :copyright: 2006-2008 by Georg Brandl.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 import sys
 import getopt
 from textwrap import dedent
 
-from pygments import __version__, __author__, highlight
+from pygments import __version__, highlight
 from pygments.util import ClassNotFound, OptionError, docstring_headline
 from pygments.lexers import get_all_lexers, get_lexer_by_name, get_lexer_for_filename, \
      find_lexer_class, guess_lexer, TextLexer
@@ -29,6 +29,7 @@ Usage: %s [-l <lexer> | -g] [-F <filter>[:<options>]] [-f <formatter>]
 
        %s -S <style> -f <formatter> [-a <arg>] [-O <options>] [-P <option=value>]
        %s -L [<which> ...]
+       %s -N <filename>
        %s -H <type> <name>
        %s -h | -V
 
@@ -67,6 +68,10 @@ dependent.
 The -L option lists lexers, formatters, styles or filters -- set
 `which` to the thing you want to list (e.g. "styles"), or omit it to
 list everything.
+
+The -N option guesses and prints out a lexer name based solely on
+the given filename. It does not take input or highlight anything.
+If no specific lexer can be determined "text" is returned.
 
 The -H option prints detailed help for the object <name> of type <type>,
 where <type> is one of "lexer", "formatter" or "filter".
@@ -185,10 +190,10 @@ def main(args=sys.argv):
     """
     # pylint: disable-msg=R0911,R0912,R0915
 
-    usage = USAGE % ((args[0],) * 5)
+    usage = USAGE % ((args[0],) * 6)
 
     try:
-        popts, args = getopt.getopt(args[1:], "l:f:F:o:O:P:LS:a:hVHg")
+        popts, args = getopt.getopt(args[1:], "l:f:F:o:O:P:LS:a:N:hVHg")
     except getopt.GetoptError, err:
         print >>sys.stderr, usage
         return 2
@@ -214,7 +219,7 @@ def main(args=sys.argv):
         return 0
 
     if opts.pop('-V', None) is not None:
-        print 'Pygments version %s, (c) 2006-2008 by %s.' % (__version__, __author__)
+        print 'Pygments version %s, (c) 2006-2008 by Georg Brandl.' % __version__
         return 0
 
     # handle ``pygmentize -L``
@@ -261,6 +266,20 @@ def main(args=sys.argv):
             parsed_opts[name] = value
     opts.pop('-P', None)
 
+    # handle ``pygmentize -N``
+    infn = opts.pop('-N', None)
+    if infn is not None:
+        try:
+            lexer = get_lexer_for_filename(infn, **parsed_opts)
+        except ClassNotFound, err:
+            lexer = TextLexer()
+        except OptionError, err:
+            print >>sys.stderr, 'Error:', err
+            return 1
+
+        print lexer.aliases[0]
+        return 0
+
     # handle ``pygmentize -S``
     S_opt = opts.pop('-S', None)
     a_opt = opts.pop('-a', None)
@@ -281,7 +300,11 @@ def main(args=sys.argv):
             return 1
 
         arg = a_opt or ''
-        print fmter.get_style_defs(arg)
+        try:
+            print fmter.get_style_defs(arg)
+        except Exception, err:
+            print >>sys.stderr, 'Error:', err
+            return 1
         return 0
 
     # if no -S is given, -a is not allowed
@@ -311,7 +334,7 @@ def main(args=sys.argv):
                 print >>sys.stderr, 'Error:', err
                 return 1
         try:
-            outfile = file(outfn, 'wb')
+            outfile = open(outfn, 'wb')
         except Exception, err:
             print >>sys.stderr, 'Error: cannot open outfile:', err
             return 1
@@ -336,14 +359,14 @@ def main(args=sys.argv):
 
         infn = args[0]
         try:
-            code = file(infn).read()
+            code = open(infn, 'rb').read()
         except Exception, err:
             print >>sys.stderr, 'Error: cannot read infile:', err
             return 1
 
         if not lexer:
             try:
-                lexer = get_lexer_for_filename(infn, **parsed_opts)
+                lexer = get_lexer_for_filename(infn, code, **parsed_opts)
             except ClassNotFound, err:
                 if '-g' in opts:
                     try:
@@ -379,9 +402,12 @@ def main(args=sys.argv):
             # encoding pass-through
             fmter.encoding = 'latin1'
         else:
-            # use terminal encoding
-            lexer.encoding = getattr(sys.stdin, 'encoding', None) or 'ascii'
-            fmter.encoding = getattr(sys.stdout, 'encoding', None) or 'ascii'
+            if sys.version_info < (3,):
+                # use terminal encoding; Python 3's terminals already do that
+                lexer.encoding = getattr(sys.stdin, 'encoding',
+                                         None) or 'ascii'
+                fmter.encoding = getattr(sys.stdout, 'encoding',
+                                         None) or 'ascii'
 
     # ... and do it!
     try:

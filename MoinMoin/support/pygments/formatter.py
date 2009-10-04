@@ -5,9 +5,11 @@
 
     Base formatter class.
 
-    :copyright: 2006-2007 by Georg Brandl, Armin Ronacher.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
+
+import codecs
 
 from pygments.util import get_bool_opt
 from pygments.styles import get_style_by_name
@@ -84,4 +86,7 @@ class Formatter(object):
         Format ``tokensource``, an iterable of ``(tokentype, tokenstring)``
         tuples and write it into ``outfile``.
         """
-        raise NotImplementedError()
+        if self.encoding:
+            # wrap the outfile in a StreamWriter
+            outfile = codecs.lookup(self.encoding)[3](outfile)
+        return self.format_unencoded(tokensource, outfile)
