@@ -12,8 +12,8 @@
              internet connection. don't run that at home, use
              a server ;-)
 
-    :copyright: 2006-2007 by Armin Ronacher.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 
 
@@ -3373,7 +3373,7 @@ if __name__ == '__main__':
         idx += 1
 
     # extract useful sourcecode from this file
-    f = file(__file__)
+    f = open(__file__)
     try:
         content = f.read()
     finally:
@@ -3382,7 +3382,7 @@ if __name__ == '__main__':
     footer = content[content.find("if __name__ == '__main__':"):]
 
     # write new file
-    f = file(__file__, 'w')
+    f = open(__file__, 'w')
     f.write(header)
     f.write('MODULES = %s\n\n' % pprint.pformat(modules))
     f.write(footer)

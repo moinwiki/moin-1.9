@@ -9,8 +9,8 @@
 
     Do not alter the FORMATTERS dictionary by hand.
 
-    :copyright: 2006-2007 by Armin Ronacher, Georg Brandl.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 
 from pygments.util import docstring_headline
@@ -18,7 +18,10 @@ from pygments.util import docstring_headline
 # start
 from pygments.formatters.bbcode import BBCodeFormatter
 from pygments.formatters.html import HtmlFormatter
+from pygments.formatters.img import BmpImageFormatter
+from pygments.formatters.img import GifImageFormatter
 from pygments.formatters.img import ImageFormatter
+from pygments.formatters.img import JpgImageFormatter
 from pygments.formatters.latex import LatexFormatter
 from pygments.formatters.other import NullFormatter
 from pygments.formatters.other import RawTokenFormatter
@@ -29,8 +32,11 @@ from pygments.formatters.terminal256 import Terminal256Formatter
 
 FORMATTERS = {
     BBCodeFormatter: ('BBCode', ('bbcode', 'bb'), (), 'Format tokens with BBcodes. These formatting codes are used by many bulletin boards, so you can highlight your sourcecode with pygments before posting it there.'),
+    BmpImageFormatter: ('img_bmp', ('bmp', 'bitmap'), ('*.bmp',), 'Create a bitmap image from source code. This uses the Python Imaging Library to generate a pixmap from the source code.'),
+    GifImageFormatter: ('img_gif', ('gif',), ('*.gif',), 'Create a GIF image from source code. This uses the Python Imaging Library to generate a pixmap from the source code.'),
     HtmlFormatter: ('HTML', ('html',), ('*.html', '*.htm'), "Format tokens as HTML 4 ``<span>`` tags within a ``<pre>`` tag, wrapped in a ``<div>`` tag. The ``<div>``'s CSS class can be set by the `cssclass` option."),
-    ImageFormatter: ('img', ('img', 'IMG', 'png', 'jpg', 'gif', 'bmp'), ('*.png', '*.jpg', '*.gif', '*.bmp'), 'Create an image from source code. This uses the Python Imaging Library to generate a pixmap from the source code.'),
+    ImageFormatter: ('img', ('img', 'IMG', 'png'), ('*.png',), 'Create a PNG image from source code. This uses the Python Imaging Library to generate a pixmap from the source code.'),
+    JpgImageFormatter: ('img_jpg', ('jpg', 'jpeg'), ('*.jpg',), 'Create a JPEG image from source code. This uses the Python Imaging Library to generate a pixmap from the source code.'),
     LatexFormatter: ('LaTeX', ('latex', 'tex'), ('*.tex',), 'Format tokens as LaTeX code. This needs the `fancyvrb` and `color` standard packages.'),
     NullFormatter: ('Text only', ('text', 'null'), ('*.txt',), 'Output the text unchanged without any formatting.'),
     RawTokenFormatter: ('Raw tokens', ('raw', 'tokens'), ('*.raw',), 'Format tokens as a raw representation for storing token streams.'),
@@ -67,7 +73,7 @@ if __name__ == '__main__':
     imports.sort()
 
     # extract useful sourcecode from this file
-    f = file(__file__)
+    f = open(__file__)
     try:
         content = f.read()
     finally:
@@ -76,7 +82,7 @@ if __name__ == '__main__':
     footer = content[content.find("if __name__ == '__main__':"):]
 
     # write new file
-    f = file(__file__, 'w')
+    f = open(__file__, 'w')
     f.write(header)
     f.write('# start\n')
     f.write('\n'.join(['from %s import %s' % imp for imp in imports]))

@@ -11,8 +11,8 @@
 
     Formatter version 1.
 
-    :copyright: 2007 by Artem Egorkine.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 
 # TODO:
@@ -124,8 +124,8 @@ class Terminal256Formatter(Formatter):
         valuerange = (0x00, 0x5f, 0x87, 0xaf, 0xd7, 0xff)
 
         for i in range(217):
-            r = valuerange[(i / 36) % 6]
-            g = valuerange[(i / 6) % 6]
+            r = valuerange[(i // 36) % 6]
+            g = valuerange[(i // 6) % 6]
             b = valuerange[i % 6]
             self.xterm_colors.append((r, g, b))
 
@@ -182,17 +182,15 @@ class Terminal256Formatter(Formatter):
                                              escape.reset_string())
 
     def format(self, tokensource, outfile):
-        enc = self.encoding
         # hack: if the output is a terminal and has an encoding set,
         # use that to avoid unicode encode problems
-        if not enc and hasattr(outfile, "encoding") and \
+        if not self.encoding and hasattr(outfile, "encoding") and \
            hasattr(outfile, "isatty") and outfile.isatty():
-            enc = outfile.encoding
+            self.encoding = outfile.encoding
+        return Formatter.format(self, tokensource, outfile)
 
+    def format_unencoded(self, tokensource, outfile):
         for ttype, value in tokensource:
-            if enc:
-                value = value.encode(enc)
-
             not_found = True
             while ttype and not_found:
                 try:

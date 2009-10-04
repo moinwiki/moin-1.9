@@ -5,8 +5,8 @@
 
     Base lexer classes.
 
-    :copyright: 2006-2007 by Georg Brandl.
-    :license: BSD, see LICENSE for more details.
+    :copyright: Copyright 2006-2009 by the Pygments team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 import re
 
@@ -127,10 +127,7 @@ class Lexer(object):
         Also preprocess the text, i.e. expand tabs and strip it if
         wanted and applies registered filters.
         """
-        if isinstance(text, unicode):
-            text = u'\n'.join(text.splitlines())
-        else:
-            text = '\n'.join(text.splitlines())
+        if not isinstance(text, unicode):
             if self.encoding == 'guess':
                 try:
                     text = text.decode('utf-8')
@@ -149,6 +146,9 @@ class Lexer(object):
                 text = text.decode(enc['encoding'])
             else:
                 text = text.decode(self.encoding)
+        # text now *is* a unicode string
+        text = text.replace('\r\n', '\n')
+        text = text.replace('\r', '\n')
         if self.stripall:
             text = text.strip()
         elif self.stripnl:
@@ -478,7 +478,6 @@ class RegexLexer(Lexer):
             for rexmatch, action, new_state in statetokens:
                 m = rexmatch(text, pos)
                 if m:
-                    # print rex.pattern
                     if type(action) is _TokenType:
                         yield pos, action, m.group()
                     else:
