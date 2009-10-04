@@ -119,12 +119,12 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
             else:
                 # didn't work, let's try parsedatetime
                 cal = Calendar()
-                mtime_parsed, invalid_flag = cal.parse(mtime)
+                mtime_parsed, parsed_what = cal.parse(mtime)
                 # XXX it is unclear if usage of localtime here and in parsedatetime module is correct.
                 # time.localtime is the SERVER's local time and of no relevance to the user (being
                 # somewhere in the world)
                 # mktime is reverse function for localtime, so this maybe fixes it again!?
-                if not invalid_flag and mtime_parsed <= time.localtime():
+                if parsed_what > 0 and mtime_parsed <= time.localtime():
                     mtime = time.mktime(mtime_parsed)
                 else:
                     mtime_parsed = None # we don't use invalid stuff
