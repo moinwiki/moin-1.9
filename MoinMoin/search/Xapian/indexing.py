@@ -192,21 +192,24 @@ class XapianIndex(BaseIndex):
         connection.close()
 
     def _get_document(self, connection, doc_id, mtime, mode):
-        document = None
+        do_index = False
 
         if mode == 'update':
             try:
                 doc = connection.get_document(doc_id)
                 docmtime = long(doc.data['mtime'][0])
-                if mtime > docmtime:
-                    document = doc
             except KeyError:
-                document = xappy.UnprocessedDocument()
-                document.id = doc_id
+                do_index = True
+            else:
+                do_index = mtime > docmtime
         elif mode == 'add':
+            do_index = True
+
+        if do_index:
             document = xappy.UnprocessedDocument()
             document.id = doc_id
-
+        else:
+            document = None
         return document
 
     def _add_fields_to_document(self, request, document, fields=None, multivalued_fields=None):
