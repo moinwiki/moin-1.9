@@ -92,7 +92,7 @@ def advanced_ui(macro):
             #    '<input type="text" name="xor_terms" size="30" value="%s">'
             #    % form_get(request, 'xor_terms', escaped=True)),
             # TODO: dropdown-box?
-            (_('last modified since (e.g. last 2 weeks)'),
+            (_('last modified since (e.g. 2 weeks before)'),
                 '<input type="text" name="mtime" size="30" value="%s">'
                 % form_get(request, 'mtime', escaped=True)),
         )])
