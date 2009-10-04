@@ -53,11 +53,21 @@ def exec_cmd(cmd, timeout=300):
 
         tmax = tstart + timeout
         tnow = time.time()
-        rc = p.poll()
+        data = []
+        errors = []
+        rc = None
         while rc is None and tnow < tmax:
             time.sleep(0.001) # wait at least 1ms between polls
+            data.append(child_stdout.read())
+            errors.append(child_stderr.read())
             rc = p.poll()
             tnow = time.time()
+
+        child_stdout.close()
+        child_stderr.close()
+
+        data = ''.join(data)
+        errors = ''.join(errors)
 
         t = tnow - tstart
         if rc is None:
@@ -73,10 +83,11 @@ def exec_cmd(cmd, timeout=300):
 
     else:
         child_stdin, child_stdout, child_stderr = os.popen3(cmd)
-    data = child_stdout.read()
-    errors = child_stderr.read()
-    child_stdout.close()
-    child_stderr.close()
+        data = child_stdout.read()
+        errors = child_stderr.read()
+        child_stdout.close()
+        child_stderr.close()
+
     logging.debug("Command '%s', stderr: %s, stdout: %d bytes" % (cmd, errors, len(data)))
     return data, errors
 
