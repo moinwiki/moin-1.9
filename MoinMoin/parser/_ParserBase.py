@@ -26,6 +26,9 @@ pre.codearea span.ConsWord { color: #008080; font-weight: bold; }
 
 import re
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config, wikiutil
 from MoinMoin.support.python_compatibility import hash_new
 
@@ -152,6 +155,8 @@ def parse_start_step(request, args):
 
 
 class ParserBase:
+    """ DEPRECATED highlighting parser - please use/extend pygments library """
+    logging.warning('Using ParserBase is deprecated - please use/extend pygments syntax highlighting library.')
 
     parsername = 'ParserBase'
     tabwidth = 4

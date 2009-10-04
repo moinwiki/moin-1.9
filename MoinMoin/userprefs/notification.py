@@ -32,7 +32,7 @@ class Settings(UserPrefBase):
         @rtype: list of unicode strings
         @return: list of normalized names
         """
-        text = self.request.form.get(key, [''])[0]
+        text = self.request.form.get(key, '')
         text = text.replace('\r', '')
         items = []
         for item in text.split('\n'):
@@ -46,7 +46,7 @@ class Settings(UserPrefBase):
         _ = self._
         form = self.request.form
 
-        if self.request.request_method != 'POST':
+        if self.request.method != 'POST':
             return
         theuser = self.request.user
         if not theuser:

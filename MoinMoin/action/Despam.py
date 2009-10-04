@@ -12,6 +12,9 @@ DAYS = 30 # we look for spam edits in the last x days
 
 import time
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.logfile import editlog
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
@@ -66,7 +69,7 @@ def show_editors(request, pagename, timestamp):
             pg.link_to(request, text=_("Select Author"),
                 querystr={
                     'action': 'Despam',
-                    'editor': editor, # was: url_quote_plus()
+                    'editor': repr(editor),
                 })))
 
     table = DataBrowserWidget(request)
@@ -104,14 +107,13 @@ def show_pages(request, pagename, editor, timestamp):
     request.write('''
 </table>
 <p>
-<form method="post" action="%s/%s">
+<form method="post" action="%s">
 <input type="hidden" name="action" value="Despam">
 <input type="hidden" name="editor" value="%s">
 <input type="submit" name="ok" value="%s">
 </form>
 </p>
-''' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
-       wikiutil.url_quote(editor), _("Revert all!")))
+''' % (request.href(pagename), wikiutil.url_quote(editor), _("Revert all!")))
 
 def revert_page(request, pagename, editor):
     if not request.user.may.revert(pagename):
@@ -150,7 +152,7 @@ def revert_page(request, pagename, editor):
 def revert_pages(request, editor, timestamp):
     _ = request.getText
 
-    editor = wikiutil.url_unquote(editor, want_unicode=False)
+    editor = wikiutil.url_unquote(editor)
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
     pages = {}
@@ -183,11 +185,11 @@ def execute(pagename, request):
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 
-    editor = request.form.get('editor', [None])[0]
+    editor = request.values.get('editor')
     timestamp = time.time() - DAYS * 24 * 3600
-    ok = request.form.get('ok', [0])[0]
+    ok = request.form.get('ok', 0)
+    logging.debug("editor: %r ok: %r" % (editor, ok))
 
-    request.emit_http_headers()
     request.theme.send_title("Despam", pagename=pagename)
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))

@@ -16,6 +16,217 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.9.0current:
+
+  Please note:
+  * This is a BETA version, not meant for production usage, but just to
+    discover bugs, incompatibilities, installation issues, documentation issues,
+    etc. - please report issues on MoinMoin:MoinMoinBugs.
+  * For the beta download archive, we updated the *.po files with the system
+    text translations and also the system and help pages, so translators can
+    see the current state in a working local wiki.
+    We know that translations and system / help pages are not yet finished and
+    that  they still require much more work.
+    Please see http://master19.moinmo.in/ and help cleaning up there.
+
+  New features:
+  * config attribute extensions_mapping added for mapping of attachment file
+    extensions to actions (currently used for anywikidraw/twikidraw action)
+
+  Bug fixes:
+  * setup.py: fix wrong exitcode
+
+  Other changes:
+  * TextCha feature of TWikiDraw removed again because AnyWikiDraw misses the
+    TextCha feature still, language detection problems.
+
+
+Version 1.9.0beta4:
+
+  New features:
+  * Moin's Xapian based search code was refactored:
+    * It is now based on the xappy library (see MoinMoin.support.xappy).
+    * Minimum Xapian requirement is 1.0.6 now.
+    * Outdated and unmaintained xapwrap lib was removed.
+    * now regex search with Xapian enabled also is based on the xapian index
+  * raw action mimetype support: ...?action=raw&mimetype=text/css
+  * TWikiDraw:
+    * support code was refactored/moved to the twikidraw action.
+    * use drawing:example.tdraw to invoke it (drawing:example also still
+      works for backwards compatibility)
+    * TextCha feature added
+  * AnyWikiDraw:
+    * java applet added, source code see contrib/
+    * support code for it is in anywikidraw action.
+    * use drawing:example.adraw to invoke it
+  * SlideShow action and css from moin/extensions for modernized theme added
+
+  Bug fixes:
+  * Bug with "language:en" was fixed for the Moin search. Now language:
+    behaves like described on HelpOnSearching.
+  * flup_frontend: __import__ compatibility fix for python 2.4
+  * wiki_groups and wiki_dicts caching fix.
+  * Fixed moin server standalone --start.
+
+  Other changes:
+  * HINT: simplify wikiserver configuration by using same names as werkzeug's
+    run_simple() call.
+  * Removed moin account check's --lastsaved option, it is default now
+    (checking last use with trail file did not work in 1.9 anyway).
+
+
+Version 1.9.0beta3:
+
+  New features:
+  * HINT: We now offer different sized sets of system/help pages and the default
+    underlay just contains a single page: LanguageSetup. You need to be
+    superuser, visit that page and then install the language packs you like
+    (minimum is the essential set for English).
+  * HINT: LanguageSetup is the default page_front_page, you need to change that
+    after installing language packs (see above).
+  * New modular group and dict data access, you can use group and dict 
+    backend modules to access group and dict data stored anywhere you like.
+    Currently we provide these backends:
+      * WikiGroups and WikiDicts backends get data from wikipages. They work
+        similar to old wikidicts code (but with less caching issues :).
+      * ConfigGroups and ConfigDicts backends get data from a dictionary
+        defined in the wiki config.
+      * CompositeGroups and CompositeDicts compose several backends, so data
+        may be retrieved from several sources. For example, groups may be
+        defined in the wiki config and on wiki pages.
+    * Using cfg.groups and cfg.dicts, you can define the backend to use to
+      access group and dict information (default: WikiGroups / WikiDicts
+      backend).
+      See wiki/config/more_samples/ directory (groups_wikiconfig_snippet and
+      dicts_wikiconfig_snippet).
+    * See also the new HelpOnDictionaries and HelpOnGroups help pages.
+  * "moin ... account homepage" script to create user homepages.
+  * Theme packages: do_copythemefile now copies theme files to
+    MoinMoin/web/static/htdocs.
+  * OpenID: Support for Simple Registration (SREG) extension.
+    Basic profile fields can be copied from OpenID provider when logging in.
+  * OpenID: Support for Teams extension.
+    If your OpenID provider supports the Teams extension (i.e. Launchpad),
+    MoinMoin can be configured to generate 
+  * OpenID: Ability to accept logins from specific OpenID providers.
+    Login form changes based on configuration for better usability:
+    * 0 providers: normal text input box for OpenID URL
+    * 1 provider: hidden field, automatic form submission with JavaScript
+    * 2+ providers: select field, uses directed identity
+
+  Bug fixes:
+  * Fixed MoinMoinBugs/DeprecatedIsNotRespected (search ranking, WantedPages).
+  * web.session: fixed MoinMoinBugs/1.9_session_lifetime_for_user. We do
+    refresh the session cookie now on each request.
+  * web.session: fixed MoinMoinBugs/1.9_remember_me_broken.
+  * Fix superuser functionality (broken in previous 1.9 betas).
+  * fixes misc. crashes / exceptions
+  * OpenID: request processing now works with new WSGI refactoring.
+  * OpenID: always return error messages with CancelLogin if OpenID process fails.
+
+  Other changes:
+  * ImageLink page has been killed (ImageLink macro is gone since 1.6.1).
+  * replace our text_irssi parser with a wrapper around pygments' irc highlighter
+  * Added disabled state for HTML select fields.
+  * Allowed disabling of timezone and language user prefs if they are
+    part of the user's login fields (i.e. OpenID SREG).
+  * Added option to disable local registration links and direct user
+    to registration page at an OpenID provider instead.
+
+  Developer notes:
+  * groups and dicts API changes:
+    * request.groups and request.dicts provide access to groups and dicts.
+    * MoinMoin.wikidicts is gone, please use MoinMoin.datastruct.
+    * LazyGroup and LazyGroupsBackend base classes for implementing backends
+      which potentially deal with huge amounts of data (like a LDAP directory).
+      Use MoinMoin/datastruct/backends/config_lazy_groups.py as a draft for
+      new backends.
+    * See http://moinmo.in/Groups2009 for more details.
+  * i18n: new approach for defining sets of system/help pages (see i18n.strings).
+    CheckTranslation, page packager, wikiutil.isSystemPage() use those sets.
+
+
+Version 1.9.0beta2:
+
+  New features:
+  * Added modernized_cms theme (hides most wiki widgets from modernized if the
+    user is not logged in).
+  * Static file serving built-in (moved wiki/htdocs to MoinMoin/web/static/htdocs).
+    MoinMoin.web.static has a static file serving wrapper that uses the files
+    from htdocs subdirectory by default (docs=True).
+    You can also give another path or switch off creation of that static wrapper.
+    See the docstring of the static package for details.
+  * Handle wikiserverconfig(_local) in the same way as wikiconfig(_local)
+  * PackagePages: create package file in memory and send it to the caller
+  * Environment variable MOIN_DEBUGGER=off/web/external (default is like "off")
+  * HTTPAuthMoin: http basic auth done by moin
+  * ldap auth: new name_callback param to create a custom wiki username (not the
+    ldap login username)
+  * wikiconfig/farmconfig: improve values for data(_underlay)_dir, make logo
+    work automatically
+  * New session code:
+    * cfg.cookie_lifetime is now a tuple (anon, loggedin), giving the lifetime
+      of the cookie in hours, accepting floats, for anon sessions and logged in
+      sessions. Default is (0, 12). 0 means not to use a session cookie (== not
+      to establish a session) and makes only sense for anon users.
+  * cfg.cookie_httponly is new and defaults to False. Please note that if you
+    set it to True, TWikiDraw and similar stuff won't be able to use the session
+    cookie. Thus, if your wiki page doesn't allow writing for everybody, saving
+    a drawing will fail, because there is no session (== no logged in user) for
+    the TWikiDraw applet's saving POSTs.
+
+  Removed features:
+  * Removed cfg.traceback_* settings (use logging configuration)
+  * Removed old session code and settings:
+    * Removed cfg.session_handler and session_id_handler (use cfg.session_service)
+    * Removed cfg.anonymous_session_lifetime (use cfg.cookie_lifetime)
+
+  Fixes:
+  * Fix ScriptContext URL default value
+  * AttachFile: get the rename field content from qs args, too
+  * Changed code to support werkzeug 0.5pre
+  * run_server param name need to match Config attribute name 'debug'
+  * Fix wiki regex samples in farmconfig
+  * 1.6.0a mig script/converter: fixed converter bug for parser sections
+  * login action: fix formatting of error messages
+  * AttachFile do=view: quote filename and pagename params for EmbedObject
+    macro call
+  * unsubscribe action: add msg types so icons get displayed
+  * Only save session data if we also have a cookie establishing a session
+  * suid: simplify and fix, bigger selection box
+  * Drawings: fix KeyError for non-existing map file
+
+
+Version 1.9.0beta1:
+  New features:
+    * HINT: MoinMoin requires Python 2.4 now. If you only have Python 2.3 and
+            you don't want to upgrade it, please use MoinMoin 1.8.x.
+    * HINT: MoinMoin is now a WSGI application.
+      Please read the new install docs about how to use it.
+      We are still working on the docs, please try to use them and report any
+      bugs you find: http://master19.moinmo.in/InstallDocs
+      You also have a local copy of that page as docs/INSTALL.html.
+      There is also some stuff in docs/INSTALL.wsgi.
+    * HINT: due to big changes in the request processing and the request
+      object (related to the WSGI refactoring), many 3rd party plugins might
+      need code updates to work with moin 1.9.
+      We are working on some docs about how to update them to work with 1.9.
+    * We use the pygments highlighting library now, use it like this:
+      {{{#!highlight xxx
+      ...
+      }}}
+      xxx is any of the markups pygments supports.
+      Note: we still have some (deprecated) small wrappers around pygments,
+      so the old syntax #!python/pascal/cplusplus/... still works.
+    * TWikiDraw drawings are now stored as a single attachment foo.tdraw.
+      We added a migration script that converts your existing drawings.
+    * HINT: auth.http.HTTPAuth is now auth.GivenAuth
+      This was badly named from the beginning as for most servers, it just
+      looked at REMOTE_USER environment variable and relied on the server
+      doing the authentication (could be http basic auth or any other auth).
+      See HelpOnAuthentication.
+
+
 Version 1.8.5:
   Bug fixes:
     * Attachment links: fix processing of attributes (e.g. 'target', 'title')
@@ -68,6 +279,7 @@ Version 1.8.4:
 
   Other changes:    
     * Creole parser: Add second license: BSD
+
 
 Version 1.8.3:
   Bug fixes:
@@ -160,6 +372,7 @@ Version 1.8.2:
     * Streamline attachment_drawing formatter behaviour.
     * Search results: only redirect to a single search result for titlesearch
       (fuzzy goto functionality), but not for fulltext search results.
+
 
 
 Version 1.8.1:

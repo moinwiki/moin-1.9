@@ -13,6 +13,7 @@ from MoinMoin import config, wikiutil, action
 from MoinMoin.Page import Page
 from MoinMoin.logfile import editlog
 from MoinMoin.widget import html
+from MoinMoin.action import AttachFile
 
 def execute(pagename, request):
     """ show misc. infos about a page """
@@ -76,7 +77,7 @@ def execute(pagename, request):
         _ = request.getText
         default_count, limit_max_count = request.cfg.history_count
         try:
-            max_count = int(request.form.get('max_count', [default_count])[0])
+            max_count = int(request.values.get('max_count', default_count))
         except:
             max_count = default_count
         max_count = min(max_count, limit_max_count)
@@ -100,6 +101,16 @@ def execute(pagename, request):
         def render_action(text, query, **kw):
             kw.update(dict(rel='nofollow'))
             return page.link_to(request, text, querystr=query, **kw)
+
+        def render_file_action(text, pagename, filename, request, do):
+            url = AttachFile.getAttachUrl(pagename, filename, request, do=do)
+            if url:
+                f = request.formatter
+                link = f.url(1, url) + f.text(text) + f.url(0)
+                return link
+
+        may_write = request.user.may.write(pagename)
+        may_delete = request.user.may.delete(pagename)
 
         # read in the complete log of this page
         log = editlog.EditLog(request, rootpagename=pagename)
@@ -135,19 +146,16 @@ def execute(pagename, request):
 
                 filename = wikiutil.url_unquote(line.extra)
                 comment = "%s: %s %s" % (line.action, filename, line.comment)
-                size = 0
-                if line.action != 'ATTDEL':
-                    from MoinMoin.action import AttachFile
-                    if AttachFile.exists(request, pagename, filename):
-                        size = AttachFile.size(request, pagename, filename)
-                    if line.action == 'ATTNEW':
-                        actions.append(render_action(_('view'), {'action': 'AttachFile', 'do': 'view', 'target': '%s' % filename}))
-                    elif line.action == 'ATTDRW':
-                        actions.append(render_action(_('edit'), {'action': 'AttachFile', 'drawing': '%s' % filename.replace(".draw", "")}))
-
-                    actions.append(render_action(_('get'), {'action': 'AttachFile', 'do': 'get', 'target': '%s' % filename}))
-                    if request.user.may.delete(pagename):
-                        actions.append(render_action(_('del'), {'action': 'AttachFile', 'do': 'del', 'target': '%s' % filename}))
+                if AttachFile.exists(request, pagename, filename):
+                    size = AttachFile.size(request, pagename, filename)
+                    actions.append(render_file_action(_('view'), pagename, filename, request, do='view'))
+                    actions.append(render_file_action(_('get'), pagename, filename, request, do='get'))
+                    if may_delete:
+                        actions.append(render_file_action(_('del'), pagename, filename, request, do='del'))
+                    if may_write:
+                        actions.append(render_file_action(_('edit'), pagename, filename, request, do='modify'))
+                else:
+                    size = 0
 
             history.addRow((
                 rev,
@@ -156,7 +164,7 @@ def execute(pagename, request):
                 diff,
                 line.getEditor(request) or _("N/A"),
                 wikiutil.escape(comment) or '&nbsp;',
-                "&nbsp;".join(actions),
+                "&nbsp;".join(a for a in actions if a),
             ))
             count += 1
             if count >= max_count:
@@ -187,8 +195,6 @@ def execute(pagename, request):
     page = Page(request, pagename)
     title = page.split_title()
 
-    request.emit_http_headers()
-
     request.setContentLanguage(request.lang)
     f = request.formatter
 
@@ -207,14 +213,8 @@ def execute(pagename, request):
         request.write("[%s] " % page.link_to(request, text=text, querystr=querystr, rel='nofollow'))
     request.write(f.paragraph(0))
 
-    try:
-        show_hitcounts = int(request.form.get('hitcounts', [0])[0]) != 0
-    except ValueError:
-        show_hitcounts = False
-    try:
-        show_general = int(request.form.get('general', [0])[0]) != 0
-    except ValueError:
-        show_general = False
+    show_hitcounts = int(request.values.get('hitcounts', 0)) != 0
+    show_general = int(request.values.get('general', 0)) != 0
 
     if show_hitcounts:
         from MoinMoin.stats import hitcounts

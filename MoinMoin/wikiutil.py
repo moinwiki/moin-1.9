@@ -25,6 +25,8 @@ from MoinMoin.util import pysupport, lock
 from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
+from MoinMoin import web # needed so that next line works:
+import werkzeug
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -40,26 +42,6 @@ CHILD_PREFIX_LEN = len(CHILD_PREFIX)
 #############################################################################
 ### Getting data from user/Sending data to user
 #############################################################################
-
-def decodeWindowsPath(text):
-    """ Decode Windows path names correctly. This is needed because many CGI
-    servers follow the RFC recommendation and re-encode the path_info variable
-    according to the file system semantics.
-
-    @param text: the text to decode, string
-    @rtype: unicode
-    @return: decoded text
-    """
-
-    import locale
-    cur_charset = locale.getdefaultlocale()[1]
-    try:
-        return unicode(text, 'utf-8')
-    except UnicodeError:
-        try:
-            return unicode(text, cur_charset, 'replace')
-        except LookupError:
-            return unicode(text, 'iso-8859-1', 'replace')
 
 def decodeUnknownInput(text):
     """ Decode unknown input, like text attachments
@@ -108,107 +90,73 @@ def decodeUserInput(s, charsets=[config.charset]):
     raise UnicodeError('The string %r cannot be decoded.' % s)
 
 
-# this is a thin wrapper around urllib (urllib only handles str, not unicode)
-# with py <= 2.4.1, it would give incorrect results with unicode
-# with py == 2.4.2, it crashes with unicode, if it contains non-ASCII chars
-def url_quote(s, safe='/', want_unicode=False):
-    """
-    Wrapper around urllib.quote doing the encoding/decoding as usually wanted:
+def url_quote(s, safe='/', want_unicode=None):
+    """ see werkzeug.url_quote, we use a different safe param default value """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.url_quote(s, charset=config.charset, safe=safe)
 
-    @param s: the string to quote (can be str or unicode, if it is unicode,
-              config.charset is used to encode it before calling urllib)
-    @param safe: just passed through to urllib
-    @param want_unicode: for the less usual case that you want to get back
-                         unicode and not str, set this to True
-                         Default is False.
-    """
+def url_quote_plus(s, safe='/', want_unicode=None):
+    """ see werkzeug.url_quote_plus, we use a different safe param default value """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.url_quote_plus(s, charset=config.charset, safe=safe)
+
+def url_unquote(s, want_unicode=None):
+    """ see werkzeug.url_unquote """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
     if isinstance(s, unicode):
         s = s.encode(config.charset)
-    elif not isinstance(s, str):
-        s = str(s)
-    s = urllib.quote(s, safe)
-    if want_unicode:
-        s = s.decode(config.charset) # ascii would also work
-    return s
+    return werkzeug.url_unquote(s, charset=config.charset, errors='fallback:iso-8859-1')
 
-def url_quote_plus(s, safe='/', want_unicode=False):
+
+def parseQueryString(qstr, want_unicode=None):
+    """ see werkzeug.url_decode
+
+        Please note: this returns a MultiDict, you might need to use dict() on
+                     the result if your code expects a "normal" dict.
     """
-    Wrapper around urllib.quote_plus doing the encoding/decoding as usually wanted:
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.url_decode(qstr, charset=config.charset, errors='fallback:iso-8859-1',
+                               decode_keys=False, include_empty=False)
 
-    @param s: the string to quote (can be str or unicode, if it is unicode,
-              config.charset is used to encode it before calling urllib)
-    @param safe: just passed through to urllib
-    @param want_unicode: for the less usual case that you want to get back
-                         unicode and not str, set this to True
-                         Default is False.
-    """
-    if isinstance(s, unicode):
-        s = s.encode(config.charset)
-    elif not isinstance(s, str):
-        s = str(s)
-    s = urllib.quote_plus(s, safe)
-    if want_unicode:
-        s = s.decode(config.charset) # ascii would also work
-    return s
-
-def url_unquote(s, want_unicode=True):
-    """
-    Wrapper around urllib.unquote doing the encoding/decoding as usually wanted:
-
-    @param s: the string to unquote (can be str or unicode, if it is unicode,
-              config.charset is used to encode it before calling urllib)
-    @param want_unicode: for the less usual case that you want to get back
-                         str and not unicode, set this to False.
-                         Default is True.
-    """
-    if isinstance(s, unicode):
-        s = s.encode(config.charset) # ascii would also work
-    s = urllib.unquote(s)
-    if want_unicode:
-        try:
-            s = decodeUserInput(s, [config.charset, 'iso-8859-1', ]) # try hard
-        except UnicodeError:
-            s = s.decode('ascii', 'replace') # better than crashing
-    return s
-
-def parseQueryString(qstr, want_unicode=True):
-    """ Parse a querystring "key=value&..." into a dict.
-    """
-    is_unicode = isinstance(qstr, unicode)
-    if is_unicode:
-        qstr = qstr.encode(config.charset)
-    values = {}
-    for key, value in cgi.parse_qs(qstr).items():
-        if len(value) < 2:
-            v = ''.join(value)
-            if want_unicode:
-                try:
-                    v = unicode(v, config.charset)
-                except UnicodeDecodeError:
-                    v = unicode(v, 'iso-8859-1', 'replace')
-            values[key] = v
-    return values
-
-def makeQueryString(qstr=None, want_unicode=False, **kw):
+def makeQueryString(qstr=None, want_unicode=None, **kw):
     """ Make a querystring from arguments.
 
     kw arguments overide values in qstr.
 
-    If a string is passed in, it's returned verbatim and
-    keyword parameters are ignored.
+    If a string is passed in, it's returned verbatim and keyword parameters are ignored.
+
+    See also: werkzeug.url_encode
 
     @param qstr: dict to format as query string, using either ascii or unicode
     @param kw: same as dict when using keywords, using ascii or unicode
     @rtype: string
     @return: query string ready to use in a url
     """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
     if qstr is None:
         qstr = {}
+    elif isinstance(qstr, (str, unicode)):
+        return qstr
     if isinstance(qstr, dict):
         qstr.update(kw)
-        items = ['%s=%s' % (url_quote_plus(key, want_unicode=want_unicode), url_quote_plus(value, want_unicode=want_unicode)) for key, value in qstr.items()]
-        qstr = '&'.join(items)
-    return qstr
+        return werkzeug.url_encode(qstr, charset=config.charset, encode_keys=True)
+    else:
+        raise ValueError("Unsupported argument type, should be dict.")
 
 
 def quoteWikinameURL(pagename, charset=config.charset):
@@ -223,35 +171,13 @@ def quoteWikinameURL(pagename, charset=config.charset):
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
-    pagename = pagename.encode(charset)
-    return urllib.quote(pagename)
+    # XXX please note that urllib.quote and werkzeug.url_quote have
+    # XXX different defaults for safe=...
+    return werkzeug.url_quote(pagename, charset=charset, safe='/')
 
 
-def escape(s, quote=0):
-    """ Escape possible html tags
+escape = werkzeug.escape
 
-    Replace special characters '&', '<' and '>' by SGML entities.
-    (taken from cgi.escape so we don't have to include that, even if we
-    don't use cgi at all)
-
-    @param s: (unicode) string to escape
-    @param quote: bool, should transform '\"' to '&quot;'
-    @rtype: when called with a unicode object, return unicode object - otherwise return string object
-    @return: escaped version of s
-    """
-    if not isinstance(s, (str, unicode)):
-        s = str(s)
-
-    # Must first replace &
-    s = s.replace("&", "&amp;")
-
-    # Then other...
-    s = s.replace("<", "&lt;")
-    s = s.replace(">", "&gt;")
-    if quote:
-        s = s.replace('"', "&quot;")
-        s = s.replace("'", "&#x27;")
-    return s
 
 def clean_input(text, max_len=201):
     """ Clean input:
@@ -564,7 +490,7 @@ def load_wikimap(request):
             if not line or line[0] == '#':
                 continue
             try:
-                line = "%s %s/InterWiki" % (line, request.getScriptname())
+                line = "%s %s/InterWiki" % (line, request.script_root)
                 wikitag, urlprefix, dummy = line.split(None, 2)
             except ValueError:
                 pass
@@ -574,9 +500,9 @@ def load_wikimap(request):
         del lines
 
         # add own wiki as "Self" and by its configured name
-        _interwiki_list['Self'] = request.getScriptname() + '/'
+        _interwiki_list['Self'] = request.script_root + '/'
         if request.cfg.interwikiname:
-            _interwiki_list[request.cfg.interwikiname] = request.getScriptname() + '/'
+            _interwiki_list[request.cfg.interwikiname] = request.script_root + '/'
 
         # save for later
         request.cfg.cache.interwiki_list = _interwiki_list
@@ -648,7 +574,7 @@ def resolve_wiki(request, wikiurl):
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def resolve_interwiki(request, wikiname, pagename):
     """ Resolve an interwiki reference (wikiname:pagename).
@@ -663,7 +589,7 @@ def resolve_interwiki(request, wikiname, pagename):
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def join_wiki(wikiurl, wikitail):
     """
@@ -689,15 +615,15 @@ def join_wiki(wikiurl, wikitail):
 #############################################################################
 
 def isSystemPage(request, pagename):
-    """ Is this a system page? Uses AllSystemPagesGroup internally.
+    """ Is this a system page?
 
     @param request: the request object
     @param pagename: the page name
     @rtype: bool
     @return: true if page is a system page
     """
-    return (request.dicts.has_member('SystemPagesGroup', pagename) or
-        isTemplatePage(request, pagename))
+    from MoinMoin import i18n
+    return pagename in i18n.system_pages or isTemplatePage(request, pagename)
 
 
 def isTemplatePage(request, pagename):
@@ -710,14 +636,14 @@ def isTemplatePage(request, pagename):
     return request.cfg.cache.page_template_regexact.search(pagename) is not None
 
 
-def isGroupPage(request, pagename):
+def isGroupPage(pagename, cfg):
     """ Is this a name of group page?
 
     @param pagename: the page name
     @rtype: bool
     @return: true if page is a form page
     """
-    return request.cfg.cache.page_group_regexact.search(pagename) is not None
+    return cfg.cache.page_group_regexact.search(pagename) is not None
 
 
 def filterCategoryPages(request, pagelist):
@@ -2254,6 +2180,47 @@ class ParameterParser:
 #############################################################################
 ### Misc
 #############################################################################
+def normalize_pagename(name, cfg):
+    """ Normalize page name
+
+    Prevent creating page names with invisible characters or funny
+    whitespace that might confuse the users or abuse the wiki, or
+    just does not make sense.
+
+    Restrict even more group pages, so they can be used inside acl lines.
+
+    @param name: page name, unicode
+    @rtype: unicode
+    @return: decoded and sanitized page name
+    """
+    # Strip invalid characters
+    name = config.page_invalid_chars_regex.sub(u'', name)
+
+    # Split to pages and normalize each one
+    pages = name.split(u'/')
+    normalized = []
+    for page in pages:
+        # Ignore empty or whitespace only pages
+        if not page or page.isspace():
+            continue
+
+        # Cleanup group pages.
+        # Strip non alpha numeric characters, keep white space
+        if isGroupPage(page, cfg):
+            page = u''.join([c for c in page
+                             if c.isalnum() or c.isspace()])
+
+        # Normalize white space. Each name can contain multiple
+        # words separated with only one space. Split handle all
+        # 30 unicode spaces (isspace() == True)
+        page = u' '.join(page.split())
+
+        normalized.append(page)
+
+    # Assemble components into full pagename
+    name = u'/'.join(normalized)
+    return name
+
 def taintfilename(basename):
     """
     Make a filename that is supposed to be a plain name secure, i.e.
@@ -2267,6 +2234,20 @@ def taintfilename(basename):
         basename = basename.replace(x, '_')
 
     return basename
+
+
+def drawing2fname(drawing):
+    config.drawing_extensions = ['.tdraw', '.adraw',
+                                 '.svg',
+                                 '.png', '.jpg', '.jpeg', '.gif',
+                                ]
+    fname, ext = os.path.splitext(drawing)
+    # note: do not just check for empty extension or stuff like drawing:foo.bar
+    # will fail, instead of being expanded to foo.bar.tdraw
+    if ext not in config.drawing_extensions:
+        # for backwards compatibility, twikidraw is the default:
+        drawing += '.tdraw'
+    return drawing
 
 
 def mapURL(request, url):
@@ -2371,7 +2352,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     if text is None:
         text = params # default
     if formatter:
-        url = "%s/%s" % (request.getScriptname(), params)
+        url = "%s/%s" % (request.script_root, params)
         # formatter.url will escape the url part
         if on is not None:
             tag = formatter.url(on, url, css_class, **kw)
@@ -2390,7 +2371,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                 attrs += ' id="%s"' % id
             if name:
                 attrs += ' name="%s"' % name
-            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
+            tag = '<a%s href="%s/%s">' % (attrs, request.script_root, params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
         logging.warning("wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))
@@ -2562,4 +2543,58 @@ def get_processing_instructions(body):
         pi.append((verb.lower(), args.strip()))
 
     return pi, body
+
+
+class Version(tuple):
+    """
+    Version objects store versions like 1.2.3-4.5alpha6 in a structured
+    way and support version comparisons and direct version component access.
+    1: major version (digits only)
+    2: minor version (digits only)
+    3: (maintenance) release version (digits only)
+    4.5alpha6: optional additional version specification (str)
+
+    You can create a Version instance either by giving the components, like:
+        Version(1,2,3,'4.5alpha6')
+    or by giving the composite version string, like:
+        Version(version="1.2.3-4.5alpha6").
+
+    Version subclasses tuple, so comparisons to tuples should work.
+    Also, we inherit all the comparison logic from tuple base class.
+    """
+    VERSION_RE = re.compile(
+        r"""(?P<major>\d+)
+            \.
+            (?P<minor>\d+)
+            \.
+            (?P<release>\d+)
+            (-
+             (?P<additional>.+)
+            )?""",
+            re.VERBOSE)
+
+    @classmethod
+    def parse_version(cls, version):
+        match = cls.VERSION_RE.match(version)
+        if match is None:
+            raise ValueError("Unexpected version string format: %r" % version)
+        v = match.groupdict()
+        return int(v['major']), int(v['minor']), int(v['release']), str(v['additional'] or '')
+
+    def __new__(cls, major=0, minor=0, release=0, additional='', version=None):
+        if version:
+            major, minor, release, additional = cls.parse_version(version)
+        return tuple.__new__(cls, (major, minor, release, additional))
+
+    # properties for easy access of version components
+    major = property(lambda self: self[0])
+    minor = property(lambda self: self[1])
+    release = property(lambda self: self[2])
+    additional = property(lambda self: self[3])
+
+    def __str__(self):
+        version_str = "%d.%d.%d" % (self.major, self.minor, self.release)
+        if self.additional:
+            version_str += "-%s" % self.additional
+        return version_str
 

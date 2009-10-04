@@ -54,7 +54,7 @@ class TestEmbedObject:
         m = make_macro(self.request, self.page)
         filename = 'test.mpg'
         result = m.execute('EmbedObject', u'%s' % filename)
-        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.mpg"' in result
+        assert '<object data="/AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.mpg"' in result
         assert 'align="middle"' in result
         assert 'value="transparent"' in result
 
@@ -64,7 +64,7 @@ class TestEmbedObject:
         filename = 'test.mpg'
         height = '50 %' # also tests that space is allowed in there
         result = m.execute('EmbedObject', u'target=%s, height=%s' % (filename, height))
-        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.mpg"' in result
+        assert '<object data="/AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.mpg"' in result
         assert 'height="50%"' in result
         assert 'align="middle"' in result
 
