@@ -252,16 +252,16 @@ class SearchResults:
 
     def _sortByWeight(self):
         """ Sorts found pages by the weight of the matches """
-        tmp = [(hit.weight(), hit.page_name, hit) for hit in self.hits]
+        tmp = [(hit.weight(), hit.page_name, hit.attachment, hit) for hit in self.hits]
         tmp.sort()
         tmp.reverse()
-        self.hits = [item[2] for item in tmp]
+        self.hits = [item[3] for item in tmp]
 
     def _sortByPagename(self):
-        """ Sorts a list of found pages alphabetical by page name """
-        tmp = [(hit.page_name, hit) for hit in self.hits]
+        """ Sorts a list of found pages alphabetical by page/attachment name """
+        tmp = [(hit.page_name, hit.attachment, hit) for hit in self.hits]
         tmp.sort()
-        self.hits = [item[1] for item in tmp]
+        self.hits = [item[2] for item in tmp]
 
     def stats(self, request, formatter, hitsFrom):
         """ Return search statistics, formatted with formatter
