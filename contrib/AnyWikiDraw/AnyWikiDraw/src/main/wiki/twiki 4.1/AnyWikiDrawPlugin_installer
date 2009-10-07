@@ -1,0 +1,120 @@
+#!perl
+#
+# Install script for AnyWikiDrawPlugin
+#
+# Copyright (C) 2004-2007 TWiki Contributors. All Rights Reserved.
+# TWiki Contributors are listed in the AUTHORS file in the root of
+# this distribution. NOTE: Please extend that file, not this notice.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version. For
+# more details read LICENSE in the root of this distribution.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# As per the GPL, removal of this notice is prohibited.
+#
+# Author: Crawford Currie http://wikiring.com
+#
+# NOTE TO THE DEVELOPER: THIS FILE IS GENERATED AUTOMATICALLY
+# BY THE BUILD PROCESS DO NOT EDIT IT - IT WILL BE OVERWRITTEN
+#
+use strict;
+require 5.008;
+
+=pod
+
+---+ AnyWikiDrawPlugin_installer
+This is the installer script. The basic function of this script is to
+locate an archive and unpack it.
+
+It will also check the dependencies listed in DEPENDENCIES and assist
+the user in installing any that are missing. The script also automatically
+maintains the revision histories of any files that are being installed by the
+package but already have ,v files on disc (indicating that they are
+revision controlled).
+
+The script also functions as an *uninstaller* by passing the parameter
+=uninstall= on the command-line. Note that uninstallation does *not* revert
+the history of any topic changed during the installation.
+
+The script allows the definition of PREINSTALL and POSTINSTALL scripts.
+These scripts can be used for example to modify the configuration during
+installation, using the functions described below.
+
+Refer to the documentation of =configure=
+
+=cut
+
+# This is all done in package TWiki so that reading LocalSite.cfg and TWiki.cfg
+# will put the config vars into the right namespace.
+package TWiki;
+
+# The root of package URLs
+my $PACKAGES_URL = 'http://twiki.org/p/pub/Plugins';
+
+# Extract MANIFEST and DEPENDENCIES from the __DATA__
+undef $/;
+my @DATA = split( /<<<< (.*?) >>>>\s*\n/, <DATA> );
+shift @DATA;    # remove empty first element
+
+unless ( do 'tools/extender.pl' ) {
+    die <<MESSAGE;
+************************************************************
+Could not load installer script from tools/extender.pl.
+
+If this is a TWiki release prior to 4.2, please download the
+latest version of the script from:
+
+http://twiki.org/cgi-bin/view/Codev/ExtenderScript
+
+and place it in the 'tools' directory below your installation
+root (create the directory if necessary).
+
+If this is TWiki 4.2 or later, the script is missing from
+your installation, or may be broken.
+************************************************************
+MESSAGE
+}
+
+sub preuninstall {
+
+    # # No PREUNINSTALL script;
+}
+
+sub postuninstall {
+
+    # # No POSTUNINSTALL script;
+}
+
+sub preinstall {
+
+    # # No PREINSTALL script;
+}
+
+sub postinstall {
+
+    # # No POSTINSTALL script;
+}
+
+TWiki::Extender::install( $PACKAGES_URL, 'AnyWikiDrawPlugin', 'AnyWikiDrawPlugin', @DATA );
+
+1;
+
+# MANIFEST and DEPENDENCIES are done this way
+# to make it easy to extract them from this script.
+
+__DATA__
+<<<< MANIFEST >>>>
+data/TWiki/AnyWikiDrawPlugin.txt,0644,Plugin doc page
+lib/TWiki/Plugins/AnyWikiDrawPlugin.pm,0444,Plugin Perl module
+templates/anywikidraw.tmpl,0444,Template
+templates/anywikidraw.pattern.tmpl,0444,Template
+pub/TWiki/AnyWikiDrawPlugin/AnyWikiDrawForTWiki.jar,0444,Java applet
+
+<<<< DEPENDENCIES >>>>
+
