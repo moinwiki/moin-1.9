@@ -6,6 +6,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import StringIO
+
 from MoinMoin import i18n, wikiutil, config, version, caching
 from MoinMoin.action import get_available_actions
 from MoinMoin.Page import Page
@@ -1820,6 +1822,29 @@ var gui_editor_link_text = "%(text)s";
             request.write('</ul>\n')
         #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
         request.write('</body>\n</html>\n\n')
+
+    def sidebar(self, d, **keywords):
+        """ Display page called SideBar as an additional element on every page
+
+        @param d: parameter dictionary
+        @rtype: string
+        @return: sidebar html
+        """
+
+        # Check which page to display, return nothing if doesn't exist.
+        sidebar = self.request.getPragma('sidebar', u'SideBar')
+        page = Page(self.request, sidebar)
+        if not page.exists():
+            return u""
+        # Capture the page's generated HTML in a buffer.
+        buffer = StringIO.StringIO()
+        self.request.redirect(buffer)
+        try:
+            page.send_page(content_only=1, content_id="sidebar")
+        finally:
+            self.request.redirect()
+        return u'<div class="sidebar">%s</div>' % buffer.getvalue()
+
 
 class ThemeNotFound(Exception):
     """ Thrown if the supplied theme could not be found anywhere """
