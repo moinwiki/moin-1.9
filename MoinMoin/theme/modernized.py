@@ -96,7 +96,7 @@ class Theme(ThemeBase):
             self.username(d),
             u'<h1 id="locationline">',
             self.interwiki(d),
-            self.title(d),
+            self.title_with_separators(d),
             u'</h1>',
             self.trail(d),
             self.navibar(d),
@@ -169,39 +169,6 @@ class Theme(ThemeBase):
             self.emit_custom_html(self.cfg.page_footer2),
             ]
         return u'\n'.join(html)
-
-    def title(self, d):
-        """ Assemble the title (now using breadcrumbs)
-
-        @param d: parameter dictionary
-        @rtype: string
-        @return: title html
-        """
-        _ = self.request.getText
-        content = []
-        if d['title_text'] == d['page'].split_title(): # just showing a page, no action
-            curpage = ''
-            segments = d['page_name'].split('/') # was: title_text
-            for s in segments[:-1]:
-                curpage += s
-                content.append(Page(self.request, curpage).link_to(self.request, s))
-                curpage += '/'
-            link_text = segments[-1]
-            link_title = _('Click to do a full-text search for this title')
-            link_query = {
-                'action': 'fullsearch',
-                'value': 'linkto:"%s"' % d['page_name'],
-                'context': '180',
-            }
-            # we dont use d['title_link'] any more, but make it ourselves:
-            link = d['page'].link_to(self.request, link_text, querystr=link_query, title=link_title, css_class='backlink', rel='nofollow')
-            content.append(link)
-        else:
-            content.append(wikiutil.escape(d['title_text']))
-
-        location_html = u'<span class="sep">/</span>'.join(content)
-        html = u'<span id="pagelocation">%s</span>' % location_html
-        return html
 
     def username(self, d):
         """ Assemble the username / userprefs link
