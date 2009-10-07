@@ -1,0 +1,50 @@
+General tests of the datetime module.
+
+Dates may be supplied as YYYYMMDD:
+
+>>> date_from_string('19990201')
+datetime.date(1999, 2, 1)
+>>> date_from_string('19690201')
+datetime.date(1969, 2, 1)
+>>> date_from_string('20000228')
+datetime.date(2000, 2, 28)
+>>> date_from_string('20000229')
+datetime.date(2000, 2, 29)
+
+
+Dates may also be supplied as YYYY-MM-DD, YYYY/MM/DD or YYYY.MM.DD:
+
+>>> date_from_string('1999-02-01')
+datetime.date(1999, 2, 1)
+>>> date_from_string('1999/02/01')
+datetime.date(1999, 2, 1)
+>>> date_from_string('1999.02.01')
+datetime.date(1999, 2, 1)
+
+
+Out of range dates cause a ValueError:
+
+>>> date_from_string('19000229')
+Traceback (most recent call last):
+...
+ValueError: day is out of range for month
+
+>>> date_from_string('20000001')
+Traceback (most recent call last):
+...
+ValueError: month must be in 1..12
+
+
+If we pass a datetime.date object (or something which looks similar) it is
+returned unchanged:
+
+>>> date_from_string(datetime.date(2001, 7, 11))
+datetime.date(2001, 7, 11)
+
+
+If we pass something unrecognisible, we get a ValueError:
+>>> date_from_string('hello world')
+Traceback (most recent call last):
+...
+ValueError: Unrecognised date format
+

@@ -1,0 +1,156 @@
+@charset "UTF-8";
+/* CSS Document */
+
+* {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 125%; /* = 15 pixel for 12 px fonts */
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	margin: 10px;
+	padding: 0px;
+}
+code {
+	font-family: Courier, monospace;
+}
+h1, h2, h3, h4 {
+	font-family: Tahoma, Helvetica, Arial, sans-serif;
+}
+h1 {
+	font-size: 28px;
+	margin: 0px 0 18px 0;
+	font-weight: bold;
+	line-height: 100%;
+}
+h2 {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 18px 0 18px 0;
+	line-height: 120%;
+}
+h3 {
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 120%;
+	margin: 18px 0 18px 0;
+}
+h4 {
+	font-weight: bold;
+}
+p {
+	margin-bottom: 9px;
+}
+p+h2, ul+h2 {
+	margin-top: 36px;
+}
+ul {
+	margin-bottom: 9px;
+	margin-left: 16px;
+}
+ol {
+	margin-bottom: 9px;
+	margin-left: 16px;
+}
+
+
+table {
+	margin-bottom: 18px;
+}
+th {
+	padding: 2px;
+	font-weight: bold;
+}
+td {
+	padding: 2px;
+}
+b, strong, i {
+	font-size:inherit;
+}
+
+#header {
+}
+#footer {
+}
+#nav1 {
+	background-color: #F0F0F0;
+}
+#nav2 {
+	background-color: #F0F0F0;
+}
+
+
+
+#notationBody, #noteBody, #cubeBody, #scriptBody {
+	width: 600px;
+}
+#notationBody table {
+
+}
+#notationBody  td {
+	background-color: #F0F0F0;
+}
+#notationBody th {
+	background-color: #CCCCCC;
+}
+#notationBody td.rowspacer {
+	background-color: #fff;
+}
+
+.listing {
+	font-family: Courier, monospace;
+	background-color: #f0f0f0;
+	padding: 6px 8px 6px 8px;
+	margin-bottom: 16px;
+	border: solid 1px #CCCCCC;
+}
+
+.listingTopFragment {
+	font-family: Courier, monospace;
+	background-color: #f0f0f0;
+	padding: 6px 8px 6px 8px;
+	margin-bottom: 16px;
+	border-top: solid 1px #CCCCCC;
+	border-right: solid 1px #CCCCCC;
+	border-left: solid 1px #CCCCCC;
+	border-bottom: dotted 1px #CCCCCC;
+}
+.listingMiddleFragment {
+	font-family: Courier, monospace;
+	background-color: #f0f0f0;
+	padding: 6px 8px 6px 8px;
+	margin-bottom: 16px;
+	border-top: dotted 1px #CCCCCC;
+	border-right: solid 1px #CCCCCC;
+	border-left: solid 1px #CCCCCC;
+	border-bottom: dotted 1px #CCCCCC;
+}
+.listingBottomFragment {
+	font-family: Courier, monospace;
+	background-color: #f0f0f0;
+	padding: 6px 8px 6px 8px;
+	margin-bottom: 16px;
+	border-top: dotted 1px #CCCCCC;
+	border-bottom: solid 1px #CCCCCC;
+	border-right: solid 1px #CCCCCC;
+	border-left: solid 1px #CCCCCC;
+}
+
+
+.tip {
+	color: #333;
+	font-size: 10px;
+}
+.description {
+	font-size: 10px;
+}
+.marginalia {
+	font-size: 10px;
+	text-align: right;
+	padding-right: 10px;
+}
+.paddingdouble {
+	padding-top: 16px;
+}
