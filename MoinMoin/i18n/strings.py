@@ -102,7 +102,7 @@ all_template_pages = essential_template_pages + optional_template_pages
 
 # Installation / Configuration / Administration Help:
 admin_pages = [
-    _('InstallDocs'),              
+    _('InstallDocs'),
     _('HelpOnConfiguration'),
     _('HelpOnConfiguration/EmailSupport'),
     _('HelpOnConfiguration/SecurityPolicy'),
