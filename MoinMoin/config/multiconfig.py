@@ -776,7 +776,7 @@ options_no_group_name = {
         'rss_rc': (1, 60),
         # The following actions are often used for images - to avoid pages with lots of images
         # (like photo galleries) triggering surge protection, we assign rather high limits:
-        'AttachFile': (90, 60),
+        'AttachFile': (300, 30),
         'cache': (600, 30), # cache action is very cheap/efficient
      },
      "Surge protection tries to deny clients causing too much load/traffic, see /SurgeProtection."),
