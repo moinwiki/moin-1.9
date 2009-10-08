@@ -128,7 +128,7 @@ class Theme(ThemeBase):
             # Header
             u'<div id="header">',
             u'<h1 id="locationline">',
-            self.title(d),
+            self.title_with_separators(d),
             u'</h1>',
             self.msg(d),
             u'</div>',
