@@ -260,7 +260,7 @@ class HTTPContext(BaseContext):
             return
 
         if level == 1:
-            self.headers.set('Cache-Control', 'private, must-revalidate, mag-age=10')
+            self.headers.set('Cache-Control', 'private, must-revalidate, max-age=10')
         elif level == 2:
             self.headers.set('Cache-Control', 'no-cache')
             self.headers.set('Pragma', 'no-cache')
