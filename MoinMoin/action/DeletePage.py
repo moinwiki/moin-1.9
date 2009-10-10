@@ -74,7 +74,7 @@ class DeletePage(ActionBase):
 
             d = {
                 'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', '0') == '1'],
+                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
                 'subpage_label': _('Delete all /subpages too?'),
                 'comment_label': _("Optional reason for the deletion"),
                 'buttons_html': buttons_html,

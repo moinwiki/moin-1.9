@@ -80,10 +80,9 @@ class RenamePage(ActionBase):
         _ = self._
         if self.subpages:
             subpages = ' '.join(self.subpages)
-
             d = {
                 'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.values.get('subpages_checked', '0') == '1'],
+                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
                 'subpage_label': _('Rename all /subpages too?'),
                 'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),

@@ -91,7 +91,7 @@ class CopyPage(ActionBase):
             d = {
                 'textcha': TextCha(self.request).render(),
                 'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', '0') == '1'],
+                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
                 'subpage_label': _('Copy all /subpages too?'),
                 'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),
