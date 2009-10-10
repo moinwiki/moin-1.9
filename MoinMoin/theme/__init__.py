@@ -263,30 +263,31 @@ class ThemeBase:
         @return: title html
         """
         _ = self.request.getText
-        content = []
-        if d['title_text'] == d['page'].split_title(): # just showing a page, no action
-            curpage = ''
-            segments = d['page_name'].split('/') # was: title_text
-            for s in segments[:-1]:
-                curpage += s
-                content.append(Page(self.request, curpage).link_to(self.request, s))
-                curpage += '/'
+        if d['title_text'] == d['page'].split_title():
+            # just showing a page, no action
+            segments = d['page_name'].split('/')
             link_text = segments[-1]
             link_title = _('Click to do a full-text search for this title')
-            link_query = {
-                'action': 'fullsearch',
-                'value': 'linkto:"%s"' % d['page_name'],
-                'context': '180',
-            }
-            # we dont use d['title_link'] any more, but make it ourselves:
-            link = d['page'].link_to(self.request, link_text, querystr=link_query, title=link_title, css_class='backlink', rel='nofollow')
-            content.append(link)
+            link_query = { 'action': 'fullsearch', 'context': '180',
+                            'value': 'linkto:"%s"' % d['page_name'], }
+            link = d['page'].link_to(self.request, link_text,
+                                     querystr=link_query, title=link_title,
+                                     css_class='backlink', rel='nofollow')
+            if len(segments) <= 1:
+                html = link
+            else:
+                content = []
+                curpage = ''
+                for s in segments[:-1]:
+                    curpage += s
+                    content.append(Page(self.request,
+                                        curpage).link_to(self.request, s))
+                    curpage += '/'
+                path_html = u'<span class="sep">/</span>'.join(content)
+                html = u'<span class="pagepath">%s</span><span class="sep">/</span>%s' % (path_html, link)
         else:
-            content.append(wikiutil.escape(d['title_text']))
-
-        location_html = u'<span class="sep">/</span>'.join(content)
-        html = u'<span id="pagelocation">%s</span>' % location_html
-        return html
+            html = wikiutil.escape(d['title_text'])
+        return u'<span id="pagelocation">%s</span>' % html
 
     def username(self, d):
         """ Assemble the username / userprefs link
