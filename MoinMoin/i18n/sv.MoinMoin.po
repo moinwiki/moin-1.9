@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
-"PO-Revision-Date: 2009-09-29 09:25+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"PO-Revision-Date: 2009-10-06 09:45+0200\n"
 "Last-Translator: thomas marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -779,18 +779,6 @@ msgstr "Ditt konto är nu förknippat med din OpenID."
 msgid "The password you entered is not valid."
 msgstr "Lösenordet du skrev in är inte giltigt."
 
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID: handtag-verifiering fortsättning"
-
-msgid "OpenID: handle name continuation"
-msgstr "OpenID: handtag-namn fortsättning"
-
-msgid "OpenID: handle associate continuation"
-msgstr "OpenID: handtag-anknytning fortsättning"
-
-msgid "OpenID: unknown continuation stage"
-msgstr "OpenID: okänd fortsättningssteg"
-
 msgid "OpenID error: unknown continuation stage"
 msgstr "OpenID-fel: okänd fortsättningssteg"
 
@@ -1443,6 +1431,28 @@ msgstr "BildMall"
 msgid "SyncJobTemplate"
 msgstr "SynkJobbMall"
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "installera"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "HjälpMedKonfiguration"
 
@@ -1860,9 +1870,6 @@ msgstr "[SLUT]"
 msgid "[TOP]"
 msgstr "[BÖRJAN]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Klicka här för att göra en fulltextsökning på den här titeln"
-
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -1884,6 +1891,9 @@ msgstr "Avsluta prenumeration"
 
 msgid "Home"
 msgstr "Hem"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klicka här för att göra en fulltextsökning på den här titeln"
 
 msgid "Clear message"
 msgstr "Ta bort meddelande"
@@ -2198,7 +2208,7 @@ msgstr "som innehåller en eller flera av följande termer"
 msgid "not containing the following terms"
 msgstr "som inte innehåller följande termer"
 
-msgid "last modified since (e.g. last 2 weeks)"
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "senast ändrat sedan (t.ex. 2 veckor)"
 
 msgid "any category"
@@ -3481,6 +3491,18 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID: handtag-verifiering fortsättning"
+
+#~ msgid "OpenID: handle name continuation"
+#~ msgstr "OpenID: handtag-namn fortsättning"
+
+#~ msgid "OpenID: handle associate continuation"
+#~ msgstr "OpenID: handtag-anknytning fortsättning"
+
+#~ msgid "OpenID: unknown continuation stage"
+#~ msgstr "OpenID: okänd fortsättningssteg"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -757,18 +757,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr ""
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1432,6 +1420,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "התקן"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "עזרה בעריכה"
 
@@ -1885,9 +1895,6 @@ msgstr "[למטה]"
 msgid "[TOP]"
 msgstr "[למעלה]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "לחץ לביצוע חיפוש מלל מלא עבור כותרת זאת"
-
 msgid "Settings"
 msgstr "הגדרות"
 
@@ -1909,6 +1916,9 @@ msgstr "בטל מינוי"
 
 msgid "Home"
 msgstr "דף בית"
+
+msgid "Click to do a full-text search for this title"
+msgstr "לחץ לביצוע חיפוש מלל מלא עבור כותרת זאת"
 
 msgid "Clear message"
 msgstr "סגור הודעה"
@@ -2217,7 +2227,8 @@ msgstr "מכיל אחד או יותר מהמונחים הבאים"
 msgid "not containing the following terms"
 msgstr "לא מכיל את המונחים הבאים"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "שונה לאחרונה מאז (לדוגמה: בשבועיים האחרונים)"
 
 msgid "any category"

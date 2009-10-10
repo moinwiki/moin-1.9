@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -778,18 +778,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr "Введений вами пароль недійсний."
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1467,6 +1455,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "встановити"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "ДовідкаФорматування"
 
@@ -1921,9 +1931,6 @@ msgstr "[ВНИЗ]"
 msgid "[TOP]"
 msgstr "[ВГОРУ]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Натисніть сюди для пошуку цієї назви всюди"
-
 msgid "Settings"
 msgstr "Налаштування"
 
@@ -1945,6 +1952,9 @@ msgstr "Припинити стеження"
 
 msgid "Home"
 msgstr "МояСторінка"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Натисніть сюди для пошуку цієї назви всюди"
 
 msgid "Clear message"
 msgstr "Прибрати це повідомлення"
@@ -2253,7 +2263,8 @@ msgstr "містить один або більше з наступних тер
 msgid "not containing the following terms"
 msgstr "не містить наступних термінів"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "час останньої зміни (наприклад, минулі 2 тижні)"
 
 msgid "any category"

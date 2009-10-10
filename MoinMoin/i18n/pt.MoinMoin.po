@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2007-01-05 22:27+0000\n"
 "Last-Translator: Rita Farinha <rita.farinha@intraneia.com>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -781,18 +781,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr ""
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1479,6 +1467,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "instalar"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "AjudaNaFormatação"
 
@@ -1932,9 +1942,6 @@ msgstr "[FINAL]"
 msgid "[TOP]"
 msgstr "[INÍCIO]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Clique aqui para pesquisar por este título"
-
 msgid "Settings"
 msgstr ""
 
@@ -1956,6 +1963,9 @@ msgstr "Cancelar Subscrição"
 
 msgid "Home"
 msgstr "Página Principal"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Clique aqui para pesquisar por este título"
 
 msgid "Clear message"
 msgstr "Limpar mensagem"
@@ -2263,7 +2273,8 @@ msgstr "incluindo um ou mais dos termos seguintes"
 msgid "not containing the following terms"
 msgstr "não incluindo os seguintes termos"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "última alteração desde (ex: últimas 2 semanas)"
 
 msgid "any category"

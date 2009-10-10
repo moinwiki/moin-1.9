@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-12-03 14:24+0100\n"
 "Last-Translator: Jörg Cassens <moinmoin-nb@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -784,19 +784,6 @@ msgstr "Din brukerkonto er nå koblet med OpenID."
 msgid "The password you entered is not valid."
 msgstr "Passordet du oppga er ikke gyldig."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID trust verifikasjon"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1471,6 +1458,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "installer"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "HjelpOmFormattering"
 
@@ -1927,9 +1936,6 @@ msgstr "[NEDERST]"
 msgid "[TOP]"
 msgstr "[ØVERST]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Klikk her for å kjøre et fritekstsøk etter denne tittelen"
-
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -1951,6 +1957,9 @@ msgstr "Avbestill"
 
 msgid "Home"
 msgstr "Hjem"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klikk her for å kjøre et fritekstsøk etter denne tittelen"
 
 msgid "Clear message"
 msgstr "Fjern beskjed"
@@ -2266,7 +2275,8 @@ msgstr "som inneholder en eller flere av følgende begreper"
 msgid "not containing the following terms"
 msgstr "som ikke inneholder følgende begreper"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "sist endret sist (f.eks. last 2 weeks)"
 
 msgid "any category"
@@ -3549,6 +3559,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "ukjent bruker"
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID trust verifikasjon"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

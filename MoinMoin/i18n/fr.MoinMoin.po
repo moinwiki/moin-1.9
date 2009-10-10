@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
-"PO-Revision-Date: 2009-09-29 00:06+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"PO-Revision-Date: 2009-10-07 00:17+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Impossible de modifier d'anciennes versions !"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"Le verrou que vous déteniez à expiré. Vos modifications risquent d'engendrer "
+"Le verrou que vous déteniez a expiré. Vos modifications risquent d'engendrer "
 "des conflits !"
 
 msgid "Page name is too long, try shorter name."
@@ -619,7 +619,7 @@ msgid "OpenID verification requires that you click this button:"
 msgstr "Veuillez cliquer sur ce bouton pour l'identification OpenID :"
 
 msgid "Notification"
-msgstr "Notifications"
+msgstr "Notification"
 
 msgid "Notification settings saved!"
 msgstr "Paramètres de notification sauvegardés !"
@@ -634,7 +634,7 @@ msgid "'''Event type'''"
 msgstr "'''Type d'évènement'''"
 
 msgid "Select the events you want to be notified about."
-msgstr "Sélectionnez les évènement dont vous souhaitez être averti :"
+msgstr "Sélectionnez les évènements dont vous souhaitez être averti :"
 
 msgid ""
 "Before you can be notified, you need to provide a way to contact you in the "
@@ -644,11 +644,11 @@ msgstr ""
 "dans les préférences générales"
 
 msgid "Subscribed events"
-msgstr "Évènements auxquels vous êtes abonnés"
+msgstr "Évènements auxquels vous êtes abonné"
 
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr ""
-"Pages du wiki auxquelles vous êtes abonnés<<BR>>(une expression rationnelle "
+"Pages du wiki auxquelles vous êtes abonné<<BR>>(une expression rationnelle "
 "par ligne)"
 
 msgid "Save"
@@ -815,18 +815,6 @@ msgstr "Votre compte est maintenant associé à votre identifiant OpenID."
 msgid "The password you entered is not valid."
 msgstr "Le mot de passe entré est incorrect."
 
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID : étape de vérification"
-
-msgid "OpenID: handle name continuation"
-msgstr "OpenID : étape de gestion du compte"
-
-msgid "OpenID: handle associate continuation"
-msgstr "OpenID : étape d'association"
-
-msgid "OpenID: unknown continuation stage"
-msgstr "OpenID : étape inconnue"
-
 msgid "OpenID error: unknown continuation stage"
 msgstr "Erreur OpenID : étape inconnue"
 
@@ -857,7 +845,7 @@ msgid "LDAP server %(server)s failed."
 msgstr "Panne du serveur LDAP %(server)s."
 
 msgid "Failed to connect to database."
-msgstr "Échec de la connexion à la base de donnée."
+msgstr "Échec de la connexion à la base de données."
 
 #, python-format
 msgid ""
@@ -1501,6 +1489,28 @@ msgstr "ModèleDeTransparent"
 msgid "SyncJobTemplate"
 msgstr "ModèleDeTâcheDeSynchronisation"
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "installer"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "AideDeParamétrage"
 
@@ -1918,9 +1928,6 @@ msgstr "[BAS]"
 msgid "[TOP]"
 msgstr "[HAUT]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Cliquez ici pour faire une recherche de ce titre dans les pages"
-
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -1942,6 +1949,9 @@ msgstr "Se désabonner"
 
 msgid "Home"
 msgstr "Page d'accueil"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Cliquez ici pour faire une recherche de ce titre dans les pages"
 
 msgid "Clear message"
 msgstr "Fermer ce message"
@@ -2259,8 +2269,8 @@ msgstr "contenant au moins l'un des termes suivants"
 msgid "not containing the following terms"
 msgstr "ne contenant aucun des termes suivants"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "modifié depuis (p. ex. « last 2 weeks »)"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "modifié depuis (p. ex. « 2 weeks before »)"
 
 msgid "any category"
 msgstr "n'importe quelle catégorie"
@@ -2358,7 +2368,7 @@ msgstr "Transparent %(pos)d sur %(size)d "
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
-"<<%(macro_name)s: échec de l'exécution [%(error_msg)s] (conultez également "
+"<<%(macro_name)s: échec de l'exécution [%(error_msg)s] (consultez également "
 "le journal de bord)>>"
 
 msgid "Go To Page"
@@ -2887,8 +2897,9 @@ msgid ""
 "The following %(badwords)d words could not be found in the dictionary of %"
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"Les %(badwords)d mots suivants n'ont pu être trouvé dans le dictionnaire sur "
-"un total de %(totalwords)d mots%(localwords)s et sont surlignés ci-dessous :"
+"Les %(badwords)d mots suivants n'ont pu être trouvés dans le dictionnaire "
+"sur un total de %(totalwords)d mots%(localwords)s et sont surlignés ci-"
+"dessous :"
 
 msgid "Add checked words to dictionary"
 msgstr "Ajouter les mots cochés au dictionnaire"
@@ -2910,7 +2921,7 @@ msgstr ""
 "lire."
 
 msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "La traitement du courrier et de Jabber n'est pas activée sur ce wiki."
+msgstr "Le traitement du courrier et de Jabber n'est pas activé sur ce wiki."
 
 msgid "You must log in to use subscriptions."
 msgstr "Vous devez être identifié pour utiliser l'abonnement."
@@ -3065,7 +3076,7 @@ msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
-"La page %s n'a pas pu être synchronisée. La page distante a été renommé. "
+"La page %s n'a pas pu être synchronisée. La page distante a été renommée. "
 "Cela n'est pas pris en charge pour l'instant. Si vous souhaitez rétablir la "
 "synchronisation, il suffit de détruire l'une des pages."
 
@@ -3247,7 +3258,7 @@ msgstr "Voulez-vous vraiment copier cette page ?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
-msgstr "Liste de tout les liens pour « %s »"
+msgstr "Liste de tous les liens pour « %s »"
 
 msgid "No older revisions available!"
 msgstr "Il n'y a pas de version antérieure."
@@ -3591,3 +3602,15 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonyme"
+
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID : étape de vérification"
+
+#~ msgid "OpenID: handle name continuation"
+#~ msgstr "OpenID : étape de gestion du compte"
+
+#~ msgid "OpenID: handle associate continuation"
+#~ msgstr "OpenID : étape d'association"
+
+#~ msgid "OpenID: unknown continuation stage"
+#~ msgstr "OpenID : étape inconnue"

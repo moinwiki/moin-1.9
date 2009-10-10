@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -155,7 +155,7 @@ msgid "Preview"
 msgstr "Предварительный просмотр"
 
 msgid "GUI Mode"
-msgstr "Режим графического редактора"
+msgstr "Режим WYSIWYG-редактора"
 
 msgid "Load Draft"
 msgstr "Загрузить черновик"
@@ -791,20 +791,8 @@ msgstr "Ваша учетная запись связана с вашим OpenID
 msgid "The password you entered is not valid."
 msgstr "Введенный вами пароль не верен."
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "Ошибка OpenID: неизвестный этап продолжения"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Для входа по OpenID должны быть включены анонимные сессии."
@@ -1381,7 +1369,7 @@ msgid "WikiWikiWeb"
 msgstr "ВикиВикиСеть"
 
 msgid "FrontPage"
-msgstr "Начало"
+msgstr "ГлавнаяСтраница"
 
 msgid "WikiSandBox"
 msgstr "ВикиПесочница"
@@ -1467,6 +1455,28 @@ msgstr "ШаблонПрезентацияКадр"
 msgid "SyncJobTemplate"
 msgstr "ШаблонСинхронизация"
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "установить"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "КакНастраивать"
 
@@ -1483,7 +1493,7 @@ msgid "HelpOnConfiguration/SupplementationPage"
 msgstr "КакНастраивать/ВспомогательнаяСтраница"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr "КакНастраивать/ЗащитаОтДурака"
+msgstr "КакНастраивать/ЗащитаОтФлуда"
 
 msgid "HelpOnConfiguration/UserPreferences"
 msgstr "КакНастраивать/ВашиНастройки"
@@ -1579,7 +1589,7 @@ msgid "HelpOnEditing/SubPages"
 msgstr "КакРедактировать/ВложенныеСтраницы"
 
 msgid "HelpOnGraphicalEditor"
-msgstr "ПомощьПоГрафическомуРедактору"
+msgstr "ПомощьПоWysiwygРедактору"
 
 msgid "HelpOnGroups"
 msgstr "ПомощьПоГруппам"
@@ -1606,19 +1616,19 @@ msgid "HelpOnLogin"
 msgstr "КакВойти"
 
 msgid "HelpOnMacros"
-msgstr "ПомощьПоМакросам"
+msgstr "ПомощьПоМакроКомандам"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr "ПомощьПоМакросам/EmbedObject"
+msgstr "ПомощьПоМакроКомандам/EmbedObject"
 
 msgid "HelpOnMacros/Include"
-msgstr "ПомощьПоМакросам/Include"
+msgstr "ПомощьПоМакроКомандам/Include"
 
 msgid "HelpOnMacros/MailTo"
-msgstr "ПомощьПоМакросам/MailTo"
+msgstr "ПомощьПоМакроКомандам/MailTo"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr "ПомощьПоМакросам/MonthCalendar"
+msgstr "ПомощьПоМакроКомандам/MonthCalendar"
 
 msgid "HelpOnNavigation"
 msgstr "КакОриентироваться"
@@ -1774,7 +1784,7 @@ msgid "WikiCourse/23 Actions"
 msgstr "ВикиКурс/23 Действия"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr "ВикиКурс/30 Графический редактор"
+msgstr "ВикиКурс/30 WYSIWYG-редактор"
 
 msgid "WikiCourse/40 Creating more pages"
 msgstr "ВикиКурс/40 Создание новых страниц"
@@ -1884,9 +1894,6 @@ msgstr "[ВНИЗ]"
 msgid "[TOP]"
 msgstr "[ВВЕРХ]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Нажмите сюда для полнотекстового поиска этого названия"
-
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1908,6 +1915,9 @@ msgstr "Отписаться"
 
 msgid "Home"
 msgstr "МояСтраница"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Нажмите сюда для полнотекстового поиска этого названия"
 
 msgid "Clear message"
 msgstr "Убрать это сообщение"
@@ -1993,7 +2003,7 @@ msgid "Edit (Text)"
 msgstr "Редактировать (Текст)"
 
 msgid "Edit (GUI)"
-msgstr "Редактировать (Графически)"
+msgstr "Редактировать (GUI)"
 
 msgid "Immutable Page"
 msgstr "Неизменяемая страница"
@@ -2125,10 +2135,10 @@ msgid "NONE"
 msgstr "НЕТ"
 
 msgid "Global extension macros"
-msgstr "Общие дополнительные макросы"
+msgstr "Общие дополнительные макрокоманды"
 
 msgid "Local extension macros"
-msgstr "Локальные дополнительные макросы"
+msgstr "Локальные дополнительные макрокоманды"
 
 msgid "Global extension actions"
 msgstr "Общие дополнительные действия"
@@ -2222,8 +2232,9 @@ msgstr "с любым из слов"
 msgid "not containing the following terms"
 msgstr "без слов"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "последний раз отредактирована (например, последние 2 недели назад)"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr ""
+"последний раз отредактирована (например, «2 weeks before» — две недели назад)"
 
 msgid "any category"
 msgstr "любая категория"
@@ -3264,7 +3275,7 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "Вам нельзя делать рисунки на этой странице."
 
 msgid "Empty target given."
-msgstr ""
+msgstr "Задана пустая цель."
 
 msgid "Edit drawing"
 msgstr "Редактировать рисунок"
@@ -3745,14 +3756,15 @@ msgstr "анонимно"
 #~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
 #~ "(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
 #~ msgstr ""
-#~ "Не хватает агрументов, даных макросу EmbedObject! Попробуйте <<EmbedObject"
-#~ "(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
+#~ "Не хватает агрументов, даных макрокоманде EmbedObject! Попробуйте "
+#~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
+#~ "Text])>>"
 
 #~ msgid ""
 #~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
 #~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
 #~ msgstr ""
-#~ "Не хватает агрументов, даных макросу EmbedObject! Попробуйте "
+#~ "Не хватает агрументов, даных макроманде EmbedObject! Попробуйте "
 #~ "<<EmbedObjecturl_mimetype [,width=width] [,height=height] [,alt=alternate "
 #~ "Text])>>"
 

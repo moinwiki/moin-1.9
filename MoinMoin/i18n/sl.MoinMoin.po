@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -778,18 +778,6 @@ msgstr "Vaš uporabniški račun je sedaj povezan z vašim OpenID."
 msgid "The password you entered is not valid."
 msgstr "Geslo, ki ste ga vnesli, ni veljavno."
 
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID: nadaljevanje preverjanja"
-
-msgid "OpenID: handle name continuation"
-msgstr "OpenID: nadaljevanje imena"
-
-msgid "OpenID: handle associate continuation"
-msgstr "OpenID: nadaljevanje povezovanja (asociacije)"
-
-msgid "OpenID: unknown continuation stage"
-msgstr "OpenID: neznana faza nadaljevanja"
-
 msgid "OpenID error: unknown continuation stage"
 msgstr "OpenID: napaka: neznana faza nadaljevanja"
 
@@ -1452,6 +1440,28 @@ msgstr "ŠablonaSlike"
 msgid "SyncJobTemplate"
 msgstr "ŠablonaZaSyncJob"
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "namesti"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "PomočPriNastavitvah"
 
@@ -1870,9 +1880,6 @@ msgstr "[NA-KONEC]"
 msgid "[TOP]"
 msgstr "[NA-VRH]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Iskanje tega naslova po polnem besedilu strani"
-
 msgid "Settings"
 msgstr "Nastavitve"
 
@@ -1894,6 +1901,9 @@ msgstr "Preklic naročila na spremembe"
 
 msgid "Home"
 msgstr "Domov"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Iskanje tega naslova po polnem besedilu strani"
 
 msgid "Clear message"
 msgstr "Odstrani tole obvestilo"
@@ -2207,7 +2217,8 @@ msgstr "vsebujoč vsaj enega od naslednjih izrazov"
 msgid "not containing the following terms"
 msgstr "ne vsebujoč naslednjih izrazov"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "nazadnje spremenjeno po... (n.pr. v zadnjih dveh tednih)"
 
 msgid "any category"
@@ -3499,3 +3510,15 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimno"
+
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID: nadaljevanje preverjanja"
+
+#~ msgid "OpenID: handle name continuation"
+#~ msgstr "OpenID: nadaljevanje imena"
+
+#~ msgid "OpenID: handle associate continuation"
+#~ msgstr "OpenID: nadaljevanje povezovanja (asociacije)"
+
+#~ msgid "OpenID: unknown continuation stage"
+#~ msgstr "OpenID: neznana faza nadaljevanja"

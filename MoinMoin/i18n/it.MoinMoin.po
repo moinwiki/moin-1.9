@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
-"PO-Revision-Date: 2009-04-20 16:16+0100\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"PO-Revision-Date: 2009-10-03 22:29+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -378,11 +378,12 @@ msgstr ""
 "Questo pacchetto richiede una versione di MoinMoin più recente (almeno %s)."
 
 msgid "The theme name is not set."
-msgstr "Il nome del tema non è stato specificato."
+msgstr "Il nome del tema non è impostato."
 
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
+"File del tema non installati. Permessi di scrittura non presenti per %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -390,7 +391,7 @@ msgstr "L'installazione di \"%(filename)s\" non è riuscita."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr "Il file %s non è un pacchetto di MoinMoin."
+msgstr "Il file %s non è un file pacchetto di MoinMoin."
 
 #, python-format
 msgid "The page %s does not exist."
@@ -480,13 +481,12 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Espressione regolare di evidenziazione \"%(regex)s\" non valida: %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"La copia di backup di questa pagina è deprecata e pertanto non verrà inclusa "
-"nella ricerca."
+"La copia di backup di questa pagina è deprecata e il suo punteggio nelle "
+"ricerca sarà basso."
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -778,21 +778,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Associa questo nome"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Verifica annullata."
+msgstr "Verifica OpenID annullata."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID aggiunto con successo."
+msgstr "OpenID completato con successo. ID: %s"
 
-#, fuzzy
 msgid "OpenID failure"
 msgstr "Fallimento di OpenID."
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "Nessun OpenID fornito."
+msgstr "Nessun OpenID trovato nella sessione."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "L'account è ora associato al proprio OpenID."
@@ -800,21 +797,8 @@ msgstr "L'account è ora associato al proprio OpenID."
 msgid "The password you entered is not valid."
 msgstr "La password inserita non è valida."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "Verifica fiducia OpenID"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "Errore OpenID: passo di continuazione sconosciuto"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr ""
@@ -843,18 +827,17 @@ msgstr "Il server LDAP %(server)s ha fallito."
 msgid "Failed to connect to database."
 msgstr "Connessione al database non riuscita."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "Se non si dispone di un account, <a href=\"%(userprefslink)s\">è possibile "
-"crearne uno ora</a>. <a href=\"%(sendmypasswordlink)s\">Dimenticato la "
-"password?</a>"
+"crearne uno ora</a>."
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Password dimenticata?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1453,7 +1436,7 @@ msgid "HomepageTemplate"
 msgstr "PaginaPersonaleModello"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "AiutoModello"
 
 msgid "HomepageReadWritePageTemplate"
 msgstr "PaginaPersonaleLetturaScritturaModello"
@@ -1467,8 +1450,9 @@ msgstr "PaginaPersonalePrivataModello"
 msgid "HomepageGroupsTemplate"
 msgstr "PaginaPersonaleGruppiModello"
 
+#, fuzzy
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "DispensaPresentazioneModello"
 
 msgid "SlideShowTemplate"
 msgstr "PresentazioneModello"
@@ -1479,29 +1463,53 @@ msgstr "DiapositivaModello"
 msgid "SyncJobTemplate"
 msgstr "LavoroSincModello"
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "installa"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "AiutoSuConfigurazione"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "AiutoSuConfigurazione/SupportoPostaElettronica"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "AiutoSuConfigurazione/PoliticheDiSicurezza"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "AiutoSuConfigurazione/FileAllegati"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "AiutoSuConfigurazione/PaginaSupplementare"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "AiutoSuConfigurazione/ProtezioneSovraccarico"
 
+#, fuzzy
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr ""
+msgstr "AiutoSuConfigurazione/PreferenzeUtente"
 
+#, fuzzy
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "AiutoSuInstallazionePacchetto"
 
 msgid "HelpOnUpdating"
 msgstr "AiutoSuAggiornamento"
@@ -1509,20 +1517,24 @@ msgstr "AiutoSuAggiornamento"
 msgid "HelpOnUpdatingPython"
 msgstr "AiutoSuAggiornamentoPython"
 
+#, fuzzy
 msgid "HelpOnAdministration"
 msgstr "AiutoSuAmministrazione"
 
+#, fuzzy
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "AiutoSuAutenticazione"
 
+#, fuzzy
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "AiutoSuAutenticazione/CookieEsterno"
 
 msgid "HelpOnMoinCommand"
 msgstr "AiutoSuComandiMoin"
 
+#, fuzzy
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "AiutoSuComandiMoin/DumpDiEsportazione"
 
 msgid "HelpOnNotification"
 msgstr "AiutoSuNotifiche"
@@ -1566,8 +1578,9 @@ msgstr "AiutoSuListeControlloAccesso"
 msgid "HelpOnActions"
 msgstr "AiutoSuAzioni"
 
+#, fuzzy
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "AiutoSuAzioni/AllegaFile"
 
 msgid "HelpOnAdmonitions"
 msgstr "AiutoSuAvvisi"
@@ -1595,14 +1608,14 @@ msgstr "AiutoSuModificaPaginaModoGrafico"
 
 #, fuzzy
 msgid "HelpOnGroups"
-msgstr "AiutoSuLineeOrizzontali"
+msgstr "AiutoSuGruppi"
 
 msgid "HelpOnHeadlines"
 msgstr "AiutoSuTitoliSezioni"
 
 #, fuzzy
 msgid "HelpOnImages"
-msgstr "AiutoSuPagineXml"
+msgstr "AiutoSuImmagini"
 
 msgid "HelpOnLanguages"
 msgstr "AiutoSuLingue"
@@ -1610,8 +1623,9 @@ msgstr "AiutoSuLingue"
 msgid "HelpOnLinking"
 msgstr "AiutoSuCollegamenti"
 
+#, fuzzy
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "AiutoSuCollegamenti/CollegamentiNote"
 
 msgid "HelpOnLists"
 msgstr "AiutoSuListe"
@@ -1619,20 +1633,25 @@ msgstr "AiutoSuListe"
 msgid "HelpOnLogin"
 msgstr "AiutoSuAccesso"
 
+#, fuzzy
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "AiutoSuMacro"
 
+#, fuzzy
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
+msgstr "AiutoSuMacro/IncludiOggetto"
 
+#, fuzzy
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "AiutoSuMacro/Includi"
 
+#, fuzzy
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "AiutoSuMacro/MailTo"
 
+#, fuzzy
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "AiutoSuMacro/CalendarioMensile"
 
 msgid "HelpOnNavigation"
 msgstr "AiutoSuNavigazione"
@@ -1644,7 +1663,7 @@ msgid "HelpOnPageCreation"
 msgstr "AiutoSuCreazionePagina"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "AiutoSuCancellazionePagina"
 
 msgid "HelpOnParsers"
 msgstr "AiutoSuProcessoriDiCodice"
@@ -1656,7 +1675,7 @@ msgid "HelpOnParsers/ReStructuredText/RstPrimer"
 msgstr "AiutoSuProcessoriDiCodice/ReStructuredText/IntroduzioneRst"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "AiutoSuIstruzioniDiElaborazione"
 
 msgid "HelpOnRules"
 msgstr "AiutoSuLineeOrizzontali"
@@ -1900,10 +1919,6 @@ msgstr "[FINE]"
 msgid "[TOP]"
 msgstr "[INIZIO]"
 
-msgid "Click to do a full-text search for this title"
-msgstr ""
-"Fare clic qui per effettuare una ricerca su tutto il testo per questo titolo"
-
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -1925,6 +1940,10 @@ msgstr "Annulla abbonamento"
 
 msgid "Home"
 msgstr "Home"
+
+msgid "Click to do a full-text search for this title"
+msgstr ""
+"Fare clic qui per effettuare una ricerca su tutto il testo per questo titolo"
 
 msgid "Clear message"
 msgstr "Nascondi questo messaggio"
@@ -2242,7 +2261,8 @@ msgstr "contenente uno o più dei seguenti termini"
 msgid "not containing the following terms"
 msgstr "non contenente i seguenti termini"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "modificato per l'ultima volta durante (es. le ultime 2 settimane)"
 
 msgid "any category"
@@ -2392,28 +2412,26 @@ msgstr ""
 "È necessario avere un collegamento rapido a questa pagina per poterlo "
 "rimuovere."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Diapositive"
+msgstr "Modifica diapositiva"
 
 msgid "Quit"
-msgstr ""
+msgstr "Chiudi"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Diapositive"
+msgstr "Chiude le diapositive"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "Mostra prima diapositiva (Freccia su)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "Mostra ultima diapositiva (Freccia giù)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "Mostra diapositiva precedente (Freccia sinistra)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "Mostra diapositiva successiva (Freccia destra)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -3299,7 +3317,7 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "Non si è autorizzati a salvare un disegno in questa pagina."
 
 msgid "Empty target given."
-msgstr ""
+msgstr "Fornito obiettivo vuoto."
 
 msgid "Edit drawing"
 msgstr "Modifica il disegno"
@@ -3363,20 +3381,18 @@ msgstr "Amministrazione di MyPages"
 msgid "Only superuser is allowed to use this action."
 msgstr "Solo al super-utente è consentito usare questa azione."
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "La pagina sovrastante non è stata trovata."
+msgstr "Pacchetti di pagina non trovati."
 
-#, fuzzy
 msgid "page package"
-msgstr "Pagina modificata"
+msgstr "pacchetto pagina"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Scegliere:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Installazione pacchetto lingua per «%s»"
 
 msgid "Your subscription to this page has been removed."
 msgstr "L'abbonamento a questa pagina è stato annullato."
@@ -3556,6 +3572,19 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimo"
+
+# (ndt) misteriosi...
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID: continuazione handle verifica"
+
+#~ msgid "OpenID: handle name continuation"
+#~ msgstr "OpenID: continuazione handle nome"
+
+#~ msgid "OpenID: handle associate continuation"
+#~ msgstr "OpenID: continuazione handle di associazione"
+
+#~ msgid "OpenID: unknown continuation stage"
+#~ msgstr "OpenID: passo di continuazione sconosciuto"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

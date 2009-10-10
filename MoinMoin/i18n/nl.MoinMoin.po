@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2009-03-24 20:06+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -797,19 +797,6 @@ msgstr "Uw account is nu gekoppeld met uw OpenID."
 msgid "The password you entered is not valid."
 msgstr "Het wachtwoord dat u opgaf is ongeldig."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID vertrouwensverificatie"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1484,6 +1471,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "installeren"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "HelpBijOpmaak"
 
@@ -1939,9 +1948,6 @@ msgstr "[ONDER]"
 msgid "[TOP]"
 msgstr "[BOVEN]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
-
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -1963,6 +1969,9 @@ msgstr "Abonnement opzeggen"
 
 msgid "Home"
 msgstr "Start"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
 
 msgid "Clear message"
 msgstr "Bericht wissen"
@@ -2278,7 +2287,8 @@ msgstr "bevat een of meer van de volgende termen"
 msgid "not containing the following terms"
 msgstr "bevat de volgende termen niet"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "laatst gewijzigd sinds (bv. vorige 2 weken)"
 
 msgid "any category"
@@ -3591,6 +3601,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID vertrouwensverificatie"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

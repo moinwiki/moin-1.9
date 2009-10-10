@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.8\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
-"PO-Revision-Date: 2009-08-30 19:04-0300\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"PO-Revision-Date: 2009-10-10 09:57-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -483,12 +483,11 @@ msgstr "Se esperaba un valor para la llave \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "expresión regular inválida \"%(regex)s\":·%(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"¡El respaldo del contenido de esta página ha caducado y no se incluirá en "
+"¡El respaldo del contenido de esta página ha caducado y tendrá menor relevancia en "
 "los resultados de la búsqueda!"
 
 #, python-format
@@ -752,10 +751,10 @@ msgid ""
 "If you choose an existing account name you will be asked for the\n"
 "password and be able to associate the account with your OpenID."
 msgstr ""
-"Selecciona un nombre de usuario.Si seleccionas un nombre de usuario que ya "
-"existe se te pedirá que\n"
-"introduzcas la contraseña y podrás asociar ese nombre de usuario contu "
-"OpenID."
+"Selecciona un nombre de usuario.\n"
+"Si seleccionas un nombre de usuario que ya existe se te pedirá que\n"
+"introduzcas la contraseña y podrás asociar ese nombre de usuario con "
+"tu OpenID."
 
 msgid "Name"
 msgstr "Nombre"
@@ -780,40 +779,24 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Asociar este nombre"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "Has cancelado la verificación."
+msgstr "Has cancelado la verificación OpenID."
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "Se adicionó el OpenID satisfactoriamente."
+msgstr "OpenID satisfactorio. identificador: %s"
 
-#, fuzzy
 msgid "OpenID failure"
 msgstr "Fallo de OpenID."
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "No has ingresado un OpenID."
+msgstr "No se ha encontrado un OpenID en la sesión."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Tu cuenta se ha asociado a tu OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "La contraseña que introdujiste no es válida."
-
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "Verificación de confianza de OpenID"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
 
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
@@ -846,19 +829,18 @@ msgstr "El servidor LDAP %(server)s ha fallado."
 msgid "Failed to connect to database."
 msgstr "Fallo al conectar a la base de datos."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "Si no tienes una cuenta <a href=\"%(userprefslink)s\">puedes crear una "
-"ahora</a>. <a href=\"%(sendmypasswordlink)s\">¿Olvidaste tu contraseña?</a>"
+"ahora</a>. "
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">¿Olvidaste tu contraseña?</a>"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
 ">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
@@ -881,17 +863,16 @@ msgstr ""
 ">>'''''negrilla'''<<Verbatim(**)>> y cursiva''<<Verbatim(//)>>;\n"
 " Línea horizontal:: <<Verbatim(----)>>\n"
 " Forzar salto de línea:: <<Verbatim(\\\\)>>\n"
-" Encabezados:: = Título de nivel 1 =; == Título de nivel 2 ==; === Título de "
-"nivel 3 ===; ==== Título de nivel 4 ====; ===== Título de nivel 5 =====.\n"
-" Listas:: espacio y uno de estos: * viñetas; 1., a., A., i., I. elementos "
-"numerados; 1.#n comienza la numeración en n; un 'espacio' produce sangría o "
-"indentado.\n"
-" Enlaces:: <<Verbatim(JuntaPalabrasConMayúscula)>>; <<Verbatim([[destino "
-"enlace|texto enlace]])>>.\n"
-" Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||; "
-"no se permiten espacios después de las tablas o los títulos.\n"
+" Encabezados:: = Título de nivel 1 =; == Título de nivel 2 ==; === Título "
+"de nivel 3 ===; ==== Título de nivel 4 ====; ===== Título de nivel 5 =====.\n"
+" Listas:: * viñetas; ** sub-viñetas; # elementos numerados; ## sub-elementos"
+" numerados.\n"
+" Enlaces:: <<Verbatim([[destino]])>>; <<Verbatim([[destino|texto enlace]])"
+">>.\n"
+" Tablas:: |= texto de encabezado | texto de celda | mas texto de celda |;\n"
+"\n"
+"(!) Para mas ayuda, consulta HelpOnEditing o HelpOnCreoleSyntax.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -907,24 +888,23 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
 " Énfasis:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negrilla'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negrilla "
 "cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mezclada ''<<Verbatim(''')"
 ">>'''''negrilla'''<<Verbatim(''')>> y cursiva''<<Verbatim('')>>; <<Verbatim"
 "(----)>> línea horizontal.\n"
-" Encabezados:: <<Verbatim(=)>> Título de nivel 1 <<Verbatim(=)>>; <<Verbatim"
-"(==)>> Título de nivel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Título de nivel "
-"3 <<Verbatim(===)>>; <<Verbatim(====)>> Título de nivel 4 <<Verbatim(====)"
-">>; <<Verbatim(=====)>> Título de nivel 5 <<Verbatim(=====)>>.\n"
+" Encabezados:: = Título de nivel 1 =; == Título de nivel 2 ==; === Título de "
+"nivel 3 ===; ==== Título de nivel 4 ====; ===== Título de nivel 5 =====.\n"
 " Listas:: espacio y uno de estos: * viñetas; 1., a., A., i., I. elementos "
-"numerados; 1.#n comienza la numeración en n; un 'espacio' produce sangría o "
-"indentado.\n"
+"numerados; 1.#n comienza la numeración en n; un espacio produce sangría.\n"
 " Enlaces:: <<Verbatim(JuntaPalabrasConMayúscula)>>; <<Verbatim([[destino "
 "enlace|texto enlace]])>>.\n"
 " Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||; "
 "no se permiten espacios después de las tablas o los títulos.\n"
+"\n"
+"(!) Para mas ayuda, consulta HelpOnEditing o SyntaxReference.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -983,8 +963,8 @@ msgstr ""
 "Listas: * viñetas; 1., a. enumeraciones.\n"
 "}}}\n"
 "(!) Para obtener más ayuda, consulta la\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|Referencia "
-"rápida de reStructuredText]].\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"Referencia rápida de reStructuredText]].\n"
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Se excedió el número máximo de 'includes' permitidos"
@@ -1235,8 +1215,8 @@ msgstr ""
 "Te has suscrito a una página del Wiki en \"%(sitename)s\" para recibir vía "
 "correo notificaciones ante cambios en la misma.\n"
 "\n"
-"%(editor)s ha cambiado el nombre de la página \"%(oldname)s\" a \"%(pagename)"
-"s\":\n"
+"%(editor)s ha cambiado el nombre de la página \"%(oldname)s\" a "
+"\"%(pagename)s\":\n"
 
 #, python-format
 msgid "New user account created on %(sitename)s"
@@ -1273,9 +1253,9 @@ msgid ""
 msgstr ""
 "Estimado Usuario del Wiki,\n"
 "\n"
-"Te has suscrito a las notificaciones de modificación de la página \"%"
-"(page_name)s\". El editor %(editor)s  ha agregado un archivo adjunto a dicha "
-"página. A continuación, la información detallada disponible:\n"
+"Te has suscrito a las notificaciones de modificación de la página "
+"\"%(page_name)s\". El editor %(editor)s  ha agregado un archivo adjunto a "
+"dicha página. A continuación, la información detallada disponible:\n"
 "\n"
 "Nombre del archivo adjunto: %(attach_name)s\n"
 "Tamaño del archivo adjunto: %(attach_size)s\n"
@@ -1392,13 +1372,11 @@ msgstr "PáginaInexistente"
 msgid "MissingHomePage"
 msgstr "PáginaPersonalInexistente"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "PáginaPersonalInexistente"
+msgstr "WikiHomePage"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Nombre"
+msgstr "WikiName"
 
 msgid "WikiWikiWeb"
 msgstr ""
@@ -1409,9 +1387,8 @@ msgstr "PáginaInicial"
 msgid "WikiSandBox"
 msgstr ""
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "InterWiki"
 
 msgid "AbandonedPages"
 msgstr ""
@@ -1499,6 +1476,28 @@ msgid "SlideTemplate"
 msgstr ""
 
 msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "InstallDocs"
+msgstr "instalar"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
 msgstr ""
 
 #, fuzzy
@@ -1957,9 +1956,6 @@ msgstr "[FINAL]"
 msgid "[TOP]"
 msgstr "[INICIO]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Efectuar una búsqueda por páginas que tienen este título en contenidos"
-
 msgid "Settings"
 msgstr "Opciones"
 
@@ -1981,6 +1977,9 @@ msgstr "Des-suscribirse"
 
 msgid "Home"
 msgstr "Inicio"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Efectuar una búsqueda por páginas que tienen este título en contenidos"
 
 msgid "Clear message"
 msgstr "Quitar mensaje"
@@ -2296,8 +2295,8 @@ msgstr "que contiene uno o más de estos términos"
 msgid "not containing the following terms"
 msgstr "que no contenga niguno de los siguientes términos"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "última modificación desde (p.e. 2 semanas atrás)"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "última modificación desde (p.ej. 2 semanas atrás)"
 
 msgid "any category"
 msgstr "cualquier categoría"
@@ -2444,16 +2443,14 @@ msgstr "No se ha podido eliminar tu enlace rápido a esta página."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Necesitas tener un enlace rápido a esta página para eliminarlo."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Proyectar diapositivas"
+msgstr "Modificar diapositivas"
 
 msgid "Quit"
-msgstr ""
+msgstr "Salir"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Proyectar diapositivas"
+msgstr "Salir de de proyección de diapositivas"
 
 msgid "Show first slide (up arrow)"
 msgstr ""
@@ -3416,13 +3413,11 @@ msgstr "Administración de MisPáginas"
 msgid "Only superuser is allowed to use this action."
 msgstr "Solamente el superusuario tiene permiso para usar esta acción."
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "¡No se encontró una página superior!"
+msgstr "No se encontraron paquetes de página"
 
-#, fuzzy
 msgid "page package"
-msgstr "Página cambiada"
+msgstr "paquete de página"
 
 msgid "Choose:"
 msgstr ""
@@ -3607,6 +3602,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anónimo"
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "Verificación de confianza de OpenID"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

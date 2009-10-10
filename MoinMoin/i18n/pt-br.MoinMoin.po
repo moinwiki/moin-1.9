@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2009-09-28\n"
 "Last-Translator: Renato Silva\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -785,18 +785,6 @@ msgstr "Sua conta está agora associada a sua OpenID"
 msgid "The password you entered is not valid."
 msgstr "A senha que você informou não é válida."
 
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID: tratar continuação de verificação"
-
-msgid "OpenID: handle name continuation"
-msgstr "OpenID: tratar continuação de nome"
-
-msgid "OpenID: handle associate continuation"
-msgstr "OpenID: tratar continuação de associação"
-
-msgid "OpenID: unknown continuation stage"
-msgstr "OpenID: estágio de continuação desconhecido"
-
 msgid "OpenID error: unknown continuation stage"
 msgstr "Erro de OpenID: estágio de continuação desconhecido"
 
@@ -1078,10 +1066,10 @@ msgid "Jabber ID"
 msgstr "Identidade Jabber"
 
 msgid "User CSS URL"
-msgstr "URL da folha de estilo (CSS) do usuário"
+msgstr "URL da CSS de usuário"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Deixe em branco para desabilitar a folha de estil CSS do usuário)"
+msgstr "(Deixe em branco para desabilitar a CSS de usuário)"
 
 msgid "Editor size"
 msgstr "Tamanho do editor"
@@ -1458,6 +1446,28 @@ msgstr "TemplateDeSlide"
 
 msgid "SyncJobTemplate"
 msgstr "TemplateDeSyncJob"
+
+#, fuzzy
+msgid "InstallDocs"
+msgstr "instalar"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
 
 msgid "HelpOnConfiguration"
 msgstr "AjudaComConfiguração"
@@ -1878,9 +1888,6 @@ msgstr "[FINAL]"
 msgid "[TOP]"
 msgstr "[TOPO]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Clique aqui para fazer uma busca completa para este título"
-
 msgid "Settings"
 msgstr "Configurações"
 
@@ -1902,6 +1909,9 @@ msgstr "Deixar de acompanhar"
 
 msgid "Home"
 msgstr "Home"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Clique aqui para fazer uma busca completa para este título"
 
 msgid "Clear message"
 msgstr "Excluir mensagem"
@@ -2216,8 +2226,8 @@ msgstr "contendo um ou mais dos seguintes termos"
 msgid "not containing the following terms"
 msgstr "não contendo os seguintes termos"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "última modificação desde (p.e últimas 2 semanas)"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "última modificação desde (ex. 2 semanas atrás)"
 
 msgid "any category"
 msgstr "qualquer categoria"
@@ -3516,6 +3526,18 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anônimo"
+
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID: tratar continuação de verificação"
+
+#~ msgid "OpenID: handle name continuation"
+#~ msgstr "OpenID: tratar continuação de nome"
+
+#~ msgid "OpenID: handle associate continuation"
+#~ msgstr "OpenID: tratar continuação de associação"
+
+#~ msgid "OpenID: unknown continuation stage"
+#~ msgstr "OpenID: estágio de continuação desconhecido"
 
 #~ msgid "you may need to login to edit this page"
 #~ msgstr "você pode precisar se logar para editar esta página"

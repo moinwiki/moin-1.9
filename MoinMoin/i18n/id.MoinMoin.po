@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -785,18 +785,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr ""
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1477,6 +1465,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "instal"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "BantuanPemformatan"
 
@@ -1930,9 +1940,6 @@ msgstr "[DASAR]"
 msgid "[TOP]"
 msgstr "[ATAS]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Klik untuk melakukan pencarian teks penuh untuk judul ini"
-
 msgid "Settings"
 msgstr ""
 
@@ -1954,6 +1961,9 @@ msgstr "Batal berlangganan"
 
 msgid "Home"
 msgstr "Pangkal"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klik untuk melakukan pencarian teks penuh untuk judul ini"
 
 msgid "Clear message"
 msgstr "Bersihkan pesan"
@@ -2262,7 +2272,8 @@ msgstr "berisi satu atau lebih dari istilah berikut"
 msgid "not containing the following terms"
 msgstr "tidak berisi dari istilah berikut"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "perubahan terakhir sejak (contoh: 2 minggu terakhir)"
 
 msgid "any category"
