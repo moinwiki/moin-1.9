@@ -30,6 +30,8 @@
 import os, time, zipfile, errno, datetime
 from StringIO import StringIO
 
+from werkzeug import http_date
+
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
@@ -776,9 +778,11 @@ def _do_box(pagename, request):
         dangerous = mime_type in request.cfg.mimetypes_xss_protect
         content_dispo = dangerous and 'attachment' or 'inline'
 
-        request.content_type = content_type
-        request.last_modified = timestamp
-        #request.content_length = os.path.getsize(fpath)
+        now = time.time()
+        request.headers.add('Date', http_date(now))
+        request.headers.add('Content-Type', content_type)
+        request.headers.add('Last-Modified', http_date(timestamp))
+        #request.headers.add('Content-Length', os.path.getsize(fpath))
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
         request.headers.add('Content-Disposition', content_dispo_string)
 
@@ -814,9 +818,11 @@ def _do_get(pagename, request):
         dangerous = mime_type in request.cfg.mimetypes_xss_protect
         content_dispo = dangerous and 'attachment' or 'inline'
 
-        request.content_type = content_type
-        request.last_modified = timestamp
-        request.content_length = os.path.getsize(fpath)
+        now = time.time()
+        request.headers.add('Date', http_date(now))
+        request.headers.add('Content-Type', content_type)
+        request.headers.add('Last-Modified', http_date(timestamp))
+        request.headers.add('Content-Length', os.path.getsize(fpath))
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
         request.headers.add('Content-Disposition', content_dispo_string)
 
