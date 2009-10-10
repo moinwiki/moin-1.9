@@ -782,6 +782,8 @@ def _do_box(pagename, request):
         request.headers.add('Date', http_date(now))
         request.headers.add('Content-Type', content_type)
         request.headers.add('Last-Modified', http_date(timestamp))
+        # Expire content fast, browser shall ask and get 200 or 304 answer:
+        request.headers.add('Expires', http_date(now + 10))
         #request.headers.add('Content-Length', os.path.getsize(fpath))
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
         request.headers.add('Content-Disposition', content_dispo_string)
@@ -822,6 +824,8 @@ def _do_get(pagename, request):
         request.headers.add('Date', http_date(now))
         request.headers.add('Content-Type', content_type)
         request.headers.add('Last-Modified', http_date(timestamp))
+        # Expire content fast, browser shall ask and get 200 or 304 answer:
+        request.headers.add('Expires', http_date(now + 10))
         request.headers.add('Content-Length', os.path.getsize(fpath))
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
         request.headers.add('Content-Disposition', content_dispo_string)
