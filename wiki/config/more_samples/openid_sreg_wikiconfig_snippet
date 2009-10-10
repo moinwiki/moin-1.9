@@ -1,0 +1,37 @@
+    # This is a sample configuration snippet that shows moin's openid sreg configuration
+    # See HelpOnOpenID, HelpOnAuthentication and HelpOnConfiguration for more info.
+
+    from MoinMoin.auth.openidrp import OpenIDAuth
+    from MoinMoin.auth.openidrp_ext.openidrp_sreg import *
+
+    auth = [
+        OpenIDAuth(modify_request=openidrp_sreg_modify_request,
+                   update_user=openidrp_sreg_update_user,
+                   create_user=openidrp_sreg_create_user),
+        # other auth methods can go here
+        #MoinAuth()
+    ]
+
+    cookie_lifetime = (1, 12)
+
+    # allow only certain OP's .. with directed identities
+    openidrp_allowed_op = []
+
+    openidrp_allow_registration = True
+    openidrp_registration_url = '' # url to your provider's registration page
+
+    # configurable SREG request values
+    # possible values:
+    #     nickname, email, fullname, dob, gender, country, language, timezone
+    # match these up with OpenIDRP.auth_attribs
+    #     ['name', 'email', 'aliasname', 'language', 'tz_offset']
+    openidrp_sreg_required = ['nickname', 'email', 'timezone']
+    openidrp_sreg_optional = ['fullname', 'language']
+    openidrp_sreg_username_field = 'nickname' #'fullname'
+
+    # don't let users change password or have multiple openid's
+    user_form_disable = ['changepass', 'oid']
+
+    # remove some options from the large user preferences form
+    user_form_remove = ['css_url', 'quicklinks'] #'password', 'password1', 'password2']
+

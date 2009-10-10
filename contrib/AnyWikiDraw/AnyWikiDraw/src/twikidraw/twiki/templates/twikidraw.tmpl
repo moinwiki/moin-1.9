@@ -1,0 +1,51 @@
+%TMPL:INCLUDE{"twiki"}%
+%TMPL:P{"htmldoctype"}%
+<head>
+  <title> %WIKITOOLNAME% . <nop>%WEB% . %TOPIC% (edit drawing "%PARAM1%") %TMPL:P{"titleaction"}%</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=%CHARSET%" />
+ <meta name="robots" content="noindex" />
+ %HTTP_EQUIV_ON_EDIT%
+ <meta http-equiv="Expires" content="0" />
+ <meta http-equiv="Pragma" content="no-cache" />
+ <meta http-equiv="Cache-Control" content="no-cache" />
+</head>
+<body bgcolor="#ffffff">
+<table width="100%" border="0" cellpadding="3" cellspacing="0">
+  <tr>
+    <td bgcolor="%WEBBGCOLOR%" rowspan="2" valign="top" width="1%">
+      <a href="%WIKIHOMEURL%"><img src="%PUBURLPATH%/wikiHome.gif" border="0" alt="Home" /></a>
+    </td>
+    <td>
+      <b>%WIKITOOLNAME% . %WEB% . </b><font size="+2"><b>%TOPIC%</b> (edit drawing <b>%PARAM1%</b>) </font>
+    </td>
+  </tr>
+  <tr bgcolor="%WEBBGCOLOR%">
+    <td colspan="2">
+      <nop>TWikiDraw
+    </td>
+  </tr>
+</table>
+<p />
+<img src="%ATTACHURLPATH%/%PARAM1%.gif" border="2" alt="%PARAM1%" />
+<applet code="CH.ifa.draw.twiki.TWikiDraw.class" archive="%PUBURLPATH%/%TWIKIWEB%/TWikiDrawPlugin/twikidraw.jar" width="100%" height="40">
+<param name="drawpath" value="%ATTACHURLPATH%/%PARAM1%.draw" />
+<param name="gifpath"  value="%ATTACHURLPATH%/%PARAM1%.gif" />
+<param name="extracolors"  value="%WEB% background=%WEBBGCOLOR%,%TWIKIDRAWPLUGIN_EXTRA_COLORS%" />
+<param name="savepath" value="%SCRIPTURLPATH%/upload%SCRIPTSUFFIX%/%WEB%/%TOPIC%" />
+<param name="viewpath" value="%SCRIPTURLPATH%/view%SCRIPTSUFFIX%/%WEB%/%TOPIC%" />
+<param name="helppath" value="%SCRIPTURLPATH%/view%SCRIPTSUFFIX%/%TWIKIWEB%/TWikiDrawPlugin" />
+<b>NOTE:</b> You need a Java enabled browser to edit the drawing %PARAM1%.
+</applet>
+<p />
+<b>NOTE:</b> If you have edited this drawing before, it may be necessary to hit
+shift+reload to refresh the drawing in the editor, due to URL cacheing. It may also be necessary to hit shift+reload after editing to see the result.
+<p />
+<table width="100%" border="0" cellpadding="3" cellspacing="0">
+  <tr bgcolor="%WEBBGCOLOR%">
+    <td valign="top">
+      <a href="%SCRIPTURLPATH%/view%SCRIPTSUFFIX%/%WEB%/%TOPIC%">Cancel</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
