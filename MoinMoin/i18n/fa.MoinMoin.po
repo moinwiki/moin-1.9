@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -788,19 +788,6 @@ msgstr "حساب کاربری شما به حساب OpenID مطابق شد."
 msgid "The password you entered is not valid."
 msgstr "کلمه عبوری که وارد نمودید معتبر نیست."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "بازبینی صحت OpenID"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1480,6 +1467,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "نصب"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "راهنمای فرمت‌ها"
 
@@ -1934,9 +1943,6 @@ msgstr "[انتهای صفحه]"
 msgid "[TOP]"
 msgstr "[ابتدای صفحه]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "جهت جستجوی کامل این موضوع در سایت کلیک نمایید"
-
 msgid "Settings"
 msgstr "تنظیمات"
 
@@ -1958,6 +1964,9 @@ msgstr "لغو عضویت"
 
 msgid "Home"
 msgstr "صفحه خانگی"
+
+msgid "Click to do a full-text search for this title"
+msgstr "جهت جستجوی کامل این موضوع در سایت کلیک نمایید"
 
 msgid "Clear message"
 msgstr "پیغام حذف شود"
@@ -2267,7 +2276,8 @@ msgstr "شامل یک یا چند مورد از این عبارات"
 msgid "not containing the following terms"
 msgstr "شامل این عبارات نباشد"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "آخرین بار ویرایش شده در (مثلا: ۲ هفته اخیر)"
 
 msgid "any category"
@@ -3546,6 +3556,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "بازبینی صحت OpenID"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

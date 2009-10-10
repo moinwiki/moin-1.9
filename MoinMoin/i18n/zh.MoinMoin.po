@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -758,19 +758,6 @@ msgstr "您的帐号现在关联到您的 OpenID。"
 msgid "The password you entered is not valid."
 msgstr "您输入的口令无效。"
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID 信任校验"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1428,6 +1415,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "安装"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "帮助-排版"
 
@@ -1882,9 +1891,6 @@ msgstr "[底部]"
 msgid "[TOP]"
 msgstr "[顶部]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "点击对这个标题进行全文检索"
-
 msgid "Settings"
 msgstr "设置"
 
@@ -1906,6 +1912,9 @@ msgstr "取消订阅"
 
 msgid "Home"
 msgstr "主页"
+
+msgid "Click to do a full-text search for this title"
+msgstr "点击对这个标题进行全文检索"
 
 msgid "Clear message"
 msgstr "清除此提示信息"
@@ -2216,7 +2225,8 @@ msgstr "包含以下一个或多个条目"
 msgid "not containing the following terms"
 msgstr "未包含以下条目"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "最后一次修改在(如：两周前)"
 
 msgid "any category"
@@ -3453,6 +3463,10 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 
 msgid "anonymous"
 msgstr "匿名"
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID 信任校验"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -751,18 +751,6 @@ msgstr "你的帳號已連結到你的 OpenID"
 msgid "The password you entered is not valid."
 msgstr "密碼不正確。"
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1416,6 +1404,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "安裝"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "說明/排版"
 
@@ -1871,9 +1881,6 @@ msgstr "[底部]"
 msgid "[TOP]"
 msgstr "[頂部]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "點一下，對本頁標題做全文檢索，以便找出引用本頁的頁面"
-
 msgid "Settings"
 msgstr "設定"
 
@@ -1895,6 +1902,9 @@ msgstr "取消訂閱"
 
 msgid "Home"
 msgstr "首頁"
+
+msgid "Click to do a full-text search for this title"
+msgstr "點一下，對本頁標題做全文檢索，以便找出引用本頁的頁面"
 
 msgid "Clear message"
 msgstr "關閉此訊息框"
@@ -2201,7 +2211,8 @@ msgstr "包含以下一或多個項目"
 msgid "not containing the following terms"
 msgstr "不包含以下項目"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "最後一次修改在 (如：兩週前)"
 
 msgid "any category"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -793,18 +793,6 @@ msgstr "Ihr Konto ist nun mit Ihrer OpenID verbunden."
 msgid "The password you entered is not valid."
 msgstr "Das eingegebene Passwort ist ungültig."
 
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID: Fortsetzung der Handle-Überprüfung"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1475,6 +1463,28 @@ msgstr "SlideTemplate"
 msgid "SyncJobTemplate"
 msgstr "SyncJobTemplate"
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "installieren"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "HilfeZurKonfiguration"
 
@@ -1892,9 +1902,6 @@ msgstr "[FUSS]"
 msgid "[TOP]"
 msgstr "[KOPF]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Hier klicken für eine Liste der Seiten, die auf diese verweisen"
-
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -1916,6 +1923,9 @@ msgstr "Nicht abonnieren"
 
 msgid "Home"
 msgstr "Heim"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Hier klicken für eine Liste der Seiten, die auf diese verweisen"
 
 msgid "Clear message"
 msgstr "Nachricht löschen"
@@ -2232,8 +2242,8 @@ msgstr "die einen oder mehrere der folgenden Ausdrücke enthalten"
 msgid "not containing the following terms"
 msgstr "die folgende Ausdrücke nicht enthalten"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "die zuletzt geändert wurden seit (z.B. 'last 2 weeks')"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "die zuletzt geändert wurden seit (z.B.: 2 weeks before)"
 
 msgid "any category"
 msgstr "jede Kategorie"

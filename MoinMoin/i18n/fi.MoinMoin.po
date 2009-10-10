@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -786,19 +786,6 @@ msgstr "Käyttäjätunnuksesi on nyt liitetty OpenID:hesi."
 msgid "The password you entered is not valid."
 msgstr "Syöttämäsi salasana on virheellinen."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID-luottamuksenvarmennus"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1473,6 +1460,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "asenna"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "OhjeMuotoilusta"
 
@@ -1928,9 +1937,6 @@ msgstr "[LOPPUUN]"
 msgid "[TOP]"
 msgstr "[ALKUUN]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Napsauta suorittaaksesi sisältöhaun tälle nimelle"
-
 msgid "Settings"
 msgstr "Asetukset"
 
@@ -1952,6 +1958,9 @@ msgstr "Poista tilaus"
 
 msgid "Home"
 msgstr "Koti"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Napsauta suorittaaksesi sisältöhaun tälle nimelle"
 
 msgid "Clear message"
 msgstr "Sulje viesti"
@@ -2266,7 +2275,8 @@ msgstr "jotka sisältävät yhden tai useamman seuraavista ehdoista"
 msgid "not containing the following terms"
 msgstr "jotka eivät sisällä seuraavia ehtoja"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "joita on muokattu viimeksi... (esim. last 2 weeks tai last 2 hours)"
 
 msgid "any category"
@@ -3567,6 +3577,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID-luottamuksenvarmennus"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

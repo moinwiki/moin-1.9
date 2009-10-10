@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2006-12-08 18:50+0000\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -751,18 +751,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr ""
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1351,6 +1339,28 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "saz bike"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr ""
 
@@ -1784,9 +1794,6 @@ msgstr "[JÊR]"
 msgid "[TOP]"
 msgstr "[JOR]"
 
-msgid "Click to do a full-text search for this title"
-msgstr ""
-
 msgid "Settings"
 msgstr ""
 
@@ -1807,6 +1814,9 @@ msgid "Unsubscribe"
 msgstr ""
 
 msgid "Home"
+msgstr ""
+
+msgid "Click to do a full-text search for this title"
 msgstr ""
 
 msgid "Clear message"
@@ -2121,7 +2131,7 @@ msgstr ""
 msgid "not containing the following terms"
 msgstr ""
 
-msgid "last modified since (e.g. last 2 weeks)"
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr ""
 
 msgid "any category"

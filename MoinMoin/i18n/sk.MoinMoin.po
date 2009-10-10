@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -769,18 +769,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr "Heslo je neplatné."
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1391,6 +1379,28 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "nainštalovať"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "PomocSNastavením"
 
@@ -1809,9 +1819,6 @@ msgstr "[DOLU]"
 msgid "[TOP]"
 msgstr "[HORE]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Ak chcete fulltextovo vyhľadávať tento názov, kliknite sem."
-
 msgid "Settings"
 msgstr "Nastavenia"
 
@@ -1833,6 +1840,9 @@ msgstr "Zrušiť odoberanie"
 
 msgid "Home"
 msgstr "Domovská stránka"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Ak chcete fulltextovo vyhľadávať tento názov, kliknite sem."
 
 msgid "Clear message"
 msgstr "Vymazať odkaz"
@@ -2137,7 +2147,8 @@ msgstr "obsahujúce jeden alebo viacero nasledujúcich termínov"
 msgid "not containing the following terms"
 msgstr "neobsahujúce nasledujúce termíny"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "posledná zmena (napr. pred 2 týždňami)"
 
 msgid "any category"

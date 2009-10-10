@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -791,19 +791,6 @@ msgstr "Jūsų paskyra dabar susieta su jūsų OpenID."
 msgid "The password you entered is not valid."
 msgstr "Įvestas netinkamas slaptažodis."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID Trust patikrinimas"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1465,6 +1452,28 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "įdiegti"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr ""
 
@@ -1884,9 +1893,6 @@ msgstr "[Į APAČIĄ]"
 msgid "[TOP]"
 msgstr "[Į VIRŠŲ]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Spauskite, kad atliktumėte šios antraštės paiešką visame tekste"
-
 msgid "Settings"
 msgstr "Nuostatos"
 
@@ -1908,6 +1914,9 @@ msgstr "Atsisakyti"
 
 msgid "Home"
 msgstr "Į pradžią"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Spauskite, kad atliktumėte šios antraštės paiešką visame tekste"
 
 msgid "Clear message"
 msgstr "Išvalyti žinutę"
@@ -2222,7 +2231,8 @@ msgstr "turintis vieną arba daugiau iš šių terminų"
 msgid "not containing the following terms"
 msgstr "neturintis šių terminų"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "paskutinį kartą keistas prieš (pvz. paskutines 2 savaites)"
 
 msgid "any category"
@@ -3519,6 +3529,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID Trust patikrinimas"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

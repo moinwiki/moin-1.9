@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: HiroshiIwasaki <iwskhrs@gmail.com>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -777,19 +777,6 @@ msgstr "あなたのアカウントはOpenIDと結びつけられています。
 msgid "The password you entered is not valid."
 msgstr "入力されたパスワードが間違っています。"
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "OpenID 信頼確認"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1455,6 +1442,28 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
+#, fuzzy
+msgid "InstallDocs"
+msgstr "インストール"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr ""
 
@@ -1873,9 +1882,6 @@ msgstr "[画面下]"
 msgid "[TOP]"
 msgstr "[画面上]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
-
 msgid "Settings"
 msgstr "設定"
 
@@ -1897,6 +1903,9 @@ msgstr "購読中止"
 
 msgid "Home"
 msgstr "ホーム"
+
+msgid "Click to do a full-text search for this title"
+msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
 
 msgid "Clear message"
 msgstr "メッセージを消去"
@@ -2209,7 +2218,8 @@ msgstr "以下のひとつ以上の言葉を含む"
 msgid "not containing the following terms"
 msgstr "以下の言葉を含まない"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "最終更新日 (例: last 2 weeks)"
 
 msgid "any category"
@@ -3487,6 +3497,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID 信頼確認"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -762,18 +762,6 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr ""
 
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1441,6 +1429,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "instal·la"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "QuantAlFormat"
 
@@ -1894,9 +1904,6 @@ msgstr "[INFERIOR]"
 msgid "[TOP]"
 msgstr "[SUPERIOR]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Feu clic per a fer una cerca del text complet per a aquest títol"
-
 msgid "Settings"
 msgstr "Paràmetres"
 
@@ -1918,6 +1925,9 @@ msgstr "Desubscriu"
 
 msgid "Home"
 msgstr "Inici"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Feu clic per a fer una cerca del text complet per a aquest títol"
 
 msgid "Clear message"
 msgstr "Neteja el missatge"
@@ -2225,7 +2235,8 @@ msgstr "que continguen un o més dels termes següents"
 msgid "not containing the following terms"
 msgstr "que no continguen els termes següents"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "modificats per darrera vegada (per exemple últimes 2 setmanes)"
 
 msgid "any category"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 14:41+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -172,11 +172,11 @@ msgid "Comment:"
 msgstr "Komentārs:"
 
 msgid "<No addition>"
-msgstr "<Nav papildus>"
+msgstr "<Nekādas>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr "Pievienot: %(category)s"
+msgstr "Pievienot pie: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Dzēst tukšumus rindu beigās"
@@ -288,7 +288,9 @@ msgstr ""
 msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
-msgstr "Kamēr Jūs labosiet šo lapu, citi tiks ''brīdināti'' līdz %(bumptime)s."
+msgstr ""
+"Kamēr Jūs labosiet šo lapu, pārējie lietotāji tiks ''brīdināti'' līdz %"
+"(bumptime)s."
 
 msgid "Use the Preview button to extend the locking period."
 msgstr "Lai paildzinātu pieejas liegšanas periodu, nospiediet pirmskata pogu."
@@ -765,27 +767,14 @@ msgstr "OpenID veiksmīgs. ID: %s"
 msgid "OpenID failure"
 msgstr "OpenID kļūda."
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "OpenID identifikators nav norādīts."
+msgstr "OpenID sesijā nav atrasts."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Jūsu konts ir asociēts ar Jūsu OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Parole, kuru Jus ievadījāt, nav derīga."
-
-msgid "OpenID: handle verify continuation"
-msgstr ""
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
 
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
@@ -1205,7 +1194,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -1213,7 +1202,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Godājamais \"Superlietotāj\", tikko ir izveidots jauns lietotājs:\n"
+"Godājamais \"Superlietotāj\", tikko vietnē %(sitename)s tika izveidots jauns lietotājs:\n"
 "\n"
 "    Lietotāja vārds: %(username)s\n"
 "    E-pasta adrese: %(useremail)s"
@@ -1439,6 +1428,27 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
+msgid "InstallDocs"
+msgstr "InstalētDokumentāciju"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
 msgid "HelpOnConfiguration"
 msgstr "KonfigurēšanasPalīdzība"
 
@@ -1523,20 +1533,17 @@ msgstr ""
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnCategories"
 msgstr ""
@@ -1547,9 +1554,8 @@ msgstr ""
 msgid "HelpOnEditLocks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "FormatēšanasPalīdzība"
+msgstr "RediģēšanasPalīdzība"
 
 msgid "HelpOnEditing/SubPages"
 msgstr ""
@@ -1557,35 +1563,29 @@ msgstr ""
 msgid "HelpOnGraphicalEditor"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
 msgid "HelpOnHeadlines"
-msgstr "VirsrakstuPalīdzība"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLanguages"
-msgstr "Valoda"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnMacros"
 msgstr ""
@@ -1602,17 +1602,14 @@ msgstr ""
 msgid "HelpOnMacros/MonthCalendar"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "VietnesNavigācija"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "OpenID serveris"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1629,15 +1626,14 @@ msgstr ""
 msgid "HelpOnProcessingInstructions"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
 msgid "HelpOnSearching"
 msgstr "MeklēšanasPalīdzība"
 
 msgid "HelpOnSlideShows"
-msgstr "SlīdrādesPalīdzība"
+msgstr ""
 
 msgid "HelpOnSlideShows/000 Introduction"
 msgstr ""
@@ -1672,24 +1668,20 @@ msgstr ""
 msgid "HelpOnThemes"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "JūsuIestatījumi"
+msgstr ""
 
 msgid "HelpOnVariables"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "PalīdzībasSaturaRādītājs"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "Atrakstīties"
+msgstr ""
 
 msgid "CamelCase"
 msgstr ""
@@ -1709,9 +1701,8 @@ msgstr ""
 msgid "WikiCourse/04 Creating a wiki account"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "JūsuIestatījumi"
+msgstr ""
 
 msgid "WikiCourse/06 Your own wiki homepage"
 msgstr ""
@@ -1746,9 +1737,8 @@ msgstr ""
 msgid "WikiCourse/17 External links"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "Jauna Piesaiste"
+msgstr ""
 
 msgid "WikiCourse/19 Symbols"
 msgstr ""
@@ -1762,9 +1752,8 @@ msgstr ""
 msgid "WikiCourse/22 Parsers"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "Citas darbības:"
+msgstr ""
 
 msgid "WikiCourse/30 The graphical editor"
 msgstr ""
@@ -1884,9 +1873,6 @@ msgstr "[APAKŠA]"
 msgid "[TOP]"
 msgstr "[AUGŠA]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
-
 msgid "Settings"
 msgstr "Iestatījumi"
 
@@ -1908,6 +1894,9 @@ msgstr "Atrakstīties"
 
 msgid "Home"
 msgstr "Māja"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
 
 msgid "Clear message"
 msgstr "Notīrīt ziņojumu"
@@ -2212,11 +2201,11 @@ msgstr "saturošs vienu vai vairākus no sekojošajiem terminiem"
 msgid "not containing the following terms"
 msgstr "nesaturošu sekojošus terminus"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "pēdējo reizi modificēta kopš (piemēram, pēdējās 2 nedēļās)"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "pēdējo reizi modificēta kopš (piemēram, pirms 2 nedēļām)"
 
 msgid "any category"
-msgstr ""
+msgstr "jebkura kategorija"
 
 msgid "any language"
 msgstr "jebjura valoda"
@@ -2225,7 +2214,7 @@ msgid "any mimetype"
 msgstr "jebkurš MIME tips"
 
 msgid "Categories"
-msgstr ""
+msgstr "Kategorijas"
 
 msgid "Language"
 msgstr "Valoda"
@@ -2261,7 +2250,7 @@ msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."
 
 msgid "Description"
-msgstr ""
+msgstr "Apraksts"
 
 #, python-format
 msgid ""
@@ -2354,28 +2343,26 @@ msgstr "Nevar izdzēst Jūsu ātrsaiti uz šo lapu."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Nepieciešama ātrsaite uz šo lapu, lai to varētu izdzēst."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Slīdrāde"
+msgstr "Labot slīdrāde"
 
 msgid "Quit"
-msgstr ""
+msgstr "Iziet"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Slīdrāde"
+msgstr "Pārtraukt izrādi"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "Rādīt pimo slīdu (bulttaustiņš uz leju)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "Rādīt pimo slīdu (bulttaustiņš uz augšu)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "Rādīt iepriekšējo slīdu (bulttaustiņš pa kreisi)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "Rādīt nākamo slīdu (bulttaustiņš pa labi)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -3261,16 +3248,14 @@ msgstr "MyPages pārvaldīšana"
 msgid "Only superuser is allowed to use this action."
 msgstr "Tikai superlietotājs drīkst lietot šo kontu."
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "Virslapa nav atrasta!"
+msgstr "Lapušu pakotne nav atrasta."
 
-#, fuzzy
 msgid "page package"
-msgstr "Mainīta lapa"
+msgstr "lapas pakotne"
 
 msgid "Choose:"
-msgstr ""
+msgstr "Izvēle:"
 
 #, python-format
 msgid "Install language packs for '%s'"
@@ -3447,11 +3432,11 @@ msgstr ""
 "atļauts."
 
 msgid "anonymous"
-msgstr ""
+msgstr "anonīms"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"
-#~ msgstr "Jums nav tiesību labot šo lapu."
+#~ msgstr ""
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."
@@ -3459,21 +3444,17 @@ msgstr ""
 #~ "Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
 #~ "serveriem."
 
-#, fuzzy
 #~ msgid "InterWikiMap"
-#~ msgstr "Viki marķējums"
+#~ msgstr ""
 
-#, fuzzy
 #~ msgid "BadContent"
-#~ msgstr "Saturs"
+#~ msgstr ""
 
-#, fuzzy
 #~ msgid "LocalBadContent"
-#~ msgstr "Saturs"
+#~ msgstr ""
 
-#, fuzzy
 #~ msgid "EditedSystemPages"
-#~ msgstr "Aizvākt sistēmas lapas"
+#~ msgstr ""
 
 #~ msgid "Created the package %s containing the pages %s."
 #~ msgstr "Izveidots sainis %s, kas satur lapas %s."

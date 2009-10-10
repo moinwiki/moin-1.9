@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 12:24+0200\n"
+"POT-Creation-Date: 2009-10-10 13:41+0200\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -790,19 +790,6 @@ msgstr "Вашата сметка сега е поврзана со Вашиот
 msgid "The password you entered is not valid."
 msgstr "Лозинката која ја внесовте не е важечка."
 
-#, fuzzy
-msgid "OpenID: handle verify continuation"
-msgstr "Проверка на довербата на OpenID"
-
-msgid "OpenID: handle name continuation"
-msgstr ""
-
-msgid "OpenID: handle associate continuation"
-msgstr ""
-
-msgid "OpenID: unknown continuation stage"
-msgstr ""
-
 msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
@@ -1480,6 +1467,28 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
+msgid "InstallDocs"
+msgstr "инсталирај"
+
+msgid "InstallDocs/QuickInstall"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Linux"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/MacOSX"
+msgstr ""
+
+msgid "InstallDocs/QuickInstall/Windows"
+msgstr ""
+
+msgid "InstallDocs/Requirements"
+msgstr ""
+
+msgid "InstallDocs/ServerInstall"
+msgstr ""
+
+#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "Како да форматирате"
 
@@ -1935,9 +1944,6 @@ msgstr "[ДНО]"
 msgid "[TOP]"
 msgstr "[ВРВ]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Пребарување на овој наслов во содржината на страниците"
-
 msgid "Settings"
 msgstr "Поставки"
 
@@ -1959,6 +1965,9 @@ msgstr "Откажи ја претплатата"
 
 msgid "Home"
 msgstr "Дома"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Пребарување на овој наслов во содржината на страниците"
 
 msgid "Clear message"
 msgstr "Отстрани го известувањето"
@@ -2271,7 +2280,8 @@ msgstr "кои содржат еден или повеќе од наведени
 msgid "not containing the following terms"
 msgstr "кои не ги содржат наведените термини"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "последна промена од (пр. последни 2 недели)"
 
 msgid "any category"
@@ -3563,6 +3573,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "Проверка на довербата на OpenID"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"
