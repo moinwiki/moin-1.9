@@ -102,13 +102,6 @@ all_template_pages = essential_template_pages + optional_template_pages
 
 # Installation / Configuration / Administration Help:
 admin_pages = [
-    _('InstallDocs'),
-    _('InstallDocs/QuickInstall'),
-    _('InstallDocs/QuickInstall/Linux'),
-    _('InstallDocs/QuickInstall/MacOSX'),
-    _('InstallDocs/QuickInstall/Windows'),
-    _('InstallDocs/Requirements'),
-    _('InstallDocs/ServerInstall'),
     _('HelpOnConfiguration'),
     _('HelpOnConfiguration/EmailSupport'),
     _('HelpOnConfiguration/SecurityPolicy'),
@@ -117,7 +110,6 @@ admin_pages = [
     _('HelpOnConfiguration/SurgeProtection'),
     _('HelpOnConfiguration/UserPreferences'),
     _('HelpOnPackageInstaller'),
-    _('HelpOnUpdating'),
     _('HelpOnUpdatingPython'),
     _('HelpOnAdministration'),
     _('HelpOnAuthentication'),
