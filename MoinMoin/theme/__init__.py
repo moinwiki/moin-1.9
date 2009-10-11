@@ -268,8 +268,8 @@ class ThemeBase:
             segments = d['page_name'].split('/')
             link_text = segments[-1]
             link_title = _('Click to do a full-text search for this title')
-            link_query = { 'action': 'fullsearch', 'context': '180',
-                            'value': 'linkto:"%s"' % d['page_name'], }
+            link_query = {'action': 'fullsearch', 'context': '180',
+                          'value': 'linkto:"%s"' % d['page_name'], }
             link = d['page'].link_to(self.request, link_text,
                                      querystr=link_query, title=link_title,
                                      css_class='backlink', rel='nofollow')
