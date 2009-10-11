@@ -52,6 +52,7 @@ KernelNewbies http://wiki.kernelnewbies.org/
 Spamikaze http://spamikaze.org/
 Ulteo http://www.ulteo.com/main/wiki/index.cgi/
 CsWikiPedia http://cs.wikipedia.org/wiki/
+RuWikiPedia http://ru.wikipedia.org/wiki/
 MBWiki http://wiki.musicbrainz.org/
 SquidWiki http://wiki.squid-cache.org/
 
