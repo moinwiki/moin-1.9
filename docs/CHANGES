@@ -35,10 +35,30 @@ Version 1.9.0current:
 
   Bug fixes:
   * setup.py: fix wrong exitcode
+  * Xapian indexing: we need to return a UnprocessedDocument in any case, never a ProcessedDocument
+  * AdvancedSearch: example didn't work, fixed
+  * fix wrong usage of parseQueryString result
+  * SyncPages and LocalSiteMap action: fix NameError
+  * LocalSiteMap: added missing _()
+  * fix typo in Cache-Control header (max-age)
+  * fix '304 not modified' response for AttachFile do=get and do=box, add
+    expires header with now+10s
+  * action CopyPage, RenamePage, DeletePage: fixed getting subpages_checked param from url
+  * action.getHandler(): make it moin 1.8 compatible again
+
 
   Other changes:
+  * updated flup to 1.0.2+ ( http://hg.saddi.com/flup-server/rev/6ea1ffac1bcb )
+  * updated pygments to 1.1.1+ ( http://dev.pocoo.org/hg/pygments-main/rev/948f8885af16 )
+  * updated parsedatetime to 0.8.7
   * TextCha feature of TWikiDraw removed again because AnyWikiDraw misses the
     TextCha feature still, language detection problems.
+  * removed anywikidraw .pack.gz file, makes more trouble than it's worth
+  * MoinMoin/search/builtin.py searching does not require a lock, xapian allows several concurrent search connections.
+  * add the sidebar() method from Mandarin and Gugiel themes to ThemeBase
+  * move title_with_separators() from Modernized theme to ThemeBase
+  * Modernized theme: add a span with "pagepath" class to title_with_separators
+  * increase surge protection limits for AttachFile to avoid trouble with image galleries
 
 
 Version 1.9.0beta4:
