@@ -16,17 +16,15 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.0current:
+Version 1.9.0rc1:
 
   Please note:
-  * This is a BETA version, not meant for production usage, but just to
+  * This is a BETA/RC version, not meant for production usage, but just to
     discover bugs, incompatibilities, installation issues, documentation issues,
     etc. - please report issues on MoinMoin:MoinMoinBugs.
-  * For the beta download archive, we updated the *.po files with the system
-    text translations and also the system and help pages, so translators can
-    see the current state in a working local wiki.
-    We know that translations and system / help pages are not yet finished and
-    that  they still require much more work.
+  * Translators can still work on translations, RC is mainly for testing the
+    code, we likely will update translations and wiki pages for final release.
+    Be careful though, don't break things.
     Please see http://master19.moinmo.in/ and help cleaning up there.
 
   New features:
