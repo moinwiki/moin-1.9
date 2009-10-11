@@ -342,7 +342,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
     def set(self, request, session_name, expires):
         """ Set moin_session cookie """
-        self._set_cookie(request, session_name, expires, http_only=True)
+        self._set_cookie(request, session_name, expires, http_only=False) # TODO: cfg.cookie_httponly as in 1.9
         logging.debug("setting cookie with session_name %r, expiry %r" % (session_name, expires))
 
     def get(self, request):
