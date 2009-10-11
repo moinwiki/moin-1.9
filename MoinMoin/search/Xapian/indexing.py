@@ -264,8 +264,8 @@ class XapianIndex(BaseIndex):
 
                 connection.replace(doc)
 
-        except (OSError, IOError):
-            pass
+        except (OSError, IOError, UnicodeError):
+            logging.exception("_index_file crashed:")
 
     def _get_languages(self, page):
         """ Get language of a page and the language to stem it in
