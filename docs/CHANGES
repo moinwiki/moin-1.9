@@ -46,6 +46,7 @@ Version 1.9.0rc1:
 
 
   Other changes:
+  * use 'modernized' theme by default (1.8 used 'modern')
   * updated flup to 1.0.2+ ( http://hg.saddi.com/flup-server/rev/6ea1ffac1bcb )
   * updated pygments to 1.1.1+ ( http://dev.pocoo.org/hg/pygments-main/rev/948f8885af16 )
   * updated parsedatetime to 0.8.7

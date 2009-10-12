@@ -819,7 +819,7 @@ options_no_group_name = {
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
      'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[[url|link title]]"`, to use a shortened name for long page name, use `u"[[LongLongPageName|title]]"`. [list of Unicode strings]'),
 
-    ('theme_default', 'modern',
+    ('theme_default', 'modernized',
      "the name of the theme that is used by default (see HelpOnThemes)"),
     ('theme_force', False,
      "if True, do not allow to change the theme"),
