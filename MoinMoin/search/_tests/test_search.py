@@ -426,13 +426,14 @@ class TestXapianSearch(BaseSearchTest):
 
 
 class TestXapianSearchStemmed(TestXapianSearch):
-    py.test.skip("TODO fix TestXapianSearchStemmed - strange effects with stemming")
     class Config(wikiconfig.Config):
 
         xapian_search = True
         xapian_stemming = True
 
     def test_stemming(self):
+        py.test.skip("TODO fix TestXapianSearchStemmed - strange effects with stemming")
+
         result = self.search(u"title:edit")
         assert len(result.hits) == 2
 
