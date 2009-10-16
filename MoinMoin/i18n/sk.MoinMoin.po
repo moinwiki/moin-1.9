@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -1379,28 +1379,6 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "nainštalovať"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "PomocSNastavením"
 
@@ -1424,9 +1402,6 @@ msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-msgid "HelpOnUpdating"
-msgstr "PomocSUpdatovaním"
 
 msgid "HelpOnUpdatingPython"
 msgstr "PomocSUpdatovanímPythonu"
@@ -1502,6 +1477,10 @@ msgstr "PomocSKategóriami"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "PomocSFormátovaním"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3393,6 +3372,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "nainštalovať"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "PomocSUpdatovaním"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

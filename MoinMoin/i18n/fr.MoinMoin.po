@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-10-07 00:17+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
@@ -1489,28 +1489,6 @@ msgstr "ModèleDeTransparent"
 msgid "SyncJobTemplate"
 msgstr "ModèleDeTâcheDeSynchronisation"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "installer"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "AideDeParamétrage"
 
@@ -1534,9 +1512,6 @@ msgstr "AideDeParamétrage/PréférencesUtilisateur"
 
 msgid "HelpOnPackageInstaller"
 msgstr "AideDeL'InstallateurDePaquets"
-
-msgid "HelpOnUpdating"
-msgstr "AideDeMiseÀJour"
 
 msgid "HelpOnUpdatingPython"
 msgstr "AideDeMiseÀJourDePython"
@@ -1612,6 +1587,10 @@ msgstr "AideDesCatégories"
 
 msgid "HelpOnDictionaries"
 msgstr "AideDesDictionnaires"
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "AideDeMiseEnForme"
 
 msgid "HelpOnEditLocks"
 msgstr "AideDesVerrousD'Édition"
@@ -3602,6 +3581,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonyme"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installer"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "AideDeMiseÀJour"
 
 #~ msgid "OpenID: handle verify continuation"
 #~ msgstr "OpenID : étape de vérification"

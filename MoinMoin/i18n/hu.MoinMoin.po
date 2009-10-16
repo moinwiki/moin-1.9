@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: MARTON Jozsef <jmarton@omikk.bme.hu>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -1423,28 +1423,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "telepít"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "FormázásiSegédlet"
 
@@ -1469,10 +1447,6 @@ msgstr "FelhasználóiBeállítások"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "FormázásiSegédlet"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1561,6 +1535,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "FormázásiSegédlet"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3501,6 +3479,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "telepít"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "FormázásiSegédlet"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

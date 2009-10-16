@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -1463,28 +1463,6 @@ msgstr "SlideTemplate"
 msgid "SyncJobTemplate"
 msgstr "SyncJobTemplate"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "installieren"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "HilfeZurKonfiguration"
 
@@ -1508,9 +1486,6 @@ msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-msgid "HelpOnUpdating"
-msgstr "HilfeZumUpdaten"
 
 msgid "HelpOnUpdatingPython"
 msgstr ""
@@ -1586,6 +1561,10 @@ msgstr "HilfeZuKategorien"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HilfeZumFormatieren"
 
 msgid "HelpOnEditLocks"
 msgstr "HilfeZuEditierSperren"
@@ -3562,3 +3541,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installieren"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HilfeZumUpdaten"

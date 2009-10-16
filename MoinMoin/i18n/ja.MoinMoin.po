@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: HiroshiIwasaki <iwskhrs@gmail.com>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1442,28 +1442,6 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "インストール"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr ""
 
@@ -1486,9 +1464,6 @@ msgid "HelpOnConfiguration/UserPreferences"
 msgstr ""
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
-
-msgid "HelpOnUpdating"
 msgstr ""
 
 msgid "HelpOnUpdatingPython"
@@ -1565,6 +1540,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "書式のヘルプ"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3497,6 +3476,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "インストール"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

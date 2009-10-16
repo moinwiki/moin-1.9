@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -1315,27 +1315,6 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-msgid "InstallDocs"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr ""
 
@@ -1358,9 +1337,6 @@ msgid "HelpOnConfiguration/UserPreferences"
 msgstr ""
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
-
-msgid "HelpOnUpdating"
 msgstr ""
 
 msgid "HelpOnUpdatingPython"
@@ -1438,6 +1414,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "टिप्पणी"
 
 msgid "HelpOnEditLocks"
 msgstr ""

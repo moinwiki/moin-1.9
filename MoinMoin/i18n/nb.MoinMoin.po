@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-12-03 14:24+0100\n"
 "Last-Translator: Jörg Cassens <moinmoin-nb@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -1458,28 +1458,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "installer"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "HjelpOmFormattering"
 
@@ -1504,10 +1482,6 @@ msgstr "BrukerProfil"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "HjelpOmFormattering"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1597,6 +1571,10 @@ msgstr "Klasser"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HjelpOmFormattering"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3559,6 +3537,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "ukjent bruker"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installer"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HjelpOmFormattering"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

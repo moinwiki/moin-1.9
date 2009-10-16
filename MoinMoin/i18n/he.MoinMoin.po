@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -1420,28 +1420,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "התקן"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "עזרה בעריכה"
 
@@ -1465,10 +1443,6 @@ msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "עזרה בעריכה"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1558,6 +1532,10 @@ msgstr "קטגוריות"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "עזרה בעריכה"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3462,6 +3440,14 @@ msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "התקן"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "עזרה בעריכה"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

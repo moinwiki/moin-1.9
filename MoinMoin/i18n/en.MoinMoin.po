@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 16:16+0200\n"
+"POT-Creation-Date: 2009-10-16 07:49-0600\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1376,6 +1376,9 @@ msgid "HelpOnCategories"
 msgstr ""
 
 msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnDrawings"
 msgstr ""
 
 msgid "HelpOnEditLocks"

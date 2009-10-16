@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1415,28 +1415,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "安装"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "帮助-排版"
 
@@ -1460,10 +1438,6 @@ msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "帮助-排版"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1553,6 +1527,10 @@ msgstr "分类"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "帮助-排版"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3463,6 +3441,14 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 
 msgid "anonymous"
 msgstr "匿名"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "安装"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "帮助-排版"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

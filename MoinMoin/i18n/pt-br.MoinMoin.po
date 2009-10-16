@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-09-28\n"
 "Last-Translator: Renato Silva\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -1447,28 +1447,6 @@ msgstr "TemplateDeSlide"
 msgid "SyncJobTemplate"
 msgstr "TemplateDeSyncJob"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "instalar"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "AjudaComConfiguração"
 
@@ -1492,9 +1470,6 @@ msgstr "AjudaComConfiguração/PreferênciasDoUsuário"
 
 msgid "HelpOnPackageInstaller"
 msgstr "AjudaComInstaladorDePacote"
-
-msgid "HelpOnUpdating"
-msgstr "AjudaComAtualização"
 
 msgid "HelpOnUpdatingPython"
 msgstr "AjudaComAtualizaçãoDoPython"
@@ -1570,6 +1545,10 @@ msgstr "AjudaComCategorias"
 
 msgid "HelpOnDictionaries"
 msgstr "AjudaComDicionários"
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "AjudaComFormatação"
 
 msgid "HelpOnEditLocks"
 msgstr "AjudaComTravasDeEdição"
@@ -1899,7 +1878,7 @@ msgstr "ExcluirCache"
 
 #, python-format
 msgid "(cached %s)"
-msgstr "(armazenado %s)"
+msgstr "(armazenado em %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Ou tente uma da seguintes ações: "
@@ -2313,14 +2292,14 @@ msgid "No parent page found!"
 msgstr "Não foi encontrada página pai!"
 
 msgid "Slideshow"
-msgstr "Diapositivos"
+msgstr "Slideshow"
 
 msgid "Start"
 msgstr "Iniciar"
 
 #, python-format
 msgid "Slide %(pos)d of %(size)d"
-msgstr "Diapositivo %(pos)d de %(size)d"
+msgstr "Slide %(pos)d de %(size)d"
 
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
@@ -3526,6 +3505,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anônimo"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "instalar"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "AjudaComAtualização"
 
 #~ msgid "OpenID: handle verify continuation"
 #~ msgstr "OpenID: tratar continuação de verificação"

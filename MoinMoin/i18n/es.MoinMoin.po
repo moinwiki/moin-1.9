@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-10-10 09:57-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -487,8 +487,8 @@ msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"¡El respaldo del contenido de esta página ha caducado y tendrá menor relevancia en "
-"los resultados de la búsqueda!"
+"¡El respaldo del contenido de esta página ha caducado y tendrá menor "
+"relevancia en los resultados de la búsqueda!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -753,8 +753,8 @@ msgid ""
 msgstr ""
 "Selecciona un nombre de usuario.\n"
 "Si seleccionas un nombre de usuario que ya existe se te pedirá que\n"
-"introduzcas la contraseña y podrás asociar ese nombre de usuario con "
-"tu OpenID."
+"introduzcas la contraseña y podrás asociar ese nombre de usuario con tu "
+"OpenID."
 
 msgid "Name"
 msgstr "Nombre"
@@ -863,16 +863,17 @@ msgstr ""
 ">>'''''negrilla'''<<Verbatim(**)>> y cursiva''<<Verbatim(//)>>;\n"
 " Línea horizontal:: <<Verbatim(----)>>\n"
 " Forzar salto de línea:: <<Verbatim(\\\\)>>\n"
-" Encabezados:: = Título de nivel 1 =; == Título de nivel 2 ==; === Título "
-"de nivel 3 ===; ==== Título de nivel 4 ====; ===== Título de nivel 5 =====.\n"
-" Listas:: * viñetas; ** sub-viñetas; # elementos numerados; ## sub-elementos"
-" numerados.\n"
+" Encabezados:: = Título de nivel 1 =; == Título de nivel 2 ==; === Título de "
+"nivel 3 ===; ==== Título de nivel 4 ====; ===== Título de nivel 5 =====.\n"
+" Listas:: * viñetas; ** sub-viñetas; # elementos numerados; ## sub-elementos "
+"numerados.\n"
 " Enlaces:: <<Verbatim([[destino]])>>; <<Verbatim([[destino|texto enlace]])"
 ">>.\n"
 " Tablas:: |= texto de encabezado | texto de celda | mas texto de celda |;\n"
 "\n"
 "(!) Para mas ayuda, consulta HelpOnEditing o HelpOnCreoleSyntax.\n"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -888,7 +889,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Énfasis:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negrilla'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negrilla "
@@ -963,8 +964,8 @@ msgstr ""
 "Listas: * viñetas; 1., a. enumeraciones.\n"
 "}}}\n"
 "(!) Para obtener más ayuda, consulta la\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"Referencia rápida de reStructuredText]].\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|Referencia "
+"rápida de reStructuredText]].\n"
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Se excedió el número máximo de 'includes' permitidos"
@@ -1215,8 +1216,8 @@ msgstr ""
 "Te has suscrito a una página del Wiki en \"%(sitename)s\" para recibir vía "
 "correo notificaciones ante cambios en la misma.\n"
 "\n"
-"%(editor)s ha cambiado el nombre de la página \"%(oldname)s\" a "
-"\"%(pagename)s\":\n"
+"%(editor)s ha cambiado el nombre de la página \"%(oldname)s\" a \"%(pagename)"
+"s\":\n"
 
 #, python-format
 msgid "New user account created on %(sitename)s"
@@ -1253,9 +1254,9 @@ msgid ""
 msgstr ""
 "Estimado Usuario del Wiki,\n"
 "\n"
-"Te has suscrito a las notificaciones de modificación de la página "
-"\"%(page_name)s\". El editor %(editor)s  ha agregado un archivo adjunto a "
-"dicha página. A continuación, la información detallada disponible:\n"
+"Te has suscrito a las notificaciones de modificación de la página \"%"
+"(page_name)s\". El editor %(editor)s  ha agregado un archivo adjunto a dicha "
+"página. A continuación, la información detallada disponible:\n"
 "\n"
 "Nombre del archivo adjunto: %(attach_name)s\n"
 "Tamaño del archivo adjunto: %(attach_size)s\n"
@@ -1479,28 +1480,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "instalar"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "AyudaSobreFormato"
 
@@ -1525,10 +1504,6 @@ msgstr "PreferenciasDelUsuario"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "AyudaSobreFormato"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1618,6 +1593,10 @@ msgstr "Categorías"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "AyudaSobreFormato"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3602,6 +3581,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anónimo"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "instalar"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "AyudaSobreFormato"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"
