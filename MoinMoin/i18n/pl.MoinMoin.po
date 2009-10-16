@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -1455,28 +1455,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "instaluj"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "PomocPrzyFormatowaniu"
 
@@ -1501,10 +1479,6 @@ msgstr "PreferencjeCzytelnika"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "PomocPrzyFormatowaniu"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1594,6 +1568,10 @@ msgstr "Kategorie"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "PomocPrzyFormatowaniu"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3567,6 +3545,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "instaluj"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "PomocPrzyFormatowaniu"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1440,28 +1440,6 @@ msgstr "ŠablonaSlike"
 msgid "SyncJobTemplate"
 msgstr "ŠablonaZaSyncJob"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "namesti"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "PomočPriNastavitvah"
 
@@ -1485,9 +1463,6 @@ msgstr "PomočPriNastavitvah/UporabniškePreference"
 
 msgid "HelpOnPackageInstaller"
 msgstr "PomočPriNameščevalcuPaketov"
-
-msgid "HelpOnUpdating"
-msgstr "PomočPriAžuriranju"
 
 msgid "HelpOnUpdatingPython"
 msgstr "PomočPriAžuriranjuPythona"
@@ -1563,6 +1538,10 @@ msgstr "PomočPriKategorijah"
 
 msgid "HelpOnDictionaries"
 msgstr "PomočPriSlovarjih"
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "PomočPriOblikovanju"
 
 msgid "HelpOnEditLocks"
 msgstr "PomočPriZaklepanjuObUrejanju"
@@ -3510,6 +3489,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimno"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "namesti"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "PomočPriAžuriranju"
 
 #~ msgid "OpenID: handle verify continuation"
 #~ msgstr "OpenID: nadaljevanje preverjanja"

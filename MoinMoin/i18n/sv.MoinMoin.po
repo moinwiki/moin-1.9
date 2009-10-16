@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-10-06 09:45+0200\n"
 "Last-Translator: thomas marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -1431,28 +1431,6 @@ msgstr "BildMall"
 msgid "SyncJobTemplate"
 msgstr "SynkJobbMall"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "installera"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "HjälpMedKonfiguration"
 
@@ -1476,9 +1454,6 @@ msgstr "HjälpMedKonfiguration/AnvändarInställningar"
 
 msgid "HelpOnPackageInstaller"
 msgstr "HjälpMedPaketInstalleraren"
-
-msgid "HelpOnUpdating"
-msgstr "HjälpMedUppdatering"
 
 msgid "HelpOnUpdatingPython"
 msgstr "HjälpMedUppdateraPython"
@@ -1554,6 +1529,10 @@ msgstr "HjälpMedKategorier"
 
 msgid "HelpOnDictionaries"
 msgstr "HjälpMedOrdbok"
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HjälpMedFormatering"
 
 msgid "HelpOnEditLocks"
 msgstr "HjälpMedRedigeringsLås"
@@ -3491,6 +3470,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installera"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HjälpMedUppdatering"
 
 #~ msgid "OpenID: handle verify continuation"
 #~ msgstr "OpenID: handtag-verifiering fortsättning"

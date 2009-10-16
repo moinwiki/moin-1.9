@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -1450,28 +1450,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "installere"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "HjælpTilFormatering"
 
@@ -1496,10 +1474,6 @@ msgstr "BrugerProfil"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "HjælpTilFormatering"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1588,6 +1562,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HjælpTilFormatering"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3537,6 +3515,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installere"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HjælpTilFormatering"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

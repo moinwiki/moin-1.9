@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1467,28 +1467,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "نصب"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "راهنمای فرمت‌ها"
 
@@ -1512,10 +1490,6 @@ msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "راهنمای فرمت‌ها"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1605,6 +1579,10 @@ msgstr "طبقه‌بندیها"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "راهنمای فرمت‌ها"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3556,6 +3534,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "نصب"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "راهنمای فرمت‌ها"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

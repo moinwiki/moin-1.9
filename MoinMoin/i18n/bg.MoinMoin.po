@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -1457,28 +1457,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "инсталирай"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "ПомощЗаФорматиране"
 
@@ -1503,10 +1481,6 @@ msgstr "ПотребителскиНастройки"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "ПомощЗаФорматиране"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1595,6 +1569,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "ПомощЗаФорматиране"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3550,6 +3528,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "инсталирай"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "ПомощЗаФорматиране"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1460,28 +1460,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "asenna"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "OhjeMuotoilusta"
 
@@ -1506,10 +1484,6 @@ msgstr "KäyttäjäAsetukset"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "OhjeMuotoilusta"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1599,6 +1573,10 @@ msgstr "Kategoriat"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "OhjeMuotoilusta"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3577,6 +3555,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "asenna"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "OhjeMuotoilusta"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -1429,27 +1429,6 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-msgid "InstallDocs"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "Chỉ dẫn cách định dạng"
@@ -1475,10 +1454,6 @@ msgstr "Sở thích cá nhân"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "Chỉ dẫn cách định dạng"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1567,6 +1542,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "Chỉ dẫn cách định dạng"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3479,6 +3458,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "Chỉ dẫn cách định dạng"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

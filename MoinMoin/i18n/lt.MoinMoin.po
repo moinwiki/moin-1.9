@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -1452,28 +1452,6 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "įdiegti"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr ""
 
@@ -1496,9 +1474,6 @@ msgid "HelpOnConfiguration/UserPreferences"
 msgstr ""
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
-
-msgid "HelpOnUpdating"
 msgstr ""
 
 msgid "HelpOnUpdatingPython"
@@ -1575,6 +1550,10 @@ msgstr "PagalbaKategorijų"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "PagalbaFormatavimo"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3529,6 +3508,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "įdiegti"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

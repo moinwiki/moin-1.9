@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-03-24 20:06+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1471,28 +1471,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "installeren"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "HelpBijOpmaak"
 
@@ -1517,10 +1495,6 @@ msgstr "GebruikersVoorkeuren"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "HelpBijOpmaak"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1610,6 +1584,10 @@ msgstr "Categorieën"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HelpBijOpmaak"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3601,6 +3579,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installeren"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HelpBijOpmaak"
 
 #, fuzzy
 #~ msgid "OpenID: handle verify continuation"

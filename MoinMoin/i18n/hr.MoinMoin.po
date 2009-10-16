@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -1452,28 +1452,6 @@ msgid "SyncJobTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "InstallDocs"
-msgstr "instaliraj"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnConfiguration"
 msgstr "Kako oblikovati"
 
@@ -1498,10 +1476,6 @@ msgstr "Korisničke postavke"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
-
-#, fuzzy
-msgid "HelpOnUpdating"
-msgstr "Kako oblikovati"
 
 #, fuzzy
 msgid "HelpOnUpdatingPython"
@@ -1591,6 +1565,10 @@ msgstr "Kategorije"
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "Kako oblikovati"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3530,6 +3508,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "instaliraj"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "Kako oblikovati"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

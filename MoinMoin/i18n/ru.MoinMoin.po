@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -1455,28 +1455,6 @@ msgstr "ШаблонПрезентацияКадр"
 msgid "SyncJobTemplate"
 msgstr "ШаблонСинхронизация"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "установить"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "КакНастраивать"
 
@@ -1500,9 +1478,6 @@ msgstr "КакНастраивать/ВашиНастройки"
 
 msgid "HelpOnPackageInstaller"
 msgstr "ПомощьПоУстановкеПакетов"
-
-msgid "HelpOnUpdating"
-msgstr "КакОбновлятьМойнМойн"
 
 msgid "HelpOnUpdatingPython"
 msgstr "КакОбновлятьПитон"
@@ -1578,6 +1553,10 @@ msgstr "ПомощьПоКатегориям"
 
 msgid "HelpOnDictionaries"
 msgstr "ПомощьПоСловарям"
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "КакФорматировать"
 
 msgid "HelpOnEditLocks"
 msgstr "ПомощьПоБлокировкам"
@@ -3439,7 +3418,7 @@ msgid "Local Site Map for \"%s\""
 msgstr "Карта окрестностей около \"%s\""
 
 msgid "Charts are not available!"
-msgstr "Диаграммы недоступены!"
+msgstr "Диаграммы недоступны!"
 
 msgid "Do it."
 msgstr "Выполняй."
@@ -3525,6 +3504,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "анонимно"
+
+#~ msgid "InstallDocs"
+#~ msgstr "какУстанавливать"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "КакОбновлятьМойнМойн"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 13:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2009-10-03 22:29+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1463,28 +1463,6 @@ msgstr "DiapositivaModello"
 msgid "SyncJobTemplate"
 msgstr "LavoroSincModello"
 
-#, fuzzy
-msgid "InstallDocs"
-msgstr "installa"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "AiutoSuConfigurazione"
 
@@ -1510,9 +1488,6 @@ msgstr "AiutoSuConfigurazione/PreferenzeUtente"
 #, fuzzy
 msgid "HelpOnPackageInstaller"
 msgstr "AiutoSuInstallazionePacchetto"
-
-msgid "HelpOnUpdating"
-msgstr "AiutoSuAggiornamento"
 
 msgid "HelpOnUpdatingPython"
 msgstr "AiutoSuAggiornamentoPython"
@@ -1593,6 +1568,10 @@ msgstr "AiutoSuCategorie"
 
 msgid "HelpOnDictionaries"
 msgstr "AiutoSuDizionari"
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "AiutoSuFormattazione"
 
 msgid "HelpOnEditLocks"
 msgstr "AiutoSuBloccoModifica"
@@ -3572,6 +3551,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimo"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installa"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "AiutoSuAggiornamento"
 
 # (ndt) misteriosi...
 #~ msgid "OpenID: handle verify continuation"

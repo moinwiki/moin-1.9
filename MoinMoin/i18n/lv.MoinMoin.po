@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 14:41+0200\n"
+"POT-Creation-Date: 2009-10-16 06:46-0600\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -1202,7 +1202,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Godājamais \"Superlietotāj\", tikko vietnē %(sitename)s tika izveidots jauns lietotājs:\n"
+"Godājamais \"Superlietotāj\", tikko vietnē %(sitename)s tika izveidots jauns "
+"lietotājs:\n"
 "\n"
 "    Lietotāja vārds: %(username)s\n"
 "    E-pasta adrese: %(useremail)s"
@@ -1428,27 +1429,6 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-msgid "InstallDocs"
-msgstr "InstalētDokumentāciju"
-
-msgid "InstallDocs/QuickInstall"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Linux"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/MacOSX"
-msgstr ""
-
-msgid "InstallDocs/QuickInstall/Windows"
-msgstr ""
-
-msgid "InstallDocs/Requirements"
-msgstr ""
-
-msgid "InstallDocs/ServerInstall"
-msgstr ""
-
 msgid "HelpOnConfiguration"
 msgstr "KonfigurēšanasPalīdzība"
 
@@ -1471,9 +1451,6 @@ msgid "HelpOnConfiguration/UserPreferences"
 msgstr ""
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
-
-msgid "HelpOnUpdating"
 msgstr ""
 
 msgid "HelpOnUpdatingPython"
@@ -1550,6 +1527,10 @@ msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "FormatēšanasPalīdzība"
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -3434,27 +3415,14 @@ msgstr ""
 msgid "anonymous"
 msgstr "anonīms"
 
-#, fuzzy
-#~ msgid "you may need to login to edit this page"
-#~ msgstr ""
+#~ msgid "InstallDocs"
+#~ msgstr "InstalētDokumentāciju"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."
 #~ msgstr ""
 #~ "Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
 #~ "serveriem."
-
-#~ msgid "InterWikiMap"
-#~ msgstr ""
-
-#~ msgid "BadContent"
-#~ msgstr ""
-
-#~ msgid "LocalBadContent"
-#~ msgstr ""
-
-#~ msgid "EditedSystemPages"
-#~ msgstr ""
 
 #~ msgid "Created the package %s containing the pages %s."
 #~ msgstr "Izveidots sainis %s, kas satur lapas %s."
