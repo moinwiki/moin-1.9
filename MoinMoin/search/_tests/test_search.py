@@ -281,17 +281,15 @@ class BaseSearchTest(object):
 
     def test_create_page(self):
         self.pages['TestCreatePage'] = 'some text' # Moin serarch must search this page
-
-        create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
-        self._wait_for_index_update()
-
-        result = self.search(u'TestCreatePage')
-
-        nuke_page(self.request, 'TestCreatePage')
-        self._wait_for_index_update()
-
-        del self.pages['TestCreatePage']
-        assert len(result.hits) == 1
+        try:
+            create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
+            self._wait_for_index_update()
+            result = self.search(u'TestCreatePage')
+            assert len(result.hits) == 1
+        finally:
+            nuke_page(self.request, 'TestCreatePage')
+            self._wait_for_index_update()
+            del self.pages['TestCreatePage']
 
     def test_attachment(self):
         page_name = u'TestAttachment'
@@ -304,18 +302,17 @@ class BaseSearchTest(object):
         result = self.search(filename)
         assert len(result.hits) == 0
 
-        create_page(self.request, page_name, self.pages[page_name])
-        AttachFile.add_attachment(self.request, page_name, filename, filecontent, True)
-        append_page(self.request, page_name, '[[attachment:%s]]' % filename)
-        self._wait_for_index_update()
-
-        result = self.search(filename)
-
-        nuke_page(self.request, page_name)
-        del self.pages[page_name]
-        self._wait_for_index_update()
-
-        assert len(result.hits) > 0
+        try:
+            create_page(self.request, page_name, self.pages[page_name])
+            AttachFile.add_attachment(self.request, page_name, filename, filecontent, True)
+            append_page(self.request, page_name, '[[attachment:%s]]' % filename)
+            self._wait_for_index_update()
+            result = self.search(filename)
+            assert len(result.hits) > 0
+        finally:
+            nuke_page(self.request, page_name)
+            del self.pages[page_name]
+            self._wait_for_index_update()
 
         result = self.search(filename)
         assert len(result.hits) == 0
