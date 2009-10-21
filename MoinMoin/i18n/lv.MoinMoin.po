@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-16 06:46-0600\n"
+"POT-Creation-Date: 2009-10-16 09:50-0600\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -808,10 +808,12 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
+"Ja Jums nav konta, <a href=\"%(userprefslink)s\">tagad Jūs to varat izveidot"
+"</a>. "
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">Neaceraties paroli?</a>"
 
 #, fuzzy
 msgid ""
@@ -1056,7 +1058,7 @@ msgid "Email"
 msgstr "E-pasts"
 
 msgid "Jabber ID"
-msgstr ""
+msgstr "Jabber Identifikators"
 
 msgid "User CSS URL"
 msgstr "Lietotāja CSS URL"
@@ -1092,7 +1094,7 @@ msgid "Mail account data"
 msgstr "Sūtīt konta datus"
 
 msgid "OpenID"
-msgstr ""
+msgstr "OpendID"
 
 msgid "Login"
 msgstr "Ieiet"
@@ -1310,7 +1312,7 @@ msgid "matches"
 msgstr "saskaņas"
 
 msgid "about"
-msgstr ""
+msgstr "par"
 
 msgid "RecentChanges"
 msgstr "PēdējāsIzmaiņas"
@@ -1472,7 +1474,7 @@ msgid "HelpOnMoinCommand/ExportDump"
 msgstr ""
 
 msgid "HelpOnNotification"
-msgstr "Notifikācija"
+msgstr ""
 
 msgid "HelpOnSessions"
 msgstr ""
@@ -1528,9 +1530,8 @@ msgstr ""
 msgid "HelpOnDictionaries"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "FormatēšanasPalīdzība"
+msgstr ""
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -1991,7 +1992,7 @@ msgid "User account browser"
 msgstr "Lietotāju kontu pārlūks"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Viki konfigurācija"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2358,7 +2359,7 @@ msgstr ""
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr ""
+msgstr "Vietne %s ir pieprasījusi Jūsu identitāti."
 
 #, python-format
 msgid ""
@@ -2376,10 +2377,10 @@ msgid "Identity URL"
 msgstr "Identitātes URL"
 
 msgid "Remember decision"
-msgstr ""
+msgstr "Atcerēties lēmumu"
 
 msgid "Remember this trust decision and don't ask again"
-msgstr ""
+msgstr "Atcerēties šo uzticības lēmumu un vair nejautāt"
 
 msgid "Approve"
 msgstr "Apstiprināt"
@@ -2637,14 +2638,15 @@ msgstr "Jums nav tiesību atspiest šīs lapas piesaistes."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Fails %(filename)s nav .zip fails."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"Piesaiste '%(filename)s' nav atpakota, jo faili ir pārāk lieli, tikai .zip "
-"faili, jau ekstistē vai atrodas mapēs."
+"Piesaiste '%(filename)s' nav atpakota, jo daži faili nav taipat "
+"direktorijā vai pārsniedz datnes maksimālo pieļaujamo izmēru (%"
+"(maxsize_file)d kB)."
 
 #, fuzzy, python-format
 msgid ""
@@ -3240,7 +3242,7 @@ msgstr "Izvēle:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "Uzstādīt valodas pakotni priekš '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
