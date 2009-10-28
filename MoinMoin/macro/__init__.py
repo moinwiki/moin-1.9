@@ -127,7 +127,11 @@ class Macro:
             # and makes the wiki UI unusable (by emitting a Server Error),
             # thus, in case of exceptions, we just log the problem and return
             # some standard text.
-            logging.exception("Macro %s raised an exception:" % self.name)
+            try:
+                page_spec = " (page: '%s')" % self.formatter.page.page_name
+            except:
+                page_spec = ""
+            logging.exception("Macro %s%s raised an exception:" % (self.name, page_spec))
             _ = self.request.getText
             return self.formatter.text(_('<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>') % {
                    'macro_name': self.name,
