@@ -35,10 +35,10 @@ def check_forbidden(request):
         remote_addr = request.remote_addr
         for host in request.cfg.hosts_deny:
             if host[-1] == '.' and remote_addr.startswith(host):
-                logging.debug("hosts_deny (net): %s" % str(forbidden))
+                logging.debug("hosts_deny (net): %s" % remote_addr)
                 raise Forbidden()
             if remote_addr == host:
-                logging.debug("hosts_deny (ip): %s" % str(forbidden))
+                logging.debug("hosts_deny (ip): %s" % remote_addr)
                 raise Forbidden()
     return False
 
