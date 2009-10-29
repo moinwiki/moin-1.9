@@ -758,13 +758,13 @@ options_no_group_name = {
         'AttachFile': (90, 60),
         'cache': (600, 30), # cache action is very cheap/efficient
      },
-     "Surge protection tries to deny clients causing too much load/traffic, see /SurgeProtection."),
+     "Surge protection tries to deny clients causing too much load/traffic, see HelpOnConfiguration/SurgeProtection."),
     ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
 
     ('textchas', None,
      "Spam protection setup using site-specific questions/answers, see HelpOnTextChas."),
     ('textchas_disabled_group', None,
-     "Name of a group of trusted users who do not get asked TextCha questions."),
+     "Name of a group of trusted users who do not get asked !TextCha questions."),
 
     ('antispam_master_url', "http://master.moinmo.in/?action=xmlrpc2",
      "where antispam security policy fetches spam pattern updates (if it is enabled)"),
@@ -1121,7 +1121,7 @@ options = {
         # id -> username for page info and recent changes, but it
         # is not usable for the user any more:
        ],
-       "Describes user preferences, see /UserPreferences."),
+       "Describes user preferences, see HelpOnConfiguration/UserPreferences."),
 
       ('checkbox_defaults',
        {
@@ -1137,13 +1137,13 @@ options = {
         'wikiname_add_spaces': 0,
         'remember_me': 1,
        },
-       "Defaults for user preferences, see /UserPreferences."),
+       "Defaults for user preferences, see HelpOnConfiguration/UserPreferences."),
 
       ('checkbox_disable', [],
-       "Disable user preferences, see /UserPreferences."),
+       "Disable user preferences, see HelpOnConfiguration/UserPreferences."),
 
       ('checkbox_remove', [],
-       "Remove user preferences, see /UserPreferences."),
+       "Remove user preferences, see HelpOnConfiguration/UserPreferences."),
 
       ('form_fields',
        [
