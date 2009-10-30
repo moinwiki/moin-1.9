@@ -147,8 +147,8 @@ class AnyWikiDraw(object):
 
         html = """
 <p>
-<applet code="org.anywikidraw.twiki.TWikiDrawingApplet.class" codebase="."
-        archive="%(htdocs)s/applets/anywikidraw/lib/AnyWikiDrawForTWiki.jar" width="800" height="620">
+<applet code="org.anywikidraw.moinmoin.MoinMoinDrawingApplet.class" codebase="."
+        archive="%(htdocs)s/applets/anywikidraw/lib/AnyWikiDrawForMoinMoin.jar" width="800" height="620">
 
     <!-- The following parameters are used to tell AnyWikiDraw how to communicate with MoinMoin. -->
     <param name="DrawingName" value="%(basename)s.svg">
