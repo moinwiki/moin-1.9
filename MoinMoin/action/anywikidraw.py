@@ -153,8 +153,6 @@ class AnyWikiDraw(object):
     <!-- The following parameters are used to tell AnyWikiDraw how to communicate with MoinMoin. -->
     <param name="DrawingName" value="%(basename)s.svg">
     <param name="DrawingURL" value="%(drawurl)s">
-    <param name="DrawingWidth" value="640">
-    <param name="DrawingHeight" value="480">
     <param name="PageURL" value="%(pageurl)s">
     <param name="UploadURL" value="%(saveurl)s">
 
