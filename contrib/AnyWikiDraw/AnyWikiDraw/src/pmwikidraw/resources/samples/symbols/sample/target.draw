@@ -1,6 +1,0 @@
-
-    com.wombatinvasion.pmwikidraw.PmWikiDrawing 2 4 
-        org.jhotdraw.figures.EllipseFigure "attributes" "attributes" 2 "LineWidth" "Double" 3.0 "FillColor" "Color" 255 0 0 0 0 80 80  
-        org.jhotdraw.figures.EllipseFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 255 255 255 10 10 60 60  
-        org.jhotdraw.figures.EllipseFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 255 0 0 20 20 40 40  
-        org.jhotdraw.figures.EllipseFigure "attributes" "attributes" 2 "LineWidth" "Double" 1.25 "FillColor" "Color" 255 255 255 30 30 20 20   
