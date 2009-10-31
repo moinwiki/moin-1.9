@@ -492,7 +492,7 @@ class User:
         This is a private method and should not be used by clients.
 
         @param data: dict with user data (from storage)
-        @param password: password to verify
+        @param password: password to verify [unicode]
         @rtype: 2 tuple (bool, bool)
         @return: password is valid, enc_password changed
         """
@@ -506,19 +506,17 @@ class User:
         if not password:
             return False, False
 
-        password = password.encode('utf-8')
-
         if epwd[:5] == '{SHA}':
-            enc = '{SHA}' + base64.encodestring(hash_new('sha1', password).digest()).rstrip()
+            enc = '{SHA}' + base64.encodestring(hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
             if epwd == enc:
-                data['enc_password'] = encodePassword(password)
+                data['enc_password'] = encodePassword(password) # upgrade to SSHA
                 return True, True
             return False, False
 
         if epwd[:6] == '{SSHA}':
             data = base64.decodestring(epwd[6:])
             salt = data[20:]
-            hash = hash_new('sha1', password)
+            hash = hash_new('sha1', password.encode('utf-8'))
             hash.update(salt)
             return hash.digest() == data[:20], False
 
