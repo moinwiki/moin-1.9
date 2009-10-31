@@ -2345,7 +2345,7 @@ msgid "Your quicklink to this page has been removed."
 msgstr "Seu link rápido para esta página foi removido."
 
 msgid "Your quicklink to this page could not be removed."
-msgstr "Sua inscrição a esta página não pode ser removida."
+msgstr "Seu link rápido para esta página não pôde ser removido."
 
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Você precisa ter um link rápido para esta página para poder removê-lo."

@@ -1588,9 +1588,8 @@ msgstr "AideDesCatégories"
 msgid "HelpOnDictionaries"
 msgstr "AideDesDictionnaires"
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "AideDeMiseEnForme"
+msgstr "AideDesDessins"
 
 msgid "HelpOnEditLocks"
 msgstr "AideDesVerrousD'Édition"
