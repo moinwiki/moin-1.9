@@ -13,12 +13,15 @@ from datetime import datetime
 
 from MoinMoin.support.python_compatibility import set
 from MoinMoin import wikiutil
+from MoinMoin.action.AttachFile import _get_files
 from MoinMoin.Page import Page
+from MoinMoin.action import AttachFile
 from MoinMoin.packages import packLine, MOIN_PACKAGE_FILE
 from MoinMoin.script import MoinScript
 from MoinMoin import i18n
 from MoinMoin.i18n import strings
 i18n.strings = strings
+
 
 COMPRESSION_LEVEL = zipfile.ZIP_STORED
 
@@ -87,8 +90,8 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             os.remove(filename)
         except OSError:
             pass
-
-        existing_pages = [pagename for pagename in pagelist if Page(request, pagename).exists()]
+        # page LanguageSetup needs no packing!
+        existing_pages = [pagename for pagename in pagelist if Page(request, pagename).exists() and pagename != 'LanguageSetup']
         if not existing_pages:
             return
 
@@ -97,15 +100,23 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         script = [packLine(['MoinMoinPackage', '1']), ]
 
         cnt = 0
+        userid = ""
         for pagename in existing_pages:
             pagename = pagename.strip()
             page = Page(request, pagename)
             cnt += 1
+            files = _get_files(request, pagename)
             script.append(packLine([function, str(cnt), pagename]))
             timestamp = wikiutil.version2timestamp(page.mtime_usecs())
             zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
+            for attname in files:
+                cnt += 1
+                zipname = "%d_attachment" % cnt
+                script.append(packLine(["AddAttachment", zipname, attname, pagename, userid, "Created by the PackagePages action."]))
+                filename = AttachFile.getFilename(request, pagename, attname)
+                zf.write(filename, zipname)
 
         script += [packLine(['Print', 'Installed MoinMaster page bundle %s.' % os.path.basename(filename)])]
 
