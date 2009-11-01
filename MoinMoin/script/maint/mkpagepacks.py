@@ -106,17 +106,18 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             page = Page(request, pagename)
             cnt += 1
             files = _get_files(request, pagename)
+            for attname in files:
+                cnt += 1
+                zipname = "%d_attachment" % cnt
+                script.append(packLine(["ReplaceUnderlayAttachment", zipname, attname, pagename, userid, "Created by the PackagePages action."]))
+                filename = AttachFile.getFilename(request, pagename, attname)
+                zf.write(filename, zipname)
+
             script.append(packLine([function, str(cnt), pagename]))
             timestamp = wikiutil.version2timestamp(page.mtime_usecs())
             zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
-            for attname in files:
-                cnt += 1
-                zipname = "%d_attachment" % cnt
-                script.append(packLine(["AddAttachment", zipname, attname, pagename, userid, "Created by the PackagePages action."]))
-                filename = AttachFile.getFilename(request, pagename, attname)
-                zf.write(filename, zipname)
 
         script += [packLine(['Print', 'Installed MoinMaster page bundle %s.' % os.path.basename(filename)])]
 
