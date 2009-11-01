@@ -47,9 +47,7 @@ def execute(pagename, request):
         package = packages.ZipPackage(request, targetpath)
         if package.isPackage():
             if package.installPackage():
-                msg = package.msg
-                if not msg:
-                    msg = _("Attachment '%(filename)s' installed.") % {'filename': target}
+                msg = _("Attachment '%(filename)s' installed.") % {'filename': target}
             else:
                 msg = _("Installation of '%(filename)s' failed.") % {'filename': target}
         else:

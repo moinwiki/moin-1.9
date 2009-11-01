@@ -343,6 +343,30 @@ class ScriptEngine:
         else:
             self.msg += u"action delete page: not enough rights - nothing done \n"
 
+    def do_replaceunderlayattachment(self, zipname, filename, pagename, author=u"Scripting Subsystem", comment=u""):
+        """
+        overwrite underlay attachments
+
+        @param pagename: Page where the file is attached. Or in 2.0, the file itself.
+        @param zipname: Filename of the attachment from the zip file
+        @param filename: Filename of the attachment (just applicable for MoinMoin < 2.0)
+        """
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
+            filename = wikiutil.taintfilename(filename)
+            zipname = wikiutil.taintfilename(zipname)
+            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            pagedir = page.getPagePath(use_underlay=1, check_create=1)
+            attachments = os.path.join(pagedir, 'attachments')
+            if not os.path.exists(attachments):
+                os.mkdir(attachments)
+            target = os.path.join(attachments, filename)
+            self._extractToFile(zipname, target)
+            if os.path.exists(target):
+                os.chmod(target, config.umask )
+        else:
+            self.msg += u"action replace underlay attachment: not enough rights - nothing done \n"
+
     def do_replaceunderlay(self, filename, pagename):
         """
         Overwrites underlay pages. Implementational detail: This needs to be
@@ -368,7 +392,6 @@ class ScriptEngine:
 
         pagefile = os.path.join(revdir, revstr)
         self._extractToFile(filename, pagefile)
-
         # Clear caches
         # TODO Code from MoinMoin/script/maint/cleancache.py may be used
 
