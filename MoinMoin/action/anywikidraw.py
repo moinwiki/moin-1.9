@@ -56,7 +56,9 @@ def attachment_drawing(self, url, text, **kw):
     if map:
         # ToDo mapid must become uniq
         # we have a image map. inline it and add a map ref to the img tag
-        mapid = u'ImageMapOf' + drawing
+        # we have also to set a unique ID
+        mapid = u'ImageMapOf%s%s' % (self.request.uid_generator(pagename), drawing)
+
         map = map.replace(u'id="%s.svg"' % drawing, '')
         map = map.replace(u'name="%s.svg"' % drawing, u'name="%s"' % mapid)
         # unxml, because 4.01 concrete will not validate />
