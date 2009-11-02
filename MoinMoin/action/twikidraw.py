@@ -75,7 +75,8 @@ def attachment_drawing(self, url, text, **kw):
         map = u''
     if map:
         # we have a image map. inline it and add a map ref to the img tag
-        mapid = u'ImageMapOf' + drawing
+        # we have also to set a unique ID
+        mapid = u'ImageMapOf%s%s' % (self.request.uid_generator(pagename), drawing)
         map = map.replace(u'%MAPNAME%', mapid)
         # add alt and title tags to areas
         map = re.sub(ur'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', ur'href="\1" alt="\1" title="\1"', map)
