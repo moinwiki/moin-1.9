@@ -1920,7 +1920,7 @@ def load_theme_fallback(request, theme_name=None):
     except ThemeNotFound:
         fallback = 1
         try:
-            request.theme = load_theme(request.cfg.theme_default)
+            request.theme = load_theme(request, request.cfg.theme_default)
         except ThemeNotFound:
             fallback = 2
             from MoinMoin.theme.modern import Theme
