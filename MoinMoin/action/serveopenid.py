@@ -181,7 +181,7 @@ class MoinOpenIDServer:
             # since we didn't put any openid.server into
             # the page to start with, this is someone trying
             # to abuse us. No need to give a nice error
-            request.makeForbidden403()
+            request.makeForbidden(403, '')
             return
 
         server_url = request.getQualifiedURL(
@@ -203,8 +203,7 @@ class MoinOpenIDServer:
             username = request.user.name
         elif identity is not None:
             if not self._verify_endpoint_identity(identity):
-                request.makeForbidden403()
-                request.write('verification failed')
+                request.makeForbidden(403, 'verification failed')
                 return
 
         if 'openid.user' in request.page.pi:
@@ -233,8 +232,7 @@ class MoinOpenIDServer:
                 return
 
             if openidreq is None:
-                request.makeForbidden403()
-                request.write('no request')
+                request.makeForbidden(403, 'no request')
                 return
 
             if request.user.valid and username != request.user.name:
@@ -264,14 +262,12 @@ class MoinOpenIDServer:
         # use empty string if nothing was sent
         form_nonce = form.get('nonce', '')
         if session_nonce != form_nonce:
-            self.request.makeForbidden403()
-            self.request.write('invalid nonce')
+            self.request.makeForbidden(403, 'invalid nonce')
             return None
 
         openidreq = request.session.get('openidserver.request')
         if not openidreq:
-            request.makeForbidden403()
-            request.write('no response request')
+            request.makeForbidden(403, 'no response request')
             return None
         del request.session['openidserver.request']
 

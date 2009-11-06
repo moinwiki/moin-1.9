@@ -60,8 +60,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     _ = request.getText
     titlesearch = checkTitleSearch(request)
     if titlesearch < 0:
-        request.makeForbidden403()
         request.surge_protect(kick_him=True) # get rid of spammer
+        request.makeForbidden(403, '')
         return
 
     advancedsearch = isAdvancedSearch(request)

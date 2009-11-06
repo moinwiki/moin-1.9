@@ -17,8 +17,8 @@ def execute(pagename, request):
 
     if 'button_preview' in request.form and 'button_spellcheck' in request.form:
         # multiple buttons pressed at once? must be some spammer/bot
-        request.makeForbidden403()
         request.surge_protect(kick_him=True) # get rid of him
+        request.makeForbidden(403, '')
         return
 
     if not request.user.may.write(pagename):
