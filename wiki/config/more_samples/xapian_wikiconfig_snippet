@@ -1,26 +1,26 @@
-    # This is a sample configuration snippet that shows how to configure Xapian indexing search.
+    # This is a sample configuration snippet that shows how to configure
+    # Xapian indexing search. For further help see HelpOnXapian.
 
-    # You must have Xapian itself and its Python bindings (xapian-core and xapian-bindings) 
-    # from http://www.xapian.org/ at least in version 1.0.6 installed. 
-    # In addition, Windows users need to install pywin32 from http://sourceforge.net/projects/pywin32/. 
-    # For further help see HelpOnXapian
+    # You need Xapian and its Python bindings (xapian-core and xapian-bindings). 
+    # On Windows, you additionally need pywin32 (http://sourceforge.net/projects/pywin32/). 
 
-    # Setting this to True, enables Xapian search for your MoinMoin wiki. 
-    # You need to build the index from existing pages and attachments.
-    # moin --config-dir=/where/your/configdir/is --wiki-url=wiki-url/ index build --mode=add
+    # Setting this to True, enables Xapian indexed search.
+    # After enabling (and also after changing any xapian related setting), you
+    # need to (re-)build the index:
+    # moin --config-dir=/where/your/configdir/is --wiki-url=wiki-url/ index build --mode=rebuild
     #xapian_search = False
 
-    # If this option is enabled, all revisions of all pages are indexed. 
-    # This allows users to search in older revisions of pages 
-    # if enabled in the search dialogue on FindPage. 
-    xapian_index_history = True
+    # If set to True means that ALL page revisions will be indexed (not only
+    # the latest revision).
+    # Thus, they optionally will be searchable [see FindPage search options]).
+    #xapian_index_history = False
 
-    # If enabled, words will be indexed in their raw and stemmed forms and terms.
-    # This means that searching for "testing" will also yield pages containing 
-    # the words "tested", "tester" etc.
-    # By changing xapian_stemming you need to rebuild the index.
-    xapian_stemming = False
+    # If set to True, words will be indexed in their original AND their stemmed
+    # forms. This means that searching for "testing" will also find "tested",
+    # "tester", "testings", etc.
+    #xapian_stemming = False
 
-    # This option lets you specify a non-default directory to save your index to.
-    # Initially, it gets saved to data_dir/cache/xapian/. 
-    xapian_index_dir = None
+    # This option lets you specify a non-default directory for storing the index.
+    # If set to None (default), it gets stored into <data_dir>/cache/xapian/. 
+    #xapian_index_dir = None
+
