@@ -7,17 +7,20 @@ from MoinMoin.config import multiconfig
 Dependencies = ['user'] # table headings are translated to user language
 generates_headings = True
 
-def macro_WikiConfigHelp(macro):
+def macro_WikiConfigHelp(macro, section=None):
     request = macro.request
     _ = request.getText
     f = macro.request.formatter
     ret = []
 
     groups = []
-    for groupname in multiconfig.options:
-        groups.append((groupname, True, multiconfig.options))
-    for groupname in multiconfig.options_no_group_name:
-        groups.append((groupname, False, multiconfig.options_no_group_name))
+    if section and section in multiconfig.options:
+        groups.append((section, True, multiconfig.options))
+    else:
+        for groupname in multiconfig.options:
+            groups.append((groupname, True, multiconfig.options))
+        for groupname in multiconfig.options_no_group_name:
+            groups.append((groupname, False, multiconfig.options_no_group_name))
     groups.sort()
 
     for groupname, addgroup, optsdict in groups:
