@@ -75,6 +75,10 @@ def sendmail(request, to, subject, text, mail_from=None):
     _ = request.getText
     cfg = request.cfg
     mail_from = mail_from or cfg.mail_from
+
+    logging.debug("send mail, from: %r, subj: %r" % (mail_from, subject))
+    logging.debug("send mail, to: %r" % (to, ))
+
     subject = subject.encode(config.charset)
 
     # Create a text/plain body using CRLF (see RFC2822)
