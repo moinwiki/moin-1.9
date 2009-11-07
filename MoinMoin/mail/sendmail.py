@@ -3,7 +3,7 @@
     MoinMoin - email helper functions
 
     @copyright: 2003 Juergen Hermann <jh@web.de>,
-                2008 MoinMoin:ThomasWaldmann
+                2008-2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -78,7 +78,7 @@ def sendmail(request, to, subject, text, mail_from=None):
 
     logging.debug("send mail, from: %r, subj: %r" % (mail_from, subject))
     logging.debug("send mail, to: %r" % (to, ))
-    
+
     if not to:
         return (1, _("No recipients, nothing to do"))
 
