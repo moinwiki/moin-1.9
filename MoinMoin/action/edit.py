@@ -10,6 +10,7 @@
 """
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
+from MoinMoin.web.utils import check_surge_protect
 
 def execute(pagename, request):
     """ edit a page """
@@ -17,8 +18,7 @@ def execute(pagename, request):
 
     if 'button_preview' in request.form and 'button_spellcheck' in request.form:
         # multiple buttons pressed at once? must be some spammer/bot
-        request.surge_protect(kick_him=True) # get rid of him
-        request.makeForbidden(403, '')
+        check_surge_protect(request, kick=True) # get rid of him
         return
 
     if not request.user.may.write(pagename):
