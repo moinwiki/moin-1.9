@@ -12,6 +12,7 @@ import re, time
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 from MoinMoin.support.parsedatetime.parsedatetime import Calendar
+from MoinMoin.web.utils import check_surge_protect
 
 def checkTitleSearch(request):
     """ Return 1 for title search, 0 for full text search, -1 for idiot spammer
@@ -60,8 +61,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     _ = request.getText
     titlesearch = checkTitleSearch(request)
     if titlesearch < 0:
-        request.surge_protect(kick_him=True) # get rid of spammer
-        request.makeForbidden(403, '')
+        check_surge_protect(request, kick=True) # get rid of spammer
         return
 
     advancedsearch = isAdvancedSearch(request)
