@@ -15,7 +15,7 @@ import pygments.formatter
 from pygments.token import Token
 
 from MoinMoin import config
-from MoinMoin.parser._ParserBase import parse_start_step
+from MoinMoin.parser import parse_start_step
 from MoinMoin.support.python_compatibility import hash_new
 
 Dependencies = []
