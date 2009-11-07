@@ -1165,7 +1165,7 @@ def searchAndImportPlugin(cfg, type, name, what=None):
         except PluginMissingError:
             pass
     else:
-        raise PluginMissingError("Plugin not found!")
+        raise PluginMissingError("Plugin not found! (%r %r %r)" % (type, name, what))
     return plugin
 
 
