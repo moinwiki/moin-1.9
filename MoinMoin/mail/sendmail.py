@@ -78,6 +78,9 @@ def sendmail(request, to, subject, text, mail_from=None):
 
     logging.debug("send mail, from: %r, subj: %r" % (mail_from, subject))
     logging.debug("send mail, to: %r" % (to, ))
+    
+    if not to:
+        return (1, _("No recipients, nothing to do"))
 
     subject = subject.encode(config.charset)
 
