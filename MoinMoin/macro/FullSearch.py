@@ -42,8 +42,8 @@ def search_box(type, macro):
     @return: search box html fragment
     """
     _ = macro._
-    if 'value' in macro.form:
-        default = wikiutil.escape(macro.form["value"], quote=1)
+    if 'value' in macro.request.values:
+        default = wikiutil.escape(macro.request.values["value"], quote=1)
     else:
         default = ''
 
