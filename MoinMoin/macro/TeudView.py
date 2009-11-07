@@ -33,8 +33,8 @@ def macro_TeudView(macro):
     xslfile = xmldoc.getDataPath('webde.xsl')
     pagename = macro.formatter.page.page_name
 
-    if 'module' in macro.form:
-        modname = macro.form["module"]
+    if 'module' in macro.request.args:
+        modname = macro.request.args["module"]
         try:
             obj = pydoc.locate(modname)
         except pydoc.ErrorDuringImport, value:
