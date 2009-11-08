@@ -16,7 +16,8 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.0rc1:
+
+Version 1.9.0current:
 
   Please note:
   * This is a BETA/RC version, not meant for production usage, but just to
@@ -26,6 +27,24 @@ Version 1.9.0rc1:
     code, we likely will update translations and wiki pages for final release.
     Be careful though, don't break things.
     Please see http://master19.moinmo.in/ and help cleaning up there.
+
+  New features:
+  * added wikiconfig snippet for xapian indexed search
+  * macro WikiConfigHelp: added section keyword for selecting a subset of the
+    description, e.g. <<WikiConfigHelp(section="xapian")>>
+
+  Bug fixes:
+  * killed deprecated macro.form attribute (didn't work as expected anyway due
+    to WSGI refactoring) - please use macro.request.{args,form,values}
+  * fixed URL args processing for macros: MonthCalendar, FullSearch, TeudView
+  * fix load_theme call for fallback theme loading
+  * fix makeForbidden403() calls - is makeForbidden(403, ...) now
+  * fix check_surge_protect() call
+  * sendmail: add more debug logging, check for empty recipients list
+  * parsers: avoid accidental triggering of ParserBase deprecation warning
+
+
+Version 1.9.0rc1:
 
   New features:
   * config attribute extensions_mapping added for mapping of attachment file
@@ -42,7 +61,6 @@ Version 1.9.0rc1:
   * fix '304 not modified' response for AttachFile do=get and do=box
   * action CopyPage, RenamePage, DeletePage: fixed getting subpages_checked param from url
   * action.getHandler(): make it moin 1.8 compatible again
-
 
   Other changes:
   * 'modernized' theme:
