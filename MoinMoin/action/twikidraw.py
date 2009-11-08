@@ -114,7 +114,7 @@ class TwikiDraw(object):
         if not request.user.may.write(pagename):
             return _('You are not allowed to save a drawing on this page.')
         if not target:
-            return _("Empty target given.")
+            return _("Empty target name given.")
 
         file_upload = request.files.get('filepath')
         if not file_upload:
@@ -156,7 +156,7 @@ class TwikiDraw(object):
         if not request.user.may.read(pagename):
             return _('You are not allowed to view attachments of this page.')
         if not target:
-            return _("Empty target given.")
+            return _("Empty target name given.")
 
         ci = AttachFile.ContainerItem(request, pagename, target)
         if ci.exists():
