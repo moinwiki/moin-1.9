@@ -39,7 +39,7 @@ def macro_WikiConfigHelp(macro, section=None):
             ])
         ret.extend([
             f.table(1),
-            f.table_row(1),
+            f.table_row(1, style="background-color: #ffffcc"),
             f.table_cell(1), f.strong(1), f.text(_('Variable name')), f.strong(0), f.table_cell(0),
             f.table_cell(1), f.strong(1), f.text(_('Default')), f.strong(0), f.table_cell(0),
             f.table_cell(1), f.strong(1), f.text(_('Description')), f.strong(0), f.table_cell(0),
