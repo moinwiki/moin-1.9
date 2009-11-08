@@ -974,7 +974,7 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Страница не найдена: %s**"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT выключен, смотрите КакКонфигурировать"
+msgstr "XSLT выключен, смотрите КакНастраивать"
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr "Обработка XSLT невозможна без установки 4suite 1.x."
@@ -1460,7 +1460,7 @@ msgid "SlideTemplate"
 msgstr "ШаблонПрезентацияКадр"
 
 msgid "SyncJobTemplate"
-msgstr "ШаблонСинхронизация"
+msgstr "ШаблонЗаданиеСинхронизации"
 
 msgid "HelpOnConfiguration"
 msgstr "КакНастраивать"
@@ -2199,7 +2199,7 @@ msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
 "of its mimetype %(mimetype)s."
 msgstr ""
-"Текующая конфигурация не позволяет встраивать файл %(file)s из-за его MIME-"
+"Текущая конфигурация не позволяет встраивать файл %(file)s из-за его MIME-"
 "типа %(mimetype)s."
 
 msgid "Embedded"
@@ -2719,7 +2719,7 @@ msgid ""
 "(maxsize_file)d kB)."
 msgstr ""
 "Вложение '%(filename)s' не распаковано, т. к. некоторые файлы не находятся в "
-"одном каталоге, либо слишком велики(размер привышает максимальный %"
+"одном каталоге, либо слишком велики (размер привышает максимальный %"
 "(maxsize_file)d КБ)."
 
 #, python-format
@@ -3520,27 +3520,22 @@ msgstr "анонимно"
 #~ msgid "HelpOnUpdating"
 #~ msgstr "КакОбновлятьМойнМойн"
 
-#, fuzzy
 #~ msgid "you may need to login to edit this page"
-#~ msgstr "Вам не разрешено менять эту страницу."
+#~ msgstr "Вам необходимо авторизоваться для возможности получения доступа на редактирование данной страницы."
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."
 #~ msgstr "Установка тем допустима только на автономных серверах."
 
-#, fuzzy
 #~ msgid "InterWikiMap"
 #~ msgstr "InterWikiMap"
 
-#, fuzzy
 #~ msgid "BadContent"
 #~ msgstr "BadContent"
 
-#, fuzzy
 #~ msgid "LocalBadContent"
 #~ msgstr "LocalBadContent"
 
-#, fuzzy
 #~ msgid "EditedSystemPages"
 #~ msgstr "Убрать служебные страницы"
 

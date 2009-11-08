@@ -1424,7 +1424,7 @@ msgid "CategoryTemplate"
 msgstr "Категорії"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "ШаблонПерсональноїСторінки"
 
 msgid "HelpTemplate"
 msgstr ""
@@ -1452,7 +1452,7 @@ msgid "SlideTemplate"
 msgstr ""
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "ШаблонСинхронізації"
 
 #, fuzzy
 msgid "HelpOnConfiguration"

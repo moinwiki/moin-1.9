@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.7\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-16 07:49-0600\n"
+"POT-Creation-Date: 2009-11-03 19:30+0100\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1408,37 +1408,37 @@ msgid "CategoryHomepage"
 msgstr "DomačaStranKategorije"
 
 msgid "CategoryTemplate"
-msgstr "ŠablonaKategorije"
+msgstr "PredlogaKategorije"
 
 msgid "HomepageTemplate"
-msgstr "ŠablonaDomačeStrani"
+msgstr "PredlogaDomačeStrani"
 
 msgid "HelpTemplate"
-msgstr "ŠablonaPomoči"
+msgstr "PredlogaPomoči"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr "ŠablonaBralnoPisalneDomačeStrani"
+msgstr "PredlogaBralnoPisalneDomačeStrani"
 
 msgid "HomepageReadPageTemplate"
-msgstr "ŠablonaBralneDomačeStrani"
+msgstr "PredlogaBralneDomačeStrani"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr "ŠablonaZasebneStraniDomačeStrani"
+msgstr "PredlogaZasebneStraniDomačeStrani"
 
 msgid "HomepageGroupsTemplate"
-msgstr "ŠablonaGrupDomačeStrani"
+msgstr "PedlogaGrupDomačeStrani"
 
 msgid "SlideShowHandOutTemplate"
-msgstr "ŠablonaIzročkovPrikazaSlik"
+msgstr "PredlogaIzročkovPrikazaSlik"
 
 msgid "SlideShowTemplate"
-msgstr "ŠablonaPrikazaSlik"
+msgstr "PredlogaPrikazaSlik"
 
 msgid "SlideTemplate"
-msgstr "ŠablonaSlike"
+msgstr "PredlogaSlike"
 
 msgid "SyncJobTemplate"
-msgstr "ŠablonaZaSyncJob"
+msgstr "PredlogaZaSyncJob"
 
 msgid "HelpOnConfiguration"
 msgstr "PomočPriNastavitvah"
@@ -1539,9 +1539,8 @@ msgstr "PomočPriKategorijah"
 msgid "HelpOnDictionaries"
 msgstr "PomočPriSlovarjih"
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "PomočPriOblikovanju"
+msgstr "PomočPriRisbah"
 
 msgid "HelpOnEditLocks"
 msgstr "PomočPriZaklepanjuObUrejanju"
@@ -1561,9 +1560,8 @@ msgstr "PomočPriGrupah"
 msgid "HelpOnHeadlines"
 msgstr "PomočPriNaslovih"
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "PomočPriXmlStraneh"
+msgstr "PomočPriSlikah"
 
 msgid "HelpOnLanguages"
 msgstr "PomočPriJezikih"
@@ -1656,7 +1654,7 @@ msgid "HelpOnTables"
 msgstr "PomočPriTabelah"
 
 msgid "HelpOnTemplates"
-msgstr "PomočPriŠablonah"
+msgstr "PomočPriPredlogah"
 
 msgid "HelpOnThemes"
 msgstr "PomočPriTemah"
@@ -2196,7 +2194,6 @@ msgstr "vsebujoč vsaj enega od naslednjih izrazov"
 msgid "not containing the following terms"
 msgstr "ne vsebujoč naslednjih izrazov"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
 msgstr "nazadnje spremenjeno po... (n.pr. v zadnjih dveh tednih)"
 

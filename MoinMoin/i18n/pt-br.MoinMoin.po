@@ -2241,7 +2241,7 @@ msgid "Search in all page revisions"
 msgstr "Buscar por todas as revisões de páginas"
 
 msgid "Go get it!"
-msgstr "Comece-o!"
+msgstr "Obter!"
 
 msgid "Include system pages"
 msgstr "Incluir páginas de sistema"
