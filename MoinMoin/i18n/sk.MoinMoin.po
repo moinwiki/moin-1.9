@@ -1478,9 +1478,8 @@ msgstr "PomocSKategóriami"
 msgid "HelpOnDictionaries"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "PomocSFormátovaním"
+msgstr ""
 
 msgid "HelpOnEditLocks"
 msgstr ""
@@ -1500,9 +1499,8 @@ msgstr "PomocnSoSkupinami"
 msgid "HelpOnHeadlines"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "PmocSJazykmi"
+msgstr ""
 
 msgid "HelpOnLanguages"
 msgstr "PmocSJazykmi"
@@ -2126,7 +2124,6 @@ msgstr "obsahujúce jeden alebo viacero nasledujúcich termínov"
 msgid "not containing the following terms"
 msgstr "neobsahujúce nasledujúce termíny"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
 msgstr "posledná zmena (napr. pred 2 týždňami)"
 
@@ -2273,16 +2270,14 @@ msgstr ""
 "Ak chcete odstrániť rýchly odkaz na túto stránku, musí nejaký najprv "
 "existovať."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "Prezentácia obrázkov"
+msgstr "Upraviť prezentáciu obrázkov"
 
 msgid "Quit"
-msgstr ""
+msgstr "Ukončiť"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "Prezentácia obrázkov"
+msgstr "Ukončiť prezentáciu obrázkov"
 
 msgid "Show first slide (up arrow)"
 msgstr ""
@@ -3186,9 +3181,8 @@ msgstr "Manažment MojeStránky"
 msgid "Only superuser is allowed to use this action."
 msgstr "Iba superužívateľ má oprávnenie uskutočniť túto akciu."
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "Rodičovská stránka sa nenašla!"
+msgstr "Balíček stránok stránka sa nenašiel!"
 
 msgid "page package"
 msgstr "balíček stránky"
@@ -3369,17 +3363,5 @@ msgid ""
 msgstr ""
 "Je nám ľúto, ale stránka sa nedá uložiť, pretože \"%(content)s\" táto wiki "
 "nepovoľuje. "
-
 msgid "anonymous"
 msgstr "anonym"
-
-#, fuzzy
-#~ msgid "InstallDocs"
-#~ msgstr "nainštalovať"
-
-#~ msgid "HelpOnUpdating"
-#~ msgstr "PomocSUpdatovaním"
-
-#, fuzzy
-#~ msgid "you may need to login to edit this page"
-#~ msgstr "Nemáte oprávnenie zmeniť túto stránku."
