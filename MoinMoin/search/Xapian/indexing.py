@@ -174,22 +174,25 @@ class XapianIndex(BaseIndex):
         """ Assumes that the write lock is acquired """
         self.touch()
         connection = MoinIndexerConnection(self.dir)
-        # do all page updates
-        pages = self.update_queue.pages()[:amount]
-        for name in pages:
-            self._index_page(request, connection, name, mode='update')
-            self.update_queue.remove([name])
+        try:
+            # do all page updates
+            pages = self.update_queue.pages()[:amount]
+            logging.debug("update queue: updating %d pages+attachments in index..." % len(pages))
+            for name in pages:
+                self._index_page(request, connection, name, mode='update')
+                self.update_queue.remove([name])
 
-        # do page/attachment removals
-        items = self.remove_queue.pages()[:amount]
-        for item in items:
-            assert len(item.split('//')) == 2
-            pagename, attachment = item.split('//')
-            page = Page(request, pagename)
-            self._remove_item(request, connection, page, attachment)
-            self.remove_queue.remove([item])
-
-        connection.close()
+            # do page/attachment removals
+            items = self.remove_queue.pages()[:amount]
+            logging.debug("remove queue: removing %d pages/attachments from index..." % len(items))
+            for item in items:
+                assert len(item.split('//')) == 2
+                pagename, attachment = item.split('//')
+                page = Page(request, pagename)
+                self._remove_item(request, connection, page, attachment)
+                self.remove_queue.remove([item])
+        finally:
+            connection.close()
 
     def _get_document(self, connection, doc_id, mtime, mode):
         do_index = False
@@ -482,9 +485,9 @@ class XapianIndex(BaseIndex):
                 os.unlink(os.path.join(self.dir, fname))
             mode = 'add'
 
+        self.touch()
         connection = MoinIndexerConnection(self.dir)
         try:
-            self.touch()
             logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 self._index_page(request, connection, pagename, mode=mode)
@@ -493,7 +496,6 @@ class XapianIndex(BaseIndex):
                 for fname in files:
                     fname = fname.strip()
                     self._index_file(request, connection, fname, mode)
-            connection.flush()
         finally:
             connection.close()
 
