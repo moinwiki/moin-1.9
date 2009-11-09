@@ -32,7 +32,6 @@ def searchPages(request, query, sort='weight', mtime=None, historysearch=None, *
     @rtype: SearchResults instance
     @return: search results
     """
-
     return _get_searcher(request, query, sort, mtime, historysearch, **kw).run()
 
 

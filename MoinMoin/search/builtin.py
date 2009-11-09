@@ -126,11 +126,6 @@ class BaseIndex(object):
         self.update_queue = PageQueue(request, main_dir, 'update-queue')
         self.remove_queue = PageQueue(request, main_dir, 'remove-queue')
 
-        # Disabled until we have a sane way to build the index with a
-        # queue in small steps.
-        ## if not self.exists():
-        ##    self.indexPagesInNewThread(request)
-
     def _main_dir(self):
         raise NotImplemented('...')
 
@@ -147,7 +142,7 @@ class BaseIndex(object):
         filesys.touch(self.dir)
 
     def _search(self, query):
-        """ Actually perfom the search (read-lock acquired)
+        """ Actually perfom the search
 
         @param query: the search query objects tree
         """
@@ -234,9 +229,6 @@ class BaseIndex(object):
 
         This should be called from indexPages or indexPagesInNewThread only!
 
-        This may take some time, depending on the size of the wiki and speed
-        of the machine.
-
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
 
@@ -296,7 +288,7 @@ class BaseIndex(object):
             raise
 
     def _do_queued_updates(self, request, amount=5):
-        """ Perform updates in the queues (read-lock acquired)
+        """ Perform updates in the queues
 
         @param request: the current request
         @keyword amount: how many updates to perform at once (default: 5)
@@ -412,7 +404,7 @@ class BaseSearch(object):
         Search pages.
 
         Return list of tuples (wikiname, page object, attachment,
-        matches, revision) and estimated number of search results (If
+        matches, revision) and estimated number of search results (if
         there is no estimate, None should be returned).
 
         The list may contain deleted pages or pages the user may not read.

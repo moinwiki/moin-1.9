@@ -17,7 +17,7 @@ from MoinMoin import config
 class WikiAnalyzer(object):
     """ A text analyzer for wiki syntax
 
-    The purpose of this class is to anaylze texts/pages in wiki syntax
+    The purpose of this class is to analyze texts/pages in wiki syntax
     and yield single terms to feed into the xapian database.
     """
 

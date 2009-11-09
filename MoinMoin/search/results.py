@@ -202,7 +202,7 @@ class FoundAttachment(FoundPage):
 
 
 class FoundRemote(FoundPage):
-    """ Represents an attachment in search results """
+    """ Represents a remote search result """
 
     def __init__(self, wikiname, page_name, attachment, matches=None, page=None, rev=0):
         self.wikiname = wikiname
@@ -381,11 +381,6 @@ class SearchResults(object):
     def pageListWithContext(self, request, formatter, info=1, context=180,
                             maxlines=1, paging=True, hitsFrom=0, hitsInfo=0):
         """ Format a list of found pages with context
-
-        The default parameter values will create Google-like search
-        results, as this is the most known search interface. Good
-        interface is familiar interface, so unless we have much better
-        solution (we don't), being like Google is the way.
 
         @param request: current request
         @param formatter: formatter to use
@@ -801,8 +796,7 @@ class SearchResults(object):
 
         Do not call this, it should be called only by the instance code.
 
-        Each request might need different translations or other user
-        preferences.
+        Each request might need different translations or other user preferences.
 
         @param request: current request
         @param formatter: the formatter instance to use
