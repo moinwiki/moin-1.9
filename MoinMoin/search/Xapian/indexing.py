@@ -2,8 +2,8 @@
 """
     MoinMoin - xapian search engine indexing
 
-    @copyright: 2006-2008 MoinMoin:ThomasWaldmann,
-                2006 MoinMoin:FranzPletz
+    @copyright: 2006-2009 MoinMoin:ThomasWaldmann,
+                2006 MoinMoin:FranzPletz,
                 2009 MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 """
@@ -31,7 +31,7 @@ class UnicodeQuery(xapian.Query):
 
     def __init__(self, *args, **kwargs):
         """
-        @keyword encoding: specifiy the encoding manually (default: value of config.charset)
+        @keyword encoding: specify the encoding manually (default: value of config.charset)
         """
         self.encoding = kwargs.get('encoding', config.charset)
 
@@ -67,9 +67,7 @@ class MoinSearchConnection(xappy.SearchConnection):
 class MoinIndexerConnection(xappy.IndexerConnection):
 
     def __init__(self, *args, **kwargs):
-
         super(MoinIndexerConnection, self).__init__(*args, **kwargs)
-
         self._define_fields_actions()
 
     def _define_fields_actions(self):
@@ -111,16 +109,12 @@ class MoinIndexerConnection(xappy.IndexerConnection):
 class StemmedField(xappy.Field):
 
     def __init__(self, name, value, request):
-
         analyzer = WikiAnalyzer(request=request, language=request.cfg.language_default)
-
         value = ' '.join(unicode('%s %s' % (word, stemmed)).strip() for word, stemmed in analyzer.tokenize(value))
-
         super(StemmedField, self).__init__(name, value)
 
 
 class XapianIndex(BaseIndex):
-
 
     def _main_dir(self):
         """ Get the directory of the xapian index """
@@ -136,11 +130,11 @@ class XapianIndex(BaseIndex):
 
     def _search(self, query, sort='weight', historysearch=0):
         """
-        Perform the search using xapian (read-lock acquired)
+        Perform the search using xapian
 
         @param query: the search query objects
-        @keyword sort: the sorting of the results (default: 'weight')
-        @keyword historysearch: whether to search in all page revisions (default: 0) TODO: use/implement this
+        @param sort: the sorting of the results (default: 'weight')
+        @param historysearch: whether to search in all page revisions (default: 0) TODO: use/implement this
         """
         while True:
             try:
@@ -442,7 +436,6 @@ class XapianIndex(BaseIndex):
         pagename = page.page_name
 
         if not attachment:
-
             search_connection = MoinSearchConnection(self.dir)
             docs_to_delete = search_connection.get_all_documents_with_field('fulltitle', pagename)
             ids_to_delete = [d.id for d in docs_to_delete]
@@ -450,21 +443,18 @@ class XapianIndex(BaseIndex):
 
             for id_ in ids_to_delete:
                 connection.delete(id_)
-                logging.debug('%s removed from xapian index' % pagename)
+                logging.debug('page %s removed from xapian index' % pagename)
         else:
             # Only remove a single attachment
             id_ = "%s:%s//%s" % (wikiname, pagename, attachment)
             connection.delete(id_)
 
-            logging.debug('attachment %s from %s removed from index' % (attachment, pagename))
+            logging.debug('attachment %s (page %s) removed from index' % (attachment, pagename))
 
     def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index pages (and all given files)
 
         This should be called from indexPages or indexPagesInNewThread only!
-
-        This may take some time, depending on the size of the wiki and speed
-        of the machine.
 
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
