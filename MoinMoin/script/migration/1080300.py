@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - migration from base rev 1080300
+    MoinMoin - migration from base rev 1080200
 
     Nothing to do, we just return the new data dir revision.
 

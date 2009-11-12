@@ -84,7 +84,6 @@ General syntax: moin [options] maint reducewiki [reducewiki-options]
     def mainloop(self):
         self.init_request()
         request = self.request
-        request.form = request.args = request.setup_args()
         destdir = self.options.target_dir
         pagelist = list(request.rootpage.getPageList(user=''))
         for pagename in pagelist:
