@@ -245,6 +245,7 @@ class Application(object):
 
     def __call__(self, environ, start_response):
         try:
+            request = None
             request = self.Request(environ)
             context = init(request)
             response = run(context)
@@ -255,8 +256,10 @@ class Application(object):
             # this is stuff the user should see on the web interface:
             response = fatal_response(e)
         except Exception, e:
+            # we avoid raising more exceptions here to preserve the original exception
+            url_info = request and ' [%s]' % request.url or ''
             # have exceptions logged within the moin logging framework:
-            logging.exception("An exception has occurred.")
+            logging.exception("An exception has occurred%s." % url_info)
             # re-raise exception, so e.g. the debugger middleware gets it
             raise
 
