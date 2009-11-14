@@ -94,8 +94,6 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('title', INDEX_FREETEXT, weight=100)
         self.add_field_action('title', STORE_CONTENT)
         self.add_field_action('content', INDEX_FREETEXT, spell=True)
-        self.add_field_action('fulltitle', INDEX_EXACT)
-        self.add_field_action('fulltitle', STORE_CONTENT)
         self.add_field_action('domain', INDEX_EXACT)
         self.add_field_action('domain', STORE_CONTENT)
         self.add_field_action('lang', INDEX_EXACT)
@@ -373,7 +371,6 @@ class XapianIndex(BaseIndex):
             fields['revision'] = revision
             fields['title'] = pagename
             fields['content'] = page.get_raw_body()
-            fields['fulltitle'] = pagename
             fields['lang'], fields['stem_lang'] = self._get_languages(page)
             fields['author'] = page.edit_info().get('editor', '?')
 
@@ -434,7 +431,6 @@ class XapianIndex(BaseIndex):
                 fields['revision'] = '0'
                 fields['title'] = '%s/%s' % (pagename, attachmentname)
                 fields['content'] = att_content
-                fields['fulltitle'] = pagename
                 fields['lang'], fields['stem_lang'] = self._get_languages(page)
 
                 multivalued_fields = {}
