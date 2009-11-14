@@ -627,7 +627,7 @@ def _do_del(pagename, request):
         from MoinMoin.search.Xapian import XapianIndex
         index = XapianIndex(request)
         if index.exists:
-            index.remove_item(pagename, filename)
+            index.update_item(pagename, filename)
 
     upload_form(pagename, request, msg=_("Attachment '%(filename)s' deleted.") % {'filename': filename})
 

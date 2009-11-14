@@ -280,7 +280,7 @@ class BaseSearchTest(object):
         assert len(result.hits) == 1
 
     def test_create_page(self):
-        self.pages['TestCreatePage'] = 'some text' # Moin serarch must search this page
+        self.pages['TestCreatePage'] = 'some text' # Moin search must search this page
         try:
             create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
             self._wait_for_index_update()
@@ -293,7 +293,7 @@ class BaseSearchTest(object):
 
     def test_attachment(self):
         page_name = u'TestAttachment'
-        self.pages[page_name] = 'some text' # Moin serarch must search this page
+        self.pages[page_name] = 'some text' # Moin search must search this page
 
         filename = "AutoCreatedSillyAttachmentForSearching.png"
         data = "Test content"

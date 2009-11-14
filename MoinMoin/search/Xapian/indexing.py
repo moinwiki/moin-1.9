@@ -48,20 +48,22 @@ class UnicodeQuery(xapian.Query):
 
 class MoinSearchConnection(xappy.SearchConnection):
 
-    def get_all_documents(self):
+    def get_all_documents(self, query=None):
         """
-        Return all the documents in the xapian index.
+        Return all the documents in the index (that match query, if given).
         """
         document_count = self.get_doccount()
-        query = self.query_all()
+        query = query or self.query_all()
         hits = self.search(query, 0, document_count)
         return hits
 
-    def get_all_documents_with_field(self, field, field_value):
-        document_count = self.get_doccount()
-        query = self.query_field(field, field_value)
-        hits = self.search(query, 0, document_count)
-        return hits
+    def get_all_documents_with_fields(self, **fields):
+        """
+        Return all the documents in the index (that match the field=value kwargs given).
+        """
+        field_queries = [self.query_field(field, value) for field, value in fields.iteritems()]
+        query = self.query_composite(self.OP_AND, field_queries)
+        return self.get_all_documents(query)
 
 
 class MoinIndexerConnection(xappy.IndexerConnection):
@@ -169,22 +171,24 @@ class XapianIndex(BaseIndex):
         self.touch()
         connection = MoinIndexerConnection(self.dir)
         try:
-            # do all page updates
-            pages = self.update_queue.pages()[:amount]
-            logging.debug("update queue: updating %d pages+attachments in index..." % len(pages))
-            for name in pages:
-                self._index_page(request, connection, name, mode='update')
-                self.update_queue.remove([name])
-
-            # do page/attachment removals
-            items = self.remove_queue.pages()[:amount]
-            logging.debug("remove queue: removing %d pages/attachments from index..." % len(items))
-            for item in items:
-                assert len(item.split('//')) == 2
-                pagename, attachment = item.split('//')
-                page = Page(request, pagename)
-                self._remove_item(request, connection, page, attachment)
-                self.remove_queue.remove([item])
+            for i in range(amount):
+                try:
+                    pagename, attachmentname, revno = self.update_queue.get()
+                except IndexError:
+                    # queue empty
+                    break
+                else:
+                    logging.debug("got from indexer queue: %r %r %r" % (pagename, attachmentname, revno))
+                    if not attachmentname:
+                        if revno is None:
+                            # generic "index this page completely, with attachments" request
+                            self._index_page(request, connection, pagename, mode='update')
+                        else:
+                            # "index this page revision" request
+                            self._index_page_rev(request, connection, pagename, revno, mode='update')
+                    else:
+                        # "index this attachment" request
+                        self._index_attachment(request, connection, pagename, attachmentname, mode='update')
         finally:
             connection.close()
 
@@ -226,43 +230,6 @@ class XapianIndex(BaseIndex):
         for field, values in multivalued_fields.iteritems():
             for value in values:
                 document.fields.append(xappy.Field(field, value))
-
-    def _index_file(self, request, connection, filename, mode='update'):
-        """ index a file as it were a page named pagename
-            Assumes that the write lock is acquired
-        """
-        fields = {}
-        multivalued_fields = {}
-
-        wikiname = request.cfg.interwikiname or u"Self"
-        fs_rootpage = 'FS' # XXX FS hardcoded
-
-        try:
-            itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
-            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
-
-            doc = self._get_document(connection, itemid, mtime, mode)
-            logging.debug("%s %r" % (filename, doc))
-
-            if doc:
-                mimetype, file_content = self.contentfilter(filename)
-
-                fields['wikiname'] = wikiname
-                fields['pagename'] = fs_rootpage
-                fields['attachment'] = filename # XXX we should treat files like real pages, not attachments
-                fields['mtime'] = str(mtime)
-                fields['revision'] = '0'
-                fields['title'] = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                fields['content'] = file_content
-
-                multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
-
-                self._add_fields_to_document(request, doc, fields, multivalued_fields)
-
-                connection.replace(doc)
-
-        except (OSError, IOError, UnicodeError):
-            logging.exception("_index_file crashed:")
 
     def _get_languages(self, page):
         """ Get language of a page and the language to stem it in
@@ -325,74 +292,67 @@ class XapianIndex(BaseIndex):
     def _index_page(self, request, connection, pagename, mode='update'):
         """ Index a page - assumes that the write lock is acquired
 
+        Index all revisions (if wanted by configuration) and all attachments.
+
         @arg connection: the Indexer connection object
         @arg pagename: a page name
         @arg mode: 'add' = just add, no checks
                    'update' = check if already in index and update if needed (mtime)
         """
         page = Page(request, pagename)
-        if request.cfg.xapian_index_history:
-            for rev in page.getRevList():
-                updated = self._index_page_rev(request, connection, Page(request, pagename, rev=rev), mode=mode)
-                logging.debug("updated page %r rev %d (updated==%r)" % (pagename, rev, updated))
+        revlist = page.getRevList() # recent revs first, does not include deleted revs
+
+        if not revlist:
+            # we have an empty revision list, that means the page is not there any more,
+            # likely it (== all of its revisions, all of its attachments) got either renamed or nuked
+            wikiname = request.cfg.interwikiname or u'Self'
+
+            sc = MoinSearchConnection(self.dir)
+            docs_to_delete = sc.get_all_documents_with_fields(wikiname=wikiname, pagename=pagename)
+                                                              # any page rev, any attachment
+            sc.close()
+
+            for doc in docs_to_delete:
+                connection.delete(doc.id)
+            logging.debug('page %s (all revs, all attachments) removed from xapian index' % pagename)
+
+        else:
+            if request.cfg.xapian_index_history:
+                index_revs, remove_revs = revlist, []
+            else:
+                if page.exists(): # is current rev not deleted?
+                    index_revs, remove_revs = revlist[:1], revlist[1:]
+                else:
+                    index_revs, remove_revs = [], revlist
+
+            for revno in index_revs:
+                updated = self._index_page_rev(request, connection, pagename, revno, mode=mode)
+                logging.debug("updated page %r rev %d (updated==%r)" % (pagename, revno, updated))
                 if not updated:
                     # we reached the revisions that are already present in the index
                     break
-        else:
-            self._index_page_rev(request, connection, page, mode=mode)
 
-        self._index_attachments(request, connection, pagename, mode)
+            for revno in remove_revs:
+                # XXX remove_revs can be rather long for pages with many revs and
+                # XXX most page revs usually will be already deleted. optimize?
+                self._remove_page_rev(request, connection, pagename, revno)
+                logging.debug("removed page %r rev %d" % (pagename, revno))
 
-    def _index_attachments(self, request, connection, pagename, mode='update'):
-        from MoinMoin.action import AttachFile
+            from MoinMoin.action import AttachFile
+            for attachmentname in AttachFile._get_files(request, pagename):
+                self._index_attachment(request, connection, pagename, attachmentname, mode)
 
-        fields = {}
-        multivalued_fields = {}
-
-        wikiname = request.cfg.interwikiname or u"Self"
-        page = Page(request, pagename)
-
-        for att in AttachFile._get_files(request, pagename):
-            itemid = "%s:%s//%s" % (wikiname, pagename, att)
-            filename = AttachFile.getFilename(request, pagename, att)
-            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
-
-            doc = self._get_document(connection, itemid, mtime, mode)
-            logging.debug("%s %s %r" % (pagename, att, doc))
-
-            if doc:
-                mimetype, att_content = self.contentfilter(filename)
-
-                fields['wikiname'] = wikiname
-                fields['pagename'] = pagename
-                fields['attachment'] = att
-                fields['mtime'] = str(mtime)
-                fields['revision'] = '0'
-                fields['title'] = '%s/%s' % (pagename, att)
-                fields['content'] = att_content
-                fields['fulltitle'] = pagename
-                fields['lang'], fields['stem_lang'] = self._get_languages(page)
-
-                multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
-                multivalued_fields['domain'] = self._get_domains(page)
-
-                self._add_fields_to_document(request, doc, fields, multivalued_fields)
-
-                connection.replace(doc)
-
-    def _index_page_rev(self, request, connection, page, mode='update'):
+    def _index_page_rev(self, request, connection, pagename, revno, mode='update'):
         """ Index a page revision - assumes that the write lock is acquired
 
         @arg connection: the Indexer connection object
-        @arg page: a page object
+        @arg pagename: the page name
+        @arg revno: page revision number (int)
         @arg mode: 'add' = just add, no checks
                    'update' = check if already in index and update if needed (mtime)
         """
-        request.page = page
-        pagename = page.page_name
-
-        fields = {}
-        multivalued_fields = {}
+        page = Page(request, pagename, rev=revno)
+        request.page = page # XXX for what is this needed?
 
         wikiname = request.cfg.interwikiname or u"Self"
         revision = str(page.get_real_rev())
@@ -405,6 +365,7 @@ class XapianIndex(BaseIndex):
         if doc:
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
 
+            fields = {}
             fields['wikiname'] = wikiname
             fields['pagename'] = pagename
             fields['attachment'] = '' # this is a real page, not an attachment
@@ -416,6 +377,7 @@ class XapianIndex(BaseIndex):
             fields['lang'], fields['stem_lang'] = self._get_languages(page)
             fields['author'] = page.edit_info().get('editor', '?')
 
+            multivalued_fields = {}
             multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
             multivalued_fields['domain'] = self._get_domains(page)
             multivalued_fields['linkto'] = page.getPageLinks(request)
@@ -431,25 +393,98 @@ class XapianIndex(BaseIndex):
 
         return bool(doc)
 
-    def _remove_item(self, request, connection, page, attachment=None):
-        wikiname = request.cfg.interwikiname or u'Self'
-        pagename = page.page_name
+    def _remove_page_rev(self, request, connection, pagename, revno):
+        """ Remove a page revision from the index - assumes that the write lock is acquired
 
-        if not attachment:
-            search_connection = MoinSearchConnection(self.dir)
-            docs_to_delete = search_connection.get_all_documents_with_field('fulltitle', pagename)
-            ids_to_delete = [d.id for d in docs_to_delete]
-            search_connection.close()
+        @arg connection: the Indexer connection object
+        @arg pagename: the page name
+        @arg revno: a real revision number (int), > 0
+        @arg mode: 'add' = just add, no checks
+                   'update' = check if already in index and update if needed (mtime)
+        """
+        wikiname = request.cfg.interwikiname or u"Self"
+        revision = str(revno)
+        itemid = "%s:%s:%s" % (wikiname, pagename, revision)
+        connection.delete(itemid)
+        logging.debug('page %s, revision %d removed from index' % (pagename, revno))
 
-            for id_ in ids_to_delete:
-                connection.delete(id_)
-                logging.debug('page %s removed from xapian index' % pagename)
+    def _index_attachment(self, request, connection, pagename, attachmentname, mode='update'):
+        """ Index an attachment
+        """
+        from MoinMoin.action import AttachFile
+        wikiname = request.cfg.interwikiname or u"Self"
+        itemid = "%s:%s//%s" % (wikiname, pagename, attachmentname)
+
+        filename = AttachFile.getFilename(request, pagename, attachmentname)
+        # check if the file is still there. as we might be doing queued index updates,
+        # the file could be gone meanwhile...
+        if os.path.exists(filename):
+            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
+            doc = self._get_document(connection, itemid, mtime, mode)
+            logging.debug("%s %s %r" % (pagename, attachmentname, doc))
+            if doc:
+                page = Page(request, pagename)
+                mimetype, att_content = self.contentfilter(filename)
+
+                fields = {}
+                fields['wikiname'] = wikiname
+                fields['pagename'] = pagename
+                fields['attachment'] = attachmentname
+                fields['mtime'] = str(mtime)
+                fields['revision'] = '0'
+                fields['title'] = '%s/%s' % (pagename, attachmentname)
+                fields['content'] = att_content
+                fields['fulltitle'] = pagename
+                fields['lang'], fields['stem_lang'] = self._get_languages(page)
+
+                multivalued_fields = {}
+                multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+                multivalued_fields['domain'] = self._get_domains(page)
+
+                self._add_fields_to_document(request, doc, fields, multivalued_fields)
+
+                connection.replace(doc)
+                logging.debug('attachment %s (page %s) updated in index' % (attachmentname, pagename))
         else:
-            # Only remove a single attachment
-            id_ = "%s:%s//%s" % (wikiname, pagename, attachment)
-            connection.delete(id_)
+            # attachment file was deleted, remove it from index also
+            connection.delete(itemid)
+            logging.debug('attachment %s (page %s) removed from index' % (attachmentname, pagename))
 
-            logging.debug('attachment %s (page %s) removed from index' % (attachment, pagename))
+    def _index_file(self, request, connection, filename, mode='update'):
+        """ index a file as it were a page named pagename
+            Assumes that the write lock is acquired
+        """
+        wikiname = request.cfg.interwikiname or u"Self"
+        fs_rootpage = 'FS' # XXX FS hardcoded
+
+        try:
+            itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
+            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
+
+            doc = self._get_document(connection, itemid, mtime, mode)
+            logging.debug("%s %r" % (filename, doc))
+
+            if doc:
+                mimetype, file_content = self.contentfilter(filename)
+
+                fields = {}
+                fields['wikiname'] = wikiname
+                fields['pagename'] = fs_rootpage
+                fields['attachment'] = filename # XXX we should treat files like real pages, not attachments
+                fields['mtime'] = str(mtime)
+                fields['revision'] = '0'
+                fields['title'] = " ".join(os.path.join(fs_rootpage, filename).split("/"))
+                fields['content'] = file_content
+
+                multivalued_fields = {}
+                multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+
+                self._add_fields_to_document(request, doc, fields, multivalued_fields)
+
+                connection.replace(doc)
+
+        except (OSError, IOError, UnicodeError):
+            logging.exception("_index_file crashed:")
 
     def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index pages (and all given files)
