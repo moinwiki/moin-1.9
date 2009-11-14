@@ -207,9 +207,6 @@ class BaseIndex(object):
 
         This should be called from indexPages or indexPagesInNewThread only!
 
-        When called in a new thread, lock is acquired before the call,
-        and this method must release it when it finishes or fails.
-
         @param request: current request
         @param files: iterator or list of files to index additionally
         @param mode: set the mode of indexing the pages, either 'update',
