@@ -165,7 +165,7 @@ class XapianIndex(BaseIndex):
         return hits
 
     def _do_queued_updates(self, request, amount=5):
-        """ Assumes that the write lock is acquired """
+        """ Index <amount> entries from the indexer queue. """
         self.touch()
         connection = MoinIndexerConnection(self.dir)
         try:
@@ -288,7 +288,7 @@ class XapianIndex(BaseIndex):
             yield 'system'
 
     def _index_page(self, request, connection, pagename, mode='update'):
-        """ Index a page - assumes that the write lock is acquired
+        """ Index a page.
 
         Index all revisions (if wanted by configuration) and all attachments.
 
@@ -341,7 +341,7 @@ class XapianIndex(BaseIndex):
                 self._index_attachment(request, connection, pagename, attachmentname, mode)
 
     def _index_page_rev(self, request, connection, pagename, revno, mode='update'):
-        """ Index a page revision - assumes that the write lock is acquired
+        """ Index a page revision.
 
         @arg connection: the Indexer connection object
         @arg pagename: the page name
@@ -391,7 +391,7 @@ class XapianIndex(BaseIndex):
         return bool(doc)
 
     def _remove_page_rev(self, request, connection, pagename, revno):
-        """ Remove a page revision from the index - assumes that the write lock is acquired
+        """ Remove a page revision from the index.
 
         @arg connection: the Indexer connection object
         @arg pagename: the page name
@@ -447,9 +447,7 @@ class XapianIndex(BaseIndex):
             logging.debug('attachment %s (page %s) removed from index' % (attachmentname, pagename))
 
     def _index_file(self, request, connection, filename, mode='update'):
-        """ index a file as it were a page named pagename
-            Assumes that the write lock is acquired
-        """
+        """ index files (that are NOT attachments, just arbitrary files) """
         wikiname = request.cfg.interwikiname or u"Self"
         fs_rootpage = 'FS' # XXX FS hardcoded
 
@@ -486,9 +484,6 @@ class XapianIndex(BaseIndex):
         """ Index pages (and all given files)
 
         This should be called from indexPages or indexPagesInNewThread only!
-
-        When called in a new thread, lock is acquired before the call,
-        and this method must release it when it finishes or fails.
 
         @param request: the current request
         @param files: an optional list of files to index
