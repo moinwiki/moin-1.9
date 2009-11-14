@@ -22,8 +22,8 @@ def handle_renamed(event):
     if request.cfg.xapian_search:
         index = _get_index(request)
         if index and index.exists():
-            index.remove_item(event.old_page.page_name, now=0)
-            index.update_page(event.page.page_name)
+            index.update_item(event.old_page.page_name, now=False)
+            index.update_item(event.page.page_name)
 
 
 def handle_copied(event):
@@ -34,9 +34,9 @@ def handle_copied(event):
     if request.cfg.xapian_search:
         index = _get_index(request)
         if index and index.exists():
-            index.update_page(event.page.page_name)
+            index.update_item(event.page.page_name)
 
-def handle_changed(event, deleted=False):
+def handle_changed(event):
     """Updates Xapian index when a page is changed"""
 
     request = event.request
@@ -44,16 +44,13 @@ def handle_changed(event, deleted=False):
     if request.cfg.xapian_search:
         index = _get_index(request)
         if index and index.exists():
-            if deleted:
-                index.remove_item(event.page.page_name)
-            else:
-                index.update_page(event.page.page_name)
+            index.update_item(event.page.page_name)
 
 
 def handle_deleted(event):
     """Updates Xapian index when a page is deleted"""
     event = ev.PageChangedEvent(event.request, event.page, event.comment)
-    handle_changed(event, deleted=True)
+    handle_changed(event)
 
 
 def handle_attached(event):
@@ -64,7 +61,7 @@ def handle_attached(event):
     if request.cfg.xapian_search:
         index = _get_index(request)
         if index and index.exists():
-            index.update_page(event.pagename)
+            index.update_item(event.pagename, event.filename)
 
 
 def handle(event):

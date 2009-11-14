@@ -25,9 +25,15 @@ from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMat
 ##############################################################################
 
 
-class PageQueue(object):
+class IndexerQueue(object):
     """
-    Represents a locked page queue on the disk
+    Represents a locked on-disk queue with jobs for the xapian indexer
+
+    Each job is a tuple like: (PAGENAME, ATTACHMENTNAME, REVNO)
+    PAGENAME: page name (unicode)
+    ATTACHMENTNAME: attachment name (unicode) or None (for pages)
+    REVNO: revision number (int) - meaning "look at that revision",
+           or None - meaning "look at all revisions"
     """
 
     def __init__(self, request, xapian_dir, queuename, timeout=10.0):
@@ -46,11 +52,6 @@ class PageQueue(object):
         return caching.CacheEntry(self.request, self.xapian_dir, self.queuename,
                                   scope='dir', use_pickle=True, do_locking=locking)
 
-    def exists(self):
-        """ Checks if the queue exists on the filesystem """
-        cache = self.get_cache(locking=False)
-        return cache.exists()
-
     def _queue(self, cache):
         try:
             queue = cache.content()
@@ -59,50 +60,37 @@ class PageQueue(object):
             queue = []
         return queue
 
-    def pages(self):
-        """ Return list of pages in the queue """
-        cache = self.get_cache(locking=True)
-        return self._queue(cache)
+    def put(self, pagename, attachmentname=None, revno=None):
+        """ Put an entry into the queue (append at end)
 
-    def append(self, pagename):
-        """ Append a page to queue
-
-        @param pagename: string to save
+        @param pagename: page name [unicode]
+        @param attachmentname: attachment name [unicode]
+        @param revno: revision number (int) or None (all revs)
         """
         cache = self.get_cache(locking=False) # we lock manually
         cache.lock('w', 60.0)
         try:
             queue = self._queue(cache)
-            queue.append(pagename)
+            entry = (pagename, attachmentname, revno)
+            queue.append(entry)
             cache.update(queue)
         finally:
             cache.unlock()
 
-    def remove(self, pages):
-        """ Remove pages from the queue
+    def get(self):
+        """ Get (and remove) first entry from the queue
 
-        When the queue is empty, the queue file is removed, so exists()
-        can tell if there is something waiting in the queue.
-
-        @param pages: list of pagenames to remove
+        Raises IndexError if queue was empty when calling get().
         """
         cache = self.get_cache(locking=False) # we lock manually
         cache.lock('w', 60.0)
         try:
             queue = self._queue(cache)
-            for page in pages:
-                try:
-                    queue.remove(page)
-                except ValueError:
-                    pass
-            if queue:
-                cache.update(queue)
-            else:
-                cache.remove()
-            return True
+            entry = queue.pop(0)
+            cache.update(queue)
         finally:
             cache.unlock()
-        return False
+        return entry
 
 
 class BaseIndex(object):
@@ -123,8 +111,7 @@ class BaseIndex(object):
         self.sig_file = os.path.join(main_dir, 'complete')
         lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir, timeout=3600.0, readlocktimeout=60.0)
-        self.update_queue = PageQueue(request, main_dir, 'update-queue')
-        self.remove_queue = PageQueue(request, main_dir, 'remove-queue')
+        self.update_queue = IndexerQueue(request, main_dir, 'indexer-queue')
 
     def _main_dir(self):
         raise NotImplemented('...')
@@ -155,24 +142,15 @@ class BaseIndex(object):
         """
         return self._search(query, **kw)
 
-    def update_page(self, pagename, now=1):
-        """ Update a single page in the index
+    def update_item(self, pagename, attachmentname=None, revno=None, now=True):
+        """ Update a single item (page or attachment) in the index
 
         @param pagename: the name of the page to update
-        @keyword now: do all updates now (default: 1)
+        @param attachmentname: the name of the attachment to update
+        @param revno: a specific revision number (int) or None (all revs)
+        @param now: do all updates now (default: True)
         """
-        self.update_queue.append(pagename)
-        if now:
-            self._do_queued_updates_InNewThread()
-
-    def remove_item(self, pagename, attachment=None, now=1):
-        """ Removes a page and all its revisions or a single attachment
-
-        @param pagename: name of the page to be removed
-        @keyword attachment: optional, only remove this attachment of the page
-        @keyword now: do all updates now (default: 1)
-        """
-        self.remove_queue.append('%s//%s' % (pagename, attachment or ''))
+        self.update_queue.put(pagename, attachmentname, revno)
         if now:
             self._do_queued_updates_InNewThread()
 
@@ -238,15 +216,6 @@ class BaseIndex(object):
         'add' or 'rebuild'
         @param pages: list of pages to index, if not given, all pages are indexed
 
-        """
-        raise NotImplemented('...')
-
-    def _remove_item(self, writer, page, attachment=None):
-        """ Remove a page and all its revisions from the index or just
-            an attachment of that page
-
-        @param pagename: name of the page to remove
-        @keyword attachment: optionally, just remove this attachment
         """
         raise NotImplemented('...')
 
