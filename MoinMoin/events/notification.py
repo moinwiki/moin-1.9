@@ -12,9 +12,11 @@
 from MoinMoin import user, wikiutil
 from MoinMoin.events import EventResult
 
+
 class Result(EventResult):
     """ A base class for results of notification handlers"""
     pass
+
 
 class Failure(Result):
     """ Used to report a failure in sending notifications """
@@ -40,9 +42,11 @@ class Success(Result):
         """
         self.recipients = recipients
 
+
 class UnknownChangeType(Exception):
     """ Used to signal an invalid page change event """
     pass
+
 
 def page_link(request, page, querystr):
     """Create an absolute url to a given page with optional action
@@ -53,6 +57,7 @@ def page_link(request, page, querystr):
 
     """
     return request.getQualifiedURL(page.url(request, querystr))
+
 
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
@@ -121,6 +126,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
     return changes
 
+
 def user_created_message(request, _, sitename, username, email):
     """Formats a message used to notify about accounts being created
 
@@ -137,6 +143,7 @@ def user_created_message(request, _, sitename, username, email):
          }
 
     return {'subject': subject, 'text': text}
+
 
 def attachment_added(request, _, page_name, attach_name, attach_size):
     """Formats a message used to notify about new attachments
@@ -232,3 +239,4 @@ def filter_subscriber_list(event, subscribers, for_jabber):
                     userlist.append(usr)
 
         subscribers[lang] = userlist
+
