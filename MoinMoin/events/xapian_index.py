@@ -5,7 +5,9 @@
     @copyright: 2007 MoinMoin:KarolNowak
     @license: GNU GPL, see COPYING for details.
 """
+
 import MoinMoin.events as ev
+
 
 def _get_index(request):
     try:
@@ -13,6 +15,7 @@ def _get_index(request):
         return XapianIndex(request)
     except ImportError:
         pass
+
 
 def handle_renamed(event):
     """Updates Xapian index when a page changes its name"""
@@ -35,6 +38,7 @@ def handle_copied(event):
         index = _get_index(request)
         if index and index.exists():
             index.update_item(event.page.page_name)
+
 
 def handle_changed(event):
     """Updates Xapian index when a page is changed"""
@@ -69,10 +73,10 @@ def handle(event):
         handle_renamed(event)
     elif isinstance(event, ev.PageCopiedEvent):
         handle_copied(event)
-    elif isinstance(event, ev.PageChangedEvent) or isinstance(event, ev.TrivialPageChangedEvent):
+    elif isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent)):
         handle_changed(event)
     elif isinstance(event, ev.PageDeletedEvent):
         handle_deleted(event)
-    elif isinstance(event, ev.FileAttachedEvent) or isinstance(event, ev.FileRemovedEvent):
+    elif isinstance(event, (ev.FileAttachedEvent, ev.FileRemovedEvent)):
         handle_attachment_change(event)
 

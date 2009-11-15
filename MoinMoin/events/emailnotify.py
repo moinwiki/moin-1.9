@@ -127,7 +127,7 @@ def handle_user_created(event):
 
 
 def handle_file_attached(event):
-    """Sends an email to super users that have subscribed to this event type"""
+    """Sends an email to users that have subscribed to this event type"""
 
     names = set()
     from_address = event.request.cfg.mail_from
@@ -163,7 +163,7 @@ def handle_file_attached(event):
 
 
 def handle_file_removed(event):
-    """Sends an email to super users that have subscribed to this event type"""
+    """Sends an email to users that have subscribed to this event type"""
 
     names = set()
     from_address = event.request.cfg.mail_from
