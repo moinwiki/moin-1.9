@@ -17,7 +17,6 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil, config, caching
 from MoinMoin.Page import Page
-from MoinMoin.util import filesys
 from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMatch, getSearchResults
 
 ##############################################################################
@@ -101,26 +100,25 @@ class BaseIndex(object):
         @param request: current request
         """
         self.request = request
-        main_dir = self._main_dir()
-        self.dir = os.path.join(main_dir, 'index')
-        if not os.path.exists(self.dir):
-            os.makedirs(self.dir)
-        self.update_queue = IndexerQueue(request, main_dir, 'indexer-queue')
+        self.main_dir = self._main_dir()
+        if not os.path.exists(self.main_dir):
+            os.makedirs(self.main_dir)
+        self.update_queue = IndexerQueue(request, self.main_dir, 'indexer-queue')
 
     def _main_dir(self):
         raise NotImplemented('...')
 
     def exists(self):
         """ Check if index exists """
-        return os.path.exists(self.dir)
+        raise NotImplemented('...')
 
     def mtime(self):
         """ Modification time of the index """
-        return os.path.getmtime(self.dir)
+        raise NotImplemented('...')
 
     def touch(self):
         """ Touch the index """
-        filesys.touch(self.dir)
+        raise NotImplemented('...')
 
     def _search(self, query):
         """ Actually perfom the search
