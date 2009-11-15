@@ -66,6 +66,8 @@ class MoinSearchConnection(xappy.SearchConnection):
         return self.get_all_documents(query)
 
 
+XapianDatabaseLockError = xappy.XapianDatabaseLockError
+
 class MoinIndexerConnection(xappy.IndexerConnection):
 
     def __init__(self, *args, **kwargs):
@@ -164,31 +166,44 @@ class XapianIndex(BaseIndex):
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
 
-    def _do_queued_updates(self, request, amount=5):
-        """ Index <amount> entries from the indexer queue. """
-        self.touch()
-        connection = MoinIndexerConnection(self.dir)
+    def do_queued_updates(self, amount=-1):
+        """ Index <amount> entries from the indexer queue.
+
+            @param amount: amount of queue entries to process (default: -1 == all)
+        """
         try:
-            for i in range(amount):
-                try:
-                    pagename, attachmentname, revno = self.update_queue.get()
-                except IndexError:
-                    # queue empty
-                    break
-                else:
-                    logging.debug("got from indexer queue: %r %r %r" % (pagename, attachmentname, revno))
-                    if not attachmentname:
-                        if revno is None:
-                            # generic "index this page completely, with attachments" request
-                            self._index_page(request, connection, pagename, mode='update')
-                        else:
-                            # "index this page revision" request
-                            self._index_page_rev(request, connection, pagename, revno, mode='update')
+            request = self._indexingRequest(self.request)
+            connection = MoinIndexerConnection(self.dir)
+            self.touch()
+            try:
+                done_count = 0
+                while amount:
+                    # trick: if amount starts from -1, it will never get 0
+                    amount -= 1
+                    try:
+                        pagename, attachmentname, revno = self.update_queue.get()
+                    except IndexError:
+                        # queue empty
+                        break
                     else:
-                        # "index this attachment" request
-                        self._index_attachment(request, connection, pagename, attachmentname, mode='update')
-        finally:
-            connection.close()
+                        logging.debug("got from indexer queue: %r %r %r" % (pagename, attachmentname, revno))
+                        if not attachmentname:
+                            if revno is None:
+                                # generic "index this page completely, with attachments" request
+                                self._index_page(request, connection, pagename, mode='update')
+                            else:
+                                # "index this page revision" request
+                                self._index_page_rev(request, connection, pagename, revno, mode='update')
+                        else:
+                            # "index this attachment" request
+                            self._index_attachment(request, connection, pagename, attachmentname, mode='update')
+                        done_count += 1
+            finally:
+                logging.debug("updated xapian index with %d queued updates" % done_count)
+                connection.close()
+        except XapianDatabaseLockError:
+            # another indexer has locked the index, we can retry it later...
+            logging.debug("can't lock xapian index, not doing queued updates now")
 
     def _get_document(self, connection, doc_id, mtime, mode):
         do_index = False
@@ -203,6 +218,8 @@ class XapianIndex(BaseIndex):
                 do_index = mtime > docmtime
         elif mode == 'add':
             do_index = True
+        else:
+            raise ValueError("mode must be 'update' or 'add'")
 
         if do_index:
             document = xappy.UnprocessedDocument()
@@ -292,13 +309,15 @@ class XapianIndex(BaseIndex):
 
         Index all revisions (if wanted by configuration) and all attachments.
 
-        @arg connection: the Indexer connection object
-        @arg pagename: a page name
-        @arg mode: 'add' = just add, no checks
-                   'update' = check if already in index and update if needed (mtime)
+        @param request: request suitable for indexing
+        @param connection: the Indexer connection object
+        @param pagename: a page name
+        @param mode: 'add' = just add, no checks
+                     'update' = check if already in index and update if needed (mtime)
         """
         page = Page(request, pagename)
         revlist = page.getRevList() # recent revs first, does not include deleted revs
+        logging.debug("indexing page %r, %d revs found" % (pagename, len(revlist)))
 
         if not revlist:
             # we have an empty revision list, that means the page is not there any more,
@@ -343,11 +362,12 @@ class XapianIndex(BaseIndex):
     def _index_page_rev(self, request, connection, pagename, revno, mode='update'):
         """ Index a page revision.
 
-        @arg connection: the Indexer connection object
-        @arg pagename: the page name
-        @arg revno: page revision number (int)
-        @arg mode: 'add' = just add, no checks
-                   'update' = check if already in index and update if needed (mtime)
+        @param request: request suitable for indexing
+        @param connection: the Indexer connection object
+        @param pagename: the page name
+        @param revno: page revision number (int)
+        @param mode: 'add' = just add, no checks
+                     'update' = check if already in index and update if needed (mtime)
         """
         page = Page(request, pagename, rev=revno)
         request.page = page # XXX for what is this needed?
@@ -358,8 +378,6 @@ class XapianIndex(BaseIndex):
         mtime = page.mtime_usecs()
 
         doc = self._get_document(connection, itemid, mtime, mode)
-        logging.debug("%s %r" % (pagename, doc))
-
         if doc:
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
 
@@ -393,11 +411,10 @@ class XapianIndex(BaseIndex):
     def _remove_page_rev(self, request, connection, pagename, revno):
         """ Remove a page revision from the index.
 
-        @arg connection: the Indexer connection object
-        @arg pagename: the page name
-        @arg revno: a real revision number (int), > 0
-        @arg mode: 'add' = just add, no checks
-                   'update' = check if already in index and update if needed (mtime)
+        @param request: request suitable for indexing
+        @param connection: the Indexer connection object
+        @param pagename: the page name
+        @param revno: a real revision number (int), > 0
         """
         wikiname = request.cfg.interwikiname or u"Self"
         revision = str(revno)
@@ -407,6 +424,13 @@ class XapianIndex(BaseIndex):
 
     def _index_attachment(self, request, connection, pagename, attachmentname, mode='update'):
         """ Index an attachment
+
+        @param request: request suitable for indexing
+        @param connection: the Indexer connection object
+        @param pagename: the page name
+        @param attachmentname: the attachment's name
+        @param mode: 'add' = just add, no checks
+                     'update' = check if already in index and update if needed (mtime)
         """
         from MoinMoin.action import AttachFile
         wikiname = request.cfg.interwikiname or u"Self"
@@ -447,7 +471,14 @@ class XapianIndex(BaseIndex):
             logging.debug('attachment %s (page %s) removed from index' % (attachmentname, pagename))
 
     def _index_file(self, request, connection, filename, mode='update'):
-        """ index files (that are NOT attachments, just arbitrary files) """
+        """ index files (that are NOT attachments, just arbitrary files)
+
+        @param request: request suitable for indexing
+        @param connection: the Indexer connection object
+        @param filename: a filesystem file name
+        @param mode: 'add' = just add, no checks
+                     'update' = check if already in index and update if needed (mtime)
+        """
         wikiname = request.cfg.interwikiname or u"Self"
         fs_rootpage = 'FS' # XXX FS hardcoded
 
@@ -481,15 +512,15 @@ class XapianIndex(BaseIndex):
             logging.exception("_index_file crashed:")
 
     def _index_pages(self, request, files=None, mode='update', pages=None):
-        """ Index pages (and all given files)
+        """ Index all (given) pages (and all given files)
 
-        This should be called from indexPages or indexPagesInNewThread only!
+        This should be called from indexPages only!
 
-        @param request: the current request
+        @param request: request suitable for indexing
         @param files: an optional list of files to index
-        @param mode: how to index the files, either 'add', 'update' or 'rebuild'
+        @param mode: 'add' = just add, no checks
+                     'update' = check if already in index and update if needed (mtime)
         @param pages: list of pages to index, if not given, all pages are indexed
-
         """
         if pages is None:
             # Index all pages
@@ -501,17 +532,20 @@ class XapianIndex(BaseIndex):
                 os.unlink(os.path.join(self.dir, fname))
             mode = 'add'
 
-        self.touch()
-        connection = MoinIndexerConnection(self.dir)
         try:
-            logging.debug("indexing all (%d) pages..." % len(pages))
-            for pagename in pages:
-                self._index_page(request, connection, pagename, mode=mode)
-            if files:
-                logging.debug("indexing all files...")
-                for fname in files:
-                    fname = fname.strip()
-                    self._index_file(request, connection, fname, mode)
-        finally:
-            connection.close()
+            connection = MoinIndexerConnection(self.dir)
+            self.touch()
+            try:
+                logging.info("indexing %d pages..." % len(pages))
+                for pagename in pages:
+                    self._index_page(request, connection, pagename, mode=mode)
+                if files:
+                    logging.info("indexing all files...")
+                    for fname in files:
+                        fname = fname.strip()
+                        self._index_file(request, connection, fname, mode)
+            finally:
+                connection.close()
+        except XapianDatabaseLockError:
+            logging.warning("xapian index is locked, can't index.")
 

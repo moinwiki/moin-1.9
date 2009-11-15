@@ -5,7 +5,7 @@
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
-                2006-2008 MoinMoin:ThomasWaldmann,
+                2006-2009 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details
 """
@@ -49,13 +49,10 @@ class XapianSearch(BaseSearch):
         index = self.index
 
         clock.start('_xapianSearch')
-        try:
-            clock.start('_xapianQuery')
-            search_results = index.search(self.query, sort=self.sort, historysearch=self.historysearch)
-            clock.stop('_xapianQuery')
-            logging.debug("_xapianSearch: finds: %r" % search_results)
-        except BaseIndex.LockedException:
-            pass
+        clock.start('_xapianQuery')
+        search_results = index.search(self.query, sort=self.sort, historysearch=self.historysearch)
+        clock.stop('_xapianQuery')
+        logging.debug("_xapianSearch: finds: %r" % search_results)
 
         # Note: .data is (un)pickled inside xappy, so we get back exactly what
         #       we had put into it at indexing time (including unicode objects).

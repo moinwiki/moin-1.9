@@ -17,7 +17,7 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil, config, caching
 from MoinMoin.Page import Page
-from MoinMoin.util import lock, filesys
+from MoinMoin.util import filesys
 from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMatch, getSearchResults
 
 ##############################################################################
@@ -96,9 +96,6 @@ class IndexerQueue(object):
 class BaseIndex(object):
     """ Represents a search engine index """
 
-    class LockedException(Exception):
-        pass
-
     def __init__(self, request):
         """
         @param request: current request
@@ -108,9 +105,6 @@ class BaseIndex(object):
         self.dir = os.path.join(main_dir, 'index')
         if not os.path.exists(self.dir):
             os.makedirs(self.dir)
-        self.sig_file = os.path.join(main_dir, 'complete')
-        lock_dir = os.path.join(main_dir, 'index-lock')
-        self.lock = lock.WriteLock(lock_dir, timeout=3600.0, readlocktimeout=60.0)
         self.update_queue = IndexerQueue(request, main_dir, 'indexer-queue')
 
     def _main_dir(self):
@@ -118,7 +112,7 @@ class BaseIndex(object):
 
     def exists(self):
         """ Check if index exists """
-        return os.path.exists(self.sig_file)
+        return os.path.exists(self.dir)
 
     def mtime(self):
         """ Modification time of the index """
@@ -152,60 +146,25 @@ class BaseIndex(object):
         """
         self.update_queue.put(pagename, attachmentname, revno)
         if now:
-            self._do_queued_updates_InNewThread()
+            self.do_queued_updates()
 
     def indexPages(self, files=None, mode='update', pages=None):
         """ Index pages (and files, if given)
-
-        Can be called only from a script. To index pages during a user
-        request, use indexPagesInNewThread.
 
         @param files: iterator or list of files to index additionally
         @param mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
         @param pages: list of pages to index, if not given, all pages are indexed
         """
-        if not self.lock.acquire(1.0):
-            logging.warning("can't index: can't acquire lock")
-            return
-        try:
-            self._unsign()
-            start = time.time()
-            request = self._indexingRequest(self.request)
-            self._index_pages(request, files, mode, pages=pages)
-            logging.info("indexing completed successfully in %0.2f seconds." %
-                        (time.time() - start))
-            self._sign()
-        finally:
-            self.lock.release()
-
-    def indexPagesInNewThread(self, files=None, mode='update', pages=None):
-        """ Index pages in a new thread
-
-        Should be called from a user request. From a script, use indexPages.
-        """
-        # Prevent rebuilding the index just after it was finished
-        if self.exists():
-            return
-
-        from threading import Thread
-        indexThread = Thread(target=self._index_pages, args=(self.request, files, mode, pages))
-        indexThread.setDaemon(True)
-
-        # Join the index thread after current request finish, prevent
-        # Apache CGI from killing the process.
-        def joinDecorator(finish):
-            def func():
-                finish()
-                indexThread.join()
-            return func
-
-        self.request.finish = joinDecorator(self.request.finish)
-        indexThread.start()
+        start = time.time()
+        request = self._indexingRequest(self.request)
+        self._index_pages(request, files, mode, pages=pages)
+        logging.info("indexing completed successfully in %0.2f seconds." %
+                    (time.time() - start))
 
     def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index all pages (and all given files)
 
-        This should be called from indexPages or indexPagesInNewThread only!
+        This should be called from indexPages only!
 
         @param request: current request
         @param files: iterator or list of files to index additionally
@@ -216,48 +175,11 @@ class BaseIndex(object):
         """
         raise NotImplemented('...')
 
-    def _do_queued_updates_InNewThread(self):
-        """ do queued index updates in a new thread
-
-        Should be called from a user request. From a script, use indexPages.
-        """
-        if not self.lock.acquire(1.0):
-            logging.warning("can't index: can't acquire lock")
-            return
-        try:
-            def lockedDecorator(f):
-                def func(*args, **kwargs):
-                    try:
-                        return f(*args, **kwargs)
-                    finally:
-                        self.lock.release()
-                return func
-
-            from threading import Thread
-            indexThread = Thread(
-                    target=lockedDecorator(self._do_queued_updates),
-                    args=(self._indexingRequest(self.request), ))
-            indexThread.setDaemon(True)
-
-            # Join the index thread after current request finish, prevent
-            # Apache CGI from killing the process.
-            def joinDecorator(finish):
-                def func():
-                    finish()
-                    indexThread.join()
-                return func
-
-            self.request.finish = joinDecorator(self.request.finish)
-            indexThread.start()
-        except:
-            self.lock.release()
-            raise
-
-    def _do_queued_updates(self, request, amount=5):
+    def do_queued_updates(self, amount=-1):
         """ Perform updates in the queues
 
         @param request: the current request
-        @keyword amount: how many updates to perform at once (default: 5)
+        @keyword amount: how many updates to perform at once (default: -1 == all)
         """
         raise NotImplemented('...')
 
@@ -310,22 +232,6 @@ class BaseIndex(object):
         r.user.may = SecurityPolicy(r.user)
         r.editlog = editlog.EditLog(r)
         return r
-
-    def _unsign(self):
-        """ Remove sig file - assume write lock acquired """
-        try:
-            os.remove(self.sig_file)
-        except OSError, err:
-            if err.errno != errno.ENOENT:
-                raise
-
-    def _sign(self):
-        """ Add sig file - assume write lock acquired """
-        f = file(self.sig_file, 'w')
-        try:
-            f.write('')
-        finally:
-            f.close()
 
 
 ##############################################################################
