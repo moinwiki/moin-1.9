@@ -43,7 +43,7 @@ from MoinMoin import config, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
 from MoinMoin.security.textcha import TextCha
-from MoinMoin.events import FileAttachedEvent, send_event
+from MoinMoin.events import FileAttachedEvent, FileRemovedEvent, send_event
 from MoinMoin.support import tarfile
 
 action_name = __name__.split('.')[-1]
@@ -198,34 +198,56 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
         filecontent can be either a str (in memory file content),
         or an open file object (file content in e.g. a tempfile).
     """
-    _ = request.getText
-
     # replace illegal chars
     target = wikiutil.taintfilename(target)
 
     # get directory, and possibly create it
     attach_dir = getAttachDir(request, pagename, create=1)
-    # save file
     fpath = os.path.join(attach_dir, target).encode(config.charset)
+
     exists = os.path.exists(fpath)
-    if exists and not overwrite:
-        raise AttachmentAlreadyExists
-    else:
-        if exists:
-            try:
-                os.remove(fpath)
-            except:
-                pass
-        stream = open(fpath, 'wb')
-        try:
-            _write_stream(filecontent, stream)
-        finally:
-            stream.close()
+    if exists:
+        if overwrite:
+            remove_attachment(request, pagename, target)
+        else:
+            raise AttachmentAlreadyExists
 
-        _addLogEntry(request, 'ATTNEW', pagename, target)
+    # save file
+    stream = open(fpath, 'wb')
+    try:
+        _write_stream(filecontent, stream)
+    finally:
+        stream.close()
 
+    _addLogEntry(request, 'ATTNEW', pagename, target)
+
+    filesize = os.path.getsize(fpath)
+    event = FileAttachedEvent(request, pagename, target, filesize)
+    send_event(event)
+
+    return target, filesize
+
+
+def remove_attachment(request, pagename, target):
+    """ remove attachment <target> of page <pagename>
+    """
+    # replace illegal chars
+    target = wikiutil.taintfilename(target)
+
+    # get directory, do not create it
+    attach_dir = getAttachDir(request, pagename, create=0)
+    # remove file
+    fpath = os.path.join(attach_dir, target).encode(config.charset)
+    try:
         filesize = os.path.getsize(fpath)
-        event = FileAttachedEvent(request, pagename, target, filesize)
+        os.remove(fpath)
+    except:
+        # either it is gone already or we have no rights - not much we can do about it
+        filesize = 0
+    else:
+        _addLogEntry(request, 'ATTDEL', pagename, target)
+
+        event = FileRemovedEvent(request, pagename, target, filesize)
         send_event(event)
 
     return target, filesize
@@ -619,15 +641,7 @@ def _do_del(pagename, request):
     if not filename:
         return # error msg already sent in _access_file
 
-    # delete file
-    os.remove(fpath)
-    _addLogEntry(request, 'ATTDEL', pagename, filename)
-
-    if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import XapianIndex
-        index = XapianIndex(request)
-        if index.exists:
-            index.update_item(pagename, filename)
+    remove_attachment(request, pagename, filename)
 
     upload_form(pagename, request, msg=_("Attachment '%(filename)s' deleted.") % {'filename': filename})
 
