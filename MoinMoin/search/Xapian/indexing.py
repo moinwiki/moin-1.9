@@ -273,7 +273,7 @@ class XapianIndex(BaseIndex):
         lang = None
         default_lang = page.request.cfg.language_default
 
-        # if we should stem, we check if we have stemmer for the language available
+        # if we should stem, we check if we have a stemmer for the language available
         if page.request.cfg.xapian_stemming:
             lang = page.pi['language']
             try:
@@ -292,8 +292,7 @@ class XapianIndex(BaseIndex):
         return (lang, default_lang)
 
     def _get_categories(self, page):
-        """ Get all categories the page belongs to through the old
-            regular expression
+        """ Get all categories the page belongs to through the old regular expression
 
         @param page: the page instance
         """
@@ -397,6 +396,7 @@ class XapianIndex(BaseIndex):
         mtime = page.mtime_usecs()
 
         doc = self._get_document(connection, itemid, mtime, mode)
+        logging.debug("%s %s %r" % (pagename, revision, doc))
         if doc:
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
 
@@ -507,7 +507,6 @@ class XapianIndex(BaseIndex):
 
             doc = self._get_document(connection, itemid, mtime, mode)
             logging.debug("%s %r" % (filename, doc))
-
             if doc:
                 mimetype, file_content = self.contentfilter(filename)
 
@@ -553,7 +552,7 @@ class XapianIndex(BaseIndex):
             for fname in os.listdir(self.db):
                 os.unlink(os.path.join(self.db, fname))
             mode = 'add'
- 
+
         try:
             connection = self.get_indexer_connection()
             self.touch()
