@@ -359,8 +359,8 @@ class TestXapianSearch(BaseSearchTest):
         return XapianSearch(self.request, query)
 
     def get_moin_search_connection(self):
-        from MoinMoin.search.Xapian import MoinSearchConnection
-        return  MoinSearchConnection(os.path.join(self.request.cfg.cache_dir, 'xapian/index'))
+        from MoinMoin.search.Xapian import XapianIndex
+        return XapianIndex(self.request).get_search_connection()
 
     def setup_class(self):
 

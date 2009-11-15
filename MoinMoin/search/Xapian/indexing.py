@@ -17,6 +17,7 @@ logging = log.getLogger(__name__)
 from MoinMoin.support import xappy
 from MoinMoin.search.builtin import BaseIndex
 from MoinMoin.search.Xapian.tokenizer import WikiAnalyzer
+from MoinMoin.util import filesys
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
@@ -118,6 +119,10 @@ class StemmedField(xappy.Field):
 
 class XapianIndex(BaseIndex):
 
+    def __init__(self, request):
+        super(XapianIndex, self).__init__(request)
+        self.db = os.path.join(self.main_dir, 'index')
+
     def _main_dir(self):
         """ Get the directory of the xapian index """
         if self.request.cfg.xapian_index_dir:
@@ -127,8 +132,22 @@ class XapianIndex(BaseIndex):
             return os.path.join(self.request.cfg.cache_dir, 'xapian')
 
     def exists(self):
-        """ Check if the Xapian index exists """
-        return BaseIndex.exists(self) and os.listdir(self.dir)
+        """ Check if index exists """
+        return os.path.exists(self.db)
+
+    def mtime(self):
+        """ Modification time of the index """
+        return os.path.getmtime(self.db)
+
+    def touch(self):
+        """ Touch the index """
+        filesys.touch(self.db)
+
+    def get_search_connection(self):
+        return MoinSearchConnection(self.db)
+
+    def get_indexer_connection(self):
+        return MoinIndexerConnection(self.db)
 
     def _search(self, query, sort='weight', historysearch=0):
         """
@@ -146,7 +165,7 @@ class XapianIndex(BaseIndex):
                 else:
                     break
             except IndexError:
-                searcher = MoinSearchConnection(self.dir)
+                searcher = self.get_search_connection()
                 timestamp = self.mtime()
                 break
 
@@ -173,7 +192,7 @@ class XapianIndex(BaseIndex):
         """
         try:
             request = self._indexingRequest(self.request)
-            connection = MoinIndexerConnection(self.dir)
+            connection = self.get_indexer_connection()
             self.touch()
             try:
                 done_count = 0
@@ -324,7 +343,7 @@ class XapianIndex(BaseIndex):
             # likely it (== all of its revisions, all of its attachments) got either renamed or nuked
             wikiname = request.cfg.interwikiname or u'Self'
 
-            sc = MoinSearchConnection(self.dir)
+            sc = self.get_search_connection()
             docs_to_delete = sc.get_all_documents_with_fields(wikiname=wikiname, pagename=pagename)
                                                               # any page rev, any attachment
             sc.close()
@@ -527,13 +546,16 @@ class XapianIndex(BaseIndex):
             pages = request.rootpage.getPageList(user='', exists=1)
 
         # rebuilding the DB: delete it and add everything
+        # XXX assumes that self.db is a xapian index directory
+        # XXX killing the index this way leads to searches failing, if the
+        # XXX wiki tries to use the index while index is rebuilt.
         if mode == 'rebuild':
-            for fname in os.listdir(self.dir):
-                os.unlink(os.path.join(self.dir, fname))
+            for fname in os.listdir(self.db):
+                os.unlink(os.path.join(self.db, fname))
             mode = 'add'
-
+ 
         try:
-            connection = MoinIndexerConnection(self.dir)
+            connection = self.get_indexer_connection()
             self.touch()
             try:
                 logging.info("indexing %d pages..." % len(pages))
