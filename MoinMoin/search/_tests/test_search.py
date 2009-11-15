@@ -3,12 +3,14 @@
     MoinMoin - MoinMoin.search Tests
 
     @copyright: 2005 by Nir Soffer <nirs@freeshell.org>,
-                2007 by MoinMoin:ThomasWaldmann
+                2007-2009 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 
-import py, os, StringIO
+import os, StringIO, time
+
+import py
 
 from MoinMoin.search import QueryError, _get_searcher
 from MoinMoin.search.queryparser import QueryParser
@@ -101,7 +103,7 @@ class BaseSearchTest(object):
 
     searcher_class = None
 
-    def _wait_for_index_update(self):
+    def _index_update(self):
         pass
 
     @classmethod
@@ -283,13 +285,15 @@ class BaseSearchTest(object):
         self.pages['TestCreatePage'] = 'some text' # Moin search must search this page
         try:
             create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
-            self._wait_for_index_update()
+            self._index_update()
             result = self.search(u'TestCreatePage')
             assert len(result.hits) == 1
         finally:
             nuke_page(self.request, 'TestCreatePage')
-            self._wait_for_index_update()
+            self._index_update()
             del self.pages['TestCreatePage']
+            result = self.search(u'TestCreatePage')
+            assert len(result.hits) == 0
 
     def test_attachment(self):
         page_name = u'TestAttachment'
@@ -306,16 +310,15 @@ class BaseSearchTest(object):
             create_page(self.request, page_name, self.pages[page_name])
             AttachFile.add_attachment(self.request, page_name, filename, filecontent, True)
             append_page(self.request, page_name, '[[attachment:%s]]' % filename)
-            self._wait_for_index_update()
+            self._index_update()
             result = self.search(filename)
             assert len(result.hits) > 0
         finally:
             nuke_page(self.request, page_name)
             del self.pages[page_name]
-            self._wait_for_index_update()
-
-        result = self.search(filename)
-        assert len(result.hits) == 0
+            self._index_update()
+            result = self.search(filename)
+            assert len(result.hits) == 0
 
     def test_get_searcher(self):
         assert isinstance(_get_searcher(self.request, ''), self.searcher_class)
@@ -344,11 +347,12 @@ class TestXapianSearch(BaseSearchTest):
 
         xapian_search = True
 
-    def _wait_for_index_update(self):
+    def _index_update(self):
+        # for xapian, we queue index updates so they can get indexed later.
+        # here we make sure the queue will be processed completely,
+        # before we continue:
         from MoinMoin.search.Xapian import XapianIndex
-        index = XapianIndex(self.request)
-        index.lock.acquire()
-        index.lock.release()
+        XapianIndex(self.request).do_queued_updates()
 
     def get_searcher(self, query):
         from MoinMoin.search.Xapian.search import XapianSearch
@@ -438,27 +442,6 @@ class TestXapianSearchStemmed(TestXapianSearch):
         assert len(result.hits) == 2
 
 
-class TestXapianIndexingInNewThread(object):
-    """ search: test Xapian indexing """
-
-    class Config(wikiconfig.Config):
-
-        xapian_search = True
-
-    def test_index_in_new_thread(self):
-        """ search: kicks off indexing for a single pages in Xapian """
-        try:
-            from MoinMoin.search.Xapian import XapianIndex
-        except ImportError:
-            py.test.skip('xapian is not installed')
-
-        nuke_xapian_index(self.request)
-        index = XapianIndex(self.request)
-        index.indexPagesInNewThread(mode='add')
-
-        nuke_xapian_index(self.request)
-
-
 class TestGetSearcher(object):
 
     class Config(wikiconfig.Config):
@@ -466,7 +449,7 @@ class TestGetSearcher(object):
         xapian_search = True
 
     def test_get_searcher(self):
-        assert isinstance(_get_searcher(self.request, ''), MoinSearch), 'Xapian index is not created, despite the configuration, MoinSearch mist be used!'
+        assert isinstance(_get_searcher(self.request, ''), MoinSearch), 'Xapian index is not created, despite the configuration, MoinSearch must be used!'
 
 coverage_modules = ['MoinMoin.search']
 
