@@ -859,7 +859,7 @@ function togglenumber(did, nstart, nstep) {
 </script>
 """
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1, msg=None):
         """Creates a formatted code region, with line numbering.
 
         This region is formatted as a <div> with a <pre> inside it.  The
@@ -884,6 +884,12 @@ function togglenumber(did, nstart, nstep) {
             self._in_code_line = 0
             # id in here no longer used
             self._code_area_state = [None, show, start, step, start]
+
+            if msg:
+                attr = {'class': 'codemsg'}
+                res.append(self._open('div', attr={'class': 'codemsg'}))
+                res.append(self.text(msg))
+                res.append(self._close('div'))
 
             # Open the code div - using left to right always!
             attr = {'class': 'codearea', 'lang': 'en', 'dir': 'ltr'}
