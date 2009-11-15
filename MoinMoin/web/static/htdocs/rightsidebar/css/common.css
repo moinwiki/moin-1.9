@@ -286,6 +286,19 @@ strong.highlight
 
 /* CSS for new code_area markup used by Colorizer and ParserBase */
 
+div.codemsg {
+       margin: 0.5em 0;
+       padding: 0.5em;
+       padding-left:2.5em;
+       background:none;
+       border: 1pt solid #CCBDAE;
+       background-color: #F7F0E0;
+       background-image:url('../img/alert.png');
+       background-repeat:no-repeat;
+       background-position: 0.5em 0.5em;
+       color: black;
+}
+
 div.codearea { /* the div makes the border */
 	margin: 0.5em 0;
 	padding: 0;

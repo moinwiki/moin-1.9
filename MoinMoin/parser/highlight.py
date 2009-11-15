@@ -116,13 +116,14 @@ class Parser:
         self.request = request
         self.raw = raw.strip('\n')
         self.filename = filename
+
         if self.parsername == 'highlight':
             # user is directly using the highlight parser
             parts = format_args.split(None)
             if parts:
                 self.syntax = parts[0]
             else:
-                self.syntax = ''
+                self.syntax = 'text'
             if len(parts) > 1:
                 params = ' '.join(parts[1:])
             else:
@@ -134,10 +135,11 @@ class Parser:
         self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, params)
 
     def format(self, formatter):
+        _ = self.request.getText
         fmt = PygmentsFormatter(formatter)
         fmt.result.append(formatter.div(1, css_class="highlight %s" % self.syntax))
         self._code_id = hash_new('sha1', self.raw.encode(config.charset)).hexdigest()
-        fmt.result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step))
+        msg = None
         if self.filename is not None:
             try:
                 lexer = pygments.lexers.get_lexer_for_filename(self.filename)
@@ -148,8 +150,9 @@ class Parser:
             try:
                 lexer = pygments.lexers.get_lexer_by_name(self.syntax)
             except pygments.util.ClassNotFound:
-                fmt.result.append(formatter.text('#!%s\n' % self.syntax))
+                msg = _("Lexer \"%s\" not found. Rendering as plain text.") % self.syntax
                 lexer = pygments.lexers.TextLexer()
+        fmt.result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step, msg))
         pygments.highlight(self.raw, lexer, fmt)
         fmt.result.append(formatter.code_area(0, self._code_id))
         fmt.result.append(formatter.div(0))

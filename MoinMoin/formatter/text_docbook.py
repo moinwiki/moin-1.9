@@ -497,7 +497,7 @@ class Formatter(FormatterBase):
 
 ### Code area #######################################################
 
-    def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1, msg=None):
         """Creates a formatted code region using screen or programlisting,
         depending on if a programming language was defined (code_type).
 

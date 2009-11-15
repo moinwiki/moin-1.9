@@ -170,7 +170,7 @@ class Formatter(FormatterBase):
     def big(self, on, **kw):
         return u''
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1, msg=None):
         snip = u'---CodeArea'
         snip = snip + (u'-' * (78 - len(snip)))
         if on:
