@@ -37,6 +37,9 @@ def handle(event):
         return handle_jid_changed(event)
     elif isinstance(event, ev.FileAttachedEvent):
         return handle_file_attached(event)
+    # TODO (needs also corresponding changes in xmppbot + testing)
+    #elif isinstance(event, ev.FileRemovedEvent):
+    #    return handle_file_removed(event)
     elif isinstance(event, ev.PageDeletedEvent):
         return handle_page_deleted(event)
     elif isinstance(event, ev.PageRenamedEvent):

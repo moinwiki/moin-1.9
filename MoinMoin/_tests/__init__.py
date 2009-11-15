@@ -15,6 +15,7 @@ from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.util import random_string
 from MoinMoin import caching, user
+from MoinMoin.action import AttachFile
 
 # Promoting the test user -------------------------------------------
 # Usually the tests run as anonymous user, but for some stuff, you
@@ -93,6 +94,9 @@ def nuke_eventlog(request):
 
 def nuke_page(request, pagename):
     """ completely delete a page, everything in the pagedir """
+    attachments = AttachFile._get_files(request, pagename)
+    for attachment in attachments:
+        AttachFile.remove_attachment(request, pagename, attachment)
     page = PageEditor(request, pagename, do_editor_backup=False)
     page.deletePage()
     # really get rid of everything there:

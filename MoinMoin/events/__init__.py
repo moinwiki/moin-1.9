@@ -119,6 +119,20 @@ class FileAttachedEvent(PageEvent):
         self.size = size
 
 
+class FileRemovedEvent(PageEvent):
+
+    name = u"FileRemovedEvent"
+    description = _(u"""An attachment has been removed""")
+    req_superuser = False
+
+    def __init__(self, request, pagename, filename, size):
+        PageEvent.__init__(self, request)
+        self.request = request
+        self.pagename = pagename
+        self.filename = filename
+        self.size = size
+
+
 class PageRevertedEvent(PageEvent):
 
     name = u"PageRevertedEvent"

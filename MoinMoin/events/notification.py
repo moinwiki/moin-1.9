@@ -172,6 +172,40 @@ def attachment_added(request, _, page_name, attach_name, attach_size):
     return data
 
 
+def attachment_removed(request, _, page_name, attach_name, attach_size):
+    """Formats a message used to notify about removed attachments
+
+    @param _: a gettext function
+    @return: a dict with notification data
+
+    """
+    data = {}
+
+    data['subject'] = _("Removed attachment from page %(pagename)s on %(sitename)s") % {
+                'pagename': page_name,
+                'sitename': request.cfg.sitename or request.url_root,
+                }
+
+    data['text'] = _("Dear Wiki user,\n\n"
+    'You have subscribed to a wiki page "%(page_name)s" for change notification. '
+    "An attachment has been removed from that page by %(editor)s. "
+    "Following detailed information is available:\n\n"
+    "Attachment name: %(attach_name)s\n"
+    "Attachment size: %(attach_size)s\n") % {
+        'editor': user.getUserIdentification(request),
+        'page_name': page_name,
+        'attach_name': attach_name,
+        'attach_size': attach_size,
+    }
+
+    data['editor'] = user.getUserIdentification(request)
+    data['page_name'] = page_name
+    data['attach_size'] = attach_size
+    data['attach_name'] = attach_name
+
+    return data
+
+
 # XXX: clean up this method to take a notification type instead of bool for_jabber
 def filter_subscriber_list(event, subscribers, for_jabber):
     """Filter a list of page subscribers to honor event subscriptions
