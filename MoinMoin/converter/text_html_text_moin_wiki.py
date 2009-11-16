@@ -8,13 +8,15 @@
 
 import re, os
 import xml.dom.minidom # HINT: the nodes in parse result tree need .has_key(), "x in ..." does not work
+import urlparse
 from xml.dom import Node
 
 from MoinMoin import config, wikiutil
 from MoinMoin.error import ConvertError
-
+from werkzeug.utils import url_decode
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 interwiki_re = re.compile(WikiParser.interwiki_rule, re.VERBOSE|re.UNICODE)
+
 
 # Portions (C) International Organization for Standardization 1986
 # Permission to copy in any form is granted for use with
@@ -1367,14 +1369,27 @@ class convert_tree(visitor):
         markup = ''
         data = attrs.pop('data', None)
         if data:
-            data = wikiutil.url_unquote(data)
+            scheme, netloc, path, params, query, fragment = urlparse.urlparse(data)
+            args = url_decode(query)
+            action = args.get("action")
+            attachname = args.get("target")
+
+            if (not scheme and not netloc # same server (local attachment!)
+                and path and action == 'AttachFile' and attachname):
+                scriptname = self.request.script_root or "/"
+                pagename = path[len(scriptname):].lstrip("/")
+                pagename = wikiutil.url_unquote(pagename)
+
+                if pagename != self.request.page.page_name:
+                    attachname = "%s/%s" % (pagename, attachname)
+                data = "attachment:%s" % attachname
 
             desc = self.get_desc(node.childNodes)
             if desc:
                 desc = '|' + desc
 
-            params = ','.join(['%s="%s"' % (k, v) for k, v in attrs.items()])
-                               # if k in ('width', 'height', )])
+            # Exlude 'type' attribute cause it generates a 'key already present' error.
+            params = ','.join(['%s="%s"' % (k, v) for k, v in attrs.items() if not k in ('type', )])
             if params:
                 params = '|' + params
                 if not desc:
