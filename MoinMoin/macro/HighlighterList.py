@@ -1,7 +1,7 @@
 """
-    HighlighterList Macro
+    MoinMoin - HighlighterList Macro
 
-    MoinMoin - A simple macro for displaying a table with list of available Pygments lexers.
+    A simple macro for displaying a table with list of available Pygments lexers.
 
     Usage: <<HighlighterList([columns=<list of one of description, names,
              patterns, mimetypes, separated by pipe>,
@@ -108,7 +108,10 @@ def macro_HighlighterList(macro, columns='|'.join(available_columns),
         ret.append(f.table_row(1))
 
         for col in columns:
-            ret.extend([f.table_cell(1), f.text(parser[col]), f.table_cell(0)])
+            text = parser[col]
+            if isinstance(text, (tuple, list)):
+                text = ', '.join(text)
+            ret.extend([f.table_cell(1), f.text(text), f.table_cell(0)])
 
         ret.append(f.table_row(0))
 
