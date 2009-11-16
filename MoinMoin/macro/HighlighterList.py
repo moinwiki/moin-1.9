@@ -93,7 +93,7 @@ def macro_HighlighterList(macro, columns='|'.join(available_columns),
     #table header
     ret.extend([
         f.table(1),
-        f.table_row(1),
+        f.table_row(1, style="background-color: #ffffcc"),
         ])
     for col in columns:
         ret.extend([
