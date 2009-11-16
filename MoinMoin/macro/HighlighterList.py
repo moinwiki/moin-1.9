@@ -108,10 +108,17 @@ def macro_HighlighterList(macro, columns='|'.join(available_columns),
         ret.append(f.table_row(1))
 
         for col in columns:
-            text = parser[col]
-            if isinstance(text, (tuple, list)):
-                text = ', '.join(text)
-            ret.extend([f.table_cell(1), f.text(text), f.table_cell(0)])
+            if col:
+                ret.extend([
+                            f.table_cell(1),
+                            f.code(1),
+                            isinstance(parser[col], str) and f.text(parser[col])
+                              or (f.code(0) + ', ' + f.code(1)).join([f.text(i) for i in parser[col]]),
+                            f.code(0),
+                            f.table_cell(0),
+                          ])
+            else:
+                ret.extend([f.table_cell(1), f.text(parser[col]), f.table_cell(0)])
 
         ret.append(f.table_row(0))
 
