@@ -14,8 +14,8 @@
            all columns are displayed.
     @param sort_column: Name of column by which list should be sorted. Column
            name can be one of "description", "names", "patterns", "mimetypes".
-           If column is not "description", item values in this column will be 
-           split. Has effect in any case (not only when sort is True). If 
+           If column is not "description", item values in this column will be
+           split. Has effect in any case (not only when sort is True). If
            sort_column is empty, description column is used.
     @param filter_re: Filtering regular expression which data in sort_column
            should match. If filter_re is empty, no filtering performed.
@@ -125,3 +125,4 @@ def macro_HighlighterList(macro, columns='|'.join(available_columns),
     ret.append(f.table(0))
 
     return ''.join(ret)
+
