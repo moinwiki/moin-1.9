@@ -127,26 +127,26 @@ class SystemInfo:
         row(_('Local extension parsers'),
             ', '.join(wikiutil.wikiPlugins('parser', self.macro.cfg)) or nonestr)
 
-        from MoinMoin.search.Xapian.indexing import XapianIndex
-        xapState = (_('Disabled'), _('Enabled'))
-        idxState = (_('index available'), _('index unavailable'))
-
-        xapian_enabled = request.cfg.xapian_search
-        xapRow = xapState[xapian_enabled]
         try:
             import xapian
             xapVersion = 'Xapian %s' % xapian.version_string()
         except ImportError:
             xapian = None
             xapVersion = _('Xapian and/or Python Xapian bindings not installed')
-        xapRow += ', %s' % xapVersion
+
+        xapian_enabled = request.cfg.xapian_search
+        xapState = (_('Disabled'), _('Enabled'))
+        xapRow = '%s, %s' % (xapState[xapian_enabled], xapVersion)
 
         if xapian and xapian_enabled:
+            from MoinMoin.search.Xapian.indexing import XapianIndex
             idx = XapianIndex(request)
-            available = idx.exists() and idxState[0] or idxState[1]
-            mtime = _('last modified: %s') % (idx.exists() and
-                request.user.getFormattedDateTime(idx.mtime()) or _('N/A'))
-            xapRow += ', %s, %s' % (available, mtime)
+            idxState = (_('index unavailable'), _('index available'))
+            idx_exists = idx.exists()
+            xapRow += ', %s' % idxState[idx_exists]
+            if idx_exists:
+                xapRow += ', %s' % (_('last modified: %s') %
+                    request.user.getFormattedDateTime(idx.mtime()))
 
         row(_('Xapian search'), xapRow)
 
