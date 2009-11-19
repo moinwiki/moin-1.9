@@ -151,7 +151,7 @@ class Parser:
                 lexer = pygments.lexers.get_lexer_by_name(self.syntax)
             except pygments.util.ClassNotFound:
                 msg = _("Syntax highlighting not supported for '%(syntax)s', see %(highlight_help_page)s.") % {"syntax": self.syntax,
-                                                                                                               "highlight_help_page": "HelpOnSyntaxHighlighting"
+                                                                                                               "highlight_help_page": "HelpOnParsers"
                                                                                                               }
                 lexer = pygments.lexers.TextLexer()
         fmt.result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step, msg))
