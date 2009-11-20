@@ -872,6 +872,8 @@ function togglenumber(did, nstart, nstep) {
 
         Call once with on=1 to start the region, and a second time
         with on=0 to end it.
+
+        the msg string is not escaped
         """
         _ = self.request.getText
         res = []
@@ -888,7 +890,6 @@ function togglenumber(did, nstart, nstep) {
             if msg:
                 attr = {'class': 'codemsg'}
                 res.append(self._open('div', attr={'class': 'codemsg'}))
-                # the msg string is not escaped
                 res.append(msg)
                 res.append(self._close('div'))
 
