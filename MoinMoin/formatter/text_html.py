@@ -888,7 +888,8 @@ function togglenumber(did, nstart, nstep) {
             if msg:
                 attr = {'class': 'codemsg'}
                 res.append(self._open('div', attr={'class': 'codemsg'}))
-                res.append(self.text(msg))
+                # the msg string is not escaped
+                res.append(msg)
                 res.append(self._close('div'))
 
             # Open the code div - using left to right always!

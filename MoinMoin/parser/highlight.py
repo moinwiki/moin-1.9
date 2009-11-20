@@ -14,9 +14,10 @@ import pygments.lexers
 import pygments.formatter
 from pygments.token import Token
 
-from MoinMoin import config
+from MoinMoin import config, wikiutil
 from MoinMoin.parser import parse_start_step
 from MoinMoin.support.python_compatibility import hash_new
+from MoinMoin.Page import Page
 
 Dependencies = []
 extensions = []
@@ -150,8 +151,13 @@ class Parser:
             try:
                 lexer = pygments.lexers.get_lexer_by_name(self.syntax)
             except pygments.util.ClassNotFound:
-                msg = _("Syntax highlighting not supported for '%(syntax)s', see %(highlight_help_page)s.") % {"syntax": self.syntax,
-                                                                                                               "highlight_help_page": "HelpOnParsers"
+                f = self.request.formatter
+                url = ''.join([
+                               f.url(1, href=Page(self.request, _("HelpOnParsers")).url(self.request, escape=0)),
+                               _("HelpOnParsers"),
+                               f.url(0)])
+                msg = _("Syntax highlighting not supported for '%(syntax)s', see %(highlight_help_page)s.") % {"syntax": wikiutil.escape(self.syntax),
+                                                                                                               "highlight_help_page": url
                                                                                                               }
                 lexer = pygments.lexers.TextLexer()
         fmt.result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step, msg))
