@@ -32,6 +32,8 @@ Version 1.9.0current:
   * added wikiconfig snippet for xapian indexed search
   * macro WikiConfigHelp: added section keyword for selecting a subset of the
     description, e.g. <<WikiConfigHelp(section="xapian")>>
+  * macro HighlighterList: lists all Pygments lexers (see HelpOnParsers)
+  * main exception handler: include request url in log output
 
   Bug fixes:
   * killed deprecated macro.form attribute (didn't work as expected anyway due
@@ -42,6 +44,17 @@ Version 1.9.0current:
   * fix check_surge_protect() call
   * sendmail: add more debug logging, check for empty recipients list
   * parsers: avoid accidental triggering of ParserBase deprecation warning
+  * SystemInfo macro: fix failure if xapian/xapian-bindings are not installed
+  * Xapian indexing:
+    * make sure DB connection gets closed
+    * rely on xapian's locking (remove moin's additional locking)
+    * removed indexer threading
+    * fixed (reimplemented) indexer queue
+  * AttachFile: added remove_attachment() and FileRemovedEvent (mail and xapian
+    support, no jabber support yet)
+  * GetText2 macro: fix for named placeholders
+  * fixed MoinMoinBugs/LineNumbersWorkingBuggyWithHighlightParser
+  * GUI editor: roundtripping works now for .pdf/doc/... attachment transclusion
 
 
 Version 1.9.0rc1:
