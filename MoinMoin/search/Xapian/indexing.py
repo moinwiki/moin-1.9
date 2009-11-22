@@ -238,7 +238,7 @@ class XapianIndex(BaseIndex):
         elif mode == 'add':
             do_index = True
         else:
-            raise ValueError("mode must be 'rebuild' or 'update' or 'add'")
+            raise ValueError("mode must be 'update' or 'add'")
 
         if do_index:
             document = xappy.UnprocessedDocument()
