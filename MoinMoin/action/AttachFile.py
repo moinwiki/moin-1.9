@@ -815,7 +815,15 @@ def _do_get(pagename, request):
         return # error msg already sent in _access_file
 
     timestamp = datetime.datetime.fromtimestamp(os.path.getmtime(fpath))
-    if_modified = request.if_modified_since
+    try:
+        if_modified = request.if_modified_since
+    except OverflowError:
+        # there is likely a bug somewhere in stdlib or werkzeug that triggers this
+        # we collect more data about it here and avoid moin crashing
+        logging.exception("HTTP_IF_MODIFIED_SINCE == %r caused an OverflowError" %
+                          request.environ.get('HTTP_IF_MODIFIED_SINCE'))
+        if_modified = None
+
     if if_modified and if_modified >= timestamp:
         request.status_code = 304
     else:
