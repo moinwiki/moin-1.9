@@ -820,6 +820,7 @@ def _do_get(pagename, request):
     except OverflowError:
         # there is likely a bug somewhere in stdlib or werkzeug that triggers this
         # we collect more data about it here and avoid moin crashing
+        logging.error("complete request.environ for exception below: %r" % request.environ)
         logging.exception("HTTP_IF_MODIFIED_SINCE == %r caused an OverflowError" %
                           request.environ.get('HTTP_IF_MODIFIED_SINCE'))
         if_modified = None
