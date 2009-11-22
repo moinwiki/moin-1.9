@@ -33,6 +33,7 @@ OSPedia http://ospedia.osdir.com/
 MsgID http://groups.google.com/groups?as_umsgid=
 PyWebMail http://pywebmail.sourceforge.net/docs/
 BcWireless http://www.bcwireless.net/moin.cgi/
+Debian http://wiki.debian.org/
 DebianBug http://bugs.debian.org/
 DebianPackage http://packages.debian.org/
 CAKE http://www.cakem.net/mywiki/
@@ -55,6 +56,8 @@ CsWikiPedia http://cs.wikipedia.org/wiki/
 RuWikiPedia http://ru.wikipedia.org/wiki/
 MBWiki http://wiki.musicbrainz.org/
 SquidWiki http://wiki.squid-cache.org/
+AltLinux http://altlinux.org/
+AltLinuxEn http://en.altlinux.org/
 
 ## Updated 2004-11-19 from http://www.usemod.com/cgi-bin/mb.pl?InterMapTxt
 ## Please modify the upper part of this page only
