@@ -2972,6 +2972,8 @@ msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see %"
 "(highlight_help_page)s."
 msgstr ""
+"Destaque de sintaxe não suportado para '%(syntax)s', veja %"
+"(highlight_help_page)s."
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
 msgstr "A opção XSLT está desabilitada, por favor vejja HelpOnConfiguration."
@@ -3315,21 +3317,17 @@ msgstr "Ir Para Página"
 msgid "Description"
 msgstr "Descrição"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "Descrição"
+msgstr "Descrição do analisador léxico"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "Usuário"
+msgstr "Nomes do analisador léxico"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "Tipo do arquivo"
+msgstr "Tipos de arquivo"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "qualquer tipo de arquivo"
+msgstr "Mimetypes"
 
 msgid "Contents"
 msgstr "Conteúdo"

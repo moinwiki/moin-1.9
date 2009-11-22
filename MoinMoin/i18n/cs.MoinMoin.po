@@ -113,7 +113,7 @@ msgstr "Argument \"%s\" musí být desetinné číslo, ne \"%s\""
 
 #, python-format
 msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Argument musí být desetinné čílso, ne \"%s\"<"
+msgstr "Argument musí být desetinné čílso, ne \"%s\""
 
 #, python-format
 msgid "Argument \"%s\" must be a complex value, not \"%s\""
