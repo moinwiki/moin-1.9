@@ -22,8 +22,10 @@ def execute(pagename, request):
         return
 
     if not request.user.may.write(pagename):
-        request.theme.add_msg(_('You are not allowed to edit this page.'), "error")
-        Page(request, pagename).send_page()
+        page = wikiutil.getLocalizedPage(request, 'PermissionDeniedPage')
+        page.body = _('You are not allowed to edit this page.')
+        page.page_name = pagename
+        page.send_page(send_special=True)
         return
 
     valideditors = ['text', 'gui', ]
