@@ -531,7 +531,7 @@ class XmlRpcBase:
         """
 
         pagename = self._instr(pagename)
-
+        pagename = wikiutil.normalize_pagename(pagename, self.cfg)
         if not pagename:
             return xmlrpclib.Fault("INVALID", "pagename can't be empty")
 
