@@ -150,7 +150,7 @@ class BaseIndex(object):
         """ Index pages (and files, if given)
 
         @param files: iterator or list of files to index additionally
-        @param mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
+        @param mode: set the mode of indexing the pages, either 'update' or 'add'
         @param pages: list of pages to index, if not given, all pages are indexed
         """
         start = time.time()
@@ -166,8 +166,7 @@ class BaseIndex(object):
 
         @param request: current request
         @param files: iterator or list of files to index additionally
-        @param mode: set the mode of indexing the pages, either 'update',
-        'add' or 'rebuild'
+        @param mode: set the mode of indexing the pages, either 'update' or 'add'
         @param pages: list of pages to index, if not given, all pages are indexed
 
         """
