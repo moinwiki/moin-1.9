@@ -2191,7 +2191,7 @@ msgstr "Neznámy typ súboru, nie je možné zobraziť jeho obsah na stránke."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "<<Verbatim(attachment:)>> %(filename)s de %(pagename)s"
+msgstr "attachment:%(filename)s de %(pagename)s"
 
 msgid "Delete"
 msgstr "Vymazať"
