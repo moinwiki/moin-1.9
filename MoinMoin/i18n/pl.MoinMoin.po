@@ -2275,7 +2275,7 @@ msgstr "Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "<<Verbatim(załącznik:)>>%(filename)s z %(pagename)s"
+msgstr "załącznik:%(filename)s strony %(pagename)s"
 
 msgid "Delete"
 msgstr "Usunąć"
