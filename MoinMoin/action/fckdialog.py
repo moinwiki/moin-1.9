@@ -7,6 +7,8 @@
 """
 
 from MoinMoin import config, wikiutil
+from MoinMoin.action.AttachFile import _get_files
+from MoinMoin.Page import Page
 import re
 
 ##############################################################################
@@ -357,38 +359,51 @@ def link_dialog(request):
 </html>
 ''' % locals())
 
-##############################################################################
-### Attachment dialog
-##############################################################################
 
 def attachment_dialog(request):
-    # list of wiki pages
-    name = request.values.get("pagename", "")
-    if name:
-        from MoinMoin import search
-        # XXX error handling!
-        searchresult = search.searchPages(request, 't:"%s"' % name)
-
-        pages = [p.page_name for p in searchresult.hits]
-        pages.sort()
-        pages[0:0] = [name]
-        page_list = '''
-         <tr>
-          <td colspan=2>
-           <select id="sctPagename" size="1" onchange="OnChangePagename(this.value);">
-           %s
-           </select>
-          <td>
-         </tr>
-''' % "\n".join(['<option value="%s">%s</option>' % (page, page)
-                 for page in pages])
-    else:
-        page_list = ""
+    """ Attachment dialog for GUI editor. """
+    """ Features: This dialog can... """
+    """ - list attachments in a drop down list """
+    """ - list attachments also for a different page than the current one """
+    """ - create new attachment """
+    _ = request.getText
+    url_prefix_static = request.cfg.url_prefix_static
 
     # wiki url
-    url_prefix_static = request.cfg.url_prefix_static
-    scriptname = request.script_root + '/'
-    action = scriptname
+    action = request.script_root + "/"
+
+    # The following code lines implement the feature "list attachments for a different page".
+    # Meaning of the variables:
+    # - requestedPagename : Name of the page where attachments shall be listed from.
+    # - attachmentsPagename : Name of the page where the attachments where retrieved from.
+    # - destinationPagename : Name of the page where attachment will be placed on.
+
+    requestedPagename = wikiutil.escape(request.values.get("requestedPagename", ""), quote=True)
+    destinationPagename = wikiutil.escape(request.values.get("destinationPagename", request.page.page_name), quote=True)
+
+    attachmentsPagename = requestedPagename or request.page.page_name
+    attachments = _get_files(request, attachmentsPagename)
+    attachments.sort()
+    attachmentList = '''
+        <select id="sctAttachments" size="10" style="width:100%%;visibility:hidden;" onchange="OnAttachmentListChange();">
+        %s
+        </select>
+''' % "\n".join(['<option value="%s">%s</option>' % (wikiutil.escape(attachment, quote=True), wikiutil.escape(attachment, quote=True))
+                 for attachment in attachments])
+
+    # Translation of dialog texts.
+    langAttachmentLocation = _("Attachment location")
+    langPagename = _("Page name")
+    langAttachmentname = _("Attachment name")
+    langListAttachmentsButton = _("Refresh attachment list")
+    langAttachmentList = _("List of attachments")
+
+    if len(attachmentsPagename) > 50:
+        shortenedPagename = "%s ... %s" % (attachmentsPagename[0:25], attachmentsPagename[-25:])
+    else:
+        shortenedPagename = attachmentsPagename
+    langAvailableAttachments = "%s: %s" % (_("Available attachments for page"), shortenedPagename)
+
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
@@ -422,31 +437,63 @@ def attachment_dialog(request):
   <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
  </head>
  <body scroll="no" style="OVERFLOW: hidden">
-  <div id="divInfo">
-   <div id="divLinkTypeAttachment">
-    <table height="100%%" cellSpacing="0" cellPadding="0" width="100%%" border="0">
-     <tr>
-      <td>
-       <form action=%(action)s method="GET">
-       <input type="hidden" name="action" value="fckdialog">
-       <input type="hidden" name="dialog" value="attachment">
-       <table cellSpacing="0" cellPadding="0" align="center" border="0">
+    <form id="DlgAttachmentForm" name="DlgAttachmentForm" action=%(action)s method="GET">
+    <input type="hidden" name="action" value="fckdialog">
+    <input type="hidden" name="dialog" value="attachment">
+    <input type="hidden" id="requestedPagename" name="requestedPagename" value="%(requestedPagename)s">
+    <input type="hidden" id="attachmentsPagename" name="attachmentsPagename" value="%(attachmentsPagename)s">
+    <input type="hidden" id="destinationPagename" name="destinationPagename" value="%(destinationPagename)s">
+
+    <div id="divInfo" style="valign=top;">
+    <div id="divLinkTypeAttachment">
+    <fieldset>
+    <legend>%(langAttachmentLocation)s</legend>
+    <table cellSpacing="0" cellPadding="0" width="100%%" border="0">
         <tr>
-         <td>
-          <span fckLang="AttachmentDlgName">Attachment Name</span><br>
-          <input id="txtAttachmentname" name="pagename" size="30" value="%(name)s">
-         </td>
+            <td valign="bottom" style="width:90%%" style="padding-bottom:10px">
+                <span>%(langPagename)s</span><br>
+            </td>
         </tr>
-       </table>
-       </form>
-      </td>
-     </tr>
+        <tr>
+            <td valign="bottom" style="width:100%%" style="padding-bottom:10px;padding-right:10px;">
+                <input id="txtPagename" type="text" onkeyup="OnPagenameChange();" onchange="OnPagenameChange();" style="width:98%%">
+            </td>
+        </tr>
+        <tr>
+            <td valign="bottom" style="width:90%%" style="padding-bottom:10px;">
+                <span>%(langAttachmentname)s</span><br>
+            </td>
+        </tr>
+        <tr valign="bottom">
+            <td valign="bottom" style="width:100%%" style="padding-bottom:10px;padding-right:10px;">
+                <input id="txtAttachmentname" type="text" onkeyup="OnAttachmentnameChange();" onchange="OnPagenameChange();" style="width:98%%"><br>
+            </td>
+        </tr>
     </table>
+    </fieldset>
+    <fieldset>
+    <legend>%(langAvailableAttachments)s</legend>
+    <table cellSpacing="0" cellPadding="0" width="100%%" border="0">
+        <tr>
+            <td valign="bottom" style="width:100%%" style="padding-bottom:10px">
+                <input id="btnListAttachments" type="submit" value="%(langListAttachmentsButton)s">
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="padding-top:10px">
+                <label for="sctAttachments">%(langAttachmentList)s</label><br>
+                %(attachmentList)s
+            </td>
+        </tr>
+    </table>
+    </fieldset>
    </div>
   </div>
+   </form>
  </body>
 </html>
 ''' % locals())
+
 
 ##############################################################################
 ### Image dialog

@@ -18,22 +18,11 @@
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-var dialog	= window.parent ;
-var oEditor = dialog.InnerDialogLoaded() ;
+var dialog	= window.parent;
+var oEditor = dialog.InnerDialogLoaded();
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
 var FCKConfig = oEditor.FCKConfig;
-
-//#### Dialog Tabs
-
-// Set the dialog tabs.
-window.parent.AddTab('Info', FCKLang.DlgLnkInfoTab);
-
-// Function called when a dialog tag is selected.
-function OnDialogTabChange(tabCode)
-{
- ShowE('divInfo'  , (tabCode == 'Info'));
-}
 
 //#### Regular Expressions library.
 var oRegex = new Object();
@@ -57,105 +46,194 @@ var oParser = new Object();
 //#### Initialization Code
 
 // oLink: The actual selected link in the editor.
-var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
-if ( oLink )
-  FCK.Selection.SelectNode( oLink ) ;
+var oLink = dialog.Selection.GetSelection().MoveToAncestorNode('A');
+if (oLink)
+  FCK.Selection.SelectNode(oLink);
 
 window.onload = function()
 {
- // Translate the dialog box texts.
- oEditor.FCKLanguageManager.TranslatePage(document);
+  // Translate the dialog box texts.
+  oEditor.FCKLanguageManager.TranslatePage(document);
 
- // Load the selected link information (if any).
- LoadSelection();
+  // Load the selected link information (if any).
+  LoadSelection();
 
- // Show the initial dialog content.
- GetE('divInfo').style.display = '';
-
- // Activate the "OK" button.
- window.parent.SetOkButton(true);
-
-  // select first text input element of dialog for usability
-  SelectField('txtAttachmentname');
+  HandleOkButton();
 }
+
 
 function LoadSelection()
 {
-  if (!oLink) return;
+  if (!oLink)
+  {
+    GetE('requestedPagename').value = GetE('attachmentsPagename').value;
+    GetE('txtPagename').value = GetE('attachmentsPagename').value;
+    GetE('sctAttachments').style.visibility = "visible";     
+    return;
+  }
 
   if (oLink.getAttribute('title') && oLink.getAttribute('title').StartsWith('attachment:'))
   {
-    GetE('txtAttachmentname').value = decodeUrl(oLink.getAttribute('title').Remove(0, 'attachment:'.length));
+    SetBasePageAttachName(oLink.getAttribute('title').Remove(0, 'attachment:'.length));
   }
 }
 
-//#### Link type selection.
-function SetLinkType(linkType)
-{
-  ShowE('divLinkTypeAttachment' , (linkType == 'attachment'));
-}
 
-//#### Called when user selects Wikipage.
-function OnChangePagename(pagename)
+// Try to set selected attachment's name and source page name into the dialog.
+function SetBasePageAttachName(path)
 {
-  GetE("txtPagename").value = pagename;
-}
+  path = decodeUrl(path);
 
-//#### Called while the user types the URL.
-function OnUrlChange()
-{
-  var sUrl = GetE('txtUrl').value;
-  var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
+  var idx = path.lastIndexOf('/'); // Attachment points to a different page ?
+  var requestedPagename = unescapeHTML(GetE('requestedPagename').value);
+  var attachmentsPagename = unescapeHTML(GetE('attachmentsPagename').value);
+  var currPagename = path.substring(0, idx);
+  var currAttachmentname = path.substring(idx+1, path.length);
 
-  if (sProtocol)
+  // If there is a request for an attachment located on a different page
+  // then we request a list of attachments for that page.
+  if ((currPagename != "") && (currPagename != attachmentsPagename))
   {
-    sUrl = sUrl.substr(sProtocol[0].length);
-    GetE('txtUrl').value = sUrl;
+    if (requestedPagename == "")
+    {
+      GetE('requestedPagename').value = currPagename;
+      document.DlgAttachmentForm.submit(); // Transmit the form data and reload attachment dialog.
+      return;
+    }
   }
-  else if (oRegex.UrlOnChangeTestOther.test(sUrl))
+  else
   {
-    GetE('cmbLinkProtocol').value = '';
+    GetE('txtAttachmentname').value = currAttachmentname;
+    GetE('sctAttachments').value = currAttachmentname;
   }
+
+  // Initialize the user interface.
+  GetE('sctAttachments').style.visibility = "visible";
+  GetE('requestedPagename').value = GetE('attachmentsPagename').value;
+  GetE('txtPagename').value = GetE('attachmentsPagename').value;
 }
+
+
+//#### Called while the user types the remote page name.
+function OnPagenameChange()
+{
+  GetE('requestedPagename').value = StripWhitespace(GetE('txtPagename').value);
+
+  if(GetE('requestedPagename').value != StripWhitespace(GetE('attachmentsPagename').value))
+    GetE('sctAttachments').disabled = true;
+  else
+    GetE('sctAttachments').disabled = false;
+
+  HandleOkButton();
+}
+
+
+// If the user types in an attachment name in the attachment name edit field,
+// we can check just in time if the name exists on the current page.
+function OnAttachmentnameChange()
+{
+  // Unselect the currently selected listbox item.
+  var idx = GetE('sctAttachments').selectedIndex;
+  if(idx!=-1)
+    GetE('sctAttachments').options[idx].selected = false;
+
+  HandleOkButton();
+}
+
+
+function OnAttachmentListChange()
+{
+  var idx = GetE('sctAttachments').selectedIndex;
+  GetE('txtAttachmentname').value = GetE('sctAttachments').options[idx].value;
+  HandleOkButton();
+}
+
+
+function StripWhitespace(text)
+{
+  text = text.replace(/^\s*|\s*$/g,'');
+  return text;
+}
+
+
+function HandleOkButton()
+{
+  var pageName = StripWhitespace(GetE('txtPagename').value);
+  var attachmentName = StripWhitespace(GetE('txtAttachmentname').value);
+
+  // Activate the "OK" button.
+  if (pageName.length == 0 || attachmentName.length == 0)
+    window.parent.SetOkButton(false);
+  else
+    window.parent.SetOkButton(true);
+}
+
+
+// Escape '<', '>', '&' and '"' to avoid XSS issues.
+function escapeHTML(text)
+{
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+// Unescape '<', '>', '&' and '"' to avoid XSS issues.
+function unescapeHTML(text)
+{
+  return text.replace(/&quot;/g, "\"").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&amp;/g, "&");
+}
+
+
+function GetAttachmentURI(pageName, attachmentName)
+{
+  return encodeURI(FCKConfig['WikiBasePath'] + pageName +
+          "?action=AttachFile&do=view&target=" + attachmentName);
+}
+
 
 //#### The OK button was hit.
 function Ok()
 {
-  var sUri;
-  var sText = '';
+  var pageName = StripWhitespace(GetE('txtPagename').value); // Attachment's source page/URL.
+  var attachmentName = StripWhitespace(GetE('txtAttachmentname').value);
+  var destinationPagename = StripWhitespace(GetE('destinationPagename').value);
+  var indexOfAttachmentList = GetE('sctAttachments').selectedIndex;
+  var title = '';
+  var fullAttachmentName = '';
 
-  sUri = GetE('txtAttachmentname').value;
-  if (sUri.length == 0)
-  {
-    alert(FCKLang.DlnLnkMsgNoUrl);
-    return false;
-  }
-  sText = sUri;
-  sUri = encodeUrl(sUri);
+  // If attachment is on a different page, than we add a reference to it before
+  // the attachment name (e.g.: remotepagename/attachment.pdf).
+  // But: If you rename the destination's page name, this link won't be
+  // processed by moin and will result in a broken link!
+  if (destinationPagename != pageName)
+    fullAttachmentName = pageName + "/" + attachmentName;
+  else
+    fullAttachmentName = attachmentName;
 
-  if (oLink) // Modifying an existent link.
+  var linkText = fullAttachmentName;
+  var attachmentURI = GetAttachmentURI(pageName, attachmentName);
+
+  if (oLink)
   {
-    oLink.href = sUri;
+    // Modify an existent link.
+    oLink.href = attachmentURI;
+    SetAttribute( oLink, '_fcksavedurl', attachmentURI ) ;
   }
-  else   // Creating a new link.
+  else
   {
-    oLink = oEditor.FCK.CreateLink(sUri)[0];
-    if (! oLink)
+    // Creating a new link.
+    oLink = oEditor.FCK.CreateLink(fullAttachmentName)[0];
+    if (!oLink)
     {
+      // If no link text is present...
       oLink = oEditor.FCK.CreateElement('A');
-      oLink.href = sUri;
-      oLink.appendChild(oEditor.FCK.EditorDocument.createTextNode(sText)); 
+      oLink.href = attachmentURI;
+      oLink.appendChild(oEditor.FCK.EditorDocument.createTextNode(linkText));
+    }
+    else
+    {
+      // If link text is marked...
+      oLink.href = attachmentURI;
     }
   }
-  
-  SetAttribute(oLink, 'title', 'attachment:' + sUri);
 
+  SetAttribute(oLink, 'title', 'attachment:' + fullAttachmentName);
   return true;
 }
-
-function SetUrl(url)
-{
-  document.getElementById('txtUrl').value = url;
-  OnUrlChange();
-}
-

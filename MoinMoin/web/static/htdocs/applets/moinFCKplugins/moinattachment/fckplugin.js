@@ -15,13 +15,13 @@ function LinkState()
 }
 
 // Register the related command.
-FCKCommands.RegisterCommand('Attachment', new FCKDialogCommand( 'Attachment', FCKLang.DlgLnkWindowTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=attachment', 400, 330, LinkState, 'CreateAttachment')) ;
+FCKCommands.RegisterCommand('Attachment', new FCKDialogCommand( 'Attachment', "Attachment", FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=attachment', 600, 500, LinkState, 'CreateAttachment')) ;
 
 oAttachmentItem = new FCKToolbarButton('Attachment', FCKLang.AttachmentBtn, null, null, false, true);
 } 
 else
 {
-FCKCommands.RegisterCommand('Attachment', new FCKDialogCommand( 'Attachment', FCKLang.DlgLnkWindowTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=attachment', 400, 330, FCK.GetNamedCommandState, 'CreateAttachment')) ;
+FCKCommands.RegisterCommand('Attachment', new FCKDialogCommand( 'Attachment', "Attachment", FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=attachment', 600, 500, FCK.GetNamedCommandState, 'CreateAttachment')) ;
 
 oAttachmentItem = new FCKToolbarButton('Attachment', FCKLang.AttachmentBtn, null, null, false, false);
 }
