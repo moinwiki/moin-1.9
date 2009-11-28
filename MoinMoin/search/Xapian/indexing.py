@@ -119,9 +119,9 @@ class StemmedField(xappy.Field):
 
 class XapianIndex(BaseIndex):
 
-    def __init__(self, request):
+    def __init__(self, request, name='index'):
         super(XapianIndex, self).__init__(request)
-        self.db = os.path.join(self.main_dir, 'index')
+        self.db = os.path.join(self.main_dir, name)
 
     def _main_dir(self):
         """ Get the directory of the xapian index """
@@ -543,15 +543,6 @@ class XapianIndex(BaseIndex):
         if pages is None:
             # Index all pages
             pages = request.rootpage.getPageList(user='', exists=1)
-
-        # rebuilding the DB: delete it and add everything
-        # XXX assumes that self.db is a xapian index directory
-        # XXX killing the index this way leads to searches failing, if the
-        # XXX wiki tries to use the index while index is rebuilt.
-        if mode == 'rebuild':
-            for fname in os.listdir(self.db):
-                os.unlink(os.path.join(self.db, fname))
-            mode = 'add'
 
         try:
             connection = self.get_indexer_connection()
