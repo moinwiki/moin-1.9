@@ -15,11 +15,7 @@ from MoinMoin.Page import Page
 from MoinMoin.widget import html
 
 def execute(pagename, request):
-    if request.user.valid:
-        url = Page(request, pagename).url(request)
-        request.http_redirect(url)
-    else:
-        return LoginHandler(pagename, request).handle()
+    return LoginHandler(pagename, request).handle()
 
 class LoginHandler:
     def __init__(self, pagename, request):
