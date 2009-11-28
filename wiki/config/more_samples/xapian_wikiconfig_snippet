@@ -1,0 +1,26 @@
+    # This is a sample configuration snippet that shows how to configure
+    # Xapian indexing search. For further help see HelpOnXapian.
+
+    # You need Xapian and its Python bindings (xapian-core and xapian-bindings). 
+    # On Windows, you additionally need pywin32 (http://sourceforge.net/projects/pywin32/). 
+
+    # Setting this to True, enables Xapian indexed search.
+    # After enabling (and also after changing any xapian related setting), you
+    # need to (re-)build the index:
+    # moin --config-dir=/where/your/configdir/is --wiki-url=wiki-url/ index build --mode=rebuild
+    #xapian_search = False
+
+    # If set to True means that ALL page revisions will be indexed (not only
+    # the latest revision).
+    # Thus, they optionally will be searchable [see FindPage search options]).
+    #xapian_index_history = False
+
+    # If set to True, words will be indexed in their original AND their stemmed
+    # forms. This means that searching for "testing" will also find "tested",
+    # "tester", "testings", etc.
+    #xapian_stemming = False
+
+    # This option lets you specify a non-default directory for storing the index.
+    # If set to None (default), it gets stored into <data_dir>/cache/xapian/. 
+    #xapian_index_dir = None
+
