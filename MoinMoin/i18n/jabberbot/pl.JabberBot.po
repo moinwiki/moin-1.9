@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Jabber Bot\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-07-17 03:14+0200\n"
+"PO-Revision-Date: 2007-07-19 01:53+0100\n"
+"Last-Translator: Karol Nowak <grywacz@gmail.com>\n"
+"Language-Team: Polish Language Team <grywacz@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language: Polski\n"
+"X-Language-in-English: Polish\n"
+"X-Direction: ltr\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#, python-format
+msgid ""
+"Here's the page \"%(pagename)s\" that you've requested:\n"
+"\n"
+"%(data)s"
+msgstr ""
+"Oto strona \"%(pagename)s\", której żądałeś:\n"
+"\n"
+"%(data)s"
+
+#, python-format
+msgid ""
+"That's the list of pages accesible to you:\n"
+"\n"
+"%s"
+msgstr ""
+"Oto list stron, do których masz dostęp:\n"
+"\n"
+"%s"
+
+#, python-format
+msgid ""
+"Following detailed information on page \"%(pagename)s\" is available::\n"
+"\n"
+"%(data)s"
+msgstr ""
+"Oto dostępne szczegółowe informacje o stronie \"%(pagename)s\":\n"
+"\n"
+"%(data)s"
+
+msgid "Submit this form to perform a wiki search"
+msgstr "Wyślij ten formularz, by przeprowadzić wyszukiwanie"
+
+msgid "Title search"
+msgstr "Szukaj w tytułach"
+
+msgid "Full-text search"
+msgstr "Szukaj w tekście"
+
+msgid "Wiki search"
+msgstr "Przeszukiwanie wiki"
+
+msgid "Search text"
+msgstr "Szukany tekst"
+
+msgid "Please specify the search criteria."
+msgstr "Proszę podać kryteria wyszukiwania."
+
+msgid "This command requires a client supporting Data Forms"
+msgstr "Ta komenda wymaga klienta obsługującego Data Forms"
+
+msgid ""
+"The \"help\" command prints a short, helpful message about a given topic or function.\n"
+"\n"
+"Usage: help [topic_or_function]"
+msgstr ""
+"Komenda \"help\" wyświetla krótką pomoc na wybrany temat.\n"
+"\n"
+"Sposób użycia: help [temat_lub_funkcja]"
+
+msgid "The \"ping\" command returns a \"pong\" message as soon as it's received."
+msgstr "Komenda \"ping\" odpowiada \"pong\", gdy tylko zostanie odebrana."
+
+msgid "searchform - perform a wiki search using a form"
+msgstr "searchform - przeszukaj wiki korzystając z formularza"
+
+#, python-format
+msgid ""
+"%(command)s - %(description)s\n"
+"\n"
+"Usage: %(command)s %(params)s"
+msgstr ""
+"%(command)s - %(description)s\n"
+"\n"
+"Sposób użycia: %(command)s %(params)s"
+
+#, python-format
+msgid "Unknown command \"%s\" "
+msgstr "Nieznana komenda \"%s\""
+
+#, python-format
+msgid ""
+"You've specified a wrong parameter list. The call should look like:\n"
+"\n"
+"%(command)s %(params)s"
+msgstr ""
+"Podałeś błędną listę parametrów. Powinna ona wyglądać tak:\n"
+"\n"
+"%(command)s %(params)s"
+
+#, python-format
+msgid ""
+"Hello there! I'm a MoinMoin Notification Bot. Available commands:\n"
+"\n"
+"%(internal)s\n"
+"%(xmlrpc)s"
+msgstr ""
+"Witaj! Jestem botem-powiadamiaczem MoinMoin. Udostępniam takie komendy:\n"
+"\n"
+"%(internal)s\n"
+"%(xmlrpc)s"
+
+msgid "You must set a (long) secret string!"
+msgstr "Musisz ustawić (długie) sekretne hasło!"
+
+msgid "Error"
+msgstr "Błąd"
+
+#, python-format
+msgid ""
+"Your request has failed. The reason is:\n"
+"%s"
+msgstr ""
+"Twoje polecenie nie mogło zostać wypełniona. Przyczyna to:\n"
+"%s"
+
+#, python-format
+msgid ""
+"A serious error occured while processing your request:\n"
+"%s"
+msgstr ""
+"Podczas przetwarzania Twojego polecenia wystąpił poważny błąd:\n"
+"%s"
+
+msgid "An internal error has occured, please contact the administrator."
+msgstr "Wystąpił błąd wewnętrzny, proszę skontaktować się z administratorem."
+
+msgid "Credentials check failed, you may be unable to see all information."
+msgstr "Uwierzytelnienie nie powiodło się, część informacji może być dla Ciebie niedostępna."
+
+msgid "This command may take a while to complete, please be patient..."
+msgstr "Wykonanie tego polecenia może chwilę potrwać, proszę uzbroić się w cierpliwość..."
+
+#, python-format
+msgid ""
+"Last author: %(author)s\n"
+"Last modification: %(modification)s\n"
+"Current version: %(version)s"
+msgstr ""
+"Ostatni autor: %(author)s\n"
+"Ostatnia zmiana: %(modification)s\n"
+"Obecna wersja: %(version)s"
+
+msgid "You must set a (long) secret string"
+msgstr "Musisz ustawić (długie) sekretne hasło"
+
+msgid "You are not allowed to use this bot!"
+msgstr "Nie masz uprawnień do użycia tego bota!"
+
