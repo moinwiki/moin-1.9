@@ -515,7 +515,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         backto = request.values.get('backto')
         if backto:
             pg = Page(request, backto)
-            request.http_redirect(pg.url(request, relative=False))
+            request.http_redirect(pg.url(request))
         else:
             request.theme.add_msg(_('Edit was cancelled.'), "error")
             self.send_page()
