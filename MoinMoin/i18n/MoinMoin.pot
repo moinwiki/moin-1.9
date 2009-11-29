@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 23:30+0100\n"
+"POT-Creation-Date: 2009-11-29 00:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2901,6 +2901,24 @@ msgid "Optional reason for the copying"
 msgstr ""
 
 msgid "Really copy this page?"
+msgstr ""
+
+msgid "Attachment location"
+msgstr ""
+
+msgid "Page name"
+msgstr ""
+
+msgid "Attachment name"
+msgstr ""
+
+msgid "Refresh attachment list"
+msgstr ""
+
+msgid "List of attachments"
+msgstr ""
+
+msgid "Available attachments for page"
 msgstr ""
 
 #, python-format
