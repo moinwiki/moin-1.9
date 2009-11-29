@@ -17,7 +17,7 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.9.0current:
+Version 1.9.0rc2:
 
   Please note:
   * This is a BETA/RC version, not meant for production usage, but just to
@@ -30,16 +30,16 @@ Version 1.9.0current:
 
   New features:
   * Improved attachment dialog for GUI editor.
-  * added wikiconfig snippet for xapian indexed search
-  * macro WikiConfigHelp: added section keyword for selecting a subset of the
-    description, e.g. <<WikiConfigHelp(section="xapian")>>
-  * macro HighlighterList: lists all Pygments lexers (see HelpOnParsers)
-  * main exception handler: include request url in log output
   * safe 2-stage xapian index rebuilding:
     moin index build --mode=buildnewindex  # slow, concurrent
     <stop wiki>
     moin index build --mode=usenewindex  # fast
     <start wiki>
+  * added wikiconfig snippet for xapian indexed search
+  * macro WikiConfigHelp: added section keyword for selecting a subset of the
+    description, e.g. <<WikiConfigHelp(section="xapian")>>
+  * macro HighlighterList: lists all Pygments lexers (see HelpOnParsers)
+  * main exception handler: include request url in log output
 
   Bug fixes:
   * killed deprecated macro.form attribute (didn't work as expected anyway due
@@ -65,6 +65,7 @@ Version 1.9.0current:
   * fixed MoinMoinBugs/LineNumbersWorkingBuggyWithHighlightParser
   * GUI editor: roundtripping works now for .pdf/doc/... attachment transclusion
   * fix MoinMoinBugs/MissingPageShouldn'tOfferToCreatePageForReadonlyUsers
+  * fix MoinMoinBugs/1.6XmlRpcPutPagePagenameEscape
 
 
 Version 1.9.0rc1:
