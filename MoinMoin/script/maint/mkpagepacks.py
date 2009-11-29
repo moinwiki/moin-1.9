@@ -108,8 +108,8 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
                 cnt += 1
                 zipname = "%d" % cnt
                 script.append(packLine(["ReplaceUnderlayAttachment", zipname, attname, pagename]))
-                filename = AttachFile.getFilename(request, pagename, attname)
-                zf.write(filename, zipname)
+                attpath = AttachFile.getFilename(request, pagename, attname)
+                zf.write(attpath, zipname)
 
             cnt += 1
             zipname = "%d" % cnt
