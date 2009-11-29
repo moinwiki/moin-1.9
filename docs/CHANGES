@@ -59,13 +59,15 @@ Version 1.9.0rc2:
     * less disruptive xapian index rebuild
   * AttachFile: added remove_attachment() and FileRemovedEvent (mail and xapian
     support, no jabber support yet)
-  * catch OverFlowError if AttachFile do=get gets invalid If-modified-since
-    header from client, log traceback and request env for further analysis.
+  * patch werkzeug 0.5.1 to catch OverFlowError and ValueError so it doesn't
+    crash when receiving invalid If-modified-since header from client.
   * GetText2 macro: fix for named placeholders
   * fixed MoinMoinBugs/LineNumbersWorkingBuggyWithHighlightParser
   * GUI editor: roundtripping works now for .pdf/doc/... attachment transclusion
   * fix MoinMoinBugs/MissingPageShouldn'tOfferToCreatePageForReadonlyUsers
   * fix MoinMoinBugs/1.6XmlRpcPutPagePagenameEscape
+  * abort RenamePage if renaming of main page fails (do not try to rename
+    subpages)
 
 
 Version 1.9.0rc1:
