@@ -450,7 +450,8 @@ msgstr "Je očekávána hodnota klíče \"%(token)s\""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr "Neplatný regulární výraz pro zvýrazňování syntaxe \"%(regex)s\": %(error)s"
+msgstr ""
+"Neplatný regulární výraz pro zvýrazňování syntaxe \"%(regex)s\": %(error)s"
 
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
@@ -487,8 +488,8 @@ msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
 msgstr ""
-"Nyní můžete měnit nastavení vybraného uživatelského účtu. Pro návrat do vašeho "
-"účtu se odhlašte."
+"Nyní můžete měnit nastavení vybraného uživatelského účtu. Pro návrat do "
+"vašeho účtu se odhlašte."
 
 msgid "You are the only user."
 msgstr "Jste jediný uživatel."
@@ -934,7 +935,8 @@ msgstr ""
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Heslo je příliš jednoduché (heslo obsahuje jméno, nebo jméno obsahuje heslo)."
+msgstr ""
+"Heslo je příliš jednoduché (heslo obsahuje jméno, nebo jméno obsahuje heslo)."
 
 msgid "Password is too easy (keyboard sequence)."
 msgstr ""
@@ -1574,6 +1576,10 @@ msgstr ""
 
 msgid "Variable name"
 msgstr "Jméno proměnné"
+
+#, fuzzy
+msgid "Setting"
+msgstr "Nastavení"
 
 msgid "Search Titles"
 msgstr "Hledat v titulcích"
