@@ -427,7 +427,18 @@ def parse_date(value):
             # if no timezone is part of the string we assume UTC
             if t[-1] is None:
                 t = t[:-1] + (0,)
-            return datetime.utcfromtimestamp(mktime_tz(t))
+            try:
+                return datetime.utcfromtimestamp(mktime_tz(t))
+            except (OverflowError, ValueError):
+                # XXX Exception handler added by MoinMoin development:
+                # catch exceptions raised by the stdlib functions if they receive far-off or invalid values.
+                # This can happen if a user agent transmits a broken if-modified-since header:
+                # 'HTTP_IF_MODIFIED_SINCE': 'Mon, 23 Jan 3115 29:41:44 GMT'
+                # 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; ja; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5'
+                # TODO: remove this patch if we require a werkzeug version > 0.5.1
+                # that has an official fix for this problem.
+                # related werkzeug ticket: http://dev.pocoo.org/projects/werkzeug/ticket/432
+                return None  # just tell we can't parse this
 
 
 def default_stream_factory(total_content_length, filename, content_type,
