@@ -17,7 +17,7 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.8.current:
+Version 1.8.6:
   Bug fixes:
   * Xapian indexing / indexing filters:
     * fix deadlocks with well- and misbehaving external filters
