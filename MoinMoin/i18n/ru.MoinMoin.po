@@ -3036,7 +3036,7 @@ msgstr ""
 "в этом вики."
 
 msgid "anonymous"
-msgstr ""
+msgstr "анонимно"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
