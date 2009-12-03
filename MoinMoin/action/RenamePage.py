@@ -53,6 +53,9 @@ class RenamePage(ActionBase):
         self.page = PageEditor(self.request, self.pagename)
         success, msgs = self.page.renamePage(newpagename, comment)
 
+        if not success:
+            return success, msgs
+
         rename_subpages = 0
         if 'rename_subpages' in form:
             try:
