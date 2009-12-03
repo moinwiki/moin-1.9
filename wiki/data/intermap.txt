@@ -14,9 +14,9 @@
 
 # MoinMoin additions
 MoinMaster http://master.moinmo.in/
-MoinCVS http://hg.moinmo.in/moin/1.6?f=-1;file=
-MoinSrc http://hg.moinmo.in/moin/1.6?f=-1;file=
-MoinDoc http://hg.moinmo.in/moin/1.6/
+MoinCVS http://hg.moinmo.in/moin/1.8?f=-1;file=
+MoinSrc http://hg.moinmo.in/moin/1.8?f=-1;file=
+MoinDoc http://hg.moinmo.in/moin/1.8/
 
 # for Germany: bookzilla.de instead of amazon == supporting GNU/Linux and 5% for FSF Europe
 # ISBN http://bookzilla.de/shop/action/advancedSearch?action=search&isbn=
@@ -33,6 +33,7 @@ OSPedia http://ospedia.osdir.com/
 MsgID http://groups.google.com/groups?as_umsgid=
 PyWebMail http://pywebmail.sourceforge.net/docs/
 BcWireless http://www.bcwireless.net/moin.cgi/
+Debian http://wiki.debian.org/
 DebianBug http://bugs.debian.org/
 DebianPackage http://packages.debian.org/
 CAKE http://www.cakem.net/mywiki/
@@ -52,8 +53,11 @@ KernelNewbies http://wiki.kernelnewbies.org/
 Spamikaze http://spamikaze.org/
 Ulteo http://www.ulteo.com/main/wiki/index.cgi/
 CsWikiPedia http://cs.wikipedia.org/wiki/
+RuWikiPedia http://ru.wikipedia.org/wiki/
 MBWiki http://wiki.musicbrainz.org/
 SquidWiki http://wiki.squid-cache.org/
+AltLinux http://altlinux.org/
+AltLinuxEn http://en.altlinux.org/
 
 ## Updated 2004-11-19 from http://www.usemod.com/cgi-bin/mb.pl?InterMapTxt
 ## Please modify the upper part of this page only
