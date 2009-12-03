@@ -290,6 +290,30 @@ Version 1.9.0beta1:
       See HelpOnAuthentication.
 
 
+
+Version 1.8.6:
+  Bug fixes:
+  * Xapian indexing / indexing filters:
+    * fix deadlocks with well- and misbehaving external filters
+    * work around indexing run crashing when encountering encoding problems
+      with non-ascii filenames
+    * OpenOffice/OpenDocument filters: catch UnicodeDecodeErrors (happens
+      with password protected files)
+  * i18n: check if languages is not initialized yet, don't crash
+  * http_redirect: use 301 redirect for some cases
+  * do not use httponly session cookies, makes trouble with twikidraw and ACLs
+  * GetText2 macro: fix for named placeholder
+  * Fix SHA -> SSHA password hash upgrade for old user profiles.
+  * abort RenamePage if renaming of main page fails (do not try to rename
+    subpages)
+
+  New features:
+  * search: improve search result ordering
+  * SubscribeUser action: username regexes, support unsubscribing
+  * add MS Powerpoint indexing filter (needs catppt from catdoc package)
+  * migration scripts: make finding damaged edit-log entries easier
+
+
 Version 1.8.5:
   Bug fixes:
     * Attachment links: fix processing of attributes (e.g. 'target', 'title')
