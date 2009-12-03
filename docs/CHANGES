@@ -30,6 +30,8 @@ Version 1.8.6:
   * do not use httponly session cookies, makes trouble with twikidraw and ACLs
   * GetText2 macro: fix for named placeholder
   * Fix SHA -> SSHA password hash upgrade for old user profiles.
+  * abort RenamePage if renaming of main page fails (do not try to rename
+    subpages)
 
   New features:
   * search: improve search result ordering
