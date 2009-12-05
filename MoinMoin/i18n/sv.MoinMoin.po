@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 23:56+0100\n"
-"PO-Revision-Date: 2009-11-20 12:10+0100\n"
+"POT-Creation-Date: 2009-11-29 00:58+0100\n"
+"PO-Revision-Date: 2009-11-30 08:53+0100\n"
 "Last-Translator: thomas marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -3177,29 +3177,23 @@ msgstr "Skäl för kopiering (ej obligatoriskt)"
 msgid "Really copy this page?"
 msgstr "Kopiera den här sidan, är du säker?"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "Länk till bilaga"
+msgstr "Bilagans plats"
 
-#, fuzzy
 msgid "Page name"
 msgstr "Sidnamn"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "Nya namnet för bilagan"
+msgstr "Bilagans namn"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "Länk till bilaga"
+msgstr "Ladda om listan över bilagor"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "bilaga"
+msgstr "Lista över bilagor"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "Bilagor till \"%(pagename)s\""
+msgstr "Bilagor till sida"
 
 #, python-format
 msgid "Full Link List for \"%s\""

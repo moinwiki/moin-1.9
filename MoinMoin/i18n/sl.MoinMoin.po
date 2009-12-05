@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 23:56+0100\n"
+"POT-Creation-Date: 2009-12-02 20:45+0100\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -910,6 +910,8 @@ msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see %"
 "(highlight_help_page)s."
 msgstr ""
+"Poudarjanje sintakse ni podprto za '%(syntax)s', "
+"glej %(highlight_help_page)s."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1240,11 +1242,11 @@ msgstr ""
 "Ime priponke: %(attach_name)s\n"
 "Velikost priponke: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr "Nova priponka dodana strani %(pagename)s, strežnik %(sitename)s"
+msgstr "Priponka odstranjena s strani %(pagename)s, strežnik %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1257,8 +1259,8 @@ msgid ""
 msgstr ""
 "Dragi uporabnik vikija,\n"
 "\n"
-"Naročeni ste na obvestila o spremembah za stran \"%(page_name)s\". Strani je "
-"%(editor)s dodal priponko. Podrobnosti:\n"
+"Naročeni ste na obvestila o spremembah na strani \"%(page_name)s\". S te strani "
+"%(editor)s odstranil priponko. Podrobnosti:\n"
 "\n"
 "Ime priponke: %(attach_name)s\n"
 "Velikost priponke: %(attach_size)s\n"
@@ -1298,9 +1300,8 @@ msgstr "Stran je bila kopirana"
 msgid "A new attachment has been added"
 msgstr "Dodana je bila nova priponka"
 
-#, fuzzy
 msgid "An attachment has been removed"
-msgstr "Dodana je bila nova priponka"
+msgstr "Priponka je bila odstranjena"
 
 msgid "A page has been reverted to a previous state"
 msgstr "Stran je bila vrnjena v prejšnje stanje"
@@ -2026,21 +2027,17 @@ msgstr "Pregledovalnik pripetih datotek"
 msgid "User account browser"
 msgstr "Pregledovalnik uporabniških računov"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "Opis"
+msgstr "Lexer opis"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "Uporabniško ime"
+msgstr "Lexer imena"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "Tip datoteke"
+msgstr "Vzorci datoteke (file patterns)"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "katerikoli tip MIME"
+msgstr "Tipi MIME"
 
 msgid "Wiki configuration"
 msgstr "Nastavitve vikija"
@@ -3199,29 +3196,23 @@ msgstr "Razlog za kopiranje (neobvezno)"
 msgid "Really copy this page?"
 msgstr "Želite zares kopirati to stran?"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "Povezava na priponko"
+msgstr "Pozicija priponke"
 
-#, fuzzy
 msgid "Page name"
 msgstr "Ime strani"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "Novo ime priponke"
+msgstr "Ime priponke"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "Povezava na priponko"
+msgstr "Obnovi seznam priponk"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "[%d priponk]"
+msgstr "Seznam priponk"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "Priponke na strani \"%(pagename)s\""
+msgstr "Razpoložljive priponke za stran"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -3306,9 +3297,8 @@ msgstr "Risba s povezavo: %(filename)s"
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Na to stran ni dovoljeno shraniti risb."
 
-#, fuzzy
 msgid "Empty target name given."
-msgstr "Podan je bil prazen cilj."
+msgstr "Podano je bilo prazno ime cilja."
 
 msgid "Edit drawing"
 msgstr "Spremeni risbo"
@@ -3542,7 +3532,7 @@ msgid "Content"
 msgstr "Vsebina"
 
 msgid "No recipients, nothing to do"
-msgstr ""
+msgstr "Ni prejemnikov, ni kaj početi"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -3563,22 +3553,3 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimno"
-
-#, fuzzy
-#~ msgid "InstallDocs"
-#~ msgstr "namesti"
-
-#~ msgid "HelpOnUpdating"
-#~ msgstr "PomočPriAžuriranju"
-
-#~ msgid "OpenID: handle verify continuation"
-#~ msgstr "OpenID: nadaljevanje preverjanja"
-
-#~ msgid "OpenID: handle name continuation"
-#~ msgstr "OpenID: nadaljevanje imena"
-
-#~ msgid "OpenID: handle associate continuation"
-#~ msgstr "OpenID: nadaljevanje povezovanja (asociacije)"
-
-#~ msgid "OpenID: unknown continuation stage"
-#~ msgstr "OpenID: neznana faza nadaljevanja"

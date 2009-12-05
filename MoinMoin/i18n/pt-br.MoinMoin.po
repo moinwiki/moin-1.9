@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 23:56+0100\n"
+"POT-Creation-Date: 2009-11-29 00:58+0100\n"
 "PO-Revision-Date: 2009-09-28\n"
 "Last-Translator: Renato Silva\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -1375,25 +1375,25 @@ msgid "WikiTipOfTheDay"
 msgstr "WikiDicaDoDia"
 
 msgid "TitleIndex"
-msgstr "ÍndiceDeTítulos"
+msgstr "ÍndiceComTítulos"
 
 msgid "WordIndex"
-msgstr "ÍndiceDePalavras"
+msgstr "ÍndiceComPalavras"
 
 msgid "FindPage"
 msgstr "EncontrarPágina"
 
 msgid "MissingPage"
-msgstr "PáginaInexistente"
+msgstr "PáginaNãoEncontrada"
 
 msgid "MissingHomePage"
-msgstr "HomePageInexistente"
+msgstr "PáginaPessoalNãoEncontrada"
 
 msgid "WikiHomePage"
-msgstr "PáginaInicialDaWiki"
+msgstr "PáginaWikiPessoal"
 
 msgid "WikiName"
-msgstr "WikiNome"
+msgstr "WikiNomes"
 
 msgid "WikiWikiWeb"
 msgstr "WikiWikiWeb"
@@ -1444,34 +1444,34 @@ msgid "FortuneCookies"
 msgstr "BiscoitosDaSorte"
 
 msgid "WikiLicense"
-msgstr "LicençaWiki"
+msgstr "LicençaDaWiki"
 
 msgid "CategoryCategory"
-msgstr "CategoriaCategoria"
+msgstr "CategoriaPáginaDeCategoria"
 
 msgid "CategoryHomepage"
-msgstr "CategoriaHomepage"
+msgstr "CategoriaPáginaPessoal"
 
 msgid "CategoryTemplate"
-msgstr "CategoriaTemplate"
+msgstr "TemplateDeCategoria"
 
 msgid "HomepageTemplate"
-msgstr "TemplateDeHomepage"
+msgstr "TemplateDePáginaPessoal"
 
 msgid "HelpTemplate"
 msgstr "TemplateDeAjuda"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr "TemplateDePáginaDeLeituraEscritaDeHomepage"
+msgstr "TemplateDePáginaDeLeituraEscritaParaPáginaPessoal"
 
 msgid "HomepageReadPageTemplate"
-msgstr "TemplateDePáginaDeLeituraDeHomepage"
+msgstr "TemplateDePáginaDeLeituraParaPáginaPessoal"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr "TemplateDePáginaPrivadaDeHomepage"
+msgstr "TemplateDePáginaPrivadaParaPáginaPessoal"
 
 msgid "HomepageGroupsTemplate"
-msgstr "TemplateDeGruposDeHomepage"
+msgstr "TemplateDeGruposParaPáginaPessoal"
 
 msgid "SlideShowHandOutTemplate"
 msgstr "TemplateDeResumoDeSlideShow"
@@ -1483,7 +1483,7 @@ msgid "SlideTemplate"
 msgstr "TemplateDeSlide"
 
 msgid "SyncJobTemplate"
-msgstr "TemplateDeSyncJob"
+msgstr "TemplateDeTarefaDeSincronização"
 
 msgid "HelpOnConfiguration"
 msgstr "AjudaComConfiguração"
@@ -2109,26 +2109,26 @@ msgid "(currently set to %s)"
 msgstr "(atualmente configurado para %s)"
 
 msgid "Delete bookmark"
-msgstr "Excluir bookmark"
+msgstr "Excluir marcador"
 
 msgid "Set bookmark"
-msgstr "Ajustar Bookmark"
+msgstr "Criar marcador"
 
 msgid "[Bookmark reached]"
-msgstr "[Bookmark atingido]"
+msgstr "[Marcador alcançado]"
 
 msgid "Python Version"
-msgstr "Versão Python"
+msgstr "Versão do Python"
 
 msgid "MoinMoin Version"
 msgstr "Versão do MoinMoin"
 
 #, python-format
 msgid "Release %s [Revision %s]"
-msgstr "Versão %s [Revisão %s]"
+msgstr "Release %s [Revisão %s]"
 
 msgid "4Suite Version"
-msgstr "Versão 4Suite"
+msgstr "Versão do 4Suite"
 
 msgid "Number of pages"
 msgstr "Número de páginas"
