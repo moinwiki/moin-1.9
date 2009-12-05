@@ -978,7 +978,7 @@ class XmlRpcBase:
         if os.path.exists(filename) and not os.path.isfile(filename):
             return self.noSuchPageFault()
         open(filename, 'wb+').write(data.data)
-        AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
+        AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, attachname)
         return xmlrpclib.Boolean(1)
 
     # XXX END WARNING XXX

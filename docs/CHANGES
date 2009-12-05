@@ -264,9 +264,17 @@ Version 1.8.6:
 
   New features:
   * search: improve search result ordering
-  * SubscribeUser action: username regexes, support unsubscribing
   * add MS Powerpoint indexing filter (needs catppt from catdoc package)
   * migration scripts: make finding damaged edit-log entries easier
+  * SubscribeUser action: support username regexes and unsubscribing.
+    Usage (enter this into the input form field you get after invoking
+    SubscribeUser action from the "More Actions" menu:
+    [+|-][re:]username[,username,...] 
+
+    +username: subscribes user <username> (+ is optional/default)
+    -username: unsubscribes user <username>
+    +re:username_re: subscribes users who match <username_re> regex.
+    -re:username_re: unsubscribes users who match <username_re> regex.
 
 
 Version 1.8.5:
