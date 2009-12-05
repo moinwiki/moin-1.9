@@ -13,7 +13,9 @@ from datetime import datetime
 
 from MoinMoin.support.python_compatibility import set
 from MoinMoin import wikidicts, wikiutil
+from MoinMoin.action.AttachFile import _get_files
 from MoinMoin.Page import Page
+from MoinMoin.action import AttachFile
 from MoinMoin.packages import packLine, MOIN_PACKAGE_FILE
 from MoinMoin.script import MoinScript
 
@@ -93,25 +95,34 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             os.remove(filename)
         except OSError:
             pass
+        # page SystemPagesSetup needs no packing!
+        existing_pages = [pagename for pagename in pagelist if Page(request, pagename).exists() and pagename != 'SystemPagesSetup']
+        if not existing_pages:
+            return
+
         zf = zipfile.ZipFile(filename, "w", COMPRESSION_LEVEL)
 
         cnt = 0
         script = [packLine(['MoinMoinPackage', '1']), ]
 
-        for pagename in pagelist:
+        for pagename in existing_pages:
             pagename = pagename.strip()
             page = Page(request, pagename)
-            if page.exists():
+            files = _get_files(request, pagename)
+            for attname in files:
                 cnt += 1
-                script.append(packLine([function, str(cnt), pagename]))
-                timestamp = wikiutil.version2timestamp(page.mtime_usecs())
-                zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
-                zi.compress_type = COMPRESSION_LEVEL
-                zf.writestr(zi, page.get_raw_body().encode("utf-8"))
-            else:
-                #import sys
-                #print >>sys.stderr, "Could not find the page %s." % pagename.encode("utf-8")
-                pass
+                zipname = "%d" % cnt
+                script.append(packLine(["ReplaceUnderlayAttachment", zipname, attname, pagename]))
+                attpath = AttachFile.getFilename(request, pagename, attname)
+                zf.write(attpath, zipname)
+
+            cnt += 1
+            zipname = "%d" % cnt
+            script.append(packLine([function, zipname, pagename]))
+            timestamp = wikiutil.version2timestamp(page.mtime_usecs())
+            zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
+            zi.compress_type = COMPRESSION_LEVEL
+            zf.writestr(zi, page.get_raw_body().encode("utf-8"))
 
         script += [packLine(['Print', 'Installed MoinMaster page bundle %s.' % os.path.basename(filename)])]
 
