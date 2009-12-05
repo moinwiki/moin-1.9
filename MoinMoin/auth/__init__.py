@@ -128,7 +128,7 @@
     @copyright: 2005-2006 Bastian Blank, Florian Festi,
                           MoinMoin:AlexanderSchremmer, Nick Phillips,
                           MoinMoin:FrankieChow, MoinMoin:NirSoffer,
-                2005-2008 MoinMoin:ThomasWaldmann,
+                2005-2009 MoinMoin:ThomasWaldmann,
                 2007      MoinMoin:JohannesBerg
 
     @license: GNU GPL, see COPYING for details.
@@ -158,11 +158,11 @@ def get_multistage_continuation_url(request, auth_name, extra_fields={}):
               'stage': auth_name}
     fields.update(extra_fields)
     if request.page:
+        logging.debug("request.page.url: " + request.page.url(request, querystr=fields))
         return request.page.url(request, querystr=fields)
     else:
-        qstr = wikiutil.makeQueryString(fields)
-        return ''.join([request.getBaseURL(), '?', qstr])
-
+        logging.debug("request.abs_href: " + request.abs_href(**fields))
+        return request.abs_href(**fields)
 
 class LoginReturn(object):
     """ LoginReturn - base class for auth method login() return value"""
@@ -250,10 +250,231 @@ class MoinAuth(BaseAuth):
 
     def login_hint(self, request):
         _ = request.getText
+        #if request.cfg.openidrp_registration_url:
+        #    userprefslink = request.cfg.openidrp_registration_url
+        #else:
         userprefslink = request.page.url(request, querystr={'action': 'newaccount'})
         sendmypasswordlink = request.page.url(request, querystr={'action': 'recoverpass'})
-        return _('If you do not have an account, <a href="%(userprefslink)s">you can create one now</a>. '
-                 '<a href="%(sendmypasswordlink)s">Forgot your password?</a>') % {
-               'userprefslink': userprefslink,
+
+        msg = ''
+        #if request.cfg.openidrp_allow_registration:
+        msg = _('If you do not have an account, <a href="%(userprefslink)s">you can create one now</a>. ') % {
+              'userprefslink': userprefslink}
+        msg += _('<a href="%(sendmypasswordlink)s">Forgot your password?</a>') % {
                'sendmypasswordlink': sendmypasswordlink}
+        return msg
+
+        #return _('If you do not have an account, <a href="%(userprefslink)s">you can create one now</a>. '
+        #         '<a href="%(sendmypasswordlink)s">Forgot your password?</a>') % {
+        #       'userprefslink': userprefslink,
+        #       'sendmypasswordlink': sendmypasswordlink}
+
+
+class GivenAuth(BaseAuth):
+    """ reuse a given authentication, e.g. http basic auth (or any other auth)
+        done by the web server, that sets REMOTE_USER environment variable.
+        This is the default behaviour.
+        You can also specify to read another environment variable (env_var).
+        Alternatively you can directly give a fixed user name (user_name)
+        that will be considered as authenticated.
+    """
+    name = 'given' # was 'http' in 1.8.x and before
+
+    def __init__(self,
+                 env_var=None,  # environment variable we want to read (default: REMOTE_USER)
+                 user_name=None,  # can be used to just give a specific user name to log in
+                 autocreate=False,  # create/update the user profile for the auth. user
+                 strip_maildomain=False,  # joe@example.org -> joe
+                 strip_windomain=False,  # DOMAIN\joe -> joe
+                 titlecase=False,  # joe doe -> Joe Doe
+                 remove_blanks=False,  # Joe Doe -> JoeDoe
+                 coding=None,  # for decoding REMOTE_USER correctly (default: auto)
+                ):
+        self.env_var = env_var
+        self.user_name = user_name
+        self.autocreate = autocreate
+        self.strip_maildomain = strip_maildomain
+        self.strip_windomain = strip_windomain
+        self.titlecase = titlecase
+        self.remove_blanks = remove_blanks
+        self.coding = coding
+        BaseAuth.__init__(self)
+
+    def decode_username(self, name):
+        """ decode the name we got from the environment var to unicode """
+        if isinstance(name, str):
+            if self.coding:
+                name = name.decode(self.coding)
+            else:
+                # XXX we have no idea about REMOTE_USER encoding, please help if
+                # you know how to do that cleanly
+                name = wikiutil.decodeUnknownInput(name)
+        return name
+
+    def transform_username(self, name):
+        """ transform the name we got (unicode in, unicode out)
+
+            Note: if you need something more special, you could create your own
+                  auth class, inherit from this class and overwrite this function.
+        """
+        assert isinstance(name, unicode)
+        if self.strip_maildomain:
+            # split off mail domain, e.g. "user@example.org" -> "user"
+            name = name.split(u'@')[0]
+
+        if self.strip_windomain:
+            # split off window domain, e.g. "DOMAIN\user" -> "user"
+            name = name.split(u'\\')[-1]
+
+        if self.titlecase:
+            # this "normalizes" the login name, e.g. meier, Meier, MEIER -> Meier
+            name = name.title()
+
+        if self.remove_blanks:
+            # remove blanks e.g. "Joe Doe" -> "JoeDoe"
+            name = u''.join(name.split())
+
+        return name
+
+    def request(self, request, user_obj, **kw):
+        u = None
+        _ = request.getText
+        # always revalidate auth
+        if user_obj and user_obj.auth_method == self.name:
+            user_obj = None
+        # something else authenticated before us
+        if user_obj:
+            logging.debug("already authenticated, doing nothing")
+            return user_obj, True
+
+        if self.user_name is not None:
+            auth_username = self.user_name
+        elif self.env_var is None:
+            auth_username = request.remote_user
+        else:
+            auth_username = request.environ.get(self.env_var)
+
+        logging.debug("auth_username = %r" % auth_username)
+        if auth_username:
+            auth_username = self.decode_username(auth_username)
+            auth_username = self.transform_username(auth_username)
+            logging.debug("auth_username (after decode/transform) = %r" % auth_username)
+            u = user.User(request, auth_username=auth_username,
+                          auth_method=self.name, auth_attribs=('name', 'password'))
+
+        logging.debug("u: %r" % u)
+        if u and self.autocreate:
+            logging.debug("autocreating user")
+            u.create_or_update()
+        if u and u.valid:
+            logging.debug("returning valid user %r" % u)
+            return u, True # True to get other methods called, too
+        else:
+            logging.debug("returning %r" % user_obj)
+            return user_obj, True
+
+
+def handle_login(request, userobj=None, username=None, password=None,
+                 attended=True, openid_identifier=None, stage=None):
+    """
+    Process a 'login' request by going through the configured authentication
+    methods in turn. The passable keyword arguments are explained in more
+    detail at the top of this file.
+    """
+    params = {
+        'username': username,
+        'password': password,
+        'attended': attended,
+        'openid_identifier': openid_identifier,
+        'multistage': (stage and True) or None
+    }
+    for authmethod in request.cfg.auth:
+        if stage and authmethod.name != stage:
+            continue
+        ret = authmethod.login(request, userobj, **params)
+
+        userobj = ret.user_obj
+        cont = ret.continue_flag
+        if stage:
+            stage = None
+            del params['multistage']
+
+        if ret.multistage:
+            request._login_multistage = ret.multistage
+            request._login_multistage_name = authmethod.name
+            return userobj
+
+        if ret.redirect_to:
+            nextstage = auth.get_multistage_continuation_url(request, authmethod.name)
+            url = ret.redirect_to
+            url = url.replace('%return_form', quote_plus(nextstage))
+            url = url.replace('%return', quote(nextstage))
+            abort(redirect(url))
+        msg = ret.message
+        if msg and not msg in request._login_messages:
+            request._login_messages.append(msg)
+
+        if not cont:
+            break
+
+    return userobj
+
+def handle_logout(request, userobj):
+    """ Logout the passed user from every configured authentication method. """
+    if userobj is None:
+        # not logged in
+        return userobj
+
+    if userobj.auth_method == 'setuid':
+        # we have no authmethod object for setuid
+        userobj = request._setuid_real_user
+        del request._setuid_real_user
+        return userobj
+
+    for authmethod in request.cfg.auth:
+        userobj, cont = authmethod.logout(request, userobj, cookie=request.cookies)
+        if not cont:
+            break
+    return userobj
+
+def handle_request(request, userobj):
+    """ Handle the per-request callbacks of the configured authentication methods. """
+    for authmethod in request.cfg.auth:
+        userobj, cont = authmethod.request(request, userobj, cookie=request.cookies)
+        if not cont:
+            break
+    return userobj
+
+def setup_setuid(request, userobj):
+    """ Check for setuid conditions in the session and setup an user
+    object accordingly. Returns a tuple of the new user objects.
+
+    @param request: a moin request object
+    @param userobj: a moin user object
+    @rtype: boolean
+    @return: (new_user, user) or (user, None)
+    """
+    old_user = None
+    if 'setuid' in request.session and userobj and userobj.isSuperUser():
+        old_user = userobj
+        uid = request.session['setuid']
+        userobj = user.User(request, uid, auth_method='setuid')
+        userobj.valid = True
+    logging.debug("setup_suid returns %r, %r" % (userobj, old_user))
+    return (userobj, old_user)
+
+def setup_from_session(request, session):
+    userobj = None
+    if 'user.id' in session:
+        auth_userid = session['user.id']
+        auth_method = session['user.auth_method']
+        auth_attrs = session['user.auth_attribs']
+        logging.debug("got from session: %r %r" % (auth_userid, auth_method))
+        logging.debug("current auth methods: %r" % request.cfg.auth_methods)
+        if auth_method and auth_method in request.cfg.auth_methods:
+            userobj = user.User(request, id=auth_userid,
+                                auth_method=auth_method,
+                                auth_attribs=auth_attrs)
+    logging.debug("session started for user %r", userobj)
+    return userobj
 

@@ -17,16 +17,15 @@ from MoinMoin import wikiutil
 
 def show_form(pagename, request):
     _ = request.getText
-    request.emit_http_headers()
     request.theme.send_title(_("Subscribe users to the page %s") % pagename, pagename=pagename)
 
     request.write("""
-<form action="%s/%s" method="POST" enctype="multipart/form-data">
+<form action="%s" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="action" value="SubscribeUser">
 %s <input type="text" name="users" size="50">
 <input type="submit" value="Subscribe">
 </form>
-""" % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
+""" % (request.href(pagename),
       _("Enter user names (comma separated):")))
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
@@ -58,14 +57,13 @@ def parse_userlist(usernames):
 
 def show_result(pagename, request):
     _ = request.getText
-    request.emit_http_headers()
 
     request.theme.send_title(_("Subscribed for %s:") % pagename, pagename=pagename)
 
     from MoinMoin.formatter.text_html import Formatter
     formatter = Formatter(request)
 
-    usernames = request.form['users'][0].split(",")
+    usernames = request.form['users'].split(",")
     subscribe, unsubscribe = parse_userlist(usernames)
 
     result = subscribe_users(request, subscribe, unsubscribe, pagename, formatter)
@@ -162,12 +160,11 @@ Example:
     if len(args) > 3:
         request_url = args[3]
     else:
-        request_url = "localhost/"
+        request_url = None
 
     # Setup MoinMoin environment
-    from MoinMoin.request import request_cli
-    request = request_cli.Request(url=request_url)
-    request.form = request.args = request.setup_args()
+    from MoinMoin.web.contexts import ScriptContext
+    request = ScriptContext(url=request_url)
 
     from MoinMoin.formatter.text_plain import Formatter
     formatter = Formatter(request)

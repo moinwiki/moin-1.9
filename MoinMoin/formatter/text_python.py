@@ -235,7 +235,7 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
         else:
             return self.formatter.line_anchorlink(on, lineno)
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1, msg=None):
         if on:
             # update state of the HTML formatter
             self.formatter._in_code_area = 1

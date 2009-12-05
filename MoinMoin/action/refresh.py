@@ -11,10 +11,10 @@ from MoinMoin.Page import Page
 def execute(pagename, request):
     """ Handle refresh action """
     # Without arguments, refresh action will refresh the page text_html cache.
-    arena = request.form.get('arena', ['Page.py'])[0]
+    arena = request.values.get('arena', 'Page.py')
     if arena == 'Page.py':
         arena = Page(request, pagename)
-    key = request.form.get('key', ['text_html'])[0]
+    key = request.values.get('key', 'text_html')
 
     # Remove cache entry (if exists), and send the page
     from MoinMoin import caching

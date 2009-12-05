@@ -119,6 +119,20 @@ class FileAttachedEvent(PageEvent):
         self.size = size
 
 
+class FileRemovedEvent(PageEvent):
+
+    name = u"FileRemovedEvent"
+    description = _(u"""An attachment has been removed""")
+    req_superuser = False
+
+    def __init__(self, request, pagename, filename, size):
+        PageEvent.__init__(self, request)
+        self.request = request
+        self.pagename = pagename
+        self.filename = filename
+        self.size = size
+
+
 class PageRevertedEvent(PageEvent):
 
     name = u"PageRevertedEvent"
@@ -151,6 +165,7 @@ class JabberIDSetEvent(Event):
         Event.__init__(self, request)
         self.jid = jid
 
+
 class JabberIDUnsetEvent(Event):
     """ Sent when Jabber ID is no longer used
 
@@ -161,6 +176,7 @@ class JabberIDUnsetEvent(Event):
     def __init__(self, request, jid):
         Event.__init__(self, request)
         self.jid = jid
+
 
 class UserCreatedEvent(Event):
     """ Sent when a new user has been created """
@@ -173,12 +189,11 @@ class UserCreatedEvent(Event):
         Event.__init__(self, request)
         self.user = user
 
+
 class PagePreSaveEvent(Event):
     """ Event sent when a page is about to be saved
 
-    This can be used to abort a save, for instance,
-    if handler returns
-
+    This can be used to abort a save, for instance, if handler returns Abort.
     """
 
     name = u"PagePreSaveEvent"
@@ -193,6 +208,7 @@ class EventResult:
     """ This is a base class for messages passed from event handlers """
     pass
 
+
 class Abort(EventResult):
     """ Result returned if handler wants to abort operation that sent the event """
     def __init__(self, reason):
@@ -205,11 +221,10 @@ class Abort(EventResult):
 def get_handlers(cfg):
     """Create a list of available event handlers.
 
-    Each handler is a handle() function defined in an plugin,
+    Each handler is a handle() function defined in a plugin,
     pretty much like in case of actions.
 
     TODO: maybe make it less dumb? ;-)
-
     """
     event_handlers = []
     names = wikiutil.getPlugins("events", cfg)
@@ -248,6 +263,7 @@ def send_event(event):
 
     return msg
 
+
 def get_subscribable_events():
     """Create and return a list of user-visible events
 
@@ -265,3 +281,4 @@ def get_subscribable_events():
 
 # Get rid of the dummy getText so that it doesn't get imported with *
 del _
+

@@ -17,7 +17,6 @@ from MoinMoin import wikiutil
 from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
-from MoinMoin.wikidicts import Dict
 from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, NotAllowedException
 from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
 from MoinMoin.support.python_compatibility import set
@@ -107,7 +106,7 @@ class ActionClass(object):
             "password": None,
         }
 
-        options.update(Dict(self.request, self.pagename))
+        options.update(self.request.dicts[self.pagename])
 
         # Convert page and group list strings to lists
         if options["pageList"] is not None:
@@ -122,8 +121,8 @@ class ActionClass(object):
     def fix_params(self, params):
         """ Does some fixup on the parameters. """
         # Load the password
-        if "password" in self.request.form:
-            params["password"] = self.request.form["password"][0]
+        if "password" in self.request.values:
+            params["password"] = self.request.values["password"]
 
         # merge the pageList case into the pageMatch case
         if params["pageList"] is not None:
@@ -178,7 +177,7 @@ class ActionClass(object):
         params = self.fix_params(self.parse_page())
 
         try:
-            if "cancel" in self.request.form:
+            if "cancel" in self.request.values:
                 raise ActionStatus(_("Operation was canceled."), "error")
 
             if params["direction"] == UP:
