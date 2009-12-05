@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 23:56+0100\n"
+"POT-Creation-Date: 2009-11-29 00:58+0100\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -2767,7 +2767,7 @@ msgid ""
 "(maxsize_file)d kB)."
 msgstr ""
 "Прикреплённый файл '%(filename)s' не распакован, т. к. некоторые файлы не "
-"находятся в одном каталоге, либо слишком велики (размер привышает "
+"находятся в одном каталоге, либо слишком велики (размер превышает "
 "максимальный %(maxsize_file)d КБ)."
 
 #, python-format
@@ -2775,7 +2775,7 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"Прикреплённый файл '%(filename)s' не распакован, т. к. было бы превышен "
+"Прикреплённый файл '%(filename)s' не распакован, т. к. был бы превышен "
 "максимально допустимый размер файлов на одну страницу (%(size)d КБ)."
 
 #, python-format
@@ -2796,7 +2796,7 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Файл '%(filename)s' распаковано."
+msgstr "Файл '%(filename)s' распакован."
 
 msgid "A severe error occurred:"
 msgstr "Произошла серьезная ошибка:"
