@@ -31,7 +31,6 @@ Version 1.9.0:
     Please read the new install docs about how to use it, see:
     http://master19.moinmo.in/InstallDocs
     You also have a local copy of that page as docs/INSTALL.html.
-    There is also some stuff in docs/INSTALL.wsgi. XXX still there?
   * HINT: due to big changes in the request processing and the request
     object (related to the WSGI refactoring), many 3rd party plugins might
     need code updates to work with moin 1.9.
@@ -120,8 +119,6 @@ Version 1.9.0:
       * Support for Simple Registration (SREG) extension.
         Basic profile fields can be copied from OpenID provider when logging in.
       * Support for Teams extension.
-        If your OpenID provider supports the Teams extension (i.e. Launchpad),
-        MoinMoin can be configured to generate XXX text missing!?
       * Ability to accept logins from specific OpenID providers.
         Login form changes based on configuration for better usability:
         * 0 providers: normal text input box for OpenID URL
@@ -145,7 +142,7 @@ Version 1.9.0:
     * HighlighterList: show Pygments syntax highlighters (see HelpOnParsers)
 
   * Actions:
-    * SlideShow action added (use modernized theme) XXX does it work ONLY for modernized?
+    * SlideShow action added (please use the "modernized" theme [default])
     * raw action mimetype support: ...?action=raw&mimetype=text/css
     * PackagePages: create package file on-the-fly in memory and send it to the
       client (do NOT create package.zip attachment)
@@ -178,9 +175,6 @@ Version 1.9.0:
 
   * With the groups/dicts code rewrite, we fixed the caching problems that the
     old code (< 1.9) sometimes had.
-
-  * Macros:
-    * GetText2: fix for named placeholders
 
   * Actions:
     * Abort RenamePage if renaming of main page fails (do not try to rename
