@@ -1,6 +1,6 @@
 # MoinMoin - Distutils distribution files
 #
-# Copyright (c) 2001, 2002 by Jürgen Hermann <jh@web.de>
+# Copyright (c) 2001, 2002 by Juergen Hermann <jh@web.de>
 # All rights reserved, see COPYING for details.
 
 # additional files not known by setup.py
@@ -12,6 +12,12 @@ recursive-include docs *
 
 # include stuff for translators
 recursive-include   MoinMoin/i18n *
+
+# include static htdocs
+recursive-include   MoinMoin/web/static/htdocs *
+
+# include non-py stuff from werkzeug
+recursive-include   MoinMoin/support/werkzeug/debug *
 
 # contrib stuff
 recursive-include   contrib *

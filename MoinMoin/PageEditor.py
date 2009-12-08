@@ -197,12 +197,11 @@ class PageEditor(Page):
 
         # Emit http_headers after checks (send_page)
         request.disableHttpCaching(level=2)
-        request.emit_http_headers()
 
         # check if we want to load a draft
         use_draft = None
         if 'button_load_draft' in form:
-            wanted_draft_timestamp = int(form.get('draft_ts', ['0'])[0])
+            wanted_draft_timestamp = int(form.get('draft_ts', '0'))
             if wanted_draft_timestamp:
                 draft = self._load_draft()
                 if draft is not None:
@@ -214,7 +213,7 @@ class PageEditor(Page):
         if use_draft is not None:
             title = _('Draft of "%(pagename)s"')
             # Propagate original revision
-            rev = int(form['draft_rev'][0])
+            rev = int(form['draft_rev'])
             self.set_raw_body(use_draft, modified=1)
             preview = use_draft
         elif preview is None:
@@ -234,7 +233,7 @@ class PageEditor(Page):
 
         # get request parameters
         try:
-            text_rows = int(form['rows'][0])
+            text_rows = int(form['rows'])
         except StandardError:
             text_rows = self.cfg.edit_rows
             if request.user.valid:
@@ -276,9 +275,9 @@ Please review the page and save then. Do not save this page as it is!""")
             # If the page exists, we get the text from the page.
             # TODO: maybe warn if template argument was ignored because the page exists?
             raw_body = self.get_raw_body()
-        elif 'template' in form:
+        elif 'template' in request.values:
             # If the page does not exist, we try to get the content from the template parameter.
-            template_page = wikiutil.unquoteWikiname(form['template'][0])
+            template_page = wikiutil.unquoteWikiname(request.values['template'])
             if request.user.may.read(template_page):
                 raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
@@ -332,10 +331,9 @@ Please review the page and save then. Do not save this page as it is!""")
             raw_body = _('Describe %s here.') % (self.page_name, )
 
         # send form
-        request.write('<form id="editor" method="post" action="%s/%s#preview" onSubmit="flgChange = false;">' % (
-            request.getScriptname(),
-            wikiutil.quoteWikinameURL(self.page_name),
-            ))
+        request.write('<form id="editor" method="post" action="%s#preview" onSubmit="flgChange = false;">' % (
+                request.href(self.page_name)
+        ))
 
         # yet another weird workaround for broken IE6 (it expands the text
         # editor area to the right after you begin to type...). IE sucks...
@@ -351,7 +349,7 @@ Please review the page and save then. Do not save this page as it is!""")
         request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(request))
 
         # Save backto in a hidden input
-        backto = form.get('backto', [None])[0]
+        backto = request.values.get('backto')
         if backto:
             request.write(unicode(html.INPUT(type="hidden", name="backto", value=backto)))
 
@@ -410,7 +408,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
     document.write('<label for="chktrivialtop">%(label)s</label>');
     //-->
 </script> ''' % {
-                'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
+                'checked': ('', 'checked')[form.get('trivial', '0') == '1'],
                 'label': _("Trivial change"),
             })
 
@@ -460,7 +458,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <label for="chktrivial">%(label)s</label>
 
 ''' % {
-                'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
+                'checked': ('', 'checked')[form.get('trivial', '0') == '1'],
                 'label': _("Trivial change"),
                 })
 
@@ -469,7 +467,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="checkbox" name="rstrip" id="chkrstrip" value="1" %(checked)s>
 <label for="chkrstrip">%(label)s</label>
 ''' % {
-            'checked': ('', 'checked')[form.get('rstrip', ['0'])[0] == '1'],
+            'checked': ('', 'checked')[form.get('rstrip', '0') == '1'],
             'label': _('Remove trailing whitespace from each line')
             })
         request.write("</p>")
@@ -514,10 +512,10 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self._save_draft(newtext, rev) # shall we really save a draft on CANCEL?
         self.lock.release()
 
-        backto = request.form.get('backto', [None])[0]
+        backto = request.values.get('backto')
         if backto:
             pg = Page(request, backto)
-            request.http_redirect(pg.url(request, relative=False))
+            request.http_redirect(pg.url(request))
         else:
             request.theme.add_msg(_('Edit was cancelled.'), "error")
             self.send_page()
@@ -672,7 +670,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
 
             # Remove cache entry (if exists)
             pg = Page(self.request, self.page_name)
-            key = self.request.form.get('key', ['text_html'])[0]
+            key = self.request.form.get('key', 'text_html') # XXX see cleanup code in deletePage
             caching.CacheEntry(self.request, pg, key, scope='item').remove()
             caching.CacheEntry(self.request, pg, "pagelinks", scope='item').remove()
 
@@ -784,8 +782,8 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             # Users can define their own variables via
             # UserHomepage/MyDict, which override the default variables.
             userDictPage = u.name + "/MyDict"
-            if request.dicts.has_dict(userDictPage):
-                variables.update(request.dicts.dict(userDictPage))
+            if userDictPage in request.dicts:
+                variables.update(request.dicts[userDictPage])
 
         for name in variables:
             text = text.replace('@%s@' % name, variables[name])
@@ -1122,7 +1120,6 @@ Please review the page and save then. Do not save this page as it is!""")
             trivial = kw.get('trivial', 0)
             # write the page file
             mtime_usecs, rev = self._write_file(newtext, action, comment, extra, deleted=deleted)
-            self.clean_acl_cache()
             self._save_draft(None, None) # everything fine, kill the draft for this page
 
             if notify:

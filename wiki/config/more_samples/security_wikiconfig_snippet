@@ -14,12 +14,6 @@
 
     #actions_excluded = ['xmlrpc'] # change this if you need xmlrpc or to forbid other actions
 
-    # Tracebacks are valuable for analyzing bugs / failures, but they can also
-    # give more information to web client than you would like, so feel free to
-    # disable showing them in the client's web browser:
-    #traceback_show = True # if True, tracebacks are displayed in the web browser
-    #traceback_log_dir = None # if set to a directory path, tracebacks are written to files there
-
     # Avoid users filling your hard disk with attachments:
     #unzip_single_file_size = 2.0 * 1000 ** 2
     #unzip_attachments_space = 200.0 * 1000 ** 2

@@ -6,7 +6,7 @@
     The days are links to Wiki pages following this naming convention:
     BasePageName/year-month-day
 
-    @copyright: 2002-2008 MoinMoin:ThomasWaldmann
+    @copyright: 2002-2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 
     Revisions:
@@ -215,16 +215,13 @@ def execute(macro, text):
     currentyear, currentmonth, currentday, h, m, s, wd, yd, ds = request.user.getTime(time.time())
     thispage = formatter.page.page_name
     # does the url have calendar params (= somebody has clicked on prev/next links in calendar) ?
-    if 'calparms' in macro.form:
+    if 'calparms' in macro.request.args:
         has_calparms = 1 # yes!
-        text2 = macro.form['calparms'][0]
-        try:
-            cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
-                parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
-            # Note: cparmheight6 and cparmanniversary are not used, they are just there
-            # to have a consistent parameter string in calparms and macro args
-        except (ValueError, TypeError), err:
-            return macro.format_error(err)
+        text2 = macro.request.args['calparms']
+        cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
+            parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
+        # Note: cparmheight6 and cparmanniversary are not used, they are just there
+        # to have a consistent parameter string in calparms and macro args
     else:
         has_calparms = 0
 
@@ -232,11 +229,8 @@ def execute(macro, text):
         text = u''
 
     # parse and check arguments
-    try:
-        parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
-            parseargs(request, text, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
-    except (ValueError, TypeError), err:
-        return macro.format_error(err)
+    parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
+        parseargs(request, text, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
 
     # does url have calendar params and is THIS the right calendar to modify (we can have multiple
     # calendars on the same page)?
