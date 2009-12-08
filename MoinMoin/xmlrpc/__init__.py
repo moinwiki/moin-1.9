@@ -1016,8 +1016,8 @@ class XmlRpcBase:
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
 
-        filename = wikiutil.taintfilename(self._instr(attachname))
-        filename = AttachFile.getFilename(self.request, pagename, filename)
+        attachname = wikiutil.taintfilename(self._instr(attachname))
+        filename = AttachFile.getFilename(self.request, pagename, attachname)
         if not os.path.isfile(filename):
             return self.noSuchPageFault()
         return self._outlob(open(filename, 'rb').read())
@@ -1041,7 +1041,7 @@ class XmlRpcBase:
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
-        attachname = wikiutil.taintfilename(attachname)
+        attachname = wikiutil.taintfilename(self._instr(attachname))
         filename = AttachFile.getFilename(self.request, pagename, attachname)
         if os.path.exists(filename) and not os.path.isfile(filename):
             return self.noSuchPageFault()

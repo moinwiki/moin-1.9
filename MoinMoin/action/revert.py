@@ -4,8 +4,8 @@
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2006-2008 MoinMoin:ThomasWaldmann,
-                2007 MoinMoin:ReimarBauer,
-                2008 MoinMoin:JohannesBerg
+                2008 MoinMoin:JohannesBerg,
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin import wikiutil

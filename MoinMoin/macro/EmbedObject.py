@@ -8,7 +8,7 @@
 
     <<EmbedObject(attachment[,width=width][,height=height][,alt=alternate Text])>>
 
-    @copyright: 2006-2008 MoinMoin:ReimarBauer,
+    @copyright: 2006-2009 MoinMoin:ReimarBauer,
                 2006 TomSi,
                 2007 OliverSiemoneit
 

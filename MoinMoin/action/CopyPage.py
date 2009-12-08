@@ -4,8 +4,8 @@
 
     This action allows you to copy a page.
 
-    @copyright: 2007 MoinMoin:ReimarBauer,
-                2007 MoinMoin:ThomasWaldmann
+    @copyright: 2007 MoinMoin:ThomasWaldmann,
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 import re
