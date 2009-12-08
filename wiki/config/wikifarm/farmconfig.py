@@ -34,7 +34,6 @@
 #  * the left part must be a valid python module name, so better use only
 #    lower letters "a-z" and "_". Do not use blanks or "-" there!!!
 #  * the right part is the url re, use r"..." for it
-#  * the right part does NOT include "http://" nor "https://" at the beginning
 #  * in the right part ".*" means "everything". Just "*" does not work like
 #    for filenames on the shell / commandline, you must use ".*" as it is a RE.
 #  * in the right part, "^" means "beginning" and "$" means "end"
@@ -47,7 +46,7 @@ wikis = [
 
     # for multiple wikis, do something like this:
     #("wiki1", r"^http://wiki1\.example\.org/.*$"),
-    #("wiki2", r"^http://wiki2\.example\.org/.*$"),
+    #("wiki2", r"^https?://wiki2\.example\.org/.*$"),
 ]
 
 
