@@ -17,8 +17,9 @@
     when really necessary (like for transferring binary files like
     attachments maybe).
 
-    @copyright: 2003-2008 MoinMoin:ThomasWaldmann,
-                2004-2006 MoinMoin:AlexanderSchremmer
+    @copyright: 2003-2009 MoinMoin:ThomasWaldmann,
+                2004-2006 MoinMoin:AlexanderSchremmer,
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details
 """
 from MoinMoin.util import pysupport
@@ -41,7 +42,9 @@ from MoinMoin import caching
 logging_tearline = '- XMLRPC %s ' + '-' * 40
 
 class XmlRpcBase:
-    """ XMLRPC base class with common functionality of wiki xmlrpc v1 and v2 """
+    """
+    XMLRPC base class with common functionality of wiki xmlrpc v1 and v2
+    """
     def __init__(self, request):
         """
         Initialize an XmlRpcBase object.
@@ -56,7 +59,8 @@ class XmlRpcBase:
     #############################################################################
 
     def _instr(self, text):
-        """ Convert inbound string.
+        """
+        Convert inbound string.
 
         @param text: the text to convert (encoded str or unicode)
         @rtype: unicode
@@ -65,7 +69,8 @@ class XmlRpcBase:
         raise NotImplementedError("please implement _instr in derived class")
 
     def _outstr(self, text):
-        """ Convert outbound string.
+        """
+        Convert outbound string.
 
         @param text: the text to convert (encoded str or unicode)
         @rtype: str
@@ -74,18 +79,20 @@ class XmlRpcBase:
         raise NotImplementedError("please implement _outstr in derived class")
 
     def _inlob(self, text):
-        """ Convert inbound base64-encoded utf-8 to Large OBject.
+        """
+        Convert inbound base64-encoded utf-8 to Large OBject.
 
         @param text: the text to convert
         @rtype: unicode
         @return: text
         """
-        text = text.data #this is a already base64-decoded 8bit string
+        text = text.data # this is a already base64-decoded 8bit string
         text = unicode(text, 'utf-8')
         return text
 
     def _outlob(self, text):
-        """ Convert outbound Large OBject to base64-encoded utf-8.
+        """
+        Convert outbound Large OBject to base64-encoded utf-8.
 
         @param text: the text, either unicode or utf-8 string
         @rtype: str
@@ -99,7 +106,8 @@ class XmlRpcBase:
         return xmlrpclib.Binary(text)
 
     def _dump_exc(self):
-        """ Convert an exception to a string.
+        """
+        Convert an exception to a string.
 
         @rtype: str
         @return: traceback as string
@@ -113,7 +121,9 @@ class XmlRpcBase:
         )
 
     def process(self):
-        """ xmlrpc v1 and v2 dispatcher """
+        """
+        xmlrpc v1 and v2 dispatcher
+        """
         request = self.request
         try:
             if 'xmlrpc' in self.request.cfg.actions_excluded:
@@ -160,8 +170,9 @@ class XmlRpcBase:
         return request
 
     def dispatch(self, method, params):
-        """ call dispatcher - for method==xxx it either locates a method called
-            xmlrpc_xxx or loads a plugin from plugin/xmlrpc/xxx.py
+        """
+        call dispatcher - for method==xxx it either locates a method called
+        xmlrpc_xxx or loads a plugin from plugin/xmlrpc/xxx.py
         """
         method = method.replace(".", "_")
 
@@ -197,7 +208,8 @@ class XmlRpcBase:
     #############################################################################
 
     def xmlrpc_system_multicall(self, call_list):
-        """system.multicall([{'methodName': 'add', 'params': [2, 2]}, ...]) => [[4], ...]
+        """
+        system.multicall([{'methodName': 'add', 'params': [2, 2]}, ...]) => [[4], ...]
 
         Allows the caller to package multiple XML-RPC calls into a single
         request.
@@ -237,7 +249,8 @@ class XmlRpcBase:
     #############################################################################
 
     def xmlrpc_getRPCVersionSupported(self):
-        """ Returns version of the Wiki API.
+        """
+        Returns version of the Wiki xmlrpc API.
 
         @rtype: int
         @return: 1 or 2 (wikirpc version)
@@ -245,19 +258,20 @@ class XmlRpcBase:
         return self.version
 
     def xmlrpc_getAllPages(self):
-        """ Get all pages readable by current user
+        """
+        Get all pages readable by current user
 
         @rtype: list
         @return: a list of all pages.
         """
 
-        # the official WikiRPC interface is implemented by the extended method
-        # as well
+        # the official WikiRPC interface is implemented by the extended method as well
         return self.xmlrpc_getAllPagesEx()
 
 
     def xmlrpc_getAllPagesEx(self, opts=None):
-        """ Get all pages readable by current user. Not an WikiRPC method.
+        """
+        Get all pages readable by current user. Not an WikiRPC method.
 
         @param opts: dictionary that can contain the following arguments:
                 include_system:: set it to false if you do not want to see system pages
@@ -313,7 +327,8 @@ class XmlRpcBase:
             return [self._outstr(page) for page in pagelist]
 
     def xmlrpc_getRecentChanges(self, date):
-        """ Get RecentChanges since date
+        """
+        Get RecentChanges since date
 
         @param date: date since when rc will be listed
         @rtype: list
@@ -365,11 +380,14 @@ class XmlRpcBase:
         return return_items
 
     def xmlrpc_getPageInfo(self, pagename):
-        """ Invoke xmlrpc_getPageInfoVersion with rev=None """
+        """
+        Invoke xmlrpc_getPageInfoVersion with rev=None
+        """
         return self.xmlrpc_getPageInfoVersion(pagename, rev=None)
 
     def xmlrpc_getPageInfoVersion(self, pagename, rev):
-        """ Return page information for specific revision
+        """
+        Return page information for specific revision
 
         @param pagename: the name of the page (utf-8)
         @param rev: revision to get info about (int)
@@ -426,11 +444,14 @@ class XmlRpcBase:
             }
 
     def xmlrpc_getPage(self, pagename):
-        """ Invoke xmlrpc_getPageVersion with rev=None """
+        """
+        Invoke xmlrpc_getPageVersion with rev=None
+        """
         return self.xmlrpc_getPageVersion(pagename, rev=None)
 
     def xmlrpc_getPageVersion(self, pagename, rev):
-        """ Get raw text from specific revision of pagename
+        """
+        Get raw text from specific revision of pagename
 
         @param pagename: pagename (utf-8)
         @param rev: revision number (int)
@@ -459,11 +480,14 @@ class XmlRpcBase:
             return self._outlob(page.get_raw_body())
 
     def xmlrpc_getPageHTML(self, pagename):
-        """ Invoke xmlrpc_getPageHTMLVersion with rev=None """
+        """
+        Invoke xmlrpc_getPageHTMLVersion with rev=None
+        """
         return self.xmlrpc_getPageHTMLVersion(pagename, rev=None)
 
     def xmlrpc_getPageHTMLVersion(self, pagename, rev):
-        """ Get HTML of from specific revision of pagename
+        """
+        Get HTML of from specific revision of pagename
 
         @param pagename: the page name (utf-8)
         @param rev: revision number (int)
@@ -527,7 +551,7 @@ class XmlRpcBase:
         @param pagename: the page name (unicode or utf-8)
         @param pagetext: the new page text (content, unicode or utf-8)
         @rtype: bool
-        @return: true on success
+        @return: True on success
         """
 
         pagename = self._instr(pagename)
@@ -556,12 +580,13 @@ class XmlRpcBase:
         return xmlrpclib.Boolean(1)
 
     def xmlrpc_renamePage(self, pagename, newpagename):
-        """Renames a page to newpagename
+        """
+        Renames a page <pagename> to <newpagename>.
 
         @param pagename: the page name (unicode or utf-8)
-        @param newpagename: then new pagename (unicode or utf-8)
-        @rtype boolean
-        @return true on success
+        @param newpagename: the new pagename (unicode or utf-8)
+        @rtype: bool
+        @return: True on success
         """
         if not (self.request.user.may.delete(pagename) and self.request.user.may.write(newpagename)):
             return xmlrpclib.Fault(1, "You are not allowed to rename this page")
@@ -575,14 +600,15 @@ class XmlRpcBase:
         return xmlrpclib.Boolean(1)
 
     def xmlrpc_revertPage(self, pagename, revision):
-        """Revert a page to previous revision
+        """
+        Revert a page to previous revision
 
         This is mainly intended to be used by the jabber bot.
 
         @param pagename: the page name (unicode or utf-8)
         @param revision: revision to revert to
-        @rtype bool
-        @return true on success
+        @rtype: bool
+        @return: True on success
 
         """
         if not self.request.user.may.write(pagename):
@@ -599,8 +625,9 @@ class XmlRpcBase:
         return xmlrpclib.Boolean(1)
 
     def xmlrpc_searchPages(self, query_string):
-        """ Searches pages for query_string.
-            Returns a list of tuples (foundpagename, context)
+        """
+        Searches pages for query_string.
+        Returns a list of tuples (foundpagename, context)
         """
         from MoinMoin import search
         results = search.searchPages(self.request, query_string)
@@ -611,7 +638,8 @@ class XmlRpcBase:
                 for hit in results.hits]
 
     def xmlrpc_searchPagesEx(self, query_string, search_type, length, case, mtime, regexp):
-        """ Searches pages for query_string - extended version for compatibility
+        """
+        Searches pages for query_string - extended version for compatibility
 
         This function, in contrary to searchPages(), doesn't return HTML-formatted data.
 
@@ -622,7 +650,6 @@ class XmlRpcBase:
         @param mtime: only output pages modified after mtime
         @param regexp: should the query_string be treates as a regular expression?
         @return: (page name, context preview, page url)
-
         """
         from MoinMoin import search
         from MoinMoin.formatter.text_plain import Formatter
@@ -641,8 +668,9 @@ class XmlRpcBase:
                 for hit in results.hits]
 
     def xmlrpc_getMoinVersion(self):
-        """ Returns a tuple of the MoinMoin version:
-            (project, release, revision)
+        """
+        Returns a tuple of the MoinMoin version:
+        (project, release, revision)
         """
         from MoinMoin import version
         return (version.project, version.release, version.revision)
@@ -651,10 +679,11 @@ class XmlRpcBase:
     # user profile data transfer
 
     def xmlrpc_getUserProfile(self):
-        """ Return the user profile data for the current user.
-            Use this in a single multicall after applyAuthToken.
-            If we have a valid user, returns a dict of items from user profile.
-            Otherwise, return an empty dict.
+        """
+        Return the user profile data for the current user.
+        Use this in a single multicall after applyAuthToken.
+        If we have a valid user, returns a dict of items from user profile.
+        Otherwise, return an empty dict.
         """
         u = self.request.user
         if not u.valid:
@@ -664,7 +693,8 @@ class XmlRpcBase:
         return userdata
 
     def xmlrpc_getUserLanguageByJID(self, jid):
-        """ Returns user's language given his/her Jabber ID
+        """
+        Returns user's language given his/her Jabber ID
 
         It makes no sense to consider this a secret, right? Therefore
         an authentication token is not required. We return a default
@@ -682,11 +712,12 @@ class XmlRpcBase:
     # authorization methods
 
     def xmlrpc_getAuthToken(self, username, password, *args):
-        """ Returns a token which can be used for authentication
-            in other XMLRPC calls. If the token is empty, the username
-            or the password were wrong.
+        """
+        Returns a token which can be used for authentication
+        in other XMLRPC calls. If the token is empty, the username
+        or the password were wrong.
 
-            Implementation note: token is same as cookie content would be for http session
+        Implementation note: token is same as cookie content would be for http session
         """
         request = self.request
         request.session = request.cfg.session_service.get_session(request)
@@ -702,7 +733,8 @@ class XmlRpcBase:
             return ""
 
     def xmlrpc_getJabberAuthToken(self, jid, secret):
-        """Returns a token which can be used for authentication.
+        """
+        Returns a token which can be used for authentication.
 
         This token can be used in other XMLRPC calls. Generation of
         token depends on user's JID and a secret shared between wiki
@@ -721,7 +753,9 @@ class XmlRpcBase:
             return ""
 
     def xmlrpc_applyAuthToken(self, auth_token):
-        """ Applies the auth token and thereby authenticates the user. """
+        """
+        Applies the auth token and thereby authenticates the user.
+        """
         if not auth_token:
             return xmlrpclib.Fault("INVALID", "Empty token.")
 
@@ -737,7 +771,9 @@ class XmlRpcBase:
 
 
     def xmlrpc_deleteAuthToken(self, auth_token):
-        """ Delete the given auth token. """
+        """
+        Delete the given auth token.
+        """
         if not auth_token:
             return xmlrpclib.Fault("INVALID", "Empty token.")
 
@@ -751,38 +787,38 @@ class XmlRpcBase:
     # methods for wiki synchronization
 
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev, n_name=None):
-        """ Gets the binary difference between two page revisions.
+        """
+        Gets the binary difference between two page revisions.
 
-            @param pagename: unicode string qualifying the page name
+        @param pagename: unicode string qualifying the page name
 
-            @param fromRev: integer specifying the source revision. May be None to
-            refer to a virtual empty revision which leads to a diff
-            containing the whole page.
+        @param fromRev: integer specifying the source revision. May be None to
+        refer to a virtual empty revision which leads to a diff
+        containing the whole page.
 
-            @param toRev: integer specifying the target revision. May be None to
-            refer to the current revision. If the current revision is the same
-            as fromRev, there will be a special error condition "ALREADY_CURRENT"
+        @param toRev: integer specifying the target revision. May be None to
+        refer to the current revision. If the current revision is the same
+        as fromRev, there will be a special error condition "ALREADY_CURRENT"
 
-            @param n_name: do a tag check verifying that n_name was the normalised
-            name of the last tag
+        @param n_name: do a tag check verifying that n_name was the normalised
+        name of the last tag
 
-            If both fromRev and toRev are None, this function acts similar to getPage, i.e. it will diff("",currentRev).
+        If both fromRev and toRev are None, this function acts similar to getPage, i.e. it will diff("",currentRev).
 
-            @return Returns a dict:
-            * status (not a field, implicit, returned as Fault if not SUCCESS):
-             * "SUCCESS" - if the diff could be retrieved successfully
-             * "NOT_EXIST" - item does not exist
-             * "FROMREV_INVALID" - the source revision is invalid
-             * "TOREV_INVALID" - the target revision is invalid
-             * "INTERNAL_ERROR" - there was an internal error
-             * "INVALID_TAG" - the last tag does not match the supplied normalised name
-             * "ALREADY_CURRENT" - this not merely an error condition. It rather means that
-             there is no new revision to diff against which is a good thing while
-             synchronisation.
-            * current: the revision number of the current revision (not the one which was diff'ed against)
-            * diff: Binary object that transports a zlib-compressed binary diff (see bdiff.py, taken from Mercurial)
-            * conflict: if there is a conflict on the page currently
-
+        @return: Returns a dict:
+        * status (not a field, implicit, returned as Fault if not SUCCESS):
+        * "SUCCESS" - if the diff could be retrieved successfully
+        * "NOT_EXIST" - item does not exist
+        * "FROMREV_INVALID" - the source revision is invalid
+        * "TOREV_INVALID" - the target revision is invalid
+        * "INTERNAL_ERROR" - there was an internal error
+        * "INVALID_TAG" - the last tag does not match the supplied normalised name
+        * "ALREADY_CURRENT" - this not merely an error condition. It rather means that
+         there is no new revision to diff against which is a good thing while
+         synchronisation.
+        * current: the revision number of the current revision (not the one which was diff'ed against)
+        * diff: Binary object that transports a zlib-compressed binary diff (see bdiff.py, taken from Mercurial)
+        * conflict: if there is a conflict on the page currently
         """
         from MoinMoin.util.bdiff import textdiff, compress
         from MoinMoin.wikisync import TagStore
@@ -847,7 +883,9 @@ class XmlRpcBase:
         return {"conflict": conflict, "diff": diffblob, "diffversion": 1, "current": currentpage.get_real_rev()}
 
     def xmlrpc_interwikiName(self):
-        """ Returns the interwiki name and the IWID of the current wiki. """
+        """
+        Returns the interwiki name and the IWID of the current wiki.
+        """
         name = self.request.cfg.interwikiname
         iwid = self.request.cfg.iwid
         if name is None:
@@ -856,24 +894,25 @@ class XmlRpcBase:
             return [self._outstr(name), iwid]
 
     def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, normalised_name):
-        """ Merges a diff sent by the remote machine and returns the number of the new revision.
-            Additionally, this method tags the new revision.
+        """
+        Merges a diff sent by the remote machine and returns the number of the new revision.
+        Additionally, this method tags the new revision.
 
-            @param pagename: The pagename that is currently dealt with.
-            @param diff: The diff that can be applied to the version specified by delta_remote_rev.
-                If it is None, the page is deleted.
-            @param local_rev: The revno of the page on the other wiki system, used for the tag.
-            @param delta_remote_rev: The revno that the diff is taken against.
-            @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
-            @param interwiki_name: Used to build the interwiki tag.
-            @param normalised_name: The normalised pagename that is common to both wikis.
+        @param pagename: The pagename that is currently dealt with.
+        @param diff: The diff that can be applied to the version specified by delta_remote_rev.
+            If it is None, the page is deleted.
+        @param local_rev: The revno of the page on the other wiki system, used for the tag.
+        @param delta_remote_rev: The revno that the diff is taken against.
+        @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
+        @param interwiki_name: Used to build the interwiki tag.
+        @param normalised_name: The normalised pagename that is common to both wikis.
 
-            @return Returns the current revision number after the merge was done. Or one of the following errors:
-                * "SUCCESS" - the page could be merged and tagged successfully.
-                * "NOT_EXIST" - item does not exist and there was not any content supplied.
-                * "LASTREV_INVALID" - the page was changed and the revision got invalid
-                * "INTERNAL_ERROR" - there was an internal error
-                * "NOT_ALLOWED" - you are not allowed to do the merge operation on the page
+        @return: Returns the current revision number after the merge was done. Or one of the following errors:
+            * "SUCCESS" - the page could be merged and tagged successfully.
+            * "NOT_EXIST" - item does not exist and there was not any content supplied.
+            * "LASTREV_INVALID" - the page was changed and the revision got invalid
+            * "INTERNAL_ERROR" - there was an internal error
+            * "NOT_ALLOWED" - you are not allowed to do the merge operation on the page
         """
         from MoinMoin.util.bdiff import decompress, patch
         from MoinMoin.wikisync import TagStore, BOTH
@@ -940,7 +979,8 @@ class XmlRpcBase:
     # If the first beta or more stable release of 1.6 will have new item semantics,
     # we will remove the functions before it is released.
     def xmlrpc_listAttachments(self, pagename):
-        """ Get all attachments associated with pagename
+        """
+        Get list of attachment names for page <pagename>.
         Deprecated.
 
         @param pagename: pagename (utf-8)
@@ -956,12 +996,13 @@ class XmlRpcBase:
         return result
 
     def xmlrpc_getAttachment(self, pagename, attachname):
-        """ Get attachname associated with pagename
+        """
+        Get contents of attachment <attachname> of page <pagename>
 
         @param pagename: pagename (utf-8)
         @param attachname: attachment name (utf-8)
-        @rtype base64
-        @return base64 data
+        @rtype: base64
+        @return: base64 data
         """
         pagename = self._instr(pagename)
         # User may read page?
@@ -975,13 +1016,14 @@ class XmlRpcBase:
         return self._outlob(open(filename, 'rb').read())
 
     def xmlrpc_putAttachment(self, pagename, attachname, data):
-        """ Set attachname associated with pagename to data
+        """
+        Store <data> as content of attachment <attachname> of page <pagename>.
 
         @param pagename: pagename (utf-8)
         @param attachname: attachment name (utf-8)
         @param data: file data (base64)
-        @rtype boolean
-        @return True if attachment was set
+        @rtype: bool
+        @return: True if attachment was successfully stored
         """
         pagename = self._instr(pagename)
         # User may read page?
@@ -1001,12 +1043,13 @@ class XmlRpcBase:
         return xmlrpclib.Boolean(1)
 
     def xmlrpc_deleteAttachment(self, pagename, attachname):
-        """ Deletes attachment from pagename
+        """
+        Deletes attachment <attachname> of page <pagename>.
 
         @param pagename: pagename (utf-8)
         @param attachname: attachment name (utf-8)
-        @rtype boolean
-        @return true on success
+        @rtype: bool
+        @return: True on success
         """
         pagename = self._instr(pagename)
 
@@ -1021,7 +1064,8 @@ class XmlRpcBase:
     # XXX END WARNING XXX
 
     def xmlrpc_getBotTranslations(self):
-        """ Return translations to be used by notification bot
+        """
+        Return translations to be used by notification bot
 
         @return: a dict (indexed by language) of dicts of translated strings (indexed by original ones)
         """
@@ -1036,7 +1080,8 @@ class XmlRpc1(XmlRpcBase):
         self.version = 1
 
     def _instr(self, text):
-        """ Convert string we get from xmlrpc into internal representation
+        """
+        Convert string we get from xmlrpc into internal representation
 
         @param text: quoted text (str or unicode object)
         @rtype: unicode
@@ -1045,7 +1090,8 @@ class XmlRpc1(XmlRpcBase):
         return wikiutil.url_unquote(text) # config.charset must be utf-8
 
     def _outstr(self, text):
-        """ Convert string from internal representation to xmlrpc
+        """
+        Convert string from internal representation to xmlrpc
 
         @param text: unicode or string in config.charset
         @rtype: str
@@ -1061,7 +1107,8 @@ class XmlRpc2(XmlRpcBase):
         self.version = 2
 
     def _instr(self, text):
-        """ Convert string we get from xmlrpc into internal representation
+        """
+        Convert string we get from xmlrpc into internal representation
 
         @param text: unicode or utf-8 string
         @rtype: unicode
@@ -1072,7 +1119,8 @@ class XmlRpc2(XmlRpcBase):
         return text
 
     def _outstr(self, text):
-        """ Convert string from internal representation to xmlrpc
+        """
+        Convert string from internal representation to xmlrpc
 
         @param text: unicode or string in config.charset
         @rtype: str
