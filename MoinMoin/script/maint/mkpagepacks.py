@@ -3,7 +3,8 @@
 MoinMoin - Package Generator
 
 @copyright: 2005 Alexander Schremmer,
-            2006 MoinMoin:ThomasWaldmann
+            2006 MoinMoin:ThomasWaldmann,
+            2009 MoinMoin:ReimarBauer
 @license: GNU GPL, see COPYING for details.
 """
 
