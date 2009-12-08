@@ -555,6 +555,25 @@ class XmlRpcBase:
 
         return xmlrpclib.Boolean(1)
 
+    def xmlrpc_renamePage(self, pagename, newpagename):
+        """Renames a page to newpagename
+
+        @param pagename: the page name (unicode or utf-8)
+        @param newpagename: then new pagename (unicode or utf-8)
+        @rtype boolean
+        @return true on success
+        """
+        if not (self.request.user.may.delete(pagename) and self.request.user.may.write(newpagename)):
+            return xmlrpclib.Fault(1, "You are not allowed to rename this page")
+        editor = PageEditor(self.request, pagename)
+
+        try:
+            editor.renamePage(newpagename)
+        except PageEditor.SaveError, error:
+            return xmlrpclib.Fault(1, "Rename failed: %s" % (str(error), ))
+
+        return xmlrpclib.Boolean(1)
+
     def xmlrpc_revertPage(self, pagename, revision):
         """Revert a page to previous revision
 
@@ -981,8 +1000,25 @@ class XmlRpcBase:
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, attachname)
         return xmlrpclib.Boolean(1)
 
-    # XXX END WARNING XXX
+    def xmlrpc_deleteAttachment(self, pagename, attachname):
+        """ Deletes attachment from pagename
 
+        @param pagename: pagename (utf-8)
+        @param attachname: attachment name (utf-8)
+        @rtype boolean
+        @return true on success
+        """
+        pagename = self._instr(pagename)
+
+        if not self.request.user.may.delete(pagename):
+            return xmlrpclib.Fault(1, 'You are not allowed to delete attachments on this page.')
+
+        attachname = wikiutil.taintfilename(attachname)
+        filename = AttachFile.getFilename(self.request, pagename, attachname)
+        AttachFile.remove_attachment(self.request, pagename, attachname)
+        return xmlrpclib.Boolean(1)
+
+    # XXX END WARNING XXX
 
     def xmlrpc_getBotTranslations(self):
         """ Return translations to be used by notification bot
