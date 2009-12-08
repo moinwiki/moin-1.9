@@ -1063,7 +1063,7 @@ class XmlRpcBase:
         if not self.request.user.may.delete(pagename):
             return xmlrpclib.Fault(1, 'You are not allowed to delete attachments on this page.')
 
-        attachname = wikiutil.taintfilename(attachname)
+        attachname = wikiutil.taintfilename(self._instr(attachname))
         filename = AttachFile.getFilename(self.request, pagename, attachname)
         AttachFile.remove_attachment(self.request, pagename, attachname)
         return xmlrpclib.Boolean(1)
