@@ -588,6 +588,13 @@ class XmlRpcBase:
         @rtype: bool
         @return: True on success
         """
+
+        pagename = self._instr(pagename)
+        pagename = wikiutil.normalize_pagename(pagename, self.cfg)
+        if not pagename:
+            return xmlrpclib.Fault("INVALID", "pagename can't be empty")
+
+        # check ACLs
         if not (self.request.user.may.delete(pagename) and self.request.user.may.write(newpagename)):
             return xmlrpclib.Fault(1, "You are not allowed to rename this page")
         editor = PageEditor(self.request, pagename)
