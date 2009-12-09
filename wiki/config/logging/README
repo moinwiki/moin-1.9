@@ -1,6 +1,6 @@
 In this directory is a collection of pre-made logging configuration files.
 
-Typically, your server adaptor script (e.g. moin.cgi) will have this:
+Typically, your server adaptor script (e.g. moin.wsgi) will have this:
 
 from MoinMoin import log
 log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
@@ -17,12 +17,12 @@ If you don't configure logging using those lines, moin will use some built-in
 logging configuration (which might be correct for some cases, but incorrect
 for some other cases, so be careful!).
 
-CGI
+WSGI
 ---
-You need to edit the moin.cgi that your webserver runs.
+You need to edit the moin.wsgi that your webserver runs.
 
-CGI / Apache: use the stderr configuration, stuff will go to apache error.log
-CGI / IIS: use the logfile configuration and edit the logfile path
+WSGI / Apache: use the stderr configuration, stuff will go to apache error.log
+WSGI / IIS: use the logfile configuration and edit the logfile path
 
 You can make very flexible and powerful logging configurations using this
 mechanism, for more details see:
