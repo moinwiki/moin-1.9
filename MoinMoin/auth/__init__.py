@@ -405,7 +405,7 @@ def handle_login(request, userobj=None, username=None, password=None,
             return userobj
 
         if ret.redirect_to:
-            nextstage = auth.get_multistage_continuation_url(request, authmethod.name)
+            nextstage = get_multistage_continuation_url(request, authmethod.name)
             url = ret.redirect_to
             url = url.replace('%return_form', quote_plus(nextstage))
             url = url.replace('%return', quote(nextstage))
