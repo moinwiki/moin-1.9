@@ -70,17 +70,14 @@ class FileSessionService(SessionService):
     """
     def __init__(self, cookie_name='MOIN_SESSION'):
         self.cookie_name = cookie_name
-        self.store = None
 
     def _store_get(self, request):
-        if self.store is None:
-            path = request.cfg.session_dir
-            try:
-                filesys.mkdir(path)
-            except OSError:
-                pass
-            self.store = FilesystemSessionStore(path=path, filename_template='%s', session_class=MoinSession)
-        return self.store
+        path = request.cfg.session_dir
+        try:
+            filesys.mkdir(path)
+        except OSError:
+            pass
+        return FilesystemSessionStore(path=path, filename_template='%s', session_class=MoinSession)
 
     def get_session(self, request, sid=None):
         if sid is None:
