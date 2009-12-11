@@ -1012,11 +1012,11 @@ Login Name: %s
 
 Password recovery token: %s
 
-Password reset URL: %s/?action=recoverpass&name=%s&token=%s
+Password reset URL: %s?action=recoverpass&name=%s&token=%s
 """) % (
                         self.name,
                         tok,
-                        self._request.script_root,
+                        self._request.url_root,
                         url_quote_plus(self.name),
                         tok, )
 
