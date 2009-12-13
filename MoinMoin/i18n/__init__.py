@@ -289,7 +289,10 @@ def getText(original, request, lang, **kw):
     if original in translation.raw:
         translated = translation.raw[original]
         if formatted:
-            key = (original, percent)
+            # it is important to include siteid and percent into the key because
+            # formatted output depends on the (farm) wiki in which the page is
+            # rendered (e.g. for link urls) and also on the percent param
+            key = (original, request.cfg.siteid, percent)
             if key in translation.formatted:
                 translated = translation.formatted[key]
                 if translated is None:
