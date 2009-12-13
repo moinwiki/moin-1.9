@@ -19,7 +19,7 @@ from MoinMoin.parser import parse_start_step
 from MoinMoin.support.python_compatibility import hash_new
 from MoinMoin.Page import Page
 
-Dependencies = []
+Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
 extensions = []
 extension_re = re.compile(r'^\*(\..*$)')
 for name, short, patterns, mime in pygments.lexers.get_all_lexers():
