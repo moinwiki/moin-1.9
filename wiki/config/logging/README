@@ -21,9 +21,6 @@ WSGI
 ---
 You need to edit the moin.wsgi that your webserver runs.
 
-WSGI / Apache: use the stderr configuration, stuff will go to apache error.log
-WSGI / IIS: use the logfile configuration and edit the logfile path
-
 You can make very flexible and powerful logging configurations using this
 mechanism, for more details see:
 
