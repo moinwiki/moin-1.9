@@ -1198,6 +1198,12 @@ options = {
        "User object attributes that are not persisted to permanent storage (internal use)."),
     )),
 
+    'openidrp': ('OpenID Relying Party',
+        'These settings control the built-in OpenID Relying Party (client).',
+    (
+      ('allowed_op', [], "List of forced providers"),
+    )),
+
     'openid_server': ('OpenID Server',
         'These settings control the built-in OpenID Identity Provider (server).',
     (
