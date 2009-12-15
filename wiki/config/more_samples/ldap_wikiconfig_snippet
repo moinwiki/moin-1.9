@@ -52,7 +52,7 @@
     auth = [ldap_authenticator1, ] # this is a list, you may have multiple ldap authenticators
                                    # as well as other authenticators
 
-    cookie_lifetime = 1 # 1 hour after last access ldap login is required again
+    cookie_lifetime = (0, 1) # no anon user sessions, 1h session lifetime for logged-in users
 
     # customize user preferences (optional, see MoinMoin/config/multiconfig for internal defaults)
     # you maybe want to use user_checkbox_remove, user_checkbox_defaults, user_form_defaults,
