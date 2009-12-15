@@ -137,6 +137,8 @@
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
+from werkzeug import redirect, abort, url_quote, url_quote_plus
+
 from MoinMoin import user, wikiutil
 
 
@@ -407,8 +409,8 @@ def handle_login(request, userobj=None, username=None, password=None,
         if ret.redirect_to:
             nextstage = get_multistage_continuation_url(request, authmethod.name)
             url = ret.redirect_to
-            url = url.replace('%return_form', quote_plus(nextstage))
-            url = url.replace('%return', quote(nextstage))
+            url = url.replace('%return_form', url_quote_plus(nextstage))
+            url = url.replace('%return', url_quote(nextstage))
             abort(redirect(url))
         msg = ret.message
         if msg and not msg in request._login_messages:
