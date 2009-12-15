@@ -50,11 +50,11 @@ class ServerFrontEnd(FrontEnd):
         super(ServerFrontEnd, self).add_options()
         parser = self.parser
         parser.add_option("-p", "--port", dest="port", type="int",
-                          help="Set the port to listen on. If not given, act as CGI/FCGI script.")
+                          help="Set the port to listen on.")
         parser.add_option("-i", "--interface", dest="interface",
                           help=("Set the interface/socket to listen on. If starts "
                                 "with '/' or './' it is interpreted as a path "
-                                "to a unix socket. If not given, act as CGI/FCGI script."))
+                                "to a unix socket."))
         # Note: interface default MUST be None, do not set it to something else!
         # Otherwise CGI (and also when the FCGI process is spawned by the web server) won't work.
 

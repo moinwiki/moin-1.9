@@ -42,7 +42,6 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 if have_flup:
-    from flup.server.fcgi_base import FCGI_RESPONDER
     class FlupFrontEnd(ServerFrontEnd):
         def add_options(self):
             super(FlupFrontEnd, self).add_options()
@@ -80,15 +79,8 @@ if have_flup:
             WSGIServerWrapped = mod.WSGIServer
 
             class WSGIServer(WSGIServerWrapped):
-                def __init__(self, application, environ=None,
-                             multithreaded=True, multiprocess=False,
-                             bindAddress=None, umask=None, multiplexed=False,
-                             debug="off", roles=(FCGI_RESPONDER, )):
-                    WSGIServerWrapped.__init__(self, application, environ=environ,
-                                               multithreaded=multithreaded, multiprocess=multiprocess,
-                                               bindAddress=bindAddress, umask=umask, multiplexed=multiplexed,
-                                               debug=debug, roles=roles)
-
+                # note: base class uses debug=False as default. as we use string values,
+                # better explicitely pass in "off", "web" or "external".
                 def error(self, req):
                     """ Override the default handler, so it implements debug=web/external/off. """
                     if self.debug == 'external':
