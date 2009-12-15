@@ -17,6 +17,28 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
+Version 1.9.current:
+  Bug fixes:
+  * farmconfig example: remove wrong comment, add sample http/https entry.
+  * xmlrpc: process attachname in get/putAttachment similarly.
+  * OpenID login: fixed, did not work (traceback).
+  * Fixed FileSessionService - use session_dir from CURRENT request.cfg (it
+    mixed up session_dirs in farm setups).
+  * Fixed password reset url (email content needs full URL).
+  * Fixed browser language detection.
+  * Fixed language pack generation/installation for pt-br, zh, zh-tw.
+  * Fixed caching of formatted msgs, see MoinMoinBugs/1.9EditPageHelpLinksBroken.
+  * highlight parser: fixed caching issue for "toggle line numbers" link.
+  * flup based frontends: fixed SCGI and AJP (didn't work).
+
+  New features:
+  * xmlrpc: added renamePage and deleteAttachment methods.
+
+  Other changes:
+  * Added rtsp, rtp, rtcp protocols to url_schemas.
+  * Added more info about index building to xapian wikiconfig snippet.
+
+
 Version 1.9.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
         also less interesting minor changes and fixes. It shows changes
