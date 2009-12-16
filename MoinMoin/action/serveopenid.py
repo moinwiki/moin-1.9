@@ -170,7 +170,7 @@ class MoinOpenIDServer:
     def handle(self):
         _ = self._
         request = self.request
-        form = request.form
+        form = request.values
 
         username = request.page.page_name
         if 'openid.user' in request.page.pi:
@@ -252,7 +252,7 @@ class MoinOpenIDServer:
 
     def handle_response(self, positive, username, identity):
         request = self.request
-        form = request.form
+        form = request.values
 
         # check form submission nonce, use None for stored value default
         # since it cannot be sent from the user
