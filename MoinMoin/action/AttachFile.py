@@ -664,10 +664,14 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
             return
 
         if new_attachment_path != attachment_path:
-            # move file
+            filesize = os.path.getsize(attachment_path)
             filesys.rename(attachment_path, new_attachment_path)
             _addLogEntry(request, 'ATTDEL', pagename, attachment)
+            event = FileRemovedEvent(request, pagename, attachment, filesize)
+            send_event(event)
             _addLogEntry(request, 'ATTNEW', new_pagename, new_attachment)
+            event = FileAttachedEvent(request, new_pagename, new_attachment, filesize)
+            send_event(event)
             upload_form(pagename, request,
                         msg=_("Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%(new_filename)s'.") % {
                             'pagename': pagename,
