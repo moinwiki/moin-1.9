@@ -30,6 +30,14 @@ Version 1.9.current:
   * Fixed caching of formatted msgs, see MoinMoinBugs/1.9EditPageHelpLinksBroken.
   * highlight parser: fixed caching issue for "toggle line numbers" link.
   * flup based frontends: fixed SCGI and AJP (didn't work).
+  * fix auth methods that use redirects (like openid)
+  * OpenID client:
+    * Add setting cfg.openidrp_allowed_op, default is [].
+    * Fixed logging in with openid and associating with an existing account.
+  * OpenID server:
+    * Fixed TypeError.
+    * Fixed processing POSTed form data AND URL args.
+  * AttachFile.move_file: send events (so e.g. xapian index update happens)
 
   New features:
   * xmlrpc: added renamePage and deleteAttachment methods.
