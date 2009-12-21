@@ -1070,7 +1070,7 @@ class Page(object):
             revisions = self.getRevList()
             if len(revisions) >= 2: # XXX shouldn't that be ever the case!? Looks like not.
                 oldpage = Page(request, self.page_name, rev=revisions[1])
-                body += oldpage.get_raw_body()
+                body += oldpage.get_data()
                 del oldpage
 
         lang = self.pi.get('language', request.cfg.language_default)
