@@ -14,6 +14,7 @@ from MoinMoin import config, wikiutil, caching, user
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog, eventlog
+from MoinMoin.util import filesys
 
 MOIN_PACKAGE_FILE = 'MOIN_PACKAGE'
 MAX_VERSION = 1
@@ -138,7 +139,7 @@ class ScriptEngine:
             if not os.path.exists(target):
                 self._extractToFile(zipname, target)
                 if os.path.exists(target):
-                    os.chmod(target, config.umask )
+                    filesys.chmod(target, 0666 & config.umask)
                     action = 'ATTNEW'
                     edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
                                        comment=u'%(filename)s' % {"filename": filename}, author=author)
@@ -347,7 +348,7 @@ class ScriptEngine:
             target = os.path.join(attachments, filename)
             self._extractToFile(zipname, target)
             if os.path.exists(target):
-                os.chmod(target, config.umask )
+                filesys.chmod(target, 0666 & config.umask)
         else:
             self.msg += u"action replace underlay attachment: not enough rights - nothing done \n"
 
