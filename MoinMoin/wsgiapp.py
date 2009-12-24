@@ -6,23 +6,41 @@
                 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
+import os
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
 from MoinMoin.web.exceptions import HTTPException
 from MoinMoin.web.request import Request, MoinMoinFinish, HeaderSet
 from MoinMoin.web.utils import check_forbidden, check_surge_protect, fatal_response, \
     redirect_last_visited
 from MoinMoin.Page import Page
-from MoinMoin import auth, i18n, user, wikiutil, xmlrpc, error
+from MoinMoin import auth, config, i18n, user, wikiutil, xmlrpc, error
 from MoinMoin.action import get_names, get_available_actions
 
-from MoinMoin import log
-logging = log.getLogger(__name__)
+
+def set_umask(new_mask=0777^config.umask):
+    """ Set the OS umask value (and ignore potential failures on OSes where
+        this is not supported).
+        Default: the bitwise inverted value of config.umask
+    """
+    try:
+        old_mask = os.umask(new_mask)
+    except:
+        # maybe we are on win32?
+        pass
+
 
 def init(request):
     """
     Wraps an incoming WSGI request in a Context object and initializes
     several important attributes.
     """
+    set_umask() # do it once per request because maybe some server
+                # software sets own umask
+
     if isinstance(request, Context):
         context, request = request, request.request
     else:
