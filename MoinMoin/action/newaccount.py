@@ -6,20 +6,18 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user, wikiutil, util
+from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.security.textcha import TextCha
 from MoinMoin.auth import MoinAuth
 
 
-_debug = False
-
 def _create_user(request):
     _ = request.getText
     form = request.form
 
-    if request.request_method != 'POST':
+    if request.method != 'POST':
         return
 
     if not TextCha(request).check_answer_from_form():
@@ -30,7 +28,7 @@ def _create_user(request):
 
     # Require non-empty name
     try:
-        theuser.name = form['name'][0]
+        theuser.name = form['name']
     except KeyError:
         return _("Empty user name. Please enter a user name.")
 
@@ -45,8 +43,8 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         return _("This user name already belongs to somebody else.")
 
     # try to get the password and pw repeat
-    password = form.get('password1', [''])[0]
-    password2 = form.get('password2', [''])[0]
+    password = form.get('password1', '')
+    password2 = form.get('password2', '')
 
     # Check if password is given and matches with password repeat
     if password != password2:
@@ -69,7 +67,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             return "Can't encode password: %s" % str(err)
 
     # try to get the email, for new users it is required
-    email = wikiutil.clean_input(form.get('email', [''])[0])
+    email = wikiutil.clean_input(form.get('email', ''))
     theuser.email = email.strip()
     if not theuser.email and 'email' not in request.cfg.user_form_remove:
         return _("Please provide your email address. If you lose your"
@@ -84,8 +82,6 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     theuser.save()
 
     result = _("User account created! You can use this account to login now...")
-    if _debug:
-        result = result + util.dumpFormData(form)
     return result
 
 
@@ -159,7 +155,7 @@ def execute(pagename, request):
 
     if not found:
         # we will not have linked, so forbid access
-        request.makeForbidden403()
+        request.makeForbidden(403, 'No MoinAuth in auth list')
         return
 
     page = Page(request, pagename)
@@ -172,7 +168,6 @@ def execute(pagename, request):
         request.theme.add_msg(_create_user(request), "dialog")
         return page.send_page()
     else: # show create form
-        request.emit_http_headers()
         request.theme.send_title(_("Create Account"), pagename=pagename)
 
         request.write(request.formatter.startContent("content"))

@@ -363,7 +363,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
 
-            if prefix == 'drawing': # twikidraw drawing
+            if prefix == 'drawing':
                 self.process_wiki_text("[[%s]]" % refuri)
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()

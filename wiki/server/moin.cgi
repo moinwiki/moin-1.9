@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - CGI Driver Script
+    MoinMoin - CGI/FCGI Driver script
 
     @copyright: 2000-2005 by Juergen Hermann <jh@web.de>,
-                2008 by MoinMoin:ThomasWaldmann
+                2008 by MoinMoin:ThomasWaldmann,
+                2008 by MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -30,24 +31,9 @@ import sys, os
 #from MoinMoin import log
 #log.load_config('/path/to/logging_configuration_file')
 
-# Debug mode - show detailed error reports
-#os.environ['MOIN_DEBUG'] = '1'
+# this works around a bug in flup's CGI autodetection (as of flup 1.0.1):
+os.environ['FCGI_FORCE_CGI'] = 'Y' # 'Y' for (slow) CGI, 'N' for FCGI
 
-
-from MoinMoin.server.server_cgi import CgiConfig, run
-
-class Config(CgiConfig):
-    # Server name - used to create .prof files
-    name = 'moin'
-
-    # Properties
-    # Allow overriding any request property by the value defined in
-    # this dict e.g properties = {'script_name': '/mywiki'}.
-    ## properties = {}
-
-    # Hotshot profile (default commented)
-    ## hotshotProfile = name + '.prof'
-
-
-run(Config)
+from MoinMoin.web.flup_frontend import CGIFrontEnd
+CGIFrontEnd().run()
 

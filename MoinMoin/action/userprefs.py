@@ -16,7 +16,7 @@ def _handle_submission(request):
     Return error msg_class, msg tuple or None, None.
     """
     _ = request.getText
-    sub = request.form.get('handler', [None])[0]
+    sub = request.values.get('handler')
 
     if sub in request.cfg.userprefs_disabled:
         return None, None
@@ -63,12 +63,12 @@ def _create_page(request, cancel=False):
     # returns text, title, msg_class, msg
     pagename = request.page.page_name
 
-    if 'handler' in request.form:
+    if 'handler' in request.values:
         msg_class, msg = _handle_submission(request)
     else:
         msg_class, msg = None, None
 
-    sub = request.form.get('sub', [''])[0]
+    sub = request.args.get('sub', '')
     cls = None
     if sub and sub not in request.cfg.userprefs_disabled:
         try:
@@ -101,7 +101,6 @@ def execute(pagename, request):
         title = _("Settings") + ":" + title
     else:
         title = _("Settings")
-    request.emit_http_headers()
     request.theme.add_msg(msg, msg_class)
     request.theme.send_title(title, page=request.page, pagename=pagename)
     # Start content (important for RTL support)

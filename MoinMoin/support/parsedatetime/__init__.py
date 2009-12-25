@@ -1,6 +1,17 @@
-version = '0.7'
-author  = 'Mike Taylor <http://code-bear.com>'
-license = """Copyright (c) 2004-2006 Mike Taylor, All rights reserved.
+"""
+parsedatetime.py contains the C{Calendar} class where the C{parse()}
+method can be found.
+
+parsedatetime_consts.py contains the C{Constants} class that builds the
+various regex values using locale information if available.
+"""
+
+version = '0.8.7'
+author  = 'Mike Taylor and Darshana Chhajed'
+license = """
+Copyright (c) 2004-2008 Mike Taylor
+Copyright (c) 2006-2008 Darshana Chhajed
+All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
