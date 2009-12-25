@@ -618,6 +618,9 @@ class XmlRpcBase:
         @return: True on success
 
         """
+
+        pagename = self._instr(pagename)
+
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
