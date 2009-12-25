@@ -74,11 +74,6 @@ class Macro:
         "GetVal": ["pages"],
         }
 
-    # we need the lang macros to execute when html is generated,
-    # to have correct dir and lang html attributes
-    for lang in i18n.wikiLanguages():
-        Dependencies[lang] = []
-
 
     def __init__(self, parser):
         self.parser = parser
@@ -90,6 +85,12 @@ class Macro:
 
         # Initialized on execute
         self.name = None
+
+        # we need the lang macros to execute when html is generated,
+        # to have correct dir and lang html attributes
+        # note: i18n needs to be initialized first before .wikiLanguages() will work
+        for lang in i18n.wikiLanguages():
+            self.Dependencies[lang] = []
 
     def _wrap(self, function, args, fixed=[]):
         try:
