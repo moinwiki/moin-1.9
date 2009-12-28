@@ -76,6 +76,10 @@ class PygmentsFormatter(pygments.formatter.Formatter):
             return 'DiffRemoved'
         elif ttype in Token.Generic.Strong:
             return 'DiffChanged'
+        elif ttype in Token.Generic.Output:
+            return 'LineNumber'
+        elif ttype in Token.Generic.Prompt:
+            return 'ID'
         else:
             # skip tags that have no class defined
             return None
