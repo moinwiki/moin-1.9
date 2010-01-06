@@ -197,7 +197,7 @@ Prints a table of contents.
             continue
 
         # will be reset by pop_unique_ids below
-        macro.request.include_id = incl_id
+        macro.request.uid_generator.include_id = incl_id
 
         need_li = lastlvl >= lvl
         while lastlvl > lvl:
