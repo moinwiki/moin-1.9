@@ -20,13 +20,21 @@ from MoinMoin.support.python_compatibility import hash_new
 from MoinMoin.Page import Page
 
 Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
-extensions = []
-extension_re = re.compile(r'^\*(\..*$)')
-for name, short, patterns, mime in pygments.lexers.get_all_lexers():
-    for pattern in patterns:
-        m = extension_re.match(pattern)
-        if m and m.groups(0):
-            extensions.extend(m.groups(0))
+
+
+def extensions_from_lexer_filenames(filenames):
+    # pygment's lexer.filenames is like ['*.py', 'Python'], but we only want
+    # the filename extensions list (like ['.py', ]):
+    return [filename[1:] for filename in filenames if filename.startswith('*.')]
+
+def extensions_for_all_lexers():
+    """
+    get supported filename extensions for all pygments lexers
+    """
+    extensions = []
+    for name, short, patterns, mime in pygments.lexers.get_all_lexers():
+        extensions.extend(extensions_from_lexer_filenames(patterns))
+    return extensions
 
 
 class PygmentsFormatter(pygments.formatter.Formatter):
@@ -115,7 +123,7 @@ class PygmentsFormatter(pygments.formatter.Formatter):
 class Parser:
     parsername = "highlight"  # compatibility wrappers override this with the pygments lexer name
     Dependencies = Dependencies
-    extensions = extensions
+    extensions = extensions_for_all_lexers()
 
     def __init__(self, raw, request, filename=None, format_args='', **kw):
         self.request = request
