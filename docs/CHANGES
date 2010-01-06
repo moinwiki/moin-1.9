@@ -38,9 +38,23 @@ Version 1.9.current:
     * Fixed TypeError.
     * Fixed processing POSTed form data AND URL args.
   * AttachFile.move_file: send events (so e.g. xapian index update happens)
+  * Page: fixed adding of page contents (only data added now, without metadata) -
+    fixes MoinMoinBugs/DeprecatedPageInclusionErrornousPageInstructionsProcessing
+  * xmlrpc.revertPage: convert pagename to internal representation.
+  * Added missing config.umask support code (setting was not used), fixed
+    config.umask usage for page packages.
+  * Do not use i18n.wikiLanguages() on class level, fails when tools import
+    the module (e.g. pydoc -k foo).
+  * highlight parser: added missing support for console/bash session
+  * Fixed precedence of parsers: more special parsers now have precedence
+    before moin falls back to using the HighlightParser (syntax highlighting).
+  * Added extensions to the rst parser (example.rst attachments are rendered
+    now when viewed).
+  * Fixed MoinMoinBugs/TableOfContentsBrokenForIncludedPages.
 
   New features:
   * xmlrpc: added renamePage and deleteAttachment methods.
+  * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
 
   Other changes:
   * Added rtsp, rtp, rtcp protocols to url_schemas.
