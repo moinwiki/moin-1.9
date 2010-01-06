@@ -175,6 +175,7 @@ _ = lambda x: x
 class Parser:
     caching = 1
     Dependencies = Dependencies # copy dependencies from module-scope
+    extensions = ['.rst', '.rest', ]
     quickhelp = _("""\
 {{{
 Emphasis: *italic* **bold** ``monospace``
