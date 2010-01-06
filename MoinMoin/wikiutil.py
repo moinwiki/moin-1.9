@@ -868,6 +868,15 @@ MIMETYPES_MORE = {
  '.wmv': 'video/x-ms-wmv',
  '.swf': 'application/x-shockwave-flash',
 }
+
+# add all mimetype patterns of pygments
+import pygments.lexers
+
+for name, short, patterns, mime in pygments.lexers.get_all_lexers():
+    for pattern in patterns:
+        if pattern.startswith('*.') and mime:
+            MIMETYPES_MORE[pattern[1:]] = mime[0]
+
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
 
 MIMETYPES_sanitize_mapping = {
@@ -1188,7 +1197,13 @@ def getParserForExtension(cfg, extension):
     """
     if not hasattr(cfg.cache, 'EXT_TO_PARSER'):
         etp, etd = {}, None
-        for pname in getPlugins('parser', cfg):
+        parser_plugins = getPlugins('parser', cfg)
+        # force the 'highlight' parser to be the first entry in the list
+        # this makes it possible to overwrite some mapping entries later, so that
+        # moin will use some "better" parser for some filename extensions
+        parser_plugins.remove('highlight')
+        parser_plugins = ['highlight'] + parser_plugins
+        for pname in parser_plugins:
             try:
                 Parser = importPlugin(cfg, 'parser', pname, 'Parser')
             except PluginMissingError:
@@ -1196,7 +1211,7 @@ def getParserForExtension(cfg, extension):
             if hasattr(Parser, 'extensions'):
                 exts = Parser.extensions
                 if isinstance(exts, list):
-                    for ext in Parser.extensions:
+                    for ext in exts:
                         etp[ext] = Parser
                 elif str(exts) == '*':
                     etd = Parser

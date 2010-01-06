@@ -23,4 +23,7 @@ from MoinMoin.parser.highlight import Dependencies
 
 class Parser(HighlightParser):
     parsername = 'irc'  # Lexer name pygments recognizes
+    extensions = [] # this is only a compatibility wrapper, we have declared
+                    # support for this extension in the HighlightParser, so
+                    # moin will call that directly
 
