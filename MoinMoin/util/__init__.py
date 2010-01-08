@@ -83,19 +83,6 @@ def rangelist(numbers):
         return pattern[1:-1]
     return pattern[1:]
 
-def dumpFormData(form):
-    """ Dump the form data for debugging purposes
-    """
-    from MoinMoin import wikiutil
-
-    result = '<dt><strong>Form entries</strong></dt>'
-    for k in form:
-        v = form.get(k, ["<empty>"])
-        v = "|".join(v)
-        result = result + '<dd><em>%s</em>=%s</dd>' % (k, wikiutil.escape(v))
-
-    return result
-
 def IsWin9x():
     """ Returns true if run on Windows 95, 98 or ME. """
     if hasattr(sys, 'getwindowsversion'):

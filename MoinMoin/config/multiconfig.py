@@ -16,13 +16,15 @@ import time
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import config, error, util, wikiutil
+from MoinMoin import config, error, util, wikiutil, web
+from MoinMoin import datastruct
 from MoinMoin.auth import MoinAuth
+import MoinMoin.auth as authmodule
 import MoinMoin.events as events
 from MoinMoin.events import PageChangedEvent, PageRenamedEvent
 from MoinMoin.events import PageDeletedEvent, PageCopiedEvent
 from MoinMoin.events import PageRevertedEvent, FileAttachedEvent
-from MoinMoin import session
+import MoinMoin.web.session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
 from MoinMoin.support.python_compatibility import set
@@ -249,6 +251,11 @@ class ConfigFunctionality(object):
             name = dirname + '_dir'
             if not getattr(self, name, None):
                 setattr(self, name, os.path.abspath(os.path.join(data_dir, dirname)))
+        # directories below cache_dir (using __dirname__ to avoid conflicts)
+        for dirname in ('session', ):
+            name = dirname + '_dir'
+            if not getattr(self, name, None):
+                setattr(self, name, os.path.abspath(os.path.join(self.cache_dir, '__%s__' % dirname)))
 
         # Try to decode certain names which allow unicode
         self._decode()
@@ -317,6 +324,7 @@ class ConfigFunctionality(object):
                 if not input in self.auth_login_inputs:
                     self.auth_login_inputs.append(input)
         self.auth_have_login = len(self.auth_login_inputs) > 0
+        self.auth_methods = found_names
 
         # internal dict for plugin `modules' lists
         self._site_plugin_lists = {}
@@ -690,22 +698,35 @@ class DefaultExpression(object):
 # information on the layout of this structure.
 #
 options_no_group_name = {
+  # =========================================================================
+  'attachment_extension': ("Mapping of attachment extensions to actions", None,
+  (
+   ('extensions_mapping',
+       {'.tdraw': {'modify': 'twikidraw'},
+        '.adraw': {'modify': 'anywikidraw'},
+       }, "file extension -> do -> action"),
+  )),
+  # ==========================================================================
+  'datastruct': ('Datastruct settings', None, (
+    ('dicts', lambda cfg, request: datastruct.WikiDicts(request),
+     "function f(cfg, request) that returns a backend which is used to access dicts definitions."),
+    ('groups', lambda cfg, request: datastruct.WikiGroups(request),
+     "function f(cfg, request) that returns a backend which is used to access groups definitions."),
+  )),
   # ==========================================================================
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
-    ('session_handler', DefaultExpression('session.DefaultSessionHandler()'),
-     "See HelpOnSessions."),
-    ('session_id_handler', DefaultExpression('session.MoinCookieSessionIDHandler()'),
-     "Only used by the DefaultSessionHandler, see HelpOnSessions."),
+    ('session_service', DefaultExpression('web.session.FileSessionService()'),
+     "The session service."),
     ('cookie_secure', None,
      'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
+    ('cookie_httponly', False,
+     'Use a httponly cookie that can only be used by the server, not by clientside scripts.'),
     ('cookie_domain', None,
      'Domain used in the session cookie. (None = do not specify domain).'),
     ('cookie_path', None,
      'Path used in the session cookie (None = auto-detect).'),
-    ('cookie_lifetime', 12,
-     'Session lifetime [h] of logged-in users (see HelpOnSessions for details).'),
-    ('anonymous_session_lifetime', None,
-     'Session lifetime [h] of users who are not logged in (None = disable anon sessions).'),
+    ('cookie_lifetime', (0, 12),
+     'Session lifetime [h] of (anonymous, logged-in) users (see HelpOnSessions for details).'),
   )),
   # ==========================================================================
   'auth': ('Authentication / Authorization / Security settings', None, (
@@ -713,7 +734,7 @@ options_no_group_name = {
      "List of trusted user names with wiki system administration super powers (not to be confused with ACL admin rights!). Used for e.g. software installation, language installation via SystemPagesSetup and more. See also HelpOnSuperUser."),
     ('auth', DefaultExpression('[MoinAuth()]'),
      "list of auth objects, to be called in this order (see HelpOnAuthentication)"),
-    ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'],
+    ('auth_methods_trusted', ['http', 'given', 'xmlrpc_applytoken'], # Note: 'http' auth method is currently just a redirect to 'given'
      'authentication methods for which users should be included in the special "Trusted" ACL group.'),
     ('secrets', None, """Either a long shared secret string used for multiple purposes or a dict {"purpose": "longsecretstring", ...} for setting up different shared secrets for different purposes. If you don't setup own secret(s), a secret string will be auto-generated from other config settings."""),
     ('DesktopEdition',
@@ -755,7 +776,7 @@ options_no_group_name = {
         'rss_rc': (1, 60),
         # The following actions are often used for images - to avoid pages with lots of images
         # (like photo galleries) triggering surge protection, we assign rather high limits:
-        'AttachFile': (90, 60),
+        'AttachFile': (300, 30),
         'cache': (600, 30), # cache action is very cheap/efficient
      },
      "Surge protection tries to deny clients causing too much load/traffic, see HelpOnConfiguration/SurgeProtection."),
@@ -798,7 +819,7 @@ options_no_group_name = {
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
      'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[[url|link title]]"`, to use a shortened name for long page name, use `u"[[LongLongPageName|title]]"`. [list of Unicode strings]'),
 
-    ('theme_default', 'modern',
+    ('theme_default', 'modernized',
      "the name of the theme that is used by default (see HelpOnThemes)"),
     ('theme_force', False,
      "if True, do not allow to change the theme"),
@@ -843,8 +864,6 @@ options_no_group_name = {
      'show section numbers in headings by default'),
     ('show_timings', False, "show some timing values at bottom of a page"),
     ('show_version', False, "show moin's version at the bottom of a page"),
-    ('traceback_show', True,
-     "if True, show debug tracebacks to users when moin crashes"),
 
     ('page_credits',
      [
@@ -896,6 +915,7 @@ options_no_group_name = {
     ('data_dir', './data/', "Path to the data directory containing your (locally made) wiki pages."),
     ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
     ('cache_dir', None, "Directory for caching, by default computed from `data_dir`/cache."),
+    ('session_dir', None, "Directory for session storage, by default computed to be `cache_dir`/__session__."),
     ('user_dir', None, "Directory for user storage, by default computed to be `data_dir`/user."),
     ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/plugin."),
     ('plugin_dirs', [], "Additional plugin directories."),
@@ -928,8 +948,8 @@ options_no_group_name = {
   )),
   # ==========================================================================
   'pages': ('Special page names', None, (
-    ('page_front_page', u'HelpOnLanguages',
-     "Name of the front page. We don't expect you to keep the default. Just read HelpOnLanguages in case you're wondering... [Unicode]"),
+    ('page_front_page', u'LanguageSetup',
+     "Name of the front page. We don't expect you to keep the default. Just read LanguageSetup in case you're wondering... [Unicode]"),
 
     # the following regexes should match the complete name when used in free text
     # the group 'all' shall match all, while the group 'key' shall match the key only
@@ -1176,6 +1196,12 @@ options = {
       ('transient_fields',
        ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ],
        "User object attributes that are not persisted to permanent storage (internal use)."),
+    )),
+
+    'openidrp': ('OpenID Relying Party',
+        'These settings control the built-in OpenID Relying Party (client).',
+    (
+      ('allowed_op', [], "List of forced providers"),
     )),
 
     'openid_server': ('OpenID Server',

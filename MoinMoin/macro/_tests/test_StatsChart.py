@@ -34,19 +34,19 @@ class TestStatsCharts:
     def testStatsChart_useragents(self):
         """ macro StatsChart useragents test: 'tests useragents' and clean page scope cache """
         result = self._test_macro(u'StatsChart', u'useragents')
-        expected = u'<form action="./AutoCreatedMoinMoinTemporaryTestPageStatsChart" method="GET"'
+        expected = u'<form action="/AutoCreatedMoinMoinTemporaryTestPageStatsChart" method="GET"'
         assert expected in result
 
     def testStatsChart_hitcounts(self):
         """ macro StatsChart hitcounts test: 'tests hitcounts' and clean page scope cache  """
         result = self._test_macro(u'StatsChart', u'hitcounts')
-        expected = u'<form action="./AutoCreatedMoinMoinTemporaryTestPageStatsChart" method="GET"'
+        expected = u'<form action="/AutoCreatedMoinMoinTemporaryTestPageStatsChart" method="GET"'
         assert expected in result
 
     def testStatsChart_languages(self):
         """ macro StatsChart languages test: 'tests languages' and clean page scope cache  """
         result = self._test_macro(u'StatsChart', u'hitcounts')
-        expected = u'<form action="./AutoCreatedMoinMoinTemporaryTestPageStatsChart" method="GET"'
+        expected = u'<form action="/AutoCreatedMoinMoinTemporaryTestPageStatsChart" method="GET"'
         assert expected in result
 
 coverage_modules = ['MoinMoin.stats']

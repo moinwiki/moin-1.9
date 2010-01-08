@@ -3,7 +3,7 @@
     MoinMoin - email helper functions
 
     @copyright: 2003 Juergen Hermann <jh@web.de>,
-                2008 MoinMoin:ThomasWaldmann
+                2008-2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -75,6 +75,13 @@ def sendmail(request, to, subject, text, mail_from=None):
     _ = request.getText
     cfg = request.cfg
     mail_from = mail_from or cfg.mail_from
+
+    logging.debug("send mail, from: %r, subj: %r" % (mail_from, subject))
+    logging.debug("send mail, to: %r" % (to, ))
+
+    if not to:
+        return (1, _("No recipients, nothing to do"))
+
     subject = subject.encode(config.charset)
 
     # Create a text/plain body using CRLF (see RFC2822)

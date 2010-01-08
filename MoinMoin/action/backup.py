@@ -37,10 +37,8 @@ def sendBackup(request):
     """ Send compressed tar file """
     dateStamp = time.strftime("%Y-%m-%d--%H-%M-%S-UTC", time.gmtime())
     filename = "%s-%s.tar.%s" % (request.cfg.siteid, dateStamp, request.cfg.backup_compression)
-    request.emit_http_headers([
-        'Content-Type: application/octet-stream',
-        'Content-Disposition: inline; filename="%s"' % filename, ])
-
+    request.content_type = 'application/octet-stream'
+    request.headers.add('Content-Disposition', 'inline; filename="%s"' % filename)
     tar = tarfile.open(fileobj=request, mode="w|%s" % request.cfg.backup_compression)
     # allow GNU tar's longer file/pathnames
     tar.posix = False
@@ -51,10 +49,9 @@ def sendBackup(request):
 
 def sendBackupForm(request, pagename):
     _ = request.getText
-    request.emit_http_headers()
     request.setContentLanguage(request.lang)
     title = _('Wiki Backup')
-    request.theme.send_title(title, form=request.form, pagename=pagename)
+    request.theme.send_title(title, pagename=pagename)
     request.write(request.formatter.startContent("content"))
 
     request.write(_("""= Downloading a backup =
@@ -74,7 +71,7 @@ To get a backup, just click here:""", wiki=True))
 <input type="submit" value="%(backup_button)s">
 </form>
 """ % {
-    'baseurl': request.getScriptname(),
+    'baseurl': request.script_root,
     'pagename': wikiutil.quoteWikinameURL(pagename),
     'backup_button': _('Backup'),
 })
@@ -103,7 +100,7 @@ def execute(pagename, request):
         return sendMsg(request, pagename,
                        msg=_('You are not allowed to do remote backup.'), msgtype="error")
 
-    dowhat = request.form.get('do', [None])[0]
+    dowhat = request.form.get('do')
     if dowhat == 'backup':
         sendBackup(request)
     elif dowhat is None:

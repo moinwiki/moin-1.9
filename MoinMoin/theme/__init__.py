@@ -6,14 +6,17 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import StringIO
+
 from MoinMoin import i18n, wikiutil, config, version, caching
+from MoinMoin.action import get_available_actions
 from MoinMoin.Page import Page
 from MoinMoin.util import pysupport
 
 modules = pysupport.getPackageModules(__file__)
 
 # Check whether we can emit a RSS feed.
-# RSS is broken on plain Python 2.3.x/2.4.x, and works only when installing PyXML.
+# RSS is broken on plain Python 2.4.x, and works only when installing PyXML.
 # News: A user reported that the RSS is valid when using Python 2.5.1 on Windows.
 import sys, xml
 rss_supported = sys.version_info[:3] >= (2, 5, 1) or '_xmlplus' in xml.__file__
@@ -252,6 +255,40 @@ class ThemeBase:
 ''' % "".join(content)
         return html
 
+    def title_with_separators(self, d):
+        """ Assemble the title using slashes, not <ul>
+
+        @param d: parameter dictionary
+        @rtype: string
+        @return: title html
+        """
+        _ = self.request.getText
+        if d['title_text'] == d['page'].split_title():
+            # just showing a page, no action
+            segments = d['page_name'].split('/')
+            link_text = segments[-1]
+            link_title = _('Click to do a full-text search for this title')
+            link_query = {'action': 'fullsearch', 'context': '180',
+                          'value': 'linkto:"%s"' % d['page_name'], }
+            link = d['page'].link_to(self.request, link_text,
+                                     querystr=link_query, title=link_title,
+                                     css_class='backlink', rel='nofollow')
+            if len(segments) <= 1:
+                html = link
+            else:
+                content = []
+                curpage = ''
+                for s in segments[:-1]:
+                    curpage += s
+                    content.append(Page(self.request,
+                                        curpage).link_to(self.request, s))
+                    curpage += '/'
+                path_html = u'<span class="sep">/</span>'.join(content)
+                html = u'<span class="pagepath">%s</span><span class="sep">/</span>%s' % (path_html, link)
+        else:
+            html = wikiutil.escape(d['title_text'])
+        return u'<span id="pagelocation">%s</span>' % html
+
     def username(self, d):
         """ Assemble the username / userprefs link
 
@@ -361,7 +398,7 @@ class ThemeBase:
             pass
 
         # Handle regular pagename like "FrontPage"
-        pagename = request.normalizePagename(pagename)
+        pagename = wikiutil.normalize_pagename(pagename, request.cfg)
 
         # Use localized pages for the current user
         if localize:
@@ -746,19 +783,18 @@ class ThemeBase:
         @return: search form html
         """
         _ = self.request.getText
-        form = self.request.form
+        form = self.request.values
         updates = {
             'search_label': _('Search:'),
-            'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
+            'search_value': wikiutil.escape(form.get('value', ''), 1),
             'search_full_label': _('Text'),
             'search_title_label': _('Titles'),
-            'baseurl': self.request.getScriptname(),
-            'pagename_quoted': wikiutil.quoteWikinameURL(d['page'].page_name),
+            'url': self.request.href(d['page'].page_name)
             }
         d.update(updates)
 
         html = u'''
-<form id="searchform" method="get" action="%(baseurl)s/%(pagename_quoted)s">
+<form id="searchform" method="get" action="%(url)s">
 <div>
 <input type="hidden" name="action" value="fullsearch">
 <input type="hidden" name="context" value="180">
@@ -989,7 +1025,7 @@ var search_hint = "%(search_hint)s";
         disabled = ' disabled class="disabled"'
 
         # Format standard actions
-        available = request.getAvailableActions(page)
+        available = get_available_actions(request.cfg, page, request.user)
         for action in menu:
             data = {'action': action, 'disabled': '', 'title': titles[action]}
             # removes excluded actions from the more actions menu
@@ -1009,11 +1045,6 @@ var search_hint = "%(search_hint)s";
 
             # SubscribeUser action enabled only if user has admin rights
             if action == 'SubscribeUser' and not request.user.may.admin(page.page_name):
-                data['action'] = 'show'
-                data['disabled'] = disabled
-
-            # PackagePages action only if user has write rights
-            if action == 'PackagePages' and not request.user.may.write(page.page_name):
                 data['action'] = 'show'
                 data['disabled'] = disabled
 
@@ -1060,11 +1091,10 @@ var search_hint = "%(search_hint)s";
             'options': '\n'.join(options),
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
             'do_button': _("Do"),
-            'baseurl': self.request.getScriptname(),
-            'pagename_quoted': wikiutil.quoteWikinameURL(page.page_name),
+            'url': self.request.href(page.page_name)
             }
         html = '''
-<form class="actionsmenu" method="GET" action="%(baseurl)s/%(pagename_quoted)s">
+<form class="actionsmenu" method="GET" action="%(url)s">
 <div>
     <label>%(label)s</label>
     <select name="action"
@@ -1571,8 +1601,7 @@ var gui_editor_link_text = "%(text)s";
             page = Page(request, pagename)
         if keywords.get('msg', ''):
             raise DeprecationWarning("Using send_page(msg=) is deprecated! Use theme.add_msg() instead!")
-        scriptname = request.getScriptname()
-        pagename_quoted = wikiutil.quoteWikinameURL(pagename)
+        scriptname = request.script_root
 
         # get name of system pages
         page_front_page = wikiutil.getFrontPage(request).page_name
@@ -1603,7 +1632,7 @@ var gui_editor_link_text = "%(text)s";
         # if it is an action or edit/search, send query headers (noindex,nofollow):
         if request.query_string:
             user_head.append(request.cfg.html_head_queries)
-        elif request.request_method == 'POST':
+        elif request.method == 'POST':
             user_head.append(request.cfg.html_head_posts)
         # we don't want to have BadContent stuff indexed:
         elif pagename in ['BadContent', 'LocalBadContent', ]:
@@ -1648,12 +1677,12 @@ var gui_editor_link_text = "%(text)s";
         ))
 
         # Links
-        output.append('<link rel="Start" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_front_page)))
+        output.append('<link rel="Start" href="%s">\n' % request.href(page_front_page))
         if pagename:
-            output.append('<link rel="Alternate" title="%s" href="%s/%s?action=raw">\n' % (
-                _('Wiki Markup'), scriptname, pagename_quoted, ))
-            output.append('<link rel="Alternate" media="print" title="%s" href="%s/%s?action=print">\n' % (
-                _('Print View'), scriptname, pagename_quoted, ))
+            output.append('<link rel="Alternate" title="%s" href="%s">\n' % (
+                    _('Wiki Markup'), request.href(pagename, action='raw')))
+            output.append('<link rel="Alternate" media="print" title="%s" href="%s">\n' % (
+                    _('Print View'), request.href(pagename, action='print')))
 
             # !!! currently disabled due to Mozilla link prefetching, see
             # http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html
@@ -1665,15 +1694,15 @@ var gui_editor_link_text = "%(text)s";
             #~         # this shopuld never happend in theory, but let's be sure
             #~         pass
             #~     else:
-            #~         request.write('<link rel="First" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[0]))
+            #~         request.write('<link rel="First" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[0]))
             #~         if pos > 0:
-            #~             request.write('<link rel="Previous" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos-1])))
+            #~             request.write('<link rel="Previous" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[pos-1])))
             #~         if pos+1 < len(all_pages):
-            #~             request.write('<link rel="Next" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos+1])))
-            #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[-1])))
+            #~             request.write('<link rel="Next" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[pos+1])))
+            #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[-1])))
 
             if page_parent_page:
-                output.append('<link rel="Up" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_parent_page)))
+                output.append('<link rel="Up" href="%s">\n' % request.href(page_parent_page))
 
         # write buffer because we call AttachFile
         request.write(''.join(output))
@@ -1686,16 +1715,15 @@ var gui_editor_link_text = "%(text)s";
             AttachFile.send_link_rel(request, pagename)
 
         output.extend([
-            '<link rel="Search" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_find_page)),
-            '<link rel="Index" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_title_index)),
-            '<link rel="Glossary" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_word_index)),
-            '<link rel="Help" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_help_formatting)),
+            '<link rel="Search" href="%s">\n' % request.href(page_find_page),
+            '<link rel="Index" href="%s">\n' % request.href(page_title_index),
+            '<link rel="Glossary" href="%s">\n' % request.href(page_word_index),
+            '<link rel="Help" href="%s">\n' % request.href(page_help_formatting),
                       ])
 
         output.append("</head>\n")
         request.write(''.join(output))
         output = []
-        request.flush()
 
         # start the <body>
         bodyattr = []
@@ -1789,7 +1817,6 @@ var gui_editor_link_text = "%(text)s";
         # emit it
         request.write(''.join(output))
         output = []
-        request.flush()
         self._send_title_called = True
 
     def send_footer(self, pagename, **keywords):
@@ -1830,4 +1857,71 @@ var gui_editor_link_text = "%(text)s";
         #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
         request.write('</body>\n</html>\n\n')
 
+    def sidebar(self, d, **keywords):
+        """ Display page called SideBar as an additional element on every page
 
+        @param d: parameter dictionary
+        @rtype: string
+        @return: sidebar html
+        """
+
+        # Check which page to display, return nothing if doesn't exist.
+        sidebar = self.request.getPragma('sidebar', u'SideBar')
+        page = Page(self.request, sidebar)
+        if not page.exists():
+            return u""
+        # Capture the page's generated HTML in a buffer.
+        buffer = StringIO.StringIO()
+        self.request.redirect(buffer)
+        try:
+            page.send_page(content_only=1, content_id="sidebar")
+        finally:
+            self.request.redirect()
+        return u'<div class="sidebar">%s</div>' % buffer.getvalue()
+
+
+class ThemeNotFound(Exception):
+    """ Thrown if the supplied theme could not be found anywhere """
+
+def load_theme(request, theme_name=None):
+    """ Load a theme for this request.
+
+    @param request: moin request
+    @param theme_name: the name of the theme
+    @type theme_name: str
+    @rtype: Theme
+    @return: a theme initialized for the request
+    """
+    if theme_name is None or theme_name == '<default>':
+        theme_name = request.cfg.theme_default
+
+    try:
+        Theme = wikiutil.importPlugin(request.cfg, 'theme', theme_name, 'Theme')
+    except wikiutil.PluginMissingError:
+        raise ThemeNotFound(theme_name)
+
+    return Theme(request)
+
+def load_theme_fallback(request, theme_name=None):
+    """ Try loading a theme, falling back to defaults on error.
+
+    @param request: moin request
+    @param theme_name: the name of the theme
+    @type theme_name: str
+    @rtype: int
+    @return: A statuscode for how successful the loading was
+             0 - theme was loaded
+             1 - fallback to default theme
+             2 - serious fallback to builtin theme
+    """
+    fallback = 0
+    try:
+        request.theme = load_theme(request, theme_name)
+    except ThemeNotFound:
+        fallback = 1
+        try:
+            request.theme = load_theme(request, request.cfg.theme_default)
+        except ThemeNotFound:
+            fallback = 2
+            from MoinMoin.theme.modern import Theme
+            request.theme = Theme(request)

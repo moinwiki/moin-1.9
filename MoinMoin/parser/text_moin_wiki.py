@@ -42,7 +42,7 @@ class Parser:
  Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])>>.
  Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
 
-(!) For more help, see HelpOnEditing or SyntaxReference.
+(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.
 """)
 
     # some common strings
@@ -692,7 +692,7 @@ class Parser:
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
         target = groups.get('transclude_target', '')
-        target = wikiutil.url_unquote(target, want_unicode=True)
+        target = wikiutil.url_unquote(target)
         desc = groups.get('transclude_desc', '') or ''
         params = groups.get('transclude_params', u'') or u''
         acceptable_attrs_img = ['class', 'title', 'longdesc', 'width', 'height', 'align', ] # no style because of JS
@@ -723,7 +723,7 @@ class Parser:
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
-                url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+                url = wikiutil.url_unquote(m.group('attach_addr'))
                 if scheme == 'attachment':
                     mt = wikiutil.MimeType(filename=url)
                     if mt.major == 'text':
@@ -741,7 +741,7 @@ class Parser:
                         from MoinMoin.action import AttachFile
                         pagename = self.formatter.page.page_name
                         if AttachFile.exists(self.request, pagename, url):
-                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
+                            href = AttachFile.getAttachUrl(pagename, url, self.request)
                             tag_attrs, query_args = self._get_params(params,
                                                                      tag_attrs={'title': desc, },
                                                                      acceptable_attrs=acceptable_attrs_object)
@@ -765,6 +765,7 @@ class Parser:
                             pagename = self.formatter.page.page_name
                             return m.execute('EmbedObject', u'target=%s' % url)
                 elif scheme == 'drawing':
+                    url = wikiutil.drawing2fname(url)
                     desc = self._transclude_description(desc, url)
                     if desc:
                         tag_attrs= {'alt': desc, 'title': desc, }
@@ -894,7 +895,7 @@ class Parser:
 
             elif mt.group('attach_scheme'):
                 scheme = mt.group('attach_scheme')
-                url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
+                url = wikiutil.url_unquote(mt.group('attach_addr'))
                 tag_attrs, query_args = self._get_params(params,
                                                          tag_attrs={'title': desc, },
                                                          acceptable_attrs=acceptable_attrs)
@@ -903,6 +904,7 @@ class Parser:
                             self._link_description(desc, target, url) +
                             self.formatter.attachment_link(0))
                 elif scheme == 'drawing':
+                    url = wikiutil.drawing2fname(url)
                     return self.formatter.attachment_drawing(url, desc, alt=desc, **tag_attrs)
             else:
                 if desc:
