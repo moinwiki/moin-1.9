@@ -118,8 +118,8 @@ class Popen(subprocess.Popen):
                 stderr_thread.join(self.timeout)
 
             # if the threads are still alive, that means the thread join timed out
-            timed_out = (self.stdout and self.stdout_thread.isAlive() or
-                         self.stderr and self.stderr_thread.isAlive())
+            timed_out = (self.stdout and stdout_thread.isAlive() or
+                         self.stderr and stderr_thread.isAlive())
             if timed_out:
                 self.kill()
             else:
