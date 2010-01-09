@@ -8,7 +8,6 @@ Sample usage:
 """
 
 import os
-import time
 import subprocess
 import threading
 import signal
@@ -22,6 +21,7 @@ if subprocess.mswindows:
         from win32process import TerminateProcess
 else:
     import select
+    import errno
 
 class Popen(subprocess.Popen):
     # send_signal, terminate, kill copied from Python 2.6
@@ -67,8 +67,6 @@ class Popen(subprocess.Popen):
 
         communicate() returns a tuple (stdout, stderr)."""
 
-        self.timeout = timeout
-
         # Optimization: If we are only using one pipe, or no pipe at
         # all, using select() or threads is unnecessary.
         if [self.stdin, self.stdout, self.stderr].count(None) >= 2:
@@ -113,9 +111,9 @@ class Popen(subprocess.Popen):
                 self.stdin.close()
 
             if self.stdout:
-                stdout_thread.join(self.timeout)
+                stdout_thread.join(timeout)
             if self.stderr:
-                stderr_thread.join(self.timeout)
+                stderr_thread.join(timeout)
 
             # if the threads are still alive, that means the thread join timed out
             timed_out = (self.stdout and stdout_thread.isAlive() or
@@ -169,7 +167,7 @@ class Popen(subprocess.Popen):
             input_offset = 0
             while read_set or write_set:
                 try:
-                    rlist, wlist, xlist = select.select(read_set, write_set, [], self.timeout)
+                    rlist, wlist, xlist = select.select(read_set, write_set, [], timeout)
                 except select.error, e:
                     if e.args[0] == errno.EINTR:
                         continue
