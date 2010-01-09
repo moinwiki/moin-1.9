@@ -60,6 +60,51 @@ def _get_session_lifetime(request, userobj):
         return forever
     return abs(lifetime)
 
+def get_cookie_name(request, name, usage, software='MOIN'):
+    """
+    Determine the full cookie name for some software (usually 'MOIN') using
+    it for some usage (e.g. 'SESSION') for some wiki (or group of wikis)
+    determined by name.
+
+    Note:
+    -----
+    We do not use the path=... information in the cookie any more, because it can
+    easily cause confusion if there are multiple cookies with same name, but
+    different pathes (like e.g. / and /foo).
+
+    Instead of using the cookie path, we use differently named cookies, so we get
+    the right cookie no matter at what URL the wiki currently is "mounted".
+
+    If name is None, we just use cfg.siteid, which is unique within a wiki farm
+    created by a single farmconfig. If you only run ONE(!) wikiconfig wiki, it
+    is also unique, of course, but not if you run multiple wikiconfig wikis under
+    same domain.
+
+    If name is not None (and not 'urlmagic'), we just use the given name (you
+    want to use that to share stuff between several wikis - just give same name
+    and it will use the same cookie. same thing if you don't want to share, just
+    give a different name then [e.g. if cfg.siteid or 'urlmagic' doesn't work
+    for you]).
+
+    If name is 'urlmagic', we use some URL components to make up some name.
+    Moving a wiki to a different URL will break all sessions. Exchanging URLs
+    of wikis might lead to confusion (requiring the client to purge the cookies).
+    """
+    if name is None:
+        name = request.cfg.siteid  # == config name, unique per farm
+
+    elif name == 'urlmagic':
+        url_components = [
+            # cookies do not store the port, thus we add it to the cookie name:
+            request.environ['SERVER_PORT'],
+            # we always store path=/ into cookie, thus we add the path to the name:
+            ('ROOT' + request.script_root).replace('/', '_'),
+        ]
+        name = '_'.join(url_components)
+
+    return "%s_%s_%s" % (software, usage, name)
+
+
 class FileSessionService(SessionService):
     """
     This sample session service stores session information in a temporary
@@ -68,8 +113,8 @@ class FileSessionService(SessionService):
     the whole logic for creating the actual session objects (which are
     inherited from the builtin `dict`)
     """
-    def __init__(self, cookie_name='MOIN_SESSION'):
-        self.cookie_name = cookie_name
+    def __init__(self, cookie_usage='SESSION'):
+        self.cookie_usage = cookie_usage
 
     def _store_get(self, request):
         path = request.cfg.session_dir
@@ -81,7 +126,8 @@ class FileSessionService(SessionService):
 
     def get_session(self, request, sid=None):
         if sid is None:
-            sid = request.cookies.get(self.cookie_name, None)
+            cookie_name = get_cookie_name(request, name=request.cfg.cookie_name, usage=self.cookie_usage)
+            sid = request.cookies.get(cookie_name, None)
         store = self._store_get(request)
         if sid is None:
             session = store.new()
@@ -103,7 +149,11 @@ class FileSessionService(SessionService):
             setuid = None
         logging.debug("finalize userobj = %r, setuid = %r" % (userobj, setuid))
         cfg = request.cfg
-        cookie_path = cfg.cookie_path or request.script_root or '/'
+        # we use different cookie names for different wikis:
+        cookie_name = get_cookie_name(request, name=request.cfg.cookie_name, usage=self.cookie_usage)
+        # we always use path='/' except if explicitly overridden by configuration,
+        # which is usually not needed and not recommended:
+        cookie_path = cfg.cookie_path or '/'
         if userobj and userobj.valid:
             session['user.id'] = userobj.id
             session['user.auth_method'] = userobj.auth_method
@@ -119,7 +169,7 @@ class FileSessionService(SessionService):
                 logging.debug("after auth: destroying session: %r" % session)
                 self.destroy_session(request, session)
                 logging.debug("after auth: deleting session cookie!")
-                request.delete_cookie(self.cookie_name, path=cookie_path, domain=cfg.cookie_domain)
+                request.delete_cookie(cookie_name, path=cookie_path, domain=cfg.cookie_domain)
 
         cookie_lifetime = _get_session_lifetime(request, userobj)
         if cookie_lifetime:
@@ -128,9 +178,9 @@ class FileSessionService(SessionService):
             cookie_secure = (cfg.cookie_secure or  # True means: force secure cookies
                              cfg.cookie_secure is None and request.is_secure)  # None means: https -> secure cookie
             logging.debug("user: %r, setting session cookie: %r" % (userobj, session.sid))
-            request.set_cookie(self.cookie_name, session.sid,
+            request.set_cookie(cookie_name, session.sid,
                                max_age=cookie_lifetime, expires=cookie_expires,
-                                path=cookie_path, domain=cfg.cookie_domain,
+                               path=cookie_path, domain=cfg.cookie_domain,
                                secure=cookie_secure, httponly=cfg.cookie_httponly)
 
             if session.should_save:
