@@ -475,8 +475,16 @@ input.button {
     background-color: #FFFF80;
 }
 
+td.diff-info {
+    vertical-align:top;
+}
+
 div.diff-info {
     white-space:nowrap;
+}
+
+div.diff-info-rev-comment span.diff-info-value {
+    white-space:normal;
 }
 
 div.diff-info-header {

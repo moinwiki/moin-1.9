@@ -186,7 +186,7 @@ def execute(pagename, request):
   <div class="diff-info diff-info-header">%(rev_header)s</div>
   <div class="diff-info diff-info-rev-size"><span class="diff-info-caption">%(rev_size_caption)s:</span> <span class="diff-info-value">%%(rev_size)d</span></div>
   <div class="diff-info diff-info-rev-author"><span class="diff-info-caption">%(rev_author_caption)s:</span> <span class="diff-info-value">%%(rev_author)s</span></div>
-  <div class="diff-info diff-info-rev-comment diff_info_rev1"><span class="diff-info-caption">%(rev_comment_caption)s:</span> <span class="diff-info-value">%%(rev_comment)s</span></div>
+  <div class="diff-info diff-info-rev-comment"><span class="diff-info-caption">%(rev_comment_caption)s:</span> <span class="diff-info-value">%%(rev_comment)s</span></div>
 """ % {
     'rev_header': _('Revision %(rev)d as of %(date)s'),
     'rev_size_caption': _('Size'),
@@ -213,10 +213,10 @@ def execute(pagename, request):
 
     if request.user.show_fancy_diff:
         from MoinMoin.util import diff_html
-        request.write(f.rawHTML(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body(), old_top=rev_info_old_html, new_top=rev_info_new_html)))
+        request.write(f.rawHTML(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body(), old_top=rev_info_old_html, new_top=rev_info_new_html, old_top_class="diff-info", new_top_class="diff-info")))
         newpage.send_page(count_hit=0, content_only=1, content_id="content-below-diff")
     else:
-        request.write(f.rawHTML('<table class="diff"><tr><td>%s</td><td>%s</td></tr></table>' % (rev_info_old_html, rev_info_new_html)))
+        request.write(f.rawHTML('<table class="diff"><tr><td class="diff-info">%s</td><td class="diff-info">%s</td></tr></table>' % (rev_info_old_html, rev_info_new_html)))
 
         from MoinMoin.util import diff_text
         lines = diff_text.diff(oldpage.getlines(), newpage.getlines())

@@ -23,7 +23,7 @@ def indent(line):
 
 
 # This code originally by Scott Moonen, used with permission.
-def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''):
+def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom='', old_top_class='', new_top_class='', old_bottom_class='', new_bottom_class=''):
     """ Find changes between old and new and return
         HTML markup visualising them.
 
@@ -33,6 +33,10 @@ def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''
         @param old_bottom: Custom html for adding at bottom of old revision column (optional)
         @param new_top: Custom html for adding ontop of new revision column (optional)
         @param new_bottom: Custom html for adding at bottom of new revision column (optional)
+        @param old_top_class: Custom class for <td> with old_top content (optional)
+        @param new_top_class: Custom class for <td> with new_top content (optional)
+        @param old_bottom_class: Custom class for <td> with old_bottom content (optional)
+        @param new_bottom_class: Custom class for <td> with new_bottom content (optional)
     """
     _ = request.getText
     t_line = _("Line") + " %d"
@@ -54,7 +58,7 @@ def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''
 """
 
     if old_top or new_top:
-        result += "<tr><td>%s</td><td>%s</td></tr>" % (old_top, new_top)
+        result += '<tr><td class="%s">%s</td><td class="%s">%s</td></tr>' % (old_top_class, old_top, new_top_class, new_top)
 
     result += """
 <tr>
@@ -152,7 +156,7 @@ def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''
         lastmatch = (match[0] + match[2], match[1] + match[2])
 
     if old_bottom or new_bottom:
-        result += "<tr><td>%s</td><td>%s</td></tr>" % (old_bottom, new_bottom)
+        result += '<tr><td class="%s">%s</td><td class="%s">%s</td></tr>' % (old_top_class, old_top, new_top_class, new_top)
 
     result += '</table>\n'
     return result
