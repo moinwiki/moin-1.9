@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-29 00:58+0100\n"
+"POT-Creation-Date: 2010-01-10 16:49+0100\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -303,13 +303,13 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<未知>"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "登录帐号：%s\n"
 "\n"
@@ -353,7 +353,7 @@ msgstr "主题名未设置。"
 
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
-msgstr ""
+msgstr "样式文件未安装! %s 无写权限."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -759,7 +759,7 @@ msgid "The password you entered is not valid."
 msgstr "您输入的口令无效。"
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "OpenID 错误: 未知的扩展状态"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "使用 OpenID 登录需要启用匿名 session。"
@@ -795,7 +795,7 @@ msgstr ""
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">忘记口令?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -882,7 +882,7 @@ msgstr ""
 msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see %"
 "(highlight_help_page)s."
-msgstr ""
+msgstr "语法高亮还未支持: '%(syntax)s', 参考 %(highlight_help_page)s."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1324,7 +1324,7 @@ msgid "RecentChanges"
 msgstr "最新改动"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "今日技巧"
 
 msgid "TitleIndex"
 msgstr "标题索引"
@@ -1356,458 +1356,459 @@ msgid "FrontPage"
 msgstr "首页"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "沙箱"
 
-#, fuzzy
+# fixed fuzzy
 msgid "InterWiki"
-msgstr "维基"
-
-msgid "AbandonedPages"
-msgstr ""
+msgstr "互联维基"
 
 #, fuzzy
+msgid "AbandonedPages"
+msgstr "被遗弃的"
+
+# fixed fuzzy
 msgid "OrphanedPages"
-msgstr "修改网页"
+msgstr "孤悬页面"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "查找网页"
+msgstr "末建页面"
 
 msgid "EventStats"
-msgstr ""
+msgstr "事件状态"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "事件状态/点击统计"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "事件状态/语言支持"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "事件状态/用户代理"
 
-#, fuzzy
+# fixed fuzzy
 msgid "PageSize"
-msgstr "大小"
+msgstr "页面尺寸"
 
-#, fuzzy
+# fixed fuzzy
 msgid "PageHits"
-msgstr "网页"
+msgstr "页面点击"
 
-#, fuzzy
+# fixed fuzzy
 msgid "RandomPage"
-msgstr "改名"
+msgstr "随机页面"
 
-#, fuzzy
+# fixed fuzzy
 msgid "XsltVersion"
-msgstr "Python版本"
+msgstr "XSLT版本"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "技巧提点s"
 
 msgid "WikiLicense"
 msgstr "维基版权"
 
-#, fuzzy
+# fixed fuzzy
 msgid "CategoryCategory"
-msgstr "任何分类"
+msgstr "分类的分类"
 
-#, fuzzy
+# fixed fuzzy
 msgid "CategoryHomepage"
-msgstr "分类"
+msgstr "主页分类"
 
-#, fuzzy
+# fixed fuzzy
 msgid "CategoryTemplate"
-msgstr "分类"
+msgstr "分类模板"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "主页模板"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "帮助页模板"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "主页读写权限模板"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "主页只读权限模板"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "主页私有文章模板"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "主页编辑组权限模板"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "幻灯提纲模板"
 
-#, fuzzy
+# fixed fuzzy
 msgid "SlideShowTemplate"
-msgstr "幻灯片模式"
+msgstr "幻灯展示模板"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "幻灯页面模板"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "同步事务模板"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnConfiguration"
-msgstr "帮助-排版"
+msgstr "帮助-配置"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "帮助-配置/邮件支持"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "帮助-配置/安全策略"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "帮助-配置/文档附件"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "帮助-配置/增补页面"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "帮助-配置/汹涌防止"
 
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr ""
+msgstr "帮助-配置/用户配置"
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "帮助-包安装"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "帮助-排版"
+msgstr "帮助-Python更新"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnAdministration"
-msgstr "帮助-排版"
+msgstr "帮助-管理"
 
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "帮助-认证"
 
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "帮助-认证/扩展Cookie"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "帮助-排版"
+msgstr "帮助-命令"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "帮助-命令/导出"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnNotification"
-msgstr "通知"
+msgstr "帮助-通知"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnSessions"
-msgstr "帮助目录"
+msgstr "帮助-会话"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnUserHandling"
-msgstr "帮助-排版"
+msgstr "帮助-用户句柄"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnXapian"
-msgstr "帮助-排版"
+msgstr "帮助-Xapian"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "帮助-维基语法"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "帮助目录"
+msgstr "帮助-Creole语法"
 
 msgid "HelpOnFormatting"
 msgstr "帮助-排版"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoin版本"
+msgstr "摸一摸"
 
 msgid "HelpContents"
 msgstr "帮助目录"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "初学者帮助"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "用户帮助"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpIndex"
-msgstr "标题索引"
+msgstr "帮助索引"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "帮助-访问控制"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnActions"
-msgstr "帮助目录"
+msgstr "帮助-动作"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "帮助-动作/附加文件"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "帮助目录"
+msgstr "帮助-管理"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "帮助-排版"
+msgstr "帮助-自动管理"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnCategories"
-msgstr "分类"
+msgstr "帮助-分类"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "帮助-字典"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnDrawings"
-msgstr "帮助-排版"
+msgstr "帮助-绘图"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "帮助-编辑锁"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnEditing"
-msgstr "帮助-排版"
+msgstr "帮助-编辑"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "帮助-编辑/子页面"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "帮助-可视化编辑器"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnGroups"
-msgstr "帮助目录"
+msgstr "帮助-群组"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "帮助-标题"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnImages"
-msgstr "帮助-排版"
+msgstr "帮助-图片"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnLanguages"
-msgstr "语言"
+msgstr "帮助-语言"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnLinking"
-msgstr "帮助-排版"
+msgstr "帮助-链接"
 
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "帮助-链接/说明链接"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnLists"
-msgstr "帮助目录"
+msgstr "帮助-列表"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnLogin"
-msgstr "帮助-排版"
+msgstr "帮助-登录"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "帮助-宏"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
+msgstr "帮助-宏/嵌入"
 
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "帮助-宏/包含"
 
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "帮助-宏/发送邮件"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "帮助-宏/月历"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnNavigation"
-msgstr "站点导航"
+msgstr "帮助-导航"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "OpenID 服务器"
+msgstr "帮助-OpenID认证"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnPageCreation"
-msgstr "帮助-排版"
+msgstr "帮助-页面创建"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "帮助-页面删除"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "帮助-解析/新结构化文本"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "帮助-解析/新结构化文本/入门"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "帮助-解析介绍"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnRules"
-msgstr "帮助目录"
+msgstr "帮助-规则"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnSearching"
-msgstr "帮助-排版"
+msgstr "帮助-搜索"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnSlideShows"
-msgstr "幻灯片模式"
+msgstr "帮助-幻灯"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "帮助-幻灯/000介绍"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "帮助-幻灯/100创建"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "帮助-幻灯/900展示"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "帮助-表情"
 
 msgid "HelpOnSpam"
-msgstr ""
+msgstr "帮助-Spam"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "拼写检查"
+msgstr "帮助-拼写检查"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "帮助-超级用户"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "同步开始 -"
+msgstr "帮助-同步"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "帮助-表格"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "帮助-模板"
 
 msgid "HelpOnThemes"
-msgstr ""
+msgstr "帮助-样式"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "用户设置"
+msgstr "帮助-用户设置"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "帮助-变量"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnXmlPages"
-msgstr "帮助-排版"
+msgstr "帮助-XML页面"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnComments"
-msgstr "帮助目录"
+msgstr "帮助-命令"
 
-#, fuzzy
+# fixed fuzzy
 msgid "HelpOnSubscribing"
-msgstr "取消订阅"
+msgstr "帮助-订阅"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "驼峰式"
 
 msgid "WikiCourse"
-msgstr ""
+msgstr "维基方针"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr ""
+msgstr "维基方针/01什么是MoinMoin"
 
 msgid "WikiCourse/02 Finding information"
-msgstr ""
+msgstr "维基方针/02寻找信息"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr ""
+msgstr "维基方针/03保留日期"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr ""
+msgstr "维基方针/04创建帐号"
 
-#, fuzzy
+# fixed fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "用户设置已保存！"
+msgstr "维基方针/05用户配置"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr ""
+msgstr "维基方针/06建立入口"
 
 msgid "WikiCourse/07 The text editor"
-msgstr ""
+msgstr "维基方针/07文本编辑"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr ""
+msgstr "维基方针/08关键词"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr ""
+msgstr "维基方针/10用维基标记排版"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr ""
+msgstr "维基方针/11章节"
 
 msgid "WikiCourse/12 Headlines"
-msgstr ""
+msgstr "维基方针/12标题"
 
 msgid "WikiCourse/13 Lists"
-msgstr ""
+msgstr "维基方针/13列表"
 
 msgid "WikiCourse/14 Text styles"
-msgstr ""
+msgstr "维基方针/14文本样式"
 
 msgid "WikiCourse/15 Tables"
-msgstr ""
+msgstr "维基方针/15表格"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr ""
+msgstr "维基方针/16互联维基链接"
 
 msgid "WikiCourse/17 External links"
-msgstr ""
+msgstr "维基方针/17扩展链接"
 
-#, fuzzy
+# fixed fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "上载附件"
+msgstr "维基方针/18附件"
 
 msgid "WikiCourse/19 Symbols"
-msgstr ""
+msgstr "维基方针/19表情符"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr ""
+msgstr "维基方针/20动态内容"
 
 msgid "WikiCourse/21 Macros"
-msgstr ""
+msgstr "维基方针/21宏"
 
 msgid "WikiCourse/22 Parsers"
-msgstr ""
+msgstr "维基方针/22解析器"
 
-#, fuzzy
+# fixed fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "更多操作："
+msgstr "维基方针/23动作"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr ""
+msgstr "维基方针/30可视化编辑器"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr ""
+msgstr "维基方针/40创建页面"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr ""
+msgstr "维基方针/50维基礼节"
 
 msgid "WikiCourse/51 Applications"
-msgstr ""
+msgstr "维基方针/51应用"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr ""
+msgstr "维基方针/52维基结构"
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "维基方针大纲"
 
 msgid "Sun"
 msgstr "星期日"
@@ -2349,7 +2350,7 @@ msgstr "幻灯片%(pos)d/%(size)d"
 
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
+msgstr "<<%(macro_name)s: 执行失败 [%(error_msg)s] (see also the log)>>"
 
 msgid "Go To Page"
 msgstr "转到网页"
@@ -2398,23 +2399,23 @@ msgid "Edit slide show"
 msgstr "幻灯片模式"
 
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #, fuzzy
 msgid "Quit slide show"
 msgstr "幻灯片模式"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "展示首张幻灯(上箭头)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "展示尾张幻灯(下箭头)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "展示前张幻灯(左箭头)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "展示后张幻灯(右箭头)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -3271,7 +3272,7 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "此页不能储存图片。"
 
 msgid "Empty target name given."
-msgstr ""
+msgstr "没给目标名称"
 
 msgid "Edit drawing"
 msgstr "编辑图片"
@@ -3341,11 +3342,11 @@ msgid "page package"
 msgstr "修改网页"
 
 msgid "Choose:"
-msgstr ""
+msgstr "选择:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "安装语言包: "
 
 msgid "Your subscription to this page has been removed."
 msgstr "您终止了订阅此页。"
@@ -3498,7 +3499,7 @@ msgid "Content"
 msgstr "目录"
 
 msgid "No recipients, nothing to do"
-msgstr ""
+msgstr "没有增订,什么也没有作"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"

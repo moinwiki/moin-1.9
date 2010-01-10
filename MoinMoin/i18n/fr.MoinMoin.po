@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-29 00:58+0100\n"
+"POT-Creation-Date: 2010-01-10 16:49+0100\n"
 "PO-Revision-Date: 2009-11-24 00:22+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
@@ -334,13 +334,13 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<inconnu>"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Nom d'utilisateur : %s\n"
 "\n"
@@ -3282,29 +3282,23 @@ msgstr "Motif de cette copie (optionnel)"
 msgid "Really copy this page?"
 msgstr "Voulez-vous vraiment copier cette page ?"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "Lien vers une pièce jointe"
+msgstr "Emplacement de la pièce jointe"
 
-#, fuzzy
 msgid "Page name"
 msgstr "Nom de la page"
 
-#, fuzzy
 msgid "Attachment name"
 msgstr "Nom de la pièce jointe"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "Lien vers une pièce jointe"
+msgstr "Mettre à jour la liste des pièces jointes"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "[%d pièces jointes]"
+msgstr "Liste des pièces jointes"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "Pièces jointes de « %(pagename)s »"
+msgstr "Pièces jointes disponibles de la page"
 
 #, python-format
 msgid "Full Link List for \"%s\""
