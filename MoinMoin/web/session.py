@@ -75,25 +75,24 @@ def get_cookie_name(request, name, usage, software='MOIN'):
     Instead of using the cookie path, we use differently named cookies, so we get
     the right cookie no matter at what URL the wiki currently is "mounted".
 
-    If name is None, we just use cfg.siteid, which is unique within a wiki farm
+    If name is None, we use some URL components to make up some name.
+    For example the cookie name for the default desktop wiki: MOIN_SESSION_8080_ROOT
+
+    If name is siteidmagic, we just use cfg.siteid, which is unique within a wiki farm
     created by a single farmconfig. If you only run ONE(!) wikiconfig wiki, it
     is also unique, of course, but not if you run multiple wikiconfig wikis under
     same domain.
 
-    If name is not None (and not 'urlmagic'), we just use the given name (you
+    If name is not None (and not 'siteidmagic'), we just use the given name (you
     want to use that to share stuff between several wikis - just give same name
     and it will use the same cookie. same thing if you don't want to share, just
-    give a different name then [e.g. if cfg.siteid or 'urlmagic' doesn't work
+    give a different name then [e.g. if cfg.siteid or 'siteidmagic' doesn't work
     for you]).
 
-    If name is 'urlmagic', we use some URL components to make up some name.
     Moving a wiki to a different URL will break all sessions. Exchanging URLs
     of wikis might lead to confusion (requiring the client to purge the cookies).
     """
     if name is None:
-        name = request.cfg.siteid  # == config name, unique per farm
-
-    elif name == 'urlmagic':
         url_components = [
             # cookies do not store the port, thus we add it to the cookie name:
             request.environ['SERVER_PORT'],
@@ -101,6 +100,9 @@ def get_cookie_name(request, name, usage, software='MOIN'):
             ('ROOT' + request.script_root).replace('/', '_'),
         ]
         name = '_'.join(url_components)
+
+    elif name is 'siteidmagic':
+        name = request.cfg.siteid  # == config name, unique per farm
 
     return "%s_%s_%s" % (software, usage, name)
 
