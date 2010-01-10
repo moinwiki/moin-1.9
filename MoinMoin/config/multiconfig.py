@@ -718,7 +718,7 @@ options_no_group_name = {
     ('session_service', DefaultExpression('web.session.FileSessionService()'),
      "The session service."),
     ('cookie_name', None,
-     'The variable part of the session cookie name. (None = use siteid, "urlmagic" = determine from URL, any other string = use that)'),
+     'The variable part of the session cookie name. (None = determine from URL, siteidmagic = use siteid, any other string = use that)'),
     ('cookie_secure', None,
      'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
     ('cookie_httponly', False,
