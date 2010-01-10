@@ -51,10 +51,16 @@ Version 1.9.current:
   * Added extensions to the rst parser (example.rst attachments are rendered
     now when viewed).
   * Fixed MoinMoinBugs/TableOfContentsBrokenForIncludedPages.
+  * Exception raised on calling add_msg() after send_title(), which leads to 
+    Internal Server Error on calling several actions (diff, preview) for 
+    deprecated pages, is replaced with warning and call stack information in 
+    log.
 
   New features:
   * xmlrpc: added renamePage and deleteAttachment methods.
   * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
+  * diff: Added displaying of information about revisions (editor, size, 
+    timestamp, comment)
 
   Other changes:
   * Added rtsp, rtp, rtcp protocols to url_schemas.
