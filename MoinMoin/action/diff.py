@@ -179,11 +179,45 @@ def execute(pagename, request):
 
     request.write(f.rawHTML(navigation_html))
 
+    oldlog = oldpage.editlog_entry()
+    newlog = newpage.editlog_entry()
+
+    rev_info_html = """
+  <div class="diff-info diff-info-header">%(rev_header)s</div>
+  <div class="diff-info diff-info-rev-size"><span class="diff-info-caption">%(rev_size_caption)s:</span> <span class="diff-info-value">%%(rev_size)d</span></div>
+  <div class="diff-info diff-info-rev-author"><span class="diff-info-caption">%(rev_author_caption)s:</span> <span class="diff-info-value">%%(rev_author)s</span></div>
+  <div class="diff-info diff-info-rev-comment diff_info_rev1"><span class="diff-info-caption">%(rev_comment_caption)s:</span> <span class="diff-info-value">%%(rev_comment)s</span></div>
+""" % {
+    'rev_header': _('Revision %(rev)d as of %(date)s'),
+    'rev_size_caption': _('Size'),
+    'rev_author_caption': _('Editor'),
+    'rev_ts_caption': _('Date'),
+    'rev_comment_caption': _('Comment'),
+}
+
+    rev_info_old_html = rev_info_html % {
+        'rev': oldrev,
+        'rev_size': oldpage.size(),
+        'rev_author': oldlog.getEditor(request) or _('N/A'),
+        'date': request.user.getFormattedDateTime(wikiutil.version2timestamp(oldlog.ed_time_usecs)) or _('N/A'),
+        'rev_comment': wikiutil.escape(oldlog.comment) or '',
+    }
+
+    rev_info_new_html = rev_info_html % {
+        'rev': newrev,
+        'rev_size': newpage.size(),
+        'rev_author': newlog.getEditor(request) or _('N/A'),
+        'date': request.user.getFormattedDateTime(wikiutil.version2timestamp(newlog.ed_time_usecs)) or _('N/A'),
+        'rev_comment': wikiutil.escape(newlog.comment) or '',
+    }
+
     if request.user.show_fancy_diff:
         from MoinMoin.util import diff_html
-        request.write(f.rawHTML(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body())))
+        request.write(f.rawHTML(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body(), old_top=rev_info_old_html, new_top=rev_info_new_html)))
         newpage.send_page(count_hit=0, content_only=1, content_id="content-below-diff")
     else:
+        request.write(f.rawHTML('<table class="diff"><tr><td>%s</td><td>%s</td></tr></table>' % (rev_info_old_html, rev_info_new_html)))
+
         from MoinMoin.util import diff_text
         lines = diff_text.diff(oldpage.getlines(), newpage.getlines())
         if not lines:

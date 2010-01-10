@@ -415,6 +415,18 @@ form.dialog {
 	background-color: #FFFF80;
 }
 
+div.diff-info {
+    white-space:nowrap;
+}
+
+div.diff-info-header {
+    background-color:#E8E8E8;
+    width:100%;
+    padding:0.25em 0.5em;
+    margin:-0.25em -0.5em;
+    margin-bottom:0.25em;
+}
+
 .searchresult dd span {
 	font-weight: bold;
 }
