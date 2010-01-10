@@ -54,13 +54,39 @@ Version 1.9.current:
   * Exception raised on calling add_msg() after send_title(), which leads to 
     Internal Server Error on calling several actions (diff, preview) for 
     deprecated pages, is replaced with warning and call stack information in 
-    log.
+    the log.
+  * SubProcess: fixed win32-specific parts, fixed imports (fixes calling of
+    external xapian index filters)
+  * Fixed session cookie confusion for nested URL paths (like path=/ and
+    path=/mywiki - for more info, see also "New features").
 
   New features:
   * xmlrpc: added renamePage and deleteAttachment methods.
   * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
   * diff: Added displaying of information about revisions (editor, size, 
     timestamp, comment)
+  * Generate session cookie names to fix cookie path confusion and enable port-
+    based wiki farming.
+
+    HINT: New setting cfg.cookie_name:
+
+    None (default): use MOIN_SESSION_<PORT>_<PATH> as session cookie name. This
+                    should work out-of-the-box for most setups.
+
+    'siteidmagic': use MOIN_SESSION_<SITEID>, which is unique within a wiki farm
+                   created by a single farmconfig (currently, cfg.siteid is just
+                   the name of the wiki configuration module).
+
+    'other_value': use MOIN_SESSION_other_value - this gives YOU control. Just
+                   use same value to share the session between wikis and use a
+                   different value, if you want a separate session.
+
+    HINT: Please do not use cfg.cookie_path any more - it usually should not be
+    needed any more, as we now always put path=/ into the cookie except if you
+    explicitly configure something else (only do that if you know exactly what
+    you're doing and if the default does not work for you).
+
+    HINT: see also the HelpOnSessions page which shows some typical configs.
 
   Other changes:
   * Added rtsp, rtp, rtcp protocols to url_schemas.
