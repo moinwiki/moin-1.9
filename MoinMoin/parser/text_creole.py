@@ -37,6 +37,7 @@ class Parser:
     MoinMoin current API.
     """
 
+    extensions = ['.creole']
     # Enable caching
     caching = 1
     Dependencies = Dependencies

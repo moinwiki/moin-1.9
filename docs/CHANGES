@@ -48,8 +48,8 @@ Version 1.9.current:
   * highlight parser: added missing support for console/bash session
   * Fixed precedence of parsers: more special parsers now have precedence
     before moin falls back to using the HighlightParser (syntax highlighting).
-  * Added extensions to the rst parser (example.rst attachments are rendered
-    now when viewed).
+  * Added extensions to the rst, moin and creole parser (example.rst, example.moin and
+    example.creole attachments are rendered now when viewed).
   * Fixed MoinMoinBugs/TableOfContentsBrokenForIncludedPages.
   * Exception raised on calling add_msg() after send_title(), which leads to 
     Internal Server Error on calling several actions (diff, preview) for 

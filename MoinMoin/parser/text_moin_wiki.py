@@ -32,6 +32,7 @@ class Parser:
         Methods named like _*_repl() are responsible to handle the named regex patterns.
     """
 
+    extensions = ['.moin']
     # allow caching
     caching = 1
     Dependencies = Dependencies

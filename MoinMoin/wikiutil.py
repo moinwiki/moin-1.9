@@ -867,6 +867,8 @@ MIMETYPES_MORE = {
  '.flv': 'video/x-flv',
  '.wmv': 'video/x-ms-wmv',
  '.swf': 'application/x-shockwave-flash',
+ '.moin': 'text/moin-wiki',
+ '.creole': 'text/creole',
 }
 
 # add all mimetype patterns of pygments
