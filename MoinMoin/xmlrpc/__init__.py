@@ -753,12 +753,25 @@ class XmlRpcBase:
         @param jid: a bare Jabber ID
         """
         if self.cfg.secrets['jabberbot'] != secret:
+            logging.warning("getJabberAuthToken: got wrong secret %r" % secret)
             return ""
 
-        u = self.request.handle_jid_auth(jid)
+        request = self.request
+        request.session = request.cfg.session_service.get_session(request)
+        logging.debug("getJabberAuthToken: got session %r" % request.session)
+
+        u = user.get_by_jabber_id(request, jid) # XXX is someone talking to use from a jid we have stored in
+                                                # XXX some user profile enough to authenticate him as that user?
+        logging.debug("getJabberAuthToken: got user %r" % u)
 
         if u and u.valid:
-            return self._generate_auth_token(u)
+            u.auth_method = 'moin' # XXX fake 'moin' login so the check for known login methods succeeds
+                                   # XXX if not patched, u.auth_method is 'internal', but that is not accepted either
+                                   # TODO this should be done more cleanly, somehow
+            request.user = u
+            request.cfg.session_service.finalize(request, request.session)
+            logging.debug("getJabberAuthToken: returning sid %r" % request.session.sid)
+            return request.session.sid
         else:
             return ""
 
@@ -771,7 +784,9 @@ class XmlRpcBase:
 
         request = self.request
         request.session = request.cfg.session_service.get_session(request, auth_token)
+        logging.debug("applyAuthToken: got session %r" % request.session)
         u = auth.setup_from_session(request, request.session)
+        logging.debug("applyAuthToken: got user %r" % u)
 
         if u and u.valid:
             self.request.user = u
