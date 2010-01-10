@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <title>AnyWikiDraw for PmWiki</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>
+    <body>
+        <h1>AnyWikiDraw for PmWiki</h1>
+    <h3>Usage</h3>
+        <p>To include a drawing in a PmWiki page, write the following tag in the
+        page:</p>
+        <p><code>(:drawing drawing.svg|width|height:)</code></p>
+        <ul>
+            <li>The tag needs to be put into smileys.</li>
+            <li>The name of the tag is <code>drawing</code></li>
+            <li>The parameter <code>drawing.svg</code> specifies the name of the drawing file.</li>
+            <li>The drawing file can have one of the following extensions 
+                    <code>.draw</code>, <code>.svg</code>, <code>.svgz</code>, <code>.png</code>, 
+                <code>.jpg</code>.</li> 
+            <li>If you specify a drawing file that does not yet exist in your Wiki, 
+            the drawing is created the first time you save a drawing.</li>
+            <li>The parameter width specifies the width of the drawing.</li>
+            <li>The parameter height specifies the height of the drawing.</li>
+    </ul>
+         <h3>Installation instructions</h3>
+         <ol>
+             <li style="color:#990000">This is an experimental cookbook. Data loss may occur. Install
+             it only on a Wiki system that does not contain critical data.</li>
+             <li>This extension adds inline drawing editing support to your Wiki.
+                 Make sure, that you have proper licenses for all drawings on your 
+             Wiki.</li> 
+             <li>Deinstall the PmWikiDraw cookbook. AnyWikiDraw includes the 
+             PmWikiDraw cookbook. Having them installed both will result into 
+             conflicts between the two cookbooks.</li> 
+             <li>To activate this cookbook, place the AnyWikiDraw folder into 
+                 the cookbooks folder of your PmWiki server, and add the
+                 following line to your config.php script:<br/>&nbsp;<br/>
+             <code>include_once(&quot;cookbook/AnyWikiDraw/AnyWikiDraw.php&quot;);</code></li>
+         </ol>
+</body>    
+</html>
+
+
