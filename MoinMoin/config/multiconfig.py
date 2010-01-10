@@ -282,6 +282,32 @@ class ConfigFunctionality(object):
                      Please change it in your wiki configuration and try again."""
             raise error.ConfigurationError(msg)
 
+        # moin < 1.9 used cookie_lifetime = <float> (but converted it to int) for logged-in users and
+        # anonymous_session_lifetime = <float> or None for anon users
+        # moin >= 1.9 uses cookie_lifetime = (<float>, <float>) - first is anon, second is logged-in
+        if not (isinstance(self.cookie_lifetime, tuple) and len(self.cookie_lifetime) == 2):
+            logging.error("wiki configuration has an invalid setting: " +
+                          "cookie_lifetime = %r" % (self.cookie_lifetime, ))
+            try:
+                anon_lifetime = self.anonymous_session_lifetime
+                logging.warning("wiki configuration has an unsupported setting: " +
+                                "anonymous_session_lifetime = %r - " % anon_lifetime +
+                                "please remove it.")
+                if anon_lifetime is None:
+                    anon_lifetime = 0
+                anon_lifetime = float(anon_lifetime)
+            except:
+                # if anything goes wrong, use default value
+                anon_lifetime = 0
+            try:
+                logged_in_lifetime = int(self.cookie_lifetime)
+            except:
+                # if anything goes wrong, use default value
+                logged_in_lifetime = 12
+            self.cookie_lifetime = (anon_lifetime, logged_in_lifetime)
+            logging.warning("using cookie_lifetime = %r - " % (self.cookie_lifetime, ) +
+                            "please fix your wiki configuration.")
+
         self._loadPluginModule()
 
         # Preparse user dicts

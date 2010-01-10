@@ -59,6 +59,9 @@ Version 1.9.current:
     external xapian index filters)
   * Fixed session cookie confusion for nested URL paths (like path=/ and
     path=/mywiki - for more info, see also "New features").
+  * handle cookie_lifetime / anonymous_session_lifetime upgrade issue
+    gracefully: emit errors/warnings to log, use old settings to create
+    cfg.cookie_lifetime as expected by moin 1.9.
 
   New features:
   * xmlrpc: added renamePage and deleteAttachment methods.
