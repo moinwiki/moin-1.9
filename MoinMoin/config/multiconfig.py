@@ -717,6 +717,8 @@ options_no_group_name = {
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
     ('session_service', DefaultExpression('web.session.FileSessionService()'),
      "The session service."),
+    ('cookie_name', None,
+     'The variable part of the session cookie name. (None = use siteid, "urlmagic" = determine from URL, any other string = use that)'),
     ('cookie_secure', None,
      'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
     ('cookie_httponly', False,
@@ -724,7 +726,7 @@ options_no_group_name = {
     ('cookie_domain', None,
      'Domain used in the session cookie. (None = do not specify domain).'),
     ('cookie_path', None,
-     'Path used in the session cookie (None = auto-detect).'),
+     'Path used in the session cookie (None = auto-detect). Please only set if you know exactly what you are doing.'),
     ('cookie_lifetime', (0, 12),
      'Session lifetime [h] of (anonymous, logged-in) users (see HelpOnSessions for details).'),
   )),
