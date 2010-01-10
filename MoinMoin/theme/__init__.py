@@ -8,6 +8,9 @@
 
 import StringIO
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import i18n, wikiutil, config, version, caching
 from MoinMoin.action import get_available_actions
 from MoinMoin.Page import Page
@@ -1570,7 +1573,11 @@ var gui_editor_link_text = "%(text)s";
         if not msg_class:
             msg_class = 'dialog'
         if self._send_title_called:
-            raise Exception("You cannot call add_msg() after send_title()")
+            import traceback
+            logging.warning("Calling add_msg() after send_title(): no message can be added.")
+            logging.info('\n'.join(['Call stack for add_msg():'] + traceback.format_stack()))
+
+            return
         self._status.append((msg, msg_class))
 
     # stuff from wikiutil.py
