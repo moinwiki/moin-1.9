@@ -80,11 +80,16 @@ def _openidrp_sreg_extract_values(info):
                     sreg['language'] = sreg['language'][0:2]
         # Timezone must be converted to offset in seconds
         if sreg_resp.get('timezone'):
-            user_tz = timezone(sreg_resp.get('timezone').encode('ascii'))
-            if user_tz:
-                user_utcoffset = user_tz.utcoffset(datetime.utcnow())
-                sreg['timezone'] = user_utcoffset.days * 24 * 60 * 60 + user_utcoffset.seconds
+            try:
+                user_tz = timezone(sreg_resp.get('timezone').encode('ascii'))
+            except pytz.UnknownTimeZoneError:
+                pass # don't use
             else:
-                sreg['timezone'] = 0
+                if user_tz:
+                    user_utcoffset = user_tz.utcoffset(datetime.utcnow())
+                    sreg['timezone'] = user_utcoffset.days * 24 * 60 * 60 + user_utcoffset.seconds
+                else:
+                    # XXX when does user_tz get falsy? if it does, shouldn't we just 'pass'?
+                    sreg['timezone'] = 0
     return sreg
 
