@@ -135,6 +135,8 @@ class Macro:
                    'macro_name': self.name,
                    'error_msg': err.args[0], # note: str(err) or unicode(err) does not work for py2.4/5/6
                  })
+            import traceback
+            logging.info("Stack:\n" + traceback.format_stack())
 
     def _m_lang(self, text):
         """ Set the current language for page content.
