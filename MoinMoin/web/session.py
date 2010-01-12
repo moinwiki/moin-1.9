@@ -11,7 +11,7 @@
                 2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import time
+import time, os
 
 from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 
@@ -44,6 +44,15 @@ class SessionService(object):
         Typical examples would be setting cookies for the client.
         """
         raise NotImplementedError
+
+    def get_all_session_ids(self, request):
+        """
+        Return a list of all session ids known to the SessionService.
+
+        TODO: make it a generator
+        """
+        raise NotImplementedError
+
 
 def _get_session_lifetime(request, userobj):
     """ Get session lifetime for the user object userobj
@@ -137,6 +146,11 @@ class FileSessionService(SessionService):
             session = store.get(sid)
         return session
 
+    def get_all_session_ids(self, request):
+        # TODO: this should be done by werkzeug's FilesystemSessionStore
+        # the sids are the same as the filenames, see filename_template above
+        return os.listdir(request.cfg.session_dir)
+
     def destroy_session(self, request, session):
         session.clear()
         store = self._store_get(request)
@@ -185,7 +199,14 @@ class FileSessionService(SessionService):
                                path=cookie_path, domain=cfg.cookie_domain,
                                secure=cookie_secure, httponly=cfg.cookie_httponly)
 
+            # add some info about expiry to the sessions, so we can purge them:
+            session['expires'] = cookie_expires
+
             if session.should_save:
+                # note: currently, every request of a logged-in user will save
+                # the session, even when always requesting same page. As we
+                # store the page trail into the session, we would save rather
+                # often anyway, though.
                 store = self._store_get(request)
                 logging.debug("saving session: %r" % session)
                 store.save(session)
