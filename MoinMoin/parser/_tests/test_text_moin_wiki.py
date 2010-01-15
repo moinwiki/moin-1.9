@@ -465,7 +465,7 @@ You can use {{{brackets}}}
 }}}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert 'Example <ul><li style="list-style-type:none"><pre>You can use {{{brackets}}}</pre>' in output
+        assert re.search('Example <ul><li style="list-style-type:none"><pre><span class="anchor" id="[^"]*"></span>You can use {{{brackets}}}</pre>', output)
 
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
@@ -475,8 +475,8 @@ Test {{{brackets}}} and test {{{brackets}}}
 }}}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        expected = '<pre>Test {{{brackets}}} and test {{{brackets}}}'
-        assert expected in output
+        expected = '<pre><span class="anchor" id="[^"]*"></span>Test {{{brackets}}} and test {{{brackets}}}'
+        assert re.search(expected, output)
 
     def testMultipleShortPreSections(self):
         """
