@@ -101,6 +101,9 @@ class PygmentsFormatter(pygments.formatter.Formatter):
         result = self.result
         self.lineno = self.start_line
 
+        for lineno in range(1, self.start_line + 1):
+            result.append(fmt.line_anchordef(lineno))
+
         for ttype, value in tokensource:
             class_ = self.get_class(ttype)
             if value:
