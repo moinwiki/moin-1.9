@@ -41,10 +41,11 @@ class PygmentsFormatter(pygments.formatter.Formatter):
     """ a formatter for Pygments that uses the moin formatter for creating output """
     line_re = re.compile(r'(\n)')
 
-    def __init__(self, formatter):
+    def __init__(self, formatter, **kw):
         pygments.formatter.Formatter.__init__(self)
         self.result = []
         self.formatter = formatter
+        self.start_line = kw.get('start_line', 0)
 
     def get_class(self, ttype):
         if ttype in Token.Text:
@@ -98,12 +99,16 @@ class PygmentsFormatter(pygments.formatter.Formatter):
         line_ready = False
         fmt = self.formatter
         result = self.result
+        self.lineno = self.start_line
+
         for ttype, value in tokensource:
             class_ = self.get_class(ttype)
             if value:
                 for line in self.line_re.split(value):
                     if not line_ready:
+                        self.lineno += 1
                         result.append(fmt.code_line(1))
+                        result.append(fmt.line_anchordef(self.lineno))
                         line_ready = True
                     if line == '\n':
                         result.append(fmt.code_line(0))
@@ -129,6 +134,7 @@ class Parser:
         self.request = request
         self.raw = raw.strip('\n')
         self.filename = filename
+        self.start_line = kw.get('start_line', 0)
 
         if self.parsername == 'highlight':
             # user is directly using the highlight parser
@@ -149,7 +155,7 @@ class Parser:
 
     def format(self, formatter):
         _ = self.request.getText
-        fmt = PygmentsFormatter(formatter)
+        fmt = PygmentsFormatter(formatter, start_line=self.start_line)
         fmt.result.append(formatter.div(1, css_class="highlight %s" % self.syntax))
         self._code_id = hash_new('sha1', self.raw.encode(config.charset)).hexdigest()
         msg = None
