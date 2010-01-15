@@ -1435,6 +1435,10 @@ class Parser:
         rawtext = self.raw.expandtabs()
 
         # go through the lines
+
+        for lineno in range(1, self.start_line + 1):
+            self.request.write(self.formatter.line_anchordef(lineno))
+
         self.lineno = self.start_line
         self.lines = self.eol_re.split(rawtext)
         self.line_is_empty = 0
