@@ -143,7 +143,7 @@ class FileSessionService(SessionService):
         if sid is None:
             session = store.new()
         else:
-            session = store.get(sid)
+            session = store.get(str(sid))
         return session
 
     def get_all_session_ids(self, request):
