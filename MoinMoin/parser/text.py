@@ -27,9 +27,25 @@ class Parser:
         self.request = request
         self.form = request.form
         self._ = request.getText
+        self.start_line = kw.get('start_line', 0)
 
     def format(self, formatter):
         """ Send the text. """
+
+        self.lines = self.raw.expandtabs().split('\n')
+        if self.lines[-1] == '':
+            del self.lines[-1]
+
+        self.lineno = self.start_line
+
         self.request.write(formatter.preformatted(1))
-        self.request.write(formatter.text(self.raw.expandtabs()))
+
+        for line in self.lines:
+            if self.lineno != self.start_line:
+                self.request.write(formatter.text('\n'))
+
+            self.lineno += 1
+            self.request.write(formatter.line_anchordef(self.lineno))
+            self.request.write(formatter.text(line))
+
         self.request.write(formatter.preformatted(0))
