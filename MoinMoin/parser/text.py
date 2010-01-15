@@ -40,6 +40,9 @@ class Parser:
 
         self.request.write(formatter.preformatted(1))
 
+        for lineno in range(1, self.start_line + 1):
+            self.request.write(formatter.line_anchordef(lineno))
+
         for line in self.lines:
             if self.lineno != self.start_line:
                 self.request.write(formatter.text('\n'))
