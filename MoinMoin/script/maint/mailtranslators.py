@@ -25,7 +25,7 @@ Detailed Instructions:
 General syntax: moin [options] maint mailtranslators [mailtranslators-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [mailtranslators-options] see below:
     0. To send an email to all translaters, from john@smith.com, and with a subject

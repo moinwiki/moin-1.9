@@ -224,7 +224,7 @@ General options:
         Mandatory for most commands and specifies the directory that contains
         your wikiconfig.py (or farmconfig.py).
 
-    --wiki-url=wiki.example.org/
+    --wiki-url=http://wiki.example.org/
         Mandatory for most commands and specifies the url of the wiki you like
         to operate on.
 

@@ -39,7 +39,7 @@ Detailed Instructions:
 General syntax: moin [options] maint reducewiki [reducewiki-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [reducewiki-options] see below:
     0. To create a wiki data/ directory with just the latest revisions in the

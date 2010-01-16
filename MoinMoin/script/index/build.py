@@ -23,7 +23,7 @@ Detailed Instructions:
 General syntax: moin [options] index build [build-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [build-options] see below:
     Please note:
