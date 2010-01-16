@@ -22,7 +22,7 @@ Detailed Instructions:
 General syntax: moin [options] xmlrpc remote [remote-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [remote-options] see below:
     0. Verify that you have a remotescriptconf.py configuration file.

@@ -24,7 +24,7 @@ Detailed Instructions:
 General syntax: moin [options] account homepage [homepage-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 1. Required is one of the options --name, --group or --all-users.
 To create the homepage of one user use the --name argument. For adding homepages to a group of users
