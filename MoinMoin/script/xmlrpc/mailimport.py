@@ -24,7 +24,7 @@ Detailed Instructions:
 General syntax: moin [options] maint mailimport [mailimport-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [mailimport-options] see below:
     0. Verify that you have a mailimportconf.py configuration file.

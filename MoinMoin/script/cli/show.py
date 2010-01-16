@@ -20,7 +20,7 @@ Detailed Instructions:
 General syntax: moin [options] cli show
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 """
 
     def __init__(self, argv, def_values):

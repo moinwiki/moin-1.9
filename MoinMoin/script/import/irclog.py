@@ -48,7 +48,7 @@ Detailed Instructions:
 General syntax: moin [options] import irclog [irclog-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [irclog-options] see below:
     0. To add all the files in the current directory to the wiki as the user 'JohnSmith'
