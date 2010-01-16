@@ -451,6 +451,7 @@ div.diff-info-header {
     padding: 0.25em 0.5em;
     margin: -0.25em -0.5em;
     margin-bottom: 0.25em;
+    text-align: center;
 }
 
 table.navigation {
