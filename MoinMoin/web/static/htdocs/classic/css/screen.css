@@ -400,11 +400,13 @@ form.dialog {
 .diff-added {
 	background-color: #E0FFE0;
 	vertical-align: sub;
+	width: 50%;
 }
 
 .diff-removed {
 	background-color: #FFFFE0;
 	vertical-align: sub;
+	width: 50%;
 }
 
 .diff-added span {
