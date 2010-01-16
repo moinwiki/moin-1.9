@@ -58,6 +58,8 @@ General syntax: moin [options] maint globaledit [globaledit-options]
                 elif l.startswith('##master-page:'):
                     masterpage = l.split(':', 1)[1].strip()
                     master_lines.append(l)
+                elif l.startswith('##master-revision:'):
+                    master_lines.append(l)
                 elif l.startswith('##master-date:'):
                     master_lines.append(l)
                 elif l.startswith('##'):
