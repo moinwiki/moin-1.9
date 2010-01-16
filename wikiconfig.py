@@ -44,8 +44,6 @@ class LocalConfig(multiconfig.DefaultConfig):
     # Add your configuration items here.
     secrets = 'This string is NOT a secret, please make up your own, long, random secret string!'
 
-    theme_default="mint"
-
 # DEVELOPERS! Do not add your configuration items there,
 # you could accidentally commit them! Instead, create a
 # wikiconfig_local.py file containing this:
