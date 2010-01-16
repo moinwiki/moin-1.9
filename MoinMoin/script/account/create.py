@@ -19,7 +19,7 @@ Detailed Instructions:
 General syntax: moin [options] account create [create-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [create-options] see below:
     1. Verify that you have specified the right options.

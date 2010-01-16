@@ -37,7 +37,7 @@ Detailed Instructions:
 General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [mkpagepacks-options] see below:
     0. THIS SCRIPT SHOULD NEVER BE RUN ON ANYTHING OTHER THAN A TEST WIKI!

@@ -22,7 +22,7 @@ Detailed Instructions:
 General syntax: moin [options] maint globaledit [globaledit-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [globaledit-options] see below:
     0. The changes that will be performed are hardcoded in the function
