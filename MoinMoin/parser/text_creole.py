@@ -25,7 +25,9 @@ import re
 import StringIO
 from MoinMoin import config, wikiutil
 from MoinMoin.macro import Macro
+from MoinMoin import config
 from _creole import Parser as CreoleParser
+from _creole import Rules as CreoleRules
 
 Dependencies = []
 
@@ -59,15 +61,18 @@ class Parser:
         self.request = request
         self.form = request.form
         self.raw = raw
+        self.rules = MoinRules(wiki_words=True,
+                               url_protocols=config.url_schemas)
 
     def format(self, formatter):
         """Create and call the true parser and emitter."""
 
-        document = CreoleParser(self.raw).parse()
-        result = Emitter(document, formatter, self.request, Macro(self)).emit()
+        document = CreoleParser(self.raw, self.rules).parse()
+        result = Emitter(document, formatter, self.request, Macro(self),
+                         self.rules).emit()
         self.request.write(result)
 
-class Rules:
+class MoinRules(CreoleRules):
     # For the link targets:
     proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
     extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
@@ -81,6 +86,12 @@ class Rules:
         '''
     page = r'(?P<page_name> .* )'
 
+    def __init__(self, *args, **kwargs):
+        CreoleRules.__init__(self, *args, **kwargs)
+        # for addresses
+        self.addr_re = re.compile('|'.join([self.extern, self.attach,
+                                            self.interwiki, self.page]),
+                                  re.X | re.U)
 
 class Emitter:
     """
@@ -88,19 +99,13 @@ class Emitter:
     tree consisting of DocNodes.
     """
 
-    addr_re = re.compile('|'.join([
-            Rules.extern,
-            Rules.attach,
-            Rules.interwiki,
-            Rules.page
-        ]), re.X | re.U) # for addresses
-
-    def __init__(self, root, formatter, request, macro):
+    def __init__(self, root, formatter, request, macro, rules):
         self.root = root
         self.formatter = formatter
         self.request = request
         self.form = request.form
         self.macro = macro
+        self.rules = rules
 
     def get_text(self, node):
         """Try to emit whatever text is in the node."""
@@ -259,7 +264,7 @@ class Emitter:
 
     def link_emit(self, node):
         target = node.content
-        m = self.addr_re.match(target)
+        m = self.rules.addr_re.match(target)
         if m:
             if m.group('page_name'):
                 # link to a page
