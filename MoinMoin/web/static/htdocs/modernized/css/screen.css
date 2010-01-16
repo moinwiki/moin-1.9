@@ -432,23 +432,23 @@ input.button {
 }
 
 td.diff-info {
-    vertical-align:top;
+    vertical-align: top;
 }
 
 div.diff-info {
-    white-space:nowrap;
+    white-space: nowrap;
 }
 
 div.diff-info-rev-comment span.diff-info-value {
-    white-space:normal;
+    white-space: normal;
 }
 
 div.diff-info-header {
-    background-color:#E8E8E8;
-    width:100%;
-    padding:0.25em 0.5em;
-    margin:-0.25em -0.5em;
-    margin-bottom:0.25em;
+    background-color: #E8E8E8;
+    width: 100%;
+    padding: 0.25em 0.5em;
+    margin: -0.25em -0.5em;
+    margin-bottom: 0.25em;
 }
 
 table.navigation {
