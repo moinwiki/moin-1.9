@@ -67,7 +67,7 @@ Version 1.9.current:
   * xmlrpc: added renamePage and deleteAttachment methods.
   * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
   * diff: Added displaying of information about revisions (editor, size, 
-    timestamp, comment)
+    timestamp, comment), added revision navigation.
   * Generate session cookie names to fix cookie path confusion and enable port-
     based wiki farming.
 
