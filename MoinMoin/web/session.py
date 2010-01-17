@@ -24,6 +24,74 @@ class MoinSession(Session):
     """ Compatibility interface to Werkzeug-sessions for old Moin-code. """
     is_new = property(lambda s: s.new)
 
+    def __repr__(self):
+        # TODO: try to get this into werkzeug codebase
+        return '<%s %s %s%s>' % (
+            self.__class__.__name__,
+            self.sid, # we want to see sid
+            dict.__repr__(self),
+            self.should_save and '*' or ''
+        )
+
+
+class FixedFilesystemSessionStore(FilesystemSessionStore):
+    """
+    Fix buggy implementation of .get() in werkzeug <= 0.5:
+
+    If you try to get(somesid) and the file with the contents of sid storage
+    does not exist or is troublesome somehow, it will create a new session
+    with a new sid in werkzeug 0.5 original implementation.
+
+    But we do not want to store a session file for new and empty sessions,
+    but rather wait for the 2nd request and see whether the user agent sends
+    the cookie back to us. If it doesn't support cookies, we don't want to
+    create one new session file per request. If it does support cookies, we
+    need to use .get() with the sid although there was no session file stored
+    for that sid in the first request.
+
+    TODO: try to get it into werkzeug codebase and remove this class after
+          we REQUIRE a werkzeug release > 0.5 that has it.
+    """
+    def get(self, sid):
+        from cPickle import load
+        if not self.is_valid_key(sid):
+            return self.new()
+        fn = self.get_session_filename(sid)
+        f = None
+        try:
+            try:
+                f = open(fn, 'rb')
+                data = load(f)
+            except (IOError, EOFError, KeyError): # XXX check completeness/correctness
+                # Note: we do NOT generate a new sid in case of trouble with session *contents*
+                # IOError: [Errno 2] No such file or directory
+                # IOError: [Errno 13] Permission denied (we will notice permission problems when writing)
+                # EOFError: when trying to load("") - no contents
+                # KeyError: when trying to load("xxx") - crap contents
+                data = {}
+        finally:
+            if f:
+                f.close()
+        return self.session_class(data, sid, False)
+
+    """
+    Adds functionality missing in werkzeug 0.5: getting a list of all SIDs,
+    so that purging sessions can be implemented.
+    """
+    def get_all_sids(self):
+        """
+        return a list of all session ids (sids)
+        """
+        import re
+        regex = re.compile(re.escape(self.filename_template).replace(r'\%s', r'(.+)'))
+        sids = []
+        for fn in os.listdir(self.path):
+            m = regex.match(fn)
+            if m:
+                sids.append(m.group(1))
+        return sids
+
+
 class SessionService(object):
     """
     A session service returns a session object given a request object and
@@ -48,8 +116,6 @@ class SessionService(object):
     def get_all_session_ids(self, request):
         """
         Return a list of all session ids known to the SessionService.
-
-        TODO: make it a generator
         """
         raise NotImplementedError
 
@@ -133,23 +199,24 @@ class FileSessionService(SessionService):
             filesys.mkdir(path)
         except OSError:
             pass
-        return FilesystemSessionStore(path=path, filename_template='%s', session_class=MoinSession)
+        return FixedFilesystemSessionStore(path=path, filename_template='%s', session_class=MoinSession)
 
     def get_session(self, request, sid=None):
         if sid is None:
             cookie_name = get_cookie_name(request, name=request.cfg.cookie_name, usage=self.cookie_usage)
             sid = request.cookies.get(cookie_name, None)
+        logging.debug("get_session for sid %r" % sid)
         store = self._store_get(request)
         if sid is None:
             session = store.new()
         else:
             session = store.get(str(sid))
+        logging.debug("get_session returns session %r" % session)
         return session
 
     def get_all_session_ids(self, request):
-        # TODO: this should be done by werkzeug's FilesystemSessionStore
-        # the sids are the same as the filenames, see filename_template above
-        return os.listdir(request.cfg.session_dir)
+        store = self._store_get(request)
+        return store.get_all_sids()
 
     def destroy_session(self, request, session):
         session.clear()
@@ -199,14 +266,18 @@ class FileSessionService(SessionService):
                                path=cookie_path, domain=cfg.cookie_domain,
                                secure=cookie_secure, httponly=cfg.cookie_httponly)
 
-            # add some info about expiry to the sessions, so we can purge them:
-            session['expires'] = cookie_expires
-
-            if session.should_save:
+            if ((not userobj.valid and not session.new  # anon users with a cookie (not first request)
+                 or
+                 userobj.valid) # logged-in users, even if THIS was the first request (no cookie yet)
+                                # XXX if UA doesn't support cookies, this creates 1 session file per request
+                and
+                session.modified): # only if we really have something to save
+                # add some info about expiry to the sessions, so we can purge them:
+                session['expires'] = cookie_expires
                 # note: currently, every request of a logged-in user will save
-                # the session, even when always requesting same page. As we
-                # store the page trail into the session, we would save rather
-                # often anyway, though.
+                # the session, even when always requesting same page.
+                # No big deal, as we store the trail into session and that
+                # likely changes with every request anyway.
                 store = self._store_get(request)
                 logging.debug("saving session: %r" % session)
                 store.save(session)
