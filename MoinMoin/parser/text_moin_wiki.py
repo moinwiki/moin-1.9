@@ -852,7 +852,7 @@ class Parser:
         target = groups.get('link_target', '')
         desc = groups.get('link_desc', '') or ''
         params = groups.get('link_params', u'') or u''
-        acceptable_attrs = ['class', 'title', 'target', 'accesskey', ] # no style because of JS
+        acceptable_attrs = ['class', 'title', 'target', 'accesskey', 'rel', ] # no style because of JS
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
