@@ -74,6 +74,23 @@ class FixedFilesystemSessionStore(FilesystemSessionStore):
                 f.close()
         return self.session_class(data, sid, False)
 
+    """
+    Adds functionality missing in werkzeug 0.5: getting a list of all SIDs,
+    so that purging sessions can be implemented.
+    """
+    def get_all_sids(self):
+        """
+        return a list of all session ids (sids)
+        """
+        import re
+        regex = re.compile(re.escape(self.filename_template).replace(r'\%s', r'(.+)'))
+        sids = []
+        for fn in os.listdir(self.path):
+            m = regex.match(fn)
+            if m:
+                sids.append(m.group(1))
+        return sids
+
 
 class SessionService(object):
     """
@@ -99,8 +116,6 @@ class SessionService(object):
     def get_all_session_ids(self, request):
         """
         Return a list of all session ids known to the SessionService.
-
-        TODO: make it a generator
         """
         raise NotImplementedError
 
@@ -200,9 +215,8 @@ class FileSessionService(SessionService):
         return session
 
     def get_all_session_ids(self, request):
-        # TODO: this should be done by werkzeug's FilesystemSessionStore
-        # the sids are the same as the filenames, see filename_template above
-        return os.listdir(request.cfg.session_dir)
+        store = self._store_get(request)
+        return store.get_all_sids()
 
     def destroy_session(self, request, session):
         session.clear()
