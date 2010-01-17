@@ -454,6 +454,11 @@ div.diff-info-header {
     text-align: center;
 }
 
+td.diff-same {
+    text-align: center;
+    border: 0;
+}
+
 table.navigation {
     float: right;
     margin: 2px;

@@ -389,6 +389,11 @@ div.diff-info-header {
     text-align: center;
 }
 
+td.diff-same {
+    text-align: center;
+    border: 0;
+}
+
 .searchresult dd span {
 	font-weight: bold;
 }
