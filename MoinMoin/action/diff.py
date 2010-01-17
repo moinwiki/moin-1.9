@@ -102,34 +102,15 @@ def execute(pagename, request):
     oldrev = oldpage.get_real_rev()
     newrev = newpage.get_real_rev()
 
-    revlist = currentpage.getRevList()
-
-    # code below assumes that the page exists and has at least
-    # one revision in the revlist, just bail out if not. Users
-    # shouldn't really run into this anyway.
-    if not revlist:
-        request.write(f.div(0)) # end content div
-        request.theme.send_footer(pagename)
-        request.theme.send_closing_html()
-        return
-
     title = _('Differences between revisions %d and %d') % (oldrev, newrev)
     if edit_count > 1:
         title += ' ' + _('(spanning %d versions)') % (edit_count, )
     title = f.text(title)
 
-    # Revision list starts from 2...
-    if oldrev <= min(revlist):
-        disable_prev = u' disabled="disabled"'
-    else:
-        disable_prev = u''
-
-    if newrev >= max(revlist):
-        disable_next = u' disabled="disabled"'
-    else:
-        disable_next = u''
-
     page_url = wikiutil.escape(currentpage.url(request), True)
+
+    def enabled(val):
+        return not val and u' disabled="disabled"' or u''
 
     revert_html = ""
     if request.user.may.revert(pagename):
@@ -143,13 +124,10 @@ def execute(pagename, request):
    </div>
   </form>
  </td>
- """ % (page_url, rev2, _("Revert to this revision"), disable_next)
+ """ % (page_url, rev2, _("Revert to this revision"), enabled(newrev < currentrev))
 
-    navigation_html = """
-<span class="diff-header">%s</span>
-<table class="diff">
-<tr>
- <td style="border:0">
+    other_diff_button_html = """
+ <td style="border:0; width:1%%">
   <form action="%s" method="get">
    <div style="text-align:left">
     <input name="action" value="diff" type="hidden">
@@ -159,31 +137,51 @@ def execute(pagename, request):
    </div>
   </form>
  </td>
- %s
- <td style="border:0">
-  <form action="%s" method="get">
-   <div style="text-align:right">
-    <input name="action" value="diff" type="hidden">
-    <input name="rev1" value="%d" type="hidden">
-    <input name="rev2" value="%d" type="hidden">
-    <input value="%s" type="submit"%s>
-   </div>
-  </form>
- </td>
+"""
+
+    navigation_html = """
+<span class="diff-header">%%s</span>
+<table class="diff">
+<tr>
+ %(button)s
+ %%s
+ %(button)s
 </tr>
 </table>
-""" % (title,
-       page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
+""" % {'button': other_diff_button_html}
+
+    prev_oldrev = (oldrev > 1) and (oldrev - 1) or 1
+    next_oldrev = (oldrev < currentrev) and (oldrev + 1) or currentrev
+
+    prev_newrev = (newrev > 1) and (newrev - 1) or 1
+    next_newrev = (newrev < currentrev) and (newrev + 1) or currentrev
+
+    navigation_html = navigation_html % (title,
+       page_url, prev_oldrev, oldrev, _("Previous change"), enabled(oldrev > 1),
        revert_html,
-       page_url, newrev, newrev + 1, _("Next change"), disable_next, )
+       page_url, newrev, next_newrev, _("Next change"), enabled(newrev < currentrev), )
 
     request.write(f.rawHTML(navigation_html))
 
     oldlog = oldpage.editlog_entry()
     newlog = newpage.editlog_entry()
 
+    def rev_nav_link(enabled, old_rev, new_rev, caption, css_classes, enabled_title, disabled_title):
+        if enabled:
+            return currentpage.link_to(request, on=1, querystr={
+                    'action': 'diff',
+                    'rev1': old_rev,
+                    'rev2': new_rev,
+                    }, css_class="diff-nav-link %s" % css_classes, title=enabled_title) + request.formatter.text(caption) + currentpage.link_to(request, on=0)
+        else:
+            return '<span class="diff-no-nav-link %(css_classes)s" title="%(disabled_title)s">%(caption)s</span>' % {
+                'css_classes': css_classes,
+                'disabled_title': disabled_title,
+                'caption': caption,
+                }
+
     rev_info_html = """
-  <div class="diff-info diff-info-header">%(rev_header)s</div>
+  <div class="diff-info diff-info-header">%%(rev_prev_link)s %(rev_header)s %%(rev_next_link)s</div>
   <div class="diff-info diff-info-rev-size"><span class="diff-info-caption">%(rev_size_caption)s:</span> <span class="diff-info-value">%%(rev_size)d</span></div>
   <div class="diff-info diff-info-rev-author"><span class="diff-info-caption">%(rev_author_caption)s:</span> <span class="diff-info-value">%%(rev_author)s</span></div>
   <div class="diff-info diff-info-rev-comment"><span class="diff-info-caption">%(rev_comment_caption)s:</span> <span class="diff-info-value">%%(rev_comment)s</span></div>
@@ -196,6 +194,8 @@ def execute(pagename, request):
 }
 
     rev_info_old_html = rev_info_html % {
+        'rev_prev_link': rev_nav_link(oldrev > 1, prev_oldrev, newrev, u'\u2190', 'diff-prev-link diff-old-rev', _('Diff with older revision in left pane'), _("No older revision available for diff")),
+        'rev_next_link': rev_nav_link((oldrev < currentrev) and (next_oldrev < newrev), next_oldrev, newrev, u'\u2192', 'diff-next-link diff-old-rev', _('Diff with newer revision in left pane'), _("Can't change to revision newer than in right pane")),
         'rev': oldrev,
         'rev_size': oldpage.size(),
         'rev_author': oldlog.getEditor(request) or _('N/A'),
@@ -204,6 +204,8 @@ def execute(pagename, request):
     }
 
     rev_info_new_html = rev_info_html % {
+        'rev_prev_link': rev_nav_link((newrev > 1) and (oldrev < prev_newrev), oldrev, prev_newrev, u'\u2190', 'diff-prev-link diff-new-rev', _('Diff with older revision in right pane'), _("Can't change to revision older than revision in left pane")),
+        'rev_next_link': rev_nav_link(newrev < currentrev, oldrev, next_newrev, u'\u2192', 'diff-next-link diff-new-rev', _('Diff with newer revision in right pane'), _("No newer revision available for diff")),
         'rev': newrev,
         'rev_size': newpage.size(),
         'rev_author': newlog.getEditor(request) or _('N/A'),
