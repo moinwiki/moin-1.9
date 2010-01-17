@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-10 16:49+0100\n"
+"POT-Creation-Date: 2010-01-17 22:54+0100\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -2951,6 +2951,30 @@ msgid "Previous change"
 msgstr ""
 
 msgid "Next change"
+msgstr ""
+
+msgid "Diff with older revision in left pane"
+msgstr ""
+
+msgid "No older revision available for diff"
+msgstr ""
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+msgid "No newer revision available for diff"
 msgstr ""
 
 #, python-format
