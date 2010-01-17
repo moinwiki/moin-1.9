@@ -50,7 +50,13 @@ General syntax: moin [options] maint cleansessions [cleansessions-options]
 
         if not self.options.all_sessions:
             now = time.time()
-            checks.append(lambda session: session['expires'] < now)
+            def session_expired(session):
+                try:
+                    return session['expires'] < now
+                except KeyError:
+                    # this is likely a pre-1.9.1 session file without expiry
+                    return True # consider it expired
+            checks.append(session_expired)
 
         if self.options.username:
             u = user.User(request, None, self.options.username)
@@ -58,7 +64,12 @@ General syntax: moin [options] maint cleansessions [cleansessions-options]
                 print 'User "%s" does not exist!' % self.options.username
                 return
             else:
-                checks.append(lambda session: session['user.id'] == u.id)
+                def user_matches(session):
+                    try:
+                        return session['user.id'] == u.id
+                    except KeyError:
+                        return False
+                checks.append(user_matches)
 
         session_service = request.cfg.session_service
         for sid in session_service.get_all_session_ids(request):
