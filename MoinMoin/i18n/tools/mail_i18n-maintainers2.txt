@@ -1,0 +1,22 @@
+Dear MoinMoin i18n maintainer / translator,
+
+If you are still unfinished with translation - keep in mind that the deadline
+for work on MoinMaster stuff (system texts, system and help pages) is at:
+
+               2009-xx-xx 16:00 UTC.
+
+
+We plan to release MoinMoin 1.9.0 soon. If your translation arrives before last
+release steps have begun, it might still get in.
+
+If not, we will include it in development of next version, so it will
+be there when we release next version.
+
+Please also don't forget to update status here:
+http://moinmo.in/MoinDev/Translation
+
+Thanks,
+
+The MoinMoin development team
+
+
