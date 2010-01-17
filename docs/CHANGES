@@ -19,55 +19,67 @@ Known main issues:
 
 Version 1.9.current:
   Bug fixes:
-  * farmconfig example: remove wrong comment, add sample http/https entry.
-  * xmlrpc: process attachname in get/putAttachment similarly.
-  * OpenID login: fixed, did not work (traceback).
   * Fixed FileSessionService - use session_dir from CURRENT request.cfg (it
     mixed up session_dirs in farm setups).
+    HINT: if you added the hotfix to your wikiconfig, please remove it now.
+  * Fixed creation of lots of session files (if anon session were enabled and
+    user agent did not support cookies).
+  * Fixed session file storage for a non-ascii base path.
+  * Fixed session cookie confusion for nested URL paths (like path=/ and
+    path=/mywiki - for more info, see also "New features").
+  * Handle cookie_lifetime / anonymous_session_lifetime upgrade issue
+    gracefully: emit errors/warnings to log, use old settings to create
+    cfg.cookie_lifetime as expected by moin 1.9.
+  * flup based frontends: fixed SCGI and AJP (didn't work).
+  * farmconfig example: remove wrong comment, add sample http/https entry.
   * Fixed password reset url (email content needs full URL).
+  * Page: fixed adding of page contents (only data added now, without metadata) -
+    fixes MoinMoinBugs/DeprecatedPageInclusionErrornousPageInstructionsProcessing
+  * xmlrpc:
+    * Process attachname in get/putAttachment similarly.
+    * revertPage: convert pagename to internal representation.
+    * Fixed auth calls used by jabberbot (needs more work).
+  * Added missing config.umask support code (setting was not used), fixed
+    config.umask usage for page packages.
   * Fixed browser language detection.
   * Fixed language pack generation/installation for pt-br, zh, zh-tw.
   * Fixed caching of formatted msgs, see MoinMoinBugs/1.9EditPageHelpLinksBroken.
-  * highlight parser: fixed caching issue for "toggle line numbers" link.
-  * flup based frontends: fixed SCGI and AJP (didn't work).
-  * fix auth methods that use redirects (like openid)
-  * OpenID client:
-    * Add setting cfg.openidrp_allowed_op, default is [].
-    * Fixed logging in with openid and associating with an existing account.
-  * OpenID server:
-    * Fixed TypeError.
-    * Fixed processing POSTed form data AND URL args.
-  * AttachFile.move_file: send events (so e.g. xapian index update happens)
-  * Page: fixed adding of page contents (only data added now, without metadata) -
-    fixes MoinMoinBugs/DeprecatedPageInclusionErrornousPageInstructionsProcessing
-  * xmlrpc.revertPage: convert pagename to internal representation.
-  * Added missing config.umask support code (setting was not used), fixed
-    config.umask usage for page packages.
-  * Do not use i18n.wikiLanguages() on class level, fails when tools import
-    the module (e.g. pydoc -k foo).
-  * highlight parser: added missing support for console/bash session
+  * Fixed usage of i18n.wikiLanguages() on class level (moved to method), failed
+    when tools import the module (e.g. pydoc -k foo).
+  * highlight parser:
+    * fixed caching issue for "toggle line numbers" link.
+    * added missing support for console/bash session
   * Fixed precedence of parsers: more special parsers now have precedence
     before moin falls back to using the HighlightParser (syntax highlighting).
   * Added extensions to the rst, moin and creole parser (example.rst, example.moin and
     example.creole attachments are rendered now when viewed).
+  * Fixed MoinMoinBugs/LineNumberSpansForProcessInstructionsMissed for
+    moin_wiki, highlight and plain parser.
+  * Fixed MoinMoinBugs/LineNumberAnchorsInPreformattedText for highlight and
+    plain parser.
   * Fixed MoinMoinBugs/TableOfContentsBrokenForIncludedPages.
   * Exception raised on calling add_msg() after send_title(), which leads to 
     Internal Server Error on calling several actions (diff, preview) for 
     deprecated pages, is replaced with warning and call stack information in 
     the log.
+  * AttachFile.move_file: send events (so e.g. xapian index update happens)
   * SubProcess: fixed win32-specific parts, fixed imports (fixes calling of
     external xapian index filters)
-  * Fixed session cookie confusion for nested URL paths (like path=/ and
-    path=/mywiki - for more info, see also "New features").
-  * handle cookie_lifetime / anonymous_session_lifetime upgrade issue
-    gracefully: emit errors/warnings to log, use old settings to create
-    cfg.cookie_lifetime as expected by moin 1.9.
+  * Fixed auth methods that use redirects (like OpenID).
+  * OpenID client:
+    * Add setting cfg.openidrp_allowed_op, default is [].
+    * Fixed logging in with openid and associating with an existing account.
+    * openidrp_sreg extension: handle UnknownTimeZoneError gracefully
+  * OpenID server:
+    * Fixed TypeError.
+    * Fixed processing POSTed form data AND URL args.
 
   New features:
-  * xmlrpc: added renamePage and deleteAttachment methods.
-  * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
   * diff: Added displaying of information about revisions (editor, size, 
     timestamp, comment), added revision navigation.
+  * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
+  * xmlrpc: added renamePage and deleteAttachment methods.
+  * Accept "rel" attribute for links (moin wiki parser).
   * Generate session cookie names to fix cookie path confusion and enable port-
     based wiki farming.
 
@@ -90,10 +102,16 @@ Version 1.9.current:
     you're doing and if the default does not work for you).
 
     HINT: see also the HelpOnSessions page which shows some typical configs.
+  * Store expiry into sessions, use moin maint cleansessions script to clean up.
+    HINT: use moin ... maint cleansessions --all once after upgrading.
+    HINT: you may want to add a cron job calling moin ... maint cleansessions
+          to regularly cleanup expired sessions (it won't remove not expired
+          sessions).
 
   Other changes:
   * Added rtsp, rtp, rtcp protocols to url_schemas.
   * Added more info about index building to xapian wikiconfig snippet.
+  * Updated the wikicreole parser to version 1.1.
 
 
 Version 1.9.0:
