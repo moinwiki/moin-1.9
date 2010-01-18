@@ -323,7 +323,7 @@ class Emitter:
     def image_emit(self, node):
         target = node.content
         text = self.get_text(node)
-        m = self.addr_re.match(target)
+        m = self.rules.addr_re.match(target)
         if m:
             if m.group('page_name'):
                 # inserted anchors
