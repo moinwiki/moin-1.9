@@ -974,7 +974,7 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Não foi possível encontrar a página referenciada: %s**"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "A opção XSLT está desabilitada, por favor vejja HelpOnConfiguration."
+msgstr "A opção XSLT está desabilitada, por favor veja HelpOnConfiguration."
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr ""
