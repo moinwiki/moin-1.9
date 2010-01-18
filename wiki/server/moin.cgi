@@ -34,9 +34,6 @@ import sys, os
 # this works around a bug in flup's CGI autodetection (as of flup 1.0.1):
 os.environ['FCGI_FORCE_CGI'] = 'Y' # 'Y' for (slow) CGI, 'N' for FCGI
 
-if 'GATEWAY_INTERFACE' in os.environ:
-    sys.argv = []
-
 from MoinMoin.web.flup_frontend import CGIFrontEnd
 CGIFrontEnd().run()
 
