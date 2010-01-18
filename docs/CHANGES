@@ -19,6 +19,7 @@ Known main issues:
 
 Version 1.9.1:
   Bug fixes:
+  * Fixed sys.argv security issue.
   * Fixed FileSessionService - use session_dir from CURRENT request.cfg (it
     mixed up session_dirs in farm setups).
     HINT: if you added the hotfix to your wikiconfig, please remove it now.
