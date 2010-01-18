@@ -17,7 +17,7 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.9.current:
+Version 1.9.1:
   Bug fixes:
   * Fixed FileSessionService - use session_dir from CURRENT request.cfg (it
     mixed up session_dirs in farm setups).
