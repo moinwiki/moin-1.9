@@ -67,6 +67,8 @@ class Popen(subprocess.Popen):
 
         communicate() returns a tuple (stdout, stderr)."""
 
+        self.timeout = timeout
+
         # Optimization: If we are only using one pipe, or no pipe at
         # all, using select() or threads is unnecessary.
         if [self.stdin, self.stdout, self.stderr].count(None) >= 2:
@@ -111,9 +113,9 @@ class Popen(subprocess.Popen):
                 self.stdin.close()
 
             if self.stdout:
-                stdout_thread.join(timeout)
+                stdout_thread.join(self.timeout)
             if self.stderr:
-                stderr_thread.join(timeout)
+                stderr_thread.join(self.timeout)
 
             # if the threads are still alive, that means the thread join timed out
             timed_out = (self.stdout and stdout_thread.isAlive() or
@@ -167,7 +169,7 @@ class Popen(subprocess.Popen):
             input_offset = 0
             while read_set or write_set:
                 try:
-                    rlist, wlist, xlist = select.select(read_set, write_set, [], timeout)
+                    rlist, wlist, xlist = select.select(read_set, write_set, [], self.timeout)
                 except select.error, e:
                     if e.args[0] == errno.EINTR:
                         continue
