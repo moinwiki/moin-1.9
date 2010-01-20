@@ -137,9 +137,10 @@ def run_server(hostname='localhost', port=8080,
     """ Run a standalone server on specified host/port. """
     application = make_application(shared=docs)
 
-    if port < 1024 and os.getuid() != 0:
-        raise RuntimeError('Must run as root to serve port number under 1024. '
-                           'Run as root or change port setting.')
+    if port < 1024:
+        if os.name == 'posix' and os.getuid() != 0:
+            raise RuntimeError('Must run as root to serve port number under 1024. '
+                               'Run as root or change port setting.')
 
     if user:
         switch_user(user, group)
