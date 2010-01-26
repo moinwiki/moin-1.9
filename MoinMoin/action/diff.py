@@ -8,6 +8,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import wikiutil
 from MoinMoin.logfile import editlog
 from MoinMoin.Page import Page
@@ -68,12 +71,6 @@ def execute(pagename, request):
             rev1 = 1
         rev2 = 0
 
-    # Start output
-    # This action generates content in the user language
-    request.setContentLanguage(request.lang)
-
-    request.theme.send_title(_('Diff for "%s"') % (pagename, ), pagename=pagename, allow_doubleclick=1)
-
     if rev1 > 0 and rev2 > 0 and rev1 > rev2 or rev1 == 0 and rev2 > 0:
         rev1, rev2 = rev2, rev1
 
@@ -94,7 +91,23 @@ def execute(pagename, request):
         newrev = rev2
         newpage = Page(request, pagename, rev=newrev)
 
+    oldlog = oldpage.editlog_entry()
+    newlog = newpage.editlog_entry()
+
+    if not oldlog or not newlog:
+        # We use "No log entries found." msg because we already have i18n
+        # for that. Better would "At least one log entry was not found.".
+        request.theme.add_msg(_("No log entries found."), "error")
+        currentpage.send_page()
+        return
+
     edit_count = abs(newrev - oldrev)
+
+    # Start output
+    # This action generates content in the user language
+    request.setContentLanguage(request.lang)
+
+    request.theme.send_title(_('Diff for "%s"') % (pagename, ), pagename=pagename, allow_doubleclick=1)
 
     f = request.formatter
     request.write(f.div(1, id="content"))
@@ -162,9 +175,6 @@ def execute(pagename, request):
        page_url, newrev, next_newrev, _("Next change"), enabled(newrev < currentrev), )
 
     request.write(f.rawHTML(navigation_html))
-
-    oldlog = oldpage.editlog_entry()
-    newlog = newpage.editlog_entry()
 
     def rev_nav_link(enabled, old_rev, new_rev, caption, css_classes, enabled_title, disabled_title):
         if enabled:
