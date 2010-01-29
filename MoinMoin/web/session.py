@@ -11,10 +11,15 @@
                 2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import time, os
+import time, os, tempfile
+try:
+    from cPickle import load, dump, HIGHEST_PROTOCOL
+except ImportError:
+    from pickle import load, dump, HIGHEST_PROTOCOL
 
 from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 
+from MoinMoin import config
 from MoinMoin.util import filesys
 
 from MoinMoin import log
@@ -53,7 +58,6 @@ class FixedFilesystemSessionStore(FilesystemSessionStore):
           we REQUIRE a werkzeug release > 0.5 that has it.
     """
     def get(self, sid):
-        from cPickle import load
         if not self.is_valid_key(sid):
             return self.new()
         fn = self.get_session_filename(sid)
@@ -75,6 +79,24 @@ class FixedFilesystemSessionStore(FilesystemSessionStore):
         return self.session_class(data, sid, False)
 
     """
+    Problem: werkzeug 0.5 just directly and non-atomically writes to the session
+             file when using save(). If another process or thread uses get() after
+             save() opened the file for writing, it will get 0 bytes session content,
+             because open(..., "wb") truncated the file already.
+    """
+    def save(self, session):
+        fd, temp_fname = tempfile.mkstemp(suffix='.tmp', dir=self.path)
+        f = os.fdopen(fd, 'wb')
+        try:
+            dump(dict(session), f, HIGHEST_PROTOCOL)
+        finally:
+            f.close()
+        filesys.chmod(temp_fname, 0666 & config.umask) # relax restrictive mode from mkstemp
+        fname = self.get_session_filename(session.sid)
+        # this is either atomic or happening with real locks set:
+        filesys.rename(temp_fname, fname)
+
+    """
     Adds functionality missing in werkzeug 0.5: getting a list of all SIDs,
     so that purging sessions can be implemented.
     """
@@ -83,7 +105,8 @@ class FixedFilesystemSessionStore(FilesystemSessionStore):
         return a list of all session ids (sids)
         """
         import re
-        regex = re.compile(re.escape(self.filename_template).replace(r'\%s', r'(.+)'))
+        regex = re.compile(re.escape(self.filename_template).replace(
+                    r'\%s', r'([0-9a-fA-F]+)')) # sid is hex only, do not match *.tmp
         sids = []
         for fn in os.listdir(self.path):
             m = regex.match(fn)
