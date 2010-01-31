@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user
+from MoinMoin import user, wikiutil
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 
@@ -41,6 +41,9 @@ class Settings(UserPrefBase):
             return
 
         if request.method != 'POST':
+            return
+
+        if not wikiutil.checkTicket(request, form['ticket']):
             return
 
         password = form.get('password1', '')
@@ -77,6 +80,9 @@ class Settings(UserPrefBase):
                       [html.INPUT(type="password", size=36, name="password1")])
         self.make_row(_('Password repeat'),
                       [html.INPUT(type="password", size=36, name="password2")])
+
+        ticket = wikiutil.createTicket(self.request)
+        form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
 
         # Add buttons
         self.make_row('', [
