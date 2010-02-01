@@ -22,5 +22,7 @@ def execute(pagename, request):
             msg = _('Your quicklink to this page could not be removed.')
     else:
         msg = _('You need to have a quicklink to this page to remove it.')
+    if msg:
+        request.theme.add_msg(msg)
+    Page(request, pagename).send_page()
 
-    Page(request, pagename).send_page(msg=msg)

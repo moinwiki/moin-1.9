@@ -554,7 +554,7 @@ class Page(object):
             if editordata[0] == 'interwiki':
                 editor = "%s:%s" % editordata[1]
             else:
-                editor = editordata[1] # ip or email
+                editor = editordata[1] # ip or email or anon
             result = {
                 'timestamp': line.ed_time_usecs,
                 'editor': editor,
@@ -755,7 +755,10 @@ class Page(object):
 
         # Add anchor
         if anchor:
-            url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
+            fmt = getattr(self, 'formatter', request.html_formatter)
+            if fmt:
+                anchor = fmt.sanitize_to_id(anchor)
+            url = "%s#%s" % (url, anchor)
 
         if not relative:
             url = '%s/%s' % (request.getScriptname(), url)
@@ -1026,10 +1029,11 @@ class Page(object):
             # redirect to another page
             # note that by including "action=show", we prevent endless looping
             # (see code in "request") or any cascaded redirection
-            request.http_redirect('%s/%s?action=show&redirect=%s' % (
-                request.getScriptname(),
-                wikiutil.quoteWikinameURL(pi['redirect']),
-                wikiutil.url_quote_plus(self.page_name, ''), ))
+            pagename, anchor = wikiutil.split_anchor(pi['redirect'])
+            redirect_url = Page(request, pagename).url(request,
+                                                       querystr={'action': 'show', 'redirect': self.page_name, },
+                                                       anchor=anchor)
+            request.http_redirect(redirect_url, code=301)
             return
 
         # if necessary, load the formatter

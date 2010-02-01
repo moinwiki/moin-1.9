@@ -8,4 +8,5 @@
 ^wikiconfig_local.*
 ^MoinMoin/i18n/POTFILES(\.in)?$
 .coverage
+.DS_Store
 

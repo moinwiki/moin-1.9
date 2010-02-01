@@ -14,6 +14,7 @@ from MoinMoin import config, wikiutil, caching, user
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog, eventlog
+from MoinMoin.util import filesys
 
 MOIN_PACKAGE_FILE = 'MOIN_PACKAGE'
 MAX_VERSION = 1
@@ -138,7 +139,7 @@ class ScriptEngine:
             if not os.path.exists(target):
                 self._extractToFile(zipname, target)
                 if os.path.exists(target):
-                    os.chmod(target, config.umask )
+                    filesys.chmod(target, 0666 & config.umask)
                     action = 'ATTNEW'
                     edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
                                        comment=u'%(filename)s' % {"filename": filename}, author=author)
@@ -292,21 +293,17 @@ class ScriptEngine:
         @param comment:  comment related to this revision (optional)
         @param trivial:  boolean, if it is a trivial edit
         """
+        _ = self.request.getText
+        trivial = str2boolean(trivial)
         if self.request.user.may.write(pagename):
-            _ = self.request.getText
-            trivial = str2boolean(trivial)
-            uid = user.getUserId(self.request, author)
-            theuser = user.User(self.request, uid)
-            save_user = self.request.user
-            self.request.user = theuser
-            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            page = PageEditor(self.request, pagename, do_editor_backup=0)
             try:
                 page.saveText(self.extract_file(filename).decode("utf-8"), 0, trivial=trivial, comment=comment)
-                self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
             except PageEditor.Unchanged:
                 pass
-            self.request.user = save_user
-            page.clean_acl_cache()
+            else:
+                self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
+                page.clean_acl_cache()
         else:
             self.msg += u"action add revision: not enough rights - nothing done \n"
 
@@ -330,6 +327,30 @@ class ScriptEngine:
                             "newpagename": newpagename}
         else:
             self.msg += u"action rename page: not enough rights - nothing done \n"
+
+    def do_replaceunderlayattachment(self, zipname, filename, pagename, author=u"Scripting Subsystem", comment=u""):
+        """
+        overwrite underlay attachments
+
+        @param pagename: Page where the file is attached. Or in 2.0, the file itself.
+        @param zipname: Filename of the attachment from the zip file
+        @param filename: Filename of the attachment (just applicable for MoinMoin < 2.0)
+        """
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
+            filename = wikiutil.taintfilename(filename)
+            zipname = wikiutil.taintfilename(zipname)
+            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            pagedir = page.getPagePath(use_underlay=1, check_create=1)
+            attachments = os.path.join(pagedir, 'attachments')
+            if not os.path.exists(attachments):
+                os.mkdir(attachments)
+            target = os.path.join(attachments, filename)
+            self._extractToFile(zipname, target)
+            if os.path.exists(target):
+                filesys.chmod(target, 0666 & config.umask)
+        else:
+            self.msg += u"action replace underlay attachment: not enough rights - nothing done \n"
 
     def do_deletepage(self, pagename, comment="Deleted by the scripting subsystem."):
         """ Marks a page as deleted (like the DeletePage action).

@@ -59,7 +59,7 @@ def test_user_created_event(request):
 
     event = events.UserCreatedEvent(request, User(request))
     request.cfg.notification_server = server_dummy()
-    request.cfg.secret = "dummy"
+    request.cfg.secrets = "thisisnotsecret"
 
     jabbernotify.handle_user_created(event)
     assert request.cfg.notification_server.sent is True

@@ -9,7 +9,8 @@
 from MoinMoin import wikiutil, user
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
-import sha
+from MoinMoin.support.python_compatibility import hash_new
+
 try:
     from MoinMoin.auth.openidrp import OpenIDAuth
     from MoinMoin.util.moinoid import MoinOpenIDStore
@@ -45,7 +46,7 @@ class Settings(UserPrefBase):
             return
         openids = self.request.user.openids[:]
         for oid in self.request.user.openids:
-            name = "rm-%s" % sha.new(oid).hexdigest()
+            name = "rm-%s" % hash_new('sha1', oid).hexdigest()
             if name in self.request.form:
                 openids.remove(oid)
         if not openids and len(self.request.cfg.auth) == 1:
@@ -78,9 +79,9 @@ class Settings(UserPrefBase):
             if oidreq is None:
                 return 'error', _("No OpenID given.") # ??
 
-            qstr = wikiutil.makeQueryString({'action': 'userprefs',
-                                             'handler': 'oid',
-                                             'oid.return': '1'})
+            qstr = {'action': 'userprefs',
+                    'handler': 'oid',
+                    'oid.return': '1'}
             return_to = request.getQualifiedURL(request.page.url(request, qstr))
             trust_root = request.getBaseURL()
             if oidreq.shouldSendRedirect():
@@ -101,11 +102,11 @@ class Settings(UserPrefBase):
         query = {}
         for key in request.form:
             query[key] = request.form[key][0]
-        qstr = wikiutil.makeQueryString({'action': 'userprefs',
-                                         'handler': 'oid',
-                                         'oid.return': '1'})
+        qstr = {'action': 'userprefs',
+                'handler': 'oid',
+                'oid.return': '1'}
         return_to = request.getQualifiedURL(request.page.url(request, qstr))
-        info = oidconsumer.complete(query, return_to=return_to)
+        info = oidconsumer.complete(query, return_to)
         if info.status == consumer.FAILURE:
             return 'error', _('OpenID error: %s.') % info.message
         elif info.status == consumer.CANCEL:
@@ -170,7 +171,7 @@ class Settings(UserPrefBase):
         _ = self.request.getText
         form = self._make_form()
         for oid in self.request.user.openids:
-            name = "rm-%s" % sha.new(oid).hexdigest()
+            name = "rm-%s" % hash_new('sha1', oid).hexdigest()
             form.append(html.INPUT(type="checkbox", name=name, id=name))
             form.append(html.LABEL(for_=name).append(html.Text(oid)))
             form.append(html.BR())

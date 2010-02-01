@@ -1,17 +1,8 @@
 MoinMoin Version History
 ========================
 
-Documentations with generic instructions about installing or updating MoinMoin
-are available as docs/INSTALL.html and docs/UPDATE.html. A special documenation
-about the migration procedure for your data_dir is in docs/README.migration.
-
-Additionally, please completely read CHANGES text until you reach the version
-you were using until now. Otherwise you might miss some important upgrading and
-configuration hints.
-
-Starting with 1.5.3, update installation hints are marked with HINT.
-They assume you are upgrading from the last release version before (e.g. from
-1.5.2 to 1.5.3).
+Please note: Starting from the MoinMoin version you used previously, you
+should read all more recent entries (or at least everything marked with HINT).
 
 This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
 already better than the previous stable release. Our release policy is not
@@ -25,14 +16,323 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-  * "Backup" and especially "Restore" action have some issues, so please DON'T
-    USE THEM except if you want to help debugging and improving it and after
-    having made a backup with some other, proven method.
-    USE BOTH ON YOUR OWN RISK!
 
-current:
-  Fixes:
-    * update xapian index by trivial changes (MoinMoinBugs/TrivialChangesDoesNotUpdateTheXapianIndex)
+Version 1.8.6:
+  Bug fixes:
+  * Xapian indexing / indexing filters:
+    * fix deadlocks with well- and misbehaving external filters
+    * work around indexing run crashing when encountering encoding problems
+      with non-ascii filenames
+    * OpenOffice/OpenDocument filters: catch UnicodeDecodeErrors (happens
+      with password protected files)
+  * i18n: check if languages is not initialized yet, don't crash
+  * http_redirect: use 301 redirect for some cases
+  * do not use httponly session cookies, makes trouble with twikidraw and ACLs
+  * GetText2 macro: fix for named placeholder
+  * Fix SHA -> SSHA password hash upgrade for old user profiles.
+  * abort RenamePage if renaming of main page fails (do not try to rename
+    subpages)
+
+  New features:
+  * search: improve search result ordering
+  * add MS Powerpoint indexing filter (needs catppt from catdoc package)
+  * migration scripts: make finding damaged edit-log entries easier
+  * SubscribeUser action: support username regexes and unsubscribing.
+    Usage (enter this into the input form field you get after invoking
+    SubscribeUser action from the "More Actions" menu:
+    [+|-][re:]username[,username,...] 
+
+    +username: subscribes user <username> (+ is optional/default)
+    -username: unsubscribes user <username>
+    +re:username_re: subscribes users who match <username_re> regex.
+    -re:username_re: unsubscribes users who match <username_re> regex.
+
+
+Version 1.8.5:
+  Bug fixes:
+    * Attachment links: fix processing of attributes (e.g. 'target', 'title')
+    * Upgrade FCKeditor from 2.6.4 to 2.6.4.1.
+    * PDF embedding: fix html, works better with PDF browser plugins now.
+    * Fix typo in rightsidebar CSS.
+    * Action revert: avoids reverting to a deleted current revision.
+    * Action diff: enable prev/next button only in the range of given revisions.
+    * Add a Auto-Submitted: auto-generated header to generated mails.
+    * Include comment in email notifies.
+    * mailimport: fix endless looping while trying to import a forwarded mail.
+    * fuid: keep same fake_mtime for intervals of max_staleness duration.
+    * Fixes a bug with empty list items in the GUI editor.
+    * Improve filesys.rename compatibility code (win32).
+    * Fix locking for CacheEntry.
+    * Xapian indexing: catch exception when a bad zip file is encountered.
+    * openidrp / botbouncer: fix param count for CancelLogin().
+
+  New features:
+    * Added CAS authentication.
+    * Added httponly cookie support and use it for session cookie.
+
+  Other changes:
+    * HTTP auth: added debug logging.
+    * Minor LDAP auth improvements.
+    * Data browser widget:
+      * Add (h)column<idx> css class to make it styleable.
+      * Include only necessary autofilter options.
+    * moin maint cleancache purges now drafts, too.
+    * Add gopher and apt protocols to url_schemas.
+    * Add .csv, .flv, .swf to MIMETYPES_MORE.
+
+
+Version 1.8.4:
+  Bug fixes:
+    * ACL security: fix bug in hierarchical ACL processing, more restrictive
+      sub page ACLs did not work if the current user name did not give a match
+      within the sub page ACL (instead, the less restrictive parent page ACL
+      was used).
+      Non-hierarchical ACL processing (the default) is NOT affected.
+    * Creole parser: fix spaces in multiline elements.
+    * Use msie.css only for Internet Explorer older than version 8, fixes
+      e.g. the double rendering of link icons.
+    * http auth: do auth_type comparisons case-insensitively (spec-compliant)
+
+  New features:
+    * EmbedObject macro: changed default width value for PDF files to 100%
+                         (use a recent Adobe Reader to make this work).
+    * CopyPage action: added a TextCha for it
+
+  Other changes:    
+    * Creole parser: Add second license: BSD
+
+Version 1.8.3:
+  Bug fixes:
+    * AttachFile XSS fixes: move escaping to error_msg / upload_form
+    * AttachFile move: add more escaping (maybe not XSS exploitable though)
+    * email attachments import with xapian indexing enabled: fix AttributeError
+    * fix wrong links in attachment notifications
+    * AttachFile do=view: quote filename and pagename params for EmbedObject
+      macro call
+    * AttachFile: fix exception when someone just clicks on upload, without
+      giving a file
+    * ldap_login: use None as default value for ssl certs/keys (using '' for
+      the pathes lets it fail with Connect Error)
+    * release edit lock if someone saves an unchanged page
+    * fix sendmail.encodeAddress (do not [QP] encode blanks, do not un-
+      necessarily use [QP] encoding for pure ascii mail addresses)
+    * Fixed docs bug: see HINT about secrets configuration at version 1.8.0
+      (1.8.0 Other changes).
+    * backup action: add 'self' dummy argument for backup_exclude function
+    * login action: fix formatting of error messages
+    * unsubscribe action: add msg types so icons get displayed
+    * fix quoting for pagehits stats (info action) - was not working for pagenames with blanks
+    * macro.TableOfContents: bug fix for MoinMoinBugs/TableOfContentsIgnoresSectionNumbersPragma
+
+  New features:
+    * added modernized_cms theme
+    * use url_prefix_fckeditor if you don't want to use the builtin FCKeditor
+      of moin, but a separate one at some specific url
+    * action.Load: added textcha feature
+    * add mumble protocol (nice and good quality F/OSS VOIP conference chat sw)
+    * ldap auth: new name_callback param to create a custom wiki username (not
+      the ldap login username).
+
+  Other changes:
+    * add compatibility code for set to xapwrap.index (fix py 2.6 warnings)
+    * wikiutil: MIMETYPES_MORE extended for .md5 as text/plain
+
+
+Version 1.8.2:
+  Bug fixes:
+    * Fix AttachFile and antispam XSS issues.
+    * Modernized, modern and rightsidebar themes: make nonexistent or
+      badinterwiki links gray also when they are already visited.
+    * Fix anchor parsing for interwiki links and #redirect processing
+      instruction.
+    * user.apply_recovery_token: key must be of type string (for Python 2.6).
+    * Fix MoinMoinBugs/GuiEditorBreaksIndentedTable.
+    * Fix autofilter javascript breakage caused by including a databrowser
+      widget.
+    * Use per-wiki i18n cache (fixes wrong links to other farm wikis).
+    * Made cfg.interwikiname and cfg.user_homewiki unicode objects (str only
+      worked for ascii names).
+    * Xapian search: fixed historysearch.
+    * Xapian search indexing:
+      * Fix index updating for trivial changes.
+      * With history search enabled and in update mode, do not try to re-index
+        old page revisions again.
+      * With history search enabled, index page attachments only once.
+      * Fix last modified time of xapian index (shown on SystemInfo page).
+    * Make logging handlers defined in logging.handlers work (e.g.
+      class=handlers.RotatingFileHandler)
+    * Jabber notifications:
+      * Use an RFC compliant message type.
+      * Fix user creation notifications.
+    * OpenID: Compatibility fix for python-openid 2.x.x (also works with
+      1.x.x), fixes crash when trying to associate moin user to OpenID.
+    * Have a wikiserverconfig.py in wiki/server/ so setup.py copies it.
+    * Fixed inconsistent handling of fragments / anchor IDs:
+      * Fixed creole and wiki parser, other parsers might need similar fixes.
+      * IDs with blanks, non-ASCII chars etc. are now sanitized in the same way
+        for links as well as for link targets, so the user editing a page won't
+        have to bother with it.
+        E.g. [[#123 foo bar]] will link to:
+        * <<Anchor(123 foo bar)>> (moin) or {{#123 foo bar}} (creole)
+        * headline = 123 foo bar = (moin / creole)
+        Simple rule: if the link and the target are consistent, it should work.
+      * The creole wiki parser created non-human-readable sha1 heading IDs
+        before 1.8.2, now it creates same (sometimes readable) heading IDs as
+        the moin wiki parser.
+      * TitleIndex/WordIndex now also use IDs sanitized in that way internally.
+      HINT: if you manually worked around the inconsistencies/bugs before, you
+            likely have to remove those workarounds now. Same thing if you used
+            creole's sha1 heading IDs or IDs on TitleIndex/WordIndex.
+
+  Other changes:
+    * Updated FCKeditor to 2.6.4 (== many bug fixes in the GUI editor).
+    * Enhanced privacy by a new setting: cfg.log_remote_addr (default: True),
+      it controls whether moin logs the remote's IP/hostname to edit-log and
+      event-log. Use log_remote_addr = False to enhance privacy.
+    * Streamline attachment_drawing formatter behaviour.
+    * Search results: only redirect to a single search result for titlesearch
+      (fuzzy goto functionality), but not for fulltext search results.
+
+
+Version 1.8.1:
+  Bug fixes:
+    * Workaround win32 locking problems (caused by spurious access denied
+      exceptions on that platform).
+    * Fix unicode errors that happened when password checker failed a password
+    * WikiConfig/WikiConfigHelp: fixed wrong language table headings
+    * Themes: make the margins around trail line work properly
+    * "modernized" theme:
+      * make broken links gray
+      * add new right/center/left/justify css classes
+      * don't force Arial
+    * Standalone server: be more specific when catching socket exceptions,
+      treat socket errors in http header emission in the same way.
+    * GUI editor:
+      * Fix heading levels when inserting new headings.
+      * Fix headers already sent exception when using e.g. edit LOCKing.
+    * Xapian indexing: fixed missing import for execfilter (only happened on
+      non-posix platforms like win32)
+
+  * New features:
+    * Themes:
+     * Make the TOC shrinkwrap, add white background to navigation macro.
+       The table of contents looked bad spanning the whole width of the page.
+       It's made to shrinkwrap now, so it will only get as wide, as the longest
+       heading. We use display:inline-table, so this won't work in MS IE6,
+       which still displays it the old way.
+       Navigation macro now has a white background, to make it more readable
+       when it's floating over a pre block or TOC.
+     * Make the numbers in lists in table of contents right-aligned.
+     * Refactored and extended theme.html_stylesheets() to make alternate
+       stylesheets possible. Stylesheet definitions now can either be:
+       2-tuples: (media, href)  # backwards compatibility
+       or:
+       3-tuples: (media, href, title)  # new, for defining alternate stylesheets
+       This works within themes as well as in the wiki config.
+       See also: http://www.w3.org/Style/Examples/007/alternatives.html
+
+
+Version 1.8.0:
+  Note: This is a reduced CHANGES, ommitting details from rc/beta test and
+        also less interesting minor changes and fixes. It shows changes
+        relative to 1.7.2 release.
+        If you want to see full detail, read it there:
+        http://hg.moinmo.in/moin/1.8/file/6130eab15936/docs/CHANGES
+
+  New Features: ==============================================================
+    * HINT: New "modernized" theme - if you use "modern" [default], try:
+      theme_default = 'modernized'
+      If you find problems with "modernized", please report them because we
+      want to use it as default theme in future.
+    * GUI Editor:
+      * upgraded to use FCKEditor version 2.6.3
+      * user can insert and modify various types of MoinMoin links
+    * New plugin_dirs setting to allow multiple plugin pathes (additional to
+      the automatically configured plugin_dir [default: data_dir/plugin]).
+    * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
+      of the current user.
+    * New macros "WikiConfig" and "WikiConfigHelp".
+    * Per-parser quickhelp, 'quickhelp' class variable of parser class.
+    * Secure session cookies for https (see cfg.cookie_secure).
+    * Added left/center/right/justify css classes to builtin themes.
+      Use them like:
+      {{{#!wiki justify
+      this content is justified....
+      }}}
+
+  Removed Features: ==========================================================
+    * HINT: url_prefix setting (use url_prefix_static or just use the default)
+    * traceback_log_dir setting (we just use logging.exception)
+    * editor_quickhelp setting (replaced by per-parser quickhelp)
+    * Restoring backups with the backup action and related settings (while
+      creating backups is no big issue and should work OK, restoring them
+      had fundamental issues related to overwriting or not-overwriting of
+      existing files - thus we removed the "restore" part of the action and
+      recommend that you just contact the wiki server admin in case of trouble,
+      give him your wiki backup file and let him carefully restore it.)
+    * Removed unmaintained DesktopEdition (moin 1.5.x style) and phpwiki
+      migration scripts from contrib/ directory.
+
+  Bug Fixes: =================================================================
+    * GUI Editor - fixed lots of bugs.
+    * Fixing https detection for servers using HTTPS=1 and also for WSGI
+      servers not using HTTPS/SSL_ environment, but just wsgi.url_scheme.
+    * Search results: link to 'view' rendering of found attachments.
+    * Standalone server: fix serverClass and interface argument processing,
+      announce used serverClass in log output.
+    * mointwisted: fixed Twisted start script.
+    * Logging:
+      * Use logging framework for messages emitted by warnings module (e.g.
+        DeprecationWarning), silence some specific warnings.
+      * Removed superfluous linefeeds in timing log output.
+    * Bug fix for language not installed (MoinMoinBugs/WikiLanguageNotDefined).
+    * Fixed editbar hidden comment link cosmetics for sidebar themes (hide the
+      complete list element).
+    * MoinMoinBugs/DoubleScriptNameInSitemap (fixing urls given by sitemap
+      action, if the wiki does not run in the root url of the site)
+    * Fixed backup action configuration (broke on win32).
+    * Fixed MoinMoinBugs/PackagesAddRevision.
+    * SyncPages: add workaround for callers calling log_status with encoded
+      bytestrings.
+    * Fixed dbw_hide_buttons javascript.
+    * HINT: Jabber bot can now be configured to use an authentication realm
+      which is different from the server's hostname; the xmpp_node
+      configuration parameter can now contain a full JID and the xmpp_resource
+      parameter is no longer supported.
+
+  Other Changes: =============================================================
+    * HINT: new configuration for misc. secrets, please use either:
+          secrets = "MySecretLooongString!" # one secret for everything
+      or:
+          secrets = {
+              'xmlrpc/ProcessMail': 'yourmailsecret', # for mailimport
+              'xmlrpc/RemoteScript': 'yourremotescriptsecret',
+              'action/cache': 'yourcachesecret', # unguessable cache keys
+              'wikiutil/tickets': 'yourticketsecret', # edit tickets
+              'jabberbot': 'yourjabberbotsecret', # jabberbot communication
+          }
+      Secret strings must be at least 10 chars long.
+      Note: mail_import_secret setting is gone, use
+            secrets["xmlrpc/ProcessMail"] instead of it.
+      Note: jabberbot secret setting is gone, use
+            secrets["jabberbot"] instead of it.
+    * HINT: user_autocreate setting was removed from wiki configuration and
+      replaced by a autocreate=<boolean> parameter of the auth objects that
+      support user profile auto creation.
+    * moin import irclog: use irssi parser to format logs, mapped .irc
+      extension to text/plain mimetype.
+    * HINT: backup action: backup_exclude (default: "do not exclude anything")
+      is now a function f(filename) that tells whether a file should be
+      excluded from backup.
+      You can get the old regex exclusion functionality by using:
+      backup_exclude = re.compile(your_regex).search
+      Be careful with your regex, you might need to use re.escape() to escape
+      characters that have a special meaning in regexes (e.g.: \.[] etc.).
+      If in doubt, maybe just leave backup_exclude at the default and don't
+      exclude anything.
+    * Speed up javascript comments processing on IE by getElementsByClassName()
+    * Added sk (slovak) i18n, updated i18n.
+
 
 1.7.3:
   New features:
@@ -277,6 +577,12 @@ Version 1.7.0:
       groups. \S+ means the category key can be anything non-blank.
       If you like to simultaneously support multiple languages, use something
       like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
+      HINT: after changing your configuration, please rebuild the cache:
+        * stop moin
+        * moin ... maint cleancache
+        * start moin
+      If you don't do this, your groups / dicts will stop working (and also
+      your ACLs that use those groups). You better do a test whether it works.
 
     * Xapian search / indexing / stemming:
       * Use text/<format> as mimetype for pages.

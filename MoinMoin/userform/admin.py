@@ -4,7 +4,7 @@
 
     @copyright: 2001-2004 Juergen Hermann <jh@web.de>,
                 2003-2007 MoinMoin:ThomasWaldmann
-                2007 MoinMoin:ReimarBauer
+                2007-2008 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin import user, wikiutil
@@ -96,7 +96,7 @@ def do_user_browser(request):
 
         browser = DataBrowserWidget(request)
         browser.setData(data)
-        return browser.toHTML(method="POST")
+        return browser.render()
 
     # No data
     return ''

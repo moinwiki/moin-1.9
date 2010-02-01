@@ -72,6 +72,7 @@ class LDAPAuth(BaseAuth):
         aliasname_attribute=None, # ('displayName') ldap attribute we get the aliasname from
         email_attribute=None, # ('mail') ldap attribute we get the email address from
         email_callback=None, # called to make up email address
+        name_callback=None, # called to use a Wiki name different from the login name
         coding='utf-8', # coding used for ldap queries and result values
         timeout=10, # how long we wait for the ldap server [s]
         start_tls=0, # 0 = No, 1 = Try, 2 = Required
@@ -81,6 +82,8 @@ class LDAPAuth(BaseAuth):
         tls_keyfile=None,
         tls_require_cert=0, # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
         bind_once=False, # set to True to only do one bind - useful if configured to bind as the user on the first attempt
+        autocreate=False, # set to True if you want to autocreate user profiles
+        name='ldap', # use e.g. 'ldap_pdc' and 'ldap_bdc' (or 'ldap1' and 'ldap2') if you auth against 2 ldap servers
         ):
         self.server_uri = server_uri
         self.bind_dn = bind_dn
@@ -95,6 +98,7 @@ class LDAPAuth(BaseAuth):
         self.aliasname_attribute = aliasname_attribute
         self.email_attribute = email_attribute
         self.email_callback = email_callback
+        self.name_callback = name_callback
 
         self.coding = coding
         self.timeout = timeout
@@ -107,7 +111,8 @@ class LDAPAuth(BaseAuth):
         self.tls_require_cert = tls_require_cert
 
         self.bind_once = bind_once
-
+        self.autocreate = autocreate
+        self.name = name
 
     def login(self, request, user_obj, **kw):
         username = kw.get('username')
@@ -217,6 +222,9 @@ class LDAPAuth(BaseAuth):
                         aliasname = sn
                 aliasname = aliasname.decode(coding)
 
+                if self.name_callback:
+                    username = self.name_callback(ldap_dict)
+
                 if email:
                     u = user.User(request, auth_username=username, auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
                     u.email = email
@@ -225,13 +233,14 @@ class LDAPAuth(BaseAuth):
                 u.name = username
                 u.aliasname = aliasname
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
-                logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
+                logging.debug("creating user object with name %r email %r alias %r" % (username, email, aliasname))
 
             except ldap.INVALID_CREDENTIALS, err:
                 logging.debug("invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
                 return CancelLogin(_("Invalid username or password."))
 
-            if u:
+            if u and self.autocreate:
+                logging.debug("calling create_or_update to autocreate user %r" % u.name)
                 u.create_or_update(True)
             return ContinueLogin(u)
 

@@ -2,12 +2,16 @@
 """
     MoinMoin - File System Utilities
 
-    @copyright: 2002 Juergen Hermann <jh@web.de>
+    @copyright: 2002 Juergen Hermann <jh@web.de>,
+                2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, shutil, time
+import sys, os, shutil, time, errno, random
 from stat import S_ISDIR, ST_MODE, S_IMODE
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 #############################################################################
 ### Misc Helpers
@@ -38,12 +42,75 @@ def rename(oldname, newname):
     rename, then unlock when finished.
     """
     if os.name == 'nt':
-        if os.path.isfile(newname):
+        # Windows "rename" taken from Mercurial's util.py. Thanks!
+        try:
+            os.rename(oldname, newname)
+        except OSError, err:
+            # On windows, rename to existing file is not allowed, so we
+            # must delete destination first. But if a file is open, unlink
+            # schedules it for delete but does not delete it. Rename
+            # happens immediately even for open files, so we rename
+            # destination to a temporary name, then delete that. Then
+            # rename is safe to do.
+            # The temporary name is chosen at random to avoid the situation
+            # where a file is left lying around from a previous aborted run.
+            # The usual race condition this introduces can't be avoided as
+            # we need the name to rename into, and not the file itself. Due
+            # to the nature of the operation however, any races will at worst
+            # lead to the rename failing and the current operation aborting.
+
+            if err.errno != errno.EEXIST:
+                raise
+
+            def tempname(prefix):
+                for tries in xrange(10):
+                    temp = '%s-%08x' % (prefix, random.randint(0, 0xffffffff))
+                    if not os.path.exists(temp):
+                        return temp
+                raise IOError, (errno.EEXIST, "No usable temporary filename found")
+
+            temp = tempname(newname)
+            os.rename(newname, temp)
+            os.unlink(temp)
+            os.rename(oldname, newname)
+    else:
+        # POSIX: just do it :)
+        os.rename(oldname, newname)
+
+rename_overwrite = rename
+
+def rename_no_overwrite(oldname, newname, delete_old=False):
+    """ Multiplatform rename
+
+    This kind of rename is doing things differently: it fails if newname
+    already exists. This is the usual thing on win32, but not on posix.
+
+    If delete_old is True, oldname is removed in any case (even if the
+    rename did not succeed).
+    """
+    if os.name == 'nt':
+        try:
             try:
-                os.remove(newname)
-            except OSError:
-                pass # let os.rename give us the error (if any)
-    os.rename(oldname, newname)
+                os.rename(oldname, newname)
+                success = True
+            except:
+                success = False
+                raise
+        finally:
+            if not success and delete_old:
+                os.unlink(oldname)
+    else:
+        try:
+            try:
+                os.link(oldname, newname)
+                success = True
+            except:
+                success = False
+                raise
+        finally:
+            if success or delete_old:
+                os.unlink(oldname)
+
 
 def touch(name):
     if sys.platform == 'win32':
@@ -66,6 +133,37 @@ def touch(name):
             win32file.CloseHandle(handle)
     else:
         os.utime(name, None)
+
+
+def access_denied_decorator(fn):
+    """ Due to unknown reasons, some os.* functions on Win32 sometimes fail
+        with Access Denied (although access should be possible).
+        Just retrying it a bit later works and this is what we do.
+    """
+    if sys.platform == 'win32':
+        def wrapper(*args, **kwargs):
+            max_retries = 42
+            retry = 0
+            while True:
+                try:
+                    return fn(*args, **kwargs)
+                except OSError, err:
+                    retry += 1
+                    if retry > max_retries:
+                        raise
+                    if err.errno == errno.EACCES:
+                        logging.warning('%s(%r, %r) -> access denied. retrying...' % (fn.__name__, args, kwargs))
+                        time.sleep(0.01)
+                        continue
+                    raise
+        return wrapper
+    else:
+        return fn
+
+stat = access_denied_decorator(os.stat)
+mkdir = access_denied_decorator(os.mkdir)
+rmdir = access_denied_decorator(os.rmdir)
+
 
 def fuid(filename, max_staleness=3600):
     """ return a unique id for a file
@@ -111,9 +209,11 @@ def fuid(filename, max_staleness=3600):
             # trick
             now = int(time.time())
             if now >= st.st_mtime + max_staleness:
-                fake_mtime = now
+                # keep same fake_mtime for each max_staleness interval
+                fake_mtime = int(now / max_staleness) * max_staleness
         uid = (st.st_mtime,  # might have a rather rough granularity, e.g. 2s
-                             # on FAT and might not change on fast updates
+                             # on FAT, 1s on ext3 and might not change on fast
+                             # updates
                st.st_ino,  # inode number (will change if the update is done
                            # by e.g. renaming a temp file to the real file).
                            # not supported on win32 (0 ever)

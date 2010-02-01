@@ -8,5 +8,5 @@
     # A secret shared with notification bot, must be the same in both configs
     # (the wiki config and the notification bot config) for communication to work.
     # CHANGE IT TO A LONG RANDOM STRING, OR YOU WILL HAVE A SECURITY ISSUE!
-    secret = u""
+    secrets = u""  # alternatively, use secrets["jabberbot"]
 

@@ -16,10 +16,7 @@ def execute(xmlrpcobj, secret, mail):
     secret = xmlrpcobj._instr(secret)
     mail = str(mail)
 
-    if not request.cfg.mail_import_secret:
-        return u"No password set"
-
-    if request.cfg.mail_import_secret != secret:
+    if request.cfg.secrets['xmlrpc/ProcessMail'] != secret:
         return u"Invalid password"
 
     try:

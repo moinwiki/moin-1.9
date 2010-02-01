@@ -45,7 +45,7 @@ from MoinMoin.script.migration.migutil import opj, listdir, copy_file, move_file
 
 import mimetypes # this MUST be after wikiutil import!
 
-from _conv160b_wiki import convert_wiki
+from _conv160a_wiki import convert_wiki
 
 create_rev = True # create a <new> rev with the converted content of <new-1> rev?
 
@@ -131,15 +131,22 @@ class EditLog:
         """ read complete edit-log from disk """
         data = {}
         try:
+            lineno = 0
             f = file(self.fname, 'r')
             for line in f:
+                lineno += 1
                 line = line.replace('\r', '').replace('\n', '')
                 if not line.strip(): # skip empty lines
                     continue
                 fields = line.split('\t') + [''] * 9
                 timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
-                timestamp = int(timestamp)
-                rev = int(rev)
+                try:
+                    timestamp = int(timestamp)
+                    rev = int(rev)
+                except ValueError, err:
+                    print "Error: %r has a damaged timestamp or revision number in log line %d [%s] - skipping this entry" % (
+                        self.fname, lineno, str(err))
+                    continue # ignore this line, do not terminate - to find all those errors in one go
                 pagename = wikiutil.unquoteWikiname(pagename)
                 data[(timestamp, rev, pagename)] = (timestamp, rev, action, pagename, ip, hostname, userid, extra, comment)
             f.close()
