@@ -2496,6 +2496,16 @@ def createTicket(request, tm=None, action=None):
     ticket = "%s.%s.%s" % (tm, pagename, action)
     digest.update(ticket)
 
+    if request.session:
+        sid = request.session.name
+    else:
+        sid = 'None'
+    if request.user.valid:
+        uid = request.user.id
+    else:
+        uid = 'None'
+    digest.update(sid+uid)
+
     return "%s.%s" % (ticket, digest.hexdigest())
 
 
