@@ -2496,7 +2496,7 @@ def createTicket(request, tm=None, action=None):
     ticket = "%s.%s.%s" % (tm, pagename, action)
     digest.update(ticket)
 
-    if request.session:
+    if request.session and not request.session.is_new:
         sid = request.session.name
     else:
         sid = 'None'
