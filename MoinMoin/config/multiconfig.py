@@ -430,6 +430,9 @@ Lists: * bullets; 1., a. numbered items.
     openid_server_restricted_users_group = None
     openid_server_enable_user = False
 
+    # actions to exclude from packagepages action
+    packagepages_actions_excluded = ['setthemename', 'copythemefile', 'installplugin', 'renamepage', 'deletepage', 'delattachment']
+
     page_credits = [
         # Feel free to add other credits, but PLEASE do NOT change or remove
         # the following links - you help us by keeping them "as is":
