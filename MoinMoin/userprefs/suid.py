@@ -33,29 +33,32 @@ class Settings(UserPrefBase):
 
     def handle_form(self):
         _ = self._
-        form = self.request.form
+        request = self.request
+        form = request.form
 
-        if 'cancel' in form:
+        if form.has_key('cancel'):
             return
 
-        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0])
-            and self.request.request_method == 'POST'):
-            uid = form.get('selected_user', [''])[0]
-            if not uid:
-                return 'error', _("No user selected")
-            theuser = user.User(self.request, uid, auth_method='setuid')
-            if not theuser or not theuser.exists():
-                return 'error', _("No user selected")
-            # set valid to True so superusers can even switch
-            # to disable accounts
-            theuser.valid = True
-            self.request.session['setuid'] = uid
-            self.request._setuid_real_user = self.request.user
-            # now continue as the other user
-            self.request.user = theuser
-            return  _("You can now change the settings of the selected user account; log out to get back to your account.")
-        else:
-            return None
+        if request.request_method != 'POST':
+            return
+
+        if not wikiutil.checkTicket(request, form.get('ticket', [''])[0]):
+            return
+
+        uid = form.get('selected_user', [''])[0]
+        if not uid:
+            return 'error', _("No user selected")
+        theuser = user.User(request, uid, auth_method='setuid')
+        if not theuser or not theuser.exists():
+            return 'error', _("No user selected")
+        # set valid to True so superusers can even switch
+        # to disable accounts
+        theuser.valid = True
+        request.session['setuid'] = uid
+        request._setuid_real_user = request.user
+        # now continue as the other user
+        request.user = theuser
+        return  _("You can now change the settings of the selected user account; log out to get back to your account.")
 
     def _user_select(self):
         options = []
