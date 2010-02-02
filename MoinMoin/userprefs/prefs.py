@@ -60,9 +60,6 @@ class Settings(UserPrefBase):
         form = self.request.form
         request = self.request
 
-        if request.method != 'POST':
-            return
-
         if not 'name' in request.user.auth_attribs:
             # Require non-empty name
             new_name = form.get('name', request.user.name)
@@ -221,10 +218,16 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
 
     def handle_form(self):
-        _ = self._
-        form = self.request.form
+        request = self.request
+        form = request.form
 
         if 'cancel' in form:
+            return
+
+        if request.method != 'POST':
+            return
+
+        if not wikiutil.checkTicket(request, form['ticket']):
             return
 
         if 'save' in form: # Save user profile
@@ -389,6 +392,9 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
             self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
             self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
+
+            ticket = wikiutil.createTicket(request)
+            self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
 
         # Add buttons
         button_cell = []
