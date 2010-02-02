@@ -3,7 +3,8 @@
     MoinMoin - MoinMoin.packages tests
 
     @copyright: 2005 MoinMoin:AlexanderSchremmer,
-                2007 Federico Lorenzi
+                2007 Federico Lorenzi,
+                2010 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -34,14 +35,10 @@ class DebugPackage(Package, ScriptEngine):
 print|foo
 ReplaceUnderlay|testdatei|TestSeite2
 IgnoreExceptions|True
-DeletePage|TestSeiteDoesNotExist|Test ...
-DeletePage|FooPage|Test ...
 IgnoreExceptions|False
 AddRevision|foofile|FooPage
 AddRevision|foofile|FooPage
-setthemename|foo
 #foobar
-installplugin|foo|local|parser|testy
 """
 
     def extract_file(self, filename):
@@ -66,9 +63,7 @@ class TestUnsafePackage:
             py.test.skip('This test needs to be run using the test wiki.')
 
     def teardown_class(self):
-        DebugPackage(self.request, u"""moinmoinpackage|1
-DeletePage|FooPage|Test ...
-""").installPackage()
+        nuke_page(self.request, "FooPage")
 
     def testBasicPackageThings(self):
         become_superuser(self.request)

@@ -3,7 +3,7 @@
     MoinMoin - Package Installer
 
     @copyright: 2005 MoinMoin:AlexanderSchremmer,
-                2007 MoinMoin:ReimarBauer
+                2007-2010 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -435,7 +435,12 @@ class ScriptEngine:
             if fnname == '':
                 continue
             try:
-                fn = getattr(self, "do_" + fnname)
+                if fnname in self.request.cfg.packagepages_actions_excluded:
+                    self.msg += u"action package %s: excluded \n" % elements[0].strip()
+                    success = False
+                    continue
+                else:
+                    fn = getattr(self, "do_" + fnname)
             except AttributeError:
                 self.msg += u"Exception RuntimeScriptException: %s\n" % (
                         _("Unknown function %(func)s in line %(lineno)i.") %

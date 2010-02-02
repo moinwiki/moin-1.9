@@ -846,6 +846,16 @@ options_no_group_name = {
     ('traceback_show', True,
      "if True, show debug tracebacks to users when moin crashes"),
 
+    ('packagepages_actions_excluded',
+     ['setthemename',  # related to questionable theme stuff, see below
+      'copythemefile', # maybe does not work, e.g. if no fs write permissions or real theme file path is unknown to moin
+      'installplugin', # code installation, potentially dangerous
+      'renamepage',    # dangerous with hierarchical acls
+      'deletepage',    # dangerous with hierarchical acls
+      'delattachment', # dangerous, no revisioning
+     ],
+     'list with excluded package actions (e.g. because they are dangerous / questionable)'),
+
     ('page_credits',
      [
        '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
