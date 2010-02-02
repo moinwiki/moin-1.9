@@ -893,6 +893,16 @@ options_no_group_name = {
     ('show_timings', False, "show some timing values at bottom of a page"),
     ('show_version', False, "show moin's version at the bottom of a page"),
 
+    ('packagepages_actions_excluded',
+     ['setthemename',  # related to questionable theme stuff, see below
+      'copythemefile', # maybe does not work, e.g. if no fs write permissions or real theme file path is unknown to moin
+      'installplugin', # code installation, potentially dangerous
+      'renamepage',    # dangerous with hierarchical acls
+      'deletepage',    # dangerous with hierarchical acls
+      'delattachment', # dangerous, no revisioning
+     ],
+     'list with excluded package actions (e.g. because they are dangerous / questionable)'),
+
     ('page_credits',
      [
        '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
