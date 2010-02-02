@@ -1,6 +1,11 @@
 Converting your DATA when upgrading MoinMoin
 ============================================
 
+1.9.x migration
+===============
+If you use the moin 1.9.x code to do the migration, you need to give the
+complete url (with protocol etc.): --wiki-url=http://wiki.example.org/
+
 Post 1.5.3 new style migration
 ==============================
 

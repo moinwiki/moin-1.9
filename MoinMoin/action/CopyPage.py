@@ -52,20 +52,19 @@ class CopyPage(ActionBase):
             return status, _('TextCha: Wrong answer! Go back and try again...')
 
         form = self.form
-        newpagename = form.get('newpagename', [u''])[0]
-        newpagename = self.request.normalizePagename(newpagename)
-        comment = form.get('comment', [u''])[0]
+        newpagename = form.get('newpagename', u'')
+        newpagename = wikiutil.normalize_pagename(newpagename, self.cfg)
+        comment = form.get('comment', u'')
         comment = wikiutil.clean_input(comment)
 
         self.page = PageEditor(self.request, self.pagename)
         success, msgs = self.page.copyPage(newpagename, comment)
 
         copy_subpages = 0
-        if form.has_key('copy_subpages'):
-            try:
-                copy_subpages = int(form['copy_subpages'][0])
-            except:
-                pass
+        try:
+            copy_subpages = int(form['copy_subpages'])
+        except:
+            pass
 
         if copy_subpages and self.subpages or (not self.users_subpages and self.subpages):
             for name in self.subpages:
@@ -92,7 +91,7 @@ class CopyPage(ActionBase):
             d = {
                 'textcha': TextCha(self.request).render(),
                 'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
+                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
                 'subpage_label': _('Copy all /subpages too?'),
                 'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),

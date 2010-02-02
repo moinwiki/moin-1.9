@@ -25,7 +25,7 @@ def macro_SystemAdmin(macro):
         'attachments': (_("File attachment browser"), do_admin_browser),
         'users': (_("User account browser"), do_user_browser),
     }
-    choice = request.form.get('sysadm', [None])[0]
+    choice = request.values.get('sysadm')
 
     # create menu
     menuitems = [(label, fnid) for fnid, (label, handler) in _MENU.items()]

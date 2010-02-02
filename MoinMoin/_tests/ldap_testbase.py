@@ -32,8 +32,6 @@
 
     # /etc/init.d/apparmor stop
 
-    Requires Python 2.4 (for subprocess module).
-
     @copyright: 2008 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -41,14 +39,10 @@
 SLAPD_EXECUTABLE = 'slapd'  # filename of LDAP server executable - if it is not
                             # in your PATH, you have to give full path/filename.
 
-import os, shutil, tempfile, time
+import os, shutil, tempfile, time, base64, md5
 from StringIO import StringIO
 import signal
-
-try:
-    import subprocess  # needs Python 2.4
-except ImportError:
-    subprocess = None
+import subprocess
 
 try:
     import ldap, ldif, ldap.modlist  # needs python-ldap
@@ -61,8 +55,6 @@ def check_environ():
         Either return some failure reason if we can't or None if everything
         looks OK.
     """
-    if subprocess is None:
-        return "You need at least python 2.4 to use ldap_testbase."
     if ldap is None:
         return "You need python-ldap installed to use ldap_testbase."
     slapd = False
@@ -187,6 +179,8 @@ class LdapEnvironment(object):
         f.write(db_config)
         f.close()
 
+        rootpw = '{MD5}' + base64.b64encode(md5.new(self.rootpw).digest())
+
         # create slapd.conf from content template in slapd_config
         slapd_config = slapd_config % {
             'ldap_dir': self.ldap_dir,
@@ -194,7 +188,7 @@ class LdapEnvironment(object):
             'schema_dir': self.schema_dir,
             'basedn': self.basedn,
             'rootdn': self.rootdn,
-            'rootpw': self.rootpw,
+            'rootpw': rootpw,
         }
         if isinstance(slapd_config, unicode):
             slapd_config = slapd_config.encode(self.coding)

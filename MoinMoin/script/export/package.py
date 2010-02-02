@@ -25,7 +25,7 @@ Detailed Instructions:
 General syntax: moin [options] export package [package-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [package-options] see below:
     0. You must run this script as owner of the wiki files, usually this is the

@@ -7,9 +7,10 @@
     TODO: use ActionBase class
 
     @copyright: 2005 MoinMoin:AlexanderSchremmer
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-
+import cStringIO
 import os
 import zipfile
 from datetime import datetime
@@ -33,9 +34,7 @@ class PackagePages:
 
     def allowed(self):
         """ Check if user is allowed to do this. """
-        may = self.request.user.may
-        return (not self.__class__.__name__ in self.request.cfg.actions_excluded and
-                may.write(self.pagename))
+        return not self.__class__.__name__ in self.request.cfg.actions_excluded
 
     def render(self):
         """ Render action
@@ -44,9 +43,8 @@ class PackagePages:
         redirects to new page.
         """
         _ = self.request.getText
-        form = self.request.form
 
-        if 'cancel' in form:
+        if 'cancel' in self.request.values:
             # User canceled
             return self.page.send_page()
 
@@ -65,14 +63,13 @@ class PackagePages:
     def package(self):
         """ Calls collectpackage() with the arguments specified. """
         _ = self.request.getText
-        form = self.request.form
 
         # Get new name from form and normalize.
-        pagelist = form.get('pagelist', [u''])[0]
-        packagename = form.get('packagename', [u''])[0]
-        include_attachments = form.get('include_attachments', [False])[0]
+        pagelist = self.request.values.get('pagelist', u'')
+        packagename = self.request.values.get('packagename', u'')
+        include_attachments = self.request.values.get('include_attachments', False)
 
-        if not form.get('submit', [None])[0]:
+        if not self.request.values.get('submit'):
             self.request.theme.add_msg(self.makeform(), "dialog")
             raise ActionError
 
@@ -82,26 +79,14 @@ class PackagePages:
             self.request.theme.add_msg(self.makeform(_('Invalid filename "%s"!') % wikiutil.escape(packagename)), "error")
             raise ActionError
 
-        # get directory, and possibly create it
-        attach_dir = Page(self.request, self.page.page_name).getPagePath("attachments", check_create=1)
-        fpath = os.path.join(attach_dir, target).encode(config.charset)
-        if os.path.exists(fpath):
-            self.request.theme.add_msg(_("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-                'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)}, "error")
-            raise ActionError
-
-        # Generate a package
-        output = open(fpath, "wb")
-        package = self.collectpackage(unpackLine(pagelist, ","), output, target, include_attachments)
-
-        if package:
-            self.request.theme.add_msg(self.makeform(), "dialog")
-            raise ActionError
-
-        _addLogEntry(self.request, 'ATTNEW', self.pagename, target)
-
-        self.request.theme.add_msg(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))
-        raise ActionError
+        request = self.request
+        filelike = cStringIO.StringIO()
+        package = self.collectpackage(unpackLine(pagelist, ","), filelike, target, include_attachments)
+        request.content_type = 'application/zip'
+        request.content_length = filelike.tell()
+        request.headers.add('Content-Disposition', 'inline; filename="%s"' % target)
+        request.write(filelike.getvalue())
+        filelike.close()
 
     def makeform(self, error=""):
         """ Display a package page form
@@ -115,11 +100,10 @@ class PackagePages:
             error = u'<p class="error">%s</p>\n' % error
 
         d = {
-            'baseurl': self.request.getScriptname(),
+            'url': self.request.href(self.pagename),
             'error': error,
             'action': self.__class__.__name__,
             'pagename': wikiutil.escape(self.pagename, True),
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'include_attachments_label': _('Include all attachments?'),
             'package': _('Package pages'),
             'cancel': _('Cancel'),
@@ -128,7 +112,7 @@ class PackagePages:
         }
         form = '''
 %(error)s
-<form method="post" action="%(baseurl)s/%(pagename_quoted)s">
+<form method="post" action="%(url)s">
 <input type="hidden" name="action" value="%(action)s">
 <table>
     <tr>
@@ -196,7 +180,7 @@ class PackagePages:
 
         pages = []
         for pagename in pagelist:
-            pagename = self.request.normalizePagename(pagename)
+            pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
             if pagename:
                 page = Page(self.request, pagename)
                 if page.exists() and self.request.user.may.read(pagename):

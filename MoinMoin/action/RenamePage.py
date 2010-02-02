@@ -45,9 +45,9 @@ class RenamePage(ActionBase):
         """ Rename this page to "pagename" """
         _ = self._
         form = self.form
-        newpagename = form.get('newpagename', [u''])[0]
-        newpagename = self.request.normalizePagename(newpagename)
-        comment = form.get('comment', [u''])[0]
+        newpagename = form.get('newpagename', u'')
+        newpagename = wikiutil.normalize_pagename(newpagename, self.cfg)
+        comment = form.get('comment', u'')
         comment = wikiutil.clean_input(comment)
 
         self.page = PageEditor(self.request, self.pagename)
@@ -57,11 +57,10 @@ class RenamePage(ActionBase):
             return success, msgs
 
         rename_subpages = 0
-        if 'rename_subpages' in form:
-            try:
-                rename_subpages = int(form['rename_subpages'][0])
-            except:
-                pass
+        try:
+            rename_subpages = int(form['rename_subpages'])
+        except:
+            pass
 
         if rename_subpages and self.subpages:
             for name in self.subpages:
@@ -84,10 +83,9 @@ class RenamePage(ActionBase):
         _ = self._
         if self.subpages:
             subpages = ' '.join(self.subpages)
-
             d = {
                 'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
+                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
                 'subpage_label': _('Rename all /subpages too?'),
                 'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),

@@ -16,23 +16,6 @@ from distutils.command.build_scripts import build_scripts
 
 from MoinMoin.version import release, revision
 
-# we need this for distutils from python 2.3 compatibility, python 2.4 has the
-# 'package_data' keyword to the 'setup' function to install data in packages
-# see http://wiki.python.org/moin/DistutilsInstallDataScattered
-from distutils.command.install_data import install_data
-class smart_install_data(install_data):
-    def run(self):
-        i18n_data_files = [(target, files) for (target, files) in self.data_files if target.startswith('MoinMoin/i18n')]
-        share_data_files = [(target, files) for (target, files) in self.data_files if target.startswith('share/moin')]
-        # first install the share/moin stuff:
-        self.data_files = share_data_files
-        install_data.run(self)
-        # now we need to install the *.po files to the package dir:
-        # need to change self.install_dir to the library dir
-        install_cmd = self.get_finalized_command('install')
-        self.install_dir = getattr(install_cmd, 'install_lib')
-        self.data_files = i18n_data_files
-        return install_data.run(self)
 
 #############################################################################
 ### Helpers
@@ -105,6 +88,26 @@ def visit((prefix, strip, found), dirname, names):
     destination = os.path.join(prefix, dirname[strip:])
     found.append((destination, files))
 
+def make_filelist(dir, strip_prefix=''):
+    """ package_data is pretty stupid: if the globs that can be given there
+        match a directory, then setup.py install will fall over that later,
+        because it expects only files.
+        Use make_filelist(dir, strip) to create a list of all FILES below dir,
+        stripping off the strip_prefix at the left side.
+    """
+    found = []
+    def _visit((found, strip), dirname, names):
+        files = []
+        for name in names:
+            path = os.path.join(dirname, name)
+            if os.path.isfile(path):
+                if path.startswith(strip):
+                    path = path[len(strip):]
+                files.append(path)
+        found.extend(files)
+
+    os.path.walk(dir, _visit, (found, strip_prefix))
+    return found
 
 #############################################################################
 ### Build script files
@@ -272,8 +275,11 @@ Topic :: Text Processing :: Markup""".splitlines(),
         'MoinMoin',
         'MoinMoin.action',
         'MoinMoin.auth',
+        'MoinMoin.auth.openidrp_ext',
         'MoinMoin.config',
         'MoinMoin.converter',
+        'MoinMoin.datastruct',
+        'MoinMoin.datastruct.backends',
         'MoinMoin.events',
         'MoinMoin.filter',
         'MoinMoin.formatter',
@@ -283,7 +289,6 @@ Topic :: Text Processing :: Markup""".splitlines(),
         'MoinMoin.macro',
         'MoinMoin.mail',
         'MoinMoin.parser',
-        'MoinMoin.request',
         'MoinMoin.script',
         'MoinMoin.script.account',
         'MoinMoin.script.cli',
@@ -298,16 +303,30 @@ Topic :: Text Processing :: Markup""".splitlines(),
         'MoinMoin.script.server',
         'MoinMoin.script.xmlrpc',
         'MoinMoin.search',
+        'MoinMoin.search.Xapian',
+        'MoinMoin.search.queryparser',
         'MoinMoin.security',
-        'MoinMoin.server',
         'MoinMoin.stats',
         'MoinMoin.support',
-        'MoinMoin.support.xapwrap',
+        'MoinMoin.support.flup',
+        'MoinMoin.support.flup.client',
+        'MoinMoin.support.flup.server',
+        'MoinMoin.support.pygments',
+        'MoinMoin.support.pygments.filters',
+        'MoinMoin.support.pygments.formatters',
+        'MoinMoin.support.pygments.lexers',
+        'MoinMoin.support.pygments.styles',
+        'MoinMoin.support.werkzeug',
+        'MoinMoin.support.werkzeug.contrib',
+        'MoinMoin.support.werkzeug.debug',
+        'MoinMoin.support.xappy',
         'MoinMoin.support.parsedatetime',
         'MoinMoin.theme',
         'MoinMoin.userform',
         'MoinMoin.userprefs',
         'MoinMoin.util',
+        'MoinMoin.web',
+        'MoinMoin.web.static',
         'MoinMoin.widget',
         'MoinMoin.wikixml',
         'MoinMoin.xmlrpc',
@@ -316,17 +335,21 @@ Topic :: Text Processing :: Markup""".splitlines(),
         #'MoinMoin._tests',
     ],
 
-    # We can use package_* instead of the smart_install_data hack when we
-    # require Python 2.4.
-    #'package_dir': { 'MoinMoin.i18n': 'MoinMoin/i18n', },
-    #'package_data': { 'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
-    #                                    '*.po',
-    #                                    'tools/*',], },
+    'package_dir': {'MoinMoin.i18n': 'MoinMoin/i18n',
+                    'MoinMoin.web.static': 'MoinMoin/web/static',
+                   },
+    'package_data': {'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
+                                       '*.po',
+                                       'tools/*',
+                                       'jabberbot/*',
+                                      ],
+                     'MoinMoin.web.static': make_filelist('MoinMoin/web/static/htdocs',
+                                                          strip_prefix='MoinMoin/web/static/'),
+                    },
 
     # Override certain command classes with our own ones
     'cmdclass': {
         'build_scripts': build_scripts_moin,
-        'install_data': smart_install_data, # hack needed for 2.3
     },
 
     'scripts': moin_scripts,
@@ -334,7 +357,7 @@ Topic :: Text Processing :: Markup""".splitlines(),
     # This copies the contents of wiki dir under sys.prefix/share/moin
     # Do not put files that should not be installed in the wiki dir, or
     # clean the dir before you make the distribution tarball.
-    'data_files': makeDataFiles('share/moin', 'wiki') + makeDataFiles('MoinMoin/i18n', 'MoinMoin/i18n')
+    'data_files': makeDataFiles('share/moin', 'wiki')
 }
 
 if hasattr(distutils.dist.DistributionMetadata, 'get_keywords'):
@@ -344,13 +367,14 @@ if hasattr(distutils.dist.DistributionMetadata, 'get_platforms'):
     setup_args['platforms'] = "any"
 
 
-try:
-    setup(**setup_args)
-except distutils.errors.DistutilsPlatformError, ex:
-    print
-    print str(ex)
+if __name__ == '__main__':
+    try:
+        setup(**setup_args)
+    except distutils.errors.DistutilsPlatformError, ex:
+        print
+        print str(ex)
 
-    print """
+        print """
 POSSIBLE CAUSE
 
 "distutils" often needs developer support installed to work
@@ -359,5 +383,5 @@ called "python%d.%d-dev(el)".
 
 Please contact the system administrator to have it installed.
 """ % sys.version_info[:2]
-    sys.exit(1)
+        sys.exit(1)
 

@@ -7,6 +7,7 @@ MoinMoin - cli show script
 """
 
 from MoinMoin.script import MoinScript
+from MoinMoin.wsgiapp import run
 
 class PluginScript(MoinScript):
     """\
@@ -19,7 +20,7 @@ Detailed Instructions:
 General syntax: moin [options] cli show
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 """
 
     def __init__(self, argv, def_values):
@@ -27,4 +28,4 @@ General syntax: moin [options] cli show
 
     def mainloop(self):
         self.init_request()
-        self.request.run()
+        run(self.request)
