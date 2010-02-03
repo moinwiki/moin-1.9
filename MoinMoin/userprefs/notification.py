@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import events
+from MoinMoin import events, wikiutil
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 
@@ -46,8 +46,6 @@ class Settings(UserPrefBase):
         _ = self._
         form = self.request.form
 
-        if self.request.request_method != 'POST':
-            return
         theuser = self.request.user
         if not theuser:
             return
@@ -76,9 +74,16 @@ class Settings(UserPrefBase):
 
     def handle_form(self):
         _ = self._
-        form = self.request.form
+        request = self.request
+        form = request.form
 
         if form.has_key('cancel'):
+            return
+
+        if request.request_method != 'POST':
+            return
+
+        if not wikiutil.checkTicket(request, form.get('ticket', [''])[0]):
             return
 
         if form.has_key('save'): # Save user profile
@@ -137,6 +142,9 @@ class Settings(UserPrefBase):
 
         self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
+
+        ticket = wikiutil.createTicket(self.request)
+        self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
 
         if (not (self.cfg.mail_enabled and self.request.user.email)
             and not (self.cfg.jabber_enabled and self.request.user.jid)):
