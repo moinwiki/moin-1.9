@@ -53,6 +53,8 @@ def do_user_browser(request):
         url = request.page.url(request)
         ret = html.FORM(action=url)
         ret.append(html.INPUT(type='hidden', name='action', value='userprofile'))
+        ticket = wikiutil.createTicket(request, action='userprofile')
+        ret.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
         ret.append(html.INPUT(type='hidden', name='name', value=account.name))
         ret.append(html.INPUT(type='hidden', name='key', value="disabled"))
         ret.append(html.INPUT(type='hidden', name='val', value=val))
