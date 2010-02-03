@@ -22,6 +22,9 @@ def _create_user(request):
     if request.request_method != 'POST':
         return
 
+    if not wikiutil.checkTicket(request, form.get('ticket', [''])[0]):
+        return
+
     if not TextCha(request).check_answer_from_form():
         return _('TextCha: Wrong answer! Go back and try again...')
 
@@ -97,6 +100,10 @@ def _create_form(request):
     url = request.page.url(request)
     ret = html.FORM(action=url)
     ret.append(html.INPUT(type='hidden', name='action', value='newaccount'))
+
+    ticket = wikiutil.createTicket(request)
+    ret.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
+
     lang_attr = request.theme.ui_lang_attr()
     ret.append(html.Raw('<div class="userpref"%s>' % lang_attr))
     tbl = html.TABLE(border="0")
