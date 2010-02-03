@@ -50,7 +50,10 @@ from MoinMoin.auth import BaseAuth, GivenAuth
 
 class HTTPAuth(GivenAuth):
     name = 'http'  # GivenAuth uses 'given'
-    logging.warning("DEPRECATED use of MoinMoin.auth.http.HTTPAuth, please read instructions there or docs/CHANGES!")
+
+    def __init__(self, *args, **kwargs):
+        logging.warning("DEPRECATED use of MoinMoin.auth.http.HTTPAuth, please read instructions there or docs/CHANGES!")
+        GivenAuth.__init__(self, *args, **kwargs)
 
 
 class HTTPAuthMoin(BaseAuth):
