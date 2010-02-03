@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.Page import Page
-from MoinMoin import user
+from MoinMoin import user, wikiutil
 
 def execute(pagename, request):
     """ set values in user profile """
@@ -16,7 +16,8 @@ def execute(pagename, request):
 
     if not request.user.isSuperUser():
         request.theme.add_msg(_("Only superuser is allowed to use this action."), "error")
-    else:
+    elif (request.request_method == 'POST' and
+          wikiutil.checkTicket(request, form.get('ticket', [''])[0])):
         user_name = form.get('name', [''])[0]
         key = form.get('key', [''])[0]
         val = form.get('val', [''])[0]
