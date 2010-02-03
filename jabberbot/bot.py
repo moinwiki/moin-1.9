@@ -33,7 +33,9 @@ def _check_xmpp_version():
         msg.add_content(form)
     except TypeError:
         print 'Your version of pyxmpp is too old!'
-        print 'You need a least revision 665 to run this bot. Exiting...'
+        print 'You need a least pyxmpp SVN revision 665 to run this bot.'
+        print 'pyxmpp release 1.0.1 works, too.'
+        print 'Exiting...'
         sys.exit(1)
 
 def main():

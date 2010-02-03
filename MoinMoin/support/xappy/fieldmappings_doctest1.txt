@@ -1,0 +1,9 @@
+
+
+Test basic workings of the FieldMappings.
+
+>>> maps = FieldMappings()
+>>> maps.get_fieldname_from_prefix('XA')
+>>> maps.add_prefix('foo')
+>>> maps.get_fieldname_from_prefix('XA')
+'foo'

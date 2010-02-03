@@ -109,7 +109,8 @@ class ItemCache:
             (for 'meta') or the complete cache ('pagelists').
             @param request: the request object
         """
-        elog = request.editlog
+        from MoinMoin.logfile import editlog
+        elog = editlog.EditLog(request)
         old_pos = self.log_pos
         new_pos, items = elog.news(old_pos)
         if items:
@@ -753,6 +754,9 @@ class Page(object):
                 url = "%s/%s/%s" % (request.cfg.url_prefix_action, action, url)
             url = '%s?%s' % (url, querystr)
 
+        if not relative:
+            url = '%s/%s' % (request.script_root, url)
+
         # Add anchor
         if anchor:
             fmt = getattr(self, 'formatter', request.html_formatter)
@@ -760,8 +764,6 @@ class Page(object):
                 anchor = fmt.sanitize_to_id(anchor)
             url = "%s#%s" % (url, anchor)
 
-        if not relative:
-            url = '%s/%s' % (request.getScriptname(), url)
         return url
 
     def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
@@ -959,33 +961,33 @@ class Page(object):
         pi['acl'] = security.AccessControlList(request.cfg, acl)
         return pi
 
-    def send_raw(self, content_disposition=None):
+    def send_raw(self, content_disposition=None, mimetype=None):
         """ Output the raw page data (action=raw).
             With no content_disposition, the browser usually just displays the
             data on the screen, with content_disposition='attachment', it will
             offer a dialogue to save it to disk (used by Save action).
+            Supplied mimetype overrides default text/plain.
         """
         request = self.request
-        request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
+        request.mimetype = mimetype or 'text/plain'
         if self.exists():
             # use the correct last-modified value from the on-disk file
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
-            request.setHttpHeader("Status: 200 OK")
-            request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
+            request.status_code = 200
+            request.last_modified = os.path.getmtime(self._text_filename())
             text = self.encodeTextMimeType(self.body)
             #request.setHttpHeader("Content-Length: %d" % len(text))  # XXX WRONG! text is unicode obj, but we send utf-8!
             if content_disposition:
                 # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
                 # There is no solution that is compatible to IE except stripping non-ascii chars
                 filename_enc = "%s.txt" % self.page_name.encode(config.charset)
-                request.setHttpHeader('Content-Disposition: %s; filename="%s"' % (
-                                      content_disposition, filename_enc))
+                dispo_string = '%s; filename="%s"' % (content_disposition, filename_enc)
+                request.headers.add('Content-Disposition', dispo_string)
         else:
-            request.setHttpHeader('Status: 404 NOTFOUND')
+            request.status_code = 404
             text = u"Page %s not found." % self.page_name
 
-        request.emit_http_headers()
         request.write(text)
 
     def send_page(self, **keywords):
@@ -1010,11 +1012,11 @@ class Page(object):
         send_special = keywords.get('send_special', False)
         print_mode = keywords.get('print_mode', 0)
         if print_mode:
-            media = 'media' in request.form and request.form['media'][0] or 'print'
+            media = request.values.get('media', 'print')
         else:
             media = 'screen'
         self.hilite_re = (keywords.get('hilite_re') or
-                          request.form.get('highlight', [None])[0])
+                          request.values.get('highlight'))
 
         # count hit?
         if keywords.get('count_hit', 0):
@@ -1025,7 +1027,7 @@ class Page(object):
         pi = self.pi
 
         if 'redirect' in pi and not (
-            'action' in request.form or 'redirect' in request.form or content_only):
+            'action' in request.values or 'redirect' in request.values or content_only):
             # redirect to another page
             # note that by including "action=show", we prevent endless looping
             # (see code in "request") or any cascaded redirection
@@ -1054,8 +1056,6 @@ class Page(object):
             try:
                 self.formatter.set_highlight_re(self.hilite_re)
             except re.error, err:
-                if 'highlight' in request.form:
-                    del request.form['highlight']
                 request.theme.add_msg(_('Invalid highlighting regular expression "%(regex)s": %(error)s') % {
                                           'regex': self.hilite_re,
                                           'error': str(err),
@@ -1065,12 +1065,12 @@ class Page(object):
         if 'deprecated' in pi:
             # deprecated page, append last backup version to current contents
             # (which should be a short reason why the page is deprecated)
-            request.theme.add_msg(_('The backed up content of this page is deprecated and will not be included in search results!'), "warning")
+            request.theme.add_msg(_('The backed up content of this page is deprecated and will rank lower in search results!'), "warning")
 
             revisions = self.getRevList()
             if len(revisions) >= 2: # XXX shouldn't that be ever the case!? Looks like not.
                 oldpage = Page(request, self.page_name, rev=revisions[1])
-                body += oldpage.get_raw_body()
+                body += oldpage.get_data()
                 del oldpage
 
         lang = self.pi.get('language', request.cfg.language_default)
@@ -1080,12 +1080,12 @@ class Page(object):
         page_exists = self.exists()
         if not content_only:
             if emit_headers:
-                request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
+                request.content_type = "%s; charset=%s" % (self.output_mimetype, self.output_charset)
                 if page_exists:
                     if not request.user.may.read(self.page_name):
-                        request.setHttpHeader('Status: 403 Permission Denied')
+                        request.status_code = 403
                     else:
-                        request.setHttpHeader('Status: 200 OK')
+                        request.status_code = 200
                     if not request.cacheable:
                         # use "nocache" headers if we're using a method that is not simply "display"
                         request.disableHttpCaching(level=2)
@@ -1100,8 +1100,7 @@ class Page(object):
                         #request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(lastmod))
                         pass
                 else:
-                    request.setHttpHeader('Status: 404 NOTFOUND')
-                request.emit_http_headers()
+                    request.status_code = 404
 
             if not page_exists and self.request.isSpiderAgent:
                 # don't send any 404 content to bots
@@ -1120,8 +1119,8 @@ class Page(object):
 
                 # This redirect message is very annoying.
                 # Less annoying now without the warning sign.
-                if 'redirect' in request.form:
-                    redir = request.form['redirect'][0]
+                if 'redirect' in request.values:
+                    redir = request.values['redirect']
                     request.theme.add_msg('<strong>%s</strong><br>' % (
                         _('Redirected from page "%(page)s"') % {'page':
                             wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))}), "info")
@@ -1146,12 +1145,11 @@ class Page(object):
                         openid_username = self.pi['openid.user']
                         userid = user.getUserId(request, openid_username)
 
-                    if request.cfg.openid_server_restricted_users_group:
-                        request.dicts.addgroup(request,
-                                               request.cfg.openid_server_restricted_users_group)
-
-                    if userid is not None and not request.cfg.openid_server_restricted_users_group or \
-                      request.dicts.has_member(request.cfg.openid_server_restricted_users_group, openid_username):
+                    openid_group_name = request.cfg.openid_server_restricted_users_group
+                    if userid is not None and (
+                        not openid_group_name or (
+                            openid_group_name in request.groups and
+                            openid_username in request.groups[openid_group_name])):
                         html_head = '<link rel="openid2.provider" href="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
                                                                                 querystr={'action': 'serveopenid'})), True)
@@ -1604,12 +1602,6 @@ class Page(object):
 
         return Page(self.request, self.page_name, rev=lastRevision).parseACL()
 
-    def clean_acl_cache(self):
-        """
-        Clean ACL cache entry of this page (used by PageEditor on save)
-        """
-        pass # should not be necessary any more as the new cache watches edit-log for changes
-
     # Text format -------------------------------------------------------
 
     def encodeTextMimeType(self, text):
@@ -1868,9 +1860,7 @@ class RootPage(Page):
             # WARNING: SLOW
             pages = self.getPageList(user='')
         else:
-            pages = self.request.pages
-            if not pages:
-                pages = self._listPages()
+            pages = self._listPages()
         count = len(pages)
         self.request.clock.stop('getPageCount')
 

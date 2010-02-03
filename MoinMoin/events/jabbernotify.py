@@ -37,6 +37,9 @@ def handle(event):
         return handle_jid_changed(event)
     elif isinstance(event, ev.FileAttachedEvent):
         return handle_file_attached(event)
+    # TODO (needs also corresponding changes in xmppbot + testing)
+    #elif isinstance(event, ev.FileRemovedEvent):
+    #    return handle_file_removed(event)
     elif isinstance(event, ev.PageDeletedEvent):
         return handle_page_deleted(event)
     elif isinstance(event, ev.PageRenamedEvent):
@@ -115,6 +118,7 @@ def handle_page_deleted(event):
     notification.filter_subscriber_list(event, subscribers, True)
     return page_change("page_deleted", request, page, subscribers)
 
+
 def handle_page_renamed(event):
     """Handles event sent when a page is renamed"""
 
@@ -178,6 +182,7 @@ def page_change(change_type, request, page, subscribers, **kwargs):
 
         if recipients:
             return notification.Success(recipients)
+
 
 def send_notification(request, jids, notification):
     """ Send notifications for a single language.

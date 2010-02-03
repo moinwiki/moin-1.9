@@ -164,7 +164,7 @@ class MoinScript(Script):
         )
         self.parser.add_option(
             "--wiki-url", metavar="WIKIURL", dest="wiki_url",
-            help="URL of a single wiki to migrate e.g. localhost/mywiki/ [default: CLI]"
+            help="URL of a single wiki to migrate e.g. http://localhost/mywiki/ [default: CLI]"
         )
         self.parser.add_option(
             "--page", dest="page", default='',
@@ -173,11 +173,9 @@ class MoinScript(Script):
 
     def init_request(self):
         """ create request """
-        from MoinMoin.request import request_cli
-        if self.options.wiki_url:
-            self.request = request_cli.Request(self.options.wiki_url, self.options.page)
-        else:
-            self.request = request_cli.Request(pagename=self.options.page)
+        from MoinMoin.web.contexts import ScriptContext
+        url = self.options.wiki_url or None
+        self.request = ScriptContext(url, self.options.page)
 
     def mainloop(self):
         # Insert config dir or the current directory to the start of the path.
@@ -226,7 +224,7 @@ General options:
         Mandatory for most commands and specifies the directory that contains
         your wikiconfig.py (or farmconfig.py).
 
-    --wiki-url=wiki.example.org/
+    --wiki-url=http://wiki.example.org/
         Mandatory for most commands and specifies the url of the wiki you like
         to operate on.
 

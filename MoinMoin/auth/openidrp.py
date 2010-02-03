@@ -5,6 +5,9 @@
     @copyright: 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.util.moinoid import MoinOpenIDStore
 from MoinMoin import user
 from MoinMoin.auth import BaseAuth
@@ -15,12 +18,13 @@ from MoinMoin.widget import html
 from MoinMoin.auth import CancelLogin, ContinueLogin
 from MoinMoin.auth import MultistageFormLogin, MultistageRedirectLogin
 from MoinMoin.auth import get_multistage_continuation_url
-
+from werkzeug.utils import url_encode
 
 class OpenIDAuth(BaseAuth):
     login_inputs = ['openid_identifier']
     name = 'openid'
     logout_possible = True
+    auth_attribs = ()
 
     def __init__(self, modify_request=None,
                        update_user=None,
@@ -28,9 +32,9 @@ class OpenIDAuth(BaseAuth):
                        forced_service=None,
                        idselector_com=None):
         BaseAuth.__init__(self)
-        self._modify_request = modify_request or (lambda x: None)
-        self._update_user = update_user or (lambda i, u: None)
-        self._create_user = create_user or (lambda i, u: None)
+        self._modify_request = modify_request or (lambda x, c: None)
+        self._update_user = update_user or (lambda i, u, c: None)
+        self._create_user = create_user or (lambda i, u, c: None)
         self._forced_service = forced_service
         self._idselector_com = idselector_com
         if forced_service:
@@ -41,13 +45,14 @@ class OpenIDAuth(BaseAuth):
         if create:
             # pass in a created but unsaved user object
             u = user.User(request, auth_method=self.name,
-                          auth_username=request.session['openid.id'])
+                          auth_username=request.session['openid.id'],
+                          auth_attribs=self.auth_attribs)
             # invalid name
             u.name = ''
-            u = self._create_user(request.session['openid.info'], u)
+            u = self._create_user(request.session['openid.info'], u, request.cfg)
 
         if u:
-            self._update_user(request.session['openid.info'], u)
+            self._update_user(request.session['openid.info'], u, request.cfg)
 
             # just in case the wiki admin screwed up
             if (not user.isValidName(request, u.name) or
@@ -71,6 +76,7 @@ class OpenIDAuth(BaseAuth):
         # that they want to use on this wiki
         # XXX: request nickname from OP and suggest using it
         # (if it isn't in use yet)
+        logging.debug("running _get_account_name")
         _ = request.getText
         form.append(html.INPUT(type='hidden', name='oidstage', value='2'))
         table = html.TABLE(border='0')
@@ -135,16 +141,19 @@ username and leave the password field blank.""")))
         oidconsumer = consumer.Consumer(request.session,
                                         MoinOpenIDStore(request))
         query = {}
-        for key in request.form:
-            query[key] = request.form[key][0]
+        for key in request.values.keys():
+            query[key] = request.values.get(key)
         current_url = get_multistage_continuation_url(request, self.name,
                                                       {'oidstage': '1'})
         info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
+            logging.debug(_("OpenID error: %s.") % info.message)
             return CancelLogin(_('OpenID error: %s.') % info.message)
         elif info.status == consumer.CANCEL:
+            logging.debug(_("OpenID verification canceled."))
             return CancelLogin(_('Verification canceled.'))
         elif info.status == consumer.SUCCESS:
+            logging.debug(_("OpenID success. id: %s") % info.identity_url)
             request.session['openid.id'] = info.identity_url
             request.session['openid.info'] = info
 
@@ -152,7 +161,8 @@ username and leave the password field blank.""")))
             uid = user.getUserIdByOpenId(request, info.identity_url)
             if uid:
                 u = user.User(request, id=uid, auth_method=self.name,
-                              auth_username=info.identity_url)
+                              auth_username=info.identity_url,
+                              auth_attribs=self.auth_attribs)
             else:
                 u = None
 
@@ -163,17 +173,19 @@ username and leave the password field blank.""")))
 
             # if no user found, then we need to ask for a username,
             # possibly associating an existing account.
-            request.session['openid.id'] = info.identity_url
+            logging.debug("OpenID: No user found, prompting for username")
+            #request.session['openid.id'] = info.identity_url
             return MultistageFormLogin(self._get_account_name)
         else:
+            logging.debug(_("OpenID failure"))
             return CancelLogin(_('OpenID failure.'))
 
     def _handle_name_continuation(self, request):
         if not 'openid.id' in request.session:
-            return CancelLogin(None)
+            return CancelLogin(_('No OpenID found in session.'))
 
         _ = request.getText
-        newname = request.form.get('username', [''])[0]
+        newname = request.form.get('username', '')
         if not newname:
             return MultistageFormLogin(self._get_account_name)
         if not user.isValidName(request, newname):
@@ -184,7 +196,8 @@ username and leave the password field blank.""")))
         if not uid:
             # we can create a new user with this name :)
             u = user.User(request, auth_method=self.name,
-                          auth_username=request.session['openid.id'])
+                          auth_username=request.session['openid.id'],
+                          auth_attribs=self.auth_attribs)
             u.name = newname
             u = self._handle_user_data(request, u)
             return ContinueLogin(u)
@@ -195,16 +208,17 @@ username and leave the password field blank.""")))
 
     def _handle_associate_continuation(self, request):
         if not 'openid.id' in request.session:
-            return CancelLogin(None)
+            return CancelLogin(_('No OpenID found in session.'))
 
         _ = request.getText
-        username = request.form.get('username', [''])[0]
-        password = request.form.get('password', [''])[0]
+        username = request.form.get('username', '')
+        password = request.form.get('password', '')
         if not password:
             return self._handle_name_continuation(request)
         u = user.User(request, name=username, password=password,
                       auth_method=self.name,
-                      auth_username=request.session['openid.id'])
+                      auth_username=request.session['openid.id'],
+                      auth_attribs=self.auth_attribs)
         if u.valid:
             self._handle_user_data(request, u)
             return ContinueLogin(u, _('Your account is now associated to your OpenID.'))
@@ -214,14 +228,19 @@ username and leave the password field blank.""")))
             return MultistageFormLogin(assoc)
 
     def _handle_continuation(self, request):
-        oidstage = request.form.get('oidstage', [0])[0]
+        _ = request.getText
+        oidstage = request.values.get('oidstage')
         if oidstage == '1':
+            logging.debug('OpenID: handle verify continuation')
             return self._handle_verify_continuation(request)
         elif oidstage == '2':
+            logging.debug('OpenID: handle name continuation')
             return self._handle_name_continuation(request)
         elif oidstage == '3':
+            logging.debug('OpenID: handle associate continuation')
             return self._handle_associate_continuation(request)
-        return CancelLogin(None)
+        logging.debug('OpenID error: unknown continuation stage')
+        return CancelLogin(_('OpenID error: unknown continuation stage'))
 
     def _openid_form(self, request, form, oidhtml):
         _ = request.getText
@@ -254,7 +273,7 @@ document.getElementById("openid_message").submit();
         _ = request.getText
 
         # user entered something but the session can't be stored
-        if not request.session.is_stored:
+        if not request.cfg.cookie_lifetime[0]:
             return ContinueLogin(user_obj,
                                  _('Anonymous sessions need to be enabled for OpenID login.'))
 
@@ -278,11 +297,11 @@ document.getElementById("openid_message").submit();
             if oidreq is None:
                 return ContinueLogin(None, _('No OpenID.'))
 
-            self._modify_request(oidreq)
+            self._modify_request(oidreq, request.cfg)
 
             return_to = get_multistage_continuation_url(request, self.name,
                                                         {'oidstage': '1'})
-            trust_root = request.getBaseURL()
+            trust_root = request.url_root
             if oidreq.shouldSendRedirect():
                 redirect_url = oidreq.redirectURL(trust_root, return_to)
                 return MultistageRedirectLogin(redirect_url)

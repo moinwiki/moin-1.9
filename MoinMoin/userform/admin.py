@@ -3,18 +3,24 @@
     MoinMoin - User account administration
 
     @copyright: 2001-2004 Juergen Hermann <jh@web.de>,
-                2003-2007 MoinMoin:ThomasWaldmann
-                2007-2008 MoinMoin:ReimarBauer
+                2003-2007 MoinMoin:ThomasWaldmann,
+                2007-2008 MoinMoin:ReimarBauer,
+                2009 MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 """
+
+
 from MoinMoin import user, wikiutil
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
+from MoinMoin.datastruct.backends.wiki_groups import WikiGroup
+
 
 def do_user_browser(request):
     """ Browser for SystemAdmin macro. """
     _ = request.getText
+    groups = request.groups
 
     data = TupleDataset()
     data.columns = [
@@ -25,16 +31,18 @@ def do_user_browser(request):
         Column('action', label=_('Action')),
     ]
 
-    isgroup = request.cfg.cache.page_group_regexact.search
-    groupnames = request.rootpage.getPageList(user='', filter=isgroup)
-
     # Iterate over users
     for uid in user.getUserList(request):
         account = user.User(request, uid)
 
-        grouppage_links = ', '.join([Page(request, groupname).link_to(request)
-                                     for groupname in groupnames
-                                     if request.dicts.has_member(groupname, account.name)])
+        account_groups = set(groups.groups_with_member(account.name))
+        wiki_groups = set([group for group in account_groups if isinstance(groups[group], WikiGroup)])
+        other_groups = list(account_groups - wiki_groups)
+
+        # First show groups that are defined in wikipages linking to it
+        # after show groups from other backends.
+        grouppage_links = ', '.join([Page(request, group_name).link_to(request) for group_name in wiki_groups] +
+                                    other_groups)
 
         userhomepage = Page(request, account.name)
         if userhomepage.exists():

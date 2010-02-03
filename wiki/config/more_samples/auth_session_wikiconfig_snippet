@@ -12,10 +12,8 @@
     # session cookie settings:
     #cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
     #cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
-    #cookie_lifetime = 12 # 12 hours from now
-
-    # use this if you want sessions for anonymous users, too:
-    #anonymous_session_lifetime = 1 # default: disabled
+    #cookie_lifetime = (0, 12) # 0 -> no session for anon users (not logged in)
+                               # 12 -> 12h session lifetime for logged-in users
 
     # The default (ENABLED) password_checker will keep users from choosing too
     # short or too easy passwords. If you don't like this and your site has
