@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
 """
     MoinMoin - CGI/FCGI Driver script
 
     @copyright: 2000-2005 by Juergen Hermann <jh@web.de>,
                 2008 by MoinMoin:ThomasWaldmann,
-                2008 by MoinMoin:FlorianKrupicka
+                2008 by MoinMoin:FlorianKrupicka,
                 2010 by MoinMoin:RadomirDopieralski
     @license: GNU GPL, see COPYING for details.
 """
@@ -45,9 +44,10 @@ from MoinMoin.web.serving import make_application
 application = make_application(shared=True)
 
 ## Uncomment this if you need to set the SCRIPT_NAME:
-#def application(env, start):
-#    env['SCRIPT_NAME'] = ''
+#def script_fixer(env, start):
+#    env['SCRIPT_NAME'] = ''  # use '' for running at /, '/wiki' for running at /wiki/
 #    return application(env, start)
+#application = script_fixer
 
 ## Choose your server mode (threaded, forking or single-thread)
 try:
@@ -55,8 +55,8 @@ try:
 #    from flup.server.fcgi_fork import WSGIServer
 #    from flup.server.fcgi_single import WSGIServer
 except ImportError:
-    logging.warning("No flup-package installed, only basic CGI "
-                    "support is available.")
+    logging.warning("No flup-package installed, only basic CGI support is available.")
     from MoinMoin.web._fallback_cgi import WSGIServer
 
 WSGIServer(application).run()
+
