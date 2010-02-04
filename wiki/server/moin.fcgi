@@ -41,16 +41,25 @@ logging = log.getLogger(__name__)
 # use shared=False to not have moin serve static docs
 # use shared='/my/path/to/htdocs' to serve static docs from that path
 from MoinMoin.web.serving import make_application
-application = make_application(shared=True)
+app = make_application(shared=True)  # <-- adapt here as needed
 
-## Uncomment this if you need to set the SCRIPT_NAME:
-#def script_fixer(env, start):
-#    env['SCRIPT_NAME'] = ''  # use '' for running at /, '/wiki' for running at /wiki/
-#    return application(env, start)
-#application = script_fixer
+# Is fixing the script name needed?
+# Use None if your url looks like http://domain/wiki/moin.fcgi
+# Use '' if you use rewriting to run at http://domain/
+# Use '/mywiki' if you use rewriting to run at http://domain/mywiki/
+fix_script_name = None  # <-- adapt here as needed
+
+if fix_script_name is None:
+    application = app
+else:
+    def script_name_fixer(env, start):
+        env['SCRIPT_NAME'] = fix_script_name
+        return app(env, start)
+    application = script_name_fixer
 
 ## Choose your server mode (threaded, forking or single-thread)
 try:
+    # v-- adapt here as needed
     from flup.server.fcgi import WSGIServer
 #    from flup.server.fcgi_fork import WSGIServer
 #    from flup.server.fcgi_single import WSGIServer
