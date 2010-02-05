@@ -6,6 +6,7 @@
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 MoinMoin:AlexanderSchremmer
+                2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -13,7 +14,7 @@
 from MoinMoin import module_tested
 
 
-class TestSimpleStuff:
+class TestSimpleStuff(object):
     """ The simplest MoinMoin test class
 
     Class name must start with 'Test' to be included in
@@ -34,7 +35,7 @@ class TestSimpleStuff:
         assert result == expected
 
 
-class TestComplexStuff:
+class TestComplexStuff(object):
     """ Describe these tests here...
 
     Some tests may have a list of tests related to this test case. You

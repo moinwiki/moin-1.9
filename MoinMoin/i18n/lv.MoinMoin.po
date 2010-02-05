@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-01-17 22:54+0100\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -172,11 +172,11 @@ msgid "Comment:"
 msgstr "Komentārs:"
 
 msgid "<No addition>"
-msgstr "<Nav papildus>"
+msgstr "<Nekādas>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr "Pievienot: %(category)s"
+msgstr "Pievienot pie: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Dzēst tukšumus rindu beigās"
@@ -288,7 +288,9 @@ msgstr ""
 msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
-msgstr "Kamēr Jūs labosiet šo lapu, citi tiks ''brīdināti'' līdz %(bumptime)s."
+msgstr ""
+"Kamēr Jūs labosiet šo lapu, pārējie lietotāji tiks ''brīdināti'' līdz %"
+"(bumptime)s."
 
 msgid "Use the Preview button to extend the locking period."
 msgstr "Lai paildzinātu pieejas liegšanas periodu, nospiediet pirmskata pogu."
@@ -320,13 +322,13 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<nezināms>"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Lietotāja vārds: %s\n"
 "\n"
@@ -354,16 +356,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Jūsu viki konta dati"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Nezināma darbība %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
+
+msgid "Login and try again."
+msgstr "Pieslēdzieties un mēģiniet vēlreiz."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Sainim nepieciešama jaunāka MoinMoin versija (vismaz %s)."
 
 msgid "The theme name is not set."
 msgstr "Tēmas nosaukums nav uzstādīts."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
-"serveriem."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -461,11 +473,11 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Nepareiza izcelšanas regulārā izteiksme \"%(regex)s\": %(error)s"
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"Saglabātais lapas saturs ir novecojis un netiks iekļauts meklēšanas "
-"rezultātā!"
+"Saglabātais lapas saturs ir novecojis un tam būs zemāks meklēšanas "
+"kritērijiem atbilstības līmenis!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -717,8 +729,8 @@ msgstr "Dzēstie atzīmēti šādi."
 msgid "Additions are marked like this."
 msgstr "Pievienotie atzīmēti šādi"
 
-msgid "You need to log in."
-msgstr "Nepieciešams pieslēgties."
+msgid "Please log in first."
+msgstr "Lūdzu, sākumā pieslēdzieties"
 
 msgid ""
 "Please choose an account name now.\n"
@@ -745,11 +757,27 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+msgid "OpenID verification canceled."
+msgstr "OpenID verificēšana tika atsaukta."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID veiksmīgs. ID: %s"
+
+msgid "OpenID failure"
+msgstr "OpenID kļūda."
+
+msgid "No OpenID found in session."
+msgstr "OpenID sesijā nav atrasts."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Jūsu konts ir asociēts ar Jūsu OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Parole, kuru Jus ievadījāt, nav derīga."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "OpenID autentificēšanai jābūt iespējotām anonīmām sesijām."
@@ -778,8 +806,14 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
+"Ja Jums nav konta, <a href=\"%(userprefslink)s\">tagad Jūs to varat "
+"izveidot</a>. "
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr "<a href=\"%(sendmypasswordlink)s\">Neaceraties paroli?</a>"
 
 #, fuzzy
 msgid ""
@@ -833,7 +867,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Uzsvērt:: <<Verbatim('')>>''kursīvā''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''treknrakstā'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''treknā "
@@ -869,6 +903,15 @@ msgstr "Nepieciešams skaitlis \"%(arg)s\" pēc \"%(key)s\""
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Nepieciešams krāsas kods \"%(arg)s\" pēc \"%(key)s\""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
+msgstr ""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1024,7 +1067,7 @@ msgid "Email"
 msgstr "E-pasts"
 
 msgid "Jabber ID"
-msgstr ""
+msgstr "Jabber Identifikators"
 
 msgid "User CSS URL"
 msgstr "Lietotāja CSS URL"
@@ -1060,7 +1103,7 @@ msgid "Mail account data"
 msgstr "Sūtīt konta datus"
 
 msgid "OpenID"
-msgstr ""
+msgstr "OpendID"
 
 msgid "Login"
 msgstr "Ieiet"
@@ -1073,18 +1116,6 @@ msgstr "Augšuplādēt jaunu piesaisti \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Iekļautais attēls: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Izveidot jaunu attēlu \"%(filename)s (atvērs jaunā logā)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Labot attēlu %(filename)s (atvērs jaunā logā)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikšķināms attēls %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Pārslēgt rindu numerāciju"
 
@@ -1095,17 +1126,6 @@ msgstr "Versijas %(rev)d atgriešana."
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Pārdēvēta no '%(oldpagename)s'."
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Nezināma darbība %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
-
-msgid "Login and try again."
-msgstr "Pieslēdzieties un mēģiniet vēlreiz."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Opcijas ''--pages'' an ''--search'' ir savstarpēji izslēdzošas!"
@@ -1185,7 +1205,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -1193,7 +1213,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Godājamais \"Superlietotāj\", tikko ir izveidots jauns lietotājs:\n"
+"Godājamais \"Superlietotāj\", tikko vietnē %(sitename)s tika izveidots jauns "
+"lietotājs:\n"
 "\n"
 "    Lietotāja vārds: %(username)s\n"
 "    E-pasta adrese: %(useremail)s"
@@ -1213,6 +1234,29 @@ msgid ""
 "Attachment name: %(attach_name)s\n"
 "Attachment size: %(attach_size)s\n"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgstr "Jauna piesaiste piesaistīta lapai %(pagename)s uz %(sitename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Godājamais Viki lietotāj,\n"
+"\n"
+"Jūs esat parakstījies(-usies) viki lapas izmaiņām vietnē \"%(sitename)s\".\n"
+"\n"
+"Lapu \"%(oldname)s\" ir pārdēvējis par \"%(pagename)s\" lietotājs %(editor)"
+"s:\n"
+"\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1245,6 +1289,10 @@ msgstr "Lapa ir bijusi pārkopēta"
 msgid "A new attachment has been added"
 msgstr "Jauna piesaiste ir bijusi pievienota"
 
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Jauna piesaiste ir bijusi pievienota"
+
 msgid "A page has been reverted to a previous state"
 msgstr "Lapa ir atgriezta uz iepriekšēju stāvokli"
 
@@ -1265,9 +1313,6 @@ msgstr "Mainīta lapa"
 
 msgid "Page changed"
 msgstr "Mainītā lapa"
-
-msgid "about"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -1302,11 +1347,14 @@ msgstr "saskaņa"
 msgid "matches"
 msgstr "saskaņas"
 
-msgid "FrontPage"
-msgstr "SākumLapa"
+msgid "about"
+msgstr "par"
 
 msgid "RecentChanges"
 msgstr "PēdējāsIzmaiņas"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "VirsrakstuRādītājs"
@@ -1317,23 +1365,432 @@ msgstr "PriekšmetuRādītājs"
 msgid "FindPage"
 msgstr "MeklētLapu"
 
-msgid "SiteNavigation"
-msgstr "VietnesNavigācija"
-
-msgid "HelpContents"
-msgstr "PalīdzībasSaturaRādītājs"
-
-msgid "HelpOnFormatting"
-msgstr "FormatēšanasPalīdzība"
-
-msgid "WikiLicense"
-msgstr "VikiLicence"
-
 msgid "MissingPage"
 msgstr "IztrūkstošaLapa"
 
 msgid "MissingHomePage"
 msgstr "IztrūkstošaMājasLapa"
+
+msgid "WikiHomePage"
+msgstr "VikiMājasLapa"
+
+msgid "WikiName"
+msgstr "VikiVārds"
+
+msgid "WikiWikiWeb"
+msgstr "VikiVikiTīmeklis"
+
+msgid "FrontPage"
+msgstr "SākumLapa"
+
+msgid "WikiSandBox"
+msgstr "VikiSmilškaste"
+
+msgid "InterWiki"
+msgstr "StarpViki"
+
+msgid "AbandonedPages"
+msgstr "PamestāsLapas"
+
+msgid "OrphanedPages"
+msgstr "BāreņLapas"
+
+msgid "WantedPages"
+msgstr "MeklētāsLapas"
+
+msgid "EventStats"
+msgstr "NotikumuStatistika"
+
+msgid "EventStats/HitCounts"
+msgstr "NotikumuStatistika/TrāpījumuSkaits"
+
+msgid "EventStats/Languages"
+msgstr "NotikumuStatistika/Valodas"
+
+msgid "EventStats/UserAgents"
+msgstr "NotikumuStatistika/LietotājuAģenti"
+
+msgid "PageSize"
+msgstr "LapasIzmērs"
+
+msgid "PageHits"
+msgstr "LapuTrāpījumi"
+
+msgid "RandomPage"
+msgstr "PatvaļīgaLapu"
+
+msgid "XsltVersion"
+msgstr "XsltVersija"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "VikiLicence"
+
+msgid "CategoryCategory"
+msgstr "KategorijasKategorija"
+
+msgid "CategoryHomepage"
+msgstr "KategorijasMājasLapa"
+
+msgid "CategoryTemplate"
+msgstr "KategorijasVeidne"
+
+msgid "HomepageTemplate"
+msgstr "MājasLapasVeidne"
+
+msgid "HelpTemplate"
+msgstr "PalīdzībasVeidne"
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+msgid "SlideShowTemplate"
+msgstr "SlīdrādesVeidne"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+msgid "HelpOnConfiguration"
+msgstr "KonfigurēšanasPalīdzība"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr ""
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+msgid "HelpOnUpdatingPython"
+msgstr ""
+
+msgid "HelpOnAdministration"
+msgstr ""
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+msgid "HelpOnMoinCommand"
+msgstr ""
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+msgid "HelpOnNotification"
+msgstr ""
+
+msgid "HelpOnSessions"
+msgstr ""
+
+msgid "HelpOnUserHandling"
+msgstr ""
+
+msgid "HelpOnXapian"
+msgstr ""
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+msgid "HelpOnCreoleSyntax"
+msgstr ""
+
+msgid "HelpOnFormatting"
+msgstr "FormatēšanasPalīdzība"
+
+msgid "MoinMoin"
+msgstr ""
+
+msgid "HelpContents"
+msgstr ""
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+msgid "HelpIndex"
+msgstr ""
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+msgid "HelpOnActions"
+msgstr ""
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+msgid "HelpOnAdmonitions"
+msgstr ""
+
+msgid "HelpOnAutoAdmin"
+msgstr ""
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnDrawings"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+msgid "HelpOnEditing"
+msgstr "RediģēšanasPalīdzība"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+msgid "HelpOnGroups"
+msgstr ""
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+msgid "HelpOnImages"
+msgstr ""
+
+msgid "HelpOnLanguages"
+msgstr ""
+
+msgid "HelpOnLinking"
+msgstr ""
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+msgid "HelpOnLists"
+msgstr ""
+
+msgid "HelpOnLogin"
+msgstr ""
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+msgid "HelpOnNavigation"
+msgstr ""
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+msgid "HelpOnPageCreation"
+msgstr ""
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+msgid "HelpOnRules"
+msgstr ""
+
+msgid "HelpOnSearching"
+msgstr "MeklēšanasPalīdzība"
+
+msgid "HelpOnSlideShows"
+msgstr ""
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+msgid "HelpOnSpellCheck"
+msgstr "PareizrakstībasPalīdzība"
+
+msgid "HelpOnSuperUser"
+msgstr "SuperlietotājaPalīdzība"
+
+msgid "HelpOnSynchronisation"
+msgstr "SinhronizēšanasPalīdzība"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+msgid "HelpOnUserPreferences"
+msgstr ""
+
+msgid "HelpOnVariables"
+msgstr ""
+
+msgid "HelpOnXmlPages"
+msgstr ""
+
+msgid "HelpOnComments"
+msgstr ""
+
+msgid "HelpOnSubscribing"
+msgstr ""
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+msgid "WikiCourse/05 User preferences"
+msgstr ""
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+msgid "WikiCourse/18 Attachments"
+msgstr ""
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+msgid "WikiCourse/23 Actions"
+msgstr ""
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+# Svētdiena
+msgid "Sun"
+msgstr "Sv"
 
 # Pirmdiena
 msgid "Mon"
@@ -1358,10 +1815,6 @@ msgstr "Pk"
 # Sestdiena
 msgid "Sat"
 msgstr "Se"
-
-# Svētdiena
-msgid "Sun"
-msgstr "Sv"
 
 msgid "AttachFile"
 msgstr "PievienotFailu"
@@ -1435,9 +1888,6 @@ msgstr "[APAKŠA]"
 msgid "[TOP]"
 msgstr "[AUGŠA]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
-
 msgid "Settings"
 msgstr "Iestatījumi"
 
@@ -1459,6 +1909,9 @@ msgstr "Atrakstīties"
 
 msgid "Home"
 msgstr "Māja"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
 
 msgid "Clear message"
 msgstr "Notīrīt ziņojumu"
@@ -1571,8 +2024,24 @@ msgstr "Datnes piesaistes pārlūks"
 msgid "User account browser"
 msgstr "Lietotāju kontu pārlūks"
 
+#, fuzzy
+msgid "Lexer description"
+msgstr "Apraksts"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Lietotājvārds"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "Faila veids"
+
+#, fuzzy
+msgid "Mimetypes"
+msgstr "jebkurš MIME tips"
+
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Viki konfigurācija"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -1689,23 +2158,20 @@ msgstr "Globālie parsētāji"
 msgid "Local extension parsers"
 msgstr "Lokālo paplašinājumu parsētāji"
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "''Xapian'' un/vai ''Python Xapian'' modulis nav instalēts"
+
 msgid "Disabled"
 msgstr "Izslēgts"
 
 msgid "Enabled"
 msgstr "Ieslēgts"
 
-msgid "index available"
-msgstr "indekss pieejams"
-
 msgid "index unavailable"
 msgstr "indekss nav pieejams"
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "''Xapian'' un/vai ''Python Xapian'' modulis nav instalēts"
-
-msgid "N/A"
-msgstr "Nav pieejams"
+msgid "index available"
+msgstr "indekss pieejams"
 
 msgid "Xapian search"
 msgstr "''Xapian'' meklēšana"
@@ -1715,6 +2181,9 @@ msgstr "Vārdu dalīšana priekš ''Xapian''"
 
 msgid "Active threads"
 msgstr "Aktīvie pavedieni"
+
+msgid "N/A"
+msgstr "Nav pieejams"
 
 msgid "No orphaned pages in this wiki."
 msgstr "Šajā viki nav nevienas bāreņlapas."
@@ -1763,11 +2232,11 @@ msgstr "saturošs vienu vai vairākus no sekojošajiem terminiem"
 msgid "not containing the following terms"
 msgstr "nesaturošu sekojošus terminus"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "pēdējo reizi modificēta kopš (piemēram, pēdējās 2 nedēļās)"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "pēdējo reizi modificēta kopš (piemēram, pirms 2 nedēļām)"
 
 msgid "any category"
-msgstr ""
+msgstr "jebkura kategorija"
 
 msgid "any language"
 msgstr "jebjura valoda"
@@ -1776,7 +2245,7 @@ msgid "any mimetype"
 msgstr "jebkurš MIME tips"
 
 msgid "Categories"
-msgstr ""
+msgstr "Kategorijas"
 
 msgid "Language"
 msgstr "Valoda"
@@ -1812,7 +2281,7 @@ msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."
 
 msgid "Description"
-msgstr ""
+msgstr "Apraksts"
 
 #, python-format
 msgid ""
@@ -1859,6 +2328,10 @@ msgstr "Starts"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "%(pos)d slaids no %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Iet uz lapu"
 
@@ -1901,6 +2374,27 @@ msgstr "Nevar izdzēst Jūsu ātrsaiti uz šo lapu."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Nepieciešama ātrsaite uz šo lapu, lai to varētu izdzēst."
 
+msgid "Edit slide show"
+msgstr "Labot slīdrāde"
+
+msgid "Quit"
+msgstr "Iziet"
+
+msgid "Quit slide show"
+msgstr "Pārtraukt izrādi"
+
+msgid "Show first slide (up arrow)"
+msgstr "Rādīt pimo slīdu (bulttaustiņš uz leju)"
+
+msgid "Show last slide (down arrow)"
+msgstr "Rādīt pimo slīdu (bulttaustiņš uz augšu)"
+
+msgid "Show previous slide (left arrow)"
+msgstr "Rādīt iepriekšējo slīdu (bulttaustiņš pa kreisi)"
+
+msgid "Show next slide (right arrow)"
+msgstr "Rādīt nākamo slīdu (bulttaustiņš pa labi)"
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -1914,7 +2408,7 @@ msgstr ""
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr ""
+msgstr "Vietne %s ir pieprasījusi Jūsu identitāti."
 
 #, python-format
 msgid ""
@@ -1932,10 +2426,10 @@ msgid "Identity URL"
 msgstr "Identitātes URL"
 
 msgid "Remember decision"
-msgstr ""
+msgstr "Atcerēties lēmumu"
 
 msgid "Remember this trust decision and don't ask again"
-msgstr ""
+msgstr "Atcerēties šo uzticības lēmumu un vair nejautāt"
 
 msgid "Approve"
 msgstr "Apstiprināt"
@@ -2071,9 +2565,6 @@ msgstr "instalēt"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Lapai %(pagename)s nav piesaistes"
 
-msgid "Edit drawing"
-msgstr "Labot attēlu"
-
 msgid "New Attachment"
 msgstr "Jauna Piesaiste"
 
@@ -2106,14 +2597,14 @@ msgstr "Lapas \"%(pagename)s\" piesaistes"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha tests: nepareiza atbilde! Atgriezieties un mēginiet vēlreiz..."
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Jums nav tiesību pārrasktīt šai lapai piesaistītās datnes."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Jums nav tiesību pārrasktīt šai lapai piesaistītās datnes."
 
 #, python-format
 msgid ""
@@ -2126,9 +2617,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Piesaite '%(target)s' (veidota no faila '%(filename)s') jau eksistē."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
@@ -2199,14 +2687,14 @@ msgstr "Jums nav tiesību atspiest šīs lapas piesaistes."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Fails %(filename)s nav .zip fails."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"Piesaiste '%(filename)s' nav atpakota, jo faili ir pārāk lieli, tikai .zip "
-"faili, jau ekstistē vai atrodas mapēs."
+"Piesaiste '%(filename)s' nav atpakota, jo daži faili nav taipat direktorijā "
+"vai pārsniedz datnes maksimālo pieļaujamo izmēru (%(maxsize_file)d kB)."
 
 #, fuzzy, python-format
 msgid ""
@@ -2645,6 +3133,30 @@ msgstr "Kopēšanas iemesls (neobligāts)"
 msgid "Really copy this page?"
 msgstr "Jūs tiešām vēlaties kopēt šo lapu?"
 
+#, fuzzy
+msgid "Attachment location"
+msgstr "Piesaistes saite"
+
+#, fuzzy
+msgid "Page name"
+msgstr "Lapas nosaukums"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Jaunais piesaistes nosaukums"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Piesaistes saite"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "piesaiste"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "Lapas \"%(pagename)s\" piesaistes"
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr "Visu saišu saraksts \"%s\""
@@ -2670,6 +3182,33 @@ msgstr "Iepriekšējais labojums"
 msgid "Next change"
 msgstr "Nākamais labojums"
 
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Vecākas versijas nav!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Vecākas versijas nav!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Vecākas versijas nav!"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "Lapa saglabāta %(count)d reizes!"
@@ -2683,10 +3222,6 @@ msgstr "Ignorēt atstarpju(probelu) starpību"
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Nepareizs faila nosaukums \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Izveidots sainis %s, kas satur lapas %s."
 
 msgid "Include all attachments?"
 msgstr "Iekļaut visas piesaistes?"
@@ -2717,8 +3252,26 @@ msgstr "Nav lietotājs:"
 msgid "You are not allowed to perform this action."
 msgstr "Jums nav tiesību veikt šo darbību."
 
-msgid "Please log in first."
-msgstr "Lūdzu, sākumā pieslēdzieties"
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Izveidot jaunu attēlu \"%(filename)s (atvērs jaunā logā)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Labot attēlu %(filename)s (atvērs jaunā logā)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikšķināms attēls %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Labot attēlu"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Lūdzu, pirms veidot papildus lapas, izveidojiet mājas lapu."
@@ -2773,6 +3326,22 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages pārvaldīšana"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Tikai superlietotājs drīkst lietot šo kontu."
+
+msgid "No page packages found."
+msgstr "Lapušu pakotne nav atrasta."
+
+msgid "page package"
+msgstr "lapas pakotne"
+
+msgid "Choose:"
+msgstr "Izvēle:"
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr "Uzstādīt valodas pakotni priekš '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
@@ -2877,9 +3446,6 @@ msgstr "Darbība %(actionname)s ir veikta šajā Viki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Jums nav tiesību izmantot darbību %(actionname)s šajā lapā."
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Tikai superlietotājs drīkst lietot šo kontu."
-
 msgid "Views/day"
 msgstr "Skatīta (dienā)"
 
@@ -2930,6 +3496,9 @@ msgstr "Kam:"
 msgid "Content"
 msgstr "Saturs"
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Pievienoties e-pasta serverim '%(server)s' nedrīkst: %(reason)s"
@@ -2948,7 +3517,22 @@ msgstr ""
 "atļauts."
 
 msgid "anonymous"
-msgstr ""
+msgstr "anonīms"
+
+#~ msgid "InstallDocs"
+#~ msgstr "InstalētDokumentāciju"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
+#~ "serveriem."
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Izveidots sainis %s, kas satur lapas %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "Nepieciešams pieslēgties."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3021,9 +3605,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Jūs varat augšuplādēt datni jaunā lapā vai izvēlēties augšuplādēt datni "
 #~ "kā piesaisti pašreizējai lapai"
-
-#~ msgid "attachment"
-#~ msgstr "piesaiste"
 
 #~ msgid "New Name"
 #~ msgstr "Jauns nosaukums"
@@ -3115,9 +3696,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "JūsuIestatījumi"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Parakstīties uz maznozīmīgām izmaiņām"

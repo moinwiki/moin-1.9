@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.8\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
-"PO-Revision-Date: 2009-03-16 18:41+0100\n"
+"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"PO-Revision-Date: 2009-03-24 20:06+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -323,13 +323,13 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<onbekend>"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Inlognaam: %s\n"
 "\n"
@@ -358,6 +358,17 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Uw wiki account informatie"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Onbekende actie %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
+
+msgid "Login and try again."
+msgstr "Log in en probeer opnieuw."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr ""
 "Het pakket heeft een nieuwere versie van MoinMoin nodig (tenminste %s)."
@@ -365,10 +376,9 @@ msgstr ""
 msgid "The theme name is not set."
 msgstr "De naam van het thema is niet ingesteld."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Thema bestanden installeren wordt alleen door alleenstaande servers "
-"ondersteund."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -467,8 +477,9 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Ongeldige reguliere expressie voor het markeren \"%(regex)s\":%(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "De reservekopie van de inhoud van deze pagina is achterhaald en zal niet "
@@ -728,8 +739,8 @@ msgstr "Verwijderingen worden op deze manier gemarkeerd."
 msgid "Additions are marked like this."
 msgstr "Toevoegingen worden op deze manier gemarkeerd."
 
-msgid "You need to log in."
-msgstr "U moet inloggen."
+msgid "Please log in first."
+msgstr "Log eerst in."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -764,11 +775,30 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Koppel deze naam"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Verificatie geannuleerd."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID met succes toegevoegd."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "OpenID storing."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Geen OpenID opgegeven."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Uw account is nu gekoppeld met uw OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Het wachtwoord dat u opgaf is ongeldig."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Anonieme sessies moeten geactiveerd zijn voor OpenID login."
@@ -796,13 +826,17 @@ msgstr "LDAP server %(server)s storing."
 msgid "Failed to connect to database."
 msgstr "Fout bij het verbinden met de database."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Als u geen account hebt, <a href=\"%(userprefslink)s\">kan u er nu een "
 "aanmaken</a>. <a href=\"%(sendmypasswordlink)s\">Wachtwoord vergeten?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -850,7 +884,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Nadruk:: <<Verbatim('')>>''cursief''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''vet'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''vet "
@@ -884,6 +918,15 @@ msgstr "Er werd een geheel getal \"%(arg)s\" na \"%(key)s\" verwacht"
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Er werd een kleurwaarde \"%(arg)s\" na \"%(key)s\" verwacht"
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
+msgstr ""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1070,7 +1113,7 @@ msgid "Enable user"
 msgstr "Gebruiker activeren"
 
 msgid "disabled"
-msgstr "uitgeschakeld"
+msgstr "geblokkeerd"
 
 msgid "Mail account data"
 msgstr "E-mail accountgegevens"
@@ -1089,18 +1132,6 @@ msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Afbeelding in de tekst: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Nieuwe tekening maken \"%(filename)s\" (opent in een nieuw venster)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Tekening bewerken \"%(filename)s\" (opent in een nieuw venster)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikbare tekening: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Regelnummers aan/uit doen"
 
@@ -1111,17 +1142,6 @@ msgstr "Terugzetten naar revisie %(rev)d."
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Hernoemd van '%(oldpagename)s'."
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Onbekende actie %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
-
-msgid "Login and try again."
-msgstr "Log in en probeer opnieuw."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "De opties --pages en --search sluiten elkaar uit!"
@@ -1238,6 +1258,30 @@ msgstr ""
 "Naam van de bijlage: %(attach_name)s\n"
 "Grootte: %(attach_size)s\n"
 
+#, fuzzy, python-format
+msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgstr "Nieuwe bijlage toegevoegd aan pagina %(pagename)s op %(sitename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Beste wikigebruiker,\n"
+"\n"
+"U bent geabonneerd op een wikipagina \"%(page_name)s\" voor updatemeldingen. "
+"Er werd op die pagina een bijlage toegevoegd door %(editor)s. De volgende "
+"gedetailleerde informatie is beschikbaar:\n"
+"\n"
+"Naam van de bijlage: %(attach_name)s\n"
+"Grootte: %(attach_size)s\n"
+
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
@@ -1272,6 +1316,10 @@ msgstr "Een pagina is gekopieerd."
 msgid "A new attachment has been added"
 msgstr "Er is een nieuwe bijlage toegevoegd"
 
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Er is een nieuwe bijlage toegevoegd"
+
 msgid "A page has been reverted to a previous state"
 msgstr "Een pagina is teruggezet naar een vorige staat"
 
@@ -1292,9 +1340,6 @@ msgstr "Pagina gewijzigd"
 
 msgid "Page changed"
 msgstr "Pagina gewijzigd"
-
-msgid "about"
-msgstr "over"
 
 #, python-format
 msgid ""
@@ -1329,11 +1374,14 @@ msgstr "overeenkomst"
 msgid "matches"
 msgstr "overeenkomsten"
 
-msgid "FrontPage"
-msgstr "VoorPagina"
+msgid "about"
+msgstr "over"
 
 msgid "RecentChanges"
 msgstr "RecenteWijzigingen"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "IndexVanTitels"
@@ -1344,23 +1392,483 @@ msgstr "IndexVanWoorden"
 msgid "FindPage"
 msgstr "PaginaZoeken"
 
-msgid "SiteNavigation"
-msgstr "WegWijzer"
-
-msgid "HelpContents"
-msgstr "HelpInhoud"
-
-msgid "HelpOnFormatting"
-msgstr "HelpBijOpmaak"
-
-msgid "WikiLicense"
-msgstr "WikiLicentie"
-
 msgid "MissingPage"
 msgstr "OntbrekendePagina"
 
 msgid "MissingHomePage"
 msgstr "OntbrekendeThuisPagina"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "OntbrekendeThuisPagina"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Naam"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "VoorPagina"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Pagina gewijzigd"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "PaginaZoeken"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Grootte"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Pagina's"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "PaginaHernoemen"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python versie"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "WikiLicentie"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "willekeurige categorie"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Categorieën"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Categorieën"
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Diavoorstelling"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "GebruikersVoorkeuren"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "Melding"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "HelpInhoud"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "HelpInhoud"
+
+msgid "HelpOnFormatting"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin versie"
+
+msgid "HelpContents"
+msgstr "HelpInhoud"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "IndexVanTitels"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "HelpInhoud"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "HelpInhoud"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Categorieën"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "HelpInhoud"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Taal"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "HelpInhoud"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "WegWijzer"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "OpenID server"
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "HelpBijOpmaak"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "HelpInhoud"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Diavoorstelling"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "Spellingscontrole"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Synchronisatie gestart -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "GebruikersVoorkeuren"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "HelpBijOpmaak"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "HelpInhoud"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Abonnement opzeggen"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "GebruikersVoorkeuren"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Nieuwe bijlage"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Meer acties:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Zon"
 
 msgid "Mon"
 msgstr "Maa"
@@ -1379,9 +1887,6 @@ msgstr "Vrij"
 
 msgid "Sat"
 msgstr "Zat"
-
-msgid "Sun"
-msgstr "Zon"
 
 msgid "AttachFile"
 msgstr "BijlageToevoegen"
@@ -1455,9 +1960,6 @@ msgstr "[ONDER]"
 msgid "[TOP]"
 msgstr "[BOVEN]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
-
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -1479,6 +1981,9 @@ msgstr "Abonnement opzeggen"
 
 msgid "Home"
 msgstr "Start"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
 
 msgid "Clear message"
 msgstr "Bericht wissen"
@@ -1590,6 +2095,22 @@ msgstr "Bijlagen verkenner"
 
 msgid "User account browser"
 msgstr "Gebruikersaccountbeheer"
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "Beschrijving"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Gebruikersnaam"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "Bestandstype"
+
+#, fuzzy
+msgid "Mimetypes"
+msgstr "elke mimetype"
 
 msgid "Wiki configuration"
 msgstr "Wiki configuratie"
@@ -1714,23 +2235,20 @@ msgstr "Globale parsers"
 msgid "Local extension parsers"
 msgstr "Lokale uitbreidingsparsers"
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian en/of Python Xapian verbindingen niet geïnstalleerd"
+
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-msgid "index available"
-msgstr "index beschikbaar"
-
 msgid "index unavailable"
 msgstr "index niet beschikbaar"
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian en/of Python Xapian verbindingen niet geïnstalleerd"
-
-msgid "N/A"
-msgstr "n.v.t."
+msgid "index available"
+msgstr "index beschikbaar"
 
 msgid "Xapian search"
 msgstr "Xapian zoeken"
@@ -1740,6 +2258,9 @@ msgstr "Herleiden tot stam voor Xapian"
 
 msgid "Active threads"
 msgstr "Actieve threads"
+
+msgid "N/A"
+msgstr "n.v.t."
 
 msgid "No orphaned pages in this wiki."
 msgstr "Geen weespagina's in deze wiki."
@@ -1794,7 +2315,8 @@ msgstr "bevat een of meer van de volgende termen"
 msgid "not containing the following terms"
 msgstr "bevat de volgende termen niet"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "laatst gewijzigd sinds (bv. vorige 2 weken)"
 
 msgid "any category"
@@ -1890,6 +2412,10 @@ msgstr "Start"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Dia %(pos)d van %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Ga naar Pagina"
 
@@ -1935,6 +2461,29 @@ msgstr "Uw quicklink naar deze pagina kon niet verwijderd worden."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "U moet een quicklink naar deze pagina hebben om het te verwijderen."
 
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Diavoorstelling"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Diavoorstelling"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
 "and log in before you can use your OpenID. MoinMoin will\n"
@@ -1965,7 +2514,7 @@ msgid ""
 msgstr ""
 "\n"
 "Als u goedkeurt zal aan de website vertegenwoordigd door onderstaande\n"
-"vertrouwensbasis gemeld worden dat u de identiteit-URL %s controleert.\n"
+"vertrouwenscode gemeld worden dat u de identiteit-URL %s controleert.\n"
 "(Als u een afgevaardigde identiteit gebruik zal de site zelf deze "
 "afvaardiging\n"
 "omkeren.)"
@@ -2137,9 +2686,6 @@ msgstr "installeren"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Geen bijlagen opgeslagen voor %(pagename)s"
 
-msgid "Edit drawing"
-msgstr "Tekening bewerken"
-
 msgid "New Attachment"
 msgstr "Nieuwe bijlage"
 
@@ -2172,16 +2718,16 @@ msgstr "Bijlagen voor \"%(pagename)s\""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Verkeerd antwoord! Ga terug en probeer opnieuw..."
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr ""
-"U hebt geen toestemming om een bijlage van deze pagina te overschrijven."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
 "probeer opnieuw."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr ""
+"U hebt geen toestemming om een bijlage van deze pagina te overschrijven."
 
 #, python-format
 msgid ""
@@ -2194,9 +2740,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Bijlage '%(target)s' bestaat al (externe naam '%(filename)s')."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "U hebt geen toestemming bijlagen van deze pagina te verwijderen."
@@ -2743,6 +3286,30 @@ msgstr "Eventueel de reden voor het kopiëren"
 msgid "Really copy this page?"
 msgstr "Bent u zeker dat u deze pagina wil kopiëren?"
 
+#, fuzzy
+msgid "Attachment location"
+msgstr "Link naar bijlage"
+
+#, fuzzy
+msgid "Page name"
+msgstr "Paginanaam"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Nieuwe bijlagenaam"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Link naar bijlage"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "bijlage"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "Bijlagen voor \"%(pagename)s\""
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr "Volledige verwijzingenlijst voor \"%s\""
@@ -2768,6 +3335,33 @@ msgstr "Vorige wijziging"
 msgid "Next change"
 msgstr "Volgende wijziging"
 
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Geen oudere versies beschikbaar!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Geen oudere versies beschikbaar!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Geen oudere versies beschikbaar!"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "De pagina is weliswaar %(count)d keer opgeslagen!"
@@ -2781,10 +3375,6 @@ msgstr "Wijzigingen in de hoeveelheid witruimte negeren"
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Ongeldig bestandsnaam \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Het gemaakte pakket %s dat de pagina's %s bevat werd aangemaakt."
 
 msgid "Include all attachments?"
 msgstr "Inclusief alle bijlagen?"
@@ -2815,8 +3405,26 @@ msgstr "Geen gebruiker:"
 msgid "You are not allowed to perform this action."
 msgstr "U hebt geen toestemming om deze actie uit te voeren."
 
-msgid "Please log in first."
-msgstr "Log eerst in."
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Nieuwe tekening maken \"%(filename)s\" (opent in een nieuw venster)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Tekening bewerken \"%(filename)s\" (opent in een nieuw venster)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikbare tekening: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Tekening bewerken"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Maak eerst een thuispagina voor u extra pagina's aanmaakt alstublieft."
@@ -2877,6 +3485,24 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MijnPagina's beheer"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Enkel de beheerder mag deze actie gebruiken."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Geen bovenliggende pagina gevonden!"
+
+#, fuzzy
+msgid "page package"
+msgstr "Pagina gewijzigd"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Uw abonnement op deze pagina is opgezegd."
@@ -2985,9 +3611,6 @@ msgstr ""
 "U hebt geen toestemming niet om de actie %(actionname)s op deze pagina uit "
 "te voeren!"
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Enkel de beheerder mag deze actie gebruiken."
-
 msgid "Views/day"
 msgstr "Weergaven/dag"
 
@@ -3038,6 +3661,9 @@ msgstr "Naar"
 msgid "Content"
 msgstr "Inhoud"
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Verbinding met de mailserver '%(server)s' mislukt: %(reason)s"
@@ -3057,6 +3683,50 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "installeren"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HelpBijOpmaak"
+
+#, fuzzy
+#~ msgid "OpenID: handle verify continuation"
+#~ msgstr "OpenID vertrouwensverificatie"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "U hebt geen toestemming deze pagina te bewerken."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Thema bestanden installeren wordt alleen door alleenstaande servers "
+#~ "ondersteund."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki-opmaak"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Inhoud"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Inhoud"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Exclusief systeempagina's"
+
+#~ msgid "You need to log in."
+#~ msgstr "U moet inloggen."
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Het gemaakte pakket %s dat de pagina's %s bevat werd aangemaakt."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3131,9 +3801,6 @@ msgstr "anoniem"
 #~ msgstr ""
 #~ "U kunt een bestand naar een nieuwe pagina opsturen of een bestand als "
 #~ "bijlage naar de huidige pagina opsturen"
-
-#~ msgid "attachment"
-#~ msgstr "bijlage"
 
 #~ msgid "New Name"
 #~ msgstr "Nieuwe naam"
@@ -3232,9 +3899,6 @@ msgstr "anoniem"
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "GebruikersVoorkeuren"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Abonneren op triviale wijzigingen"

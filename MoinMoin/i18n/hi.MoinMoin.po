@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-01-17 22:54+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -302,7 +302,7 @@ msgid ""
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 
 msgid ""
@@ -318,14 +318,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+
+msgid "Login and try again."
+msgstr ""
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "प्रस्तावली को मोइनमोइन के नये संस्करण (कम से कम %s) की आवश्यकता है।"
 
 msgid "The theme name is not set."
 msgstr "विषय नाम निश्चित नही है"
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "प्रतिस्थापन विषय फाइलें केवल विशेष मुख्य प्रकार के कम्प्यूटर के लिए हैं।"
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -423,7 +435,7 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 
@@ -679,9 +691,8 @@ msgstr ""
 msgid "Additions are marked like this."
 msgstr ""
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "आप अभी लागूड आवूट है।"
+msgid "Please log in first."
+msgstr "कूपया लागीन कीजिए ।"
 
 msgid ""
 "Please choose an account name now.\n"
@@ -708,10 +719,26 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+msgid "OpenID verification canceled."
+msgstr ""
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -741,7 +768,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 msgid ""
@@ -776,7 +807,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -793,6 +824,15 @@ msgstr ""
 
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
 msgstr ""
 
 msgid ""
@@ -979,18 +1019,6 @@ msgstr ""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr ""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr ""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr ""
-
 msgid "Toggle line numbers"
 msgstr ""
 
@@ -1000,17 +1028,6 @@ msgstr ""
 
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr ""
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-
-msgid "Login and try again."
 msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
@@ -1096,6 +1113,22 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
 
@@ -1127,6 +1160,9 @@ msgstr ""
 msgid "A new attachment has been added"
 msgstr ""
 
+msgid "An attachment has been removed"
+msgstr ""
+
 msgid "A page has been reverted to a previous state"
 msgstr ""
 
@@ -1151,9 +1187,6 @@ msgstr "पेकेज पृष्ट"
 #, fuzzy
 msgid "Page changed"
 msgstr "परिवर्तन सुरक्षित करे"
-
-msgid "about"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -1186,10 +1219,13 @@ msgstr ""
 msgid "matches"
 msgstr ""
 
-msgid "FrontPage"
+msgid "about"
 msgstr ""
 
 msgid "RecentChanges"
+msgstr ""
+
+msgid "WikiTipOfTheDay"
 msgstr ""
 
 msgid "TitleIndex"
@@ -1201,22 +1237,442 @@ msgstr ""
 msgid "FindPage"
 msgstr ""
 
-msgid "SiteNavigation"
+msgid "MissingPage"
 msgstr ""
 
-msgid "HelpContents"
+msgid "MissingHomePage"
 msgstr ""
 
-msgid "HelpOnFormatting"
+msgid "WikiHomePage"
+msgstr ""
+
+#, fuzzy
+msgid "WikiName"
+msgstr "नाम"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr ""
+
+msgid "WikiSandBox"
+msgstr ""
+
+msgid "InterWiki"
+msgstr ""
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "पेकेज पृष्ट"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "पेकेज पृष्ट"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "पृष्ट आकार: %d"
+
+msgid "PageHits"
+msgstr ""
+
+msgid "RandomPage"
+msgstr ""
+
+msgid "XsltVersion"
+msgstr ""
+
+msgid "FortuneCookies"
 msgstr ""
 
 msgid "WikiLicense"
 msgstr ""
 
-msgid "MissingPage"
+msgid "CategoryCategory"
 msgstr ""
 
-msgid "MissingHomePage"
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+msgid "SlideShowTemplate"
+msgstr ""
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+msgid "HelpOnConfiguration"
+msgstr ""
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr ""
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+msgid "HelpOnUpdatingPython"
+msgstr ""
+
+msgid "HelpOnAdministration"
+msgstr ""
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+msgid "HelpOnMoinCommand"
+msgstr ""
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+msgid "HelpOnNotification"
+msgstr ""
+
+msgid "HelpOnSessions"
+msgstr ""
+
+msgid "HelpOnUserHandling"
+msgstr ""
+
+msgid "HelpOnXapian"
+msgstr ""
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+msgid "HelpOnCreoleSyntax"
+msgstr ""
+
+msgid "HelpOnFormatting"
+msgstr ""
+
+msgid "MoinMoin"
+msgstr ""
+
+msgid "HelpContents"
+msgstr ""
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+msgid "HelpIndex"
+msgstr ""
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "क्रिया"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+msgid "HelpOnAdmonitions"
+msgstr ""
+
+msgid "HelpOnAutoAdmin"
+msgstr ""
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "टिप्पणी"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+msgid "HelpOnEditing"
+msgstr ""
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "क्रिया"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "टिप्पणी"
+
+msgid "HelpOnLanguages"
+msgstr ""
+
+msgid "HelpOnLinking"
+msgstr ""
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+msgid "HelpOnLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "लॉिगन"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+msgid "HelpOnNavigation"
+msgstr ""
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+msgid "HelpOnPageCreation"
+msgstr ""
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+msgid "HelpOnRules"
+msgstr ""
+
+msgid "HelpOnSearching"
+msgstr ""
+
+msgid "HelpOnSlideShows"
+msgstr ""
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+msgid "HelpOnSpellCheck"
+msgstr ""
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+msgid "HelpOnSynchronisation"
+msgstr ""
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "यूजर उपयोगकर्ता की वरीयता सुरिक्षत कर ली गई है।"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+msgid "HelpOnXmlPages"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "टिप्पणी"
+
+msgid "HelpOnSubscribing"
+msgstr ""
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "यूजर उपयोगकर्ता की वरीयता सुरिक्षत कर ली गई है।"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+msgid "WikiCourse/18 Attachments"
+msgstr ""
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+msgid "WikiCourse/23 Actions"
+msgstr ""
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
 msgstr ""
 
 msgid "Mon"
@@ -1235,9 +1691,6 @@ msgid "Fri"
 msgstr ""
 
 msgid "Sat"
-msgstr ""
-
-msgid "Sun"
 msgstr ""
 
 msgid "AttachFile"
@@ -1312,9 +1765,6 @@ msgstr ""
 msgid "[TOP]"
 msgstr ""
 
-msgid "Click to do a full-text search for this title"
-msgstr ""
-
 msgid "Settings"
 msgstr ""
 
@@ -1335,6 +1785,9 @@ msgid "Unsubscribe"
 msgstr ""
 
 msgid "Home"
+msgstr ""
+
+msgid "Click to do a full-text search for this title"
 msgstr ""
 
 msgid "Clear message"
@@ -1446,6 +1899,18 @@ msgid "File attachment browser"
 msgstr ""
 
 msgid "User account browser"
+msgstr ""
+
+msgid "Lexer description"
+msgstr ""
+
+msgid "Lexer names"
+msgstr ""
+
+msgid "File patterns"
+msgstr ""
+
+msgid "Mimetypes"
 msgstr ""
 
 msgid "Wiki configuration"
@@ -1567,22 +2032,19 @@ msgstr ""
 msgid "Local extension parsers"
 msgstr ""
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
 msgid "Disabled"
 msgstr ""
 
 msgid "Enabled"
 msgstr ""
 
-msgid "index available"
-msgstr ""
-
 msgid "index unavailable"
 msgstr ""
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
-
-msgid "N/A"
+msgid "index available"
 msgstr ""
 
 msgid "Xapian search"
@@ -1592,6 +2054,9 @@ msgid "Stemming for Xapian"
 msgstr ""
 
 msgid "Active threads"
+msgstr ""
+
+msgid "N/A"
 msgstr ""
 
 msgid "No orphaned pages in this wiki."
@@ -1641,7 +2106,7 @@ msgstr ""
 msgid "not containing the following terms"
 msgstr ""
 
-msgid "last modified since (e.g. last 2 weeks)"
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr ""
 
 msgid "any category"
@@ -1735,6 +2200,10 @@ msgstr ""
 msgid "Slide %(pos)d of %(size)d"
 msgstr ""
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr ""
 
@@ -1775,6 +2244,27 @@ msgid "Your quicklink to this page could not be removed."
 msgstr ""
 
 msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+
+msgid "Edit slide show"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid "Quit slide show"
+msgstr ""
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
 msgstr ""
 
 msgid ""
@@ -1944,9 +2434,6 @@ msgstr ""
 msgid "No attachments stored for %(pagename)s"
 msgstr ""
 
-msgid "Edit drawing"
-msgstr ""
-
 msgid "New Attachment"
 msgstr ""
 
@@ -1979,14 +2466,14 @@ msgstr ""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "तेक्सचा: गलत जवाब! वापस जा के फिर से प्रयास कीजिए..."
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "आप यह पृष्ठ कॉपी नही कर सकते।"
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "आप यह पृष्ठ कॉपी नही कर सकते।"
 
 #, python-format
 msgid ""
@@ -1996,9 +2483,6 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr ""
-
-msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
 msgid "You are not allowed to delete attachments on this page."
@@ -2492,6 +2976,25 @@ msgstr "नकल करने के िलए वैकल्पिक का�
 msgid "Really copy this page?"
 msgstr "कया सचमुच पृष्ट की नकल करू?"
 
+msgid "Attachment location"
+msgstr ""
+
+#, fuzzy
+msgid "Page name"
+msgstr "पेकेज नाम"
+
+msgid "Attachment name"
+msgstr ""
+
+msgid "Refresh attachment list"
+msgstr ""
+
+msgid "List of attachments"
+msgstr ""
+
+msgid "Available attachments for page"
+msgstr ""
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr ""
@@ -2519,6 +3022,33 @@ msgstr "साधारण परिवर्तन"
 msgid "Next change"
 msgstr "परिवर्तन सुरक्षित करे"
 
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "पुराने रेविज़ंस नही !"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "पुराने रेविज़ंस नही !"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "पुराने रेविज़ंस नही !"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "इस पृष्ट को %(count)d बार सुरिक्षत किया गया था!"
@@ -2532,10 +3062,6 @@ msgstr "वयट सपेस मैं परिवर्तन की अव�
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "अमान्य फायल का नाम \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "%s पेकेज को बनाया जिसमे %s पृष्ट है।"
 
 msgid "Include all attachments?"
 msgstr ""
@@ -2566,8 +3092,26 @@ msgstr "पर्योगक्ता नहीं:"
 msgid "You are not allowed to perform this action."
 msgstr "आप यह नहीं दबा सकते"
 
-msgid "Please log in first."
-msgstr "कूपया लागीन कीजिए ।"
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr ""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr ""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr ""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr ""
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
@@ -2601,6 +3145,25 @@ msgid ""
 msgstr ""
 
 msgid "MyPages management"
+msgstr ""
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "आप यह नहीं दबा सकते"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "पेकेज पृष्ट"
+
+#, fuzzy
+msgid "page package"
+msgstr "पेकेज पृष्ट"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
 msgstr ""
 
 msgid "Your subscription to this page has been removed."
@@ -2703,10 +3266,6 @@ msgstr ""
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "आप यह नहीं दबा सकते"
-
 msgid "Views/day"
 msgstr ""
 
@@ -2755,6 +3314,9 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr ""
@@ -2772,6 +3334,21 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "आप को यह पृष्ट को बदलने की आग्या नही है।"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "प्रतिस्थापन विषय फाइलें केवल विशेष मुख्य प्रकार के कम्प्यूटर के लिए हैं।"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "%s पेकेज को बनाया जिसमे %s पृष्ट है।"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "आप अभी लागूड आवूट है।"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

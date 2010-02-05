@@ -221,7 +221,7 @@ class Formatter(FormatterBase):
         # TODO, see text_html formatter
         return ''
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1, msg=None):
         return ('<codearea id="%s">' % code_id, '</codearea')[not on]
 
     def code_line(self, on):

@@ -25,7 +25,9 @@ import re
 import StringIO
 from MoinMoin import config, wikiutil
 from MoinMoin.macro import Macro
+from MoinMoin import config
 from _creole import Parser as CreoleParser
+from _creole import Rules as CreoleRules
 
 Dependencies = []
 
@@ -37,6 +39,7 @@ class Parser:
     MoinMoin current API.
     """
 
+    extensions = ['.creole']
     # Enable caching
     caching = 1
     Dependencies = Dependencies
@@ -58,15 +61,18 @@ class Parser:
         self.request = request
         self.form = request.form
         self.raw = raw
+        self.rules = MoinRules(wiki_words=True,
+                               url_protocols=config.url_schemas)
 
     def format(self, formatter):
         """Create and call the true parser and emitter."""
 
-        document = CreoleParser(self.raw).parse()
-        result = Emitter(document, formatter, self.request, Macro(self)).emit()
+        document = CreoleParser(self.raw, self.rules).parse()
+        result = Emitter(document, formatter, self.request, Macro(self),
+                         self.rules).emit()
         self.request.write(result)
 
-class Rules:
+class MoinRules(CreoleRules):
     # For the link targets:
     proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
     extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
@@ -80,6 +86,12 @@ class Rules:
         '''
     page = r'(?P<page_name> .* )'
 
+    def __init__(self, *args, **kwargs):
+        CreoleRules.__init__(self, *args, **kwargs)
+        # for addresses
+        self.addr_re = re.compile('|'.join([self.extern, self.attach,
+                                            self.interwiki, self.page]),
+                                  re.X | re.U)
 
 class Emitter:
     """
@@ -87,19 +99,13 @@ class Emitter:
     tree consisting of DocNodes.
     """
 
-    addr_re = re.compile('|'.join([
-            Rules.extern,
-            Rules.attach,
-            Rules.interwiki,
-            Rules.page
-        ]), re.X | re.U) # for addresses
-
-    def __init__(self, root, formatter, request, macro):
+    def __init__(self, root, formatter, request, macro, rules):
         self.root = root
         self.formatter = formatter
         self.request = request
         self.form = request.form
         self.macro = macro
+        self.rules = rules
 
     def get_text(self, node):
         """Try to emit whatever text is in the node."""
@@ -258,7 +264,7 @@ class Emitter:
 
     def link_emit(self, node):
         target = node.content
-        m = self.addr_re.match(target)
+        m = self.rules.addr_re.match(target)
         if m:
             if m.group('page_name'):
                 # link to a page
@@ -297,7 +303,7 @@ class Emitter:
                 # link to an attachment
                 scheme = m.group('attach_scheme')
                 attachment = m.group('attach_addr')
-                url = wikiutil.url_unquote(attachment, want_unicode=True)
+                url = wikiutil.url_unquote(attachment)
                 text = self.get_text(node)
                 return ''.join([
                         self.formatter.attachment_link(1, url),
@@ -317,11 +323,11 @@ class Emitter:
     def image_emit(self, node):
         target = node.content
         text = self.get_text(node)
-        m = self.addr_re.match(target)
+        m = self.rules.addr_re.match(target)
         if m:
             if m.group('page_name'):
                 # inserted anchors
-                url = wikiutil.url_unquote(target, want_unicode=True)
+                url = wikiutil.url_unquote(target)
                 if target.startswith('#'):
                     return self.formatter.anchordef(url[1:])
                 # default to images
@@ -331,18 +337,19 @@ class Emitter:
                 # external link
                 address = m.group('extern_addr')
                 proto = m.group('extern_proto')
-                url = wikiutil.url_unquote(address, want_unicode=True)
+                url = wikiutil.url_unquote(address)
                 return self.formatter.image(
                     src=url, alt=text, html_class='external_image')
             elif m.group('attach_scheme'):
                 # link to an attachment
                 scheme = m.group('attach_scheme')
                 attachment = m.group('attach_addr')
-                url = wikiutil.url_unquote(attachment, want_unicode=True)
+                url = wikiutil.url_unquote(attachment)
                 if scheme == 'image':
                     return self.formatter.attachment_image(
                         url, alt=text, html_class='image')
                 elif scheme == 'drawing':
+                    url = wikiutil.drawing2fname(url)
                     return self.formatter.attachment_drawing(url, text, alt=text)
                 else:
                     pass
@@ -350,19 +357,19 @@ class Emitter:
                 # interwiki link
                 pass
 #        return "".join(["{{", self.formatter.text(target), "}}"])
-        url = wikiutil.url_unquote(node.content, want_unicode=True)
+        url = wikiutil.url_unquote(node.content)
         return self.formatter.attachment_inlined(url, text)
 
 # Not used
 #    def drawing_emit(self, node):
-#        url = wikiutil.url_unquote(node.content, want_unicode=True)
+#        url = wikiutil.url_unquote(node.content)
 #        text = self.get_text(node)
 #        return self.formatter.attachment_drawing(url, text)
 
 # Not used
 #    def figure_emit(self, node):
 #        text = self.get_text(node)
-#        url = wikiutil.url_unquote(node.content, want_unicode=True)
+#        url = wikiutil.url_unquote(node.content)
 #        return ''.join([
 #            self.formatter.rawHTML('<div class="figure">'),
 #            self.get_image(url, text), self.emit_children(node),

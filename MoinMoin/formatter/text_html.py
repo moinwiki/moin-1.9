@@ -410,7 +410,7 @@ class Formatter(FormatterBase):
         """
 
         if hasattr(self, 'page'):
-            self.request.begin_include(self.page.page_name)
+            self.request.uid_generator.begin(self.page.page_name)
 
         result = []
         # Use the content language
@@ -434,7 +434,7 @@ class Formatter(FormatterBase):
         result.append(self.anchordef('bottom'))
         result.append(self._close('div', newline=newline))
         if hasattr(self, 'page'):
-            self.request.end_include()
+            self.request.uid_generator.end()
         return ''.join(result)
 
     def lang(self, on, lang_name):
@@ -625,7 +625,7 @@ class Formatter(FormatterBase):
                     kw['title'] = "attachment:%s" % url
                 kw['css'] = 'attachment'
             else:
-                target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
+                target = AttachFile.getAttachUrl(pagename, fname, self.request, do='upload_form')
                 kw['title'] = _('Upload new attachment "%(filename)s"') % {'filename': fname}
                 kw['css'] = 'attachment nonexistent'
             return self.url(on, target, **kw)
@@ -639,7 +639,7 @@ class Formatter(FormatterBase):
         exists = AttachFile.exists(self.request, pagename, fname)
         if exists:
             kw['css'] = 'attachment'
-            kw['src'] = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+            kw['src'] = AttachFile.getAttachUrl(pagename, fname, self.request, addts=1)
             title = _('Inlined image: %(url)s') % {'url': self.text(url)}
             if not 'title' in kw:
                 kw['title'] = title
@@ -651,66 +651,19 @@ class Formatter(FormatterBase):
             title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
             img = self.icon('attachimg')
             css = 'nonexistent'
-            target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
+            target = AttachFile.getAttachUrl(pagename, fname, self.request, do='upload_form')
             return self.url(1, target, css=css, title=title) + img + self.url(0)
 
     def attachment_drawing(self, url, text, **kw):
-        # XXX text arg is unused!
-        _ = self.request.getText
-        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-        fname = wikiutil.taintfilename(filename)
-        drawing = fname
-        fname = fname + u".png"
-        filename = filename + u".png"
-        # fallback for old gif drawings (1.1 -> 1.2)
-        exists = AttachFile.exists(self.request, pagename, fname)
-        if not exists:
-            gfname = fname[:-4] + u".gif"
-            gfilename = filename[:-4] + u".gif"
-            exists = AttachFile.exists(self.request, pagename, gfname)
-            if exists:
-                fname, filename = gfname, gfilename
-
-        # check whether attachment exists, possibly point to upload form
-        drawing_url = AttachFile.getAttachUrl(pagename, fname, self.request, drawing=drawing, upload=True)
-        if not exists:
-            title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': fname}
-            img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
-            css = 'nonexistent'
-            return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
-
-        title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-        kw['src'] = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
-        kw['css'] = 'drawing'
-
-        mappath = AttachFile.getFilename(self.request, pagename, drawing + u'.map')
+        # ToDo try to move this to a better place e.g. __init__
         try:
-            map = file(mappath, 'r').read()
-        except (IOError, OSError):
-            map = ''
-        if map:
-            # we have a image map. inline it and add a map ref to the img tag
-            mapid = 'ImageMapOf' + drawing
-            map = map.replace('%MAPNAME%', mapid)
-            # add alt and title tags to areas
-            map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
-            map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, title, title))
-            # unxml, because 4.01 concrete will not validate />
-            map = map.replace('/>', '>')
-            title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
-            if 'title' not in kw:
-                kw['title'] = title
-            if 'alt' not in kw:
-                kw['alt'] = kw['title']
-            kw['usemap'] = '#'+mapid
-            return map + self.image(**kw)
-        else:
-            if 'title' not in kw:
-                kw['title'] = title
-            if 'alt' not in kw:
-                kw['alt'] = kw['title']
-            return self.url(1, drawing_url) + self.image(**kw) + self.url(0)
-
+            drawing_action = AttachFile.get_action(self.request, url, do='modify')
+            assert drawing_action is not None
+            attachment_drawing = wikiutil.importPlugin(self.request.cfg, 'action',
+                                              drawing_action, 'attachment_drawing')
+            return attachment_drawing(self, url, text, **kw)
+        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError, AssertionError):
+            return url
 
     # Text ##############################################################
 
@@ -906,7 +859,7 @@ function togglenumber(did, nstart, nstep) {
 </script>
 """
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1, msg=None):
         """Creates a formatted code region, with line numbering.
 
         This region is formatted as a <div> with a <pre> inside it.  The
@@ -919,6 +872,8 @@ function togglenumber(did, nstart, nstep) {
 
         Call once with on=1 to start the region, and a second time
         with on=0 to end it.
+
+        the msg string is not escaped
         """
         _ = self.request.getText
         res = []
@@ -931,6 +886,12 @@ function togglenumber(did, nstart, nstep) {
             self._in_code_line = 0
             # id in here no longer used
             self._code_area_state = [None, show, start, step, start]
+
+            if msg:
+                attr = {'class': 'codemsg'}
+                res.append(self._open('div', attr={'class': 'codemsg'}))
+                res.append(msg)
+                res.append(self._close('div'))
 
             # Open the code div - using left to right always!
             attr = {'class': 'codearea', 'lang': 'en', 'dir': 'ltr'}

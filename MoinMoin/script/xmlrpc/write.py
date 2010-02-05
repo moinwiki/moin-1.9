@@ -10,7 +10,7 @@ import xmlrpclib
 import sys
 
 from MoinMoin.script import MoinScript
-from MoinMoin.support.multicall import MultiCall
+
 
 class PluginScript(MoinScript):
     """\
@@ -65,7 +65,7 @@ Note: we automatically append ?action=xmlrpc2 to the target url given.
             content = sys.stdin.read()
 
             # build a multicall object that
-            mcall = MultiCall(s)
+            mcall = xmlrpclib.MultiCall(s)
             # first applies the token and
             mcall.applyAuthToken(token)
             # then edits the page

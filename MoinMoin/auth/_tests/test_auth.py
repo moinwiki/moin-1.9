@@ -5,14 +5,10 @@
     @copyright: 2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-
 import py.test
-py.test.skip("broken due to test Config refactoring, fix later")
 
-import StringIO, urllib
-
-from MoinMoin.server.server_wsgi import WsgiConfig
-from MoinMoin.request import request_wsgi
+from MoinMoin.web.request import TestRequest, evaluate_request
+from MoinMoin import wsgiapp
 from MoinMoin._tests import wikiconfig
 
 
@@ -25,55 +21,34 @@ class AuthTest:
 
         Some test needs specific config values, or they will fail.
         """
-        config = WsgiConfig() # you MUST create an instance
 
     def teardown_class(cls):
         """ Stuff that should run to clean up the state of this test class
 
         """
-        pass
 
-    def setup_env(self, **kw):
-        default_environ = {
-            'SERVER_NAME': 'localhost',
-            'SERVER_PORT': '80',
-            'SCRIPT_NAME': '',
-            'PATH_INFO': '/',
-            'QUERY_STRING': '',
-            'REQUEST_METHOD': 'GET',
-            'REMOTE_ADDR': '10.10.10.10',
-            'HTTP_HOST': 'localhost',
-            #'HTTP_COOKIE': '',
-            #'HTTP_ACCEPT_LANGUAGE': '',
-        }
-        env = {}
-        env.update(default_environ)
-        env.update(kw)
-        if 'wsgi.input' not in env:
-            env['wsgi.input'] = StringIO.StringIO()
-        return env
-
-    def process_request(self, environ):
-        request = request_wsgi.Request(environ)
-        save_user = request.user # keep a reference, request.finish does "del request.user"
-        request.run()
-        request.user = save_user
-        return request # request.status, request.headers, request.output()
+    def run_request(self, **params):
+        request = TestRequest(**params)
+        #XXX: config passing hack
+        request.given_config = getattr(self, 'Config', wikiconfig.Config)
+        context = wsgiapp.init(request)
+        wsgiapp.run(context)
+        return context
 
 
 class TestNoAuth(AuthTest):
     def testNoAuth(self):
         """ run a simple request, no auth, just check if it succeeds """
-        environ = self.setup_env()
-        request = self.process_request(environ)
+        request = self.run_request()
 
         # anon user?
         assert not request.user.valid
 
+        appiter, status, headers = evaluate_request(request.request)
         # check if the request resulted in normal status, result headers and content
-        assert request.status == '200 OK'
+        assert status[:3] == '200'
         has_ct = has_v = has_cc = False
-        for k, v in request.headers:
+        for k, v in headers:
             if k == 'Content-Type':
                 assert v.startswith('text/html')
                 has_ct = True
@@ -90,12 +65,11 @@ class TestNoAuth(AuthTest):
         assert has_v
         # XXX BROKEN?:
         #assert has_cc # cache anon user's content
-        output = request.output()
-        assert '</html>' in output
+        assert '</html>' in ''.join(appiter)
 
 class TestAnonSession(AuthTest):
     class Config(wikiconfig.Config):
-        anonymous_session_lifetime = 1
+        cookie_lifetime = 1, 12
 
     def testAnonSession(self):
         """ run some requests, no auth, check if anon sessions work """
@@ -103,20 +77,21 @@ class TestAnonSession(AuthTest):
         trail_expected = []
         first = True
         for pagename in self.PAGES:
-            environ = self.setup_env(PATH_INFO='/%s' % pagename,
-                                     HTTP_COOKIE=cookie)
-            request = self.process_request(environ)
+            environ_overrides = {'HTTP_COOKIE': cookie}
+            request = self.run_request(path='/%s' % pagename,
+                                       environ_overrides=environ_overrides)
 
             # anon user?
             assert not request.user.valid
 
             # Do we have a session?
-            assert request.session
+            assert request.session is not None
 
+            appiter, status, headers = evaluate_request(request.request)
             # check if the request resulted in normal status, result headers and content
-            assert request.status == '200 OK'
+            assert status[:3] == '200'
             has_ct = has_v = has_cc = False
-            for k, v in request.headers:
+            for k, v in headers:
                 if k == 'Content-Type':
                     assert v.startswith('text/html')
                     has_ct = True
@@ -134,8 +109,7 @@ class TestAnonSession(AuthTest):
             assert has_v
             # XX BROKEN
             #assert not has_cc # do not cache anon user's (with session!) content
-            output = request.output()
-            assert '</html>' in output
+            assert '</html>' in ''.join(appiter)
 
             # The trail is only ever saved on the second page display
             # because otherwise anonymous sessions would be created
@@ -156,31 +130,35 @@ class TestAnonSession(AuthTest):
             assert trail == trail_expected
 
 class TestHttpAuthSession(AuthTest):
+    py.test.skip("We currently have no http auth code in moin. GivenAuth relies on the web server doing the http auth check.")
     class Config(wikiconfig.Config):
-        from MoinMoin.auth.http import HTTPAuth
-        auth = [HTTPAuth(autocreate=True)]
+        from MoinMoin.auth.http import HttpAuth # does not exist (yet?)
+        auth = [HttpAuth(autocreate=True)]
 
     def testHttpAuthSession(self):
         """ run some requests with http auth, check whether session works """
         username = u'HttpAuthTestUser'
+        auth_info = u'%s:%s' % (username, u'testpass')
+        auth_header = 'Basic %s' % auth_info.encode('base64')
         cookie = ''
         trail_expected = []
         first = True
         for pagename in self.PAGES:
-            environ = self.setup_env(AUTH_TYPE='Basic', REMOTE_USER=str(username),
-                                     PATH_INFO='/%s' % pagename,
-                                     HTTP_COOKIE=cookie)
-            request = self.process_request(environ)
+            environ_overrides = {'HTTP_COOKIE': cookie,
+                                 'HTTP_AUTHORIZATION': auth_header}
+            request = self.run_request(path='/%s' % pagename,
+                                       environ_overrides=environ_overrides)
 
             # Login worked?
             assert request.user.valid
             assert request.user.name == username
 
             # Do we have a session?
-            assert request.session
+            assert request.session is not None
 
+            appiter, status, headers = evaluate_request(request.request)
             # check if the request resulted in normal status, result headers and content
-            assert request.status == '200 OK'
+            assert status[:3] == '200'
             has_ct = has_v = has_cc = False
             for k, v in request.headers:
                 if k == 'Content-Type':
@@ -199,8 +177,7 @@ class TestHttpAuthSession(AuthTest):
             assert has_ct
             assert has_v
             assert has_cc # do not cache logged-in user's content
-            output = request.output()
-            assert '</html>' in output
+            assert '</html>' in ''.join(appiter)
 
             # The trail is only ever saved on the second page display
             # because otherwise anonymous sessions would be created
@@ -233,30 +210,29 @@ class TestMoinAuthSession(AuthTest):
         first = True
         for pagename in self.PAGES:
             if first:
-                formdata = urllib.urlencode({
-                    'name': username.encode('utf-8'),
-                    'password': password.encode('utf-8'),
+                formdata = {
+                    'name': username,
+                    'password': password,
                     'login': 'login',
-                })
-                environ = self.setup_env(PATH_INFO='/%s' % pagename,
-                                         HTTP_CONTENT_TYPE='application/x-www-form-urlencoded',
-                                         HTTP_CONTENT_LENGTH='%d' % len(formdata),
-                                         QUERY_STRING='action=login', REQUEST_METHOD='POST',
-                                         **{'wsgi.input': StringIO.StringIO(formdata)})
+                }
+                request = self.run_request(path='/%s' % pagename,
+                                           query_string='login=login',
+                                           method='POST', form_data=formdata)
             else: # not first page, use session cookie
-                environ = self.setup_env(PATH_INFO='/%s' % pagename,
-                                         HTTP_COOKIE=cookie)
-            request = self.process_request(environ)
+                environ_overrides = {'HTTP_COOKIE': cookie}
+                request = self.run_request(path='/%s' % pagename,
+                                           environ_overrides=environ_overrides)
 
             # Login worked?
             assert request.user.valid
             assert request.user.name == username
 
             # Do we have a session?
-            assert request.session
+            assert request.session is not None
 
+            appiter, status, headers = evaluate_request(request.request)
             # check if the request resulted in normal status, result headers and content
-            assert request.status == '200 OK'
+            assert status[:3] == '200'
             has_ct = has_v = has_cc = False
             for k, v in request.headers:
                 if k == 'Content-Type':
@@ -275,8 +251,7 @@ class TestMoinAuthSession(AuthTest):
             assert has_ct
             assert has_v
             assert has_cc # do not cache logged-in user's content
-            output = request.output()
-            assert '</html>' in output
+            assert '</html>' in ''.join(appiter)
 
             # The trail is only ever saved on the second page display
             # because otherwise anonymous sessions would be created

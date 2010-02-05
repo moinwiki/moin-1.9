@@ -2,14 +2,42 @@
 """
     MoinMoin - http authentication
 
-    You need either your webserver configured for doing HTTP auth (like Apache
-    reading some .htpasswd file) or Twisted (will accept HTTP auth against
-    password stored in moin user profile, but currently will NOT ask for auth)
-    or Standalone (in which case it will ask for auth and accept auth against
-    stored user profile.)
+    HTTPAuth
+    ========
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
-                2007 MoinMoin:JohannesBerg
+    HTTPAuth is just a dummy redirecting to MoinMoin.auth.GivenAuth for backwards
+    compatibility.
+
+    Please fix your setup, this dummy will be removed soon:
+
+    Old (1.8.x):
+    ------------
+    from MoinMoin.auth.http import HTTPAuth
+    auth = [HTTPAuth(autocreate=True)]
+    # any presence (or absence) of 'http' auth name, e.g.:
+    auth_methods_trusted = ['http', 'xmlrpc_applytoken']
+
+    New (1.9.x):
+    ------------
+    from MoinMoin.auth import GivenAuth
+    auth = [GivenAuth(autocreate=True)]
+    # presence (or absence) of 'given' auth name, e.g.:
+    auth_methods_trusted = ['given', 'xmlrpc_applytoken']
+
+    HTTPAuthMoin
+    ============
+
+    HTTPAuthMoin is HTTP auth done by moin (not by your web server).
+
+    Moin will request HTTP Basic Auth and use the HTTP Basic Auth header it
+    receives to authenticate username/password against the moin user profiles.
+
+    from MoinMoin.auth.http import HTTPAuthMoin
+    auth = [HTTPAuthMoin()]
+    # check if you want 'http' auth name in there:
+    auth_methods_trusted = ['http', 'xmlrpc_applytoken']
+
+    @copyright: 2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -17,16 +45,25 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import config, user
-from MoinMoin.request import request_twisted, request_cli, request_standalone
-from MoinMoin.auth import BaseAuth
-from base64 import decodestring
+from MoinMoin.auth import BaseAuth, GivenAuth
 
-class HTTPAuth(BaseAuth):
-    """ authenticate via http basic/digest/ntlm auth """
+
+class HTTPAuth(GivenAuth):
+    name = 'http'  # GivenAuth uses 'given'
+
+    def __init__(self, *args, **kwargs):
+        logging.warning("DEPRECATED use of MoinMoin.auth.http.HTTPAuth, please read instructions there or docs/CHANGES!")
+        GivenAuth.__init__(self, *args, **kwargs)
+
+
+class HTTPAuthMoin(BaseAuth):
+    """ authenticate via http (basic) auth """
     name = 'http'
 
-    def __init__(self, autocreate=False):
+    def __init__(self, autocreate=False, realm='MoinMoin', coding='iso-8859-1'):
         self.autocreate = autocreate
+        self.realm = realm
+        self.coding = coding
         BaseAuth.__init__(self)
 
     def request(self, request, user_obj, **kw):
@@ -39,52 +76,21 @@ class HTTPAuth(BaseAuth):
         if user_obj:
             return user_obj, True
 
-        logging.debug("request: %r" % request)
-        # for standalone, request authorization and verify it,
-        # deny access if it isn't verified
-        if isinstance(request, request_standalone.Request):
-            request.setHttpHeader('WWW-Authenticate: Basic realm="MoinMoin"')
-            auth = request.headers.get('Authorization')
-            if auth:
-                auth = auth.split()[-1]
-                info = decodestring(auth).split(':', 1)
-                logging.debug("len(info) == %d" % len(info))
-                if len(info) == 2:
-                    logging.debug("username: %r" % info[0])
-                    u = user.User(request, auth_username=info[0], password=info[1],
-                                  auth_method=self.name, auth_attribs=[])
-            if not u:
-                request.makeForbidden(401, _('You need to log in.'))
-        # for Twisted, just check
-        elif isinstance(request, request_twisted.Request):
-            username = request.twistd.getUser().decode(config.charset)
-            password = request.twistd.getPassword().decode(config.charset)
-            logging.debug("username: %r" % username)
-            # when using Twisted http auth, we use username and password from
-            # the moin user profile, so both can be changed by user.
-            u = user.User(request, auth_username=username, password=password,
-                          auth_method=self.name, auth_attribs=())
-        elif not isinstance(request, request_cli.Request):
-            env = request.env
-            auth_type = env.get('AUTH_TYPE', '').lower()
-            logging.debug("auth_type: %r" % auth_type)
-            if auth_type in ['basic', 'digest', 'ntlm', 'negotiate', ]:
-                username = env.get('REMOTE_USER', '').decode(config.charset)
-                logging.debug("username: %r" % username)
-                if auth_type in ('ntlm', 'negotiate', ):
-                    # converting to standard case so the user can even enter wrong case
-                    # (added since windows does not distinguish between e.g.
-                    #  "Mike" and "mike")
-                    username = username.split('\\')[-1] # split off domain e.g.
-                                                        # from DOMAIN\user
-                    # this "normalizes" the login name from {meier, Meier, MEIER} to Meier
-                    # put a comment sign in front of next line if you don't want that:
-                    username = username.title()
-                    logging.debug("processed username: %r" % username)
-                # when using http auth, we have external user name and password,
-                # we don't use the moin user profile for those attributes.
-                u = user.User(request, auth_username=username,
-                              auth_method=self.name, auth_attribs=('name', 'password'))
+        auth = request.authorization
+        if auth and auth.username and auth.password is not None:
+            logging.debug("http basic auth, received username: %r password: %r" % (
+                          auth.username, auth.password))
+            u = user.User(request,
+                          name=auth.username.decode(self.coding),
+                          password=auth.password.decode(self.coding),
+                          auth_method=self.name, auth_attribs=[])
+            logging.debug("user: %r" % u)
+
+        if not u or not u.valid:
+            from werkzeug import Response, abort
+            response = Response(_('Please log in first.'), 401,
+                                {'WWW-Authenticate': 'Basic realm="%s"' % self.realm})
+            abort(response)
 
         logging.debug("u: %r" % u)
         if u and self.autocreate:

@@ -21,7 +21,7 @@ Detailed Instructions:
 General syntax: moin [options] xmlrpc retrieve [retrieve-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [retrieve-options] see below:
     0. To retrieve the page 'FrontPage' from the wiki '192.168.0.1' which is

@@ -108,7 +108,7 @@ class EventLog:
                 pagename = kvdict.get('pagename')
                 if pagename and ('PAGE', pagename) in self.renames:
                     kvdict['pagename'] = self.renames[('PAGE', pagename)]
-                kvpairs = wikiutil.makeQueryString(kvdict, want_unicode=False)
+                kvpairs = wikiutil.makeQueryString(kvdict)
                 fields = str(timestamp), action, kvpairs
                 line = '\t'.join(fields) + '\n'
                 f.write(line)

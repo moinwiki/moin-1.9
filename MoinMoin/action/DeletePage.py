@@ -44,7 +44,7 @@ class DeletePage(ActionBase):
     def do_action(self):
         """ Delete pagename """
         form = self.form
-        comment = form.get('comment', [u''])[0]
+        comment = form.get('comment', u'')
         comment = wikiutil.clean_input(comment)
 
         # Create a page editor that does not do editor backups, because
@@ -53,11 +53,10 @@ class DeletePage(ActionBase):
         success, msgs = self.page.deletePage(comment)
 
         delete_subpages = 0
-        if 'delete_subpages' in form:
-            try:
-                delete_subpages = int(form['delete_subpages'][0])
-            except:
-                pass
+        try:
+            delete_subpages = int(form['delete_subpages'])
+        except:
+            pass
 
         if delete_subpages and self.subpages:
             for name in self.subpages:
@@ -75,7 +74,7 @@ class DeletePage(ActionBase):
 
             d = {
                 'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
+                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
                 'subpage_label': _('Delete all /subpages too?'),
                 'comment_label': _("Optional reason for the deletion"),
                 'buttons_html': buttons_html,

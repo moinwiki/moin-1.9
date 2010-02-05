@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys
+import os, re, sys
 import zipfile
 
 from MoinMoin import config, wikiutil, caching, user
@@ -202,7 +202,9 @@ class ScriptEngine:
 
         from MoinMoin.version import release
         version_int = [int(x) for x in version.split(".")]
-        release = [int(x) for x in release.split(".")]
+        # use a regex here to get only the numbers of the release string (e.g. ignore betaX)
+        release = re.compile('\d+').findall(release)[0:3]
+        release = [int(x) for x in release]
         if version_int > release:
             if lines > 0:
                 self.goto = lines
@@ -226,11 +228,11 @@ class ScriptEngine:
         _ = self.request.getText
         if self.themename is None:
             raise RuntimeScriptException(_("The theme name is not set."))
-        sa = getattr(self.request, "sareq", None)
-        if sa is None:
-            raise RuntimeScriptException(_("Installing theme files is only supported "
-                                           "for standalone type servers."))
-        htdocs_dir = sa.server.htdocs
+
+        from MoinMoin.web.static import STATIC_FILES_PATH as htdocs_dir
+        if not os.access(htdocs_dir, os.W_OK):
+            raise RuntimeScriptException(_("Theme files not installed! Write rights missing for %s.") % htdocs_dir)
+
         theme_file = os.path.join(htdocs_dir, self.themename,
                                   wikiutil.taintfilename(ftype),
                                   wikiutil.taintfilename(target))
@@ -303,7 +305,6 @@ class ScriptEngine:
                 pass
             else:
                 self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
-                page.clean_acl_cache()
         else:
             self.msg += u"action add revision: not enough rights - nothing done \n"
 
@@ -328,6 +329,21 @@ class ScriptEngine:
         else:
             self.msg += u"action rename page: not enough rights - nothing done \n"
 
+    def do_deletepage(self, pagename, comment="Deleted by the scripting subsystem."):
+        """ Marks a page as deleted (like the DeletePage action).
+
+        @param pagename: page to delete
+        @param comment:  the related comment (optional)
+        """
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
+            page = PageEditor(self.request, pagename, do_editor_backup=0)
+            if not page.exists():
+                raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
+            page.deletePage(comment)
+        else:
+            self.msg += u"action delete page: not enough rights - nothing done \n"
+
     def do_replaceunderlayattachment(self, zipname, filename, pagename, author=u"Scripting Subsystem", comment=u""):
         """
         overwrite underlay attachments
@@ -351,21 +367,6 @@ class ScriptEngine:
                 filesys.chmod(target, 0666 & config.umask)
         else:
             self.msg += u"action replace underlay attachment: not enough rights - nothing done \n"
-
-    def do_deletepage(self, pagename, comment="Deleted by the scripting subsystem."):
-        """ Marks a page as deleted (like the DeletePage action).
-
-        @param pagename: page to delete
-        @param comment:  the related comment (optional)
-        """
-        if self.request.user.may.write(pagename):
-            _ = self.request.getText
-            page = PageEditor(self.request, pagename, do_editor_backup=0)
-            if not page.exists():
-                raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
-            page.deletePage(comment)
-        else:
-            self.msg += u"action delete page: not enough rights - nothing done \n"
 
     def do_replaceunderlay(self, filename, pagename):
         """
@@ -392,15 +393,8 @@ class ScriptEngine:
 
         pagefile = os.path.join(revdir, revstr)
         self._extractToFile(filename, pagefile)
-
         # Clear caches
-        try:
-            del self.request.cfg.DICTS_DATA
-        except AttributeError:
-            pass
-        self.request.pages = {}
-        caching.CacheEntry(self.request, 'wikidicts', 'dicts_groups', scope='wiki').remove()
-        page.clean_acl_cache()
+        # TODO Code from MoinMoin/script/maint/cleancache.py may be used
 
     def runScript(self, commands):
         """ Runs the commands.
@@ -556,12 +550,11 @@ Example:
     if len(args) > 3:
         request_url = args[3]
     else:
-        request_url = "localhost/"
+        request_url = None
 
     # Setup MoinMoin environment
-    from MoinMoin.request import request_cli
-    request = request_cli.Request(url=request_url)
-    request.form = request.args = request.setup_args()
+    from MoinMoin.web.contexts import ScriptContext
+    request = ScriptContext(url=request_url)
 
     package = ZipPackage(request, packagefile)
     if not package.isPackage():
