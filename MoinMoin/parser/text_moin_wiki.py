@@ -740,9 +740,10 @@ class Parser:
                         return self.formatter.attachment_image(url, **tag_attrs)
                     else:
                         from MoinMoin.action import AttachFile
-                        pagename = self.formatter.page.page_name
-                        if AttachFile.exists(self.request, pagename, url):
-                            href = AttachFile.getAttachUrl(pagename, url, self.request)
+                        current_pagename = self.formatter.page.page_name
+                        pagename, filename = AttachFile.absoluteName(url, current_pagename)
+                        if AttachFile.exists(self.request, pagename, filename):
+                            href = AttachFile.getAttachUrl(pagename, filename, self.request)
                             tag_attrs, query_args = self._get_params(params,
                                                                      tag_attrs={'title': desc, },
                                                                      acceptable_attrs=acceptable_attrs_object)
