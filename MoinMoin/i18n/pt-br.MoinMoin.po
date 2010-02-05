@@ -1038,7 +1038,7 @@ msgid "After login, jump to last visited page"
 msgstr "Depois do login, voltará para a última página visitada"
 
 msgid "Show comment sections"
-msgstr "Mostrar secção comentários"
+msgstr "Mostrar comentários de página"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrar sinal de interrogação nos links cujas páginas não existem"
@@ -1338,7 +1338,7 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 "Resultados %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s de %(aboutHits)s %(bs)s%"
-"(hits)d%(be)s resultados fora da %(pages)d pages."
+"(hits)d%(be)s resultados, num total de aproximadamente %(pages)d páginas."
 
 msgid "seconds"
 msgstr "segundos"
@@ -1366,7 +1366,7 @@ msgid "matches"
 msgstr "acertos"
 
 msgid "about"
-msgstr "sobre"
+msgstr "aproximadamente"
 
 msgid "RecentChanges"
 msgstr "MudançasRecentes"
@@ -1922,7 +1922,7 @@ msgid "Home"
 msgstr "Home"
 
 msgid "Click to do a full-text search for this title"
-msgstr "Clique aqui para fazer uma busca completa para este título"
+msgstr "Clique para fazer uma busca completa por este título"
 
 msgid "Clear message"
 msgstr "Excluir mensagem"
@@ -2197,7 +2197,7 @@ msgid "N/A"
 msgstr "N/D"
 
 msgid "No orphaned pages in this wiki."
-msgstr "Nenhuma página órfã neste wiki."
+msgstr "Nenhuma página órfã nesta wiki."
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -2268,22 +2268,22 @@ msgid "Language"
 msgstr "Idioma"
 
 msgid "File Type"
-msgstr "Tipo do arquivo"
+msgstr "Tipo de arquivo"
 
 msgid "Search only in titles"
-msgstr "Buscar somente por Títulos"
+msgstr "Buscar somente nos títulos"
 
 msgid "Case-sensitive search"
-msgstr "Buscar diferenciando maiúsculas e minúsculas"
+msgstr "Diferenciar maiúsculas e minúsculas"
 
 msgid "Exclude underlay"
-msgstr "Excluir underline (_)"
+msgstr "Excluir underlay"
 
 msgid "No system items"
-msgstr "Nenhum item no sistema"
+msgstr "Sem itens de sistema"
 
 msgid "Search in all page revisions"
-msgstr "Buscar por todas as revisões de páginas"
+msgstr "Buscar em todas as revisões de página"
 
 msgid "Go get it!"
 msgstr "Obter!"
@@ -2295,7 +2295,7 @@ msgid "Exclude system pages"
 msgstr "Excluir páginas de sistema"
 
 msgid "No wanted pages in this wiki."
-msgstr "Nenhuma página solicitada neste wiki."
+msgstr "Nenhuma página desejada nesta wiki."
 
 msgid "Description"
 msgstr "Descrição"
@@ -2492,8 +2492,8 @@ msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
 msgstr ""
-"Este wiki não está habilitado a enviar mensagens de correio eletrônico.\n"
-"Contate o administrador deste wiki para habilitar esta opção."
+"O processamento de email não está habilitado nesta wiki.\n"
+"Contate o administrador da wiki para habilitar os emails."
 
 msgid "Please provide a valid email address or a username!"
 msgstr "Por favor, forneça um endereço de e-mail ou login válido!"
@@ -2563,7 +2563,7 @@ msgstr ""
 
 #, python-format
 msgid "[%d attachments]"
-msgstr "[%d arquivos anexados]"
+msgstr "%d anexo(s)"
 
 #, python-format
 msgid ""
@@ -3474,8 +3474,8 @@ msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. <<BR>>"
 msgstr ""
-"(!) Você está fazendo uma busca de títulos que pode não incluir todos os "
-"resultados relacionados ao seu pedido de busca deste wiki. <<BR>>"
+"(!) Você está fazendo uma busca por títulos que pode não incluir todos os "
+"resultados relacionados ao critério de pesquisa. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Clique aqui para fazer uma busca completa!"

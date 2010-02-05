@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-17 22:54+0100\n"
-"PO-Revision-Date: 2010-01-10 20:00+0100\n"
+"PO-Revision-Date: 2010-01-21 00:30+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
 "MIME-Version: 1.0\n"
@@ -490,7 +490,7 @@ msgstr "Une valeur était attendue pour la clef « %(token)s »"
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
-"L'expression rationnelle de surlignage : « %(regex)s » est incorrecte : %"
+"L'expression rationnelle de mise en évidence : « %(regex)s » est incorrecte : %"
 "(error)s"
 
 msgid ""
@@ -950,7 +950,7 @@ msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see %"
 "(highlight_help_page)s."
 msgstr ""
-"La coloration syntaxique n'est pas compatible avec « %(syntax)s », consultez %"
+"La coloration syntaxique n'est pas compatible avec « %(syntax)s », consultez %"
 "(highlight_help_page)s."
 
 msgid ""
@@ -1312,10 +1312,10 @@ msgstr ""
 "\n"
 "vous vous êtes abonné aux notifications de changements pour la page \"%"
 "(page_name)s\".Une pièce jointe de cette page vient d'être supprimée par %"
-"(editor)s. Quelques détails sur la pièce jointe :\n"
+"(editor)s. Quelques détails sur la pièce jointe :\n"
 "\n"
-"Nom : %(attach_name)s\n"
-"Taille : %(attach_size)s\n"
+"Nom : %(attach_name)s\n"
+"Taille : %(attach_size)s\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -2649,7 +2649,7 @@ msgid "move"
 msgstr "déplacer"
 
 msgid "get"
-msgstr "obtenir"
+msgstr "télécharger"
 
 msgid "view"
 msgstr "voir"
@@ -2924,7 +2924,7 @@ msgid ""
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 "Les %(badwords)d mots suivants n'ont pu être trouvés dans le dictionnaire "
-"sur un total de %(totalwords)d mots%(localwords)s et sont surlignés ci-"
+"sur un total de %(totalwords)d mots%(localwords)s et sont mis en évidence ci-"
 "dessous :"
 
 msgid "Add checked words to dictionary"
@@ -3325,32 +3325,29 @@ msgstr "Modification précédente"
 msgid "Next change"
 msgstr "Modification suivante"
 
-#, fuzzy
 msgid "Diff with older revision in left pane"
-msgstr "Il n'y a pas de version antérieure."
+msgstr "Différences avec, à gauche, la version précédente."
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "Il n'y a pas de version antérieure."
+msgstr "Pas de version antérieure à comparer."
 
 msgid "Diff with newer revision in left pane"
-msgstr ""
+msgstr "Différences avec, à gauche, la version suivante."
 
 msgid "Can't change to revision newer than in right pane"
-msgstr ""
+msgstr "Impossible de passer à une version plus récente qu'à droite"
 
 msgid "Diff with older revision in right pane"
-msgstr ""
+msgstr "Différences avec, à droite, la version précédente"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr ""
+msgstr "Impossible de passer à une version plus ancienne qu'à gauche"
 
 msgid "Diff with newer revision in right pane"
-msgstr ""
+msgstr "Différences avec, à droite, la version suivante"
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "Il n'y a pas de version antérieure."
+msgstr "Pas de version plus récente à comparer."
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
