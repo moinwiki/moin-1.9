@@ -1294,7 +1294,7 @@ To leave the editor, press the Cancel button.""", wiki=True) % {
         """ Write new lock file. """
         self._deleteLockFile()
         try:
-            editlog.EditLog(self.request, filename=self._filename()).add(
+            editlog.EditLog(self.request, filename=self._filename(), force_ip=True).add(
                self.request, wikiutil.timestamp2version(self.now), 0, "LOCK", self.page_name)
         except IOError:
             pass
