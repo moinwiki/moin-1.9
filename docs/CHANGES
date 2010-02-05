@@ -338,6 +338,27 @@ Version 1.9.0:
     to WSGI refactoring) - please use macro.request.{args,form,values}
 
 
+Version 1.8.7:
+  Fixes:
+  * Fixed major security issues in misc. actions.
+    HINT: if you have removed superuser configuration to workaround the issue
+    (following our security advisory), you may re-add it after installing this
+    moin release.
+  * Improved package security: cfg.packagepages_actions_excluded excludes
+    unsafe or otherwise questionable package actions by default now.
+  * wiki parser: fixed transclusion of (e.g. video) attachments from other
+    pages.
+  * Fixed edit locking for non-logged in editors and cfg.log_remote_addr=False.
+  * xmlrpc:
+    * Process attachname in get/putAttachment similarly.
+    * revertPage: convert pagename to internal representation.
+  * Fixed config.umask usage for page packages.
+  * Fixed usage of i18n.wikiLanguages() on class level (moved to method), failed
+    when tools import the module (e.g. pydoc -k foo).
+  * SubProcess: fixed win32-specific parts, fixed imports (fixes calling of
+    external xapian index filters)
+
+
 Version 1.8.6:
   Bug fixes:
   * Xapian indexing / indexing filters:
