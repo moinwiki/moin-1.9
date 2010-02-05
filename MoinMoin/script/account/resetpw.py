@@ -20,7 +20,7 @@ Detailed Instructions:
 General syntax: moin [options] account resetpw [newpw-options] newpassword
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [newpw-options] see below:
     1. To change JohnSmith's password:

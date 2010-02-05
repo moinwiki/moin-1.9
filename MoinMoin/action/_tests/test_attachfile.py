@@ -56,21 +56,14 @@ class TestAttachFile:
         """
         Tests if AttachFile.getFilename creates the attachment dir on self.requesting
         """
+        become_trusted(self.request)
+
         filename = ""
+
         file_exists = os.path.exists(AttachFile.getFilename(self.request, self.pagename, filename))
 
         nuke_page(self.request, self.pagename)
 
         assert file_exists
-
-    def test_getAttachUrl(self):
-        """
-        Tests if AttachFile.getAttachUrl taints a filename
-        """
-        filename = "<test2.txt>"
-        expect = "rename=_test2.txt_&"
-        result = AttachFile.getAttachUrl(self.pagename, filename, self.request, upload=True)
-
-        assert expect in result
 
 coverage_modules = ['MoinMoin.action.AttachFile']

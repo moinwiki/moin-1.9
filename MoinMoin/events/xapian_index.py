@@ -5,7 +5,17 @@
     @copyright: 2007 MoinMoin:KarolNowak
     @license: GNU GPL, see COPYING for details.
 """
+
 import MoinMoin.events as ev
+
+
+def _get_index(request):
+    try:
+        from MoinMoin.search.Xapian import XapianIndex
+        return XapianIndex(request)
+    except ImportError:
+        pass
+
 
 def handle_renamed(event):
     """Updates Xapian index when a page changes its name"""
@@ -13,11 +23,10 @@ def handle_renamed(event):
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
-            index.remove_item(event.old_page.page_name, now=0)
-            index.update_page(event.page.page_name)
+        index = _get_index(request)
+        if index and index.exists():
+            index.update_item(event.old_page.page_name, now=False)
+            index.update_item(event.page.page_name)
 
 
 def handle_copied(event):
@@ -26,42 +35,37 @@ def handle_copied(event):
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
-            index.update_page(event.page.page_name)
+        index = _get_index(request)
+        if index and index.exists():
+            index.update_item(event.page.page_name)
 
-def handle_changed(event, deleted=False):
+
+def handle_changed(event):
     """Updates Xapian index when a page is changed"""
 
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
-            if deleted:
-                index.remove_item(event.page.page_name)
-            else:
-                index.update_page(event.page.page_name)
+        index = _get_index(request)
+        if index and index.exists():
+            index.update_item(event.page.page_name)
 
 
 def handle_deleted(event):
     """Updates Xapian index when a page is deleted"""
     event = ev.PageChangedEvent(event.request, event.page, event.comment)
-    handle_changed(event, deleted=True)
+    handle_changed(event)
 
 
-def handle_attached(event):
-    """Updates Xapian index when a new attachment is added"""
+def handle_attachment_change(event):
+    """Updates Xapian index when attachment is added or removed"""
 
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
-            index.update_page(event.pagename)
+        index = _get_index(request)
+        if index and index.exists():
+            index.update_item(event.pagename, event.filename)
 
 
 def handle(event):
@@ -69,9 +73,10 @@ def handle(event):
         handle_renamed(event)
     elif isinstance(event, ev.PageCopiedEvent):
         handle_copied(event)
-    elif isinstance(event, ev.PageChangedEvent) or isinstance(event, ev.TrivialPageChangedEvent):
+    elif isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent)):
         handle_changed(event)
     elif isinstance(event, ev.PageDeletedEvent):
         handle_deleted(event)
-    elif isinstance(event, ev.FileAttachedEvent):
-        handle_attached(event)
+    elif isinstance(event, (ev.FileAttachedEvent, ev.FileRemovedEvent)):
+        handle_attachment_change(event)
+
