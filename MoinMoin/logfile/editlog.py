@@ -163,12 +163,16 @@ class EditLog(LogFile):
         # of a confusing userid
         self.uid_override = kw.get('uid_override', None)
 
+        # force inclusion of ip address, even if config forbids it.
+        # this is needed so PageLock can work correctly for locks of anon editors.
+        self.force_ip = kw.get('force_ip', False)
+
     def add(self, request, mtime, rev, action, pagename, host=None, extra=u'', comment=u''):
         """ Generate (and add) a line to the edit-log.
 
         If `host` is None, it's read from request vars.
         """
-        if request.cfg.log_remote_addr:
+        if request.cfg.log_remote_addr or self.force_ip:
             if host is None:
                 host = request.remote_addr
 
