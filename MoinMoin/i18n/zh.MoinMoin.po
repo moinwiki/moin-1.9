@@ -876,7 +876,7 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\"后面要接颜色值\"%(arg)s\""
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "帮助-解析"
 
 #, python-format
 msgid ""
@@ -1345,12 +1345,11 @@ msgstr "缺失主页"
 msgid "WikiHomePage"
 msgstr "缺失主页"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "用户名"
+msgstr "维基链接名"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "维基网"
 
 msgid "FrontPage"
 msgstr "首页"
@@ -1721,94 +1720,94 @@ msgid "CamelCase"
 msgstr "驼峰式"
 
 msgid "WikiCourse"
-msgstr "维基方针"
+msgstr "维基教程"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr "维基方针/01什么是MoinMoin"
+msgstr "维基教程/01什么是MoinMoin"
 
 msgid "WikiCourse/02 Finding information"
-msgstr "维基方针/02寻找信息"
+msgstr "维基教程/02寻找信息"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr "维基方针/03保留日期"
+msgstr "维基教程/03保留日期"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr "维基方针/04创建帐号"
+msgstr "维基教程/04创建帐号"
 
 # fixed fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "维基方针/05用户配置"
+msgstr "维基教程/05用户配置"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr "维基方针/06建立入口"
+msgstr "维基教程/06建立入口"
 
 msgid "WikiCourse/07 The text editor"
-msgstr "维基方针/07文本编辑"
+msgstr "维基教程/07文本编辑"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr "维基方针/08关键词"
+msgstr "维基教程/08关键词"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr "维基方针/10用维基标记排版"
+msgstr "维基教程/10用维基标记排版"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr "维基方针/11章节"
+msgstr "维基教程/11章节"
 
 msgid "WikiCourse/12 Headlines"
-msgstr "维基方针/12标题"
+msgstr "维基教程/12标题"
 
 msgid "WikiCourse/13 Lists"
-msgstr "维基方针/13列表"
+msgstr "维基教程/13列表"
 
 msgid "WikiCourse/14 Text styles"
-msgstr "维基方针/14文本样式"
+msgstr "维基教程/14文本样式"
 
 msgid "WikiCourse/15 Tables"
-msgstr "维基方针/15表格"
+msgstr "维基教程/15表格"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr "维基方针/16互联维基链接"
+msgstr "维基教程/16互联维基链接"
 
 msgid "WikiCourse/17 External links"
-msgstr "维基方针/17扩展链接"
+msgstr "维基教程/17扩展链接"
 
 # fixed fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "维基方针/18附件"
+msgstr "维基教程/18附件"
 
 msgid "WikiCourse/19 Symbols"
-msgstr "维基方针/19表情符"
+msgstr "维基教程/19表情符"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr "维基方针/20动态内容"
+msgstr "维基教程/20动态内容"
 
 msgid "WikiCourse/21 Macros"
-msgstr "维基方针/21宏"
+msgstr "维基教程/21宏"
 
 msgid "WikiCourse/22 Parsers"
-msgstr "维基方针/22解析器"
+msgstr "维基教程/22解析器"
 
 # fixed fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "维基方针/23动作"
+msgstr "维基教程/23动作"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr "维基方针/30可视化编辑器"
+msgstr "维基教程/30可视化编辑器"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr "维基方针/40创建页面"
+msgstr "维基教程/40创建页面"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr "维基方针/50维基礼节"
+msgstr "维基教程/50维基礼节"
 
 msgid "WikiCourse/51 Applications"
-msgstr "维基方针/51应用"
+msgstr "维基教程/51应用"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr "维基方针/52维基结构"
+msgstr "维基教程/52维基结构"
 
 msgid "WikiCourseHandOut"
-msgstr "维基方针大纲"
+msgstr "维基教程大纲"
 
 msgid "Sun"
 msgstr "星期日"
@@ -3205,7 +3204,7 @@ msgstr "版本%d和%d间的区别"
 
 #, python-format
 msgid "(spanning %d versions)"
-msgstr "(跳过%d版)"
+msgstr "(跳过第%d版)"
 
 msgid "Previous change"
 msgstr "上个改动"
@@ -3213,32 +3212,29 @@ msgstr "上个改动"
 msgid "Next change"
 msgstr "下个改动"
 
-#, fuzzy
 msgid "Diff with older revision in left pane"
-msgstr "没有旧版！"
+msgstr "在左面板与旧版本比较"
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "没有旧版！"
+msgstr "没有旧版本可比较"
 
 msgid "Diff with newer revision in left pane"
-msgstr ""
+msgstr "在左面板与新版本比较"
 
 msgid "Can't change to revision newer than in right pane"
-msgstr ""
+msgstr "无法变更到比右面板更新的版本"
 
 msgid "Diff with older revision in right pane"
-msgstr ""
+msgstr "在右面板与旧版本比较"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr ""
+msgstr "无法变更到比左面板更旧的版本"
 
 msgid "Diff with newer revision in right pane"
-msgstr ""
+msgstr "在右面板与新版本比较"
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "没有旧版！"
+msgstr "没有新版本可比较"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3360,20 +3356,18 @@ msgstr "个人网页管理"
 msgid "Only superuser is allowed to use this action."
 msgstr "只有超级用户才被允许使用该动作。"
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "找不到上层网页！"
+msgstr "找不到网页包！"
 
-#, fuzzy
 msgid "page package"
-msgstr "修改网页"
+msgstr "网页包"
 
 msgid "Choose:"
 msgstr "选择:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr "安装语言包: "
+msgstr "安装语言包 (%s): "
 
 msgid "Your subscription to this page has been removed."
 msgstr "您终止了订阅此页。"

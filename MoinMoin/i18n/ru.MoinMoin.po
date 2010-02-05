@@ -3145,7 +3145,7 @@ msgid "Show \"%(title)s\""
 msgstr "Показать \"%(title)s\""
 
 msgid "General Page Infos"
-msgstr "Общая информаци о странице"
+msgstr "Общая информация о странице"
 
 msgid "Page hits and edits"
 msgstr "Просмотры и исправления страниц"
