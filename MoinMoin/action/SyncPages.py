@@ -102,8 +102,8 @@ class ActionClass(object):
             "pageList": None,
             "groupList": None,
             "direction": "foo", # is defaulted below
-            "user": None, # XXX should be refactored into a password agent or OpenID like solution
-            "password": None,
+            "user": "", # XXX should be refactored into a password agent or OpenID like solution
+            "password": "",
         }
 
         options.update(self.request.dicts[self.pagename])
@@ -120,10 +120,6 @@ class ActionClass(object):
 
     def fix_params(self, params):
         """ Does some fixup on the parameters. """
-        # Load the password
-        if "password" in self.request.values:
-            params["password"] = self.request.values["password"]
-
         # merge the pageList case into the pageMatch case
         if params["pageList"] is not None:
             params["pageMatch"] = u'|'.join([r'^%s$' % re.escape(name)
@@ -139,10 +135,14 @@ class ActionClass(object):
 
         return params
 
-    def show_password_form(self):
+    def show_password_form(self, name, password):
         _ = self.request.getText
         d = {"message": _(r"Please enter your password of your account at the remote wiki below. <<BR>> /!\ You should trust both wikis because the password could be read by the particular administrators.", wiki=True),
+             "namelabel": _("Name"),
+             "name": name,
              "passwordlabel": _("Password"),
+             "password": password,
+             "ticket": wikiutil.createTicket(self.request),
              "submit": _("Login"),
              "cancel": _("Cancel"),
         }
@@ -151,8 +151,13 @@ class ActionClass(object):
 <form method="post">
 <div>
 <input type="hidden" name="action" value="SyncPages">
+<input type="hidden" name="ticket" value="%(ticket)s">
+<label for="iName" style="font-weight: bold;">%(namelabel)s:</label>
+<input type="text" name="name" id="iName" size="32" value="%(name)s">
+</div>
+<div>
 <label for="iPassword" style="font-weight: bold;">%(passwordlabel)s:</label>
-<input type="password" name="password" id="iPassword" size="20">
+<input type="password" name="password" id="iPassword" size="32" value="%(password)s">
 </div>
 <div style="margin-top:1em; margin-bottom:1em;">
 <div style="float:left">
@@ -176,9 +181,19 @@ class ActionClass(object):
 
         params = self.fix_params(self.parse_page())
 
+        if self.request.method != 'POST':
+            # display the username / password dialog if we were just called by a GET request
+            return self.show_password_form(params["user"], params["password"])
+
         try:
             if "cancel" in self.request.values:
                 raise ActionStatus(_("Operation was canceled."), "error")
+
+            if not wikiutil.checkTicket(self.request, self.request.form.get('ticket', '')):
+                raise ActionStatus(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'SyncPages' })
+
+            name = self.request.form.get('name', '')
+            password = self.request.form.get('password', '')
 
             if params["direction"] == UP:
                 raise ActionStatus(_("The only supported directions are BOTH and DOWN."), "error")
@@ -191,15 +206,12 @@ class ActionClass(object):
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
-                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"], params["user"], params["password"], verbose=debug)
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"], name, password, verbose=debug)
             except (UnsupportedWikiException, NotAllowedException), (msg, ):
                 raise ActionStatus(msg, "error")
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown.", wiki=True), "error")
-            # if only the username is supplied, we ask for the password
-            if params["user"] and not params["password"]:
-                return self.show_password_form()
         except ActionStatus, e:
             self.request.theme.add_msg(*e.args)
         else:

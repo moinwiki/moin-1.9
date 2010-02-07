@@ -142,19 +142,22 @@ class Settings(UserPrefBase):
         if self.request.method != 'POST':
             return
 
+        if not wikiutil.checkTicket(self.request, form.get('ticket', '')):
+            return
+
         if form.has_key('remove'):
             return self._handle_remove()
 
         if form.has_key('add'):
             return self._handle_add()
 
-        return
-
     def _make_form(self):
         action = "%s%s" % (self.request.script_root, self.request.path)
         _form = html.FORM(action=action)
         _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         _form.append(html.INPUT(type="hidden", name="handler", value="oid"))
+        ticket = wikiutil.createTicket(self.request)
+        _form.append(html.INPUT(type="hidden", name="ticket", value=ticket))
         return _form
 
     def _make_row(self, label, cell, **kw):
