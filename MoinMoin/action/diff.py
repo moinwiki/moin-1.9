@@ -128,7 +128,6 @@ def execute(pagename, request):
     revert_html = ""
     if request.user.may.revert(pagename):
         revert_html = """
- <td style="border:0">
   <form action="%s" method="get">
    <div style="text-align:center">
     <input name="action" value="revert" type="hidden">
@@ -136,7 +135,6 @@ def execute(pagename, request):
     <input value="%s" type="submit"%s>
    </div>
   </form>
- </td>
  """ % (page_url, rev2, _("Revert to this revision"), enabled(newrev < currentrev))
 
     other_diff_button_html = """
@@ -157,7 +155,9 @@ def execute(pagename, request):
 <table class="diff">
 <tr>
  %(button)s
- %%s
+ <td style="border:0">
+   %%s
+ </td>
  %(button)s
 </tr>
 </table>
