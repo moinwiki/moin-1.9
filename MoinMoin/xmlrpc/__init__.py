@@ -130,6 +130,10 @@ class XmlRpcBase:
                 # we do not handle xmlrpc v1 and v2 differently
                 response = xmlrpclib.Fault(1, "This moin wiki does not allow xmlrpc method calls.")
             else:
+                # overwrite any user there might be, if you need a valid user for
+                # xmlrpc, you have to use multicall and getAuthToken / applyAuthToken
+                request.user = user.User(request, auth_method='xmlrpc:invalid')
+
                 data = request.in_data
 
                 try:

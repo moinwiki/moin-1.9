@@ -107,13 +107,20 @@ def show_pages(request, pagename, editor, timestamp):
     request.write('''
 </table>
 <p>
-<form method="post" action="%s">
+<form method="post" action="%(url)s">
 <input type="hidden" name="action" value="Despam">
-<input type="hidden" name="editor" value="%s">
-<input type="submit" name="ok" value="%s">
+<input type="hidden" name="ticket" value="%(ticket)s">
+<input type="hidden" name="editor" value="%(editor)s">
+<input type="submit" name="ok" value="%(label)s">
 </form>
 </p>
-''' % (request.href(pagename), wikiutil.url_quote(editor), _("Revert all!")))
+''' % dict(
+        url=request.href(pagename),
+        ticket=wikiutil.createTicket(request),
+        editor=wikiutil.url_quote(editor),
+        label=_("Revert all!"),
+    ))
+
 
 def revert_page(request, pagename, editor):
     if not request.user.may.revert(pagename):
@@ -194,7 +201,8 @@ def execute(pagename, request):
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
 
-    if ok:
+    if (request.method == 'POST' and ok and
+        wikiutil.checkTicket(request, request.form.get('ticket', ''))):
         revert_pages(request, editor, timestamp)
     elif editor:
         show_pages(request, pagename, editor, timestamp)
