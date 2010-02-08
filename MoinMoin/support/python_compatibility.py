@@ -76,6 +76,7 @@ except (NameError, ImportError):
             else:
                 d = kw or self.kw
             return self.fn(*(self.args + args), **d)
+
 """
 This is a feature from python 2.5, needed for compatibility with python 2.3 and 2.4,
 although it may not be 100% compatible.
