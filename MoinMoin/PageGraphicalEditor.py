@@ -314,7 +314,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         url_prefix_static = request.cfg.url_prefix_static
         url_prefix_local = request.cfg.url_prefix_local
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
-        fckbasepath = url_prefix_local + '/applets/FCKeditor'
+        fckbasepath = request.cfg.url_prefix_fckeditor
         wikiurl = request.getScriptname()
         if not wikiurl or wikiurl[-1] != '/':
             wikiurl += '/'

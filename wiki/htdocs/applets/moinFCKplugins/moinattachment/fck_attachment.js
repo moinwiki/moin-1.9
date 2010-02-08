@@ -18,7 +18,8 @@
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-var oEditor  = window.parent.InnerDialogLoaded();
+var dialog	= window.parent ;
+var oEditor = dialog.InnerDialogLoaded() ;
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
 var FCKConfig = oEditor.FCKConfig;
@@ -56,9 +57,9 @@ var oParser = new Object();
 //#### Initialization Code
 
 // oLink: The actual selected link in the editor.
-var oLink = FCK.Selection.MoveToAncestorNode('A');
-if (oLink)
- FCK.Selection.SelectNode(oLink);
+var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
+if ( oLink )
+  FCK.Selection.SelectNode( oLink ) ;
 
 window.onload = function()
 {
@@ -73,25 +74,25 @@ window.onload = function()
 
  // Activate the "OK" button.
  window.parent.SetOkButton(true);
+
+  // select first text input element of dialog for usability
+  SelectField('txtAttachmentname');
 }
 
 function LoadSelection()
 {
- if (!oLink) return;
+  if (!oLink) return;
 
- if (oLink.getAttribute('title') && 
-          oLink.getAttribute('title').startsWith('attachment:'))
- {
-  GetE('txtAttachmentname').value = decodeUrl(
-     oLink.getAttribute('title').remove(0, 'attachment:'.length));
- }
-
+  if (oLink.getAttribute('title') && oLink.getAttribute('title').StartsWith('attachment:'))
+  {
+    GetE('txtAttachmentname').value = decodeUrl(oLink.getAttribute('title').Remove(0, 'attachment:'.length));
+  }
 }
 
 //#### Link type selection.
 function SetLinkType(linkType)
 {
- ShowE('divLinkTypeAttachment' , (linkType == 'attachment'));
+  ShowE('divLinkTypeAttachment' , (linkType == 'attachment'));
 }
 
 //#### Called when user selects Wikipage.
@@ -103,56 +104,58 @@ function OnChangePagename(pagename)
 //#### Called while the user types the URL.
 function OnUrlChange()
 {
- var sUrl = GetE('txtUrl').value;
- var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
+  var sUrl = GetE('txtUrl').value;
+  var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
 
- if (sProtocol)
- {
-  sUrl = sUrl.substr(sProtocol[0].length);
-  GetE('txtUrl').value = sUrl;
- }
- else if (oRegex.UrlOnChangeTestOther.test(sUrl))
- {
-  GetE('cmbLinkProtocol').value = '';
- }
+  if (sProtocol)
+  {
+    sUrl = sUrl.substr(sProtocol[0].length);
+    GetE('txtUrl').value = sUrl;
+  }
+  else if (oRegex.UrlOnChangeTestOther.test(sUrl))
+  {
+    GetE('cmbLinkProtocol').value = '';
+  }
 }
 
 //#### The OK button was hit.
 function Ok()
 {
- var sUri;
- var sText = '';
+  var sUri;
+  var sText = '';
 
-   sUri = GetE('txtAttachmentname').value;
-   if (sUri.length == 0)
-   {
+  sUri = GetE('txtAttachmentname').value;
+  if (sUri.length == 0)
+  {
     alert(FCKLang.DlnLnkMsgNoUrl);
     return false;
-   }
-   sText = sUri;
-   sUri = encodeUrl(sUri);
-
- if (oLink) // Modifying an existent link.
-  oLink.href = sUri;
- else   // Creating a new link.
- {
-  oLink = oEditor.FCK.CreateLink(sUri);
-  if (! oLink)
-  {
-    oLink = oEditor.FCK.CreateElement('A');
-    oLink.href = sUri;
-    oLink.appendChild(oEditor.FCK.EditorDocument.createTextNode(sText)); 
   }
- }
+  sText = sUri;
+  sUri = encodeUrl(sUri);
 
+  if (oLink) // Modifying an existent link.
+  {
+    oLink.href = sUri;
+  }
+  else   // Creating a new link.
+  {
+    oLink = oEditor.FCK.CreateLink(sUri)[0];
+    if (! oLink)
+    {
+      oLink = oEditor.FCK.CreateElement('A');
+      oLink.href = sUri;
+      oLink.appendChild(oEditor.FCK.EditorDocument.createTextNode(sText)); 
+    }
+  }
+  
   SetAttribute(oLink, 'title', 'attachment:' + sUri);
 
- return true;
+  return true;
 }
 
 function SetUrl(url)
 {
- document.getElementById('txtUrl').value = url;
- OnUrlChange();
+  document.getElementById('txtUrl').value = url;
+  OnUrlChange();
 }
 

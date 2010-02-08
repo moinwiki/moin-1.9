@@ -37,8 +37,9 @@ class EventLog(LogFile):
 
         if values is None:
             values = {}
-        if add_http_info:
-            # All these are ascii
+        if request.cfg.log_remote_addr and add_http_info:
+            # if cfg.log_remote_addr is False (usually for privacy reasons),
+            # we likely do not want to log user agent and http referer either.
             for key in ['remote_addr', 'http_user_agent', 'http_referer']:
                 value = getattr(request, key, '')
                 if value:

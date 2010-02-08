@@ -2,6 +2,9 @@
 """
     get latest translation page content from the wiki and write it to *.po
 """
+
+master_url = "http://master18.moinmo.in/?action=xmlrpc2"
+
 DOMAIN = "MoinMoin"
 
 def run():
@@ -13,7 +16,7 @@ def run():
     lang = sys.argv[1]
 
     if not lang in excluded:
-        wiki = xmlrpclib.ServerProxy("http://master17.moinmo.in/?action=xmlrpc2")
+        wiki = xmlrpclib.ServerProxy(master_url)
 
         pagename = "MoinI18n/%s" % lang
         print pagename

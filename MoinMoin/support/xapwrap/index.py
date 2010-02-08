@@ -118,7 +118,12 @@ Xapwrap currently does not support stemming or stop words, although a
 future version will.
 
 """
-import cPickle, sets, glob, os
+try:
+    set
+except:
+    from sets import Set as set
+
+import cPickle, glob, os
 import xapian
 from document import makePairForWrite, StandardAnalyzer, Document, SortKey, Keyword
 from document import UNICODE_ENCODING, UNICODE_ERROR_POLICY
@@ -973,8 +978,8 @@ class SmartIndex(Index):
             raise InvalidArgumentError(
                 "document UIDs must be greater than one when using SmartIndex")
 
-        docSortKeys = sets.Set([sk.name for sk in doc.sortFields if sk.name is not None])
-        indexSortKeys = sets.Set(self.indexValueMap.keys())
+        docSortKeys = set([sk.name for sk in doc.sortFields if sk.name is not None])
+        indexSortKeys = set(self.indexValueMap.keys())
         if not docSortKeys.issubset(indexSortKeys):
             nextValueIndex = 1 + max(self.indexValueMap.itervalues())
             # we sort the sortKeys in order to improve the odds that two
@@ -992,9 +997,9 @@ class SmartIndex(Index):
                     nextValueIndex += 2
             self.saveState()
 
-        docKeywords = sets.Set([tf.name for tf in doc.textFields if tf.prefix] +
+        docKeywords = set([tf.name for tf in doc.textFields if tf.prefix] +
                                [kw.name for kw in doc.keywords])
-        indexKeyWords = sets.Set(self.prefixMap.keys())
+        indexKeyWords = set(self.prefixMap.keys())
         if not docKeywords.issubset(indexKeyWords):
             for k in docKeywords - indexKeyWords:
                 self.prefixMap[k] = k.upper()

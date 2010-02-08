@@ -60,7 +60,10 @@ def i18n_init(request):
     request.clock.start('i18n_init')
     if languages is None:
         logging.debug("trying to load translations from cache")
-        meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm', use_pickle=True)
+        # the scope of the i18n cache needs to be per-wiki, because some translations
+        # have http links (to some help pages) and they must not point to another
+        # wiki in the farm (confusing and maybe not even readable due to ACLs):
+        meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='wiki', use_pickle=True)
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
             logging.debug("cache needs update")
@@ -199,7 +202,8 @@ class Translation(object):
 
     def loadLanguage(self, request, trans_dir="i18n"):
         request.clock.start('loadLanguage')
-        cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm', use_pickle=True)
+        # see comment about per-wiki scope above
+        cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='wiki', use_pickle=True)
         langfilename = po_filename(request, self.language, self.domain, i18n_dir=trans_dir)
         needsupdate = cache.needsUpdate(langfilename)
         if not needsupdate:
@@ -278,6 +282,9 @@ def getText(original, request, lang, **kw):
                 translation.formatted[key] = translated # remember it
     else:
         try:
+            if languages is None:
+                # languages not initialized yet
+                raise KeyError
             language = languages[lang]['x-language-in-english']
             dictpagename = "%sDict" % language.replace(' ', '')
             dicts = request.dicts
@@ -290,7 +297,7 @@ def getText(original, request, lang, **kw):
             # do not simply return trans with str, but recursively call
             # to get english translation, maybe formatted.
             # if we don't find an english "translation", we just format it
-            # on the fly (this is needed for cfg.editor_quickhelp).
+            # on the fly (this is needed for quickhelp).
             if lang != 'en':
                 logging.debug("falling back to english, requested string not in %r translation: %r" % (lang, original))
                 translated = getText(original, request, 'en', wiki=formatted, percent=percent)

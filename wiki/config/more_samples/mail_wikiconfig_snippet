@@ -24,11 +24,11 @@
     # within moin, you need some script called by your MDA (e.g. procmail)
     # to DO the xmlrpc calls for each mail arriving for your wiki!
     #actions_excluded = [] # it won't work if 'xmlrpc' is excluded!
-    #mail_import_secret = "foo" # a shared secret also known to the mail importer xmlrpc script
     #mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
     #mail_import_pagename_search = ['subject', 'to', ] # where to look for target pagename (and in which order)
     #mail_import_pagename_envelope = u"%s" # use u"+ %s/" to add "+ " and "/" automatically
     #mail_import_pagename_regex = r'\[\[([^\]]*)\]\]' # how to find/extract the pagename from the subject
     #mail_import_wiki_addrs = [] # the e-mail addresses for e-mails that should go into the wiki
+    #secrets = ""  # or secrets["xmlrpc/ProcessMail"] - a shared secret also known to the mail importer xmlrpc script
 
 

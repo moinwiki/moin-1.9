@@ -15,7 +15,8 @@ class DataBrowserWidget(base.Widget):
         _ = request.getText
         base.Widget.__init__(self, request, **kw)
         self.data = None
-        self.data_id = 'dbw.'
+        self.unqual_data_id = 'dbw.'
+        self.data_id = request.formatter.qualify_id(self.unqual_data_id)
         # prefixed with __ are untranslated and to be used in the JS
         self._all = _('[all]')
         self.__all = '[all]'
@@ -37,7 +38,8 @@ class DataBrowserWidget(base.Widget):
         """
         self.data = dataset
         if dataset.data_id:
-            self.data_id = 'dbw.%s.' % dataset.data_id
+            self.unqual_data_id = 'dbw.%s.' % dataset.data_id
+            self.data_id = self.request.formatter.qualify_id(self.unqual_data_id)
 
     def _name(self, elem):
         """ return name tag for a HTML element
@@ -87,21 +89,27 @@ class DataBrowserWidget(base.Widget):
         del unique[0]
         unique.sort()
         result = [self._makeoption(item, item == value) for item in unique]
-        common = [None, None, None]
-        common[0] = self._makeoption(self._all, value == self.__all, self.__all)
-        common[1] = self._makeoption(self._empty, value == self.__empty, self.__empty)
-        common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
+        common = []
+        common.append(self._makeoption(self._all, value == self.__all, self.__all))
+        if '' in unique:
+            common.extend([
+                self._makeoption(self._empty, value == self.__empty, self.__empty),
+                self._makeoption(self._notempty, value == self.__notempty, self.__notempty),
+            ])
         return '\n'.join(common + result)
 
-    def format(self, method="GET"):
+    def _format(self, formatter=None, method=None):
         """
-        formats the table
-        @param method: GET or POST method
+        does the formatting of the table
+        @param formatter: formatter
+        @param method: None is the default and does not create a form
+                       while "GET" or "POST" will create the form using the given method
         """
-        fmt = self.request.formatter
+        fmt = formatter or self.request.formatter
 
         result = []
-        result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
+        if method:
+            result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
         result.append(fmt.div(1))
 
         havefilters = False
@@ -112,7 +120,7 @@ class DataBrowserWidget(base.Widget):
         if havefilters:
             result.append(fmt.rawHTML('<input type="submit" value="%s" %s>' % (self._filter, self._name('submit'))))
 
-        result.append(fmt.table(1, id='%stable' % self.data_id))
+        result.append(fmt.table(1, id='%stable' % self.unqual_data_id))
 
         # add header line
         if self._show_header:
@@ -121,7 +129,8 @@ class DataBrowserWidget(base.Widget):
                 col = self.data.columns[idx]
                 if col.hidden:
                     continue
-                result.append(fmt.table_cell(1))
+                cell_attrs = {'class': 'hcolumn%d' % idx}
+                result.append(fmt.table_cell(1, cell_attrs))
                 result.append(fmt.strong(1))
                 result.append(col.label or col.name)
                 result.append(fmt.strong(0))
@@ -175,11 +184,12 @@ class DataBrowserWidget(base.Widget):
                 for idx in range(len(row)):
                     if self.data.columns[idx].hidden:
                         continue
+                    cell_attrs = {'class': 'column%d' % idx}
                     if isinstance(row[idx], tuple):
-                        result.append(fmt.table_cell(1, abbr=unicode(row[idx][1])))
+                        result.append(fmt.table_cell(1, cell_attrs, abbr=unicode(row[idx][1])))
                         result.append(unicode(row[idx][0]))
                     else:
-                        result.append(fmt.table_cell(1))
+                        result.append(fmt.table_cell(1, cell_attrs))
                         result.append(unicode(row[idx]))
                     result.append(fmt.table_cell(0))
                 result.append(fmt.table_row(0))
@@ -188,14 +198,12 @@ class DataBrowserWidget(base.Widget):
 
         result.append(fmt.table(0))
         result.append(fmt.div(0))
-        result.append(fmt.rawHTML('</form>'))
+        if method:
+            result.append(fmt.rawHTML('</form>'))
         return ''.join(result)
 
-    toHTML = format # old name of "format" function DEPRECATED, will be removed in 1.7
+    format = _format # DEPRECATED, use render()
 
-    def render(self, method="GET"):
-        """
-        @param method: GET or POST method
-        """
-        self.request.write(self.format(method=method))
+    render = _format # Note: in moin <= 1.7.1 render() used request.write(), this was wrong!
+                     # Now it just returns the result, as the other widgets do.
 

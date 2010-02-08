@@ -51,8 +51,8 @@ import sys, os
 # Debug mode - show detailed error reports
 #os.environ['MOIN_DEBUG'] = '1'
 
-
 from MoinMoin.server.server_modpython import ModpythonConfig, modpythonHandler
+
 
 class MyConfig(ModpythonConfig):
     """ Set up local server-specific stuff here """

@@ -25,7 +25,7 @@ class Formatter(text_html.Formatter):
             self._base_depth = depth
 
         count_depth = max(depth - (self._base_depth - 1), 1)
-        heading_depth = depth + 1
+        heading_depth = depth
 
         # closing tag, with empty line after, to make source more readable
         if not on:
@@ -68,10 +68,15 @@ class Formatter(text_html.Formatter):
             return '<span style="background-color:#ffff11">{{attachment:%s|%s}}</span>' % (url, text)
 
     def attachment_link(self, on, url=None, **kw):
+        assert on in (0, 1, False, True) # make sure we get called the new way, not like the 1.5 api was
         _ = self.request.getText
+        querystr = kw.get('querystr', {})
+        assert isinstance(querystr, dict) # new in 1.6, only support dicts
+        if 'do' not in querystr:
+            querystr['do'] = 'view'
         if on:
             pagename = self.page.page_name
-            target = AttachFile.getAttachUrl(pagename, url, self.request)
+            target = AttachFile.getAttachUrl(pagename, url, self.request, do=querystr['do'])
             return self.url(on, target, title="attachment:%s" % wikiutil.quoteWikinameURL(url))
         else:
             return self.url(on)
@@ -234,3 +239,9 @@ class Formatter(text_html.Formatter):
     def line_anchorlink(self, on, lineno=0):
         return '' # not needed for gui editor feeding
 
+    def span(self, on, **kw):
+        previous_state = self.request.user.show_comments
+        self.request.user.show_comments = True
+        ret = text_html.Formatter.span(self, on, **kw)
+        self.request.user.show_comments = previous_state
+        return ret

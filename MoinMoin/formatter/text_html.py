@@ -14,7 +14,7 @@ from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
-from MoinMoin.support.python_compatibility import set, rsplit
+from MoinMoin.support.python_compatibility import set
 
 # insert IDs into output wherever they occur
 # warning: breaks toggle line numbers javascript
@@ -488,8 +488,6 @@ class Formatter(FormatterBase):
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
-            if '#' in wikitail:
-                wikitail, kw['anchor'] = rsplit(wikitail, '#', 1)
             wikitail = wikiutil.url_unquote(wikitail)
             try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
                 pagename = wikiutil.AbsPageName(self.page.page_name, wikitail)
@@ -502,6 +500,9 @@ class Formatter(FormatterBase):
                 if querystr:
                     separator = ('?', '&')['?' in href]
                     href = '%s%s%s' % (href, separator, wikiutil.makeQueryString(querystr))
+                anchor = kw.get('anchor')
+                if anchor:
+                    href = '%s#%s' % (href, self.sanitize_to_id(anchor))
                 if wikitag_bad:
                     html_class = 'badinterwiki'
                 else:
@@ -601,7 +602,7 @@ class Formatter(FormatterBase):
 
     # Attachments ######################################################
 
-    def attachment_link(self, on, url=None, **kw):
+    def attachment_link(self, on, url=None, querystr=None, **kw):
         """ Link to an attachment.
 
             @param on: 1/True=start link, 0/False=end link
@@ -609,7 +610,8 @@ class Formatter(FormatterBase):
         """
         assert on in (0, 1, False, True) # make sure we get called the new way, not like the 1.5 api was
         _ = self.request.getText
-        querystr = kw.get('querystr', {})
+        if querystr is None:
+            querystr = {}
         assert isinstance(querystr, dict) # new in 1.6, only support dicts
         if 'do' not in querystr:
             querystr['do'] = 'view'
@@ -619,13 +621,14 @@ class Formatter(FormatterBase):
             fname = wikiutil.taintfilename(filename)
             if AttachFile.exists(self.request, pagename, fname):
                 target = AttachFile.getAttachUrl(pagename, fname, self.request, do=querystr['do'])
-                title = "attachment:%s" % url
-                css = 'attachment'
+                if not 'title' in kw:
+                    kw['title'] = "attachment:%s" % url
+                kw['css'] = 'attachment'
             else:
                 target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
-                title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
-                css = 'attachment nonexistent'
-            return self.url(on, target, css=css, title=title)
+                kw['title'] = _('Upload new attachment "%(filename)s"') % {'filename': fname}
+                kw['css'] = 'attachment nonexistent'
+            return self.url(on, target, **kw)
         else:
             return self.url(on)
 
@@ -652,6 +655,7 @@ class Formatter(FormatterBase):
             return self.url(1, target, css=css, title=title) + img + self.url(0)
 
     def attachment_drawing(self, url, text, **kw):
+        # XXX text arg is unused!
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         fname = wikiutil.taintfilename(filename)
@@ -670,42 +674,42 @@ class Formatter(FormatterBase):
         # check whether attachment exists, possibly point to upload form
         drawing_url = AttachFile.getAttachUrl(pagename, fname, self.request, drawing=drawing, upload=True)
         if not exists:
-            linktext = _('Create new drawing "%(filename)s (opens in new window)"')
-            return (self.url(1, drawing_url) +
-                    self.text(linktext % {'filename': fname}) +
-                    self.url(0))
+            title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': fname}
+            img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
+            css = 'nonexistent'
+            return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
+
+        title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
+        kw['src'] = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+        kw['css'] = 'drawing'
 
         mappath = AttachFile.getFilename(self.request, pagename, drawing + u'.map')
-
-        # check for map file
-        if os.path.exists(mappath):
+        try:
+            map = file(mappath, 'r').read()
+        except (IOError, OSError):
+            map = ''
+        if map:
             # we have a image map. inline it and add a map ref to the img tag
-            try:
-                map = file(mappath, 'r').read()
-            except IOError:
-                pass
-            except OSError:
-                pass
-            else:
-                mapid = 'ImageMapOf' + drawing
-                # replace MAPNAME
-                map = map.replace('%MAPNAME%', mapid)
-                # add alt and title tags to areas
-                map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
-                # add in edit links plus alt and title attributes
-                alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-                map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, alt, title))
-                # unxml, because 4.01 concrete will not validate />
-                map = map.replace('/>', '>')
-                alt = title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
-                src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
-                return (map + self.image(alt=alt, title=title, src=src, usemap='#'+mapid, css="drawing"))
+            mapid = 'ImageMapOf' + drawing
+            map = map.replace('%MAPNAME%', mapid)
+            # add alt and title tags to areas
+            map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
+            map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, title, title))
+            # unxml, because 4.01 concrete will not validate />
+            map = map.replace('/>', '>')
+            title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
+            if 'title' not in kw:
+                kw['title'] = title
+            if 'alt' not in kw:
+                kw['alt'] = kw['title']
+            kw['usemap'] = '#'+mapid
+            return map + self.image(**kw)
         else:
-            alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
-            return (self.url(1, drawing_url) +
-                    self.image(alt=alt, title=title, src=src, css="drawing") +
-                    self.url(0))
+            if 'title' not in kw:
+                kw['title'] = title
+            if 'alt' not in kw:
+                kw['alt'] = kw['title']
+            return self.url(1, drawing_url) + self.image(**kw) + self.url(0)
 
 
     # Text ##############################################################
