@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-01-17 22:54+0100\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -327,7 +327,7 @@ msgid ""
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Логин-Нэр: %s\n"
 "\n"
@@ -348,14 +348,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Таны Вики дансны мэдээлэл"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Тодорхойгүй үйлдэл %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Та %(action_name)s үйлдлийг энэ хуудас дээр ажиллуулж болохгүй!"
+
+msgid "Login and try again."
+msgstr "Та эхлээд логин хийгээд дараа нь ахиад оролдоод үзнэ үү."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Тус Пакет МойнМойны шинэ хувилбар шаардаж байна (ядаж %s)."
 
 msgid "The theme name is not set."
 msgstr "Загварын нэр өгөгдөөгүй байна."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Суулгах загварын файлууд нь зөвхөн Server-Typ standalone -ыгдэмждэг."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -452,8 +464,9 @@ msgstr "\"%(token)s\" өгөгдөлд утга оруулаагүй байна"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Сүүлийн агуулгын BackUp хуучирсан байгаа бахайлтад өртөхгүй болсон болно!"
@@ -712,9 +725,8 @@ msgstr "Арилгагдсан текстүүд ингэж тэмдэглэгд�
 msgid "Additions are marked like this."
 msgstr "Нэмж оруулсан текстүүд ингэж тэмдэглэгдсэн."
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "Та логаут хийсэн байна."
+msgid "Please log in first."
+msgstr "Эхлээд логин хийнэ үү."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -741,10 +753,27 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Ажиллагаа цуцлагдлаа."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -774,7 +803,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 #, fuzzy
@@ -829,7 +862,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Өргөлт:: <<Verbatim('')>>''ташуу''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''бүдүүн'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''бүдүүн болон "
@@ -865,6 +898,15 @@ msgstr "Хүссэн бүхэл тоо \"%(arg)s\" дараа \"%(key)s\""
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Хүссэн өнгөний утга \"%(arg)s\" дараа \"%(key)s\""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
+msgstr ""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1078,18 +1120,6 @@ msgstr " \"%(filename)s\" гэсэн файлыг шинээр хавсарга�
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Шинэ зураг \"%(filename)s\" оруулах"
-
-#, fuzzy, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Зургын %(filename)s файлыг өөрчлөх"
-
-#, fuzzy, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Зургын %(filename)s файлыг өөрчлөх"
-
 msgid "Toggle line numbers"
 msgstr "Мөрний дугаарыг нээх, хаах"
 
@@ -1100,17 +1130,6 @@ msgstr "Хяналтын хувилбар %(rev)d сэргээгдлээ."
 #, fuzzy, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "\"%(pagename)s\" -ийн хавсралтууд"
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Тодорхойгүй үйлдэл %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Та %(action_name)s үйлдлийг энэ хуудас дээр ажиллуулж болохгүй!"
-
-msgid "Login and try again."
-msgstr "Та эхлээд логин хийгээд дараа нь ахиад оролдоод үзнэ үү."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1218,6 +1237,30 @@ msgid ""
 "Attachment size: %(attach_size)s\n"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgstr "%(pagename)s дахь <<Verbatim(attachment:)>>%(filename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Эрхэм хүндэт Вики хэрэглэгч та,\n"
+"\n"
+" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
+"авахаар бүртгэгдсэн байна.\n"
+"\n"
+"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
+"%(pagelink)s\n"
+"\n"
+
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
@@ -1255,6 +1298,10 @@ msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
 msgid "A new attachment has been added"
 msgstr "Хавсралтын шинэ нэр"
 
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Хавсралтын шинэ нэр"
+
 msgid "A page has been reverted to a previous state"
 msgstr ""
 
@@ -1280,9 +1327,6 @@ msgstr "Хуудсуудыг багцлах"
 #, fuzzy
 msgid "Page changed"
 msgstr "Өөрчлөлтийг хадгалах"
-
-msgid "about"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -1318,11 +1362,14 @@ msgstr "Оноолт"
 msgid "matches"
 msgstr "Оноолт"
 
-msgid "FrontPage"
-msgstr "Эхний хуудас"
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "Хамгийн сүүлийн өөрчлөлт"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "TitleIndex"
@@ -1333,23 +1380,478 @@ msgstr "WortIndex"
 msgid "FindPage"
 msgstr "ХуудасОл"
 
-msgid "SiteNavigation"
-msgstr "ХуудасныНавигаци"
-
-msgid "HelpContents"
-msgstr "АгуулгынТусламж"
-
-msgid "HelpOnFormatting"
-msgstr "ФорматлахТусламж"
-
-msgid "WikiLicense"
-msgstr "ВикиЛиценз"
-
 msgid "MissingPage"
 msgstr "ОлдохгүйХуудас"
 
 msgid "MissingHomePage"
 msgstr "ОлдохгүйНүүрХуудас"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "ОлдохгүйНүүрХуудас"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Нэр"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "Эхний хуудас"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Вики"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Хуудсуудыг багцлах"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "ХуудасОл"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Хэмжээ"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Хуудсууд"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "ХуудасНэрлэх"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python хувилбар"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "ВикиЛиценз"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Слайд үзүүлэх"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "ХэрэглэгчийнТохиргоо"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpOnFormatting"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin хувилбар"
+
+msgid "HelpContents"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "TitleIndex"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "хэл"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "ХуудасныНавигаци"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Слайд үзүүлэх"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "ДүрэмШалгах"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Синхронизаци эхэллээ -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "ХэрэглэгчийнТохиргоо"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Бүртгүүлэхгүй"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "ХэрэглэгчийнТохиргоо"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Шинэ хавсралт файл"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Бусад ...:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Ня"
 
 msgid "Mon"
 msgstr "Да"
@@ -1368,9 +1870,6 @@ msgstr "Ба"
 
 msgid "Sat"
 msgstr "Бя"
-
-msgid "Sun"
-msgstr "Ня"
 
 msgid "AttachFile"
 msgstr "ФайлХавсаргах"
@@ -1444,9 +1943,6 @@ msgstr "[ДООД]"
 msgid "[TOP]"
 msgstr "[ДЭЭД]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Энд дарж ийшээ заасан хуудсуудыг харж болно"
-
 msgid "Settings"
 msgstr ""
 
@@ -1468,6 +1964,9 @@ msgstr "Бүртгүүлэхгүй"
 
 msgid "Home"
 msgstr "Нүүр"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Энд дарж ийшээ заасан хуудсуудыг харж болно"
 
 msgid "Clear message"
 msgstr "Мэссэж устгах"
@@ -1584,6 +2083,21 @@ msgid "File attachment browser"
 msgstr "Хавсралтын шинэ нэр"
 
 msgid "User account browser"
+msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "Python хувилбар"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Хэрэглэгч"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "файлын төрөл"
+
+msgid "Mimetypes"
 msgstr ""
 
 msgid "Wiki configuration"
@@ -1705,23 +2219,20 @@ msgstr "Глобаль парзер"
 msgid "Local extension parsers"
 msgstr "Локаль өргөтгөсөн парзер"
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian ба/эсвэл Python Xapian bindings суулгаагүй"
+
 msgid "Disabled"
 msgstr "Идэвхгүй"
 
 msgid "Enabled"
 msgstr "Идэвхтэй"
 
-msgid "index available"
-msgstr "Индэксжсэн"
-
 msgid "index unavailable"
 msgstr "Индексжээгүй"
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian ба/эсвэл Python Xapian bindings суулгаагүй"
-
-msgid "N/A"
-msgstr "өгөгдөлгүй"
+msgid "index available"
+msgstr "Индэксжсэн"
 
 msgid "Xapian search"
 msgstr "Xapian-Хайлт"
@@ -1731,6 +2242,9 @@ msgstr ""
 
 msgid "Active threads"
 msgstr "Active threads"
+
+msgid "N/A"
+msgstr "өгөгдөлгүй"
 
 msgid "No orphaned pages in this wiki."
 msgstr "No orphaned pages in this wiki."
@@ -1779,7 +2293,8 @@ msgstr "дараах ухагдахуунуудаас нэг болон хэд �
 msgid "not containing the following terms"
 msgstr "дараах ухагдахуунуудыг агуулаагүй"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "сүүлийн өөрчлөлт (Жбэл: 'сүүлийн 2 долоо хоног')"
 
 msgid "any category"
@@ -1875,6 +2390,10 @@ msgstr "Эхлэх"
 msgid "Slide %(pos)d of %(size)d"
 msgstr " %(size)d -ийн хуудас: %(pos)d von "
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Хуудас руу оч"
 
@@ -1919,6 +2438,29 @@ msgstr "Таны энэ хуудас руу заасан quicklink устгаг�
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Слайд үзүүлэх"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Слайд үзүүлэх"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2099,9 +2641,6 @@ msgstr "суулгах"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Энэ %(pagename)s хуудсанд хавсралт хадгалагдаагүй байна."
 
-msgid "Edit drawing"
-msgstr "Зураг өөрчлөх"
-
 msgid "New Attachment"
 msgstr "Шинэ хавсралт файл"
 
@@ -2134,16 +2673,16 @@ msgstr "\"%(pagename)s\" -ийн хавсралтууд"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Та энэ хуудасны хавсралтуудыг үзэж болохгүй."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Хоосон файл. Файлын нэрнээс ASCII-тэмдэгтүүдийг нь арилгааддахин оролдоод "
 "үзнэ үү."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Та энэ хуудасны хавсралтуудыг үзэж болохгүй."
 
 #, python-format
 msgid ""
@@ -2156,9 +2695,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Хавсралт '%(target)s' (ремоут нэр '%(filename)s') өмнө нь байсанбайна."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Та энэ хуудсандд зураг хадгалж болохгүй."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Та энэ хуудаснаас хавсралт устгаж болохгүй!"
@@ -2705,6 +3241,30 @@ msgstr "Нэр солих шалтгаан"
 msgid "Really copy this page?"
 msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
 
+#, fuzzy
+msgid "Attachment location"
+msgstr "Хавсралт"
+
+#, fuzzy
+msgid "Page name"
+msgstr "Багцын нэр"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Хавсралтын шинэ нэр"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Хавсралт"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "Хавсралт"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "\"%(pagename)s\" -ийн хавсралтууд"
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr "\"%s\" -ын линкүүдийн жагсаалт"
@@ -2732,6 +3292,33 @@ msgstr "Өмнөх"
 msgid "Next change"
 msgstr "Юу ч өөрчлөгдөөгүй."
 
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Энэ хуудасны хуучин хувилбар алга байна!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Энэ хуудасны хуучин хувилбар алга байна!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Энэ хуудасны хуучин хувилбар алга байна!"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "Хуудас %(count)d удаа хадгалагдсан байх юм!"
@@ -2745,10 +3332,6 @@ msgstr "Хоосон зайнаас бусад өөрчлөлтүүдийг хэ
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Файлын буруу нэр: \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "%s -ийг агуулсан %s багц үүсгэгдлээ."
 
 #, fuzzy
 msgid "Include all attachments?"
@@ -2780,8 +3363,26 @@ msgstr "Хэрэглэгч биш:"
 msgid "You are not allowed to perform this action."
 msgstr "Та энэ үйлдлийг гүйцэтгэж болохгүй."
 
-msgid "Please log in first."
-msgstr "Эхлээд логин хийнэ үү."
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Шинэ зураг \"%(filename)s\" оруулах"
+
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Зургын %(filename)s файлыг өөрчлөх"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Зургын %(filename)s файлыг өөрчлөх"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Та энэ хуудсандд зураг хадгалж болохгүй."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Зураг өөрчлөх"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Хуудсууд үүсгэхээсээ өмнө нүүр хуудсаа үүсгэнэ үү."
@@ -2836,6 +3437,25 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Миний хуудасны менежмент"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Та энэ үйлдлийг хийж болохгүй."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Энэ хуудас дэд хуудас биш!"
+
+#, fuzzy
+msgid "page package"
+msgstr "Хуудсуудыг багцлах"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Таны энэ хуудасны Abonnement арилгагдсан байна."
@@ -2948,10 +3568,6 @@ msgstr "%(actionname)s үйлдэл энэ вики-д хамаарахгүй!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Та энэ %(actionname)s үйлдлийг энэ хуудас дээр гүйцэтгэх боломжгүй!"
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Та энэ үйлдлийг хийж болохгүй."
-
 msgid "Views/day"
 msgstr "Уншигдсан/Өдөр"
 
@@ -3002,6 +3618,9 @@ msgstr "Хэнд"
 msgid "Content"
 msgstr "Агуулга"
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr " '%(server)s'Мэйл сервер холбогдсонгүй, алдаа: %(reason)s"
@@ -3021,6 +3640,46 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "суулгах"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "ФорматлахТусламж"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Та энэ хуудсанд өөрчлөлт оруулах эрхгүй."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Суулгах загварын файлууд нь зөвхөн Server-Typ standalone -ыгдэмждэг."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki эх текст"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Агуулга"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Агуулга"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Системийн хуудсуудыг хамраагүй"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "%s -ийг агуулсан %s багц үүсгэгдлээ."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Та логаут хийсэн байна."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3087,10 +3746,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Шинэ хавсралт файл"
-
-#, fuzzy
-#~ msgid "attachment"
-#~ msgstr "Хавсралт"
 
 #, fuzzy
 #~ msgid "New Name"
@@ -3188,9 +3843,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "ХэрэглэгчийнТохиргоо"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Ердийн өөрчлөлтийг бүртгүүл"

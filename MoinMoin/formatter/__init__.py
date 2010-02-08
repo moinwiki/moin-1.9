@@ -74,12 +74,12 @@ class FormatterBase:
 
     def startContent(self, content_id="content", **kw):
         if self.page:
-            self.request.begin_include(self.page.page_name)
+            self.request.uid_generator.begin(self.page.page_name)
         return ""
 
     def endContent(self):
         if self.page:
-            self.request.end_include()
+            self.request.uid_generator.end()
         return ""
 
     # Links ##############################################################
@@ -93,7 +93,7 @@ class FormatterBase:
             return ''
         if not pagename and page:
             pagename = page.page_name
-        pagename = self.request.normalizePagename(pagename)
+        pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
         if pagename and pagename not in self.pagelinks:
             self.pagelinks.append(pagename)
 
@@ -407,11 +407,11 @@ class FormatterBase:
         '''
         Take an ID and make it unique in the current namespace.
         '''
-        ns = self.request.include_id
+        ns = self.request.uid_generator.include_id
         if not ns is None:
             ns = self.sanitize_to_id(ns)
         id = self.sanitize_to_id(id)
-        id = self.request.make_unique_id(id, ns)
+        id = self.request.uid_generator(id, ns)
         return id
 
     def qualify_id(self, id):
@@ -421,7 +421,7 @@ class FormatterBase:
         is suitable if the dot ('.') is valid in IDs for your
         formatter.
         '''
-        ns = self.request.include_id
+        ns = self.request.uid_generator.include_id
         if not ns is None:
             ns = self.sanitize_to_id(ns)
             return '%s.%s' % (ns, id)

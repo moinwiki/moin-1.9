@@ -372,7 +372,7 @@ class Formatter(FormatterBase):
     def big(self, on, **kw):
         return self._set_tag('big', on)
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1, msg=None):
         kw = {'id': code_id,
               'type': code_type,
               'show': show,

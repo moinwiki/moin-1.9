@@ -84,7 +84,7 @@ def macro_EmbedObject(macro, target=wikiutil.required_arg(unicode), pagename=Non
 
         if not AttachFile.exists(request, pagename, fname):
             linktext = _('Upload new attachment "%(filename)s"') % {'filename': fname}
-            target = AttachFile.getAttachUrl(pagename, fname, request, upload=True)
+            target = AttachFile.getAttachUrl(pagename, fname, request, do='upload_form')
             return (fmt.url(1, target) +
                     fmt.text(linktext) +
                     fmt.url(0))

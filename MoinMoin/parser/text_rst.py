@@ -175,6 +175,7 @@ _ = lambda x: x
 class Parser:
     caching = 1
     Dependencies = Dependencies # copy dependencies from module-scope
+    extensions = ['.rst', '.rest', ]
     quickhelp = _("""\
 {{{
 Emphasis: *italic* **bold** ``monospace``
@@ -363,7 +364,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
 
-            if prefix == 'drawing': # twikidraw drawing
+            if prefix == 'drawing':
                 self.process_wiki_text("[[%s]]" % refuri)
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <title>AnyWikiDraw for MediaWiki</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <h1>AnyWikiDraw for MediaWiki</h1>
+    <h3>Usage</h3>
+        <p>To include a drawing in a MediaWiki page, write the following tag in the
+        page:</p>
+        <p><code>{{#drawing:drawing.svg|width|height}}</code></p>
+        <ul>
+            <li>The tag needs to be put into double curly braces.</li>
+            <li>The name of the tag is <code>#drawing:</code></li>
+            <li>The parameter <code>drawing.svg</code> specifies the name of the drawing file.</li>
+            <li>The drawing file can have one of the following extensions 
+            <code>.svg</code>,<code> .png</code>, 
+            <code>.jpg</code>.</li> 
+          <li>If you specify an drawing file that does not yet exist in your Wiki, 
+            the drawing is created the first time you save a drawing.</li>
+            <li>The parameter width specifies the width of the drawing.</li>
+            <li>The parameter height specifies the height of the drawing.</li>
+         </ul>
+         <h3>Security considerations</h3>
+         <ul>
+           <li><span style="color:#990000">This is an experimental extension. Data loss may occur.<br /> 
+               <em>Install
+           it only on a Wiki system that does not contain critical data.</em><br />
+             <br />
+           </span></li>
+           <li>You need to grant access to session cookies to JavaScript and Java.<br />
+             <em>You may not want to do this if your wiki embeds JavaScript code from untrusted sources.<br />
+             F
+             or example if your wiki embeds banners and advertisements from a third party system.</em><br />
+             <br />
+           </li>
+           <li> You need to allow file upload to your users.<br />
+             <em>You may not want to do this if your wiki allows user account creation by people not known to you.             </em>           </li>
+         </ul>
+             <h3 align="left">Installation instructions</h3>
+         <ol>
+             <li >Enable Cookie access by JavaScript and Java Applets in  the <code>LocalSettings.php</code> script:<br />
+               <br />
+               <code>$wgCookieHttpOnly = false;</code><br />
+               <br />
+           </li>
+           <li>Enable file uploading in  <code>LocalSettings.php</code> script:<br />
+               <br />
+               <code>$wgEnableUploads = true;</code><br />
+                 <code></code><br /></li>
+           <li>If you want to use AnyWikiDraw as SVG editor, make sure that you have properly installed and enabled SVG support on your MediaWiki server. For example, if you have installed ImageMagick on your server, you can activate SVG support using the following lines in  the <code>LocalSettings.php</code> script:<br />
+               <code><br />
+               $wgUseImageMagick = true;<br />
+$wgImageMagickConvertCommand='/opt/local/bin/convert';<br />
+$wgSVGConverterPath='/opt/local/bin';<br />
+$wgFileExtensions[] = 'svg';<br />
+             </code><code><br />
+</code></li>
+             <li>Place the AnyWikiDraw folder into 
+             the <code>extensions</code> folder of your MediaWiki server. <br />
+             <em>Please note, that different versions of this extension exist for different versions of MediaWiki.</em><br />
+             <br />
+             </li>
+             <li>To activate this extension add the
+                 following lines to your <code>LocalSettings.php</code> script:<br/>
+                 <code><br />
+             require_once(&quot;extensions/AnyWikiDraw/AnyWikiDraw.php&quot;);</code></li>
+         </ol>
+               <h3>Summary of changes to LocalSettings.php</h3>
+               <p class="listing"><code>// Enable cookie access by JavaScript and Java Applets<br />
+               $wgCookieHttpOnly = false;<br />
+               <br />
+               </code><code>// Enable file upload<br />
+               $wgEnableUploads = true;</code><br />
+               <br />
+               <code>// Enable an SVG converter, for example ImageMagick<br />
+               $wgUseImageMagick = true;<br />
+               $wgImageMagickConvertCommand='/opt/local/bin/convert';<br />
+    $wgSVGConverterPath='/opt/local/bin';</code><br />
+    <code><code>$wgFileExtensions[] = 'svg';<br />
+    </code><br />
+      </code><code>// Enable AnyWikiDraw<br />
+    require_once(&quot;$IP/extensions/AnyWikiDraw/AnyWikiDraw.php&quot;);</code></p>
+</body>    
+</html>
+
+

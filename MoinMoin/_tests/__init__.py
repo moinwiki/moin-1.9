@@ -15,6 +15,7 @@ from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.util import random_string
 from MoinMoin import caching, user
+from MoinMoin.action import AttachFile
 
 # Promoting the test user -------------------------------------------
 # Usually the tests run as anonymous user, but for some stuff, you
@@ -93,6 +94,9 @@ def nuke_eventlog(request):
 
 def nuke_page(request, pagename):
     """ completely delete a page, everything in the pagedir """
+    attachments = AttachFile._get_files(request, pagename)
+    for attachment in attachments:
+        AttachFile.remove_attachment(request, pagename, attachment)
     page = PageEditor(request, pagename, do_editor_backup=False)
     page.deletePage()
     # really get rid of everything there:
@@ -115,3 +119,9 @@ def make_macro(request, page):
     p.form = request.form
     m = macro.Macro(p)
     return m
+
+def nuke_xapian_index(request):
+    """ completely delete everything in xapian index dir """
+    fpath = os.path.join(request.cfg.cache_dir, 'xapian')
+    if os.path.exists(fpath):
+        shutil.rmtree(fpath, True)

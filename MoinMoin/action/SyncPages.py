@@ -17,7 +17,6 @@ from MoinMoin import wikiutil
 from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
-from MoinMoin.wikidicts import Dict
 from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, NotAllowedException
 from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
 from MoinMoin.support.python_compatibility import set
@@ -107,7 +106,7 @@ class ActionClass(object):
             "password": "",
         }
 
-        options.update(Dict(self.request, self.pagename))
+        options.update(self.request.dicts[self.pagename])
 
         # Convert page and group list strings to lists
         if options["pageList"] is not None:
@@ -182,19 +181,19 @@ class ActionClass(object):
 
         params = self.fix_params(self.parse_page())
 
-        if self.request.request_method != 'POST':
+        if self.request.method != 'POST':
             # display the username / password dialog if we were just called by a GET request
             return self.show_password_form(params["user"], params["password"])
 
         try:
-            if "cancel" in self.request.form:
+            if "cancel" in self.request.values:
                 raise ActionStatus(_("Operation was canceled."), "error")
 
-            if not wikiutil.checkTicket(self.request, self.request.form.get('ticket', [''])[0]):
+            if not wikiutil.checkTicket(self.request, self.request.form.get('ticket', '')):
                 raise ActionStatus(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'SyncPages' })
 
-            name = self.request.form.get('name', [''])[0]
-            password = self.request.form.get('password', [''])[0]
+            name = self.request.form.get('name', '')
+            password = self.request.form.get('password', '')
 
             if params["direction"] == UP:
                 raise ActionStatus(_("The only supported directions are BOTH and DOWN."), "error")

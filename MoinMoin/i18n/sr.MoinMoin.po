@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-01-17 22:54+0100\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -322,13 +322,13 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<непознато>"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Корисничко име: %s\n"
 "\n"
@@ -354,15 +354,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Подаци вашег вики налога"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Непозната радња %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Није вам дозвољено да %(action_name)s на овој страници."
+
+msgid "Login and try again."
+msgstr "Пријавите се и покушајте поново"
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Пакет захтева новије издање MoinMoin-а (бар %s)."
 
 msgid "The theme name is not set."
 msgstr "Име теме није постављено."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Инсталирање датотека тема је подржано само за самостојеће врсте сервера."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -459,8 +470,9 @@ msgstr "Очекивана вредност за кључ „%(token)s“"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Неисправни регуларни израз за наглашавање „%(regex)s“: %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Резервне копије ове странице су застареле и неће бити укључене у резултате "
@@ -723,8 +735,8 @@ msgstr "Избрисани делови су означени овако."
 msgid "Additions are marked like this."
 msgstr "Додаци су означени овако."
 
-msgid "You need to log in."
-msgstr "Морате се пријавити."
+msgid "Please log in first."
+msgstr "Прво се пријавите."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -758,11 +770,30 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Придружите ово име"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Провера је отказана."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID грешка: %s."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Неуспех OpenID-а."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "ОпенИД није дат."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Ваш налог је сада придружен са Вашим OpenID-ом."
 
 msgid "The password you entered is not valid."
 msgstr "Лозинка коју сте унели је неважећа."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr ""
@@ -791,13 +822,17 @@ msgstr ""
 msgid "Failed to connect to database."
 msgstr "Неуспешно повезивање са базом података."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Немате налог,  <a href=\"%(userprefslink)s\">можете направити један сада</"
 "a>. <a href=\"%(sendmypasswordlink)s\">Заборавилисте лозинку?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -850,7 +885,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Наглашавање:: <<Verbatim('')>>''укошено''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''задебљано'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''задебљано и "
@@ -885,6 +920,15 @@ msgstr "Очекиван цели број „%(arg)s“  после „%(key)s�
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Очекивана вредност боје „%(arg)s“ после „%(key)s“"
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
+msgstr ""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1091,18 +1135,6 @@ msgstr "Додај нови прилог „%(filename)s“"
 msgid "Inlined image: %(url)s"
 msgstr "Слика у линији: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Направи нови цртеж „%(filename)s (отвара се у новом прозору)“"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Уреди цртеж %(filename)s (отвара се у новом прозору)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Цртеж на који се може притиснути: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Укључи/искучи бројеве редова"
 
@@ -1113,17 +1145,6 @@ msgstr "Повратити на верзију %(rev)d."
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Преименовано из '%(oldpagename)s'."
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Непозната радња %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Није вам дозвољено да %(action_name)s на овој страници."
-
-msgid "Login and try again."
-msgstr "Пријавите се и покушајте поново"
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Опције --pages и --search су узајамно искључиве"
@@ -1236,6 +1257,31 @@ msgid ""
 "Attachment size: %(attach_size)s\n"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgstr "прилог:%(filename)s за %(pagename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Поштовани вики корисниче,\n"
+"\n"
+"Ви сте претплаћени на вики страницу или категорију на  „%(sitename)s“ за "
+"обавештење о измени.\n"
+"\" .\n"
+"\n"
+"Ова страница је промењена од стране %(editor)s :\n"
+"%(pagelink)s\n"
+"\n"
+
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
@@ -1272,6 +1318,10 @@ msgstr "Број позива и измена странице"
 msgid "A new attachment has been added"
 msgstr "Ново име прилога"
 
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Ново име прилога"
+
 msgid "A page has been reverted to a previous state"
 msgstr ""
 
@@ -1297,9 +1347,6 @@ msgstr "Странице пакета"
 #, fuzzy
 msgid "Page changed"
 msgstr "Сачувај измене"
-
-msgid "about"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -1334,11 +1381,14 @@ msgstr "поклапај"
 msgid "matches"
 msgstr "поклапа"
 
-msgid "FrontPage"
-msgstr "НасловнаСтрана"
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "ПоследњеПромене"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "ИндексНаслова"
@@ -1349,23 +1399,482 @@ msgstr "ИндексРечи"
 msgid "FindPage"
 msgstr "НађиСтраницу"
 
-msgid "SiteNavigation"
-msgstr "ПутоКази"
-
-msgid "HelpContents"
-msgstr "HelpContents"
-
-msgid "HelpOnFormatting"
-msgstr "HelpOnFormatting"
-
-msgid "WikiLicense"
-msgstr "ВикиЛиценца"
-
 msgid "MissingPage"
 msgstr "НедостајућаСтраница"
 
 msgid "MissingHomePage"
 msgstr "НедостајућаЛичнаСтраница"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "НедостајућаЛичнаСтраница"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Име"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "НасловнаСтрана"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Вики"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Странице пакета"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "НађиСтраницу"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Величина"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Странице"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "ПреименујСтраницу"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python верзија"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "ВикиЛиценца"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "било које категорије"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Категорије"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Категорије"
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Приказ слајдова"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr ""
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "Обавештење"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "HelpContents"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "HelpContents"
+
+msgid "HelpOnFormatting"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin верзија"
+
+msgid "HelpContents"
+msgstr "HelpContents"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "ИндексНаслова"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "HelpContents"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "HelpContents"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Категорије"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "HelpContents"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Језик"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "HelpContents"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "ПутоКази"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "OpenID грешка: %s."
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "HelpOnFormatting"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "HelpContents"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Приказ слајдова"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "ПровераПравописа"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Усаглашавање је почело -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "Поставке"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "HelpOnFormatting"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "HelpContents"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "УкиниПретплату"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "Корисничке поставке су сачуване!"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Нови прилог"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Још радњи:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Недеља"
 
 msgid "Mon"
 msgstr "Понедељак"
@@ -1384,9 +1893,6 @@ msgstr "Петак"
 
 msgid "Sat"
 msgstr "Субота"
-
-msgid "Sun"
-msgstr "Недеља"
 
 msgid "AttachFile"
 msgstr "ПриложиДатотеку"
@@ -1460,9 +1966,6 @@ msgstr "[ДНО]"
 msgid "[TOP]"
 msgstr "[ВРХ]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Притисни за комплетну претрагу за овај наслов"
-
 msgid "Settings"
 msgstr "Поставке"
 
@@ -1484,6 +1987,9 @@ msgstr "Укини претплату"
 
 msgid "Home"
 msgstr "НасловнаСтрана"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Притисни за комплетну претрагу за овај наслов"
 
 msgid "Clear message"
 msgstr "Избриши поруку"
@@ -1596,6 +2102,22 @@ msgstr "Ново име прилога"
 
 msgid "User account browser"
 msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "PyStemmer верзија"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Корисничко име"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "Име датотеке"
+
+#, fuzzy
+msgid "Mimetypes"
+msgstr "сваке „mime“ врсте"
 
 msgid "Wiki configuration"
 msgstr ""
@@ -1717,23 +2239,20 @@ msgstr "Инсталирани рашчлањивачи"
 msgid "Local extension parsers"
 msgstr "Локалне екстензије рашчлањивача"
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian и/или Python Xapian везе нису инсталиране"
+
 msgid "Disabled"
 msgstr "Искључено"
 
 msgid "Enabled"
 msgstr "Укључено"
 
-msgid "index available"
-msgstr "индекс доступан"
-
 msgid "index unavailable"
 msgstr "индекс недоступан"
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian и/или Python Xapian везе нису инсталиране"
-
-msgid "N/A"
-msgstr "Нема података"
+msgid "index available"
+msgstr "индекс доступан"
 
 msgid "Xapian search"
 msgstr "Xapian претрага"
@@ -1743,6 +2262,9 @@ msgstr "Разкорењавање за Xapian"
 
 msgid "Active threads"
 msgstr "Активни низови"
+
+msgid "N/A"
+msgstr "Нема података"
 
 msgid "No orphaned pages in this wiki."
 msgstr "Нема остављених страница у овом викију."
@@ -1791,7 +2313,8 @@ msgstr "који садрже једну или више од следећих �
 msgid "not containing the following terms"
 msgstr "који не садрже следеће ставке"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "који су задњи пут промењене током (нпр. задње 2 седмице)"
 
 msgid "any category"
@@ -1887,6 +2410,10 @@ msgstr "Почетак"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Слајд %(pos)d од %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Иди на страницу"
 
@@ -1929,6 +2456,29 @@ msgstr "Ваша брза веза за ову страницу се није м
 msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 "Морате прво направити брзу везу на ову страницу да би је могли избацити."
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Приказ слајдова"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Приказ слајдова"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2084,7 +2634,7 @@ msgstr ""
 "Да бисте закачили прилог на ову страну, користите следећи текст\n"
 "'''{{{attachment:filename}}}''' , као што видите на списку датотека. \n"
 "Немојте '''НИКАДА''' користити УРЛ од {{{[get]}}} везе, пошто \n"
-"ће се вероватно мењати и изгубити везу до прилога.</p>"
+"ће се вероватно мењати и изгубити везу до прилога."
 
 msgid "del"
 msgstr "избриши"
@@ -2107,9 +2657,6 @@ msgstr "инсталирај"
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Нема прилога закачених за %(pagename)s"
-
-msgid "Edit drawing"
-msgstr "Уреди цртеж"
 
 msgid "New Attachment"
 msgstr "Нови прилог"
@@ -2143,16 +2690,16 @@ msgstr "Прилози за „%(pagename)s“"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Погрешан одговор! Вратите се назад и покушајте поново..."
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Није вам дозвољено да видите прилоге на овој страници."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Нема садржаја у датотеци. Избришите ASCII занкове из имена датотеке и "
 "покушајте поново."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Није вам дозвољено да видите прилоге на овој страници."
 
 #, python-format
 msgid ""
@@ -2165,9 +2712,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Прилог  '%(target)s' (даљинско име '%(filename)s') већ постоји."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Није вам дозвољено да сачувате цртеж на овој страници."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Није вам дозвољено да бришете прилоге на овој страници."
@@ -2698,6 +3242,30 @@ msgstr "Необавезан разлог за умножавање"
 msgid "Really copy this page?"
 msgstr "Стварно умножити ову страницу?"
 
+#, fuzzy
+msgid "Attachment location"
+msgstr "Прилози"
+
+#, fuzzy
+msgid "Page name"
+msgstr "Име пакета"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Ново име прилога"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Прилози"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "прилог"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "Прилози за „%(pagename)s“"
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr "Списак свих веза за „%s“"
@@ -2725,6 +3293,33 @@ msgstr "Предходни"
 msgid "Next change"
 msgstr "Ништа се није променило"
 
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Старија издања не постоје!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Старија издања не постоје!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Старија издања не постоје!"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "Страница је већ %(count)d пута сачувана!"
@@ -2738,10 +3333,6 @@ msgstr "Занемари измене у броју размака"
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Неважеће име датотеке: „%s“!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Направите пакет %s који садржи странице %s."
 
 #, fuzzy
 msgid "Include all attachments?"
@@ -2773,8 +3364,26 @@ msgstr "Није корисник:"
 msgid "You are not allowed to perform this action."
 msgstr "Није вам дозвољено да изведете ову радњу."
 
-msgid "Please log in first."
-msgstr "Прво се пријавите."
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Направи нови цртеж „%(filename)s (отвара се у новом прозору)“"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Уреди цртеж %(filename)s (отвара се у новом прозору)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Цртеж на који се може притиснути: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Није вам дозвољено да сачувате цртеж на овој страници."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Уреди цртеж"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Прво направите личну страницу пре него што направите додатне странице."
@@ -2833,6 +3442,25 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Руковођење [[МојеСтранице|МојимСтраницама]]"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Није вам дозвољено да користите ову радњу."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Ово није подстраница!"
+
+#, fuzzy
+msgid "page package"
+msgstr "Странице пакета"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Ваша претплата на ову страницу је склоњена."
@@ -2942,10 +3570,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 "Вама није дозвољено да користите радњу %(actionname)s на овој страници!."
 
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Није вам дозвољено да користите ову радњу."
-
 msgid "Views/day"
 msgstr "Прегледа на дан"
 
@@ -2996,6 +3620,9 @@ msgstr "Прима"
 msgid "Content"
 msgstr "Садржај"
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Приступ серверу ел. поште '%(server)s' није успео: %(reason)s"
@@ -3015,6 +3642,45 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "инсталирај"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HelpOnFormatting"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Није вам дозвољено да уређујете ову страницу."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Инсталирање датотека тема је подржано само за самостојеће врсте сервера."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Изворни текст Викија"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Садржај"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Садржај"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Искључи системске странице"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Направите пакет %s који садржи странице %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "Морате се пријавити."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3091,9 +3757,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Можете поставити датотеку на нову страницу или изабрати да поставите "
 #~ "датотеку као додатак на тренутној страници"
-
-#~ msgid "attachment"
-#~ msgstr "прилог"
 
 #~ msgid "New Name"
 #~ msgstr "Ново име"
