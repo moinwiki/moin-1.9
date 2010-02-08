@@ -880,7 +880,8 @@ options_no_group_name = {
 
     ('edit_bar', ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'],
      'list of edit bar entries'),
-    ('history_count', (100, 200), "number of revisions shown for info/history action (default_count_shown, max_count_shown)"),
+    ('history_count', (100, 200, 5, 10, 25, 50), "Number of revisions shown for info/history action (default_count_shown, max_count_shown, [other values shown as page size choices]). At least first two values (default and maximum) should be provided. If additional values are provided, user will be able to change number of items per page in the UI."),
+    ('history_paging', True, "Enable paging for history. Warning: because event log functions are rather unefficient, enabling this option may lead to possibility of producing heavy requests!"),
 
     ('show_hosts', True,
      "if True, show host names and IPs. Set to False to hide them."),
