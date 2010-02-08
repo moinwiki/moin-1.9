@@ -114,7 +114,14 @@ def getAttachUrl(pagename, filename, request, addts=0, do='get'):
     """
     action = get_action(request, filename, do)
     if action:
-        url = request.href(pagename, action=action, do=do, target=filename)
+        args = dict(action=action, do=do, target=filename)
+        if do not in ['get', 'view', # harmless
+                      'modify', # just renders the applet html, which has own ticket
+                      'move', # renders rename form, which has own ticket
+            ]:
+            # create a ticket for the not so harmless operations
+            args['ticket'] = wikiutil.createTicket(request)
+        url = request.href(pagename, **args)
         return url
 
 
@@ -471,6 +478,7 @@ def send_uploadform(pagename, request):
 <p>
 <input type="hidden" name="action" value="%(action_name)s">
 <input type="hidden" name="do" value="upload">
+<input type="hidden" name="ticket" value="%(ticket)s">
 <input type="submit" value="%(upload_button)s">
 </p>
 </form>
@@ -484,6 +492,7 @@ def send_uploadform(pagename, request):
     'overwrite_checked': ('', 'checked')[request.form.get('overwrite', '0') == '1'],
     'upload_button': _('Upload'),
     'textcha': TextCha(request).render(),
+    'ticket': wikiutil.createTicket(request),
 })
 
     request.write('<h2>' + _("Attached Files") + '</h2>')
@@ -532,6 +541,10 @@ def upload_form(pagename, request, msg=''):
 
 def _do_upload(pagename, request):
     _ = request.getText
+
+    if not wikiutil.checkTicket(request, request.form.get('ticket', '')):
+        return _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'AttachFile.upload' }
+
     # Currently we only check TextCha for upload (this is what spammers ususally do),
     # but it could be extended to more/all attachment write access
     if not TextCha(request).check_answer_from_form():
@@ -635,6 +648,9 @@ class ContainerItem:
 def _do_del(pagename, request):
     _ = request.getText
 
+    if not wikiutil.checkTicket(request, request.args.get('ticket', '')):
+        return _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'AttachFile.del' }
+
     pagename, filename, fpath = _access_file(pagename, request)
     if not request.user.may.delete(pagename):
         return _('You are not allowed to delete attachments on this page.')
@@ -690,8 +706,8 @@ def _do_attachment_move(pagename, request):
 
     if 'cancel' in request.form:
         return _('Move aborted!')
-    if not wikiutil.checkTicket(request, request.form['ticket']):
-        return _('Please use the interactive user interface to move attachments!')
+    if not wikiutil.checkTicket(request, request.form.get('ticket', '')):
+        return _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'AttachFile.move' }
     if not request.user.may.delete(pagename):
         return _('You are not allowed to move attachments from this page.')
 
@@ -853,6 +869,9 @@ def _do_get(pagename, request):
 def _do_install(pagename, request):
     _ = request.getText
 
+    if not wikiutil.checkTicket(request, request.args.get('ticket', '')):
+        return _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'AttachFile.install' }
+
     pagename, target, targetpath = _access_file(pagename, request)
     if not request.user.isSuperUser():
         return _('You are not allowed to install files.')
@@ -876,8 +895,11 @@ def _do_install(pagename, request):
 
 def _do_unzip(pagename, request, overwrite=False):
     _ = request.getText
-    pagename, filename, fpath = _access_file(pagename, request)
 
+    if not wikiutil.checkTicket(request, request.args.get('ticket', '')):
+        return _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'AttachFile.unzip' }
+
+    pagename, filename, fpath = _access_file(pagename, request)
     if not (request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename)):
         return _('You are not allowed to unzip attachments of this page.')
 

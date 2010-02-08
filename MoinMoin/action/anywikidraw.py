@@ -88,6 +88,10 @@ class AnyWikiDraw(object):
     def save(self):
         request = self.request
         _ = request.getText
+
+        if not wikiutil.checkTicket(request, request.args.get('ticket', '')):
+            return _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'anywikidraw.save' }
+
         pagename = self.pagename
         target = self.target
         if not request.user.may.write(pagename):
@@ -144,7 +148,8 @@ class AnyWikiDraw(object):
         else:
             drawurl = ''
         pageurl = request.href(pagename)
-        saveurl = request.href(pagename, action=action_name, do='save', target=target)
+        saveurl = request.href(pagename, action=action_name, do='save', target=target,
+                               ticket=wikiutil.createTicket(request))
         helpurl = request.href("HelpOnActions/AttachFile")
 
         html = """
