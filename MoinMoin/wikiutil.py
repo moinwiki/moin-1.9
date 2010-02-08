@@ -2418,51 +2418,60 @@ def anchor_name_from_text(text):
 
 
 ########################################################################
-### Tickets - used by RenamePage and DeletePage
+### Tickets - usually used in forms to make sure that form submissions
+### are in response to a form the same user got from moin for the same
+### action and same page.
 ########################################################################
 
-def createTicket(request, tm=None, action=None):
-    """ Create a ticket using a site-specific secret (the config)
+def createTicket(request, tm=None, action=None, pagename=None):
+    """ Create a ticket using a configured secret
 
         @param tm: unix timestamp (optional, uses current time if not given)
         @param action: action name (optional, uses current action if not given)
                        Note: if you create a ticket for a form that calls another
                              action than the current one, you MUST specify the
                              action you call when posting the form.
+        @param pagename: page name (optional, uses current page name if not given)
+                       Note: if you create a ticket for a form that posts to another
+                             page than the current one, you MUST specify the
+                             page name you use when posting the form.
     """
 
-    import sha
+    from MoinMoin.support.python_compatibility import hmac_new
     if tm is None:
+        # for age-check of ticket
         tm = "%010x" % time.time()
 
-    # make the ticket specific to the page and action:
-    try:
-        pagename = quoteWikinameURL(request.page.page_name)
-    except:
-        pagename = 'None'
+    # make the ticket very specific:
+    if pagename is None:
+        try:
+            pagename = request.page.page_name
+        except:
+            pagename = ''
 
     if action is None:
-        try:
-            action = request.action
-        except:
-            action = 'None'
-
-
-    ticket = "%s.%s.%s" % (tm, pagename, action)
-    digest = sha.new(request.cfg.secrets)
-    digest.update(ticket)
+        action = request.action
 
     if request.session and not request.session.is_new:
         sid = request.session.name
     else:
-        sid = 'None'
+        sid = ''
+
     if request.user.valid:
         uid = request.user.id
     else:
-        uid = 'None'
-    digest.update(sid+uid)
+        uid = ''
 
-    return "%s.%s" % (ticket, digest.hexdigest())
+    hmac_data = []
+    for value in [tm, pagename, action, sid, uid, ]:
+        if isinstance(value, unicode):
+            value = value.encode('utf-8')
+        hmac_data.append(value)
+
+    hmac = hmac_new(request.cfg.secrets,
+                    ''.join(hmac_data))
+    return "%s.%s" % (tm, hmac.hexdigest())
+
 
 def checkTicket(request, ticket):
     """Check validity of a previously created ticket"""
@@ -2478,6 +2487,8 @@ def checkTicket(request, ticket):
         # we don't accept tickets older than 10h
         logging.debug("checkTicket: too old ticket, timestamp %r" % timestamp)
         return False
+    # Note: if the session timed out, that will also invalidate the ticket,
+    #       if the ticket was created within a session.
     ourticket = createTicket(request, timestamp_str)
     logging.debug("checkTicket: returning %r, got %r, expected %r" % (ticket == ourticket, ticket, ourticket))
     return ticket == ourticket
