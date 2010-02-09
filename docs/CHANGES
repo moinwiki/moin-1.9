@@ -16,6 +16,14 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.9.current:
+  Bug fixes:
+
+  New features:
+  * info action: added pagination ability to revision history viewer.
+    http://hg.moinmo.in/moin/1.9/rev/b23b1d2b1391
+
+  Other changes:
 
 Version 1.9.1:
   Bug fixes:
