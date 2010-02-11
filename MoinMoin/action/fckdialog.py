@@ -186,7 +186,7 @@ def page_list(request):
      <table cellSpacing="0" cellPadding="0" align="center" border="0">
       <tr>
        <td>
-       <span fckLang="PageDlgName">Page Name</span><br>
+       <span fckLang="PageDlgName">Page name</span><br>
        <select id="txtName" size="1">
        %s
        </select>
