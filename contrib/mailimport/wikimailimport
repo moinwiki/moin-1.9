@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# the "moin" script command has to be in your PATH
+#export PATH=/path_to_moin_command:$PATH
+
+# add the directories were your mailimport configuration and your MoinMoin code is located to the python path:
+#export PYTHONPATH='/path_to_MoinMoin:/path_to_mailimportconfig'
+
+# call the xmlrpc client code
+moin xmlrpc mailimport
+
