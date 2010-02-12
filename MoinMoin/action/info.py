@@ -104,8 +104,8 @@ def execute(pagename, request):
             offset = max(min(offset, log_size - 1), 0)
 
             paging_info_html += f.paragraph(1, css_class="searchstats info-paging-info") + _("Showing page edit history entries from '''%(start_offset)d''' to '''%(end_offset)d''' out of '''%(total_count)d''' entries total.", wiki=True) % {
-                'start_offset': offset + 1,
-                'end_offset': min(log_size, offset + max_count),
+                'start_offset': log_size - min(log_size, offset + max_count) + 1,
+                'end_offset': log_size - offset,
                 'total_count': log_size,
             } + f.paragraph(0)
 
@@ -125,7 +125,7 @@ def execute(pagename, request):
                             'action': 'info',
                             'offset': str(offset),
                             'max_count': str(max_count),
-                            }, css_class="info-offset-nav-link", rel="nofollow") + f.text(caption or str(offset + 1)) + page.link_to(request, on=0) +
+                            }, css_class="info-offset-nav-link", rel="nofollow") + f.text(caption or str(log_size - offset)) + page.link_to(request, on=0) +
                         f.table_cell(0)
                     )
 
@@ -146,7 +146,7 @@ def execute(pagename, request):
                     # so we check whether we should add current offset marker like this
                     if not offset_added and offset <= cur_offset * max_count:
                         # current info history view offset
-                        offset_links.append(f.table_cell(1, css_class="info-offset-item info-cur-offset") + f.text(str(offset + 1)) + f.table_cell(0))
+                        offset_links.append(f.table_cell(1, css_class="info-offset-item info-cur-offset") + f.text(str(log_size - offset)) + f.table_cell(0))
                         offset_added = True
 
                     # add link, if not at this offset
@@ -161,7 +161,7 @@ def execute(pagename, request):
 
                 # special case - if offset is greater than max_offset * max_count
                 if offset > max_offset * max_count:
-                    offset_links.append(f.table_cell(1, css_class="info-offset-item info-cur-offset") + f.text(str(offset + 1)) + f.table_cell(0))
+                    offset_links.append(f.table_cell(1, css_class="info-offset-item info-cur-offset") + f.text(str(log_size - offset)) + f.table_cell(0))
 
                 # link to next page
                 if offset < (log_size - max_count):
