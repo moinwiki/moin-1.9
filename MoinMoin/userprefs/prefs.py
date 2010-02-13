@@ -200,7 +200,8 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 try:
                     value = int(value)
                 except ValueError:
-                    value = 0
+                    # value we got is crap, do not setattr this value, just pass
+                    pass
                 else:
                     setattr(request.user, key, value)
 
