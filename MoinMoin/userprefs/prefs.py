@@ -63,7 +63,7 @@ class Settings(UserPrefBase):
 
         if not 'name' in request.user.auth_attribs:
             # Require non-empty name
-            new_name = form.get('name', [request.user.name])[0]
+            new_name = wikiutil.clean_input(form.get('name', [request.user.name])[0]).strip()
 
             # Don't allow changing the name to an invalid one
             if not user.isValidName(request, new_name):
@@ -86,8 +86,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'email' in request.user.auth_attribs:
             # try to get the email
-            new_email = wikiutil.clean_input(form.get('email', [request.user.email])[0])
-            new_email = new_email.strip()
+            new_email = wikiutil.clean_input(form.get('email', [request.user.email])[0]).strip()
 
             # Require email
             if not new_email and 'email' not in request.cfg.user_form_remove:
@@ -128,15 +127,15 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'aliasname' in request.user.auth_attribs:
             # aliasname
-            request.user.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0])
+            request.user.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0]).strip()
 
         # editor size
         request.user.edit_rows = util.web.getIntegerInput(request, 'edit_rows',
                                                           request.user.edit_rows, 10, 60)
 
         # try to get the editor
-        request.user.editor_default = form.get('editor_default', [self.cfg.editor_default])[0]
-        request.user.editor_ui = form.get('editor_ui', [self.cfg.editor_ui])[0]
+        request.user.editor_default = wikiutil.clean_input(form.get('editor_default', [self.cfg.editor_default])[0])
+        request.user.editor_ui = wikiutil.clean_input(form.get('editor_ui', [self.cfg.editor_ui])[0])
 
         # time zone
         request.user.tz_offset = util.web.getIntegerInput(request, 'tz_offset',
@@ -151,7 +150,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             request.user.date_fmt = '' # default
 
         # try to get the (optional) theme
-        theme_name = form.get('theme_name', [self.cfg.theme_default])[0]
+        theme_name = wikiutil.clean_input(form.get('theme_name', [self.cfg.theme_default])[0])
         if theme_name != request.user.theme_name:
             # if the theme has changed, load the new theme
             # so the user has a direct feedback
@@ -165,7 +164,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 return 'error', _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
         # try to get the (optional) preferred language
-        request.user.language = form.get('language', [''])[0]
+        request.user.language = wikiutil.clean_input(form.get('language', [''])[0])
         if request.user.language == u'': # For language-statistics
             from MoinMoin import i18n
             request.user.real_language = i18n.get_browser_language(request)
@@ -191,6 +190,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 continue
             default = self.cfg.user_form_defaults[key]
             value = form.get(key, [default])[0]
+            value = wikiutil.clean_input(value)
             setattr(request.user, key, value)
 
         # checkbox options
@@ -200,6 +200,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 try:
                     value = int(value)
                 except ValueError:
+                    # value we got is crap, do not setattr this value, just pass
                     pass
                 else:
                     setattr(request.user, key, value)

@@ -568,8 +568,9 @@ class User:
             elif isinstance(value, dict):
                 key += '{}'
                 value = encodeDict(value)
-            line = u"%s=%s\n" % (key, unicode(value))
-            data.write(line)
+            line = u"%s=%s" % (key, unicode(value))
+            line = line.replace('\n', ' ').replace('\r', ' ') # no lineseps
+            data.write(line + '\n')
         data.close()
 
         arena = 'user'
