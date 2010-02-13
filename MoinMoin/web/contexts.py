@@ -144,9 +144,9 @@ class BaseContext(Context):
     def isSpiderAgent(self):
         """ Simple check if useragent is a spider bot. """
         cfg = self.cfg
-        user_agent = self.request.user_agent
+        user_agent = self.environ.get('HTTP_USER_AGENT')
         if user_agent and cfg.cache.ua_spiders:
-            return cfg.cache.ua_spiders.search(user_agent.browser) is not None
+            return cfg.cache.ua_spiders.search(user_agent) is not None
         return False
     isSpiderAgent = EnvironProxy(isSpiderAgent)
 
