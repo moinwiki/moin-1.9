@@ -244,9 +244,10 @@ def setup_i18n_preauth(context):
                     break
             else:
                 logging.debug("moin does not support any language client accepts")
-                if cfg.language_default in i18n.languages:
-                    lang = cfg.language_default
-                    logging.debug("fall back to cfg.language_default (%r)" % lang)
+        if not lang:
+            if cfg.language_default in i18n.languages:
+                lang = cfg.language_default
+                logging.debug("fall back to cfg.language_default (%r)" % lang)
     if not lang:
         lang = 'en'
         logging.debug("emergency fallback to 'en'")
