@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -2096,6 +2096,10 @@ msgstr "Subacció d'AttachFile no implementada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Adjuncions per a «%(pagename)s»"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2147,9 +2151,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "S'ha avortat el moviment."
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Empreu la interfície d'usuari interactiva per a moure les adjuncions."
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "No teniu permís per a moure adjuncions des d'aquesta pàgina."
@@ -2355,10 +2356,6 @@ msgstr "Vos heu subscrit a aquesta pàgina."
 
 msgid "You could not get subscribed to this page."
 msgstr "No us heu pogut subscriure a aquesta pàgina."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
 
 msgid "You are now logged out."
 msgstr "Heu sortit del vostre compte."
@@ -2909,6 +2906,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Empreu la interfície d'usuari interactiva per a moure les adjuncions."
 
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "Còpia de seguretat / Restauració del wiki"

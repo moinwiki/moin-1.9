@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -2135,6 +2135,12 @@ msgstr "Sub-aksi TaruhBerkas yang tidak di-support: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Lampiran untuk \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Silakan gunakan antarmuka pengguna interaktif untuk menggunakan aksi %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Jawaban salah! Harap kembali dan coba lagi..."
 
@@ -2187,10 +2193,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Perpindahan dibatalkan!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Silakan gunakan antarmuka pengguna interaktif untuk memindahkan lampiran!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Anda tidak diizinkan memindahkan lampiran dari halaman ini."
@@ -2401,12 +2403,6 @@ msgstr "Anda berlangganan ke halaman ini."
 
 msgid "You could not get subscribed to this page."
 msgstr "Anda tidak dapat berlangganan ke halaman ini."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Silakan gunakan antarmuka pengguna interaktif untuk menggunakan aksi %"
-"(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Sekarang Anda telah logout."
@@ -3012,6 +3008,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Silakan gunakan antarmuka pengguna interaktif untuk memindahkan lampiran!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

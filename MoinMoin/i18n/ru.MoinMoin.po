@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -2177,6 +2177,12 @@ msgstr "Неподдерживаемый метод AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Прикреплённые файлы для \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Пожалуйста, воспользуйтесь интерактивным пользовательски интерфейсом для "
+"действия %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: ответ неверен. Вернитесь и попробуйте еще раз"
 
@@ -2229,11 +2235,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Перемещение отменено!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Пожалуйста, воспользуйтесь интерфейсом пользователя для перемещения "
-"прикреплённых файлов."
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Вам нельзя перемещать прикреплённые файлы с этой страницы."
@@ -2437,12 +2438,6 @@ msgstr "Вы подписались на эту страницу."
 
 msgid "You could not get subscribed to this page."
 msgstr "Не удалось подписаться на эту страницу."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Пожалуйста, воспользуйтесь интерактивным пользовательски интерфейсом для "
-"действия %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Вы вышли."
@@ -3048,6 +3043,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "анонимно"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Пожалуйста, воспользуйтесь интерфейсом пользователя для перемещения "
+#~ "прикреплённых файлов."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

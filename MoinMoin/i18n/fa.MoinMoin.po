@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -2153,6 +2153,11 @@ msgstr "ارسال فایل پشتیبانی نشده: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "ضمیمه‌های صفحه \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"لطفا جهت انجام عملیات %(actionname)s از جلوه های کاربردی استفاده نمایید!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "حروف معوج: پاسخ صحیح نیست! مجددا سعی نمایید..."
 
@@ -2205,9 +2210,6 @@ msgstr "صفحه '%(new_pagename)s' وجود ندارد و یا شما دستر�
 
 msgid "Move aborted!"
 msgstr "جابجایی انجام نشد!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "لطفا جهت جابجایی ضمیمه‌ها از امکانات موجد استفاده نمایید!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "شما مجاز به انتقال ضمیمه‌ها از این صفحه نمی‌باشید."
@@ -2412,11 +2414,6 @@ msgstr "شما در این صفحه عضو شده‌اید."
 
 msgid "You could not get subscribed to this page."
 msgstr "امکانات عضویت شما در این صفحه وجود ندارد."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"لطفا جهت انجام عملیات %(actionname)s از جلوه های کاربردی استفاده نمایید!"
 
 msgid "You are now logged out."
 msgstr "شما از سیستم خارج شدید."
@@ -3010,6 +3007,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "لطفا جهت جابجایی ضمیمه‌ها از امکانات موجد استفاده نمایید!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -2108,6 +2108,10 @@ msgstr "Sub-acţiunea AttachFile este nepermisă: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Ataşamente pentru \"%(pagename)s\""
 
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2162,10 +2166,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Mutare anulată!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Vă rugăm să folosiţi interfaţa interactivă pentru mutarea ataşamentelor!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nu aveţi permisiunea de a muta ataşamentele de pe această pagină."
@@ -2383,10 +2383,6 @@ msgstr "Aţi fost înregistrat(ă) pe această pagină."
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Aţi fost înregistrat(ă) pe această pagină."
-
-#, fuzzy, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!"
 
 msgid "You are now logged out."
 msgstr "Acum sunteţi neînregistrat(ă)."
@@ -2956,6 +2952,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Vă rugăm să folosiţi interfaţa interactivă pentru mutarea ataşamentelor!"
 
 #, fuzzy
 #~ msgid "Xapian Version"

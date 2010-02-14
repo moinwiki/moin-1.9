@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -2046,6 +2046,12 @@ msgstr "Nepodporovaná podakcia PriložSúbor: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Prílohy pre „%(pagename)s“"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prosím, použite interaktívny interface užívateľa na uskutočnenie akcie %"
+"(actionname)s !"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Nesprávna odpoveď! Vráťte sa späť a skúste znovu..."
 
@@ -2098,9 +2104,6 @@ msgstr "Stránka %(new_pagename)s neexistuje alebo nemáte potrebné práva."
 
 msgid "Move aborted!"
 msgstr "Presun zrušený!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Prosím, na presun príloh použite interaktívne rozhranie!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nemáte oprávnenie presúvať prílohy z tejto stránky."
@@ -2306,12 +2309,6 @@ msgstr "Prihlásili ste sa na odoberanie tejto stránky."
 
 msgid "You could not get subscribed to this page."
 msgstr "Nebolo možné zaregistrovať Vás na odoberanie tejto stránky."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prosím, použite interaktívny interface užívateľa na uskutočnenie akcie %"
-"(actionname)s !"
 
 msgid "You are now logged out."
 msgstr "Momentálne ste odhlásený."
@@ -2890,3 +2887,6 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Prosím, na presun príloh použite interaktívne rozhranie!"

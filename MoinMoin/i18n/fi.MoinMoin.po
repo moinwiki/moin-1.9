@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -2152,6 +2152,10 @@ msgstr "AttachFile-toiminnon alaluokka ei ole tuettu: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Liitetiedostot sivulla %(pagename)s"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Käytä toimintoa %(actionname)s vuorovaikutteisessa käyttöliittymässä!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 "TextCha: Väärä vastaus! Napsauta selaimen Edellinen-painiketta ja tallenna "
@@ -2209,9 +2213,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Siirto peruttu!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Käytä vuorovaikutteista käyttöliittymää liitetiedostojen siirtoon!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Sinulla ei ole oikeutta siirtää liitetiedostoja tältä sivulta."
@@ -2415,10 +2416,6 @@ msgstr "Sinut on lisätty tilaajaksi tälle sivulle."
 
 msgid "You could not get subscribed to this page."
 msgstr "Sinua ei voitu lisätä tämän sivun tilaajaksi."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Käytä toimintoa %(actionname)s vuorovaikutteisessa käyttöliittymässä!"
 
 msgid "You are now logged out."
 msgstr "Olet kirjautunut ulos."
@@ -3031,6 +3028,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Käytä vuorovaikutteista käyttöliittymää liitetiedostojen siirtoon!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

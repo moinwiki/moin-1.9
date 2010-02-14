@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -2144,6 +2144,10 @@ msgstr "Nieprzewidziany sposób poboru pliku: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Załączniki do \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Użyj interaktywnego interfejsu aby użyc akcji %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Zła odpowiedź! Wróć i spróbuj ponownie..."
 
@@ -2196,9 +2200,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Ruch przerwany!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Użyj interaktywnego interfejsu aby przenieść załąćznik!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nie możesz przenosić załączników z tej strony."
@@ -2405,10 +2406,6 @@ msgstr "Zasubskrybowałeś tę stronę."
 
 msgid "You could not get subscribed to this page."
 msgstr "Nie możesz subsrybować tej strony."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Użyj interaktywnego interfejsu aby użyc akcji %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Ciasteczko skasowane. Wylogowano."
@@ -3021,6 +3018,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimowy"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Użyj interaktywnego interfejsu aby przenieść załąćznik!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

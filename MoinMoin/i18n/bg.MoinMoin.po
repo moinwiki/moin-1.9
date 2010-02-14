@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -2130,6 +2130,10 @@ msgstr "Неподдържано действие при качване: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Приложения към \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Моля, използвайте интерактивния интерфейс за действие %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2182,9 +2186,6 @@ msgstr "Страница %(newpagename)s не съществува или ням
 
 msgid "Move aborted!"
 msgstr "Преместването е преустановено!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Моля, използвайте интерактивния интерфейс за местене на допълнения!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Не Ви е позволено да местите допълнения от тази страница."
@@ -2397,10 +2398,6 @@ msgstr "Бяхте абонирани за тази страница."
 
 msgid "You could not get subscribed to this page."
 msgstr "Не можахте да се абонирате за тази страница."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Моля, използвайте интерактивния интерфейс за действие %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Вие излязохте успешно."
@@ -3014,6 +3011,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Моля, използвайте интерактивния интерфейс за местене на допълнения!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

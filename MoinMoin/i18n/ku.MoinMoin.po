@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-12-08 18:50+0000\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -2007,6 +2007,10 @@ msgstr ""
 msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2054,9 +2058,6 @@ msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr ""
 
 msgid "Move aborted!"
-msgstr ""
-
-msgid "Please use the interactive user interface to move attachments!"
 msgstr ""
 
 #, fuzzy
@@ -2256,10 +2257,6 @@ msgstr "Tu bû endamê vî rûpelî."
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Tu bû endamê vî rûpelî."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
 
 #, fuzzy
 msgid "You are now logged out."

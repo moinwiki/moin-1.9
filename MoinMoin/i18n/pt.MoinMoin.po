@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2007-01-05 22:27+0000\n"
 "Last-Translator: Rita Farinha <rita.farinha@intraneia.com>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -2137,6 +2137,11 @@ msgstr "Acção de envio não suportada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Anexos de \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Por favor, utilize a interface gráfica para utilizar a acção %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2188,9 +2193,6 @@ msgstr "A página %(newpagename)s não existe ou não tem permissões suficiente
 
 msgid "Move aborted!"
 msgstr "Movimento cancelado!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Por favor, utilize a interface interactiva para mover anexos!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Não tem permissão para mover anexos desta página."
@@ -2402,11 +2404,6 @@ msgstr "Subscreveu esta página."
 
 msgid "You could not get subscribed to this page."
 msgstr "Não pode subscrever esta página."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Por favor, utilize a interface gráfica para utilizar a acção %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Saiu do sistema."
@@ -3014,6 +3011,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Por favor, utilize a interface interactiva para mover anexos!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

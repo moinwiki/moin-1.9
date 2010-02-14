@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -2146,6 +2146,10 @@ msgstr "Nepodprta PripniDatoteko pod-akcija: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Priponke na strani \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Za akcijo %(actionname)s uporabite interaktivni uporabniški vmesnik!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Napačen odgovor! Pojdi nazaj in poskusi znova..."
 
@@ -2200,9 +2204,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Prestavljanje preklicano."
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Za prestavitev priponk uporabite interaktivni uporabniški vmesnik!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Prestavitev priponk s te strani vam ni dovoljena."
@@ -2407,10 +2408,6 @@ msgstr "Sedaj ste naročeni na obvestila o spremembah s te strani."
 
 msgid "You could not get subscribed to this page."
 msgstr "Niste se mogli naročiti na obvestila o spremembah s te strani."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Za akcijo %(actionname)s uporabite interaktivni uporabniški vmesnik!"
 
 msgid "You are now logged out."
 msgstr "Odjavljeni ste."
@@ -3021,3 +3018,6 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Za prestavitev priponk uporabite interaktivni uporabniški vmesnik!"

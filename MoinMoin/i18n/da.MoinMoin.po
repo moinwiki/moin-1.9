@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -2120,6 +2120,12 @@ msgstr "Overførselsrutine ikke understøttet: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Vedhæftninger til \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Anvend venligst den interaktive brugergrænseflade til at bruge rutinen %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2173,11 +2179,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Flytning afbrudt!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Anvend venligst den interaktive brugergrænseflade til at flytte "
-"vedhæftninger!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Du har ikke lov til at flytte vedhæftninger fra denne side!"
@@ -2385,12 +2386,6 @@ msgstr "Du abonnerer nu på denne side."
 
 msgid "You could not get subscribed to this page."
 msgstr "Du kunne ikke abonnere på denne side."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Anvend venligst den interaktive brugergrænseflade til at bruge rutinen %"
-"(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Du er nu logget ud."
@@ -3001,6 +2996,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Anvend venligst den interaktive brugergrænseflade til at flytte "
+#~ "vedhæftninger!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
