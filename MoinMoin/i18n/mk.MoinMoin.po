@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -2154,6 +2154,11 @@ msgstr "Неподдржана операција при товарањето н
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Прилози на страницата \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Користете го интерактивниот кориснички интерфејс за дејството %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Погрешен одгвор! Вратете се и пробајте повторно..."
 
@@ -2207,11 +2212,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Преместувањето е прекинато!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Користете го интерактивниот кориснички интерфејс за преместување на "
-"прилозите!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Не Ви е дозволено да ги преместувате прилозите од оваа страница."
@@ -2416,11 +2416,6 @@ msgstr "Се претплативте на оваа страница."
 
 msgid "You could not get subscribed to this page."
 msgstr "Не може да се претплатите на оваа страница."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Користете го интерактивниот кориснички интерфејс за дејството %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Сега сте одјавени."
@@ -3027,6 +3022,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Користете го интерактивниот кориснички интерфејс за преместување на "
+#~ "прилозите!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

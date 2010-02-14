@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -2104,6 +2104,12 @@ msgstr "Nem támogatott föltöltési művelet: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "A(z) \"%(pagename)s\" lap mellékletei"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Kérjük, a(z) %(actionname)s művelet végrehajtásához az interaktív "
+"felhasználói felületet használja!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2156,12 +2162,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Kérjük, a(z) %(actionname)s művelet végrehajtásához az interaktív "
-"felhasználói felületet használja!"
 
 #, fuzzy
 msgid "You are not allowed to move attachments from this page."
@@ -2380,12 +2380,6 @@ msgstr "Ön előfizetett erre a lapra."
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Ön előfizetett erre a lapra."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Kérjük, a(z) %(actionname)s művelet végrehajtásához az interaktív "
-"felhasználói felületet használja!"
 
 msgid "You are now logged out."
 msgstr "A sütit letöröltük. Ön kilépett."
@@ -2970,6 +2964,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Kérjük, a(z) %(actionname)s művelet végrehajtásához az interaktív "
+#~ "felhasználói felületet használja!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

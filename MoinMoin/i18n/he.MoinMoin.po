@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -2082,6 +2082,10 @@ msgstr "תת פעולה של צירוף קובץ לא נתמכת: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "קבצים מצורפים ל–\"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "אנא השתמש במנשק המשתמש האינטראקטיבי בכדי להשתמש בפעולה %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: תשובה שגויה! חזור אחורה ונסה שוב..."
 
@@ -2132,9 +2136,6 @@ msgstr "הדף %(new_pagename)s לא קיים או שאין ברשותך מספ�
 
 msgid "Move aborted!"
 msgstr "הזזה בוטלה!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "אנא השתמשו במנשק המשתמש האינטראקטיבי להעברת קבצים מצורפים!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "אינך מורשה להזיז קבצים מצורפים מדף זה."
@@ -2336,10 +2337,6 @@ msgstr "ביצעת מינוי לדף זה."
 
 msgid "You could not get subscribed to this page."
 msgstr "אין באפשרותך לבצע מינוי לדף זה."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "אנא השתמש במנשק המשתמש האינטראקטיבי בכדי להשתמש בפעולה %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "נותקת מהמערכת."
@@ -2919,6 +2916,9 @@ msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "אנא השתמשו במנשק המשתמש האינטראקטיבי להעברת קבצים מצורפים!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

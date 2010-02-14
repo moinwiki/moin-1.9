@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -2095,6 +2095,11 @@ msgstr "Nepodporovaná akce pro PřipojitSoubor: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Přílohy k  \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prosím, použijte interaktivní rozhraní pro spuštění akce %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Špatná odpověď! Jdi zpět a zkus to znova..."
 
@@ -2144,9 +2149,6 @@ msgstr "Stránka %(newpagename)s neexistuje nebo nemáte dostatečná oprávněn
 
 msgid "Move aborted!"
 msgstr "Přesun přerušen!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Prosím, použijte interaktivní rozhraní pro přesun příloh!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nemáte oprávnění k přesunu příloh z této stránky."
@@ -2355,11 +2357,6 @@ msgstr "Přihlásili jste se k odběru této stránky."
 
 msgid "You could not get subscribed to this page."
 msgstr "Nemůžete se přihlásit k odběru této stránky."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prosím, použijte interaktivní rozhraní pro spuštění akce %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Jste nyní odhlášeni."
@@ -2958,6 +2955,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Prosím, použijte interaktivní rozhraní pro přesun příloh!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

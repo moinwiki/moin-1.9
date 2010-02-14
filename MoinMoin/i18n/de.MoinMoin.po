@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -2183,6 +2183,11 @@ msgstr "Nicht unterstützte Unter-Aktion von AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Dateianhänge für \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 "TextCha: Falsche Antwort! Gehen Sie zurück und probieren Sie es nochmal..."
@@ -2240,11 +2245,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Verschieben abgebrochen!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Für die das Verschieben von Anhängen bitte nur die vorgesehenen Webseiten "
-"benutzen!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Sie dürfen keine Anhänge von dieser Seite verschieben."
@@ -2458,11 +2458,6 @@ msgstr "Die Seite wurde zur Liste abonnierter Seiten hinzugefügt."
 msgid "You could not get subscribed to this page."
 msgstr ""
 "Die Seite konnte nicht zur Liste abonnierter Seiten hinzugefügt werden."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
 
 msgid "You are now logged out."
 msgstr "Sie sind nun abgemeldet."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-09-25 20:00+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -2138,6 +2138,12 @@ msgstr "Ogiltig sub-åtgärd för AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bilagor till \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Var god använd det interaktiva användargränsnittet för att utföra åtgärd %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Fel svar! Gå tillbaka och försök igen..."
 
@@ -2190,10 +2196,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Flytt avbruten!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Var god använd det interaktiva användargränsnittet för att flytta bilagor"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Du får inte flytta bilagor från den här sidan."
@@ -2396,12 +2398,6 @@ msgstr "Du prenumerar nu på den här sidan."
 
 msgid "You could not get subscribed to this page."
 msgstr "Du kunde inte prenumerar på den här sidan."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Var god använd det interaktiva användargränsnittet för att utföra åtgärd %"
-"(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Du är nu utloggad."
@@ -3005,6 +3001,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Var god använd det interaktiva användargränsnittet för att flytta bilagor"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

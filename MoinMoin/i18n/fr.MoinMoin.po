@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2009-01-26 00:10+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: français <traduc@traduc.org>\n"
@@ -2206,6 +2206,11 @@ msgstr "Sous-action d'ajout non disponible : %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Pièces jointes de « %(pagename)s »"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha : mauvaise réponse ! Revenez en arrière et réessayez..."
 
@@ -2261,9 +2266,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Déplacement annulé !"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Utilisez l'interface interactive pour déplacer des pièces jointes !"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr ""
@@ -2482,11 +2484,6 @@ msgstr "Vous avez été abonné à cette page."
 
 msgid "You could not get subscribed to this page."
 msgstr "Il n'a pas été possible de vous abonner à cette page."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
 
 msgid "You are now logged out."
 msgstr "Vous êtes maintenant déconnecté."
@@ -3116,3 +3113,6 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonyme"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Utilisez l'interface interactive pour déplacer des pièces jointes !"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -2151,6 +2151,12 @@ msgstr "サポートされていないファイル添付アクション: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s の添付ファイル\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"アクション %(actionname)s を使用するには、対話的なユーザインターフェースから"
+"行ってください。"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: 不正解です。戻ってもう一度やり直してください。"
 
@@ -2205,9 +2211,6 @@ msgstr "ページ %(new_pagename)s が存在しないか、必要な権限があ
 
 msgid "Move aborted!"
 msgstr "移動は中断されました。"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "このページから添付ファイルを移動する権限がありません。"
@@ -2413,12 +2416,6 @@ msgstr "このページの購読を開始しました。"
 
 msgid "You could not get subscribed to this page."
 msgstr "このページを購読することができませんでした。"
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"アクション %(actionname)s を使用するには、対話的なユーザインターフェースから"
-"行ってください。"
 
 msgid "You are now logged out."
 msgstr "ログアウト完了です。"
@@ -3013,6 +3010,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

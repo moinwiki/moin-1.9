@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -2120,6 +2120,10 @@ msgstr "Không thể thực hiện việc tải lên: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "File gửi kèm trong trang \"%(pagename)s\""
 
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2170,10 +2174,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
 
 #, fuzzy
 msgid "You are not allowed to move attachments from this page."
@@ -2381,10 +2381,6 @@ msgstr "Bạn vừa đăng ký vào trang này."
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Bạn vừa đăng ký vào trang này."
-
-#, fuzzy, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
 
 msgid "You are now logged out."
 msgstr "Bạn đã thoát ra khỏi hệ thống."
@@ -2948,6 +2944,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
 
 #, fuzzy
 #~ msgid "Xapian Version"

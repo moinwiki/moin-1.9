@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -2131,6 +2131,12 @@ msgstr "Буруу үйлдэл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\" -ийн хавсралтууд"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Энэ %(actionname)s үйлдлийг хэрэглэхийн тулд интерактив хэрэглэгчийн "
+"интерфэйс ашиглана уу!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2183,11 +2189,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Зөөлт цуцлагдлаа!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Хавсралтуудыг зөөхийн тулд хэрэглэгчийн интерактив интерфэйс ашиглана уу "
-"benutzen!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Та энэ хуудаснаас хавсралт зөөж болохгүй."
@@ -2399,12 +2400,6 @@ msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын ж�
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын жагсаалтад нэмэгдлээ."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Энэ %(actionname)s үйлдлийг хэрэглэхийн тулд интерактив хэрэглэгчийн "
-"интерфэйс ашиглана уу!"
 
 msgid "You are now logged out."
 msgstr "Та логаут хийсэн байна."
@@ -3021,6 +3016,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Хавсралтуудыг зөөхийн тулд хэрэглэгчийн интерактив интерфэйс ашиглана уу "
+#~ "benutzen!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

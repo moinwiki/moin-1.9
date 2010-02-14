@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -2167,6 +2167,12 @@ msgstr "A acción para subir arquivos ao servidor non está soportada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Anexos para \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"¡Por favor, use a interface interactiva de usuario para a acción %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2218,11 +2224,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Por favor, use a interface de usuario interactiva para renomear páxinas!"
 
 #, fuzzy
 msgid "You are not allowed to move attachments from this page."
@@ -2439,12 +2440,6 @@ msgstr "Subscribiuse a esta páxina."
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Subscribiuse a esta páxina."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"¡Por favor, use a interface interactiva de usuario para a acción %"
-"(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Saiu do sistema."
@@ -3037,6 +3032,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Por favor, use a interface de usuario interactiva para renomear páxinas!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

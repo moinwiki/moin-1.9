@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-12-02 15:24+0100\n"
 "Last-Translator: Jon Nordby <jononor@gmail.com>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -2142,6 +2142,12 @@ msgstr "Ukjent aksjon ved sikkerhetskopiering: %s."
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Skissen av \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Vennligst bruk det interaktive brukergrensesnittet for aksjonen %(actionname)"
+"s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Feil svar. Gå tilbake og prøv igjen..."
 
@@ -2192,12 +2198,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Vennligst bruk det interaktive brukergrensesnittet for aksjonen %(actionname)"
-"s!"
 
 #, fuzzy
 msgid "You are not allowed to move attachments from this page."
@@ -2402,12 +2402,6 @@ msgstr "Du abonnerer nå på denne siden."
 
 msgid "You could not get subscribed to this page."
 msgstr "Du kan ikke abonnerer på denne siden."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Vennligst bruk det interaktive brukergrensesnittet for aksjonen %(actionname)"
-"s!"
 
 msgid "You are now logged out."
 msgstr "Du er nå logget ut."
@@ -3018,6 +3012,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#, fuzzy
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Vennligst bruk det interaktive brukergrensesnittet for aksjonen %"
+#~ "(actionname)s!"
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian-versjon"

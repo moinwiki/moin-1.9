@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -2118,6 +2118,10 @@ msgstr "Непідтримувана дія ДодатиФайл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Вкладення для \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Скористайтесь інтерфейсом користувача для %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Неправильна відповідь! Поверніться та спробуйте знову..."
 
@@ -2171,9 +2175,6 @@ msgstr "Сторінка '%(new_pagename)s' не існує або у вас б�
 
 msgid "Move aborted!"
 msgstr "Переміщення скасовано!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Скористайтесь інтерфейсом користувача для переміщення вкладень!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Ви не можете забирати переміщувати вкладення з цієї сторінки."
@@ -2381,10 +2382,6 @@ msgstr "Тепер ви стежите за цією сторінкою."
 
 msgid "You could not get subscribed to this page."
 msgstr "Ви не можете стежити за цією сторінкою."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Скористайтесь інтерфейсом користувача для %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Ви вийшли."
@@ -2982,6 +2979,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Скористайтесь інтерфейсом користувача для переміщення вкладень!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

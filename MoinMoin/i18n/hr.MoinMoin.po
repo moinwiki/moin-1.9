@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -2115,6 +2115,10 @@ msgstr "Nepodržana operacija pri podizanju privitka: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Privitci na stranici \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Koristite interaktivno korisničko sučelje za akciju %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Pogrešan odgovor! Vratite se i pokušajte ponovno..."
 
@@ -2168,9 +2172,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Premještanje prekinuto!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Koristite interaktivno korisničko sučelje za premještanje privitaka!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nije Vam dozvoljen premještati privitke s ove stranice."
@@ -2380,10 +2381,6 @@ msgstr "Pretplaćeni ste na obavijesti o ovoj stanici."
 
 msgid "You could not get subscribed to this page."
 msgstr "Na obavijesti o ovoj stanici se nije moguće prijaviti."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Koristite interaktivno korisničko sučelje za akciju %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Uspješno ste se odjavili."
@@ -2987,6 +2984,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Koristite interaktivno korisničko sučelje za premještanje privitaka!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

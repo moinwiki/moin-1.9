@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2009-02-03 00:05+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -2155,6 +2155,12 @@ msgstr "Nepalaikomas AttachFile sub-veiksmas: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Priedai „%(pagename)s“"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prašome naudoti interaktyviąją naudotojo sąsają, kad naudotumėte veiksmą %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Klaidingas atsakymas! Eikite atgal ir bandykite dar kartą..."
 
@@ -2209,9 +2215,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Perkėlimas nutrauktas!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Prašome naudoti interaktyviąją naudotojo sąsają priedų perkėlimui!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Jums neleidžiama perkelti priedų iš šio puslapio."
@@ -2416,12 +2419,6 @@ msgstr "Jūs buvote užprenumeruotas šiam puslapiui."
 
 msgid "You could not get subscribed to this page."
 msgstr "Jūs negalėjote užsiprenumeriuoti šio puslapio."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prašome naudoti interaktyviąją naudotojo sąsają, kad naudotumėte veiksmą %"
-"(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Jūs dabar atsijungęs."
@@ -3031,6 +3028,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Prašome naudoti interaktyviąją naudotojo sąsają priedų perkėlimui!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

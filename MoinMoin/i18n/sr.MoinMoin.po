@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -2140,6 +2140,12 @@ msgstr "Неподржана ДодајДатотеку радња: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Прилози за „%(pagename)s“"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Користите интерактивно корисничко сучеље да бисте користили радњу %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Погрешан одговор! Вратите се назад и покушајте поново..."
 
@@ -2191,9 +2197,6 @@ msgstr "Страница %(newpagename)s не постоји или немате
 
 msgid "Move aborted!"
 msgstr "Померање отказано!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Користите интерактивно корисничко сучеље за померање прилога!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Није вам дозвољено да померите прилоге са ове странице."
@@ -2403,12 +2406,6 @@ msgstr "Претплаћени сте на ову страницу."
 
 msgid "You could not get subscribed to this page."
 msgstr "Нисте се могли преплатити у ову страницу."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Користите интерактивно корисничко сучеље да бисте користили радњу %"
-"(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Ви сте сада одјављени."
@@ -3015,6 +3012,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Користите интерактивно корисничко сучеље за померање прилога!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

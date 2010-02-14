@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2009-03-16 18:41+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -2169,6 +2169,12 @@ msgstr "Niet ondersteunde AttachFile subactie: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bijlagen voor \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Gebruik de interactieve gebruikersinterface om de actie %(actionname)s te "
+"gebruiken!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Verkeerd antwoord! Ga terug en probeer opnieuw..."
 
@@ -2222,10 +2228,6 @@ msgstr "Pagina '%(new_pagename)s' bestaat niet of u hebt niet genoeg rechten."
 
 msgid "Move aborted!"
 msgstr "Verplaatsing geannuleerd!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Gebruik de interactieve gebruikersinterface om bijlagen te verplaatsen!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "U hebt geen toestemming om bijlagen van deze pagina te verplaatsen."
@@ -2435,12 +2437,6 @@ msgstr "U bent geabonneerd op deze pagina."
 
 msgid "You could not get subscribed to this page."
 msgstr "U kon niet op deze pagina geabonneerd worden."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Gebruik de interactieve gebruikersinterface om de actie %(actionname)s te "
-"gebruiken!"
 
 msgid "You are now logged out."
 msgstr "U bent nu uitgelogd."
@@ -3057,6 +3053,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Gebruik de interactieve gebruikersinterface om bijlagen te verplaatsen!"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

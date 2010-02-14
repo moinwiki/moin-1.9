@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-05 17:32+0100\n"
+"POT-Creation-Date: 2010-02-14 02:48+0100\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -2090,6 +2090,10 @@ msgstr "不支持的上载功能：%s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "网页\"%(pagename)s\"的附件"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "请使用用户界面交互进行%(actionname)s操作！"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha：错误答案！请后退并重试..."
 
@@ -2137,9 +2141,6 @@ msgstr "网页'%(new_pagename)s' 不存在或您没有足够权限。"
 
 msgid "Move aborted!"
 msgstr "取消移动！"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "请使用用户界面交互地移动附件！"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "您无权移动此页附件。"
@@ -2336,10 +2337,6 @@ msgstr "您已经订阅了此页。"
 
 msgid "You could not get subscribed to this page."
 msgstr "您无法订阅此页。"
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "请使用用户界面交互进行%(actionname)s操作！"
 
 msgid "You are now logged out."
 msgstr "您已登出。"
@@ -2920,3 +2917,6 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "请使用用户界面交互地移动附件！"
