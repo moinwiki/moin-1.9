@@ -144,7 +144,7 @@ class BaseContext(Context):
     def isSpiderAgent(self):
         """ Simple check if useragent is a spider bot. """
         cfg = self.cfg
-        user_agent = self.environ.get('HTTP_USER_AGENT')
+        user_agent = self.http_user_agent
         if user_agent and cfg.cache.ua_spiders:
             return cfg.cache.ua_spiders.search(user_agent) is not None
         return False
@@ -269,6 +269,14 @@ class HTTPContext(BaseContext):
     def http_redirect(self, url, code=302):
         """ Raise a simple redirect exception. """
         abort(redirect(url, code=code))
+
+    def http_user_agent(self):
+        return self.environ.get('HTTP_USER_AGENT', '')
+    http_user_agent = EnvironProxy(http_user_agent)
+
+    def http_referer(self):
+        return self.environ.get('HTTP_REFERER', '')
+    http_referer = EnvironProxy(http_referer)
 
     # the output related methods
     def write(self, *data):
