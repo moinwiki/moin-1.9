@@ -18,7 +18,7 @@ from MoinMoin.widget import html
 from MoinMoin.auth import CancelLogin, ContinueLogin
 from MoinMoin.auth import MultistageFormLogin, MultistageRedirectLogin
 from MoinMoin.auth import get_multistage_continuation_url
-from werkzeug.utils import url_encode
+from werkzeug import url_encode
 
 class OpenIDAuth(BaseAuth):
     login_inputs = ['openid_identifier']
