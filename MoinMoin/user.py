@@ -901,7 +901,7 @@ class User:
             pagename_stripped = pagename.strip()
             if pagename_stripped:
                 trail.append(pagename_stripped)
-            self._request.session['trail'] = trail[-(self._cfg.trail_size-1):]
+            self._request.session['trail'] = trail[-self._cfg.trail_size:]
 
     def getTrail(self):
         """ Return list of recently visited pages.
