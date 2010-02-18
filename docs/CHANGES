@@ -348,10 +348,11 @@ Version 1.9.0:
 
 Version 1.8.7:
   Fixes:
-  * Fixed major security issues in misc. actions.
+  * Fixed major security issues in miscellaneous parts of moin.
     HINT: if you have removed superuser configuration to workaround the issue
     (following our security advisory), you may re-add it after installing this
-    moin release.
+    moin release. If you don't need superuser capabilities often, it might be
+    wise to not have superusers configured all the time, though.
   * Improved package security: cfg.packagepages_actions_excluded excludes
     unsafe or otherwise questionable package actions by default now.
   * wiki parser: fixed transclusion of (e.g. video) attachments from other
@@ -361,8 +362,8 @@ Version 1.8.7:
     * Process attachname in get/putAttachment similarly.
     * revertPage: convert pagename to internal representation.
   * Fixed config.umask usage for page packages.
-  * Fixed usage of i18n.wikiLanguages() on class level (moved to method), failed
-    when tools import the module (e.g. pydoc -k foo).
+  * Fixed usage of i18n.wikiLanguages() on class level (moved to method),
+    failed when tools import the module (e.g. pydoc -k foo).
   * SubProcess: fixed win32-specific parts, fixed imports (fixes calling of
     external xapian index filters)
 
