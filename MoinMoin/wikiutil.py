@@ -257,7 +257,7 @@ def clean_input(text, max_len=201):
         replace CR, LF, TAB by whitespace
         delete control chars
 
-        @param text: unicode text to clean
+        @param text: unicode text to clean (if we get str, we decode)
         @rtype: unicode
         @return: cleaned text
     """
@@ -266,6 +266,10 @@ def clean_input(text, max_len=201):
     if length == 0 or length > max_len:
         return u''
     else:
+        if isinstance(text, str):
+            # the translate() below can ONLY process unicode, thus, if we get
+            # str, we try to decode it using the usual coding:
+            text = text.decode(config.charset)
         return text.translate(config.clean_input_translation_map)
 
 
