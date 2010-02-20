@@ -11,13 +11,17 @@
                 2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import time, os, tempfile
+import sys, os
+from os import path
+import time
+import tempfile
+import re
 try:
     from cPickle import load, dump, HIGHEST_PROTOCOL
 except ImportError:
     from pickle import load, dump, HIGHEST_PROTOCOL
 
-from werkzeug.contrib.sessions import FilesystemSessionStore, Session
+from werkzeug.contrib.sessions import SessionStore, ModificationTrackingDict
 
 from MoinMoin import config
 from MoinMoin.util import filesys
@@ -25,94 +29,202 @@ from MoinMoin.util import filesys
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-class MoinSession(Session):
-    """ Compatibility interface to Werkzeug-sessions for old Moin-code. """
-    is_new = property(lambda s: s.new)
+
+# start copy from werkzeug 0.6 - directly import this, if we require >= 0.6:
+
+class Session(ModificationTrackingDict):
+    """Subclass of a dict that keeps track of direct object changes.  Changes
+    in mutable structures are not tracked, for those you have to set
+    `modified` to `True` by hand.
+    """
+    __slots__ = ModificationTrackingDict.__slots__ + ('sid', 'new')
+
+    def __init__(self, data, sid, new=False):
+        ModificationTrackingDict.__init__(self, data)
+        self.sid = sid
+        self.new = new
+
+    @property
+    def should_save(self):
+        """True if the session should be saved.
+
+        .. versionchanged:: 0.6
+           By default the session is now only saved if the session is
+           modified, not if it is new like it was before.
+        """
+        return self.modified
 
     def __repr__(self):
-        # TODO: try to get this into werkzeug codebase
         return '<%s %s %s%s>' % (
             self.__class__.__name__,
-            self.sid, # we want to see sid
+            self.sid,
             dict.__repr__(self),
             self.should_save and '*' or ''
         )
 
 
-class FixedFilesystemSessionStore(FilesystemSessionStore):
+#: used for temporary files by the filesystem session store
+_fs_transaction_suffix = '.__wz_sess'
+
+
+class FilesystemSessionStore(SessionStore):
+    """Simple example session store that saves sessions in the filesystem like
+    PHP does.
+
+    .. versionchanged:: 0.6
+       `renew_missing` was added.  Previously this was considered `True`,
+       now the default changed to `False` and it can be explicitly
+       deactivated.
+
+    :param path: the path to the folder used for storing the sessions.
+                 If not provided the default temporary directory is used.
+    :param filename_template: a string template used to give the session
+                              a filename.  ``%s`` is replaced with the
+                              session id.
+    :param session_class: The session class to use.  Defaults to
+                          :class:`Session`.
+    :param renew_missing: set to `True` if you want the store to
+                          give the user a new sid if the session was
+                          not yet saved.
     """
-    Fix buggy implementation of .get() in werkzeug <= 0.5:
 
-    If you try to get(somesid) and the file with the contents of sid storage
-    does not exist or is troublesome somehow, it will create a new session
-    with a new sid in werkzeug 0.5 original implementation.
+    def __init__(self, path=None, filename_template='werkzeug_%s.sess',
+                 session_class=None, renew_missing=False, mode=0644):
+        SessionStore.__init__(self, session_class)
+        if path is None:
+            path = gettempdir()
+        self.path = path
+        if isinstance(filename_template, unicode):
+            filename_template = filename_template.encode(
+                sys.getfilesystemencoding() or 'utf-8')
+        assert not filename_template.endswith(_fs_transaction_suffix), \
+            'filename templates may not end with %s' % _fs_transaction_suffix
+        self.filename_template = filename_template
+        self.renew_missing = renew_missing
+        self.mode = mode
 
-    But we do not want to store a session file for new and empty sessions,
-    but rather wait for the 2nd request and see whether the user agent sends
-    the cookie back to us. If it doesn't support cookies, we don't want to
-    create one new session file per request. If it does support cookies, we
-    need to use .get() with the sid although there was no session file stored
-    for that sid in the first request.
+    def get_session_filename(self, sid):
+        if isinstance(sid, unicode):
+            sid = sid.encode('utf-8')
+        return path.join(self.path, self.filename_template % sid)
 
-    TODO: try to get it into werkzeug codebase and remove this class after
-          we REQUIRE a werkzeug release > 0.5 that has it.
-    """
+    def save(self, session):
+        def _dump(filename):
+            f = file(filename, 'wb')
+            try:
+                dump(dict(session), f, HIGHEST_PROTOCOL)
+            finally:
+                f.close()
+        fn = self.get_session_filename(session.sid)
+        if os.name == 'posix':
+            td, tmp = tempfile.mkstemp(suffix=_fs_transaction_suffix,
+                                       dir=self.path)
+            _dump(tmp)
+            try:
+                os.rename(tmp, fn)
+            except (IOError, OSError):
+                pass
+            os.chmod(fn, self.mode)
+        else:
+            _dump(fn)
+            try:
+                os.chmod(fn, self.mode)
+            except OSError:
+                # maybe some platforms fail here, have not found
+                # any that do thought.
+                pass
+
+    def delete(self, session):
+        fn = self.get_session_filename(session.sid)
+        try:
+            os.unlink(fn)
+        except OSError:
+            pass
+
     def get(self, sid):
         if not self.is_valid_key(sid):
             return self.new()
-        fn = self.get_session_filename(sid)
-        f = None
         try:
+            f = open(self.get_session_filename(sid), 'rb')
+        except IOError:
+            if self.renew_missing:
+                return self.new()
+            data = {}
+        else:
             try:
-                f = open(fn, 'rb')
-                data = load(f)
-            except (IOError, EOFError, KeyError): # XXX check completeness/correctness
-                # Note: we do NOT generate a new sid in case of trouble with session *contents*
-                # IOError: [Errno 2] No such file or directory
-                # IOError: [Errno 13] Permission denied (we will notice permission problems when writing)
-                # EOFError: when trying to load("") - no contents
-                # KeyError: when trying to load("xxx") - crap contents
-                data = {}
-        finally:
-            if f:
+                try:
+                    data = load(f)
+                except Exception:
+                    data = {}
+            finally:
                 f.close()
         return self.session_class(data, sid, False)
 
+    def list(self):
+        """Lists all sessions in the store.
+
+        .. versionadded:: 0.6
+        """
+        before, after = self.filename_template.split('%s', 1)
+        filename_re = re.compile(r'%s(.{5,})%s$' % (re.escape(before),
+                                                    re.escape(after)))
+        result = []
+        for filename in os.listdir(self.path):
+            #: this is a session that is still being saved.
+            if filename.endswith(_fs_transaction_suffix):
+                continue
+            match = filename_re.match(filename)
+            if match is not None:
+                result.append(match.group(1))
+        return result
+
+# end copy of werkzeug 0.6 code
+
+
+class FixedFilesystemSessionStore(FilesystemSessionStore):
     """
     Problem: werkzeug 0.5 just directly and non-atomically writes to the session
              file when using save(). If another process or thread uses get() after
              save() opened the file for writing, it will get 0 bytes session content,
              because open(..., "wb") truncated the file already.
+
+             werkzeug 0.6 save() is still broken: it reopens the file and does not
+             use the fd given by mkstemp. It still fails in the same way on win32
+             as 0.5 did for both posix and win32 (see above).
     """
     def save(self, session):
-        fd, temp_fname = tempfile.mkstemp(suffix='.tmp', dir=self.path)
+        fd, temp_fname = tempfile.mkstemp(suffix=_fs_transaction_suffix, dir=self.path)
         f = os.fdopen(fd, 'wb')
         try:
             dump(dict(session), f, HIGHEST_PROTOCOL)
         finally:
             f.close()
-        filesys.chmod(temp_fname, 0666 & config.umask) # relax restrictive mode from mkstemp
+        filesys.chmod(temp_fname, self.mode) # relax restrictive mode from mkstemp
         fname = self.get_session_filename(session.sid)
-        # this is either atomic or happening with real locks set:
-        filesys.rename(temp_fname, fname)
+        filesys.rename(temp_fname, fname) # atomic (posix) or quick (win32)
 
     """
-    Adds functionality missing in werkzeug 0.5: getting a list of all SIDs,
-    so that purging sessions can be implemented.
+    Problem: werkzeug 0.6 uses inconsistent encoding for template and filename
     """
-    def get_all_sids(self):
-        """
-        return a list of all session ids (sids)
-        """
-        import re
-        regex = re.compile(re.escape(self.filename_template).replace(
-                    r'\%s', r'([0-9a-fA-F]+)')) # sid is hex only, do not match *.tmp
-        sids = []
-        for fn in os.listdir(self.path):
-            m = regex.match(fn)
-            if m:
-                sids.append(m.group(1))
-        return sids
+    def _encode_fs(self, name): # TODO: call this from FilesystemSessionStore.__init__
+        if isinstance(name, unicode):
+            name = name.encode(sys.getfilesystemencoding() or 'utf-8')
+        return name
+
+    def get_session_filename(self, sid):
+        sid = self._encode_fs(sid)
+        return path.join(self.path, self.filename_template % sid)
+
+
+class MoinSession(Session):
+    """ Compatibility interface to Werkzeug-sessions for old Moin-code.
+    
+        is_new is DEPRECATED and will go away soon.
+    """
+    def _get_is_new(self):
+        logging.warning("Deprecated use of MoinSession.is_new, please use .new")
+        return self.new
+    is_new = property(_get_is_new)
 
 
 class SessionService(object):
@@ -222,7 +334,8 @@ class FileSessionService(SessionService):
             filesys.mkdir(path)
         except OSError:
             pass
-        return FixedFilesystemSessionStore(path=path, filename_template='%s', session_class=MoinSession)
+        return FixedFilesystemSessionStore(path=path, filename_template='%s',
+                                           session_class=MoinSession, mode=0666 & config.umask)
 
     def get_session(self, request, sid=None):
         if sid is None:
@@ -239,7 +352,7 @@ class FileSessionService(SessionService):
 
     def get_all_session_ids(self, request):
         store = self._store_get(request)
-        return store.get_all_sids()
+        return store.list()
 
     def destroy_session(self, request, session):
         session.clear()
@@ -294,7 +407,7 @@ class FileSessionService(SessionService):
                  userobj.valid) # logged-in users, even if THIS was the first request (no cookie yet)
                                 # XXX if UA doesn't support cookies, this creates 1 session file per request
                 and
-                session.modified): # only if we really have something to save
+                session.should_save): # only if we really have something to save
                 # add some info about expiry to the sessions, so we can purge them:
                 session['expires'] = cookie_expires
                 # note: currently, every request of a logged-in user will save
