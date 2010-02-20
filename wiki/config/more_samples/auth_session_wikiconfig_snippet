@@ -1,0 +1,22 @@
+    # This is a sample configuration snippet that shows moin's builtin auth and
+    # session configuration. See HelpOnSessions, HelpOnAuthentication and
+    # HelpOnConfiguration for more infos.
+
+    # authentication methods used (default shown, see also other snippets):
+    #from MoinMoin import auth as authmodule
+    #auth = [authmodule.MoinAuth()]
+
+    # auth methods that get a user into "Trusted" group:
+    #auth_methods_trusted = ['http', 'xmlrpc_applytoken']
+
+    # session cookie settings:
+    #cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
+    #cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
+    #cookie_lifetime = (0, 12) # 0 -> no session for anon users (not logged in)
+                               # 12 -> 12h session lifetime for logged-in users
+
+    # The default (ENABLED) password_checker will keep users from choosing too
+    # short or too easy passwords. If you don't like this and your site has
+    # rather low security requirements, feel free to DISABLE the checker by:
+    #password_checker = None # None means "don't do any password strength checks"
+
