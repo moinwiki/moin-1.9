@@ -93,7 +93,7 @@ class WSGIServer(BaseFCGIServer, ThreadedServer):
             if kw.has_key(key):
                 del kw[key]
         ThreadedServer.__init__(self, jobClass=self._connectionClass,
-                                jobArgs=(self,), **kw)
+                                jobArgs=(self, None), **kw)
 
     def _isClientAllowed(self, addr):
         return self._web_server_addrs is None or \

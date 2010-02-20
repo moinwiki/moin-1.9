@@ -47,18 +47,29 @@ def run_ajp_thread(wsgi_app, global_conf,
 
 def run_ajp_fork(wsgi_app, global_conf,
                  scriptName='', host='localhost', port='8009',
-                 allowedServers='127.0.0.1', debug=NoDefault):
+                 allowedServers='127.0.0.1', debug=NoDefault,
+                 minSpare=None, maxSpare=None,
+                 maxChildren=None, maxRequests=None):
     import flup.server.ajp_fork
     addr = (host, int(port))
     if debug is NoDefault:
         debug = global_conf.get('debug', False)
     debug = asbool(debug)
+    prefork_args = {}
+    if minSpare is not None:
+        prefork_args['minSpare'] = int(minSpare)
+    if maxSpare is not None:
+        prefork_args['maxSpare'] = int(maxSpare)
+    if maxChildren is not None:
+        prefork_args['maxChildren'] = int(maxChildren)
+    if maxRequests is not None:
+        prefork_args['maxRequests'] = int(maxRequests)
     s = flup.server.ajp_fork.WSGIServer(
         wsgi_app,
         scriptName=scriptName,
         bindAddress=addr,
         allowedServers=aslist(allowedServers),
-        debug=debug,
+        debug=debug, **prefork_args
         )
     s.run()
 
@@ -91,7 +102,9 @@ def run_fcgi_fork(wsgi_app, global_conf,
                   host=None, port=None,
                   socket=None, umask=None,
                   multiplexed=False,
-                  debug=NoDefault):
+                  debug=NoDefault,
+                  minSpare=None, maxSpare=None,
+                  maxChildren=None, maxRequests=None):
     import flup.server.fcgi_fork
     if socket:
         assert host is None and port is None
@@ -106,11 +119,21 @@ def run_fcgi_fork(wsgi_app, global_conf,
     if debug is NoDefault:
         debug = global_conf.get('debug', False)
     debug = asbool(debug)
+    prefork_args = {}
+    if minSpare is not None:
+        prefork_args['minSpare'] = int(minSpare)
+    if maxSpare is not None:
+        prefork_args['maxSpare'] = int(maxSpare)
+    if maxChildren is not None:
+        prefork_args['maxChildren'] = int(maxChildren)
+    if maxRequests is not None:
+        prefork_args['maxRequests'] = int(maxRequests)
     s = flup.server.fcgi_fork.WSGIServer(
         wsgi_app,
         bindAddress=sock, umask=umask,
         multiplexed=asbool(multiplexed),
-        debug=debug)
+        debug=debug, **prefork_args
+        )
     s.run()
 
 def run_scgi_thread(wsgi_app, global_conf,
@@ -134,18 +157,29 @@ def run_scgi_thread(wsgi_app, global_conf,
 def run_scgi_fork(wsgi_app, global_conf,
                   scriptName=NoDefault, host='localhost', port='4000',
                   allowedServers='127.0.0.1',
-                  debug=NoDefault):
+                  debug=NoDefault,
+                  minSpare=None, maxSpare=None,
+                  maxChildren=None, maxRequests=None):
     import flup.server.scgi_fork
     addr = (host, int(port))
     if debug is NoDefault:
         debug = global_conf.get('debug', False)
     debug = asbool(debug)
+    prefork_args = {}
+    if minSpare is not None:
+        prefork_args['minSpare'] = int(minSpare)
+    if maxSpare is not None:
+        prefork_args['maxSpare'] = int(maxSpare)
+    if maxChildren is not None:
+        prefork_args['maxChildren'] = int(maxChildren)
+    if maxRequests is not None:
+        prefork_args['maxRequests'] = int(maxRequests)
     s = flup.server.scgi_fork.WSGIServer(
         wsgi_app,
         scriptName=scriptName,
         bindAddress=addr,
         allowedServers=aslist(allowedServers),
-        debug=debug,
+        debug=debug, **prefork_args
         )
     s.run()
 

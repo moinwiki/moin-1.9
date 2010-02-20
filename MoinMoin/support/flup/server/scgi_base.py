@@ -37,6 +37,7 @@ import signal
 import datetime
 import os
 import warnings
+import traceback
 
 # Threads are required. If you want a non-threaded (forking) version, look at
 # SWAP <http://www.idyll.org/~t/www-tools/wsgi/>.
@@ -197,17 +198,27 @@ class Request(object):
                           handlerTime.seconds +
                           handlerTime.microseconds / 1000000.0)
 
+class TimeoutException(Exception):
+    pass
+
 class Connection(object):
     """
     Represents a single client (web server) connection. A single request
     is handled, after which the socket is closed.
     """
-    def __init__(self, sock, addr, server):
+    def __init__(self, sock, addr, server, timeout):
         self._sock = sock
         self._addr = addr
         self.server = server
+        self._timeout = timeout
 
         self.logger = logging.getLogger(LoggerName)
+
+    def timeout_handler(self, signum, frame):
+        self.logger.error('Timeout Exceeded')
+        self.logger.error("\n".join(traceback.format_stack(frame)))
+
+        raise TimeoutException
 
     def run(self):
         if len(self._addr) == 2:
@@ -263,11 +274,22 @@ class Connection(object):
         # Allocate Request
         req = Request(self, environ, input, output)
 
+        # If there is a timeout
+        if self._timeout:
+            old_alarm = signal.signal(signal.SIGALRM, self.timeout_handler)
+            signal.alarm(self._timeout)
+            
         # Run it.
         req.run()
 
         output.close()
         input.close()
+
+        # Restore old handler if timeout was given
+        if self._timeout:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old_alarm)
+
 
 class BaseSCGIServer(object):
     # What Request class to use.

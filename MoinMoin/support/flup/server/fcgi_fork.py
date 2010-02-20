@@ -70,7 +70,8 @@ class WSGIServer(BaseFCGIServer, PreforkServer):
     """
     def __init__(self, application, environ=None,
                  bindAddress=None, umask=None, multiplexed=False,
-                 debug=False, roles=(FCGI_RESPONDER,), forceCGI=False, **kw):
+                 debug=False, roles=(FCGI_RESPONDER,), forceCGI=False,
+                 timeout=None, **kw):
         """
         environ, if present, must be a dictionary-like object. Its
         contents will be copied into application's environ. Useful
@@ -99,7 +100,7 @@ class WSGIServer(BaseFCGIServer, PreforkServer):
             if kw.has_key(key):
                 del kw[key]
         PreforkServer.__init__(self, jobClass=self._connectionClass,
-                               jobArgs=(self,), **kw)
+                               jobArgs=(self, timeout), **kw)
 
         try:
             import resource

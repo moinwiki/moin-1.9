@@ -4,7 +4,7 @@ This directory contains the flup WSGI adapter package.
 
 The shipped version is available via mercurial checkout:
 
-hg clone -r 6ea1ffac1bcb http://hg.saddi.com/flup-server
+hg clone -r 0266cedb313b http://hg.saddi.com/flup-server
 # this is flup 1.0.2+, minimum requirement for moin is 1.0.2.
 
 Thanks to Allan Saddi <allan@saddi.com> for writing flup and to

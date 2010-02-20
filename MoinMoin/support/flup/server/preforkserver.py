@@ -146,7 +146,9 @@ class PreforkServer(object):
                 # children that need to die.
                 timeout = 2
 
-            w = (time.time() > self._last_purge + 10) and self._children_to_purge or []
+            w = []
+            if (time.time() > self._last_purge + 10):
+                w = [x for x in self._children_to_purge if x.fileno() != -1]
             try:
                 r, w, e = select.select(r, w, [], timeout)
             except select.error, e:
@@ -263,6 +265,7 @@ class PreforkServer(object):
             if self._children.has_key(pid):
                 del self._children[pid]
 
+        signal.alarm(0)
         signal.signal(signal.SIGALRM, oldSIGALRM)
 
         # Forcefully kill any remaining children.
@@ -287,6 +290,7 @@ class PreforkServer(object):
             if self._children.has_key(pid): # Sanity check.
                 if self._children[pid]['file'] is not None:
                     self._children[pid]['file'].close()
+                    self._children[pid]['file'] = None
                 del self._children[pid]
 
     def _spawnChild(self, sock):

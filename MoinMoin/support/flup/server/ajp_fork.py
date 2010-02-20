@@ -108,7 +108,7 @@ class WSGIServer(BaseAJPServer, PreforkServer):
     """
     def __init__(self, application, scriptName='', environ=None,
                  bindAddress=('localhost', 8009), allowedServers=None,
-                 loggingLevel=logging.INFO, debug=False, **kw):
+                 loggingLevel=logging.INFO, debug=False, timeout=None, **kw):
         """
         scriptName is the initial portion of the URL path that "belongs"
         to your application. It is used to determine PATH_INFO (which doesn't
@@ -141,7 +141,8 @@ class WSGIServer(BaseAJPServer, PreforkServer):
         for key in ('multithreaded', 'multiprocess', 'jobClass', 'jobArgs'):
             if kw.has_key(key):
                 del kw[key]
-        PreforkServer.__init__(self, jobClass=Connection, jobArgs=(self,), **kw)
+        PreforkServer.__init__(self, jobClass=Connection,
+                               jobArgs=(self, timeout), **kw)
 
     def run(self):
         """

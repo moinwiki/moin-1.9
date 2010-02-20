@@ -142,8 +142,8 @@ class WSGIServer(BaseAJPServer, ThreadedServer):
         for key in ('jobClass', 'jobArgs'):
             if kw.has_key(key):
                 del kw[key]
-        ThreadedServer.__init__(self, jobClass=Connection, jobArgs=(self,),
-                                **kw)
+        ThreadedServer.__init__(self, jobClass=Connection,
+                                jobArgs=(self, None), **kw)
 
     def run(self):
         """
