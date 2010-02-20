@@ -1017,9 +1017,10 @@ class BaseFCGIServer(object):
                 if not hasattr(socket, 'fromfd'):
                     # can happen on win32, no socket.fromfd there!
                     raise ValueError(
-                        'Dynamic FCGI server not available on this platform. '
-                        'You must use a static or external one by providing a '
-                        'legal bindAddress.')
+                        'If you want FCGI, please create an external FCGI server '
+                        'by providing a valid bindAddress. '
+                        'If you want CGI, please force CGI operation. Use '
+                        'FCGI_FORCE_CGI=Y environment or forceCGI parameter.')
                 sock = socket.fromfd(FCGI_LISTENSOCK_FILENO, socket.AF_INET,
                                      socket.SOCK_STREAM)
                 isFCGI = True
