@@ -9,12 +9,13 @@
 #
 # MoinMoin fr system text translation
 #
+
 msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
-"PO-Revision-Date: 2010-01-21 00:30+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
+"PO-Revision-Date: 2010-02-14 11:08+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
 "MIME-Version: 1.0\n"
@@ -490,8 +491,8 @@ msgstr "Une valeur était attendue pour la clef « %(token)s »"
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
-"L'expression rationnelle de mise en évidence : « %(regex)s » est incorrecte : %"
-"(error)s"
+"L'expression rationnelle de mise en évidence : « %(regex)s » est incorrecte : "
+"%(error)s"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1254,8 +1255,8 @@ msgstr "Nouveau compte utilisateur créé sur %(sitename)s"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -1264,7 +1265,7 @@ msgstr ""
 "(sitename)s ». En voici les détails :\n"
 "\n"
 "    Nom d'utilisateur : %(username)s\n"
-"    Adresse de courrier électronique : %(useremail)s"
+"    Adresse électronique : %(useremail)s"
 
 #, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
@@ -1979,8 +1980,11 @@ msgid "last modified %(time)s"
 msgstr "dernière modification %(time)s"
 
 # Il faut utiliser une espace normale après « Rechercher »,
+
 # sinon, du fait d'un défaut du moteur de Mozilla, le texte
+
 # « Rechercher » ne s'efface pas de la barre de recherche.
+
 msgid "Search:"
 msgstr "Rechercher :"
 
@@ -2693,6 +2697,11 @@ msgstr "Sous-action d'ajout non disponible : %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Pièces jointes de « %(pagename)s »"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha : mauvaise réponse ! Revenez en arrière et réessayez..."
 
@@ -2745,9 +2754,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Déplacement annulé !"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Utilisez l'interface interactive pour déplacer des pièces jointes !"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr ""
@@ -2968,11 +2974,6 @@ msgstr "Vous avez été abonné à cette page."
 msgid "You could not get subscribed to this page."
 msgstr "Il n'a pas été possible de vous abonner à cette page."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
-
 msgid "You are now logged out."
 msgstr "Vous êtes maintenant déconnecté."
 
@@ -3173,6 +3174,24 @@ msgstr "Les utilisateurs suivants sont abonnés à cette page :"
 
 msgid "This page links to the following pages:"
 msgstr "Cette page est reliée aux pages suivantes :"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+"Affichage de l'historique des modifications de '''%(start_offset)d''' à '''%"
+"(end_offset)d''' sur un total de '''%(total_count)d''' entrées."
+
+msgid "Newer"
+msgstr "Plus récent"
+
+msgid "Older"
+msgstr "Plus ancien"
+
+#, python-format
+msgid "%s items per page"
+msgstr "%s entrées par page"
 
 msgid "Date"
 msgstr "Date"
@@ -3573,9 +3592,6 @@ msgstr ""
 
 msgid "File to load page content from"
 msgstr "Choisissez le fichier d'où importer le contenu de la page"
-
-msgid "Page Name"
-msgstr "Nom de la page"
 
 #, python-format
 msgid "Local Site Map for \"%s\""

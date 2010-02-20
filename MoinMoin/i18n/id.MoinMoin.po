@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -1224,8 +1224,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2675,6 +2675,12 @@ msgstr "Sub-aksi TaruhBerkas yang tidak di-support: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Lampiran untuk \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Silakan gunakan antarmuka pengguna interaktif untuk menggunakan aksi %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Jawaban salah! Harap kembali dan coba lagi..."
 
@@ -2724,10 +2730,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Perpindahan dibatalkan!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Silakan gunakan antarmuka pengguna interaktif untuk memindahkan lampiran!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Anda tidak diizinkan memindahkan lampiran dari halaman ini."
@@ -2939,12 +2941,6 @@ msgstr "Anda berlangganan ke halaman ini."
 msgid "You could not get subscribed to this page."
 msgstr "Anda tidak dapat berlangganan ke halaman ini."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Silakan gunakan antarmuka pengguna interaktif untuk menggunakan aksi %"
-"(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Sekarang Anda telah logout."
 
@@ -3135,6 +3131,23 @@ msgstr "Pengguna yang berlangganan ke halaman ini:"
 
 msgid "This page links to the following pages:"
 msgstr "Halaman ini bertaut ke halaman berikut:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nama baru"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Tanggal"
@@ -3533,10 +3546,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Nama paket"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Site Map Lokal untuk \"%s\""
@@ -3632,6 +3641,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Silakan gunakan antarmuka pengguna interaktif untuk memindahkan lampiran!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Nama paket"
 
 #, fuzzy
 #~ msgid "InstallDocs"

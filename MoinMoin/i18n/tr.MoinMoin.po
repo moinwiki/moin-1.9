@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -1217,8 +1217,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2669,6 +2669,12 @@ msgstr "Desteklenmeyen dosya gönderim işlevi: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\" için Ekler"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"%(actionname)s işlemini kullanmak için lütfen etkileşimli kullanıcı "
+"arayüzünü kullanın!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2719,9 +2725,6 @@ msgstr "%(newpagename)s sayfası mevcut değil veya yeterli izniniz yok."
 
 msgid "Move aborted!"
 msgstr "Taşıma iptal edildi!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Lütfen ekleri taşımak için etkileşimli kullanıcı arayüzünü kullanınız."
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Sayfadan ek taşımak için yeterli izne sahip değilsiniz."
@@ -2938,12 +2941,6 @@ msgstr "Bu sayfaya üye oldunuz."
 msgid "You could not get subscribed to this page."
 msgstr "Bu sayfaya üye olamadınız."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"%(actionname)s işlemini kullanmak için lütfen etkileşimli kullanıcı "
-"arayüzünü kullanın!"
-
 msgid "You are now logged out."
 msgstr "Çıkış yaptınız."
 
@@ -3130,6 +3127,23 @@ msgstr "Listelenen kullanıcılar bu sayfaya üye olmuş:"
 
 msgid "This page links to the following pages:"
 msgstr "Bu sayfa şu sayfalara bağlantı vermekte:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Yeni ad"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Tarih"
@@ -3537,10 +3551,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Paket ismi"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\" için Yerel Site Haritası"
@@ -3637,6 +3647,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Lütfen ekleri taşımak için etkileşimli kullanıcı arayüzünü kullanınız."
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Paket ismi"
 
 #, fuzzy
 #~ msgid "InstallDocs"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1191,8 +1191,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2637,6 +2637,10 @@ msgstr "Subacció d'AttachFile no implementada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Adjuncions per a «%(pagename)s»"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2685,9 +2689,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "S'ha avortat el moviment."
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Empreu la interfície d'usuari interactiva per a moure les adjuncions."
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "No teniu permís per a moure adjuncions des d'aquesta pàgina."
@@ -2894,10 +2895,6 @@ msgstr "Vos heu subscrit a aquesta pàgina."
 msgid "You could not get subscribed to this page."
 msgstr "No us heu pogut subscriure a aquesta pàgina."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-
 msgid "You are now logged out."
 msgstr "Heu sortit del vostre compte."
 
@@ -3063,6 +3060,23 @@ msgstr "Els següents usuaris estan subscrits a esta pàgina:"
 
 msgid "This page links to the following pages:"
 msgstr "Aquesta pàgina enllaça a la pàgina següent:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nom nou"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Date"
@@ -3433,10 +3447,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Nom nou"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa del lloc local per a «%s»"
@@ -3530,6 +3540,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Empreu la interfície d'usuari interactiva per a moure les adjuncions."
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Nom nou"
 
 #, fuzzy
 #~ msgid "InstallDocs"

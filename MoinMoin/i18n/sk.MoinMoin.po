@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -1158,8 +1158,8 @@ msgstr "Nový užívateľ vytvorený na %(sitename)s"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2547,6 +2547,12 @@ msgstr "Nepodporovaná podakcia PriložSúbor: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Prílohy pre „%(pagename)s“"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prosím, použite interaktívny interface užívateľa na uskutočnenie akcie %"
+"(actionname)s !"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Nesprávna odpoveď! Vráťte sa späť a skúste znovu..."
 
@@ -2596,9 +2602,6 @@ msgstr "Stránka %(new_pagename)s neexistuje alebo nemáte potrebné práva."
 
 msgid "Move aborted!"
 msgstr "Presun zrušený!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Prosím, na presun príloh použite interaktívne rozhranie!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nemáte oprávnenie presúvať prílohy z tejto stránky."
@@ -2805,12 +2808,6 @@ msgstr "Prihlásili ste sa na odoberanie tejto stránky."
 msgid "You could not get subscribed to this page."
 msgstr "Nebolo možné zaregistrovať Vás na odoberanie tejto stránky."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prosím, použite interaktívny interface užívateľa na uskutočnenie akcie %"
-"(actionname)s !"
-
 msgid "You are now logged out."
 msgstr "Momentálne ste odhlásený."
 
@@ -3005,6 +3002,23 @@ msgstr "Na odoberanie tejto stránky sa prihlásili nasledujúci užívatelia:"
 
 msgid "This page links to the following pages:"
 msgstr "Táto stránka je prelinkovaná na nasledujúce stránky:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nové meno"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Dátum"
@@ -3372,9 +3386,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Súbor, z ktorého chcete nahrať obsah stránky"
 
-msgid "Page Name"
-msgstr "Meno stránky"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokálna mapa stránok pre \"%s\""
@@ -3469,3 +3480,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Prosím, na presun príloh použite interaktívne rozhranie!"
+
+#~ msgid "Page Name"
+#~ msgstr "Meno stránky"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1203,8 +1203,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2648,6 +2648,11 @@ msgstr "Nepodporovaná akce pro PřipojitSoubor: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Přílohy k  \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prosím, použijte interaktivní rozhraní pro spuštění akce %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Špatná odpověď! Jdi zpět a zkus to znova..."
 
@@ -2694,9 +2699,6 @@ msgstr "Stránka %(newpagename)s neexistuje nebo nemáte dostatečná oprávněn
 
 msgid "Move aborted!"
 msgstr "Přesun přerušen!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Prosím, použijte interaktivní rozhraní pro přesun příloh!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nemáte oprávnění k přesunu příloh z této stránky."
@@ -2906,11 +2908,6 @@ msgstr "Přihlásili jste se k odběru této stránky."
 msgid "You could not get subscribed to this page."
 msgstr "Nemůžete se přihlásit k odběru této stránky."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prosím, použijte interaktivní rozhraní pro spuštění akce %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Jste nyní odhlášeni."
 
@@ -3097,6 +3094,23 @@ msgstr "Následující uživatelé odebírají tuto stránku:"
 
 msgid "This page links to the following pages:"
 msgstr "Tato stránku se odkazuje na následující stránky:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nové jméno"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -3493,10 +3507,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Název balíčku"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokální mapa umístění pro \"%s\""
@@ -3591,6 +3601,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Prosím, použijte interaktivní rozhraní pro přesun příloh!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Název balíčku"
 
 #, fuzzy
 #~ msgid "InstallDocs"

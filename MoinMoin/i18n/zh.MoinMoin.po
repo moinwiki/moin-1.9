@@ -11,21 +11,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.7\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
-"Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
+"Last-Translator: Dormouse.Young <dormouseyoung@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Thanks: Li Qin <liqin@cse.buaa.edu.cn>\n"
+"Thanks: Li Qin <liqin@cse.buaa.edu.cn> Jiang Xin <worldhello.net@gmail.com>\n"
 "X-Direction: ltr\n"
 "X-Language: 简体中文\n"
 "X-Language-in-English: Simplified Chinese\n"
 "X-HasWikiMarkup: True\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Vim\n"
 
 msgid "The wiki is currently not reachable."
 msgstr "本维基目前不可访问。"
@@ -303,7 +303,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<未知>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -450,11 +450,10 @@ msgstr "键\"%(token)s\"应该有对应的值"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "无效的加亮效果正则表达式 \"%(regex)s\"：%(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr "建议您不再使用此页的备份内容，备份将不会出现在搜索结果中！"
+msgstr "此页的备份将被轻视，并且在搜索结果中将排在靠后的位置！"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -736,19 +735,16 @@ msgstr ""
 msgid "Associate this name"
 msgstr "关联该名称"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "校验取消了。"
+msgstr "OpenID 校验取消了。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenID 成功添加。"
+msgstr "OpenID 成功添加。id: %s"
 
-#, fuzzy
 msgid "OpenID failure"
 msgstr "OpenID 失败。"
 
-#, fuzzy
 msgid "No OpenID found in session."
 msgstr "未提供 OpenID。"
 
@@ -785,13 +781,12 @@ msgstr "LDAP 服务器 %(server)s 失败。"
 msgid "Failed to connect to database."
 msgstr "连接数据库失败。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
-"如果您没有帐号，<a href=\"%(userprefslink)s\">您现在可以创建一个</a>。 <a "
-"href=\"%(sendmypasswordlink)s\">忘记密码？</a>"
+"如果您没有帐号，<a href=\"%(userprefslink)s\">您现在可以创建一个</a>。"
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
@@ -1169,13 +1164,14 @@ msgstr "新用户帐号创建于 %(sitename)s"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"管理员您好，一个新的用户帐号刚刚在 %(sitename)s 上被创建。详细信息如下:\n"
+"管理员您好，一个新的用户帐号刚刚在 \"%(sitename)s\" 上被创建。"
+"详细信息如下:\n"
 "\n"
 "    用户名：%(username)s\n"
 "    邮件地址：%(useremail)s"
@@ -1203,11 +1199,11 @@ msgstr ""
 "附件名称：%(attach_name)s\n"
 "附件大小：%(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr "添加新附件到页面 %(pagename)s 于站点 %(sitename)s"
+msgstr "从 %(sitename)s 站点 %(pagename)s 页面删除和附件"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1220,8 +1216,8 @@ msgid ""
 msgstr ""
 "维基用户您好，\n"
 "\n"
-"您订阅了一个 wiki 页面 \"%(page_name)s\" 改动通知。用户 %(editor)s 为页面添加"
-"了一个附件。详细信息如下：\n"
+"您订阅了一个 wiki 页面 \"%(page_name)s\" 改动通知。用户 %(editor)s "
+"删除了页面的一个附件。详细信息如下：\n"
 "\n"
 "附件名称：%(attach_name)s\n"
 "附件大小：%(attach_size)s\n"
@@ -1259,9 +1255,8 @@ msgstr "页面被复制"
 msgid "A new attachment has been added"
 msgstr "添加了一个新附件"
 
-#, fuzzy
 msgid "An attachment has been removed"
-msgstr "添加了一个新附件"
+msgstr "一个附件已被删除"
 
 msgid "A page has been reverted to a previous state"
 msgstr "一个页面被恢复到旧版本"
@@ -1341,9 +1336,8 @@ msgstr "缺失网页"
 msgid "MissingHomePage"
 msgstr "缺失主页"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "缺失主页"
+msgstr "维基个人网页"
 
 msgid "WikiName"
 msgstr "维基链接名"
@@ -1357,21 +1351,17 @@ msgstr "首页"
 msgid "WikiSandBox"
 msgstr "沙箱"
 
-# fixed fuzzy
 msgid "InterWiki"
-msgstr "互联维基"
+msgstr "维基链"
 
-#, fuzzy
 msgid "AbandonedPages"
-msgstr "被遗弃的"
+msgstr "废弃网页"
 
-# fixed fuzzy
 msgid "OrphanedPages"
-msgstr "孤悬页面"
+msgstr "孤立网页"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "末建页面"
+msgstr "待建网页"
 
 msgid "EventStats"
 msgstr "事件状态"
@@ -2634,6 +2624,10 @@ msgstr "不支持的上载功能：%s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "网页\"%(pagename)s\"的附件"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "请使用用户界面交互进行%(actionname)s操作！"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha：错误答案！请后退并重试..."
 
@@ -2678,9 +2672,6 @@ msgstr "网页'%(new_pagename)s' 不存在或您没有足够权限。"
 
 msgid "Move aborted!"
 msgstr "取消移动！"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "请使用用户界面交互地移动附件！"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "您无权移动此页附件。"
@@ -2878,10 +2869,6 @@ msgstr "您已经订阅了此页。"
 msgid "You could not get subscribed to this page."
 msgstr "您无法订阅此页。"
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "请使用用户界面交互进行%(actionname)s操作！"
-
 msgid "You are now logged out."
 msgstr "您已登出。"
 
@@ -3057,6 +3044,23 @@ msgstr "订阅此页的用户："
 
 msgid "This page links to the following pages:"
 msgstr "此页连到以下网页："
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "新名称"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "日期"
@@ -3444,9 +3448,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "用于加载页面内容的文件"
 
-msgid "Page Name"
-msgstr "打包文件名"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"的本地站点图"
@@ -3539,6 +3540,12 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 
 msgid "anonymous"
 msgstr "匿名"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "请使用用户界面交互地移动附件！"
+
+#~ msgid "Page Name"
+#~ msgstr "打包文件名"
 
 #, fuzzy
 #~ msgid "InstallDocs"

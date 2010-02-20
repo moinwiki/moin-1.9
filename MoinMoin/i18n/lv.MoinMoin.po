@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -1205,10 +1205,10 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2594,6 +2594,10 @@ msgstr "Neatbalstīta AttachFile apakšdarbība: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Lapas \"%(pagename)s\" piesaistes"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Darbību %(actionname)s, lūdzu, izmantojiet interaktīvi!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha tests: nepareiza atbilde! Atgriezieties un mēginiet vēlreiz..."
 
@@ -2642,11 +2646,6 @@ msgstr "Lapa '%(new_pagename)s' neeksistē vai arī Jums nav tiesību."
 
 msgid "Move aborted!"
 msgstr "Pārvietošana pārtraukta!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Lūdzu, piesaistīto datņu pārvietošanai izmantojiet interaktīvo lietotāja "
-"saskarni!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Jūs nav tiesību pārvietot piesaistes no šīs lapas."
@@ -2849,10 +2848,6 @@ msgstr "Tagad Jūs esat parakstījies(-usies) uz šo lapu."
 msgid "You could not get subscribed to this page."
 msgstr "Jūs nevarat parakstīties izmaiņām šajā lapā."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Darbību %(actionname)s, lūdzu, izmantojiet interaktīvi!"
-
 msgid "You are now logged out."
 msgstr "Jūs esat atslēgts(-a)."
 
@@ -3036,6 +3031,23 @@ msgstr "Sekojoši lietotāji ir parakstījušies uz šo lapu:"
 
 msgid "This page links to the following pages:"
 msgstr "Šajā lapā ir saites uz sekojošām lapām:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Jauns nosaukums"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Datums"
@@ -3421,9 +3433,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Lapas satura ielādes datne"
 
-msgid "Page Name"
-msgstr "Lapas nosaukums"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\" vietnes karte"
@@ -3518,6 +3527,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonīms"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Lūdzu, piesaistīto datņu pārvietošanai izmantojiet interaktīvo lietotāja "
+#~ "saskarni!"
+
+#~ msgid "Page Name"
+#~ msgstr "Lapas nosaukums"
 
 #~ msgid "InstallDocs"
 #~ msgstr "InstalētDokumentāciju"

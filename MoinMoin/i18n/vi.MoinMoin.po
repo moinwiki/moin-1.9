@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -1191,8 +1191,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2653,6 +2653,10 @@ msgstr "Không thể thực hiện việc tải lên: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "File gửi kèm trong trang \"%(pagename)s\""
 
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2700,10 +2704,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
 
 #, fuzzy
 msgid "You are not allowed to move attachments from this page."
@@ -2912,10 +2912,6 @@ msgstr "Bạn vừa đăng ký vào trang này."
 msgid "You could not get subscribed to this page."
 msgstr "Bạn vừa đăng ký vào trang này."
 
-#, fuzzy, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
-
 msgid "You are now logged out."
 msgstr "Bạn đã thoát ra khỏi hệ thống."
 
@@ -3082,6 +3078,23 @@ msgstr "Những người dùng sau đã đăng ký vào trang này:"
 
 msgid "This page links to the following pages:"
 msgstr "Trang này liên kết tới các trang sau:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Tên mới"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Ngày"
@@ -3462,10 +3475,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Tên mới"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Bản đồ liên kết nội bộ cho \"%s\""
@@ -3561,6 +3570,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Tên mới"
 
 #, fuzzy
 #~ msgid "HelpOnUpdating"

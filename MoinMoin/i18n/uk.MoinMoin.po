@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1213,8 +1213,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2665,6 +2665,10 @@ msgstr "Непідтримувана дія ДодатиФайл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Вкладення для \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Скористайтесь інтерфейсом користувача для %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Неправильна відповідь! Поверніться та спробуйте знову..."
 
@@ -2715,9 +2719,6 @@ msgstr "Сторінка '%(new_pagename)s' не існує або у вас б�
 
 msgid "Move aborted!"
 msgstr "Переміщення скасовано!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Скористайтесь інтерфейсом користувача для переміщення вкладень!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Ви не можете забирати переміщувати вкладення з цієї сторінки."
@@ -2926,10 +2927,6 @@ msgstr "Тепер ви стежите за цією сторінкою."
 msgid "You could not get subscribed to this page."
 msgstr "Ви не можете стежити за цією сторінкою."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Скористайтесь інтерфейсом користувача для %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Ви вийшли."
 
@@ -3118,6 +3115,23 @@ msgstr "Сповіщення про зміну цієї сторінки отр�
 
 msgid "This page links to the following pages:"
 msgstr "Ця сторінка посилається на:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Нова назва"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Дата"
@@ -3512,10 +3526,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Назва сторінки"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Локальна мапа сайту для \"%s\""
@@ -3609,6 +3619,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Скористайтесь інтерфейсом користувача для переміщення вкладень!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Назва сторінки"
 
 #, fuzzy
 #~ msgid "InstallDocs"

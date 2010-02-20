@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
-"PO-Revision-Date: 2010-01-19 13:44+0100\n"
-"Last-Translator: thomas marquart <thomas@marquart.se>\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
+"PO-Revision-Date: 2010-02-14 09:40+0100\n"
+"Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -1086,12 +1086,12 @@ msgstr "Ett nytt användarkonto skapades på %(sitename)s"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Hej administrator, en ny användare har just skapats på %(sitename)s\". Detaljer följer:\n"
+"Hej administrator, en ny användare har just skapats på \"%(sitename)s\". Detaljer följer:\n"
 "\n"
 "    Användarnamn: %(username)s\n"
 "    Epost-adress: %(useremail)s"
@@ -2463,6 +2463,10 @@ msgstr "Ogiltig sub-åtgärd för AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bilagor till \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Var god använd det interaktiva användargränsnittet för att utföra åtgärd %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Fel svar! Gå tillbaka och försök igen..."
 
@@ -2500,9 +2504,6 @@ msgstr "Sidan '%(new_pagename)s' finns inte eller så har du inte tillräckliga 
 
 msgid "Move aborted!"
 msgstr "Flytt avbruten!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Var god använd det interaktiva användargränsnittet för att flytta bilagor"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Du får inte flytta bilagor från den här sidan."
@@ -2675,10 +2676,6 @@ msgstr "Du prenumerar nu på den här sidan."
 msgid "You could not get subscribed to this page."
 msgstr "Du kunde inte prenumerar på den här sidan."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Var god använd det interaktiva användargränsnittet för att utföra åtgärd %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Du är nu utloggad."
 
@@ -2822,6 +2819,20 @@ msgstr "Följande användare prenumerar på den här sidan:"
 
 msgid "This page links to the following pages:"
 msgstr "Den här sidan länkar till följande sidor:"
+
+#, python-format
+msgid "Showing page edit history entries from '''%(start_offset)d''' to '''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr "Visar sidans redigeringshistoria från '''%(start_offset)d''' till '''%(end_offset)d''' utifrån totalt '''%(total_count)d''' stycken inlägg."
+
+msgid "Newer"
+msgstr "Nyare"
+
+msgid "Older"
+msgstr "Äldre"
+
+#, python-format
+msgid "%s items per page"
+msgstr "%s poster per sida"
 
 msgid "Date"
 msgstr "Datum"
@@ -3174,9 +3185,6 @@ msgstr "Du kan ladda upp innehåll för sidan som anges nedan. Om du döper om s
 msgid "File to load page content from"
 msgstr "Fil för att ladda sidinnehåll ifrån"
 
-msgid "Page Name"
-msgstr "Sidnamn"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokal Sajtkarta för \"%s\""
@@ -3268,6 +3276,12 @@ msgstr "Tyvärr, kan inte spara sidan eftersom \"%(content)s\" inte är tillåte
 
 msgid "anonymous"
 msgstr "anonym"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Var god använd det interaktiva användargränsnittet för att flytta bilagor"
+#~ msgid "Page Name"
+#~ msgstr "Sidnamn"
 
 #, fuzzy
 #~ msgid "InstallDocs"

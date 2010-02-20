@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2009-09-28\n"
 "Last-Translator: Renato Silva\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -46,7 +46,7 @@ msgid "You are not allowed to edit this page."
 msgstr "Você não tem permissão para editar esta página!"
 
 msgid "Page is immutable!"
-msgstr "A página não é editável!"
+msgstr "A página é imutável!"
 
 msgid "Cannot edit old revisions!"
 msgstr "Não é possível editar revisões antigas!"
@@ -214,7 +214,7 @@ msgid "You are not allowed to delete this page!"
 msgstr "Você não tem permissão para excluir esta página!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Obrigado por suas mudanças. Sua atenção aos detalhes é apreciada."
+msgstr "Obrigado pelas alterações. Agradecemos sua atenção aos detalhes."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -1007,7 +1007,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "UnSubscribe"
-msgstr "Deixar de acompanhar"
+msgstr "Desacompanhar"
 
 msgid "Subscribe"
 msgstr "Acompanhar"
@@ -1113,7 +1113,7 @@ msgid "OpenID"
 msgstr "OpenID"
 
 msgid "Login"
-msgstr "Login"
+msgstr "Entrar"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1214,8 +1214,8 @@ msgstr "Nova conta de usuário criada em %(sitename)s"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -1338,7 +1338,7 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 "Resultados %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s de %(aboutHits)s %(bs)s%"
-"(hits)d%(be)s resultados, num total de aproximadamente %(pages)d páginas."
+"(hits)d%(be)s resultado(s), num total de aproximadamente %(pages)d páginas."
 
 msgid "seconds"
 msgstr "segundos"
@@ -1375,10 +1375,10 @@ msgid "WikiTipOfTheDay"
 msgstr "WikiDicaDoDia"
 
 msgid "TitleIndex"
-msgstr "ÍndiceComTítulos"
+msgstr "ÍndiceDeTítulos"
 
 msgid "WordIndex"
-msgstr "ÍndiceComPalavras"
+msgstr "ÍndiceDePalavras"
 
 msgid "FindPage"
 msgstr "EncontrarPágina"
@@ -1916,7 +1916,7 @@ msgid "Or try one of these actions:"
 msgstr "Ou tente uma da seguintes ações: "
 
 msgid "Unsubscribe"
-msgstr "Deixar de acompanhar"
+msgstr "Desacompanhar"
 
 msgid "Home"
 msgstr "Home"
@@ -2011,7 +2011,7 @@ msgid "Edit (GUI)"
 msgstr "Editar (Gráfico)"
 
 msgid "Immutable Page"
-msgstr "Página não Editável"
+msgstr "Página Imutável"
 
 msgid "Remove Link"
 msgstr "Remover Link"
@@ -2170,7 +2170,7 @@ msgid "Local extension parsers"
 msgstr "Extensão de parsers locais"
 
 msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian e/ou o bindings Python Xapian não está instalado"
+msgstr "Xapian e/ou bindings do Xapian para Python não instalado(s)"
 
 msgid "Disabled"
 msgstr "Desabilitado"
@@ -2250,7 +2250,7 @@ msgid "not containing the following terms"
 msgstr "não contendo os seguintes termos"
 
 msgid "last modified since (e.g. 2 weeks before)"
-msgstr "última modificação desde (ex. 2 semanas atrás)"
+msgstr "última modificação desde (ex. 2 weeks before)"
 
 msgid "any category"
 msgstr "qualquer categoria"
@@ -2644,6 +2644,10 @@ msgstr "Subação de AttachFile não suportada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Anexos de \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Por favor use a interface interativa para usar a ação %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Resposta errada! Volte e tente novamente..."
 
@@ -2694,9 +2698,6 @@ msgstr "A página '%(new_pagename)s' não existe ou você não tem acesso à mes
 
 msgid "Move aborted!"
 msgstr "Movimento abortado!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Por favor use a interface interativa para mover anexos!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Você não tem permissão para mover anexos desta página."
@@ -2907,10 +2908,6 @@ msgstr "Você passou a acompanhar esta página."
 msgid "You could not get subscribed to this page."
 msgstr "Você não pôde passar a acompanhar esta página."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Por favor use a interface interativa para usar a ação %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Você não está mais logado."
 
@@ -3100,6 +3097,24 @@ msgstr "Os seguintes usuários acompanham esta página:"
 
 msgid "This page links to the following pages:"
 msgstr "Esta página tem links para as seguintes páginas:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+"Entradas '''%(start_offset)d''' a '''%(end_offset)d''' do histórico "
+"de edição, num total de '''%(total_count)d'''."
+
+msgid "Newer"
+msgstr "Mais novas"
+
+msgid "Older"
+msgstr "Mais antigas"
+
+#, python-format
+msgid "%s items per page"
+msgstr "%s itens por página"
 
 msgid "Date"
 msgstr "Data"
@@ -3431,7 +3446,7 @@ msgstr ""
 "Edite as expressões regulares de acompanhamento nas suas configurações."
 
 msgid "You need to be subscribed to unsubscribe."
-msgstr "Para deixar de acompanhar a página você precisa já estar acompanhando."
+msgstr "Você precisa estar acompanhando a página para deixar de acompanhar."
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -3500,9 +3515,6 @@ msgstr ""
 
 msgid "File to load page content from"
 msgstr "Arquivo de onde carregar o conteúdo da página"
-
-msgid "Page Name"
-msgstr "Nome da Página"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -3598,273 +3610,3 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anônimo"
-
-#, fuzzy
-#~ msgid "InstallDocs"
-#~ msgstr "instalar"
-
-#~ msgid "HelpOnUpdating"
-#~ msgstr "AjudaComAtualização"
-
-#~ msgid "OpenID: handle verify continuation"
-#~ msgstr "OpenID: tratar continuação de verificação"
-
-#~ msgid "OpenID: handle name continuation"
-#~ msgstr "OpenID: tratar continuação de nome"
-
-#~ msgid "OpenID: handle associate continuation"
-#~ msgstr "OpenID: tratar continuação de associação"
-
-#~ msgid "OpenID: unknown continuation stage"
-#~ msgstr "OpenID: estágio de continuação desconhecido"
-
-#~ msgid "you may need to login to edit this page"
-#~ msgstr "você pode precisar se logar para editar esta página"
-
-#~ msgid ""
-#~ "Installing theme files is only supported for standalone type servers."
-#~ msgstr ""
-#~ "Instalar arquivos de temas só é possível para servidores do tipo "
-#~ "standalone."
-
-#~ msgid "InterWikiMap"
-#~ msgstr "MapaDaInterWiki"
-
-#~ msgid "BadContent"
-#~ msgstr "ConteúdoRuim"
-
-#~ msgid "LocalBadContent"
-#~ msgstr "ConteúdoRuimLocal"
-
-#~ msgid "EditedSystemPages"
-#~ msgstr "PáginasDeSistemaEditadas"
-
-#~ msgid "Created the package %s containing the pages %s."
-#~ msgstr "Criado o pacote %s contendo %s páginas."
-
-#~ msgid "You need to log in."
-#~ msgstr "Você precisa se logar."
-
-#~ msgid ""
-#~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-#~ "Files: %(filecount)d, Directories: %(dircount)d"
-#~ msgstr ""
-#~ "Restaurar Backup: %(filename)s foi para o diretório: %(targetdir)s.\n"
-#~ "Arquivos: %(filecount)d, Diretórios: %(dircount)d"
-
-#~ msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-#~ msgstr ""
-#~ "Restaurando backup: %(filename)s foi para o diretório: %(targetdir)s "
-#~ "falhou."
-
-#~ msgid "Wiki Backup / Restore"
-#~ msgstr "Wiki Backup / Restaurar"
-
-#~ msgid ""
-#~ "Some hints:\n"
-#~ " * To restore a backup:\n"
-#~ "  * Restoring a backup will overwrite existing data, so be careful.\n"
-#~ "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-#~ "stuff).\n"
-#~ "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-#~ "  * Hit the <<GetText(Restore)>> button below.\n"
-#~ "\n"
-#~ " * To make a backup, just hit the <<GetText(Backup)>> button and save the "
-#~ "file\n"
-#~ "   you get to a secure place.\n"
-#~ "\n"
-#~ "Please make sure your wiki configuration backup_* values are correct and "
-#~ "complete.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Algumas dicas:\n"
-#~ " * Para restaurar um backup:\n"
-#~ "  * A restauração de um backup sobrescreverá dados existentes, tenha "
-#~ "cuidado.\n"
-#~ "  * Renomeie-o para <siteid>.tar.<compression> (remova a parte de --data--"
-#~ "hora--UTC).\n"
-#~ "  * Coloque o arquivo de backup no backup_storage_dir (use scp, "
-#~ "ftp, ...).\n"
-#~ "  * Pressione o botão <<GetText(Restore)>> abaixo.\n"
-#~ "\n"
-#~ " * Para fazer um backup, basta pressionar o botão <<GetText(Backup)>> e "
-#~ "salvar o arquivo \n"
-#~ "que receber em um lugar seguro.\n"
-#~ "\n"
-#~ "Por favor, verifique se os valores backup_* da configuração do seu wiki "
-#~ "estão corretos e completos.\n"
-#~ "\n"
-
-#~ msgid "Restore"
-#~ msgstr "Restaurar"
-
-#~ msgid "Xapian Version"
-#~ msgstr "Versão do Xapian"
-
-#~ msgid "PyStemmer not installed"
-#~ msgstr "PyStemmer não instalado"
-
-#~ msgid "PyStemmer Version"
-#~ msgstr "Versão PyStemmer"
-
-#~ msgid "PyStemmer stems"
-#~ msgstr "PyStemmer stems"
-
-#~ msgid "New Page or New Attachment"
-#~ msgstr "Nova Página ou Novo Anexo"
-
-#~ msgid ""
-#~ "You can upload a file to a new page or choose to upload a file as "
-#~ "attachment for the current page"
-#~ msgstr ""
-#~ "Você pode carregar um arquivo para uma nova página ou escolher para "
-#~ "carregar um anexo para a página corrente"
-
-#~ msgid "New Name"
-#~ msgstr "Novo Nome"
-
-#~ msgid "Attachment '%(target)s' already exists."
-#~ msgstr "Anexo '%(target)s' já existe."
-
-#~ msgid ""
-#~ "An upload will never overwrite an existing file. If there is a name\n"
-#~ "conflict, you have to rename the file that you want to upload.\n"
-#~ "Otherwise, if \"Rename to\" is left blank, the original filename will be "
-#~ "used."
-#~ msgstr ""
-#~ "Um envio de arquivo nunca sobrescreverá um arquivo existente. Se existir "
-#~ "um conflito\n"
-#~ "quanto ao nome, você terá que renomear o arquivo que você deseja enviar.\n"
-#~ "Nos demais casos, se \"Renomear como\" for deixado em branco, o nome "
-#~ "original do arquivo será usado."
-
-#~ msgid "overwrite"
-#~ msgstr "sobrescrever"
-
-#~ msgid ""
-#~ "Somebody has requested to submit your account data to this email "
-#~ "address.\n"
-#~ "\n"
-#~ "If you lost your password, please use the data below and just enter the\n"
-#~ "password AS SHOWN into the wiki's password form field (use copy and "
-#~ "paste\n"
-#~ "for that).\n"
-#~ "\n"
-#~ "After successfully logging in, it is of course a good idea to set a new "
-#~ "and known password.\n"
-#~ msgstr ""
-#~ "Você solicitou submeter seus dados de conta a este endereço de e-mail.\n"
-#~ "\n"
-#~ "Se você perder sua senha, por favor use os dados acima e somente entre "
-#~ "com\n"
-#~ "a senha COMO MOSTRADO no campo da senha do wiki (utilize copiar e colar\n"
-#~ "para isto).\n"
-#~ "\n"
-#~ "Depois de logar com sucesso, seria uma boa idéia solicitar uma nova "
-#~ "senha.\n"
-
-#~ msgid "Found no account matching the given email address '%(email)s'!"
-#~ msgstr "Não foi encontrada nenhuma conta com o endereço '%(email)s!"
-
-#~ msgid "File attachments are not allowed in this wiki!"
-#~ msgstr "Arquivos anexados não são permitidos neste wiki!"
-
-#~ msgid "SendMyPassword"
-#~ msgstr "EnviarMinhaSenha"
-
-#~ msgid "Use UserPreferences to change your settings or create an account."
-#~ msgstr ""
-#~ "Use as PreferênciasDoUsuário para mudar suas configurações ou criar uma "
-#~ "outra conta."
-
-#~ msgid "Use UserPreferences to change settings of the selected user account"
-#~ msgstr ""
-#~ "Use as Preferências Do Usuário para mudar suas configurações da conta do "
-#~ "usuário"
-
-#~ msgid ""
-#~ "This list does not work, unless you have entered a valid email address!"
-#~ msgstr "Esta lista não funcionará exceto se você inseriu um email válido!"
-
-#~ msgid ""
-#~ "To create an account, see the %(userprefslink)s page. To recover a lost "
-#~ "password, go to %(sendmypasswordlink)s."
-#~ msgstr ""
-#~ "Para criar uma conta, veja a página %(userprefslink)s. Para recuperar uma "
-#~ "senha perdida, vá para a página %(sendmypasswordlink)s."
-
-#~ msgid ""
-#~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
-#~ "Try a different name."
-#~ msgstr ""
-#~ "'''A página com o nome {{{'%s'}}} já existe.'''\n"
-#~ "Tente um nome diferente."
-
-#~ msgid ""
-#~ "The comment on the change is:\n"
-#~ "%(comment)s\n"
-#~ "\n"
-#~ msgstr ""
-#~ "O comentário referente à alteração é:\n"
-#~ "%(comment)s\n"
-#~ "\n"
-
-#~ msgid "Status of sending notification mails:"
-#~ msgstr "Status de notificação por e-mail:"
-
-#~ msgid "[%(lang)s] %(recipients)s: %(status)s"
-#~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "Subscribe to trivial changes"
-#~ msgstr "Subscrever alterações superficiais"
-
-#~ msgid "(Only for password change or new account)"
-#~ msgstr "(Somente para mudança de senha ou novas contas)"
-
-#~ msgid "Check your argument %s"
-#~ msgstr "Confira seu argumento %s"
-
-#~ msgid "ERROR in regex '%s'"
-#~ msgstr "ERRO na expressão regular, '%s'"
-
-#~ msgid "Bad timestamp '%s'"
-#~ msgstr "Formato da data está errrado '%s'"
-
-#~ msgid "Not supported mimetype of file: %s"
-#~ msgstr "Não há suporte ao tipo de arquivo: %s"
-
-#~ msgid "Embedding of object by chosen formatter not possible"
-#~ msgstr "Não é possível embutir o objeto com o formatador escolhido"
-
-#~ msgid ""
-#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
-#~ "(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
-#~ msgstr ""
-#~ "Não há argumentos suficientes para a macro EmbedObject! Tente "
-#~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
-#~ "Text])>>"
-
-#~ msgid ""
-#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
-#~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
-#~ msgstr ""
-#~ "Não há argumentos suficientes para a macro EmbedObject! Tente "
-#~ "<<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,"
-#~ "alt=alternate Text])>>"
-
-#~ msgid "Invalid MonthCalendar calparms \"%s\"!"
-#~ msgstr "Parâmetros MêsCalendário inválidos \"%s\"!"
-
-#~ msgid "Invalid MonthCalendar arguments \"%s\"!"
-#~ msgstr "Argumentos MêsCalendário inválidos \"%s\"!"
-
-#~ msgid "Sorry, login failed."
-#~ msgstr "Desculpe, login errado."
-
-#~ msgid ""
-#~ "The remote version of MoinMoin is too old, version 1.6 is required at "
-#~ "least."
-#~ msgstr "A versão do MoinMoin desta wiki está velha, a versão atual é a 1.6."
-
-#~ msgid "belonging to one of the following categories"
-#~ msgstr "pertencendo a uma das seguintes categorias"

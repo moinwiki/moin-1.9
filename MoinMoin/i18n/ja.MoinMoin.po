@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: HiroshiIwasaki <iwskhrs@gmail.com>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1206,10 +1206,10 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "%(sitename)s において新規ユーザアカウントが作成されました。"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2639,6 +2639,12 @@ msgstr "サポートされていないファイル添付アクション: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s の添付ファイル\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"アクション %(actionname)s を使用するには、対話的なユーザインターフェースから"
+"行ってください。"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: 不正解です。戻ってもう一度やり直してください。"
 
@@ -2690,9 +2696,6 @@ msgstr "ページ %(new_pagename)s が存在しないか、必要な権限があ
 
 msgid "Move aborted!"
 msgstr "移動は中断されました。"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "このページから添付ファイルを移動する権限がありません。"
@@ -2899,12 +2902,6 @@ msgstr "このページの購読を開始しました。"
 msgid "You could not get subscribed to this page."
 msgstr "このページを購読することができませんでした。"
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"アクション %(actionname)s を使用するには、対話的なユーザインターフェースから"
-"行ってください。"
-
 msgid "You are now logged out."
 msgstr "ログアウト完了です。"
 
@@ -3092,6 +3089,23 @@ msgstr "次のユーザがこのページを購読しています:"
 
 msgid "This page links to the following pages:"
 msgstr "このページは以下のページへリンクしています:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "新しい名前"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "日付"
@@ -3484,9 +3498,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "ページコンテンツを格納したファイル"
 
-msgid "Page Name"
-msgstr "ページ名"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"のローカルサイトマップ"
@@ -3581,6 +3592,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"
+
+#~ msgid "Page Name"
+#~ msgstr "ページ名"
 
 #, fuzzy
 #~ msgid "InstallDocs"
