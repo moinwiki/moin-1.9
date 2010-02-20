@@ -36,6 +36,7 @@ import logging
 import errno
 import datetime
 import time
+import traceback
 
 # Unfortunately, for now, threads are required.
 import thread
@@ -591,20 +592,30 @@ class Request(object):
             data = data[toWrite:]
             bytesLeft -= toWrite
 
+class TimeoutException(Exception):
+    pass
+
 class Connection(object):
     """
     A single Connection with the server. Requests are not multiplexed over the
     same connection, so at any given time, the Connection is either
     waiting for a request, or processing a single request.
     """
-    def __init__(self, sock, addr, server):
+    def __init__(self, sock, addr, server, timeout):
         self.server = server
         self._sock = sock
         self._addr = addr
+        self._timeout = timeout
 
         self._request = None
 
         self.logger = logging.getLogger(LoggerName)
+
+    def timeout_handler(self, signum, frame):
+        self.logger.error('Timeout Exceeded')
+        self.logger.error("\n".join(traceback.format_stack(frame)))
+
+        raise TimeoutException
 
     def run(self):
         self.logger.debug('Connection starting up (%s:%d)',
@@ -702,10 +713,20 @@ class Connection(object):
         if req.input.bytesAvailForAdd():
             self.processInput()
 
+        # If there is a timeout
+        if self._timeout:
+            old_alarm = signal.signal(signal.SIGALRM, self.timeout_handler)
+            signal.alarm(self._timeout)
+            
         # Run Request.
         req.run()
 
         self._request = None
+
+        # Restore old handler if timeout was given
+        if self._timeout:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old_alarm)
 
     def _shutdown(self, pkt):
         """Not sure what to do with this yet."""
