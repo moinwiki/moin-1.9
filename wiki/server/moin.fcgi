@@ -57,6 +57,16 @@ else:
         return app(env, start)
     application = script_name_fixer
 
+
+# CGI with Apache2 on Windows (maybe other combinations also) has trouble with
+# URLs of non-ASCII pagenames. Use True to enable middleware that tries to fix.
+fix_apache_win32 = False  # <-- adapt here as needed
+
+if fix_apache_win32:
+    from werkzeug.contrib.fixers import PathInfoFromRequestUriFix
+    application = PathInfoFromRequestUriFix(application)
+
+
 ## Choose your server mode (threaded, forking or single-thread)
 try:
     # v-- adapt here as needed
