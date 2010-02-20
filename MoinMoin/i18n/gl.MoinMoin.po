@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -1229,8 +1229,8 @@ msgstr "Conta de usuario creada!"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2700,6 +2700,12 @@ msgstr "A acción para subir arquivos ao servidor non está soportada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Anexos para \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"¡Por favor, use a interface interactiva de usuario para a acción %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2748,11 +2754,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Por favor, use a interface de usuario interactiva para renomear páxinas!"
 
 #, fuzzy
 msgid "You are not allowed to move attachments from this page."
@@ -2970,12 +2971,6 @@ msgstr "Subscribiuse a esta páxina."
 msgid "You could not get subscribed to this page."
 msgstr "Subscribiuse a esta páxina."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"¡Por favor, use a interface interactiva de usuario para a acción %"
-"(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Saiu do sistema."
 
@@ -3142,6 +3137,23 @@ msgstr "Os seguintes usuarios están subscritos a esta páxina:"
 
 msgid "This page links to the following pages:"
 msgstr "Esta páxina liga coas seguintes:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nome novo"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -3551,10 +3563,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Nome do paquete"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa local do sitio \"%s\""
@@ -3650,6 +3658,15 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Por favor, use a interface de usuario interactiva para renomear páxinas!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Nome do paquete"
 
 #, fuzzy
 #~ msgid "InstallDocs"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -1089,8 +1089,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2463,6 +2463,10 @@ msgstr ""
 msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "तेक्सचा: गलत जवाब! वापस जा के फिर से प्रयास कीजिए..."
 
@@ -2506,9 +2510,6 @@ msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr ""
 
 msgid "Move aborted!"
-msgstr ""
-
-msgid "Please use the interactive user interface to move attachments!"
 msgstr ""
 
 msgid "You are not allowed to move attachments from this page."
@@ -2708,10 +2709,6 @@ msgstr "आप इस पृष्ट पर अिभदािनत कर द
 msgid "You could not get subscribed to this page."
 msgstr "आप इस पृष्ट पर अिभदािनत नहीं हो सकते।"
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-
 msgid "You are now logged out."
 msgstr "आप अभी लागूड आवूट है।"
 
@@ -2876,6 +2873,23 @@ msgid "The following users subscribed to this page:"
 msgstr ""
 
 msgid "This page links to the following pages:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "नया नाम"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
 msgstr ""
 
 msgid "Date"
@@ -3240,10 +3254,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "पेकेज नाम"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "स्थानीय स्थल मानचित्र \"%s\" के लिए"
@@ -3336,6 +3346,10 @@ msgid "anonymous"
 msgstr ""
 
 #, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "पेकेज नाम"
+
+#, fuzzy
 #~ msgid "you may need to login to edit this page"
 #~ msgstr "आप को यह पृष्ट को बदलने की आग्या नही है।"
 
@@ -3394,9 +3408,6 @@ msgstr ""
 
 #~ msgid "Restore"
 #~ msgstr "बहाल करना"
-
-#~ msgid "New Name"
-#~ msgstr "नया नाम"
 
 #~ msgid "Found no account matching the given email address '%(email)s'!"
 #~ msgstr "िदया गये इमेल पते '%(email)s' से काेइ खाता नही िमल रहा है!"

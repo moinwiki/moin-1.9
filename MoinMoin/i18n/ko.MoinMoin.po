@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -1189,8 +1189,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2630,6 +2630,11 @@ msgstr "지원되지 않는 업로드 액션: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\"의 첨부파일들"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"%(actionname)s 작업을 수행하기 위해서는 명령행 프로그램을 사용해 주세요!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2680,9 +2685,6 @@ msgstr "문서 %(newpagename)s 가 존재하지 않거나 권한이 없습니다
 
 msgid "Move aborted!"
 msgstr "파일 이동이 취소되었습니다!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "첨부 파일을 옮기기 위해서는 명령행 프로그램을 사용해 주세요!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "이 문서의 첨부 파일을 옮길 수 있는 권한이 없습니다."
@@ -2891,11 +2893,6 @@ msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
 msgid "You could not get subscribed to this page."
 msgstr "이 문서를 구독할 수 없었습니다."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"%(actionname)s 작업을 수행하기 위해서는 명령행 프로그램을 사용해 주세요!"
-
 msgid "You are now logged out."
 msgstr "로그아웃 되었습니다."
 
@@ -3064,6 +3061,23 @@ msgstr "다음 사용자들이 이 문서를 구독하고 있습니다:"
 
 msgid "This page links to the following pages:"
 msgstr "이 문서는 다음 링크들을 포함하고 있습니다:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "새 이름"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "날짜"
@@ -3432,10 +3446,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "패키지 이름"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"의 사이트 맵"
@@ -3534,6 +3544,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "첨부 파일을 옮기기 위해서는 명령행 프로그램을 사용해 주세요!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "패키지 이름"
 
 #, fuzzy
 #~ msgid "InstallDocs"

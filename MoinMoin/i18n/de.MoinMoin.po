@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -794,7 +794,7 @@ msgid "The password you entered is not valid."
 msgstr "Das eingegebene Passwort ist ungültig."
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "OpenID-Fehler: unbekannte Fortsetzungs-Stufe"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Für OpenID-Login müssen anonyme Sitzungen angeschaltet sein."
@@ -1229,14 +1229,14 @@ msgstr "Neues Benutzer-Konto erzeugt auf %(sitename)s"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Lieber Superuser, ein neuer Benutzer wurde gerade auf %(sitename)s erzeugt. "
-"Details folgen:\n"
+"Lieber Superuser, ein neuer Benutzer wurde gerade auf \"%(sitename)s\" "
+"erzeugt. Details folgen:\n"
 "\n"
 "    Benutzer-Name:  %(username)s\n"
 "    E-Mail-Adresse: %(useremail)s"
@@ -2669,6 +2669,11 @@ msgstr "Nicht unterstützte Unter-Aktion von AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Dateianhänge für \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 "TextCha: Falsche Antwort! Gehen Sie zurück und probieren Sie es nochmal..."
@@ -2723,11 +2728,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Verschieben abgebrochen!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Für die das Verschieben von Anhängen bitte nur die vorgesehenen Webseiten "
-"benutzen!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Sie dürfen keine Anhänge von dieser Seite verschieben."
@@ -2942,11 +2942,6 @@ msgid "You could not get subscribed to this page."
 msgstr ""
 "Die Seite konnte nicht zur Liste abonnierter Seiten hinzugefügt werden."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
-
 msgid "You are now logged out."
 msgstr "Sie sind nun abgemeldet."
 
@@ -3139,6 +3134,22 @@ msgstr "Nachfolgende Benutzer haben diese Seite abonniert:"
 
 msgid "This page links to the following pages:"
 msgstr "Diese Seite verweist auf die folgenden Seiten:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr "Zeige Seiten-Änderungshistorie von '''%(start_offset)d''' bis '''%(end_offset)d''' von '''%(total_count)d''' Einträgen insgesamt."
+
+msgid "Newer"
+msgstr "Neuer"
+
+msgid "Older"
+msgstr "Älter"
+
+#, python-format
+msgid "%s items per page"
+msgstr "%s Einträge pro Seite"
 
 msgid "Date"
 msgstr "Datum"
@@ -3534,9 +3545,6 @@ msgstr ""
 
 msgid "File to load page content from"
 msgstr "Datei, aus der der Seiteninhalt geladen wird"
-
-msgid "Page Name"
-msgstr "Seitenname"
 
 #, python-format
 msgid "Local Site Map for \"%s\""

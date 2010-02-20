@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -1217,8 +1217,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2667,6 +2667,10 @@ msgstr "Неподдържано действие при качване: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Приложения към \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Моля, използвайте интерактивния интерфейс за действие %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2716,9 +2720,6 @@ msgstr "Страница %(newpagename)s не съществува или ням
 
 msgid "Move aborted!"
 msgstr "Преместването е преустановено!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Моля, използвайте интерактивния интерфейс за местене на допълнения!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Не Ви е позволено да местите допълнения от тази страница."
@@ -2932,10 +2933,6 @@ msgstr "Бяхте абонирани за тази страница."
 msgid "You could not get subscribed to this page."
 msgstr "Не можахте да се абонирате за тази страница."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Моля, използвайте интерактивния интерфейс за действие %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Вие излязохте успешно."
 
@@ -3126,6 +3123,23 @@ msgstr "Следните потребители са абонирани за т�
 
 msgid "This page links to the following pages:"
 msgstr "Тази страница съдържа връзки към следните страници:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Ново име"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Дата"
@@ -3532,10 +3546,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Име на пакета"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Карта на околността за \"%s\""
@@ -3631,6 +3641,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Моля, използвайте интерактивния интерфейс за местене на допълнения!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Име на пакета"
 
 #, fuzzy
 #~ msgid "InstallDocs"

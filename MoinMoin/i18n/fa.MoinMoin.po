@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -320,7 +320,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<نامشخص>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -332,7 +332,8 @@ msgstr ""
 "\n"
 "رمز بازیافت کلمه عبور: %s\n"
 "\n"
-"آدرس بازنشانی کلمه عبور: %s/?action=recoverpass&name=%s&token=%s\n"
+"آدرس بازنشانی کلمه عبور: %s?action=recoverpass&name=%s&token=%s\n"
+
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -469,13 +470,12 @@ msgstr "مقداری برای \"%(token)s\" لازم است"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "پر رنگ شدن نامعتبر \"%(regex)s\": %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"نسخه پشتیبانی گرفته شده از این صفحه نامناسب است و در نتایج جستجو لحاظ نخواهد "
-"شد!"
+"نسخه پشتیبانی گرفته شده از این صفحه قدیمی است و در نتایج جستجو امتیاز پایین‌تری خواهد "
+"داشت!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -766,21 +766,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr "با این نام مطابق شود"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "تطابق لغو شد"
+msgstr "تأیید OpenID لغو شد"
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "حساب OpenID با موفقیت اضافه شد."
+msgstr "OpenID موفق. حساب: %s"
 
-#, fuzzy
 msgid "OpenID failure"
-msgstr "ایراد OpenID"
+msgstr "ناموفق OpenID"
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "حساب OpenID دریافت نشد."
+msgstr "حساب OpenID در این نشست یافت نشد."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "حساب کاربری شما به حساب OpenID مطابق شد."
@@ -819,14 +816,13 @@ msgstr "سرویس دهنده LDAP %(server)s پاسخ نداد."
 msgid "Failed to connect to database."
 msgstr "ارتباط با پایگاه داده برقرار نشد."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "در صورتیکه حساب کاربری ندارید، <a href=\"%(userprefslink)s\">هم اکنون "
-"میتوانید یک حساب کاربری جدید بسازید</a>. <a href=\"%(sendmypasswordlink)s"
-"\">کلمه عبور خود را فراموش نموده‌اید؟</a>"
+"میتوانید یک حساب کاربری بسازید</a>."
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
@@ -864,7 +860,6 @@ msgstr ""
 "\n"
 "(!) برای راهنمایی بیشتر HelpOnEditing و یا HelpOnCreoleSyntax را ببینید.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -897,7 +892,7 @@ msgstr ""
 " جدولها:: || متن درون سلول |||| متن بین دو ستون ||;    بدون دنباله فاصله پس "
 "از جدولها و یا عناوین مجاز است.\n"
 "\n"
-"(!) برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.\n"
+"(!) برای راهنمایی بیشتر HelpOnEditing و یا HelpOnMoinWikiSyntax را ببینید.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1217,13 +1212,13 @@ msgstr "حساب کاربری جدید در %(sitename)s ایجاد شد"
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"مدیر گرامی، یک حساب کاربری جدید هم اکنون در %(sitename)s ایجاد شده است. "
+"مدیر گرامی، یک حساب کاربری جدید هم اکنون در \"%(sitename)s\" ایجاد شده است. "
 "جزئیات به شرح زیر است:\n"
 "\n"
 "    نام کاربری: %(username)s\n"
@@ -1255,11 +1250,11 @@ msgstr ""
 "نام ضمیمه: %(attach_name)s\n"
 "اندازه ضمیمه: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr "ضمیمه جدید به صفحه %(pagename)s در سایت %(sitename)s الصاق شد"
+msgstr "ضمیمهٔ صفحه %(pagename)s در سایت %(sitename)s حذف شد"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1272,11 +1267,9 @@ msgid ""
 msgstr ""
 "کاربر گرامی،\n"
 "\n"
-"کاربر گرامی،\n"
-"\n"
 "شما جهت مشاهده تغییرات در صفحه ویکی \"%(page_name)s\" عضو شده‌اید. یک ضمیمه "
-"توسط %(editor)s به آن صفحه الصاق شده است.\n"
-"جزئیات بیشتر در مورد این ضمیمه به شرح ذیل است:\n"
+"توسط %(editor)s از آن صفحه حذف شده است.\n"
+"جزئیات بیشتر به شرح ذیل است:\n"
 "\n"
 "نام ضمیمه: %(attach_name)s\n"
 "اندازه ضمیمه: %(attach_size)s\n"
@@ -1314,9 +1307,8 @@ msgstr "صفحه کپی‌برداری شده است"
 msgid "A new attachment has been added"
 msgstr "ضمیمه جدید اضافه شده است"
 
-#, fuzzy
 msgid "An attachment has been removed"
-msgstr "ضمیمه جدید اضافه شده است"
+msgstr "یک ضمیمه حذف شده است"
 
 msgid "A page has been reverted to a previous state"
 msgstr "یک صفحه به وضعیت قبلی خود بازگشته است"
@@ -1376,16 +1368,16 @@ msgid "about"
 msgstr "درباره"
 
 msgid "RecentChanges"
-msgstr "آخرین تغییرات"
+msgstr "تغییرات اخیر"
 
 msgid "WikiTipOfTheDay"
 msgstr ""
 
 msgid "TitleIndex"
-msgstr "فهرست موضوعات"
+msgstr "فهرست صفحات"
 
 msgid "WordIndex"
-msgstr "فهرست لغات"
+msgstr "فهرست کلمات"
 
 msgid "FindPage"
 msgstr "جستجوی صفحه"
@@ -1396,11 +1388,9 @@ msgstr "صفحه گم شده"
 msgid "MissingHomePage"
 msgstr "صفحه خانگی یافت نشد"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "صفحه خانگی یافت نشد"
+msgstr "صفحه خانگی ویکی"
 
-#, fuzzy
 msgid "WikiName"
 msgstr "نام کاربری"
 
@@ -1408,77 +1398,67 @@ msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "FrontPage"
-msgstr "صفحه اولیه"
+msgstr "صفحهٔ آغازه"
 
 msgid "WikiSandBox"
 msgstr ""
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "ویکی"
+msgstr "ویکی داخلی"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "صفحات رهاشده"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "صفحه بروز شده"
+msgstr "صفحات بدون والد"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "جستجوی صفحه"
+msgstr "صفحات خواسته شده"
 
 msgid "EventStats"
-msgstr ""
+msgstr "گزارش آماری"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "گزارش آماری/دفعات بازدید"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "گزارش آماری/زبانها"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "گزارش آماری/مرورگرها"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "اندازه"
+msgstr "اندازه صفحه"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "صفحات"
+msgstr "دفعات بازدید"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "تغییرنام صفحه"
+msgstr "صفحهٔ تصادفی"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "نسخه python"
+msgstr "نسخه Xslt"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "طالع بینی"
 
 msgid "WikiLicense"
 msgstr "اجازه‌نامه ویکی"
 
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "همه طبقه‌بندیها"
+msgstr "طبقه‌بندی"
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "طبقه‌بندیها"
+msgstr "طبقه‌ صفحات‌خانگی"
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "طبقه‌بندیها"
+msgstr "طبقه‌الگوها"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "الگوی صفحات خانگی"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "الگوی راهنما"
 
 msgid "HomepageReadWritePageTemplate"
 msgstr ""
@@ -1495,48 +1475,44 @@ msgstr ""
 msgid "SlideShowHandOutTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "نمایش اسلاید گونه"
+msgstr "الگوی نمایش اسلایدی"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "الگوی اسلاید"
 
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای پیکربندی"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "راهنمای پیکربندی/پشتیبانی ایمیل"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "راهنمای پیکربندی/سیاستهای امنیتی"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "راهنمای پیکربندی/ضمیمهٔ فایل"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "راهنمای پیکربندی/صفحه مکمل"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "راهنمای پیکربندی/محافظ موج"
 
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr ""
+msgstr "راهنمای پیکربندی/تنظیمات کاربری"
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای بروزآوری پایتون"
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای مدیریت"
 
 msgid "HelpOnAuthentication"
 msgstr ""
@@ -1544,42 +1520,35 @@ msgstr ""
 msgid "HelpOnAuthentication/ExternalCookie"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای دستورات موین"
 
 msgid "HelpOnMoinCommand/ExportDump"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "آگاه‌سازی"
+msgstr "راهنمای سیستم آگاه‌سازی"
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "عناوین راهنما"
+msgstr "راهنمای نشستها"
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای مدیریت کاربران"
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای زاپیان"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "راهنمای نگارش ویکی موین"
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "عناوین راهنما"
+msgstr "راهنمای نگارش Creole"
 
 msgid "HelpOnFormatting"
 msgstr "راهنمای فرمت‌ها"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "نسخه MoinMoin"
+msgstr "موین موین"
 
 msgid "HelpContents"
 msgstr "عناوین راهنما"
@@ -1590,45 +1559,38 @@ msgstr ""
 msgid "HelpForUsers"
 msgstr ""
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "فهرست موضوعات"
+msgstr "فهرست راهنما"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "عناوین راهنما"
+msgstr ""
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "عناوین راهنما"
+msgstr "راهنمای تذکرها"
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "راهنمای فرمت‌ها"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "طبقه‌بندیها"
+msgstr "راهنمای طبقه‌بندیها"
 
 msgid "HelpOnDictionaries"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای ترسیمات"
 
 msgid "HelpOnEditLocks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای ویرایش"
 
 msgid "HelpOnEditing/SubPages"
 msgstr ""
@@ -1636,35 +1598,29 @@ msgstr ""
 msgid "HelpOnGraphicalEditor"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "عناوین راهنما"
+msgstr "عناوین گروه‌بندیها"
 
 msgid "HelpOnHeadlines"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای تصاویر"
 
-#, fuzzy
 msgid "HelpOnLanguages"
-msgstr "زبان"
+msgstr "راهنمای زبانها"
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای لینک‌دهی"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "عناوین راهنما"
+msgstr "عناوین فهرستها"
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای ورود"
 
 msgid "HelpOnMacros"
 msgstr ""
@@ -1681,17 +1637,14 @@ msgstr ""
 msgid "HelpOnMacros/MonthCalendar"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "پیمایش سایت"
+msgstr "راهنمای پیمایش"
 
-#, fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "سرویس دهنده OpenID"
+msgstr "راهنمای سرویس دهنده OpenID"
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای ایجاد صفحه"
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1705,17 +1658,14 @@ msgstr ""
 msgid "HelpOnProcessingInstructions"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "عناوین راهنما"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای جستجو"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "نمایش اسلاید گونه"
+msgstr "راهنمای نمایش اسلایدی"
 
 msgid "HelpOnSlideShows/000 Introduction"
 msgstr ""
@@ -1732,16 +1682,14 @@ msgstr ""
 msgid "HelpOnSpam"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "تصحیح املایی"
+msgstr "راهنمای تصحیح املایی"
 
 msgid "HelpOnSuperUser"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "همگام‌سازی آغاز شد -"
+msgstr "راهنمای هماهنگ‌سازی"
 
 msgid "HelpOnTables"
 msgstr ""
@@ -1752,24 +1700,20 @@ msgstr ""
 msgid "HelpOnThemes"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "اطلاعات کاربری"
+msgstr "راهنمای اطلاعات کاربری"
 
 msgid "HelpOnVariables"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "راهنمای فرمت‌ها"
+msgstr "راهنمای صفحات Xml"
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "عناوین راهنما"
+msgstr "راهنمای نظرات"
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "لغو عضویت"
+msgstr "راهنمای عضویت"
 
 msgid "CamelCase"
 msgstr ""
@@ -1789,9 +1733,8 @@ msgstr ""
 msgid "WikiCourse/04 Creating a wiki account"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "اطلاعات کاربری شما ذخیره شد!"
+msgstr ""
 
 msgid "WikiCourse/06 Your own wiki homepage"
 msgstr ""
@@ -1826,9 +1769,8 @@ msgstr ""
 msgid "WikiCourse/17 External links"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "ضمیمه جدید"
+msgstr ""
 
 msgid "WikiCourse/19 Symbols"
 msgstr ""
@@ -1842,9 +1784,8 @@ msgstr ""
 msgid "WikiCourse/22 Parsers"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "امکانات بیشتر:"
+msgstr ""
 
 msgid "WikiCourse/30 The graphical editor"
 msgstr ""
@@ -2093,21 +2034,17 @@ msgstr "مرورگر فایلهای ضمیمه"
 msgid "User account browser"
 msgstr "مرورگر حسابهای کاربران"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "توضیحات"
+msgstr "توضیحات Lexer"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "کاربر"
+msgstr "نامهای Lexer"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "انواع فایلها"
+msgstr "الگوهای فایل"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "همه انواع فایل"
+msgstr "انواع علائم"
 
 msgid "Wiki configuration"
 msgstr "پیکربندی ویکی"
@@ -2306,7 +2243,6 @@ msgstr "شامل یک یا چند مورد از این عبارات"
 msgid "not containing the following terms"
 msgstr "شامل این عبارات نباشد"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
 msgstr "آخرین بار ویرایش شده در (مثلا: ۲ هفته اخیر)"
 
@@ -2452,16 +2388,14 @@ msgstr ""
 "شما می‌بایست برای این صفحه لینک دسترسی سریع داشته باشید تا قادر به حذف آن "
 "باشید."
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "نمایش اسلاید گونه"
+msgstr "ویرایش نمایش اسلایدی"
 
 msgid "Quit"
 msgstr ""
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "نمایش اسلاید گونه"
+msgstr "خروج از نمایش اسلایدی"
 
 msgid "Show first slide (up arrow)"
 msgstr ""
@@ -2703,6 +2637,11 @@ msgstr "ارسال فایل پشتیبانی نشده: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "ضمیمه‌های صفحه \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"لطفا جهت انجام عملیات %(actionname)s از جلوه های کاربردی استفاده نمایید!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "حروف معوج: پاسخ صحیح نیست! مجددا سعی نمایید..."
 
@@ -2752,9 +2691,6 @@ msgstr "صفحه '%(new_pagename)s' وجود ندارد و یا شما دستر�
 
 msgid "Move aborted!"
 msgstr "جابجایی انجام نشد!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "لطفا جهت جابجایی ضمیمه‌ها از امکانات موجد استفاده نمایید!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "شما مجاز به انتقال ضمیمه‌ها از این صفحه نمی‌باشید."
@@ -2960,11 +2896,6 @@ msgstr "شما در این صفحه عضو شده‌اید."
 msgid "You could not get subscribed to this page."
 msgstr "امکانات عضویت شما در این صفحه وجود ندارد."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"لطفا جهت انجام عملیات %(actionname)s از جلوه های کاربردی استفاده نمایید!"
-
 msgid "You are now logged out."
 msgstr "شما از سیستم خارج شدید."
 
@@ -3150,6 +3081,22 @@ msgstr "کاربران زیر در این صفحه عضو می‌باشند:"
 msgid "This page links to the following pages:"
 msgstr "این صفحه به صفحات زیر لینک دارد:"
 
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+msgid "Newer"
+msgstr "جدیدتر"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
+
 msgid "Date"
 msgstr "تاریخ"
 
@@ -3246,29 +3193,23 @@ msgstr "توضیحات اختیاری برای کپی کردن"
 msgid "Really copy this page?"
 msgstr "از کپی‌برداری این صفحه مطمئنید؟"
 
-#, fuzzy
 msgid "Attachment location"
 msgstr "آدرس ضمیمه"
 
-#, fuzzy
 msgid "Page name"
 msgstr "نام صفحه"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "نام ضمیمه جدید"
+msgstr "نام ضمیمه"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "آدرس ضمیمه"
+msgstr "بروزرسانی فهرست ضمیمه"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "[%d ضمیمه‌ها]"
+msgstr "فهرست ضمیمه‌ها"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "ضمیمه‌های صفحه \"%(pagename)s\""
+msgstr "ضمیمه‌های دردسترس برای صفحه"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -3295,13 +3236,11 @@ msgstr "تغییرات قبلی"
 msgid "Next change"
 msgstr "تغییرات بعدی"
 
-#, fuzzy
 msgid "Diff with older revision in left pane"
-msgstr "ویرایش قدیمیتری موجود نیست!"
+msgstr "تغییرات با نسخه‌های قدیمی‌تر در قسمت چپ"
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "ویرایش قدیمیتری موجود نیست!"
+msgstr "نسخهٔ با تغییرات قدیمی‌تر موجود نیست"
 
 msgid "Diff with newer revision in left pane"
 msgstr ""
@@ -3318,9 +3257,8 @@ msgstr ""
 msgid "Diff with newer revision in right pane"
 msgstr ""
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "ویرایش قدیمیتری موجود نیست!"
+msgstr "نسخهٔ با تغییرات جدیدتر موجود نیست"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3446,13 +3384,11 @@ msgstr "مدیریت صفحات من"
 msgid "Only superuser is allowed to use this action."
 msgstr "فقط مدیر سیستم مجار به انجام این عملیات است."
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "صفحه والد بالاتر یافت نشد!"
+msgstr "بسته صفحه یافت نشد."
 
-#, fuzzy
 msgid "page package"
-msgstr "صفحه بروز شده"
+msgstr "بسته صفحه"
 
 msgid "Choose:"
 msgstr ""
@@ -3542,9 +3478,6 @@ msgstr ""
 
 msgid "File to load page content from"
 msgstr "فایل بارگذاری محتویات صفحه"
-
-msgid "Page Name"
-msgstr "نام صفحه"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -3640,6 +3573,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "لطفا جهت جابجایی ضمیمه‌ها از امکانات موجد استفاده نمایید!"
+
+#~ msgid "Page Name"
+#~ msgstr "نام صفحه"
 
 #, fuzzy
 #~ msgid "InstallDocs"

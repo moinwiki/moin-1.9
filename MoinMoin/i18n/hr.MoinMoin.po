@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -1208,8 +1208,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2659,6 +2659,10 @@ msgstr "Nepodržana operacija pri podizanju privitka: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Privitci na stranici \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Koristite interaktivno korisničko sučelje za akciju %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Pogrešan odgovor! Vratite se i pokušajte ponovno..."
 
@@ -2709,9 +2713,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Premještanje prekinuto!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Koristite interaktivno korisničko sučelje za premještanje privitaka!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Nije Vam dozvoljen premještati privitke s ove stranice."
@@ -2922,10 +2923,6 @@ msgstr "Pretplaćeni ste na obavijesti o ovoj stanici."
 msgid "You could not get subscribed to this page."
 msgstr "Na obavijesti o ovoj stanici se nije moguće prijaviti."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Koristite interaktivno korisničko sučelje za akciju %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Uspješno ste se odjavili."
 
@@ -3114,6 +3111,23 @@ msgstr "Slijedeći korisnici su pretplaćeni na obavijesti o toj stranici:"
 
 msgid "This page links to the following pages:"
 msgstr "Ova stranica sadrži linkove na slijedeće stranicana:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Novo ime"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -3512,10 +3526,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Ime paketa"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Struktura stranica na \"%s\""
@@ -3611,6 +3621,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Koristite interaktivno korisničko sučelje za premještanje privitaka!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Ime paketa"
 
 #, fuzzy
 #~ msgid "InstallDocs"

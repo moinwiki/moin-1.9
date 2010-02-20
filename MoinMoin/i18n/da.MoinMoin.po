@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -1209,8 +1209,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2657,6 +2657,12 @@ msgstr "Overførselsrutine ikke understøttet: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Vedhæftninger til \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Anvend venligst den interaktive brugergrænseflade til at bruge rutinen %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2707,11 +2713,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Flytning afbrudt!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Anvend venligst den interaktive brugergrænseflade til at flytte "
-"vedhæftninger!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Du har ikke lov til at flytte vedhæftninger fra denne side!"
@@ -2920,12 +2921,6 @@ msgstr "Du abonnerer nu på denne side."
 msgid "You could not get subscribed to this page."
 msgstr "Du kunne ikke abonnere på denne side."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Anvend venligst den interaktive brugergrænseflade til at bruge rutinen %"
-"(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Du er nu logget ud."
 
@@ -3115,6 +3110,23 @@ msgstr "Følgende brugere abonnerer på denne side:"
 
 msgid "This page links to the following pages:"
 msgstr "Denne side har lænker til følgende sider:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nyt navn"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Dato"
@@ -3520,10 +3532,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Pakkenavn"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokal oversigt over \"%s\""
@@ -3618,6 +3626,15 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Anvend venligst den interaktive brugergrænseflade til at flytte "
+#~ "vedhæftninger!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Pakkenavn"
 
 #, fuzzy
 #~ msgid "InstallDocs"

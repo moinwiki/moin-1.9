@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -1173,8 +1173,8 @@ msgstr "משתמש חדש נוצר ב %(sitename)s"
 
 #, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2626,6 +2626,10 @@ msgstr "תת פעולה של צירוף קובץ לא נתמכת: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "קבצים מצורפים ל–\"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "אנא השתמש במנשק המשתמש האינטראקטיבי בכדי להשתמש בפעולה %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: תשובה שגויה! חזור אחורה ונסה שוב..."
 
@@ -2673,9 +2677,6 @@ msgstr "הדף %(new_pagename)s לא קיים או שאין ברשותך מספ�
 
 msgid "Move aborted!"
 msgstr "הזזה בוטלה!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "אנא השתמשו במנשק המשתמש האינטראקטיבי להעברת קבצים מצורפים!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "אינך מורשה להזיז קבצים מצורפים מדף זה."
@@ -2878,10 +2879,6 @@ msgstr "ביצעת מינוי לדף זה."
 msgid "You could not get subscribed to this page."
 msgstr "אין באפשרותך לבצע מינוי לדף זה."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "אנא השתמש במנשק המשתמש האינטראקטיבי בכדי להשתמש בפעולה %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "נותקת מהמערכת."
 
@@ -3061,6 +3058,23 @@ msgstr "משתמשים אלו מנויים לדף:"
 
 msgid "This page links to the following pages:"
 msgstr "הדף מקושר לדפים הבאים:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "שם חדש"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "תאריך"
@@ -3448,9 +3462,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "תוכן הדף"
 
-msgid "Page Name"
-msgstr "שם הדף"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "מפת אתר מקומית של \"%s\""
@@ -3543,6 +3554,12 @@ msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "אנא השתמשו במנשק המשתמש האינטראקטיבי להעברת קבצים מצורפים!"
+
+#~ msgid "Page Name"
+#~ msgstr "שם הדף"
 
 #, fuzzy
 #~ msgid "InstallDocs"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -1219,8 +1219,8 @@ msgstr "Создадена е нова корисничка сметка на %(
 
 #, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2702,6 +2702,11 @@ msgstr "Неподдржана операција при товарањето н
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Прилози на страницата \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Користете го интерактивниот кориснички интерфејс за дејството %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Погрешен одгвор! Вратете се и пробајте повторно..."
 
@@ -2752,11 +2757,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Преместувањето е прекинато!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Користете го интерактивниот кориснички интерфејс за преместување на "
-"прилозите!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Не Ви е дозволено да ги преместувате прилозите од оваа страница."
@@ -2962,11 +2962,6 @@ msgstr "Се претплативте на оваа страница."
 msgid "You could not get subscribed to this page."
 msgstr "Не може да се претплатите на оваа страница."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Користете го интерактивниот кориснички интерфејс за дејството %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Сега сте одјавени."
 
@@ -3159,6 +3154,23 @@ msgstr "Следниве корисници се претплатени на о�
 
 msgid "This page links to the following pages:"
 msgstr "Оваа страница води до следниве страници:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Ново име"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Датум"
@@ -3557,9 +3569,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Датотека од која треба да се вчита содржината на страницата"
 
-msgid "Page Name"
-msgstr "Име на страницата"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Структура на страници на \"%s\""
@@ -3655,6 +3664,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Користете го интерактивниот кориснички интерфејс за преместување на "
+#~ "прилозите!"
+
+#~ msgid "Page Name"
+#~ msgstr "Име на страницата"
 
 #, fuzzy
 #~ msgid "InstallDocs"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -1213,10 +1213,10 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "%(sitename)s sukurta nauja naudotojo paskyra"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2643,6 +2643,12 @@ msgstr "Nepalaikomas AttachFile sub-veiksmas: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Priedai „%(pagename)s“"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prašome naudoti interaktyviąją naudotojo sąsają, kad naudotumėte veiksmą %"
+"(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Klaidingas atsakymas! Eikite atgal ir bandykite dar kartą..."
 
@@ -2694,9 +2700,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Perkėlimas nutrauktas!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Prašome naudoti interaktyviąją naudotojo sąsają priedų perkėlimui!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Jums neleidžiama perkelti priedų iš šio puslapio."
@@ -2902,12 +2905,6 @@ msgstr "Jūs buvote užprenumeruotas šiam puslapiui."
 msgid "You could not get subscribed to this page."
 msgstr "Jūs negalėjote užsiprenumeriuoti šio puslapio."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prašome naudoti interaktyviąją naudotojo sąsają, kad naudotumėte veiksmą %"
-"(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Jūs dabar atsijungęs."
 
@@ -3095,6 +3092,23 @@ msgstr "Naudotojai, užsiprenumeravę šį puslapį:"
 
 msgid "This page links to the following pages:"
 msgstr "Šis puslapis turi nuorodas į šiuos puslapius:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Naujas pavadinimas"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -3500,9 +3514,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Failas, iš kurio įkelti puslapio turinį"
 
-msgid "Page Name"
-msgstr "Puslapio pavadinimas"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Vietinis svetainės žemėlapis „%s“"
@@ -3597,3 +3608,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Prašome naudoti interaktyviąją naudotojo sąsają priedų perkėlimui!"
+
+#~ msgid "Page Name"
+#~ msgstr "Puslapio pavadinimas"

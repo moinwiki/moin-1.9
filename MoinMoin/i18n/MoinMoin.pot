@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-20 17:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1055,8 +1055,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2404,6 +2404,10 @@ msgstr ""
 msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2446,9 +2450,6 @@ msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr ""
 
 msgid "Move aborted!"
-msgstr ""
-
-msgid "Please use the interactive user interface to move attachments!"
 msgstr ""
 
 msgid "You are not allowed to move attachments from this page."
@@ -2638,10 +2639,6 @@ msgstr ""
 msgid "You could not get subscribed to this page."
 msgstr ""
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-
 msgid "You are now logged out."
 msgstr ""
 
@@ -2805,6 +2802,22 @@ msgid "The following users subscribed to this page:"
 msgstr ""
 
 msgid "This page links to the following pages:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+msgid "Newer"
+msgstr ""
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
 msgstr ""
 
 msgid "Date"
@@ -3153,9 +3166,6 @@ msgid ""
 msgstr ""
 
 msgid "File to load page content from"
-msgstr ""
-
-msgid "Page Name"
 msgstr ""
 
 #, python-format

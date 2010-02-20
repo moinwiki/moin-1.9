@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -1100,8 +1100,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2521,6 +2521,10 @@ msgstr "نفذ عملية %(actionname)s?"
 msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2564,9 +2568,6 @@ msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr ""
 
 msgid "Move aborted!"
-msgstr ""
-
-msgid "Please use the interactive user interface to move attachments!"
 msgstr ""
 
 #, fuzzy
@@ -2768,10 +2769,6 @@ msgstr ""
 msgid "You could not get subscribed to this page."
 msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-
 msgid "You are now logged out."
 msgstr "لقد قمت بتسجيل الخروج."
 
@@ -2940,6 +2937,23 @@ msgid "The following users subscribed to this page:"
 msgstr ""
 
 msgid "This page links to the following pages:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "الإسم الجديد"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
 msgstr ""
 
 msgid "Date"
@@ -3312,10 +3326,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "صفحة جديدة\n"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr ""
@@ -3407,6 +3417,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "صفحة جديدة\n"
 
 #, fuzzy
 #~ msgid "InstallDocs"

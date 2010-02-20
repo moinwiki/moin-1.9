@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -1214,8 +1214,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2670,6 +2670,12 @@ msgstr "Буруу үйлдэл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\" -ийн хавсралтууд"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Энэ %(actionname)s үйлдлийг хэрэглэхийн тулд интерактив хэрэглэгчийн "
+"интерфэйс ашиглана уу!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
@@ -2719,11 +2725,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Зөөлт цуцлагдлаа!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Хавсралтуудыг зөөхийн тулд хэрэглэгчийн интерактив интерфэйс ашиглана уу "
-"benutzen!"
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Та энэ хуудаснаас хавсралт зөөж болохгүй."
@@ -2936,12 +2937,6 @@ msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын ж�
 msgid "You could not get subscribed to this page."
 msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын жагсаалтад нэмэгдлээ."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Энэ %(actionname)s үйлдлийг хэрэглэхийн тулд интерактив хэрэглэгчийн "
-"интерфэйс ашиглана уу!"
-
 msgid "You are now logged out."
 msgstr "Та логаут хийсэн байна."
 
@@ -3137,6 +3132,23 @@ msgstr "Дараахи хэрэглэгч энэ хуудсанд бүртгүү
 
 msgid "This page links to the following pages:"
 msgstr "Энэхүү хуудас нь дараахи хуудсуудтай холбогдсон байна:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Шинэ нэр"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Огноо"
@@ -3542,10 +3554,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Багцын нэр"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\" -ийн локаль хуудасны бүтэц"
@@ -3640,6 +3648,15 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Хавсралтуудыг зөөхийн тулд хэрэглэгчийн интерактив интерфэйс ашиглана уу "
+#~ "benutzen!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Багцын нэр"
 
 #, fuzzy
 #~ msgid "InstallDocs"

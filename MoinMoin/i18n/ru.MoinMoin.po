@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -1229,8 +1229,8 @@ msgstr "Создана новая учетная запись пользоват
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2665,6 +2665,12 @@ msgstr "Неподдерживаемый метод AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Прикреплённые файлы для «%(pagename)s»"
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Пожалуйста, воспользуйтесь интерактивным пользовательски интерфейсом для "
+"действия %(actionname)s!"
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "Текстовая капча: ответ неверен. Вернитесь и попробуйте еще раз."
 
@@ -2714,11 +2720,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Перемещение отменено."
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"Пожалуйста, воспользуйтесь интерфейсом пользователя для перемещения "
-"прикреплённых файлов."
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Вам нельзя перемещать прикреплённые файлы с этой страницы."
@@ -2923,12 +2924,6 @@ msgstr "Вы подписались на эту страницу."
 msgid "You could not get subscribed to this page."
 msgstr "Не удалось подписаться на эту страницу."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Пожалуйста, воспользуйтесь интерактивным пользовательски интерфейсом для "
-"действия %(actionname)s!"
-
 msgid "You are now logged out."
 msgstr "Вы вышли."
 
@@ -3117,6 +3112,22 @@ msgstr "На уведомления об изменении этой стран�
 
 msgid "This page links to the following pages:"
 msgstr "Эта страница ссылается на:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr "Показаны записи истории правок страницы с '''%(start_offset)d''' по '''%(end_offset)d''' из '''%(total_count)d''' имеющихся."
+
+msgid "Newer"
+msgstr "Более свежие"
+
+msgid "Older"
+msgstr "Более ранние"
+
+#, python-format
+msgid "%s items per page"
+msgstr "по %s записей на странице"
 
 msgid "Date"
 msgstr "Дата"
@@ -3508,9 +3519,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Файл для загрузки содержания страницы"
 
-msgid "Page Name"
-msgstr "Имя страницы"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Карта окрестностей для \"%s\""
@@ -3605,6 +3613,14 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "анонимно"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Пожалуйста, воспользуйтесь интерфейсом пользователя для перемещения "
+#~ "прикреплённых файлов."
+
+#~ msgid "Page Name"
+#~ msgstr "Имя страницы"
 
 #~ msgid "InstallDocs"
 #~ msgstr "КакУстанавливать"

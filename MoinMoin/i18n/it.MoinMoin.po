@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 22:54+0100\n"
+"POT-Creation-Date: 2010-02-13 11:55+0100\n"
 "PO-Revision-Date: 2009-10-03 22:29+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1224,10 +1224,10 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Nuovo account creato su %(sitename)s"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -2694,6 +2694,10 @@ msgstr "Sotto-azione AllegaFile non supportata: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Allegati per \"%(pagename)s\""
 
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Usare l'interfaccia interattiva per eseguire l'azione %(actionname)s."
+
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: risposta sbagliata. Torna indietro e riprova..."
 
@@ -2746,9 +2750,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr "Spostamento annullato."
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Usa l'interfaccia interattiva per spostare gli allegati."
 
 msgid "You are not allowed to move attachments from this page."
 msgstr "Non si è autorizzati a spostare gli allegati di questa pagina."
@@ -2959,10 +2960,6 @@ msgstr "Da questo momento si è abbonati a questa pagina."
 msgid "You could not get subscribed to this page."
 msgstr "Non è stato possibile abbonarsi a questa pagina."
 
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Usare l'interfaccia interattiva per eseguire l'azione %(actionname)s."
-
 msgid "You are now logged out."
 msgstr "Si è ora disconnessi."
 
@@ -3154,6 +3151,23 @@ msgstr "Elenco degli abbonati a questa pagina:"
 
 msgid "This page links to the following pages:"
 msgstr "Questa pagina contiene collegamenti alle seguenti pagine:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nuovo nome"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -3560,9 +3574,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "File da cui caricare il contenuto della pagina"
 
-msgid "Page Name"
-msgstr "Nome pagina"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mappa del sito per \"%s\""
@@ -3656,6 +3667,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimo"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "Usa l'interfaccia interattiva per spostare gli allegati."
+
+#~ msgid "Page Name"
+#~ msgstr "Nome pagina"
 
 #, fuzzy
 #~ msgid "InstallDocs"
