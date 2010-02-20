@@ -1653,7 +1653,7 @@ def get_unicode(request, arg, name=None, default=None):
     return arg
 
 
-def get_choice(request, arg, name=None, choices=[None]):
+def get_choice(request, arg, name=None, choices=[None], default_none=False):
     """
     For use with values returned from parse_quoted_separated or given
     as macro parameters, return a unicode string that must be in the
@@ -1664,12 +1664,19 @@ def get_choice(request, arg, name=None, choices=[None]):
     @param arg: The argument, may be None or a unicode string
     @param name: Name of the argument, for error messages
     @param choices: the possible choices
+    @param default_none: If False (default), get_choice returns first available
+                         choice if arg is None. If True, get_choice returns
+                         None if arg is None. This is useful if some arg value
+                         is required (no default choice).
     @rtype: unicode or None
     @returns: the unicode string (or default value)
     """
     assert isinstance(choices, (tuple, list))
     if arg is None:
-        return choices[0]
+        if default_none:
+            return None
+        else:
+            return choices[0]
     elif not isinstance(arg, unicode):
         raise TypeError('Argument must be None or unicode')
     elif not arg in choices:
@@ -1677,11 +1684,12 @@ def get_choice(request, arg, name=None, choices=[None]):
         if name:
             raise ValueError(
                 _('Argument "%s" must be one of "%s", not "%s"') % (
-                    name, '", "'.join(choices), arg))
+                    name, '", "'.join([repr(choice) for choice in choices]),
+                    arg))
         else:
             raise ValueError(
                 _('Argument must be one of "%s", not "%s"') % (
-                    '", "'.join(choices), arg))
+                    '", "'.join([repr(choice) for choice in choices]), arg))
 
     return arg
 
@@ -1830,8 +1838,8 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             if isinstance(default.argtype, (tuple, list)):
                 # treat choice specially and return None if no choice
                 # is given in the value
-                choices = [None] + list(default.argtype)
-                return get_choice(request, value, name, choices)
+                return get_choice(request, value, name, list(default.argtype),
+                       default_none=True)
             else:
                 return _convert_arg(request, value, default.argtype, name)
         return value
