@@ -218,7 +218,7 @@ class FixedFilesystemSessionStore(FilesystemSessionStore):
 
 class MoinSession(Session):
     """ Compatibility interface to Werkzeug-sessions for old Moin-code.
-    
+
         is_new is DEPRECATED and will go away soon.
     """
     def _get_is_new(self):
