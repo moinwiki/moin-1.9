@@ -24,7 +24,7 @@ minimum: 1.0.2
 
 pygments (highlighting for all sorts of source code and other text files)
 =========================================================================
-shipped: 1.1.1
+shipped: 1.2.2
 minimum: 1.1.1(?)
 
 
