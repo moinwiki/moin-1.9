@@ -901,7 +901,7 @@ class Parser:
                 tag_attrs, query_args = self._get_params(params,
                                                          tag_attrs={'title': desc, },
                                                          acceptable_attrs=acceptable_attrs)
-                if scheme == 'attachment':
+                if scheme == 'attachment': # ZZZ
                     return (self.formatter.attachment_link(1, url, querystr=query_args, **tag_attrs) +
                             self._link_description(desc, target, url) +
                             self.formatter.attachment_link(0))
