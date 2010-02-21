@@ -47,6 +47,8 @@
         tls_require_cert=0, # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
         bind_once=False, # set to True to only do one bind - useful if configured to bind as the user on the first attempt
         autocreate=True, # set to True to automatically create/update user profiles
+        name='ldap', # use e.g. 'ldap_pdc' and 'ldap_bdc' (or 'ldap1' and 'ldap2') if you auth against 2 ldap servers
+        report_invalid_credentials=True, # whether to emit "invalid username or password" msg at login time or not
     )
 
     auth = [ldap_authenticator1, ] # this is a list, you may have multiple ldap authenticators
