@@ -1,9 +1,75 @@
-3rd party python code requirements
-==================================
+Python requirements
+===================
 
-This file has some notes about the software we bundle and ship with MoinMoin
-in the MoinMoin/support/ directory. If you are a Linux distributor and you
-want to rip out this stuff and replace it with packages, this is for you!
+Please use Python 2.4.x, 2.5.x or 2.6.x, we recommend 2.5.x / 2.6.x.
+
+Python 2.3 is not supported by moin 1.9.x (use moin 1.8.x if you can't
+upgrade Python).
+
+Python 3.x won't work for MoinMoin for now.
+
+Python build options:
+ * zlib support (required)
+ * ucs4 (32bit unicode, recommended)
+ * ucs2 also works for most users (not recommended)
+
+
+Servers
+=======
+You can use anything that speaks WSGI to moin:
+ * the "standalone" wikiserver.py we bundle with moin (recommended for
+   desktop wikis, testing, debugging, development, adhoc-wikis)
+ * apache with mod_wsgi (recommended for bigger/busier wikis), do not use
+   mod_wsgi v2.3 (it has known problems), about any other version is fine.
+ * other WSGI-compatible servers
+ * cgi, fastcgi, scgi, ajp, ... also work via the "flup" middleware bundled with moin
+ * For IIS 6.0 on Windows 2003, you can use a ISAPI-WSGI gateway:
+   http://code.google.com/p/isapi-wsgi/ v0.4.1 has been used successfully.
+
+
+Requirements needed for some moin features
+==========================================
+
+RSS feed: python-xml (pyxml) or python >= 2.5.1
+
+GUI editor: python-xml (pyxml) - more precisely, this stuff is needed by the
+            html to wiki markup converter invoked when the gui editor posts
+            html on save. Status for python 2.5.x unknown.
+
+Docbook formatter: python-xml (pyxml). Status for python 2.5.x unknown.
+
+docbook parser: 4suite 1.0a4 or 1.0b1
+
+xslt parser: 4suite 1.0a4 or 1.0b1
+
+rst parser: docutils 0.3.10 or later
+
+Xapian indexed search engine:: xapian libs + python bindings >= 1.0.6
+
+Indexing filters for xapian search:
+ * antiword (for indexing of MS Word documents)
+ * xls2csv (for indexing of MS Excel documents, from catdoc package)
+ * catppt (for indexing of MS Powerpoint documents, from catdoc package)
+ * catdoc (for indexing of RTF documents, from catdoc package)
+ * pdftotext (for indexing of PDFs, from xpdf-utils or poppler-utils)
+
+ldap_login auth: python-ldap >=2.0.0pre06
+
+mysql_group auth: MySQLdb python module
+
+openidrp auth: openid python module
+
+stats charts: gdchart python module
+
+jabberbot: pyxmpp SVN revision 665 or release >= 1.0.1
+
+
+3rd party code requirements
+===========================
+
+Below are some notes about the software we bundle and ship with MoinMoin.
+If you are a Linux distributor and you want to rip out this stuff and
+replace it with packages, this is for you!
 
 We list the shipped version and also the minimum required version.
 The shipped version will work best with moin as usually has some more bug
@@ -15,6 +81,8 @@ In case you find bugs in this requirements specification, please let us know!
 
 Thanks to all 3rd party software authors!
 
+
+A) Stuff below MoinMoin/support/:
 
 flup (cgi/fastcgi/scgi/ajp to WSGI adapter)
 ===========================================
@@ -63,4 +131,22 @@ Other stuff
 ===========
 BasicAuthTransport.py (taken from Amos' XML-RPC HowTo)
 python_compatibility.py (to be compatible with older Pythons)
+
+
+B) MoinMoin/web/static/htdocs/applets/FCKEditor/
+shipped: 2.6.4.1
+required: 2.6.x
+
+
+C) MoinMoin/web/static/htdocs/applets/TWikiDrawPlugin/
+shipped: ?
+required: ?
+
+
+D) MoinMoin/web/static/htdocs/applets/anywikidraw/
+shipped: ?
+required: ?
+
+
+
 

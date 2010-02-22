@@ -39,6 +39,7 @@ and the mailing list before contacting the MoinMoin authors directly.
 Local:
 
 See docs/CHANGES                 for a version history. READ THIS!
+See docs/REQUIREMENTS            for a list of requirements.
 See docs/INSTALL.html            for installation instructions.
 See docs/README.migration        for data conversion instructions.
 
