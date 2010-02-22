@@ -36,15 +36,15 @@ GUI editor: python-xml (pyxml) - more precisely, this stuff is needed by the
             html to wiki markup converter invoked when the gui editor posts
             html on save. Status for python 2.5.x unknown.
 
-Docbook formatter: python-xml (pyxml). Status for python 2.5.x unknown.
+Docbook formatter: python-xml (pyxml).
 
 docbook parser: 4suite 1.0a4 or 1.0b1
 
 xslt parser: 4suite 1.0a4 or 1.0b1
 
-rst parser: docutils 0.3.10 or later
+rst parser: docutils >= 0.3.10
 
-Xapian indexed search engine:: xapian libs + python bindings >= 1.0.6
+Xapian indexed search: xapian libs + python bindings >= 1.0.6
 
 Indexing filters for xapian search:
  * antiword (for indexing of MS Word documents)
@@ -64,8 +64,8 @@ stats charts: gdchart python module
 jabberbot: pyxmpp SVN revision 665 or release >= 1.0.1
 
 
-3rd party code requirements
-===========================
+Bundled 3rd party code
+======================
 
 Below are some notes about the software we bundle and ship with MoinMoin.
 If you are a Linux distributor and you want to rip out this stuff and
@@ -93,7 +93,7 @@ minimum: 1.0.2
 pygments (highlighting for all sorts of source code and other text files)
 =========================================================================
 shipped: 1.2.2
-minimum: 1.1.1(?)
+minimum: 1.1.1 will work, maybe even older versions
 
 
 parsedatetime (parse date/time strings)
@@ -105,7 +105,7 @@ minimum: 0.8.7(?)
 werkzeug (WSGI toolkit)
 =======================
 shipped: 0.5.1
-minimum: 0.5.1(?)
+minimum: 0.5.1 will work, maybe 0.5 also
 
 
 xappy (High-Level Python library for Xapian)
@@ -144,9 +144,6 @@ required: ?
 
 
 D) MoinMoin/web/static/htdocs/applets/anywikidraw/
-shipped: ?
-required: ?
-
-
-
+shipped: 0.14
+required: 0.14(?)
 
