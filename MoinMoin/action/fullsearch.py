@@ -11,7 +11,7 @@
 import re, time
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
-from MoinMoin.support.parsedatetime.parsedatetime import Calendar
+from parsedatetime.parsedatetime import Calendar
 from MoinMoin.web.utils import check_surge_protect
 
 def checkTitleSearch(request):
