@@ -332,7 +332,13 @@ class ConfigFunctionality(object):
             except ImportError:
                 self.chart_options = None
 
-        # post process
+        # "Render As Docbook" requires python-xml.
+        if 'RenderAsDocbook' not in self.actions_excluded:
+            try:
+                from xml.dom.ext.reader import Sax
+            except ImportError:
+                # this will also remove it from the actions menu:
+                self.actions_excluded.append('RenderAsDocbook')
 
         # 'setuid' special auth method auth method can log out
         self.auth_can_logout = ['setuid']

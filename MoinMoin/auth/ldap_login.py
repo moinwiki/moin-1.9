@@ -84,6 +84,7 @@ class LDAPAuth(BaseAuth):
         bind_once=False, # set to True to only do one bind - useful if configured to bind as the user on the first attempt
         autocreate=False, # set to True if you want to autocreate user profiles
         name='ldap', # use e.g. 'ldap_pdc' and 'ldap_bdc' (or 'ldap1' and 'ldap2') if you auth against 2 ldap servers
+        report_invalid_credentials=True, # whether to emit "invalid username or password" msg at login time or not
         ):
         self.server_uri = server_uri
         self.bind_dn = bind_dn
@@ -113,6 +114,8 @@ class LDAPAuth(BaseAuth):
         self.bind_once = bind_once
         self.autocreate = autocreate
         self.name = name
+
+        self.report_invalid_credentials = report_invalid_credentials
 
     def login(self, request, user_obj, **kw):
         username = kw.get('username')
@@ -192,7 +195,10 @@ class LDAPAuth(BaseAuth):
                         logging.warning("Search found more than one (%d) matches for %r." % (result_length, filterstr))
                     if result_length == 0:
                         logging.debug("Search found no matches for %r." % (filterstr, ))
-                    return ContinueLogin(user_obj, _("Invalid username or password."))
+                    if self.report_invalid_credentials:
+                        return ContinueLogin(user_obj, _("Invalid username or password."))
+                    else:
+                        return ContinueLogin(user_obj)
 
                 dn, ldap_dict = lusers[0]
                 if not self.bind_once:
