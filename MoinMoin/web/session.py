@@ -25,6 +25,7 @@ from werkzeug.contrib.sessions import SessionStore, ModificationTrackingDict
 
 from MoinMoin import config
 from MoinMoin.util import filesys
+rename = filesys.rename # use MoinMoin's rename until we have it in werkzeug 0.6.1
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -66,10 +67,10 @@ class Session(ModificationTrackingDict):
 #: used for temporary files by the filesystem session store
 _fs_transaction_suffix = '.__wz_sess'
 
-
 class FilesystemSessionStore(SessionStore):
-    """Simple example session store that saves sessions in the filesystem like
-    PHP does.
+    """Simple example session store that saves sessions on the filesystem.
+    This store works best on POSIX systems and Windows Vista / Windows
+    Server 2008 and newer.
 
     .. versionchanged:: 0.6
        `renew_missing` was added.  Previously this was considered `True`,
@@ -92,7 +93,7 @@ class FilesystemSessionStore(SessionStore):
                  session_class=None, renew_missing=False, mode=0644):
         SessionStore.__init__(self, session_class)
         if path is None:
-            path = gettempdir()
+            path = tempfile.gettempdir()
         self.path = path
         if isinstance(filename_template, unicode):
             filename_template = filename_template.encode(
@@ -104,35 +105,27 @@ class FilesystemSessionStore(SessionStore):
         self.mode = mode
 
     def get_session_filename(self, sid):
+        # out of the box, this should be a strict ASCII subset but
+        # you might reconfigure the session object to have a more
+        # arbitrary string.
         if isinstance(sid, unicode):
-            sid = sid.encode('utf-8')
+            sid = sid.encode(sys.getfilesystemencoding() or 'utf-8')
         return path.join(self.path, self.filename_template % sid)
 
     def save(self, session):
-        def _dump(filename):
-            f = file(filename, 'wb')
-            try:
-                dump(dict(session), f, HIGHEST_PROTOCOL)
-            finally:
-                f.close()
         fn = self.get_session_filename(session.sid)
-        if os.name == 'posix':
-            td, tmp = tempfile.mkstemp(suffix=_fs_transaction_suffix,
-                                       dir=self.path)
-            _dump(tmp)
-            try:
-                os.rename(tmp, fn)
-            except (IOError, OSError):
-                pass
+        fd, tmp = tempfile.mkstemp(suffix=_fs_transaction_suffix,
+                                   dir=self.path)
+        f = os.fdopen(fd, 'wb')
+        try:
+            dump(dict(session), f, HIGHEST_PROTOCOL)
+        finally:
+            f.close()
+        try:
+            rename(tmp, fn)
             os.chmod(fn, self.mode)
-        else:
-            _dump(fn)
-            try:
-                os.chmod(fn, self.mode)
-            except OSError:
-                # maybe some platforms fail here, have not found
-                # any that do thought.
-                pass
+        except (IOError, OSError):
+            pass
 
     def delete(self, session):
         fn = self.get_session_filename(session.sid)
@@ -182,39 +175,7 @@ class FilesystemSessionStore(SessionStore):
 
 
 class FixedFilesystemSessionStore(FilesystemSessionStore):
-    """
-    Problem: werkzeug 0.5 just directly and non-atomically writes to the session
-             file when using save(). If another process or thread uses get() after
-             save() opened the file for writing, it will get 0 bytes session content,
-             because open(..., "wb") truncated the file already.
-
-             werkzeug 0.6 save() is still broken: it reopens the file and does not
-             use the fd given by mkstemp. It still fails in the same way on win32
-             as 0.5 did for both posix and win32 (see above).
-    """
-    def save(self, session):
-        fd, temp_fname = tempfile.mkstemp(suffix=_fs_transaction_suffix, dir=self.path)
-        f = os.fdopen(fd, 'wb')
-        try:
-            dump(dict(session), f, HIGHEST_PROTOCOL)
-        finally:
-            f.close()
-        filesys.chmod(temp_fname, self.mode) # relax restrictive mode from mkstemp
-        fname = self.get_session_filename(session.sid)
-        filesys.rename(temp_fname, fname) # atomic (posix) or quick (win32)
-
-    """
-    Problem: werkzeug 0.6 uses inconsistent encoding for template and filename
-    """
-    def _encode_fs(self, name): # TODO: call this from FilesystemSessionStore.__init__
-        if isinstance(name, unicode):
-            name = name.encode(sys.getfilesystemencoding() or 'utf-8')
-        return name
-
-    def get_session_filename(self, sid):
-        sid = self._encode_fs(sid)
-        return path.join(self.path, self.filename_template % sid)
-
+    """ no fix currently """
 
 class MoinSession(Session):
     """ Compatibility interface to Werkzeug-sessions for old Moin-code.
