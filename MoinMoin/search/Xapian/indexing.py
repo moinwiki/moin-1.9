@@ -10,11 +10,11 @@
 
 import os, re
 import xapian
+import xappy
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin.support import xappy
 from MoinMoin.search.builtin import BaseIndex
 from MoinMoin.search.Xapian.tokenizer import WikiAnalyzer
 from MoinMoin.util import filesys
