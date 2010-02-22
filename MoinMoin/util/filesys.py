@@ -60,6 +60,15 @@ if os.name == 'nt':
 
     try:
         import ctypes
+        _GetLastError = ctypes.windll.kernel32.GetLastError
+
+        def _LogLastError(fn):
+            err = _GetLastError()
+            logging.debug("%s returned: %r" % (fn, err))
+            # 5 = Access Denied
+            # 6800 = The function attempted to use a name that is reserved
+            #        for use by another transaction.
+            
         _MOVEFILE_REPLACE_EXISTING = 0x1
         _MOVEFILE_WRITE_THROUGH = 0x8
         _MoveFileEx = ctypes.windll.kernel32.MoveFileExW
@@ -71,9 +80,20 @@ if os.name == 'nt':
                 dst = unicode(dst, sys.getfilesystemencoding())
             if _rename_atomic(src, dst):
                 return True
-            return _MoveFileEx(src, dst, _MOVEFILE_REPLACE_EXISTING |
-                                         _MOVEFILE_WRITE_THROUGH)
+            logging.debug("PSEUDO-atomic rename %r %r" % (src, dst))
+            retry = 0
+            ret = 0
+            while not ret and retry < 100:
+                ret = _MoveFileEx(src, dst, _MOVEFILE_REPLACE_EXISTING |
+                                            _MOVEFILE_WRITE_THROUGH)
+                if ret == 0:
+                    _LogLastError("MoveFileExW")
+                    time.sleep(0.001)
+                    retry += 1
+                    logging.debug("retry %d after sleeping" % retry)
+            return ret
 
+        # this stuff only exists in windows >= vista / windows server 2008
         _CreateTransaction = ctypes.windll.ktmw32.CreateTransaction
         _CommitTransaction = ctypes.windll.ktmw32.CommitTransaction
         _MoveFileTransacted = ctypes.windll.kernel32.MoveFileTransactedW
@@ -83,14 +103,30 @@ if os.name == 'nt':
         def _rename_atomic(src, dst):
             ta = _CreateTransaction(None, 0, 0, 0, 0, 1000, 'Werkzeug rename')
             if ta == -1:
+                _LogLastError("CreateTransaction")
                 return False
             try:
-                return (_MoveFileTransacted(src, dst, None, None,
-                                            _MOVEFILE_REPLACE_EXISTING |
-                                            _MOVEFILE_WRITE_THROUGH, ta)
-                        and _CommitTransaction(ta))
+                logging.debug("atomic rename %r %r" % (src, dst))
+                retry = 0
+                ret = 0
+                while not ret and retry < 100:
+                    ret = _MoveFileTransacted(src, dst, None, None,
+                                               _MOVEFILE_REPLACE_EXISTING |
+                                               _MOVEFILE_WRITE_THROUGH, ta)
+                    if ret == 0:
+                        _LogLastError("MoveFileTransacted")
+                        time.sleep(0.001)
+                        retry += 1
+                        logging.debug("retry %d after sleeping" % retry)
+                    else:
+                        ret = _CommitTransaction(ta)
+                        if ret == 0:
+                            _LogLastError("CommitTransaction")
+                return ret
             finally:
-                _CloseHandle(ta)
+                ret = _CloseHandle(ta)
+                if ret == 0:
+                    _LogLastError("CloseHandle")
     except Exception:
         pass
 
@@ -99,6 +135,7 @@ if os.name == 'nt':
         if _rename(src, dst):
             return
         # Fall back to "move away and replace"
+        logging.debug("NON-atomic rename %r %r" % (src, dst))
         try:
             os.rename(src, dst)
         except OSError, e:
@@ -112,6 +149,7 @@ if os.name == 'nt':
             except Exception:
                 pass
 else:
+    #logging.debug("atomic os.rename (POSIX)")
     rename = os.rename
     can_rename_open_file = True
 
@@ -383,3 +421,4 @@ def dcreset():
         return
     else:
         return dircache.reset()
+
