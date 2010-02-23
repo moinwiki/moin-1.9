@@ -319,6 +319,16 @@ class FileSessionService(SessionService):
         store.delete(session)
 
     def finalize(self, request, session):
+        def update_session(key, val):
+            """ put key/val into session, avoid writing if it is unchanged """
+            try:
+                current_val = session[key]
+            except KeyError:
+                session[key] = val
+            else:
+                if val != current_val:
+                    session[key] = val
+
         if request.user.auth_method == 'setuid':
             userobj = request._setuid_real_user
             setuid = request.user.id
@@ -333,11 +343,11 @@ class FileSessionService(SessionService):
         # which is usually not needed and not recommended:
         cookie_path = cfg.cookie_path or '/'
         if userobj and userobj.valid:
-            session['user.id'] = userobj.id
-            session['user.auth_method'] = userobj.auth_method
-            session['user.auth_attribs'] = userobj.auth_attribs
+            update_session('user.id', userobj.id)
+            update_session('user.auth_method', userobj.auth_method)
+            update_session('user.auth_attribs', userobj.auth_attribs)
             if setuid:
-                session['setuid'] = setuid
+                update_session('setuid', setuid)
             elif 'setuid' in session:
                 del session['setuid']
             logging.debug("after auth: storing valid user into session: %r" % userobj.name)
@@ -351,7 +361,8 @@ class FileSessionService(SessionService):
 
         cookie_lifetime = _get_session_lifetime(request, userobj)
         if cookie_lifetime:
-            cookie_expires = time.time() + cookie_lifetime
+            # we use 60s granularity, so we don't trigger session storage updates too often
+            cookie_expires = int(time.time() / 60) * 60 + cookie_lifetime
             # a secure cookie is not transmitted over unsecure connections:
             cookie_secure = (cfg.cookie_secure or  # True means: force secure cookies
                              cfg.cookie_secure is None and request.is_secure)  # None means: https -> secure cookie
@@ -361,18 +372,15 @@ class FileSessionService(SessionService):
                                path=cookie_path, domain=cfg.cookie_domain,
                                secure=cookie_secure, httponly=cfg.cookie_httponly)
 
+            # add some info about expiry to the sessions, so we can purge them:
+            update_session('expires', cookie_expires)
+
             if ((not userobj.valid and not session.new  # anon users with a cookie (not first request)
                  or
                  userobj.valid) # logged-in users, even if THIS was the first request (no cookie yet)
                                 # XXX if UA doesn't support cookies, this creates 1 session file per request
                 and
                 session.should_save): # only if we really have something to save
-                # add some info about expiry to the sessions, so we can purge them:
-                session['expires'] = cookie_expires
-                # note: currently, every request of a logged-in user will save
-                # the session, even when always requesting same page.
-                # No big deal, as we store the trail into session and that
-                # likely changes with every request anyway.
                 store = self._store_get(request)
                 logging.debug("saving session: %r" % session)
                 store.save(session)

@@ -891,6 +891,7 @@ class User:
                 pagename = self._interWikiName(pagename)
 
             trail = self._request.session.get('trail', [])
+            trail_current = trail[:]
 
             # Don't append tail to trail ;)
             if trail and trail[-1] == pagename:
@@ -901,7 +902,10 @@ class User:
             pagename_stripped = pagename.strip()
             if pagename_stripped:
                 trail.append(pagename_stripped)
-            self._request.session['trail'] = trail[-self._cfg.trail_size:]
+            trail = trail[-self._cfg.trail_size:]
+            if trail != trail_current:
+                # we only modify the session if we have something different:
+                self._request.session['trail'] = trail
 
     def getTrail(self):
         """ Return list of recently visited pages.
