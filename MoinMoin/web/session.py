@@ -174,9 +174,6 @@ class FilesystemSessionStore(SessionStore):
 # end copy of werkzeug 0.6 code
 
 
-class FixedFilesystemSessionStore(FilesystemSessionStore):
-    """ no fix currently """
-
 class MoinSession(Session):
     """ Compatibility interface to Werkzeug-sessions for old Moin-code.
 
@@ -230,6 +227,7 @@ def _get_session_lifetime(request, userobj):
     if userobj and userobj.valid and userobj.remember_me and lifetime > 0:
         return forever
     return abs(lifetime)
+
 
 def get_cookie_name(request, name, usage, software='MOIN'):
     """
@@ -295,8 +293,8 @@ class FileSessionService(SessionService):
             filesys.mkdir(path)
         except OSError:
             pass
-        return FixedFilesystemSessionStore(path=path, filename_template='%s',
-                                           session_class=MoinSession, mode=0666 & config.umask)
+        return FilesystemSessionStore(path=path, filename_template='%s',
+                                      session_class=MoinSession, mode=0666 & config.umask)
 
     def get_session(self, request, sid=None):
         if sid is None:
@@ -307,7 +305,7 @@ class FileSessionService(SessionService):
         if sid is None:
             session = store.new()
         else:
-            session = store.get(str(sid))
+            session = store.get(sid)
         logging.debug("get_session returns session %r" % session)
         return session
 
