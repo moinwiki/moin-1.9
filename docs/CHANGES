@@ -16,14 +16,55 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.current:
-  Bug fixes:
+Version 1.9.2:
+  Fixes:
+  * Fix CVE-2010-0668: major security issues were discovered in misc. parts
+    of moin.
+    HINT: if you have removed superuser configuration to workaround the issue
+    (following our security advisory), you may re-add it after installing this
+    moin release. If you don't need superuser capabilities often, it might be
+    wise to not have superusers configured all the time, though.
+  * Fix CVE-2010-0669: potential security issue due to incomplete user profile
+    input sanitizing.
+  * Improved package security: cfg.packagepages_actions_excluded excludes
+    unsafe or otherwise questionable package actions by default now.
+  * wiki parser: fixed transclusion of (e.g. video) attachments from other
+    pages.
+  * Fixed edit locking for non-logged in editors and cfg.log_remote_addr=False.
+  * mailimport: fix missing wikiutil import for normalize_pagename
+  * SubProcess: fix "timeout" AttributeError
+  * "standalone" wikiserver.py: fixed calling non-existing os.getuid on win32
+  * HTTPAuth deprecation warning moved from class level to __init__
+  * Fixed MoinMoinBugs/1.9DiffActionThrowsException.
+  * Fixed misc. session related problems, avoid unneccessary session file
+    updates
+  * Fix/improve rename-related problems on Win32 (depending on Windows version).
+  * Fixed spider / user agent detection.
+  * Make sure to use language_default when language_ignore_browser is set.
+  * diff action: fix for case when user can't revert page.
+  * Fix trail size (was off by one).
+  * Updated bundled flup middleware (upstream repo checkout), avoids
+    socket.fromfd AttributeError on win32 if cgi is forced, gives helpful
+    exception msg.
+  * wikiutil: Fixed required_arg handling (no exception when trying to raise
+    exception that choice is wrong).
+  * Do not use MoinMoin.support.* to import 3rd party code, give dist packages
+    a chance.
+  * wikiutil.clean_input: avoid crash if it gets str type
 
   New features:
   * info action: added pagination ability to revision history viewer.
-    http://hg.moinmo.in/moin/1.9/rev/b23b1d2b1391
+  * ldap_login auth: add report_invalid_credentials param to control wrong
+    credentials error message (this is typically used when using multiple
+    ldap authenticators).
+  * Add RenderAsDocbook to actions_excluded if we have no python-xml.
+  * Upgraded pygments to 1.2.2 (some fixes, some new lexers).
 
   Other changes:
+  * New docs/REQUIREMENTS.
+  * Added a less magic cgi/fcgi driver (moin.fcgi), added fixer middleware
+    for apache2/win32 to it.
+
 
 Version 1.9.1:
   Bug fixes:
