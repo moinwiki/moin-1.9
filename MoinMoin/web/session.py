@@ -319,16 +319,6 @@ class FileSessionService(SessionService):
         store.delete(session)
 
     def finalize(self, request, session):
-        def update_session(key, val):
-            """ put key/val into session, avoid writing if it is unchanged """
-            try:
-                current_val = session[key]
-            except KeyError:
-                session[key] = val
-            else:
-                if val != current_val:
-                    session[key] = val
-
         if request.user.auth_method == 'setuid':
             userobj = request._setuid_real_user
             setuid = request.user.id
@@ -336,31 +326,15 @@ class FileSessionService(SessionService):
             userobj = request.user
             setuid = None
         logging.debug("finalize userobj = %r, setuid = %r" % (userobj, setuid))
-        cfg = request.cfg
-        # we use different cookie names for different wikis:
-        cookie_name = get_cookie_name(request, name=request.cfg.cookie_name, usage=self.cookie_usage)
-        # we always use path='/' except if explicitly overridden by configuration,
-        # which is usually not needed and not recommended:
-        cookie_path = cfg.cookie_path or '/'
-        if userobj and userobj.valid:
-            update_session('user.id', userobj.id)
-            update_session('user.auth_method', userobj.auth_method)
-            update_session('user.auth_attribs', userobj.auth_attribs)
-            if setuid:
-                update_session('setuid', setuid)
-            elif 'setuid' in session:
-                del session['setuid']
-            logging.debug("after auth: storing valid user into session: %r" % userobj.name)
-        else:
-            logging.debug("after auth: user is invalid")
-            if 'user.id' in session:
-                logging.debug("after auth: destroying session: %r" % session)
-                self.destroy_session(request, session)
-                logging.debug("after auth: deleting session cookie!")
-                request.delete_cookie(cookie_name, path=cookie_path, domain=cfg.cookie_domain)
 
         cookie_lifetime = _get_session_lifetime(request, userobj)
         if cookie_lifetime:
+            cfg = request.cfg
+            # we use different cookie names for different wikis:
+            cookie_name = get_cookie_name(request, name=cfg.cookie_name, usage=self.cookie_usage)
+            # we always use path='/' except if explicitly overridden by configuration,
+            # which is usually not needed and not recommended:
+            cookie_path = cfg.cookie_path or '/'
             # we use 60s granularity, so we don't trigger session storage updates too often
             cookie_expires = int(time.time() / 60) * 60 + cookie_lifetime
             # a secure cookie is not transmitted over unsecure connections:
@@ -372,15 +346,44 @@ class FileSessionService(SessionService):
                                path=cookie_path, domain=cfg.cookie_domain,
                                secure=cookie_secure, httponly=cfg.cookie_httponly)
 
+            def update_session(key, val):
+                """ put key/val into session, avoid writing if it is unchanged """
+                try:
+                    current_val = session[key]
+                except KeyError:
+                    session[key] = val
+                else:
+                    if val != current_val:
+                        session[key] = val
+
             # add some info about expiry to the sessions, so we can purge them:
             update_session('expires', cookie_expires)
+            if userobj and userobj.valid:
+                update_session('user.id', userobj.id)
+                update_session('user.auth_method', userobj.auth_method)
+                update_session('user.auth_attribs', userobj.auth_attribs)
+                if setuid:
+                    update_session('setuid', setuid)
+                elif 'setuid' in session:
+                    del session['setuid']
+                logging.debug("after auth: storing valid user into session: %r" % userobj.name)
+            else:
+                logging.debug("after auth: user is invalid")
+                if 'user.id' in session:
+                    logging.debug("after auth: destroying session: %r" % session)
+                    self.destroy_session(request, session)
+                    logging.debug("after auth: deleting session cookie!")
+                    request.delete_cookie(cookie_name, path=cookie_path, domain=cfg.cookie_domain)
 
             if ((not userobj.valid and not session.new  # anon users with a cookie (not first request)
                  or
                  userobj.valid) # logged-in users, even if THIS was the first request (no cookie yet)
                                 # XXX if UA doesn't support cookies, this creates 1 session file per request
                 and
-                session.should_save): # only if we really have something to save
+                session.should_save # only if we really have something (modified) to save
+                and
+                session # don't save if we did just clear the session dict (on logout)
+               ):
                 store = self._store_get(request)
                 logging.debug("saving session: %r" % session)
                 store.save(session)
