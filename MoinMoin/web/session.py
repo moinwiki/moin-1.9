@@ -306,13 +306,15 @@ class FileSessionService(SessionService):
             session = store.new()
         else:
             session = store.get(sid)
-            now = time.time()
-            expiry = session.get('expires', 0)
-            if expiry < now:
-                # the browser should've killed that cookie already.
-                # clock not in sync? trying to cheat?
-                self.destroy_session(request, session)
-                session = store.new()
+            expiry = session.get('expires')
+            if expiry is not None:
+                now = time.time()
+                if expiry < now:
+                    # the browser should've killed that cookie already.
+                    # clock not in sync? trying to cheat?
+                    logging.debug("session has expired (expiry: %r now: %r)" % (expiry, now))
+                    self.destroy_session(request, session)
+                    session = store.new()
         logging.debug("get_session returns session %r" % session)
         return session
 
