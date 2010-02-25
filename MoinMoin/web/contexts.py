@@ -281,7 +281,7 @@ class HTTPContext(BaseContext):
     # the output related methods
     def write(self, *data):
         """ Write to output stream. """
-        self.request.stream.writelines(data)
+        self.request.out_stream.writelines(data)
 
     def redirectedOutput(self, function, *args, **kw):
         """ Redirect output during function, return redirected output """

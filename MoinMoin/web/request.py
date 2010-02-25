@@ -47,7 +47,24 @@ class Request(ResponseBase, RequestBase):
         self.response = []
         self.status_code = 200
 
-    in_stream = RequestBase.stream
+    # XXX ugly hack begin - works by sheer luck
+    # TODO keep request and response separate, don't mix them together
+    stream = property() # protect inherited .stream attr from accessing
+    
+    try:
+        # for werkzeug 0.6
+        in_stream = cached_property(RequestBase.stream.func, 'in_stream')
+    except AttributeError:
+        # no .func -> werkzeug 0.5
+        in_stream = RequestBase.stream
+
+    try:
+        # for werkzeug 0.6
+        out_stream = cached_property(ResponseBase.stream.func, 'out_stream')
+    except AttributeError:
+        # no .func -> werkzeug 0.5
+        out_stream = ResponseBase.stream
+    # XXX ugly hack end
 
     @cached_property
     def in_data(self):
