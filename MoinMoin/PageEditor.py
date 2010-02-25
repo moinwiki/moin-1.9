@@ -420,6 +420,15 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         lang = self.pi.get('language', request.cfg.language_default)
 
+        if not text_rows:
+            # if no specific value is given for editor height, but 0, we
+            # compute the rows from the raw_body line count plus some
+            # extra rows for adding new text in the editor. Maybe this helps
+            # with the "double slider" usability issue, esp. for devices like
+            # the iphone where you can't operate both sliders.
+            current_rows = len(raw_body.split('\n'))
+            text_rows = max(10, int(current_rows * 1.5))
+
         request.write(
             u'''\
 <textarea id="editor-textarea" name="savetext" lang="%(lang)s" dir="%(dir)s" rows="%(rows)d" cols="80"

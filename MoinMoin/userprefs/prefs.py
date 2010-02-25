@@ -130,7 +130,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         # editor size
         request.user.edit_rows = util.web.getIntegerInput(request, 'edit_rows',
-                                                          request.user.edit_rows, 10, 60)
+                                                          request.user.edit_rows, 0, 999)
 
         # try to get the editor
         request.user.editor_default = wikiutil.clean_input(form.get('editor_default', self.cfg.editor_default))
