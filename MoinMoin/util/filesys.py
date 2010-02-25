@@ -68,7 +68,7 @@ if os.name == 'nt':
             # 5 = Access Denied
             # 6800 = The function attempted to use a name that is reserved
             #        for use by another transaction.
-            
+
         _MOVEFILE_REPLACE_EXISTING = 0x1
         _MOVEFILE_WRITE_THROUGH = 0x8
         _MoveFileEx = ctypes.windll.kernel32.MoveFileExW
