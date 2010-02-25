@@ -1,0 +1,56 @@
+    # This is a sample configuration snippet that shows how to configure security
+    # features of moin, like superuser, ACLs and anti-spam / anti-abuse measures.
+
+    # This is checked by some rather critical and potentially harmful actions,
+    # like despam or PackageInstaller action:
+    #superuser = [u"YourName", ]
+
+    # IMPORTANT: grant yourself admin rights! replace YourName with
+    # your user name. See HelpOnAccessControlLists for more help.
+    #acl_rights_before = u"YourName:read,write,delete,revert,admin"
+    #acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
+    #acl_rights_after = u"" # most users don't need this
+    #acl_hierarchic = False # True to use hierarchical ACLs
+
+    #actions_excluded = ['xmlrpc'] # change this if you need xmlrpc or to forbid other actions
+
+    # Avoid users filling your hard disk with attachments:
+    #unzip_single_file_size = 2.0 * 1000 ** 2
+    #unzip_attachments_space = 200.0 * 1000 ** 2
+    #unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
+
+    # Link spam protection for public wikis (default is disabled!):
+    # a) TextChas (see HelpOnTextChas, strongly recommended!):
+    #textchas = None # a data structure with site-specific questions/answers
+    #textchas_disabled_group = None # e.g. u'NoTextChasGroup' if you are a member of this group, you don't get textchas
+    # b) BadContent antispam regex updates (recommended, needs a reliable internet connection):
+    #from MoinMoin.security.antispam import SecurityPolicy
+    #antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
+
+    # Rate limit for requests (use = None to disable completely)
+    #surge_action_limits = { # allow max. <count> <action> requests per <dt> secs
+    #    # action: (count, dt)
+    #    'all': (30, 30),
+    #    'show': (30, 60),
+    #    'recall': (10, 120),
+    #    'raw': (20, 40),  # some people use this for css
+    #    'AttachFile': (90, 60),
+    #    'diff': (30, 60),
+    #    'fullsearch': (10, 120),
+    #    'edit': (30, 300), # can be lowered after making preview different from edit
+    #    'rss_rc': (1, 60),
+    #    'default': (30, 60),
+    #}
+    #surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
+
+    # if nothing else helps, you can use this to deny some IPs:
+    #hosts_deny = []
+
+    # a regex of HTTP_USER_AGENTS that should be excluded from logging
+    # and receive a FORBIDDEN for anything except viewing a page
+    # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
+    #ua_spiders = ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
+    #              'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
+    #              'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
+    #              'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti')
+
