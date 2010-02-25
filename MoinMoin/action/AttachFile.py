@@ -338,7 +338,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
 
             try:
                 is_zipfile = zipfile.is_zipfile(fullpath)
-                if is_zipfile:
+                if is_zipfile and not readonly:
                     is_package = packages.ZipPackage(request, fullpath).isPackage()
                     if is_package and request.user.isSuperUser():
                         links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
