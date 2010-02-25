@@ -120,7 +120,12 @@ def getAttachUrl(pagename, filename, request, addts=0, do='get'):
                       'move', # renders rename form, which has own ticket
             ]:
             # create a ticket for the not so harmless operations
-            args['ticket'] = wikiutil.createTicket(request)
+            # we need action= here because the current action (e.g. "show" page
+            # with a macro AttachList) may not be the linked-to action, e.g.
+            # "AttachFile". Also, AttachList can list attachments of another page,
+            # thus we need to give pagename= also.
+            args['ticket'] = wikiutil.createTicket(request,
+                                                   pagename=pagename, action=action_name)
         url = request.href(pagename, **args)
         return url
 
@@ -378,7 +383,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
 
             try:
                 is_zipfile = zipfile.is_zipfile(fullpath)
-                if is_zipfile:
+                if is_zipfile and not readonly:
                     is_package = packages.ZipPackage(request, fullpath).isPackage()
                     if is_package and request.user.isSuperUser():
                         links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
