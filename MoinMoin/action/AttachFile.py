@@ -83,7 +83,12 @@ def attachUrl(request, pagename, filename=None, **kw):
             and
             kw.get('rename') is None):
         # create a ticket for the not so harmless operations
-        kw['ticket'] = wikiutil.createTicket(request)
+        # we need action= here because the current action (e.g. "show" page
+        # with a macro AttachList) may not be the linked-to action, e.g.
+        # "AttachFile". Also, AttachList can list attachments of another page,
+        # thus we need to give pagename= also.
+        kw['ticket'] = wikiutil.createTicket(request,
+                                             pagename=pagename, action=action_name)
     if kw:
         qs = '?%s' % wikiutil.makeQueryString(kw, want_unicode=False)
     else:
