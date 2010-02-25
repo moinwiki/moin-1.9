@@ -50,7 +50,7 @@ class Request(ResponseBase, RequestBase):
     # XXX ugly hack begin - works by sheer luck
     # TODO keep request and response separate, don't mix them together
     stream = property() # protect inherited .stream attr from accessing
-    
+
     try:
         # for werkzeug 0.6
         in_stream = cached_property(RequestBase.stream.func, 'in_stream')
@@ -121,3 +121,4 @@ def evaluate_request(request):
     if output:
         result = output
     return (result, headers_set[0], headers_set[1])
+
