@@ -9,12 +9,11 @@
 #
 # MoinMoin fr system text translation
 #
-
 msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-13 11:55+0100\n"
+"POT-Creation-Date: 2010-02-20 17:00+0100\n"
 "PO-Revision-Date: 2010-02-14 11:08+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
@@ -1980,11 +1979,8 @@ msgid "last modified %(time)s"
 msgstr "dernière modification %(time)s"
 
 # Il faut utiliser une espace normale après « Rechercher »,
-
 # sinon, du fait d'un défaut du moteur de Mozilla, le texte
-
 # « Rechercher » ne s'efface pas de la barre de recherche.
-
 msgid "Search:"
 msgstr "Rechercher :"
 
