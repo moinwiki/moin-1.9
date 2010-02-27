@@ -102,7 +102,7 @@ def execute(pagename, request):
         request.mime_type = 'text/xml'
         request.expires = expires
         request.last_modified = lastmod
-        request.headers.add('Etag', etag)
+        request.headers['Etag'] = etag
 
         # send the generated XML document
         baseurl = request.url_root

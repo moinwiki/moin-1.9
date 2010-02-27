@@ -125,7 +125,7 @@ def dispatch(request, context, action_name='show'):
     hs = HeaderSet(('Cookie', 'User-Agent'))
     if not cfg.language_ignore_browser:
         hs.add('Accept-Language')
-    request.headers.add('Vary', str(hs))
+    request.headers['Vary'] = str(hs)
 
     # Handle request. We have these options:
     # 1. jump to page where user left off

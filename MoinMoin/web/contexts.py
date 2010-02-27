@@ -239,6 +239,7 @@ class HTTPContext(BaseContext):
         raise status[resultcode](msg)
 
     def setHttpHeader(self, header):
+        logging.warning("Deprecated call to request.setHttpHeader('k:v'), use request.headers.add/set('k', 'v')")
         header, value = header.split(':', 1)
         self.headers.add(header, value)
 
@@ -260,10 +261,10 @@ class HTTPContext(BaseContext):
             return
 
         if level == 1:
-            self.headers.set('Cache-Control', 'private, must-revalidate, max-age=10')
+            self.headers['Cache-Control'] = 'private, must-revalidate, max-age=10'
         elif level == 2:
-            self.headers.set('Cache-Control', 'no-cache')
-            self.headers.set('Pragma', 'no-cache')
+            self.headers['Cache-Control'] = 'no-cache'
+            self.headers['Pragma'] = 'no-cache'
         self.request.expires = time.time() - 3600 * 24 * 365
 
     def http_redirect(self, url, code=302):

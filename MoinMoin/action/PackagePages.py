@@ -82,9 +82,9 @@ class PackagePages:
         request = self.request
         filelike = cStringIO.StringIO()
         package = self.collectpackage(unpackLine(pagelist, ","), filelike, target, include_attachments)
-        request.content_type = 'application/zip'
-        request.content_length = filelike.tell()
-        request.headers.add('Content-Disposition', 'inline; filename="%s"' % target)
+        request.headers['Content-Type'] = 'application/zip'
+        request.headers['Content-Length'] = filelike.tell()
+        request.headers['Content-Disposition'] = 'inline; filename="%s"' % target
         request.write(filelike.getvalue())
         filelike.close()
 

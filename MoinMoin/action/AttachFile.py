@@ -818,13 +818,13 @@ def _do_box(pagename, request):
         content_dispo = dangerous and 'attachment' or 'inline'
 
         now = time.time()
-        request.headers.add('Date', http_date(now))
-        request.headers.add('Content-Type', content_type)
-        request.headers.add('Last-Modified', http_date(timestamp))
-        request.headers.add('Expires', http_date(now - 365 * 24 * 3600))
-        #request.headers.add('Content-Length', os.path.getsize(fpath))
+        request.headers['Date'] = http_date(now)
+        request.headers['Content-Type'] = content_type
+        request.headers['Last-Modified'] = http_date(timestamp)
+        request.headers['Expires'] = http_date(now - 365 * 24 * 3600)
+        #request.headers['Content-Length'] = os.path.getsize(fpath)
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
-        request.headers.add('Content-Disposition', content_dispo_string)
+        request.headers['Content-Disposition'] = content_dispo_string
 
         # send data
         request.send_file(ci.get(filename))
@@ -859,13 +859,13 @@ def _do_get(pagename, request):
         content_dispo = dangerous and 'attachment' or 'inline'
 
         now = time.time()
-        request.headers.add('Date', http_date(now))
-        request.headers.add('Content-Type', content_type)
-        request.headers.add('Last-Modified', http_date(timestamp))
-        request.headers.add('Expires', http_date(now - 365 * 24 * 3600))
-        request.headers.add('Content-Length', os.path.getsize(fpath))
+        request.headers['Date'] = http_date(now)
+        request.headers['Content-Type'] = content_type
+        request.headers['Last-Modified'] = http_date(timestamp)
+        request.headers['Expires'] = http_date(now - 365 * 24 * 3600)
+        request.headers['Content-Length'] = os.path.getsize(fpath)
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
-        request.headers.add('Content-Disposition', content_dispo_string)
+        request.headers['Content-Disposition'] = content_dispo_string
 
         # send data
         request.send_file(open(fpath, 'rb'))
