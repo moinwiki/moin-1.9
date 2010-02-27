@@ -219,17 +219,9 @@ def _do_get(request, key):
         if request.if_modified_since == last_modified:
             request.status_code = 304
         else:
+            for k, v in headers:
+                request.headers.add(k, v)
             data_file = _get_datafile(request, key)
-            for key, value in headers:
-                lkey = key.lower()
-                if lkey == 'content-type':
-                    request.content_type = value
-                elif lkey == 'last-modified':
-                    request.last_modified = value
-                elif lkey == 'content-length':
-                    request.content_length = value
-                else:
-                    request.headers.add(key, value)
             request.send_file(data_file)
     except caching.CacheError:
         request.status_code = 404

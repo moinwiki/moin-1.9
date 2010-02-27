@@ -977,13 +977,13 @@ class Page(object):
             request.status_code = 200
             request.last_modified = os.path.getmtime(self._text_filename())
             text = self.encodeTextMimeType(self.body)
-            #request.setHttpHeader("Content-Length: %d" % len(text))  # XXX WRONG! text is unicode obj, but we send utf-8!
+            #request.headers['Content-Length'] = len(text)  # XXX WRONG! text is unicode obj, but we send utf-8!
             if content_disposition:
                 # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
                 # There is no solution that is compatible to IE except stripping non-ascii chars
                 filename_enc = "%s.txt" % self.page_name.encode(config.charset)
                 dispo_string = '%s; filename="%s"' % (content_disposition, filename_enc)
-                request.headers.add('Content-Disposition', dispo_string)
+                request.headers['Content-Disposition'] = dispo_string
         else:
             request.status_code = 404
             text = u"Page %s not found." % self.page_name
@@ -1097,7 +1097,7 @@ class Page(object):
                         # if it does, we must not use the page file mtime as last modified value
                         # The following code is commented because it is incorrect for dynamic pages:
                         #lastmod = os.path.getmtime(self._text_filename())
-                        #request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(lastmod))
+                        #request.headers['Last-Modified'] = util.timefuncs.formathttpdate(lastmod)
                         pass
                 else:
                     request.status_code = 404
