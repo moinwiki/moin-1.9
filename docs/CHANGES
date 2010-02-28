@@ -18,13 +18,13 @@ Known main issues:
 
 Version 1.9.2:
   Fixes:
-  * Fix CVE-2010-0668: major security issues were discovered in misc. parts
+  * Fixed CVE-2010-0668: major security issues were discovered in misc. parts
     of moin.
     HINT: if you have removed superuser configuration to workaround the issue
     (following our security advisory), you may re-add it after installing this
     moin release. If you don't need superuser capabilities often, it might be
     wise to not have superusers configured all the time, though.
-  * Fix CVE-2010-0669: potential security issue due to incomplete user profile
+  * Fixed CVE-2010-0669: potential security issue due to incomplete user profile
     input sanitizing.
   * Improved package security: cfg.packagepages_actions_excluded excludes
     unsafe or otherwise questionable package actions by default now.
@@ -37,7 +37,7 @@ Version 1.9.2:
   * HTTPAuth deprecation warning moved from class level to __init__
   * Fixed MoinMoinBugs/1.9DiffActionThrowsException.
   * Fixed misc. session related problems, avoid unneccessary session file
-    updates
+    updates.
   * Fix/improve rename-related problems on Win32 (depending on Windows version).
   * Fixed spider / user agent detection.
   * Make sure to use language_default when language_ignore_browser is set.
@@ -60,6 +60,7 @@ Version 1.9.2:
 
   New features:
   * info action: added pagination ability to revision history viewer.
+    Use cfg.history_paging = True [default] / False to enable/disable it.
   * ldap_login auth: add report_invalid_credentials param to control wrong
     credentials error message (this is typically used when using multiple
     ldap authenticators).
@@ -77,7 +78,7 @@ Version 1.9.2:
 
 Version 1.9.1:
   Bug fixes:
-  * Fixed sys.argv security issue.
+  * Fixed CVE-2010-0667: sys.argv security issue.
   * Fixed FileSessionService - use session_dir from CURRENT request.cfg (it
     mixed up session_dirs in farm setups).
     HINT: if you added the hotfix to your wikiconfig, please remove it now.
