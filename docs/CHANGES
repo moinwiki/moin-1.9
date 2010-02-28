@@ -51,6 +51,12 @@ Version 1.9.2:
   * Do not use MoinMoin.support.* to import 3rd party code, give dist packages
     a chance.
   * wikiutil.clean_input: avoid crash if it gets str type
+  * request: fixed for werkzeug 0.6 and 0.5.1 compatibility. Please note that
+    we didn't do much testing with 0.6 yet. So, if you use 0.6, please do some
+    testing and provide feedback to us.
+  * AttachFile._build_filelist: verifies readonly flag for unzip file link
+  * attachUrl: fix wrongly generated tickets (e.g. for AttachList macro)
+  * http headers: fix duplicated http headers (e.g. content-type)
 
   New features:
   * info action: added pagination ability to revision history viewer.
@@ -59,6 +65,9 @@ Version 1.9.2:
     ldap authenticators).
   * Add RenderAsDocbook to actions_excluded if we have no python-xml.
   * Upgraded pygments to 1.2.2 (some fixes, some new lexers).
+  * Text editor: if edit_rows==0 (user profile or config), we dynamically size
+    the text editor height. This avoids double sliders for the editor page
+    in most cases.
 
   Other changes:
   * New docs/REQUIREMENTS.
