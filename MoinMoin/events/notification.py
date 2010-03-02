@@ -7,6 +7,8 @@
 
     @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
     @license: GNU GPL, see COPYING for details.
+
+    DJ: Mail subjects were not consistent with prep_page_changed_mail in emailnotify.py
 """
 
 from MoinMoin import user, wikiutil
@@ -132,7 +134,7 @@ def user_created_message(request, _, sitename, username, email):
 
     @return: a dict containing message body and subject
     """
-    subject = _("New user account created on %(sitename)s") % {'sitename': sitename or "Wiki"}
+    subject = _("[%(sitename)s] New user account created") % {'sitename': sitename or "Wiki"}
     text = _("""Dear Superuser, a new user has just been created on "%(sitename)s". Details follow:
 
     User name: %(username)s
@@ -154,7 +156,7 @@ def attachment_added(request, _, page_name, attach_name, attach_size):
     """
     data = {}
 
-    data['subject'] = _("New attachment added to page %(pagename)s on %(sitename)s") % {
+    data['subject'] = _("[%(sitename)s] New attachment added to page %(pagename)s") % {
                 'pagename': page_name,
                 'sitename': request.cfg.sitename or request.url_root,
                 }
@@ -188,7 +190,7 @@ def attachment_removed(request, _, page_name, attach_name, attach_size):
     """
     data = {}
 
-    data['subject'] = _("Removed attachment from page %(pagename)s on %(sitename)s") % {
+    data['subject'] = _("[%(sitename)s] Removed attachment from page %(pagename)s") % {
                 'pagename': page_name,
                 'sitename': request.cfg.sitename or request.url_root,
                 }
