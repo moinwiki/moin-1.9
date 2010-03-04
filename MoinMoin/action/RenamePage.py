@@ -29,6 +29,11 @@ class RenamePage(ActionBase):
         filterfn = re.compile(ur"^%s/.*$" % re.escape(pagename), re.U).match
         subpagenames = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
         self.subpages = [pagename for pagename in subpagenames if self.request.user.may.delete(pagename)]
+        self.show_redirect = request.cfg.show_rename_redirect
+        try:
+            self.rename_redirect = int(self.request.form.get('rename_redirect', '0'))
+        except ValueError:
+            self.rename_redirect = 0
 
     def is_allowed(self):
         may = self.request.user.may
@@ -49,6 +54,10 @@ class RenamePage(ActionBase):
         newpagename = wikiutil.normalize_pagename(newpagename, self.cfg)
         comment = form.get('comment', u'')
         comment = wikiutil.clean_input(comment)
+        try:
+            rename_subpages = int(self.request.form.get('rename_subpages', '0'))
+        except ValueError:
+            rename_subpages = 0
 
         self.page = PageEditor(self.request, self.pagename)
         success, msgs = self.page.renamePage(newpagename, comment)
@@ -56,18 +65,23 @@ class RenamePage(ActionBase):
         if not success:
             return success, msgs
 
-        rename_subpages = 0
-        try:
-            rename_subpages = int(form['rename_subpages'])
-        except:
-            pass
+        msgs = [msgs]
+
+        if self.show_redirect and self.rename_redirect:
+            self.page = PageEditor(self.request, self.pagename)
+            self.page.saveText('#redirect %s' % newpagename, 0)
 
         if rename_subpages and self.subpages:
             for name in self.subpages:
                 self.page = PageEditor(self.request, name)
                 new_subpagename = name.replace(self.pagename, newpagename, 1)
                 success_i, msg = self.page.renamePage(new_subpagename, comment)
-                msgs = "%s %s" % (msgs, msg)
+                msgs.append(msg)
+
+                if self.show_redirect and self.rename_redirect and success_i:
+                    self.page = PageEditor(self.request, name)
+                    self.page.saveText('#redirect %s' % new_subpagename, 0)
+            msgs = ' '.join([msg for msg in msgs if msg])
 
         self.newpagename = newpagename # keep there for finish
         return success, msgs
@@ -81,63 +95,64 @@ class RenamePage(ActionBase):
 
     def get_form_html(self, buttons_html):
         _ = self._
-        if self.subpages:
-            subpages = ' '.join(self.subpages)
-            d = {
-                'subpage': subpages,
-                'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
-                'subpage_label': _('Rename all /subpages too?'),
-                'pagename': wikiutil.escape(self.pagename, True),
-                'newname_label': _("New name"),
-                'comment_label': _("Optional reason for the renaming"),
-                'buttons_html': buttons_html,
-                'querytext': _('Really rename this page?')
-                }
 
-            return '''
+        if self.subpages:
+            redirect_label = _('Create redirect for renamed page(s)?')
+
+            subpages = ' '.join(self.subpages)
+            subpages_html = """
+                <tr>
+                <dd>
+                    %(subpage_label)s<input type="checkbox" name="rename_subpages" value="1" %(subpages_checked)s>
+                </dd>
+                <dd>
+                    <class="label"><subpage> %(subpage)s</subpage>
+                </dd>
+                </tr>
+                """ % {
+                    'subpage': subpages,
+                    'subpages_checked': ('', 'checked')[self.request.args.get('subpages_checked', '0') == '1'],
+                    'subpage_label': _('Rename all /subpages too?'),
+                 }
+        else:
+            redirect_label = _('Create redirect for renamed page?')
+            subpages_html = ""
+
+        if self.show_redirect:
+            redirect_html = '<tr><dd>%(redirect_label)s<input type="checkbox" name="rename_redirect" value="1" %(redirect)s></dd></tr>' % {
+                'redirect': self.rename_redirect,
+                'redirect_label': redirect_label,
+            }
+        else:
+            redirect_html = ''
+
+        if self.show_redirect or self.subpages:
+            options_html = """
+                <table>
+                    %(subpages_html)s
+                    %(redirect_html)s
+                </table>
+                """ % {
+                    "subpages_html": subpages_html,
+                    "redirect_html": redirect_html,
+                }
+        else:
+            options_html = ""
+
+        d = {
+            'querytext': _('Really rename this page?'),
+            'pagename': wikiutil.escape(self.pagename, True),
+            'newname_label': _("New name"),
+            'comment_label': _("Optional reason for the renaming"),
+            'buttons_html': buttons_html,
+            'options_html': options_html,
+            }
+
+        return '''
 <strong>%(querytext)s</strong>
 <br>
 <br>
-<table>
-    <tr>
-    <dd>
-        %(subpage_label)s<input type="checkbox" name="rename_subpages" value="1" %(subpages_checked)s>
-    </dd>
-    <dd>
-        <class="label"><subpage> %(subpage)s</subpage>
-    </dd>
-    </tr>
-</table>
-<table>
-    <tr>
-        <td class="label"><label>%(newname_label)s</label></td>
-        <td class="content">
-            <input type="text" name="newpagename" value="%(pagename)s" size="80">
-        </td>
-    </tr>
-    <tr>
-        <td class="label"><label>%(comment_label)s</label></td>
-        <td class="content">
-            <input type="text" name="comment" size="80" maxlength="200">
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td class="buttons">
-            %(buttons_html)s
-        </td>
-    </tr>
-</table>
-''' % d
-
-        else:
-            d = {
-                'pagename': wikiutil.escape(self.pagename, True),
-                'newname_label': _("New name"),
-                'comment_label': _("Optional reason for the renaming"),
-                'buttons_html': buttons_html,
-                }
-            return '''
+%(options_html)s
 <table>
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
