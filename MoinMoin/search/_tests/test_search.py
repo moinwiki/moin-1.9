@@ -141,102 +141,117 @@ class BaseSearchTest(object):
 
         def test(query, res_count):
             result = self.search(query)
-            assert len(result.hits) == res_count
+            test_result = len(result.hits)
+            assert test_result == res_count
 
         for query, res_count in searches.iteritems():
             yield query, test, query, res_count
 
     def test_title_search_re(self):
         result = self.search(ur'-domain:underlay -domain:system title:re:\bSearchTest')
-        assert len(result.hits) == 4
+        test_result = len(result.hits)
+        assert test_result == 4
 
         result = self.search(ur'-domain:underlay -domain:system title:re:\bSearchTest\b')
         assert not result.hits
 
     def test_title_search_case(self):
         result = self.search(u'-domain:underlay -domain:system title:case:SearchTestPage')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u'-domain:underlay -domain:system title:case:searchtestpage')
         assert not result.hits
 
     def test_title_search_case_re(self):
         result = self.search(ur'-domain:underlay -domain:system title:case:re:\bSearchTestPage\b')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(ur'-domain:underlay -domain:system title:case:re:\bsearchtestpage\b')
         assert not result.hits
 
     def test_linkto_search_simple(self):
         result = self.search(u'-domain:underlay -domain:system linkto:SearchTestPage')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u'-domain:underlay -domain:system linkto:SearchTestNotExisting')
         assert not result.hits
 
     def test_linkto_search_re(self):
         result = self.search(ur'-domain:underlay -domain:system linkto:re:\bSearchTest')
-        assert len(result.hits) == 2
+        test_result = len(result.hits)
+        assert test_result == 2
 
         result = self.search(ur'-domain:underlay -domain:system linkto:re:\bSearchTest\b')
         assert not result.hits
 
     def test_linkto_search_case(self):
         result = self.search(u'-domain:underlay -domain:system linkto:case:SearchTestPage')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u'-domain:underlay -domain:system linkto:case:searchtestpage')
         assert not result.hits
 
     def test_linkto_search_case_re(self):
         result = self.search(ur'-domain:underlay -domain:system linkto:case:re:\bSearchTestPage\b')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(ur'-domain:underlay -domain:system linkto:case:re:\bsearchtestpage\b')
         assert not result.hits
 
     def test_category_search_simple(self):
         result = self.search(u'category:CategoryHomepage')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u'category:CategorySearchTestNotExisting')
         assert not result.hits
 
     def test_category_search_re(self):
         result = self.search(ur'category:re:\bCategoryHomepage\b')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
 
     def test_category_search_case(self):
         result = self.search(u'category:case:CategoryHomepage')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u'category:case:categoryhomepage')
         assert not result.hits
 
     def test_category_search_case_re(self):
         result = self.search(ur'category:case:re:\bCategoryHomepage\b')
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(ur'category:case:re:\bcategoryhomepage\b')
         assert not result.hits
 
     def test_mimetype_search_simple(self):
         result = self.search(u'mimetype:text/wiki')
-        assert len(result.hits) == 12
+        test_result = len(result.hits)
+        assert test_result == 12
 
     def test_mimetype_search_re(self):
         result = self.search(ur'mimetype:re:\btext/wiki\b')
-        assert len(result.hits) == 12
+        test_result = len(result.hits)
+        assert test_result == 12
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
 
     def test_language_search_simple(self):
         result = self.search(u'language:en')
-        assert len(result.hits) == 12
+        test_result = len(result.hits)
+        assert test_result == 12
 
     def test_domain_search_simple(self):
         result = self.search(u'domain:system')
@@ -245,10 +260,12 @@ class BaseSearchTest(object):
     def test_search_and(self):
         """ search: title search with AND expression """
         result = self.search(u"title:HelpOnCreoleSyntax lang:en")
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u"title:HelpOnCreoleSyntax lang:de")
-        assert len(result.hits) == 0
+        test_result = len(result.hits)
+        assert test_result == 0
 
         result = self.search(u"title:Help title:%s" % self.doesnotexist)
         assert not result.hits
@@ -256,30 +273,40 @@ class BaseSearchTest(object):
     def testTitleSearchOR(self):
         """ search: title search with OR expression """
         result = self.search(u"title:FrontPage or title:RecentChanges")
-        assert len(result.hits) == 2
+        test_result = len(result.hits)
+        assert test_result == 2
 
     def testTitleSearchNegatedFindAll(self):
         """ search: negated title search for some pagename that does not exist results in all pagenames """
         result = self.search(u"-title:%s" % self.doesnotexist)
-        assert len(result.hits) == len(self.pages)
+        n_pages = len(self.pages)
+        test_result = len(result.hits)
+        assert test_result == n_pages
 
     def testTitleSearchNegativeTerm(self):
         """ search: title search for a AND expression with a negative term """
         result = self.search(u"-title:FrontPage")
-        assert len(result.hits) == len(self.pages) - 1
+        test_result = len(result.hits)
+        n_pages = len(self.pages) - 1
+        assert test_result == n_pages
 
         result = self.search(u"-title:HelpOn")
-        assert len(result.hits) == len(self.pages) - 2
+        test_result = len(result.hits)
+        n_pages = len(self.pages) - 2
+        assert test_result == n_pages
 
     def testFullSearchNegatedFindAll(self):
         """ search: negated full search for some string that does not exist results in all pages """
         result = self.search(u"-%s" % self.doesnotexist)
-        assert len(result.hits) == len(self.pages)
+        test_result = len(result.hits)
+        n_pages = len(self.pages)
+        assert test_result == n_pages
 
     def test_title_search(self):
         query = QueryParser(titlesearch=True).parse_query('FrontPage')
         result = self.search(query)
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
     def test_create_page(self):
         self.pages['TestCreatePage'] = 'some text' # Moin search must search this page
@@ -287,13 +314,15 @@ class BaseSearchTest(object):
             create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
             self._index_update()
             result = self.search(u'-domain:underlay -domain:system TestCreatePage')
-            assert len(result.hits) == 1
+            test_result = len(result.hits)
+            assert test_result == 1
         finally:
             nuke_page(self.request, 'TestCreatePage')
             self._index_update()
             del self.pages['TestCreatePage']
             result = self.search(u'-domain:underlay -domain:system TestCreatePage')
-            assert len(result.hits) == 0
+            test_result = len(result.hits)
+            assert test_result == 0
 
     def test_attachment(self):
         page_name = u'TestAttachment'
@@ -304,7 +333,8 @@ class BaseSearchTest(object):
         filecontent = StringIO.StringIO(data)
 
         result = self.search(filename)
-        assert len(result.hits) == 0
+        test_result = len(result.hits)
+        assert test_result == 0
 
         try:
             create_page(self.request, page_name, self.pages[page_name])
@@ -312,13 +342,15 @@ class BaseSearchTest(object):
             append_page(self.request, page_name, '[[attachment:%s]]' % filename)
             self._index_update()
             result = self.search(filename)
-            assert len(result.hits) > 0
+            test_result = len(result.hits)
+            assert test_result > 0
         finally:
             nuke_page(self.request, page_name)
             del self.pages[page_name]
             self._index_update()
             result = self.search(filename)
-            assert len(result.hits) == 0
+            test_result = len(result.hits)
+            assert test_result == 0
 
     def test_get_searcher(self):
         assert isinstance(_get_searcher(self.request, ''), self.searcher_class)
@@ -334,10 +366,12 @@ class TestMoinSearch(BaseSearchTest):
 
     def test_stemming(self):
         result = self.search(u"title:edit")
-        assert len(result.hits) == 2
+        test_result = len(result.hits)
+        assert test_result == 2
 
         result = self.search(u"title:editing")
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
 
 class TestXapianSearch(BaseSearchTest):
@@ -390,8 +424,9 @@ class TestXapianSearch(BaseSearchTest):
     def test_get_all_documents(self):
         connection = self.get_moin_search_connection()
         documents = connection.get_all_documents()
-
-        assert len(self.pages) == len(documents)
+        n_pages = len(self.pages)
+        test_result = len(documents)
+        assert test_result == n_pages
         for document in documents:
             assert document.data['pagename'][0] in self.pages.keys()
 
@@ -420,10 +455,12 @@ class TestXapianSearch(BaseSearchTest):
 
     def test_stemming(self):
         result = self.search(u"title:edit")
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
         result = self.search(u"title:editing")
-        assert len(result.hits) == 1
+        test_result = len(result.hits)
+        assert test_result == 1
 
 
 class TestXapianSearchStemmed(TestXapianSearch):
@@ -436,10 +473,12 @@ class TestXapianSearchStemmed(TestXapianSearch):
         py.test.skip("TODO fix TestXapianSearchStemmed - strange effects with stemming")
 
         result = self.search(u"title:edit")
-        assert len(result.hits) == 2
+        test_result = len(result.hits)
+        assert test_result == 2
 
         result = self.search(u"title:editing")
-        assert len(result.hits) == 2
+        test_result = len(result.hits)
+        assert test_result == 2
 
 
 class TestGetSearcher(object):
