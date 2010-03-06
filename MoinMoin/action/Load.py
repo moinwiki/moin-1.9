@@ -107,7 +107,7 @@ class Load(ActionBase):
                      "If the page name is empty, we derive the page name from the file name."),
     'upload_label_file': _('File to load page content from'),
     'upload_label_comment': _('Comment'),
-    'upload_label_rename': _('Page Name'),
+    'upload_label_rename': _('Page name'),
     'pagename': self.pagename,
     'buttons_html': buttons_html,
     'action_name': self.form_trigger,
