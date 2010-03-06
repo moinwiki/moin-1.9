@@ -2,6 +2,9 @@
 """
     MoinMoin - MoinMoin.search Tests
 
+    We exclude underlay/system pages for some search tests
+    to save time.
+
     @copyright: 2005 by Nir Soffer <nirs@freeshell.org>,
                 2007-2009 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
