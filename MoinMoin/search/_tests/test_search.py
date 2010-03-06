@@ -147,52 +147,52 @@ class BaseSearchTest(object):
             yield query, test, query, res_count
 
     def test_title_search_re(self):
-        result = self.search(ur'title:re:\bSearchTest')
+        result = self.search(ur'-domain:underlay -domain:system title:re:\bSearchTest')
         assert len(result.hits) == 4
 
-        result = self.search(ur'title:re:\bSearchTest\b')
+        result = self.search(ur'-domain:underlay -domain:system title:re:\bSearchTest\b')
         assert not result.hits
 
     def test_title_search_case(self):
-        result = self.search(u'title:case:SearchTestPage')
+        result = self.search(u'-domain:underlay -domain:system title:case:SearchTestPage')
         assert len(result.hits) == 1
 
-        result = self.search(u'title:case:searchtestpage')
+        result = self.search(u'-domain:underlay -domain:system title:case:searchtestpage')
         assert not result.hits
 
     def test_title_search_case_re(self):
-        result = self.search(ur'title:case:re:\bSearchTestPage\b')
+        result = self.search(ur'-domain:underlay -domain:system title:case:re:\bSearchTestPage\b')
         assert len(result.hits) == 1
 
-        result = self.search(ur'title:case:re:\bsearchtestpage\b')
+        result = self.search(ur'-domain:underlay -domain:system title:case:re:\bsearchtestpage\b')
         assert not result.hits
 
     def test_linkto_search_simple(self):
-        result = self.search(u'linkto:SearchTestPage')
+        result = self.search(u'-domain:underlay -domain:system linkto:SearchTestPage')
         assert len(result.hits) == 1
 
-        result = self.search(u'linkto:SearchTestNotExisting')
+        result = self.search(u'-domain:underlay -domain:system linkto:SearchTestNotExisting')
         assert not result.hits
 
     def test_linkto_search_re(self):
-        result = self.search(ur'linkto:re:\bSearchTest')
+        result = self.search(ur'-domain:underlay -domain:system linkto:re:\bSearchTest')
         assert len(result.hits) == 2
 
-        result = self.search(ur'linkto:re:\bSearchTest\b')
+        result = self.search(ur'-domain:underlay -domain:system linkto:re:\bSearchTest\b')
         assert not result.hits
 
     def test_linkto_search_case(self):
-        result = self.search(u'linkto:case:SearchTestPage')
+        result = self.search(u'-domain:underlay -domain:system linkto:case:SearchTestPage')
         assert len(result.hits) == 1
 
-        result = self.search(u'linkto:case:searchtestpage')
+        result = self.search(u'-domain:underlay -domain:system linkto:case:searchtestpage')
         assert not result.hits
 
     def test_linkto_search_case_re(self):
-        result = self.search(ur'linkto:case:re:\bSearchTestPage\b')
+        result = self.search(ur'-domain:underlay -domain:system linkto:case:re:\bSearchTestPage\b')
         assert len(result.hits) == 1
 
-        result = self.search(ur'linkto:case:re:\bsearchtestpage\b')
+        result = self.search(ur'-domain:underlay -domain:system linkto:case:re:\bsearchtestpage\b')
         assert not result.hits
 
     def test_category_search_simple(self):
@@ -286,13 +286,13 @@ class BaseSearchTest(object):
         try:
             create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
             self._index_update()
-            result = self.search(u'TestCreatePage')
+            result = self.search(u'-domain:underlay -domain:system TestCreatePage')
             assert len(result.hits) == 1
         finally:
             nuke_page(self.request, 'TestCreatePage')
             self._index_update()
             del self.pages['TestCreatePage']
-            result = self.search(u'TestCreatePage')
+            result = self.search(u'-domain:underlay -domain:system TestCreatePage')
             assert len(result.hits) == 0
 
     def test_attachment(self):
