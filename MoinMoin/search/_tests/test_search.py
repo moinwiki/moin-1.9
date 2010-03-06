@@ -92,13 +92,13 @@ class BaseSearchTest(object):
              u'SearchTestLinksLowerCase': u'searchtestpage',
              u'SearchTestOtherLinks': u'SearchTestLinks',
              u'TestEdit': u'TestEdit',
+             u'TestOnEditing': u'another test page',
              u'LanguageSetup': None,
              u'CategoryHomepage': None,
              u'HomePageWiki': None,
              u'FrontPage': None,
              u'RecentChanges': None,
              u'HelpOnCreoleSyntax': None,
-             u'HelpOnEditing': None,
              u'HelpIndex': None}
 
     searcher_class = None
@@ -133,11 +133,11 @@ class BaseSearchTest(object):
         searches = {u'title:SearchTestPage': 1,
                     u'title:LanguageSetup': 1,
                     u'title:HelpIndex': 1,
-                    u'title:Help': 3,
-                    u'title:HelpOn': 2,
+                    u'title:Help': 2,
+                    u'title:TestOn': 1,
                     u'title:SearchTestNotExisting': 0,
                     u'title:FrontPage': 1,
-                    u'title:HelpOnEditing': 1}
+                    u'title:TestOnEditing': 1}
 
         def test(query, res_count):
             result = self.search(query)
@@ -292,7 +292,7 @@ class BaseSearchTest(object):
 
         result = self.search(u"-title:HelpOn")
         test_result = len(result.hits)
-        n_pages = len(self.pages) - 2
+        n_pages = len(self.pages) - 1
         assert test_result == n_pages
 
     def testFullSearchNegatedFindAll(self):
