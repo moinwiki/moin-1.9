@@ -1,6 +1,6 @@
 ﻿/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -239,7 +239,7 @@ FCKToolbarSet.prototype._ChangeVisibility = function( collapse )
 	this._Document.getElementById( 'xCollapsed' ).style.display = collapse ? '' : 'none' ;
 	this._Document.getElementById( 'xExpanded' ).style.display = collapse ? 'none' : '' ;
 
-	if ( FCKBrowserInfo.IsGecko )
+	if ( window.onresize )
 	{
 		// I had to use "setTimeout" because Gecko was not responding in a right
 		// way when calling window.onresize() directly.
