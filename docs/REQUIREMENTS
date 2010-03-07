@@ -139,11 +139,11 @@ required: 2.6.x
 
 
 C) MoinMoin/web/static/htdocs/applets/TWikiDrawPlugin/
-shipped: ?
-required: ?
+shipped: Using a modified TWikiDrawPlugin see README in contrib/TWikiDrawPlugin 
+required: see shipped
 
 
 D) MoinMoin/web/static/htdocs/applets/anywikidraw/
 shipped: 0.14
-required: 0.14(?)
+required: 0.14
 
