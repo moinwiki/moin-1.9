@@ -7,8 +7,6 @@
 
     @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
     @license: GNU GPL, see COPYING for details.
-
-    DJ: Mail subjects were not consistent with prep_page_changed_mail in emailnotify.py
 """
 
 from MoinMoin import user, wikiutil
