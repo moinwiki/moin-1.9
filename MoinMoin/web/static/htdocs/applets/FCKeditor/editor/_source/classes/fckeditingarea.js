@@ -1,6 +1,6 @@
 ﻿/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -354,7 +354,11 @@ FCKEditingArea.prototype._FocusIE = function()
 function FCKEditingArea_Cleanup()
 {
 	if ( this.Document )
+	{
+		// Avoid IE crash if an object is selected on unload #2201
+		this.Document.selection.empty() ;
 		this.Document.body.innerHTML = "" ;
+	}
 	this.TargetElement = null ;
 	this.IFrame = null ;
 	this.Document = null ;
