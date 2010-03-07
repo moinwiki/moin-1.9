@@ -16,9 +16,6 @@ sys.path.insert(0, '../../../..')
 
 import xmlrpclib
 
-# we have a fixed xmlrpc multicall implementation (in py 2.3 it was broken):
-from MoinMoin.support.multicall import MultiCall
-
 
 def updateGroup(server_url, username, password, groupname, groupdesc, groupmembers, acl=''):
     """
@@ -45,7 +42,7 @@ def updateGroup(server_url, username, password, groupname, groupdesc, groupmembe
 
     try:
         # build a multicall object that
-        mcall = MultiCall(wiki)
+        mcall = xmlrpclib.MultiCall(wiki)
         # first applies the token and
         mcall.applyAuthToken(auth_token)
         # then creates/updates the group page

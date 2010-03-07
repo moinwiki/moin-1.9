@@ -19,7 +19,7 @@ Detailed Instructions:
 General syntax: moin [options] account disable [disable-options]
 
 [options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
 
 [disable-options] see below:
     0. Verify that you really want to disable the account.

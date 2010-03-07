@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-02-20 17:00+0100\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -335,7 +335,7 @@ msgid ""
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Kullanıcı Adı: %s\n"
 "\n"
@@ -356,6 +356,19 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Wiki hesap bilgileriniz"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "%(action_name)s bilinmeyen işlem."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Sayfa üzerinde %(action_name)s işlemini yapmak için yeterli izne sahip "
+"değilsiniz."
+
+msgid "Login and try again."
+msgstr "Giriş yapın ve tekrar deneyin."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr ""
 "Bu paket MoinMoin'in daha yeni bir sürümüne ihtiyaç duyuyor. ((%s ve üstü)"
@@ -363,9 +376,9 @@ msgstr ""
 msgid "The theme name is not set."
 msgstr "Tema ayarlanmamış."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Tema dosyası yükleme sadece bağımsız türden sunucular için desteklenmekte."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -463,8 +476,9 @@ msgstr "\"%(token)s\" anahtarı için yanlış değer"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Sayfanın yedeklenmiş içeriği eski olduğundan arama sonuçlarında "
@@ -725,9 +739,8 @@ msgstr "Silme işlemleri bu şekilde işaretleniyor."
 msgid "Additions are marked like this."
 msgstr "Eklemeler bu şekilde işaretleniyor."
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "Çıkış yaptınız."
+msgid "Please log in first."
+msgstr "Lütfen önce giriş yapın."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -754,10 +767,27 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "İşlem iptal edildi."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -787,7 +817,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 #, fuzzy
@@ -843,7 +877,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Vurgulama:: <<Verbatim('')>>''italik''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''kalın'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kalın "
@@ -882,6 +916,15 @@ msgstr "\"%(key)s\" sonrası \"%(arg)s\" tam sayısı beklenmekte."
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\" sonrası \"%(arg)s\" renk değeri beklenmekte."
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
+msgstr ""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1080,18 +1123,6 @@ msgstr "Yeni ek dosya gönder \"%(filename)s\""
 msgid "Inlined image: %(url)s"
 msgstr "Hizalı resim: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Yeni çizim oluştur: \"%(filename)s (yeni pencerede açılır)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "%(filename)s çizimini düzenle (yeni pencerede açılır)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Tıklanabilir çizim: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Satır numaralandırmayı aç/kapa"
 
@@ -1102,19 +1133,6 @@ msgstr "%(rev)d revizyonuna geri al."
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "'%(oldpagename)s' sayfasından yeniden adlandırıldı."
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "%(action_name)s bilinmeyen işlem."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-"Sayfa üzerinde %(action_name)s işlemini yapmak için yeterli izne sahip "
-"değilsiniz."
-
-msgid "Login and try again."
-msgstr "Giriş yapın ve tekrar deneyin."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1199,8 +1217,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -1221,6 +1239,30 @@ msgid ""
 "Attachment name: %(attach_name)s\n"
 "Attachment size: %(attach_size)s\n"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgstr "%(pagename)s sayfasının %(filename)s eki "
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Sayın Wiki kullanıcısı,\n"
+"\n"
+"%(sitename)s sitesinde yer alan bir wiki sayfa ya da katagorisine, "
+"düzenlemelerden haberdar olmak için üye olmuşsunuz.\n"
+"\n"
+"Aşağıdaki sayfa %(editor)s tarafından düzenlendi.\n"
+"%(pagelink)s\n"
+"\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1259,6 +1301,10 @@ msgstr "Sayfa ziyaret ve düzenlemeleri"
 msgid "A new attachment has been added"
 msgstr "Yeni ek adı"
 
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Yeni ek adı"
+
 msgid "A page has been reverted to a previous state"
 msgstr ""
 
@@ -1284,9 +1330,6 @@ msgstr "Paket sayfaları"
 #, fuzzy
 msgid "Page changed"
 msgstr "Değişiklikleri Kaydet"
-
-msgid "about"
-msgstr ""
 
 #, fuzzy, python-format
 msgid ""
@@ -1322,11 +1365,14 @@ msgstr "eşle"
 msgid "matches"
 msgstr "eşleniyor"
 
-msgid "FrontPage"
-msgstr "AnaSayfa"
+msgid "about"
+msgstr ""
 
 msgid "RecentChanges"
 msgstr "SonDüzenlemeler"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "BaşlıkDizini"
@@ -1337,23 +1383,478 @@ msgstr "KelimeDizini"
 msgid "FindPage"
 msgstr "SayfaBul"
 
-msgid "SiteNavigation"
-msgstr "SiteGezinimi"
-
-msgid "HelpContents"
-msgstr "YardimKonuları"
-
-msgid "HelpOnFormatting"
-msgstr "YardımBiçimHakkında"
-
-msgid "WikiLicense"
-msgstr "WikiLisansı"
-
 msgid "MissingPage"
 msgstr "KayıpSayfa"
 
 msgid "MissingHomePage"
 msgstr "KayıpKişiselSayfa"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "KayıpKişiselSayfa"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "İsim"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "AnaSayfa"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Paket sayfaları"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "SayfaBul"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Büyüklük"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Sayfalar"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "SayfaAdlandır"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python Sürümü"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "WikiLisansı"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Slayt Gösterimi"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "KullanıcıAyarları"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "YardimKonuları"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "YardimKonuları"
+
+msgid "HelpOnFormatting"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin Sürümü"
+
+msgid "HelpContents"
+msgstr "YardimKonuları"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "BaşlıkDizini"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "YardimKonuları"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "YardimKonuları"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "YardimKonuları"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Dil"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "YardimKonuları"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "SiteGezinimi"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "YardımBiçimHakkında"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "YardimKonuları"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Slayt Gösterimi"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "İmlaDenetimi"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Eşleme başladı -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "KullanıcıAyarları"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "YardimKonuları"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "ÜyeliktenÇık"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "KullanıcıAyarları"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Yeni Ek"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Diğer İşlemler:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Paz"
 
 msgid "Mon"
 msgstr "Pzt"
@@ -1372,9 +1873,6 @@ msgstr "Cum"
 
 msgid "Sat"
 msgstr "Cts"
-
-msgid "Sun"
-msgstr "Paz"
 
 msgid "AttachFile"
 msgstr "DosyaEkle"
@@ -1448,9 +1946,6 @@ msgstr "[ALT]"
 msgid "[TOP]"
 msgstr "[ÜST]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Bu başlık için tam metin araması gerçekleştirmek için tıklayınız"
-
 msgid "Settings"
 msgstr ""
 
@@ -1472,6 +1967,9 @@ msgstr "Üyelik İptali"
 
 msgid "Home"
 msgstr "Ev"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Bu başlık için tam metin araması gerçekleştirmek için tıklayınız"
 
 msgid "Clear message"
 msgstr "Mesajı temizle"
@@ -1584,6 +2082,21 @@ msgid "File attachment browser"
 msgstr "Yeni ek adı"
 
 msgid "User account browser"
+msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "Python Sürümü"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Kullanıcı"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "Dosya Türü"
+
+msgid "Mimetypes"
 msgstr ""
 
 msgid "Wiki configuration"
@@ -1705,6 +2218,9 @@ msgstr "Genel ayrıştırıcılar"
 msgid "Local extension parsers"
 msgstr "Yerel geliştirilmiş makrolar"
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian ve/veya Python Xapian bağlayıcı(lar)ı yüklü değil"
+
 msgid "Disabled"
 msgstr "Etkisiz"
 
@@ -1712,18 +2228,12 @@ msgid "Enabled"
 msgstr "Etkin"
 
 #, fuzzy
-msgid "index available"
-msgstr "dizin müsait"
-
-#, fuzzy
 msgid "index unavailable"
 msgstr "dizin kullanılamaz"
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian ve/veya Python Xapian bağlayıcı(lar)ı yüklü değil"
-
-msgid "N/A"
-msgstr "Bilinmiyor"
+#, fuzzy
+msgid "index available"
+msgstr "dizin müsait"
 
 msgid "Xapian search"
 msgstr "Xapian arama"
@@ -1733,6 +2243,9 @@ msgstr ""
 
 msgid "Active threads"
 msgstr "Etkin yivler"
+
+msgid "N/A"
+msgstr "Bilinmiyor"
 
 msgid "No orphaned pages in this wiki."
 msgstr "Wiki üzerinde yetim sayfa bulunmamakta."
@@ -1781,7 +2294,8 @@ msgstr "Girilen terimlerin bir veya daha fazlasını içeren"
 msgid "not containing the following terms"
 msgstr "Girilen terimleri içermeyen"
 
-msgid "last modified since (e.g. last 2 weeks)"
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "Son düzenlemeden beri (ör: son 2 hafta)"
 
 msgid "any category"
@@ -1879,6 +2393,10 @@ msgstr "Başlat"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Slayt %(pos)d/%(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Sayfaya Git"
 
@@ -1922,6 +2440,29 @@ msgstr "Bu sayfa için sahip olduğunuz hızlı erişim bağlantısı silinemedi
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Sayfa için sahip olduğunuz hızlı erişim bağlantısı kaldırıldı."
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slayt Gösterimi"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slayt Gösterimi"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2099,9 +2640,6 @@ msgstr "yükle"
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)s sayfası için ek bulunmamakta."
 
-msgid "Edit drawing"
-msgstr "Çizimi düzenle"
-
 msgid "New Attachment"
 msgstr "Yeni Ek"
 
@@ -2140,16 +2678,16 @@ msgstr ""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Dosya içeriği boş. Dosya adında yer alan ASCII olmayan karakterleri silerek "
 "tekrar deneyiniz."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz."
 
 #, python-format
 msgid ""
@@ -2164,9 +2702,6 @@ msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 "'%(target)s' adlı dosya eki zaten mevcut. (Dosyanın karşı taraftaki adı: '%"
 "(filename)s')"
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Sayfa üzerindeki ekleri silmek için yeterli izne sahip değilsiniz."
@@ -2593,6 +3128,23 @@ msgstr "Listelenen kullanıcılar bu sayfaya üye olmuş:"
 msgid "This page links to the following pages:"
 msgstr "Bu sayfa şu sayfalara bağlantı vermekte:"
 
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Yeni ad"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
+
 msgid "Date"
 msgstr "Tarih"
 
@@ -2697,6 +3249,30 @@ msgstr "Yeniden adlandırma için, isteğe bağlı, neden"
 msgid "Really copy this page?"
 msgstr "Bu sayfayı yeniden adlandırmak istediğinize emin misiniz?"
 
+#, fuzzy
+msgid "Attachment location"
+msgstr "Ekler"
+
+#, fuzzy
+msgid "Page name"
+msgstr "Paket ismi"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Yeni ek adı"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Ekler"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "Ekler"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "\"%(pagename)s\" için Ekler"
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr "\"%s\" için Tam Bağlantı Listesi"
@@ -2724,6 +3300,33 @@ msgstr "Önceki"
 msgid "Next change"
 msgstr "Hiç bir şey değiştirilmedi."
 
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Eski revizyon bulunmamakta!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Eski revizyon bulunmamakta!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Eski revizyon bulunmamakta!"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "Sayfa zaten %(count)d kere kaydedilmiş!"
@@ -2737,10 +3340,6 @@ msgstr "Boşluk karakteri miktarındaki değişiklikleri gözardı et"
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Geçersiz dosya ismi \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "%s paketi %s sayfalarını içerecek şekilde yaratıldı."
 
 #, fuzzy
 msgid "Include all attachments?"
@@ -2772,8 +3371,26 @@ msgstr "Kullanıcı değil:"
 msgid "You are not allowed to perform this action."
 msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
 
-msgid "Please log in first."
-msgstr "Lütfen önce giriş yapın."
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Yeni çizim oluştur: \"%(filename)s (yeni pencerede açılır)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "%(filename)s çizimini düzenle (yeni pencerede açılır)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Tıklanabilir çizim: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Çizimi düzenle"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Alt sayfa yaratmadan önce lütfen kişisel sayfanızı oluşturun."
@@ -2828,6 +3445,25 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages yönetimi"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Komşu sayfa bulunamadı!"
+
+#, fuzzy
+msgid "page package"
+msgstr "Paket sayfaları"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Sayfa üyeliğiniz silindi."
@@ -2915,10 +3551,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "Paket ismi"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\" için Yerel Site Haritası"
@@ -2942,10 +3574,6 @@ msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 "Sayfa üzerinde %(actionname)s işlemini yapmak için yeterli izne sahip "
 "değilsiniz."
-
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
 
 msgid "Views/day"
 msgstr "Gösterim Sayısı/Gün"
@@ -2997,6 +3625,9 @@ msgstr "Kime"
 msgid "Content"
 msgstr "İçerik"
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "'%(server)s' e-posta sunucusuna bağlanılamadı: %(reason)s"
@@ -3020,6 +3651,51 @@ msgstr ""
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr ""
 #~ "Lütfen ekleri taşımak için etkileşimli kullanıcı arayüzünü kullanınız."
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Paket ismi"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "yükle"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr ""
+#~ "Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Tema dosyası yükleme sadece bağımsız türden sunucular için desteklenmekte."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki İmleme"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "İçerik"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "İçerik"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Sistem sayfalarını çıkar"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "%s paketi %s sayfalarını içerecek şekilde yaratıldı."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Çıkış yaptınız."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3054,10 +3730,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Yeni Ek"
-
-#, fuzzy
-#~ msgid "attachment"
-#~ msgstr "Ekler"
 
 #, fuzzy
 #~ msgid "New Name"
@@ -3155,9 +3827,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "KullanıcıAyarları"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Küçük değişikliklerden haberdar ol"

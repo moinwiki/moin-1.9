@@ -1,0 +1,24 @@
+# Image file Please
+# enter any images you would like your users to see in here, if the filename
+# is not in here then the user will not be able to use that image in their
+# drawings.
+#
+# Note that any subdirectories in here will appear as submenus/groups in the
+# image selection utilities in PmWikiDraw
+# To get a space in your group name please use the alternate chracter '_' in both
+# the physical directory name and the reference below, the plugin
+# will automatically convert '_' to ' ' for display but use it for fetching the image.
+# This is to work around a strange bug in the latest (1.5.0 Java Applet VM) 
+
+#Samples showing example grouping.
+samples/Backgrounds/backgrnd.gif
+samples/Backgrounds/bg1.gif
+samples/Backgrounds/rain.gif
+samples/Java_Related/javacentral.gif
+samples/Java_Related/Juggler0.gif
+samples/Java_Related/beans.gif
+samples/Java_Related/DUKE.gif
+samples/Java_Related/joe.surf.yellow.small.gif
+
+#Test to show that top level images work too.
+rain.gif  

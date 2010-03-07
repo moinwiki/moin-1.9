@@ -23,21 +23,16 @@
 """
 
 import re
+import sys
 
-# Whether the parser should convert \n into <br>.
-bloglike_lines = False
+__version__ = '1.1'
+
 
 class Rules:
     """Hold all the rules for generating regular expressions."""
 
     # For the inline elements:
     proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
-    url =  r'''(?P<url>
-            (^ | (?<=\s | [.,:;!?()/=]))
-            (?P<escaped_url>~)?
-            (?P<url_target> (?P<url_proto> %s ):\S+? )
-            ($ | (?=\s | [,.:;!?()] (\s | $)))
-        )''' % proto
     link = r'''(?P<link>
             \[\[
             (?P<link_target>.+?) \s*
@@ -76,10 +71,7 @@ class Rules:
             (?P<head_tail>=*) \s*
             $
         )'''
-    if bloglike_lines:
-        text = r'(?P<text> .+ ) (?P<break> (?<!\\)$\n(?!\s*$) )?'
-    else:
-        text = r'(?P<text> .+ )'
+    text = r'(?P<text> .+ )'
     list = r'''(?P<list>
             ^ [ \t]* ([*][^*\#]|[\#][^\#*]).* $
             ( \n[ \t]* [*\#]+.* $ )*
@@ -118,26 +110,59 @@ class Rules:
             ) \s*
         ''' % '|'.join([link, macro, image, code])
 
+    def __init__(self, bloglike_lines=False, url_protocols=None,
+                 wiki_words=False):
+        c = re.compile
+        # For pre escaping, in creole 1.0 done with ~:
+        self.pre_escape_re = c(self.pre_escape, re.M | re.X)
+        # for link descriptions
+        self.link_re = c('|'.join([self.image, self.linebreak,
+                                   self.char]), re.X | re.U)
+        # for list items
+        self.item_re = c(self.item, re.X | re.U | re.M)
+        # for table cells
+        self.cell_re = c(self.cell, re.X | re.U)
+
+        # For block elements:
+        if bloglike_lines:
+            self.text = r'(?P<text> .+ ) (?P<break> (?<!\\)$\n(?!\s*$) )?'
+        self.block_re = c('|'.join([self.line, self.head, self.separator,
+                                    self.pre, self.list, self.table,
+                                    self.text]), re.X | re.U | re.M)
+
+        # For inline elements:
+        if url_protocols is not None:
+            self.proto = '|'.join(re.escape(p) for p in url_protocols)
+        self.url =  r'''(?P<url>
+            (^ | (?<=\s | [.,:;!?()/=]))
+            (?P<escaped_url>~)?
+            (?P<url_target> (?P<url_proto> %s ):\S+? )
+            ($ | (?=\s | [,.:;!?()] (\s | $))))''' % self.proto
+        inline_elements = [self.link, self.url, self.macro,
+                           self.code, self.image, self.strong,
+                           self.emph, self.linebreak,
+                           self.escape, self.char]
+        if wiki_words:
+            import unicodedata
+            up_case = u''.join(unichr(i) for i in xrange(sys.maxunicode)
+                               if unicodedata.category(unichr(i))=='Lu')
+            self.wiki = ur'''(?P<wiki>[%s]\w+[%s]\w+)''' % (up_case, up_case)
+            inline_elements.insert(3, self.wiki)
+        self.inline_re = c('|'.join(inline_elements), re.X | re.U)
+
 class Parser:
     """
     Parse the raw text and create a document object
     that can be converted into output using Emitter.
+
+    A separate instance should be created for parsing a new document.
+    The first parameter is the raw text to be parsed. An optional second
+    argument is the Rules object to use. You can customize the parsing
+    rules to enable optional features or extend the parser.
     """
 
-    # For pre escaping, in creole 1.0 done with ~:
-    pre_escape_re = re.compile(Rules.pre_escape, re.M | re.X)
-    link_re = re.compile('|'.join([Rules.image, Rules.linebreak, Rules.char]), re.X | re.U) # for link descriptions
-    item_re = re.compile(Rules.item, re.X | re.U | re.M) # for list items
-    cell_re = re.compile(Rules.cell, re.X | re.U) # for table cells
-    # For block elements:
-    block_re = re.compile('|'.join([Rules.line, Rules.head, Rules.separator,
-        Rules.pre, Rules.list, Rules.table, Rules.text]), re.X | re.U | re.M)
-    # For inline elements:
-    inline_re = re.compile('|'.join([Rules.link, Rules.url, Rules.macro,
-        Rules.code, Rules.image, Rules.strong, Rules.emph, Rules.linebreak,
-        Rules.escape, Rules.char]), re.X | re.U)
-
-    def __init__(self, raw):
+    def __init__(self, raw, rules=None):
+        self.rules = rules or Rules()
         self.raw = raw
         self.root = DocNode('document', None)
         self.cur = self.root        # The most recent document node
@@ -184,11 +209,20 @@ class Parser:
         self.cur = DocNode('link', self.cur)
         self.cur.content = target
         self.text = None
-        re.sub(self.link_re, self._replace, text)
+        re.sub(self.rules.link_re, self._replace, text)
         self.cur = parent
         self.text = None
     _link_target_repl = _link_repl
     _link_text_repl = _link_repl
+
+    def _wiki_repl(self, groups):
+        """Handle WikiWord links, if enabled."""
+
+        text = groups.get('wiki', '')
+        node = DocNode('link', self.cur)
+        node.content = text
+        DocNode('text', node, node.content)
+        self.text = None
 
     def _macro_repl(self, groups):
         """Handles macros using the placeholder syntax."""
@@ -249,7 +283,7 @@ class Parser:
 
     def _list_repl(self, groups):
         text = groups.get('list', u'')
-        self.item_re.sub(self._replace, text)
+        self.rules.item_re.sub(self._replace, text)
 
     def _head_repl(self, groups):
         self.cur = self._upto(self.cur, ('document', 'section', 'blockquote'))
@@ -285,7 +319,7 @@ class Parser:
         tr = DocNode('table_row', tb)
 
         text = ''
-        for m in self.cell_re.finditer(row):
+        for m in self.rules.cell_re.finditer(row):
             cell = m.group('cell')
             if cell:
                 self.cur = DocNode('table_cell', tr)
@@ -305,7 +339,7 @@ class Parser:
         text = groups.get('pre_text', u'')
         def remove_tilde(m):
             return m.group('indent') + m.group('rest')
-        text = self.pre_escape_re.sub(remove_tilde, text)
+        text = self.rules.pre_escape_re.sub(remove_tilde, text)
         node = DocNode('preformatted', self.cur, text)
         node.sect = kind or ''
         self.text = None
@@ -363,12 +397,12 @@ class Parser:
     def parse_inline(self, raw):
         """Recognize inline elements inside blocks."""
 
-        re.sub(self.inline_re, self._replace, raw)
+        re.sub(self.rules.inline_re, self._replace, raw)
 
     def parse_block(self, raw):
         """Recognize block elements."""
 
-        re.sub(self.block_re, self._replace, raw)
+        re.sub(self.rules.block_re, self._replace, raw)
 
     def parse(self):
         """Parse the text given as self.raw and return DOM tree."""
@@ -378,7 +412,7 @@ class Parser:
 
 #################### Helper classes
 
-### The document model and emitter follow
+### The document model
 
 class DocNode:
     """

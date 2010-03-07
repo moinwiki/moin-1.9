@@ -32,7 +32,7 @@ class Settings(UserPrefBase):
         @rtype: list of unicode strings
         @return: list of normalized names
         """
-        text = self.request.form.get(key, [''])[0]
+        text = self.request.form.get(key, '')
         text = text.replace('\r', '')
         items = []
         for item in text.split('\n'):
@@ -80,10 +80,10 @@ class Settings(UserPrefBase):
         if form.has_key('cancel'):
             return
 
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
 
-        if not wikiutil.checkTicket(request, form.get('ticket', [''])[0]):
+        if not wikiutil.checkTicket(request, form.get('ticket', '')):
             return
 
         if form.has_key('save'): # Save user profile

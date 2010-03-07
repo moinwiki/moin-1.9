@@ -1,0 +1,29 @@
+    # This is a sample configuration snippet that shows moin's openid teams configuration
+    # See HelpOnOpenID, HelpOnAuthentication and HelpOnConfiguration for more info.
+
+    from MoinMoin.auth.openidrp import OpenIDAuth
+    from MoinMoin.auth.openidrp_ext.openidrp_teams import *
+
+    auth = [
+        OpenIDAuth(modify_request=openidrp_teams_modify_request,
+                   update_user=openidrp_teams_update_user,
+                   create_user=openidrp_teams_create_user),
+        # other auth methods can go here
+        #MoinAuth()
+    ]
+
+    cookie_lifetime = (1, 12)
+
+    # Launchpad Teams configuration
+    # list all teams you want to grant access to the wiki
+    openidrp_authorized_teams = ['team1', 'team2']
+
+    # ACL configuration, based on Teams
+    DesktopEdition = False
+    openidrp_acl_admin = 'AclAdmin'
+    openidrp_acl_page_postfix = 'Team'
+    acl_rights_default = u'Known:read,write All:read' #,write,delete,revert,admin"
+    acl_rights_before = u'%s:read,write,delete,revert,admin' % openidrp_acl_admin
+    acl_hierarchic = True
+    page_group_regex = ur'(?P<all>(?P<key>\S+)%s)' % openidrp_acl_page_postfix
+
