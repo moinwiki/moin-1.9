@@ -41,7 +41,6 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
-from MoinMoin.util import filesys
 
 def is_cache_exception(e):
     args = e.args
@@ -1405,7 +1404,7 @@ class Page(object):
         if self.page_name:
             rev_dir = self.getPagePath('revisions', check_create=0)
             if os.path.isdir(rev_dir):
-                for rev in filesys.dclistdir(rev_dir):
+                for rev in os.listdir(rev_dir):
                     try:
                         revint = int(rev)
                         revisions.append(revint)
@@ -1826,7 +1825,7 @@ class RootPage(Page):
         @return: dict of page names using file system encoding
         """
         pages = {}
-        for name in filesys.dclistdir(path):
+        for name in os.listdir(path):
             # Filter non-pages in quoted wiki names
             # List all pages in pages directory - assume flat namespace.
             # We exclude everything starting with '.' to get rid of . and ..
