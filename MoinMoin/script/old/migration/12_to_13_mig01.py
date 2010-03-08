@@ -93,7 +93,7 @@ def convert_file(fname_from, fname_to, enc_from, enc_to):
     print "%s -> %s" % (fname_from, fname_to)
     file_from = open(fname_from, "rb")
     if os.path.exists(fname_to):
-        raise "file exists %s" % fname_to
+        raise Exception("file exists %s" % fname_to)
     file_to = open(fname_to, "wb")
     for line in file_from:
         file_to.write(convert_string(line, enc_from, enc_to))
