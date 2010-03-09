@@ -189,6 +189,11 @@ class Formatter(FormatterBase):
         self._in_code_line = 0
         self._code_area_js = 0
         self._code_area_state = ['', 0, -1, -1, 0]
+
+        # code format string. id - code block id, num - line number.
+        # Caution: upon changing, also check line numbers hide/show js.
+        self._code_id_format = "%(id)s_%(num)d"
+
         self._show_section_numbers = None
         self.pagelink_preclosed = False
         self._is_included = kw.get('is_included', False)
@@ -819,32 +824,40 @@ function nformat(num,chrs,add) {
 }
 function addnumber(did, nstart, nstep) {
   var c = document.getElementById(did), l = c.firstChild, n = 1;
-  if (!isnumbered(c))
+  if (!isnumbered(c)) {
     if (typeof nstart == 'undefined') nstart = 1;
     if (typeof nstep  == 'undefined') nstep = 1;
-    n = nstart;
+    var n = nstart;
     while (l != null) {
       if (l.tagName == 'SPAN') {
         var s = document.createElement('SPAN');
-        s.className = 'LineNumber'
-        s.appendChild(document.createTextNode(nformat(n,4,' ')));
+        var a = document.createElement('A');
+        s.className = 'LineNumber';
+        a.appendChild(document.createTextNode(nformat(n,4,'')));
+        a.href = '#' + did + '_' + n;
+        s.appendChild(a);
+        s.appendChild(document.createTextNode(' '));
         n += nstep;
-        if (l.childNodes.length)
-          l.insertBefore(s, l.firstChild)
-        else
-          l.appendChild(s)
+        if (l.childNodes.length) {
+          l.insertBefore(s, l.firstChild);
+        }
+        else {
+          l.appendChild(s);
+        }
       }
       l = l.nextSibling;
     }
+  }
   return false;
 }
 function remnumber(did) {
   var c = document.getElementById(did), l = c.firstChild;
-  if (isnumbered(c))
+  if (isnumbered(c)) {
     while (l != null) {
       if (l.tagName == 'SPAN' && l.firstChild.className == 'LineNumber') l.removeChild(l.firstChild);
       l = l.nextSibling;
     }
+  }
   return false;
 }
 function togglenumber(did, nstart, nstep) {
@@ -885,7 +898,7 @@ function togglenumber(did, nstart, nstep) {
             self._in_code_area = 1
             self._in_code_line = 0
             # id in here no longer used
-            self._code_area_state = [None, show, start, step, start]
+            self._code_area_state = [None, show, start, step, start, ci]
 
             if msg:
                 attr = {'class': 'codemsg'}
@@ -936,7 +949,10 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         if on:
             res += '<span class="line">'
             if self._code_area_state[1] > 0:
-                res += '<span class="LineNumber">%4d </span>' % (self._code_area_state[4], )
+                res += ('<span class="LineNumber"><a href="#%(fmt)s">%%(num)4d</a> </span><span class="LineAnchor" id="%(fmt)s"></span>' % {'fmt': self._code_id_format, }) % {
+                    'id': self._code_area_state[5],
+                    'num': self._code_area_state[4],
+                    }
                 self._code_area_state[4] += self._code_area_state[3]
         self._in_code_line = on != 0
         return res
