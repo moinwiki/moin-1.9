@@ -1,6 +1,6 @@
 ﻿/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -89,6 +89,48 @@ FCKXHtml._AppendAttributes = function( xmlNode, htmlNode, node, nodeName )
 		var sStyleValue = htmlNode.style.cssText.replace( FCKRegexLib.StyleProperties, FCKTools.ToLowerCase ) ;
 		FCKTools.RestoreFormStyles( htmlNode, data ) ;
 		this._AppendAttribute( node, 'style', sStyleValue ) ;
+	}
+}
+
+/**
+ * Used to clean up HTML that has been processed FCKXHtml._AppendNode().
+ *
+ * For objects corresponding to HTML elements, Internet Explorer will
+ * treat a property as if it were an attribute set on that element.
+ *
+ * http://msdn.microsoft.com/en-us/library/ms533026(VS.85).aspx#Accessing_Element_Pr
+ *
+ * FCKXHtml._AppendNode() sets the property _fckxhtmljob on node objects
+ * corresponding HTML elements to mark them as having been processed.
+ * Counting these properties as attributes will cripple style removal
+ * because FCK.Styles.RemoveFromSelection() will not remove an element
+ * as long as it still has attributes.
+ *
+ * refs #2156 and #2834
+ */
+
+FCKXHtml._RemoveXHtmlJobProperties = function ( node )
+{
+	// Select only nodes of type ELEMENT_NODE
+	if (!node || !node.nodeType || node.nodeType != 1)
+		return ;
+
+	// Clear the _fckhtmljob attribute.
+	if ( typeof node._fckxhtmljob == 'undefined' && node.tagName !== 'BODY')
+		return;
+
+	node.removeAttribute('_fckxhtmljob') ;
+	// Recurse upon child nodes.
+	if ( node.hasChildNodes() )
+	{
+		var childNodes = node.childNodes ;
+		for ( var i = childNodes.length - 1 ; i >= 0 ; i-- )
+		{
+			var child = childNodes[i];
+			// Funny IE. #4642. It say that it has child nodes but their parent is not this node. Skip them
+			if (child.parentNode == node)
+				FCKXHtml._RemoveXHtmlJobProperties( child ) ;
+		}
 	}
 }
 

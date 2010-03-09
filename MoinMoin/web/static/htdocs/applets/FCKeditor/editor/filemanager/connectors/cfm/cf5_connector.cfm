@@ -1,7 +1,7 @@
 <cfsetting enablecfoutputonly="yes" showdebugoutput="no">
 <!---
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -35,12 +35,18 @@
  *
 --->
 
+<!--- disable connector for ColdFusion > CF5 --->
+<cfif Left(SERVER.COLDFUSION.PRODUCTVERSION,Find(",",SERVER.COLDFUSION.PRODUCTVERSION)-1) gt 5>
+	<cfabort>
+</cfif>
+
 <cfparam name="url.command">
 <cfparam name="url.type">
 <cfparam name="url.currentFolder">
 <!--- note: no serverPath url parameter - see config.cfm if you need to set the serverPath manually --->
 
 <cfinclude template="config.cfm">
+<cfset REQUEST.Config = Config>
 
 <cfscript>
 	userFilesPath = config.userFilesPath;
@@ -196,7 +202,7 @@
 	<cfswitch expression="#url.command#">
 
 		<cfcase value="FileUpload">
-			<cfset config_included = true >
+			<cfset REQUEST.config_included = true>
 			<cfinclude template="cf5_upload.cfm">
 			<cfabort>
 		</cfcase>

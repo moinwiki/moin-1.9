@@ -10,10 +10,6 @@
 """
 
 import re
-try:
-    set
-except NameError:
-    from sets import Set as set
 
 from pygments.lexers.web import \
      PhpLexer, HtmlLexer, XmlLexer, JavascriptLexer, CssLexer
@@ -38,7 +34,8 @@ __all__ = ['HtmlPhpLexer', 'XmlPhpLexer', 'CssPhpLexer',
            'MakoHtmlLexer', 'MakoXmlLexer', 'MakoJavascriptLexer',
            'MakoCssLexer', 'JspLexer', 'CheetahLexer', 'CheetahHtmlLexer',
            'CheetahXmlLexer', 'CheetahJavascriptLexer',
-           'EvoqueLexer', 'EvoqueHtmlLexer', 'EvoqueXmlLexer']
+           'EvoqueLexer', 'EvoqueHtmlLexer', 'EvoqueXmlLexer',
+           'ColdfusionLexer', 'ColdfusionHtmlLexer']
 
 
 class ErbLexer(Lexer):
@@ -246,7 +243,7 @@ class DjangoLexer(RegexLexer):
             (r'\.[a-zA-Z0-9_]+', Name.Variable),
             (r':?"(\\\\|\\"|[^"])*"', String.Double),
             (r":?'(\\\\|\\'|[^'])*'", String.Single),
-            (r'([{}()\[\]+\-*/,:]|[><=]=?)', Operator),
+            (r'([{}()\[\]+\-*/,:~]|[><=]=?)', Operator),
             (r"[0-9](\.[0-9]*)?(eE[+-][0-9])?[flFLdD]?|"
              r"0[xX][0-9a-fA-F]+[Ll]?", Number),
         ],
@@ -1294,3 +1291,97 @@ class EvoqueXmlLexer(DelegatingLexer):
     def __init__(self, **options):
         super(EvoqueXmlLexer, self).__init__(XmlLexer, EvoqueLexer,
                                              **options)
+
+class ColdfusionLexer(RegexLexer):
+    """
+    Coldfusion statements
+    """
+    name = 'cfstatement'
+    aliases = ['cfs']
+    filenames = []
+    mimetypes = []
+    flags = re.IGNORECASE | re.MULTILINE
+
+    tokens = {
+        'root': [
+            (r'//.*', Comment),
+            (r'\+\+|--', Operator),
+            (r'[-+*/^&=!]', Operator),
+            (r'<=|>=|<|>', Operator),
+            (r'mod\b', Operator),
+            (r'(eq|lt|gt|lte|gte|not|is|and|or)\b', Operator),
+            (r'\|\||&&', Operator),
+            (r'"', String.Double, 'string'),
+            # There is a special rule for allowing html in single quoted
+            # strings, evidently.
+            (r"'.*?'", String.Single),
+            (r'\d+', Number),
+            (r'(if|else|len|var|case|default|break|switch)\b', Keyword),
+            (r'([A-Za-z_$][A-Za-z0-9_.]*)\s*(\()', bygroups(Name.Function, Punctuation)),
+            (r'[A-Za-z_$][A-Za-z0-9_.]*', Name.Variable),
+            (r'[()\[\]{};:,.\\]', Punctuation),
+            (r'\s+', Text),
+        ],
+        'string': [
+            (r'""', String.Double),
+            (r'#.+?#', String.Interp),
+            (r'[^"#]+', String.Double),
+            (r'#', String.Double),
+            (r'"', String.Double, '#pop'),
+        ],
+    }
+
+class ColdfusionMarkupLexer(RegexLexer):
+    """
+    Coldfusion markup only
+    """
+    name = 'Coldfusion'
+    aliases = ['cf']
+    filenames = []
+    mimetypes = []
+
+    tokens = {
+        'root': [
+            (r'[^<]+', Other),
+            include('tags'),
+            (r'<[^<>]*', Other),
+        ],
+        'tags': [
+            (r'(?s)<!---.*?--->', Comment.Multiline),
+            (r'(?s)<!--.*?-->', Comment),
+            (r'<cfoutput.*?>', Name.Builtin, 'cfoutput'),
+            (r'(?s)(<cfscript.*?>)(.+?)(</cfscript.*?>)',
+             bygroups(Name.Builtin, using(ColdfusionLexer), Name.Builtin)),
+            # negative lookbehind is for strings with embedded >
+            (r'(?s)(</?cf(?:component|include|if|else|elseif|loop|return|'
+             r'dbinfo|dump|abort|location|invoke|throw|file|savecontent|'
+             r'mailpart|mail|header|content|zip|image|lock|argument|try|'
+             r'catch|break|directory|http|set|function|param)\b)(.*?)((?<!\\)>)',
+             bygroups(Name.Builtin, using(ColdfusionLexer), Name.Builtin)),
+        ],
+        'cfoutput': [
+            (r'[^#<]+', Other),
+            (r'(#)(.*?)(#)', bygroups(Punctuation, using(ColdfusionLexer),
+                                      Punctuation)),
+            #(r'<cfoutput.*?>', Name.Builtin, '#push'),
+            (r'</cfoutput.*?>', Name.Builtin, '#pop'),
+            include('tags'),
+            (r'(?s)<[^<>]*', Other),
+            (r'#', Other),
+        ],
+    }
+
+
+class ColdfusionHtmlLexer(DelegatingLexer):
+    """
+    Coldfusion markup in html
+    """
+    name = 'Coldufsion HTML'
+    aliases = ['cfm']
+    filenames = ['*.cfm', '*.cfml', '*.cfc']
+    mimetypes = ['application/x-coldfusion']
+
+    def __init__(self, **options):
+        super(ColdfusionHtmlLexer, self).__init__(HtmlLexer, ColdfusionMarkupLexer,
+                                                  **options)
+
