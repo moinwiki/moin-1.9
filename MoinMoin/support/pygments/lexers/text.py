@@ -10,10 +10,6 @@
 """
 
 import re
-try:
-    set
-except NameError:
-    from sets import Set as set
 from bisect import bisect
 
 from pygments.lexer import Lexer, LexerContext, RegexLexer, ExtendedRegexLexer, \
@@ -638,7 +634,8 @@ class RstLexer(RegexLexer):
     tokens = {
         'root': [
             # Heading with overline
-            (r'^(=+|-+|`+|:+|\.+|\'+|"+|~+|\^+|_+|\*+|\++|#+)([ \t]*\n)(.+)(\n)(\1)(\n)',
+            (r'^(=+|-+|`+|:+|\.+|\'+|"+|~+|\^+|_+|\*+|\++|#+)([ \t]*\n)'
+             r'(.+)(\n)(\1)(\n)',
              bygroups(Generic.Heading, Text, Generic.Heading,
                       Text, Generic.Heading, Text)),
             # Plain heading
@@ -658,24 +655,33 @@ class RstLexer(RegexLexer):
              bygroups(Text, Number, using(this, state='inline'))),
             (r'^(\s*)(\(?[A-Za-z]+\))( .+\n(?:\1  .+\n)+)',
              bygroups(Text, Number, using(this, state='inline'))),
+            # Line blocks
+            (r'^(\s*)(\|)( .+\n(?:\|  .+\n)*)',
+             bygroups(Text, Operator, using(this, state='inline'))),
             # Sourcecode directives
             (r'^( *\.\.)(\s*)((?:source)?code)(::)([ \t]*)([^\n]+)'
              r'(\n[ \t]*\n)([ \t]+)(.*)(\n)((?:(?:\8.*|)\n)+)',
              _handle_sourcecode),
             # A directive
-            (r'^( *\.\.)(\s*)([\w-]+)(::)(?:([ \t]*)(.+))?',
-             bygroups(Punctuation, Text, Operator.Word, Punctuation, Text, Keyword)),
+            (r'^( *\.\.)(\s*)([\w:-]+?)(::)(?:([ \t]*)(.*))',
+             bygroups(Punctuation, Text, Operator.Word, Punctuation, Text,
+                      using(this, state='inline'))),
             # A reference target
             (r'^( *\.\.)(\s*)([\w\t ]+:)(.*?)$',
              bygroups(Punctuation, Text, Name.Tag, using(this, state='inline'))),
             # A footnote target
             (r'^( *\.\.)(\s*)(\[.+\])(.*?)$',
              bygroups(Punctuation, Text, Name.Tag, using(this, state='inline'))),
+            # A substitution def
+            (r'^( *\.\.)(\s*)(\|.+\|)(\s*)([\w:-]+?)(::)(?:([ \t]*)(.*))',
+             bygroups(Punctuation, Text, Name.Tag, Text, Operator.Word,
+                      Punctuation, Text, using(this, state='inline'))),
             # Comments
             (r'^ *\.\..*(\n( +.*\n|\n)+)?', Comment.Preproc),
             # Field list
-            (r'^( *)(:.*?:)([ \t]+)(.*?)$', bygroups(Text, Name.Class, Text,
-                                                     Name.Function)),
+            (r'^( *)(:[a-zA-Z-]+:)(\s*)$', bygroups(Text, Name.Class, Text)),
+            (r'^( *)(:.*?:)([ \t]+)(.*?)$',
+             bygroups(Text, Name.Class, Text, Name.Function)),
             # Definition list
             (r'^([^ ].*(?<!::)\n)((?:(?: +.*)\n)+)',
              bygroups(using(this, state='inline'), using(this, state='inline'))),
@@ -687,12 +693,13 @@ class RstLexer(RegexLexer):
         'inline': [
             (r'\\.', Text), # escape
             (r'``', String, 'literal'), # code
-            (r'(`)(.+?)(`__?)',
-             bygroups(Punctuation, using(this), Punctuation)), # reference
-            (r'(`.+?`)(:[a-zA-Z0-9-]+?:)?',
+            (r'(`.+?)(<.+?>)(`__?)',  # reference with inline target
+             bygroups(String, String.Interpol, String)),
+            (r'`.+?`__?', String), # reference
+            (r'(`.+?`)(:[a-zA-Z0-9:-]+?:)?',
              bygroups(Name.Variable, Name.Attribute)), # role
-            (r'(:[a-zA-Z0-9-]+?:)(`.+?`)',
-             bygroups(Name.Attribute, Name.Variable)), # user-defined role
+            (r'(:[a-zA-Z0-9:-]+?:)(`.+?`)',
+             bygroups(Name.Attribute, Name.Variable)), # role (content first)
             (r'\*\*.+?\*\*', Generic.Strong), # Strong emphasis
             (r'\*.+?\*', Generic.Emph), # Emphasis
             (r'\[.*?\]_', String), # Footnote or citation
@@ -1013,6 +1020,7 @@ class DebianControlLexer(RegexLexer):
             (r'[}]', Text),
             (r'[^,]$', Name.Function, '#pop'),
             (r'([\+\.a-zA-Z0-9-][\s\n]*)', Name.Function),
+            (r'\[.*?\]', Name.Entity),
         ],
         'depend_vers': [
             (r'\),', Text, '#pop'),
@@ -1503,6 +1511,7 @@ class NginxConfLexer(RegexLexer):
             (r'[^\s;#{}$]+', String), # catch all
             (r'/[^\s;#]*', Name), # pathname
             (r'\s+', Text),
+            (r'[$;]', Text),  # leftover characters
         ],
     }
 

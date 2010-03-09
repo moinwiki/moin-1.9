@@ -1,6 +1,6 @@
 ﻿/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -230,6 +230,9 @@ FCKPanel.prototype.Show = function( x, y, relElement, width, height )
 			this.IncreasedY = 0 ;
 			this.RelativeElement = relElement ;
 		}
+
+		// Save the popup related arguments so they can be used by others (e.g. SCAYT).
+		this._PopupArgs = [x, y, iMainWidth, eMainNode.offsetHeight, relElement];
 
 		// Second call: Show the Popup at the specified location, with the correct size.
 		this._Popup.show( x, y, iMainWidth, eMainNode.offsetHeight, relElement ) ;

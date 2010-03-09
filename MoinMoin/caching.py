@@ -41,7 +41,7 @@ def get_arena_dir(request, arena, scope):
 def get_cache_list(request, arena, scope):
     arena_dir = get_arena_dir(request, arena, scope)
     try:
-        return filesys.dclistdir(arena_dir)
+        return os.listdir(arena_dir)
     except OSError:
         return []
 

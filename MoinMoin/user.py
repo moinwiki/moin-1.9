@@ -24,7 +24,7 @@ import os, time, codecs, base64
 from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
 from MoinMoin import config, caching, wikiutil, i18n, events
-from MoinMoin.util import timefuncs, filesys, random_string
+from MoinMoin.util import timefuncs, random_string
 from MoinMoin.wikiutil import url_quote_plus
 
 
@@ -37,7 +37,7 @@ def getUserList(request):
     """
     import re
     user_re = re.compile(r'^\d+\.\d+(\.\d+)?$')
-    files = filesys.dclistdir(request.cfg.user_dir)
+    files = os.listdir(request.cfg.user_dir)
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
