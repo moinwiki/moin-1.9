@@ -60,16 +60,8 @@ def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''
     else:
         result += """
 <tr>
-<td class="diff-removed">
-<span>
-%s
-</span>
-</td>
-<td class="diff-added">
-<span>
-%s
-</span>
-</td>
+<td class="diff-removed"><span>%s</span></td>
+<td class="diff-added"><span>%s</span></td>
 </tr>
 """ % (_('Deletions are marked like this.'), _('Additions are marked like this.'), )
 
@@ -84,12 +76,8 @@ def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''
             llineno, rlineno = lastmatch[0]+1, lastmatch[1]+1
             result += """
 <tr class="diff-title">
-<td>
-%s:
-</td>
-<td>
-%s:
-</td>
+<td>%s:</td>
+<td>%s:</td>
 </tr>
 """ % (request.formatter.line_anchorlink(1, llineno) + request.formatter.text(t_line % llineno) + request.formatter.line_anchorlink(0),
            request.formatter.line_anchorlink(1, rlineno) + request.formatter.text(t_line % rlineno) + request.formatter.line_anchorlink(0))
@@ -138,18 +126,14 @@ def diff(request, old, new, old_top='', new_top='', old_bottom='', new_bottom=''
                     rightresult += escape(rightpane[thismatch[1]:thismatch[1] + thismatch[2]])
                     charlast = (thismatch[0] + thismatch[2], thismatch[1] + thismatch[2])
 
-            leftpane = '<br>\n'.join([indent(x) for x in leftresult.splitlines()])
-            rightpane = '<br>\n'.join([indent(x) for x in rightresult.splitlines()])
+            leftpane = '<br>'.join([indent(x) for x in leftresult.splitlines()])
+            rightpane = '<br>'.join([indent(x) for x in rightresult.splitlines()])
 
             # removed width="50%%"
             result += """
 <tr>
-<td class="diff-removed">
-%s
-</td>
-<td class="diff-added">
-%s
-</td>
+<td class="diff-removed">%s</td>
+<td class="diff-added">%s</td>
 </tr>
 """ % (leftpane, rightpane)
 
