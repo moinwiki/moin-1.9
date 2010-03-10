@@ -399,14 +399,20 @@ form.dialog {
 
 .diff-added {
 	background-color: #E0FFE0;
-	vertical-align: sub;
+	vertical-align: top;
 	width: 50%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: courier, monospace;
 }
 
 .diff-removed {
 	background-color: #FFFFE0;
-	vertical-align: sub;
+	vertical-align: top;
 	width: 50%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: courier, monospace;
 }
 
 .diff-added span {
