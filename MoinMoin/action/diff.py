@@ -138,9 +138,9 @@ def execute(pagename, request):
  """ % (page_url, rev2, _("Revert to this revision"), enabled(newrev < currentrev))
 
     other_diff_button_html = """
- <td style="border:0; width:1%%">
+ <td style="border:0;">
   <form action="%s" method="get">
-   <div style="text-align:left">
+   <div style="text-align:%s">
     <input name="action" value="diff" type="hidden">
     <input name="rev1" value="%d" type="hidden">
     <input name="rev2" value="%d" type="hidden">
@@ -170,9 +170,9 @@ def execute(pagename, request):
     next_newrev = (newrev < currentrev) and (newrev + 1) or currentrev
 
     navigation_html = navigation_html % (title,
-       page_url, prev_oldrev, oldrev, _("Previous change"), enabled(oldrev > 1),
+       page_url, "left", prev_oldrev, oldrev, _("Previous change"), enabled(oldrev > 1),
        revert_html,
-       page_url, newrev, next_newrev, _("Next change"), enabled(newrev < currentrev), )
+       page_url, "right", newrev, next_newrev, _("Next change"), enabled(newrev < currentrev), )
 
     request.write(f.rawHTML(navigation_html))
 

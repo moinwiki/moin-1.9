@@ -447,6 +447,7 @@ input.button {
 
 .diff {
     width:99%;
+    table-layout: fixed;
 }
 
 .diff-header {
