@@ -6,14 +6,14 @@ Copyright (c) 2001, 2002, 2003 by Juergen Hermann
 /* content styles */
 
 html {
-	background-color: white;
-	color: black;
-	font-family: sans-serif;
-	font-size: 1em;
+    background-color: white;
+    color: black;
+    font-family: sans-serif;
+    font-size: 1em;
 }
 
 body {
-	margin: 0;
+    margin: 0;
 }
 
 /* Links */
@@ -41,7 +41,7 @@ a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
 a.action:before {content: url(../img/moin-action.png); margin: 0 0.2em;}
 
 li p {
-	margin: .25em 0;
+    margin: .25em 0;
 }
 
 li.gap {
@@ -61,19 +61,19 @@ dd {
 dd p {
     margin: 0.25em 0;
 }
-   
+
 a, img, img.drawing {
-	border: 0;
+    border: 0;
 }
 
 pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-	white-space: pre;
-	/* begin css 3 or browser specific rules - do not remove!
-	see: http://forums.techguy.org/archive/index.php/t-249849.html */
+    border: 1pt solid #AEBDCC;
+    background-color: #F3F5F7;
+    padding: 5pt;
+    font-family: courier, monospace;
+    white-space: pre;
+    /* begin css 3 or browser specific rules - do not remove!
+    see: http://forums.techguy.org/archive/index.php/t-249849.html */
     white-space: pre-wrap;
     word-wrap: break-word;
     white-space: -moz-pre-wrap;
@@ -115,19 +115,19 @@ pre.comment:before {
 
 table
 {
-	margin: 0.5em 0 0 0.5em;
-	border-collapse: collapse;
+    margin: 0.5em 0 0 0.5em;
+    border-collapse: collapse;
 }
 
 th, td
 {
-	padding: 0.25em 0.5em 0.25em 0.5em;
-	border: 1pt solid #ADB9CC;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    border: 1pt solid #ADB9CC;
 }
 
 td p {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 /* TableOfContents macro */
 div.table-of-contents {
@@ -167,13 +167,13 @@ table.navigation {
 }
 
 .footnotes div {
-	width: 5em;
-	border-top: 1pt solid gray;
+    width: 5em;
+    border-top: 1pt solid gray;
 }
 
 .footnotes ol {
-	padding: 0 2em;
-	margin: 0 0 1em;
+    padding: 0 2em;
+    margin: 0 0 1em;
 }
 
 .footnotes li {
@@ -217,47 +217,47 @@ hr {
 /* eye catchers */
 .warning 
 {
-	color: red;
+    color: red;
 }
 
 .error 
 {
-	color: red;
+    color: red;
 }
 
 strong.highlight 
 {
-	background-color: #CCE0FF;
-	padding: 1pt;
+    background-color: #CCE0FF;
+    padding: 1pt;
 }
 
 
 /* Recent changes */
 
 .rcrss {
-	float: right;
-	margin: 0 7px 0 14px;
-        height: 0;
-        position: relative;
-        top: 9px;
+    float: right;
+    margin: 0 7px 0 14px;
+    height: 0;
+    position: relative;
+    top: 9px;
 }
 *[div="rtl"] .rcrss {
     float: left;
 }
 .recentchanges[dir="rtl"] .rcrss {
-	float: left;
+    float: left;
 }
 
 .recentchanges table {
-	clear: both;
-        border-collapse: collapse;
-        
+    clear: both;
+    border-collapse: collapse;
+
     border: 1px solid #4d7da9;
 }
 
 .recentchanges td {
-	vertical-align: top;
-	border: none;
+    vertical-align: top;
+    border: none;
     background: #e6eaf0;
 }
 
@@ -269,73 +269,73 @@ strong.highlight
 }
 
 .rcdaybreak td a {
-	font-size: 0.88em;
+    font-size: 0.88em;
 }
 
 .rcicon1, .rcicon2 {
-	text-align: center;
+    text-align: center;
 }
 
 .rcpagelink {
-	width: 33%;
+    width: 33%;
 }
 
 .rctime {
-	font-size: 0.88em;
-	white-space: nowrap;
+    font-size: 0.88em;
+    white-space: nowrap;
 }
 
 .rceditor {
-	white-space: nowrap;
-	font-size: 0.88em;
+    white-space: nowrap;
+    font-size: 0.88em;
 }
 
 .rccomment {
-	width: 50%;
-	color: gray;
-	font-size: 0.88em;
+    width: 50%;
+    color: gray;
+    font-size: 0.88em;
 }
 
 
 /* User Preferences */
 
 .userpref table, .userpref td {
-	border: none;
+    border: none;
 }
 
 /* CSS for new code_area markup used by Colorizer and ParserBase */
 
 div.codemsg {
-       margin: 0.5em 0;
-       padding: 0.5em;
-       padding-left:2.5em;
-       background:none;
-       border: 1pt solid #CCBDAE;
-       background-color: #F7F0E0;
-       background-image:url('../img/alert.png');
-       background-repeat:no-repeat;
-       background-position: 0.5em 0.5em;
-       color: black;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    padding-left:2.5em;
+    background:none;
+    border: 1pt solid #CCBDAE;
+    background-color: #F7F0E0;
+    background-image:url('../img/alert.png');
+    background-repeat:no-repeat;
+    background-position: 0.5em 0.5em;
+    color: black;
 }
 
 div.codearea { /* the div makes the border */
-	margin: 0.5em 0;
-	padding: 0;
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	color: black;
+    margin: 0.5em 0;
+    padding: 0;
+    border: 1pt solid #AEBDCC;
+    background-color: #F3F5F7;
+    color: black;
 }
 
 div.codearea pre { /* the pre has no border and is inside the div */
-	margin: 0;
-	padding: 10pt;
-	border: none;
+    margin: 0;
+    padding: 10pt;
+    border: none;
 }
 
 a.codenumbers { /* format of the line numbering link */
-	margin: 0 10pt;
-	font-size: 0.85em;
-	color: gray;
+    margin: 0 10pt;
+    font-size: 0.85em;
+    color: gray;
 }
 
 /* format of certain syntax spans */
@@ -533,14 +533,14 @@ TD.tip {
     border: 1pt solid #E5E5E5;
     background-color: #F9F9FF;
     color: black;
-    
+
     margin: 10pt 30pt 10pt 30pt;
     background-repeat: no-repeat;
     background-position: 8px 8px;
     min-height: 64px; /*64=48+8+8 but doesn't work with IE*/
     padding-left: 64px;
 }
- 
+
 #content div.caution p, 
 #content div.important p, 
 #content div.note p, 
