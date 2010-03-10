@@ -101,9 +101,6 @@ class PygmentsFormatter(pygments.formatter.Formatter):
         result = self.result
         self.lineno = self.start_line
 
-        for lineno in range(1, self.start_line + 1):
-            result.append(fmt.line_anchordef(lineno))
-
         for ttype, value in tokensource:
             class_ = self.get_class(ttype)
             if value:
@@ -159,6 +156,11 @@ class Parser:
     def format(self, formatter):
         _ = self.request.getText
         fmt = PygmentsFormatter(formatter, start_line=self.start_line)
+
+        # adding line number anchors for process instruction lines
+        for lineno in range(1, self.num_start + 1):
+            fmt.result.append(formatter.line_anchordef(lineno))
+
         fmt.result.append(formatter.div(1, css_class="highlight %s" % self.syntax))
         self._code_id = hash_new('sha1', self.raw.encode(config.charset)).hexdigest()
         msg = None
@@ -181,6 +183,7 @@ class Parser:
                                                                                                                "highlight_help_page": url
                                                                                                               }
                 lexer = pygments.lexers.TextLexer()
+
         fmt.result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step, msg))
         pygments.highlight(self.raw, lexer, fmt)
         fmt.result.append(formatter.code_area(0, self._code_id))
