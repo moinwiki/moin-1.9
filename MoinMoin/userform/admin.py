@@ -94,7 +94,7 @@ def do_user_browser(request):
             jabber_link = ''
 
         data.addRow((
-            request.formatter.rawHTML(namelink),
+            (request.formatter.rawHTML(namelink), account.name),
             request.formatter.rawHTML(grouppage_links),
             email_link,
             jabber_link,
@@ -105,7 +105,7 @@ def do_user_browser(request):
         from MoinMoin.widget.browser import DataBrowserWidget
 
         browser = DataBrowserWidget(request)
-        browser.setData(data)
+        browser.setData(data, sort_columns=[0])
         return browser.render()
 
     # No data

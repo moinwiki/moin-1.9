@@ -2,12 +2,45 @@
 """
     MoinMoin - DataBrowserWidget
 
-    @copyright: 2002 Juergen Hermann <jh@web.de>
+    @copyright: 2002 Juergen Hermann <jh@web.de>,
+                2010 MoinMoin:ReimarBauer,
+                2010 MoinMoin:EugeneSyromyatnikov
     @license: GNU GPL, see COPYING for details.
 """
-
 from MoinMoin.widget import base
 from MoinMoin import wikiutil
+
+def _compare(idx, text):
+    """
+    compare function for sorted
+    """
+    txt = text[idx]
+    if isinstance(txt, tuple):
+        txt = txt[1]
+    try:
+        decimal_string = txt
+        decimal_value = float(decimal_string)
+        txt = u""
+    except ValueError:
+        decimal_value = float('Infinity')
+        decimal_string = u""
+    return (decimal_value, decimal_string, txt)
+
+def sort_table(rows, sort_columns=None, reverse=False):
+    """
+    sorts table rows
+
+    @param rows: table rows to sort
+    @param index: column to sort. By a given list it does a multiple sort
+    @param reverse: reverse sort
+    """
+    if not (sort_columns and isinstance(sort_columns, list) or
+            isinstance(sort_columns, tuple)):
+        # don't sort if no list is given
+        return rows
+    for idx in reversed(sort_columns):
+        rows = sorted(rows, key=lambda x: _compare(idx, x), reverse=reverse)
+    return rows
 
 class DataBrowserWidget(base.Widget):
 
@@ -28,14 +61,19 @@ class DataBrowserWidget(base.Widget):
         self.__filter = 'filter'
         self._show_header = show_header
 
-    def setData(self, dataset):
+    def setData(self, dataset, sort_columns=None, reverse=False):
         """ Sets the data for the browser (see MoinMoin.util.dataset).
 
         @param dataset: dataset containing either ascii, unicode or tuples.
                         If a dataset entry contains a tuple then the first
                         item in the tuple is displayed and the second item
                         is used for autofilters.
+        @param index: list of column index number for sorting
+        @param reverse: reverse sort
         """
+        if sort_columns:
+            dataset.data = sort_table(dataset.data, sort_columns, reverse=reverse)
+
         self.data = dataset
         if dataset.data_id:
             self.unqual_data_id = 'dbw.%s.' % dataset.data_id

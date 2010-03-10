@@ -1155,7 +1155,8 @@ def do_admin_browser(request):
             for filename in files:
                 filepath = os.path.join(page_dir, filename)
                 data.addRow((
-                    Page(request, pagename).link_to(request, querystr="action=AttachFile"),
+                    (Page(request, pagename).link_to(request,
+                                querystr="action=AttachFile"), wikiutil.escape(pagename, 1)),
                     wikiutil.escape(filename.decode(config.charset)),
                     os.path.getsize(filepath),
                 ))
@@ -1164,7 +1165,7 @@ def do_admin_browser(request):
         from MoinMoin.widget.browser import DataBrowserWidget
 
         browser = DataBrowserWidget(request)
-        browser.setData(data)
+        browser.setData(data, sort_columns=[0, 1])
         return browser.render(method="GET")
 
     return ''
