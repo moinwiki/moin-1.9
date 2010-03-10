@@ -222,8 +222,8 @@ textarea {
     padding: 0;
     width: 100%;
     /* sync these values, line-height is needed for IE */
-        height: 4px;
-        line-height: 4px;
+    height: 4px;
+    line-height: 4px;
     border-bottom: 1px solid #4d7da9;
     border-top: 1px solid #4d7da9;
     background: #81BBF2;
@@ -305,12 +305,12 @@ textarea {
     margin: 0;
     padding: 2px 20px 20px 20px;
 
-   /* theses are some Firefox 1.5b1 specific extensions, see also the CSS3 draft.
-   -moz-column-width: 25em;
-   -moz-column-gap: 2em;
-   -moz-column-rule: solid black 0.3em;     --   doesn't work yet with 1.5b1!
+    /* theses are some Firefox 1.5b1 specific extensions, see also the CSS3 draft.
+    -moz-column-width: 25em;
+    -moz-column-gap: 2em;
+    -moz-column-rule: solid black 0.3em;     --   doesn't work yet with 1.5b1!
 
-   TODO: make text/gui editor NOT use #page css, we don't want columns there!
+    TODO: make text/gui editor NOT use #page css, we don't want columns there!
     */
 }
 
@@ -470,7 +470,7 @@ table.navigation {
     float: right;
     margin: 2px;
 }
-        
+
 #openididentifier {
     background: url(../../common/openid.png) no-repeat;
     background-position: 0 50%;

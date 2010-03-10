@@ -138,24 +138,24 @@ pre {
 /* CSS for ParserBase */
 
 div.codearea { /* the div makes the border */
-	margin: 0.5em 0;
-	padding: 0;
-	border: 1pt dashed #222;
-	background-color: #EEF;
-	color: #444;
+    margin: 0.5em 0;
+    padding: 0;
+    border: 1pt dashed #222;
+    background-color: #EEF;
+    color: #444;
 }
 
 div.codearea pre { /* the pre has no border and is inside the div */
-	margin: 0;
-	padding: 10pt;
-	border: none;
+    margin: 0;
+    padding: 10pt;
+    border: none;
 }
 
 a.codenumbers { /* format of the line numbering link */
-	margin: 0pt;
-	font-size: 10pt;
-	color: #888;
-        display: none; /* rather annoying to see the link */
+    margin: 0pt;
+    font-size: 10pt;
+    color: #888;
+    display: none; /* rather annoying to see the link */
 }
 
 /* format of certain syntax spans */
@@ -176,6 +176,6 @@ div.codearea pre span.Preprc     {color: #839;}
 
 @media print {
     #navigation {
-        display: none;
+    display: none;
     }
 }
