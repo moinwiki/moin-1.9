@@ -31,7 +31,7 @@ def sort_table(rows, sort_columns=None, reverse=False):
     sorts table rows
 
     @param rows: table rows to sort
-    @param index: column to sort. By a given list it does a multiple sort
+    @param sort_columns: column to sort. By a given list it does a multiple sort
     @param reverse: reverse sort
     """
     if not (sort_columns and isinstance(sort_columns, (list, tuple))):
@@ -67,7 +67,7 @@ class DataBrowserWidget(base.Widget):
                         If a dataset entry contains a tuple then the first
                         item in the tuple is displayed and the second item
                         is used for autofilters.
-        @param index: list of column index number for sorting
+        @param sort_columns: list of column index number for sorting
         @param reverse: reverse sort
         """
         if sort_columns:
