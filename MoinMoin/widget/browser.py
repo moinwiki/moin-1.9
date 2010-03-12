@@ -26,19 +26,25 @@ def _compare(idx, text):
         decimal_string = u""
     return (decimal_value, decimal_string, txt)
 
-def sort_table(rows, sort_columns=None, reverse=False):
+def sort_table(rows, sort_columns=None, reverse=None):
     """
     sorts table rows
 
     @param rows: table rows to sort
-    @param sort_columns: column to sort. By a given list it does a multiple sort
-    @param reverse: reverse sort
+    @param sort_columns: column to sort. The instance must be list or tuple of integer values.
+                         By more than one entry it does a multiple sort.
+    @param reverse: reverse sort. The instance must be list or tuple of boolean values.
+                    It must be of the same length than sort_columns.
     """
-    if not (sort_columns and isinstance(sort_columns, (list, tuple))):
-        # don't sort if no list is given
+    if not sort_columns:
         return rows
+
+    assert isinstance(sort_columns, (list, tuple))
+    assert isinstance(reverse, (list, tuple))
+    assert len(rows[0]) == len(reverse)
+
     for idx in reversed(sort_columns):
-        rows = sorted(rows, key=lambda x: _compare(idx, x), reverse=reverse)
+        rows = sorted(rows, key=lambda x: _compare(idx, x), reverse=reverse[idx])
     return rows
 
 class DataBrowserWidget(base.Widget):
@@ -71,7 +77,21 @@ class DataBrowserWidget(base.Widget):
         @param reverse: reverse sort
         """
         if sort_columns:
-            dataset.data = sort_table(dataset.data, sort_columns, reverse=reverse)
+            # simplification if there is no reverse list given
+            # then all sort_columns should have the same reverse order
+            if not isinstance(reverse, (list, tuple)):
+                reverse_var = [reverse] * len(dataset.data[0])
+            else:
+                reverse_var = [False] * len(dataset.data[0])
+                for idx in reverse:
+                    reverse_var[idx] = True
+
+                # force that reverse columns listed in sort_columns
+                missing_columns = list(set(reverse) - set(sort_columns))
+                if missing_columns:
+                    sort_columns = sort_columns + missing_columns
+
+            dataset.data = sort_table(dataset.data, sort_columns, reverse=reverse_var)
 
         self.data = dataset
         if dataset.data_id:
