@@ -45,7 +45,7 @@ def execute(pagename, request):
         # generate an Expires header, using 1d cache lifetime of sisterpages list
         expires = time.time() + 24*3600
 
-        request.mime_type = 'text/plain'
+        request.mimetype = 'text/plain'
         request.expires = expires
         request.last_modified = timestamp
         request.headers['Etag'] = etag

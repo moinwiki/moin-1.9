@@ -99,7 +99,7 @@ def execute(pagename, request):
         # defined for suggested cache lifetime of the RecentChanges RSS doc
         expires = time.time() + cfg.rss_cache
 
-        request.mime_type = 'text/xml'
+        request.mimetype = 'application/rss+xml'
         request.expires = expires
         request.last_modified = lastmod
         request.headers['Etag'] = etag
