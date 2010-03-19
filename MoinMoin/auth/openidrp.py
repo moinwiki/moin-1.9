@@ -181,10 +181,10 @@ username and leave the password field blank.""")))
             return CancelLogin(_('OpenID failure.'))
 
     def _handle_name_continuation(self, request):
+        _ = request.getText
         if not 'openid.id' in request.session:
             return CancelLogin(_('No OpenID found in session.'))
 
-        _ = request.getText
         newname = request.form.get('username', '')
         if not newname:
             return MultistageFormLogin(self._get_account_name)
