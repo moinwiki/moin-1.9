@@ -817,7 +817,7 @@ options_no_group_name = {
     ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
 
     ('textchas', None,
-     "Spam protection setup using site-specific questions/answers, see HelpOnTextChas."),
+     "Spam protection setup using site-specific questions/answers, see HelpOnSpam."),
     ('textchas_disabled_group', None,
      "Name of a group of trusted users who do not get asked !TextCha questions."),
 
