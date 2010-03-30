@@ -20,7 +20,7 @@ class BotBouncer(BaseAuth):
         if kw.get('multistage'):
             uid = request.session.get('botbouncer.uid', None)
             if not uid:
-                return CancelLogin()
+                return CancelLogin(None)
             openid = request.session['botbouncer.id']
             del request.session['botbouncer.id']
             del request.session['botbouncer.uid']

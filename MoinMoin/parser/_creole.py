@@ -19,6 +19,7 @@
     @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
                 2007 MoinMoin:ThomasWaldmann (updates)
     @license: GNU GPL, see COPYING for details.
+    @license: BSD, see COPYING for details.
 """
 
 import re
@@ -258,13 +259,16 @@ class Parser:
     _head_text_repl = _head_repl
 
     def _text_repl(self, groups):
+        text = groups.get('text', '')
         if self.cur.kind in ('table', 'table_row', 'bullet_list',
             'number_list'):
             self.cur = self._upto(self.cur,
                 ('document', 'section', 'blockquote'))
         if self.cur.kind in ('document', 'section', 'blockquote'):
             self.cur = DocNode('paragraph', self.cur)
-        self.parse_inline(groups.get('text', '')+' ')
+        else:
+            text = u' ' + text
+        self.parse_inline(text)
         if groups.get('break') and self.cur.kind in ('paragraph',
             'emphasis', 'strong', 'code'):
             DocNode('break', self.cur, '')
@@ -280,6 +284,7 @@ class Parser:
         tb = self.cur
         tr = DocNode('table_row', tb)
 
+        text = ''
         for m in self.cell_re.finditer(row):
             cell = m.group('cell')
             if cell:
@@ -310,7 +315,6 @@ class Parser:
 
     def _line_repl(self, groups):
         self.cur = self._upto(self.cur, ('document', 'section', 'blockquote'))
-        self.text = None
 
     def _code_repl(self, groups):
         DocNode('code', self.cur, groups.get('code_text', u'').strip())
@@ -388,3 +392,5 @@ class DocNode:
         self.content = content
         if self.parent is not None:
             self.parent.children.append(self)
+
+

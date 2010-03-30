@@ -22,6 +22,7 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config
 from MoinMoin.util import pysupport, lock
+from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
 
@@ -938,6 +939,12 @@ MIMETYPES_MORE = {
  '.py': 'text/x-python',
  '.cfg': 'text/plain',
  '.conf': 'text/plain',
+ '.irc': 'text/plain',
+ '.md5': 'text/plain',
+ '.csv': 'text/csv',
+ '.flv': 'video/x-flv',
+ '.wmv': 'video/x-ms-wmv',
+ '.swf': 'application/x-shockwave-flash',
 }
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
 
@@ -1118,9 +1125,11 @@ def importWikiPlugin(cfg, kind, name, function="execute"):
 
     See importPlugin docstring.
     """
-    if not name in wikiPlugins(kind, cfg):
-        raise PluginMissingError
-    moduleName = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
+    plugins = wikiPlugins(kind, cfg)
+    modname = plugins.get(name, None)
+    if modname is None:
+        raise PluginMissingError()
+    moduleName = '%s.%s' % (modname, name)
     return importNameFromPlugin(moduleName, function)
 
 
@@ -1130,7 +1139,7 @@ def importBuiltinPlugin(kind, name, function="execute"):
     See importPlugin docstring.
     """
     if not name in builtinPlugins(kind):
-        raise PluginMissingError
+        raise PluginMissingError()
     moduleName = 'MoinMoin.%s.%s' % (kind, name)
     return importNameFromPlugin(moduleName, function)
 
@@ -1172,27 +1181,33 @@ def builtinPlugins(kind):
 
 
 def wikiPlugins(kind, cfg):
-    """ Gets a list of modules in data/plugin/'kind'
+    """
+    Gets a dict containing the names of all plugins of @kind
+    as the key and the containing module name as the value.
 
     @param kind: what kind of modules we look for
-    @rtype: list
-    @return: module names
+    @rtype: dict
+    @return: plugin name to containing module name mapping
     """
-    # Wiki plugins are located in wikiconfig.plugin module
-    modulename = '%s.plugin.%s' % (cfg.siteid, kind)
-
-    # short-cut if we've loaded the list already
+    # short-cut if we've loaded the dict already
     # (or already failed to load it)
-    if kind in cfg._site_plugin_lists:
-        return cfg._site_plugin_lists[kind]
-
-    try:
-        plugins = pysupport.importName(modulename, "modules")
-        cfg._site_plugin_lists[kind] = plugins
-        return plugins
-    except ImportError:
-        cfg._site_plugin_lists[kind] = []
-        return []
+    cache = cfg._site_plugin_lists
+    if kind in cache:
+        result = cache[kind]
+    else:
+        result = {}
+        for modname in cfg._plugin_modules:
+            try:
+                module = pysupport.importName(modname, kind)
+                packagepath = os.path.dirname(module.__file__)
+                plugins = pysupport.getPluginModules(packagepath)
+                for p in plugins:
+                    if not p in result:
+                        result[p] = '%s.%s' % (modname, kind)
+            except AttributeError:
+                pass
+        cache[kind] = result
+    return result
 
 
 def getPlugins(kind, cfg):
@@ -2411,15 +2426,43 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 
 def anchor_name_from_text(text):
     '''
-    Generate an anchor name from the given text
-    This function generates valid HTML IDs.
+    Generate an anchor name from the given text.
+    This function generates valid HTML IDs matching: [A-Za-z][A-Za-z0-9:_.-]*
+    Note: this transformation has a special feature: when you feed it with a
+          valid ID/name, it will return it without modification (identity
+          transformation).
     '''
-    quoted = urllib.quote_plus(text.encode('utf-7'))
-    res = quoted.replace('%', '.').replace('+', '').replace('_', '')
+    quoted = urllib.quote_plus(text.encode('utf-7'), safe=':')
+    res = quoted.replace('%', '.').replace('+', '_')
     if not res[:1].isalpha():
         return 'A%s' % res
     return res
 
+def split_anchor(pagename):
+    """
+    Split a pagename that (optionally) has an anchor into the real pagename
+    and the anchor part. If there is no anchor, it returns an empty string
+    for the anchor.
+
+    Note: if pagename contains a # (as part of the pagename, not as anchor),
+          you can use a trick to make it work nevertheless: just append a
+          # at the end:
+          "C##" returns ("C#", "")
+          "Problem #1#" returns ("Problem #1", "")
+
+    TODO: We shouldn't deal with composite pagename#anchor strings, but keep
+          it separate.
+          Current approach: [[pagename#anchor|label|attr=val,&qarg=qval]]
+          Future approach:  [[pagename|label|attr=val,&qarg=qval,#anchor]]
+          The future approach will avoid problems when there is a # in the
+          pagename part (and no anchor). Also, we need to append #anchor
+          at the END of the generated URL (AFTER the query string).
+    """
+    parts = rsplit(pagename, '#', 1)
+    if len(parts) == 2:
+        return parts
+    else:
+        return pagename, ""
 
 ########################################################################
 ### Tickets - usually used in forms to make sure that form submissions
@@ -2472,9 +2515,10 @@ def createTicket(request, tm=None, action=None, pagename=None):
             value = value.encode('utf-8')
         hmac_data.append(value)
 
-    hmac = hmac_new(request.cfg.secrets,
+    hmac = hmac_new(request.cfg.secrets['wikiutil/tickets'],
                     ''.join(hmac_data))
     return "%s.%s" % (tm, hmac.hexdigest())
+
 
 
 def checkTicket(request, ticket):

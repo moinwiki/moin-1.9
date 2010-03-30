@@ -5,7 +5,9 @@
     This macro has the main purpose of being used by extensions that write
     data to wiki pages but want to ensure that it is properly translated.
 
-    @copyright: 2006 MoinMoin:AlexanderSchremmer
+    @copyright: 2006 MoinMoin:AlexanderSchremmer,
+                2009 MoinMoin:EugeneSyromyatnikov,
+                2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -19,13 +21,17 @@ def execute(macro, args):
     and the remaining elements are substituted in the message using string
     substitution.
     """
-    sep = args[0]
-    args = unpackLine(args[1:], sep)
+    msg = u''
     if args:
-        translation = macro.request.getText(args[0])
-    else:
-        translation = u""
-    message = translation % tuple(args[1:])
-
-    return macro.formatter.text(message)
+        sep = args[0]
+        args = unpackLine(args[1:], sep)
+        if args:
+            msg, args = args[0], tuple(args[1:])
+            msg = macro.request.getText(msg)
+            try:
+                msg = msg % args
+            except TypeError:
+                # % operator will raise TypeError if msg has named placeholders
+                msg = msg % dict([arg.split('=', 1) for arg in args if '=' in arg])
+    return macro.formatter.text(msg)
 

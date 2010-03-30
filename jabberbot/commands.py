@@ -14,7 +14,7 @@ from pyxmpp.jid import JID
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""
-    def __init__(self, jids, notification, msg_type=u"message", async=True):
+    def __init__(self, jids, notification, msg_type=u"normal", async=True):
         """A constructor
 
         @param jids: a list of jids to sent this message to
@@ -33,7 +33,7 @@ class NotificationCommand:
 
 class NotificationCommandI18n(NotificationCommand):
     """Notification request that should be translated by the XMPP bot"""
-    def __init__(self, jids, notification, msg_type="message", async=True):
+    def __init__(self, jids, notification, msg_type="normal", async=True):
         """A constructor
 
         Params as in NotificationCommand.

@@ -2,7 +2,6 @@
 
 # needs darcs.idyll.org/~t/projects/twill-latest.tar.gz
 
-
 import sys
 from textwrap import wrap
 

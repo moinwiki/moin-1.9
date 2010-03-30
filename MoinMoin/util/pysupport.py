@@ -20,6 +20,22 @@ def isImportable(module):
         return 0
 
 
+def getPluginModules(packagedir):
+    """
+    Return a list of plugin modules for a given plugin package dir,
+    omitting any that start with an underscore.
+    """
+    import os, re
+
+    pyre = re.compile(r"^([^_].*)\.py$")
+    dirlist = os.listdir(packagedir)
+    matches = [pyre.match(fn) for fn in dirlist]
+    modules = [match.group(1) for match in matches if match]
+
+    modules.sort()
+    return modules
+
+
 def getPackageModules(packagefile):
     """ Return a list of modules for a package, omitting any modules
         starting with an underscore.

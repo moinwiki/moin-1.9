@@ -23,8 +23,8 @@ from MoinMoin.userprefs import UserPrefBase
 #    - quick links (or leave in wiki settings?)
 ####
 
-
 _debug = 0
+
 
 class Settings(UserPrefBase):
     def __init__(self, request):
@@ -224,10 +224,10 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     def handle_form(self):
         request = self.request
         form = request.form
-  
+
         if form.has_key('cancel'):
             return
-  
+
         if request.request_method != 'POST':
             return
 
