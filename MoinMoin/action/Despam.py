@@ -176,14 +176,14 @@ def revert_pages(request, editor, timestamp):
             if repr(line.getInterwikiEditorData(request)) == editor:
                 revertpages.append(line.pagename)
 
-    request.write("Pages to revert:<br>%s" % "<br>".join(revertpages))
+    request.write("Pages to revert:<br>%s" % "<br>".join([wikiutil.escape(p) for p in revertpages]))
     for pagename in revertpages:
-        request.write("Begin reverting %s ...<br>" % pagename)
+        request.write("Begin reverting %s ...<br>" % wikiutil.escape(pagename))
         msg = revert_page(request, pagename, editor)
         if msg:
             request.write("<p>%s: %s</p>" % (
                 Page.Page(request, pagename).link_to(request), msg))
-        request.write("Finished reverting %s.<br>" % pagename)
+        request.write("Finished reverting %s.<br>" % wikiutil.escape(pagename))
 
 def execute(pagename, request):
     _ = request.getText

@@ -9,7 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
+import os,re
 
 from xml.dom import getDOMImplementation
 from xml.dom.ext.reader import Sax
@@ -611,7 +611,12 @@ class Formatter(FormatterBase):
             was_in_para = self.cur.nodeName == "para"
             if was_in_para:
                 self.paragraph(0)
-            text = FormatterBase.macro(self, macro_obj, name, args)
+            
+            # Regular Expression to match editlink arg, remove it because it causes trouble.
+            _arg_editlink = r'(,\s*(?P<editlink>editlink))?'
+            macro_args = re.sub(_arg_editlink, '', args)
+        
+            text = FormatterBase.macro(self, macro_obj, name, macro_args)
             if text.strip():
                 self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)
             if was_in_para:
