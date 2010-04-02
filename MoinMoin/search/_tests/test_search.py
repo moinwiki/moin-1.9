@@ -465,6 +465,25 @@ class TestXapianSearch(BaseSearchTest):
         test_result = len(result.hits)
         assert test_result == 1
 
+    def test_regex_content_search_in_new_page(self):
+        self.pages['ContentTestCreatePage'] = 'M01nM01n 1s 4n 4dv4nc3d, 34sy t0 us3 4nd 3xt3ns1bl3 W1k13ng1n3' # Xapian search must search this page
+        try:
+            create_page(self.request, 'ContentTestCreatePage', self.pages['ContentTestCreatePage'])
+            self._index_update()
+            search_result = self.search(u'-domain:underlay -domain:system re:M01n.*')
+            test_result = len(search_result.hits)
+            for title in search_result.hits:
+                assert title.page_name == 'ContentTestCreatePage'
+            test_result = len(search_result.hits)
+            assert test_result == 1
+        finally:
+            nuke_page(self.request, 'ContentTestCreatePage')
+            self._index_update()
+            del self.pages['ContentTestCreatePage']
+            result = self.search(u'-domain:underlay -domain:system ContentTestCreatePage')
+            test_result = len(result.hits)
+            assert test_result == 0
+
 
 class TestXapianSearchStemmed(TestXapianSearch):
     class Config(wikiconfig.Config):
