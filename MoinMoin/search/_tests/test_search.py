@@ -96,6 +96,8 @@ class BaseSearchTest(object):
              u'SearchTestOtherLinks': u'SearchTestLinks',
              u'TestEdit': u'TestEdit',
              u'TestOnEditing': u'another test page',
+             u'ContentSearchUpper': u'Find the NEEDLE in the haystack.',
+             u'ContentSearchLower': u'Find the needle in the haystack.',
              u'LanguageSetup': None,
              u'CategoryHomepage': None,
              u'HomePageWiki': None,
@@ -241,12 +243,12 @@ class BaseSearchTest(object):
     def test_mimetype_search_simple(self):
         result = self.search(u'mimetype:text/wiki')
         test_result = len(result.hits)
-        assert test_result == 12
+        assert test_result == 14
 
     def test_mimetype_search_re(self):
         result = self.search(ur'mimetype:re:\btext/wiki\b')
         test_result = len(result.hits)
-        assert test_result == 12
+        assert test_result == 14
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
@@ -254,7 +256,7 @@ class BaseSearchTest(object):
     def test_language_search_simple(self):
         result = self.search(u'language:en')
         test_result = len(result.hits)
-        assert test_result == 12
+        assert test_result == 14
 
     def test_domain_search_simple(self):
         result = self.search(u'domain:system')
@@ -304,6 +306,22 @@ class BaseSearchTest(object):
         test_result = len(result.hits)
         n_pages = len(self.pages)
         assert test_result == n_pages
+
+    def testFullSearchRegexCaseInsensitive(self):
+        """ search: full search for regular expression """
+        search_re = 'ne{2}dle' # matches 'NEEDLE' or 'needle' or ...
+        expected_pages = ['ContentSearchUpper', 'ContentSearchLower', ]
+        result = self.search(u'-domain:underlay -domain:system re:%s' % search_re)
+        found_pages = [hit.page_name for hit in result.hits]
+        assert found_pages == expected_pages
+
+    def testFullSearchRegexCaseSensitive(self):
+        """ search: full search for regular expression """
+        search_re = 'ne{2}dle' # matches 'needle'
+        expected_pages = ['ContentSearchLower', ]
+        result = self.search(u'-domain:underlay -domain:system re:case:%s' % search_re)
+        found_pages = [hit.page_name for hit in result.hits]
+        assert found_pages == expected_pages
 
     def test_title_search(self):
         query = QueryParser(titlesearch=True).parse_query('FrontPage')
@@ -464,25 +482,6 @@ class TestXapianSearch(BaseSearchTest):
         result = self.search(u"title:editing")
         test_result = len(result.hits)
         assert test_result == 1
-
-    def test_regex_content_search_in_new_page(self):
-        self.pages['ContentTestCreatePage'] = 'M01nM01n 1s 4n 4dv4nc3d, 34sy t0 us3 4nd 3xt3ns1bl3 W1k13ng1n3' # Xapian search must search this page
-        try:
-            create_page(self.request, 'ContentTestCreatePage', self.pages['ContentTestCreatePage'])
-            self._index_update()
-            search_result = self.search(u'-domain:underlay -domain:system re:M01n.*')
-            test_result = len(search_result.hits)
-            for title in search_result.hits:
-                assert title.page_name == 'ContentTestCreatePage'
-            test_result = len(search_result.hits)
-            assert test_result == 1
-        finally:
-            nuke_page(self.request, 'ContentTestCreatePage')
-            self._index_update()
-            del self.pages['ContentTestCreatePage']
-            result = self.search(u'-domain:underlay -domain:system ContentTestCreatePage')
-            test_result = len(result.hits)
-            assert test_result == 0
 
 
 class TestXapianSearchStemmed(TestXapianSearch):
