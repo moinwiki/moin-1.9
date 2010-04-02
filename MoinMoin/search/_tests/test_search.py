@@ -2,8 +2,7 @@
 """
     MoinMoin - MoinMoin.search Tests
 
-    We exclude underlay/system pages for some search tests
-    to save time.
+    We exclude underlay/system pages for some search tests to save time.
 
     @copyright: 2005 by Nir Soffer <nirs@freeshell.org>,
                 2007-2010 by MoinMoin:ThomasWaldmann
@@ -104,7 +103,8 @@ class BaseSearchTest(object):
              u'FrontPage': None,
              u'RecentChanges': None,
              u'HelpOnCreoleSyntax': None,
-             u'HelpIndex': None}
+             u'HelpIndex': None,
+            }
 
     searcher_class = None
 
@@ -142,7 +142,8 @@ class BaseSearchTest(object):
                     u'title:TestOn': 1,
                     u'title:SearchTestNotExisting': 0,
                     u'title:FrontPage': 1,
-                    u'title:TestOnEditing': 1}
+                    u'title:TestOnEditing': 1,
+                   }
 
         def test(query, res_count):
             result = self.search(query)
@@ -336,7 +337,7 @@ class BaseSearchTest(object):
         assert test_result == n_pages
 
     def testFullSearchRegexCaseInsensitive(self):
-        """ search: full search for regular expression """
+        """ search: full search for regular expression (case insensitive) """
         search_re = 'ne{2}dle' # matches 'NEEDLE' or 'needle' or ...
         expected_pages = set(['ContentSearchUpper', 'ContentSearchLower', ])
         result = self.search(u'-domain:underlay -domain:system re:%s' % search_re)
@@ -344,7 +345,7 @@ class BaseSearchTest(object):
         assert found_pages == expected_pages
 
     def testFullSearchRegexCaseSensitive(self):
-        """ search: full search for regular expression """
+        """ search: full search for regular expression (case sensitive) """
         search_re = 'ne{2}dle' # matches 'needle'
         expected_pages = set(['ContentSearchLower', ])
         result = self.search(u'-domain:underlay -domain:system re:case:%s' % search_re)
@@ -396,7 +397,7 @@ class BaseSearchTest(object):
             found_attachments = set([(hit.page_name, hit.attachment) for hit in result.hits])
             assert (page_name, '') in found_attachments
             assert 1 <= len(found_attachments) <= 2
-            # note: moin search on returns (page_name, '') as only result
+            # Note: moin search returns (page_name, '') as only result
             #       xapian search returns 2 results: (page_name, '') and (page_name, filename)
             # TODO: make behaviour the same, if possible
         finally:
@@ -412,7 +413,7 @@ class BaseSearchTest(object):
 
 
 class TestMoinSearch(BaseSearchTest):
-
+    """ search: test Moin search """
     searcher_class = MoinSearch
 
     def get_searcher(self, query):
@@ -432,10 +433,9 @@ class TestMoinSearch(BaseSearchTest):
 
 
 class TestXapianSearch(BaseSearchTest):
-    """ search: test Xapian indexing """
+    """ search: test Xapian indexing / search """
 
     class Config(wikiconfig.Config):
-
         xapian_search = True
 
     def _index_update(self):
@@ -454,7 +454,6 @@ class TestXapianSearch(BaseSearchTest):
         return XapianIndex(self.request).get_search_connection()
 
     def setup_class(self):
-
         try:
             from MoinMoin.search.Xapian import XapianIndex
             from MoinMoin.search.Xapian.search import XapianSearch
@@ -463,7 +462,6 @@ class TestXapianSearch(BaseSearchTest):
         except ImportError, error:
             if not str(error).startswith('Xapian '):
                 raise
-
             py.test.skip('xapian is not installed')
 
         nuke_xapian_index(self.request)
@@ -497,7 +495,8 @@ class TestXapianSearch(BaseSearchTest):
                     u'category:': ([u'', u're:', u'case:', u'case:re:'], u'CategoryHomepage'),
                     u'mimetype:': ([u'', u're:'], u'text/wiki'),
                     u'language:': ([u''], u'en'),
-                    u'domain:': ([u''], u'system')}
+                    u'domain:': ([u''], u'system'),
+                   }
 
         def test_query(query):
             query_ = parser.parse_query(query).xapian_term(self.request, connection)
@@ -523,8 +522,9 @@ class TestXapianSearch(BaseSearchTest):
 
 
 class TestXapianSearchStemmed(TestXapianSearch):
-    class Config(wikiconfig.Config):
+    """ search: test Xapian indexing / search - with stemming enabled """
 
+    class Config(wikiconfig.Config):
         xapian_search = True
         xapian_stemming = True
 
@@ -545,7 +545,6 @@ class TestXapianSearchStemmed(TestXapianSearch):
 class TestGetSearcher(object):
 
     class Config(wikiconfig.Config):
-
         xapian_search = True
 
     def test_get_searcher(self):
