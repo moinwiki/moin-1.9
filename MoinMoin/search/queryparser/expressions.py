@@ -378,11 +378,22 @@ class TextSearch(BaseTextFieldSearch):
         return matches
 
     def xapian_term(self, request, connection):
+        if self.use_re:
+            # if regex search is wanted, we need to match all documents, because
+            # we do not have full content stored and need post processing to do
+            # the regex searching.
+            return Query('') # MatchAll
+        else:
+            content_query = super(TextSearch, self).xapian_term(request, connection)
+            title_query = TitleSearch(self._pattern, use_re=self.use_re, case=self.case).xapian_term(request, connection)
+            return Query(OP_OR, [title_query, content_query])
 
-        content_query = super(TextSearch, self).xapian_term(request, connection)
-        title_query = TitleSearch(self._pattern, use_re=self.use_re, case=self.case).xapian_term(request, connection)
-
-        return Query(OP_OR, [title_query, content_query])
+    def xapian_need_postproc(self):
+        # case-sensitive: xapian is case-insensitive, therefore we need postproc
+        # regex: xapian can't do regex search. also we don't have full content
+        #        stored (and we don't want to do that anyway), so regex search
+        #        needs postproc also.
+        return self.case or self.use_re
 
 
 class TitleSearch(BaseTextFieldSearch):
