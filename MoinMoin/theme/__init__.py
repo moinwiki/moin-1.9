@@ -1635,6 +1635,13 @@ var gui_editor_link_text = "%(text)s";
         if meta_desc:
             user_head.append('<meta name="description" content="%s">\n' % wikiutil.escape(meta_desc, 1))
 
+        #  add meta statement if user has doubleclick on edit turned on or it is default
+        if (pagename and keywords.get('allow_doubleclick', 0) and
+            not keywords.get('print_mode', 0) and
+            request.user.edit_on_doubleclick):
+            if request.user.may.write(pagename): # separating this gains speed
+                user_head.append('<meta name="edit_on_doubleclick" content="1">\n')
+
         # search engine precautions / optimization:
         # if it is an action or edit/search, send query headers (noindex,nofollow):
         if request.query_string:
@@ -1737,14 +1744,6 @@ var gui_editor_link_text = "%(text)s";
         if keywords.has_key('body_attr'):
             bodyattr.append(' ')
             bodyattr.append(keywords['body_attr'])
-
-        # Add doubleclick edit action
-        if (pagename and keywords.get('allow_doubleclick', 0) and
-            not keywords.get('print_mode', 0) and
-            request.user.edit_on_doubleclick):
-            if request.user.may.write(pagename): # separating this gains speed
-                url = page.url(request, {'action': 'edit'})
-                bodyattr.append(''' ondblclick="location.href='%s'" ''' % wikiutil.escape(url, True))
 
         # Set body to the user interface language and direction
         bodyattr.append(' %s' % self.ui_lang_attr())

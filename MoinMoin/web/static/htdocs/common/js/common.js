@@ -389,3 +389,190 @@ var getElementsByClassName = function (className, tag, elm){
     return getElementsByClassName(className, tag, elm);
 };
 
+
+// ===========================================================================
+// The following functions are part of scroll edit textarea on double-click
+//
+// This code is public domain (or primarily public domain).
+// Do whatever you want with it.  In particular, you may release it under
+// GPL 2.0 or incorporate it into projects that use GPL 2.0.
+// -- Radomir Dopieralski
+// Copyright: 2010 Roger D. Haase
+// License: GNU GPL V2 or later
+
+// this scrolls the textarea after a doubleclick - jumpLine is scroll-to line
+function scrollTextarea(jumpLine) {
+    var txtBox = document.getElementById('editor-textarea');
+    if (txtBox) {
+        // Calculate the cursor position - IE supports innerText, not textContent
+        var textLines = txtBox.textContent || txtBox.innerText;
+        textLines = textLines.match(/(.*\n)/g);
+        var scrolledText = '';
+        for (var i = 0; i < textLines.length && i < jumpLine; ++i) {
+            scrolledText += textLines[i];
+        }
+        txtBox.focus();
+        if (txtBox.setSelectionRange) {
+            // Standard-compliant browsers
+            // Move the cursor
+            txtBox.setSelectionRange(scrolledText.length, scrolledText.length);
+            // Calculate how far to scroll, by putting the text that is to be
+            // above the fold in a DIV, and checking the DIV's height.
+            var scrollPre = document.createElement('pre');
+            txtBox.parentNode.appendChild(scrollPre);
+            var style = window.getComputedStyle(txtBox, '');
+            scrollPre.style.lineHeight = style.lineHeight;
+            scrollPre.style.fontFamily = style.fontFamily;
+            scrollPre.style.fontSize = style.fontSize;
+            scrollPre.style.padding = 0;
+            scrollPre.style.letterSpacing = style.letterSpacing;
+            // Different browsers call this value differently:
+            try { scrollPre.style.whiteSpace = "-moz-pre-wrap"; } catch(e) {}
+            try { scrollPre.style.whiteSpace = "-o-pre-wrap"; } catch(e) {}
+            try { scrollPre.style.whiteSpace = "-pre-wrap"; } catch(e) {}
+            try { scrollPre.style.whiteSpace = "pre-wrap"; } catch(e) {}
+            scrollPre.textContent = scrolledText;
+            txtBox.scrollTop = scrollPre.scrollHeight-100;
+            scrollPre.parentNode.removeChild(scrollPre);
+        } else if (txtBox.createTextRange) {
+            // Microsoft Internet Explorer
+            // We don't need to scroll, it will do it automatically, just move
+            // the cursor.
+            var range = txtBox.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', scrolledText.length);
+            range.moveStart('character', scrolledText.length);
+            range.select();
+            txtBox.__column = 1;
+        }
+    } else {
+        // no editor-textarea means gui editor; scroll to top in case this was
+        // double-click on draft preview
+        scroll(0,0);
+    }
+}
+
+// This is the function that registers double clicks.
+// isPreview is true if the current page is an edit draft preview
+function setCallback(node, line, isPreview) {
+    if (!node.scrollLine) {
+        // Don't change the line number if there is one already.
+        // MoinMoin seems to be off by 2 lines
+        node.scrollLine = 0+line-2;
+    }
+    if (node.scrollLine || node.scrollLine === 0) {
+        if (isPreview) {
+            node.ondblclick = function () {
+                // scroll page locally and preserve existing edits
+                scrollTextarea([this.scrollLine]);
+            };
+        } else {
+            node.ondblclick = function () {
+                // Only change the query part of the URL
+                document.location.search = '?action=edit&line='+this.scrollLine;
+            };
+        }
+    }
+}
+
+// run during page load when user may edit current page OR is viewing draft preview
+function setSpanTags(isPreview) {
+    // Check all the SPAN tags
+    var marks = document.getElementsByTagName('span');
+    for (var i = 0; i < marks.length; ++i) {
+        var mark = marks[i];
+        if (mark.id && mark.id.substring(0, 5) == 'line-') {
+            // We have a line mark SPAN, get the line number from it
+            var line = mark.id.replace('line-', '');
+            if (mark.parentNode.tagName == 'DIV')  {
+                // If the SPAN is inside a DIV, set callback on the previous
+                // non-SPAN element in the same DIV.
+                var child = mark.parentNode.firstChild;
+                var last_child = null;
+                while (child) {
+                    if (child == mark && last_child) {
+                        setCallback(last_child, line, isPreview);
+                    }
+                    if (child.tagName && child.tagName != 'SPAN') {
+                        // Only consider tag that are not SPANs
+                        last_child = child;
+                    }
+                    child = child.nextSibling;
+                }
+            } else {
+                // If the SPAN is inside a P, simply set callback on that P
+                setCallback(mark.parentNode, line, isPreview);
+            }
+        }
+    }
+}
+
+// test to see if this user has selected or defaulted to edit_on_doubleclick AND
+// whether we are viewing a page, editing a page, or previewing an edit draft 
+function scrollTextareaInit() {
+    // look for meta tag -- is edit_on_doubleclick present?
+    if (!document.getElementsByName('edit_on_doubleclick').length) {
+        return;
+    }
+    // are we viewing a page - both gui and text editors will have button named button_save
+    if (!document.getElementsByName('button_save').length) {
+        setSpanTags(0);
+        return;
+    }
+    // we are in editor -- is there a line number specified in URL?
+    var lineMatch = document.location.search.match(/line=(\d*)/);
+    if (lineMatch) {
+        scrollTextarea(lineMatch[1]);
+    } else {
+        // is an editor preview
+        setSpanTags(1);
+    }
+}
+
+// Now to resolve the problem of how to best execute scrollTextareaInit
+// -- We want to run as soon as DOM is loaded, perhaps many seconds before last big image is loaded
+// -- If we wait for body.onload, the user may see and doubleclick on text before we are ready 
+// -- If every browser supported DOMContentLoaded, we could do:
+//         document.addEventListener("DOMContentLoaded", scrollTextareaInit, false);
+// -- If we had jQuery, we could do:
+//         jQuery(scrollTextareaInit);
+// -- Another possibility is to add a bit of script near the end of the mypage.HTML, hoping the DOM is ready
+//         '<script type="text/javascript" language="javascript">scrollTextareaInit()</script>'
+// -- Our choice is to speed up most current browsers and do slow but sure for the rest:
+
+// run scrollTextareaInit one time;  this function will be called twice for almost all browsers,
+scrollTextareaInitComplete = 0;
+function runScrollTextareaInitOnce() {
+    // uncomment next line to test - most browsers will display this alert twice 
+    //~ alert('scrollTextareaInitComplete=' + scrollTextareaInitComplete);
+    if (scrollTextareaInitComplete) {
+        return;
+    }
+    scrollTextareaInitComplete = 1;
+    scrollTextareaInit();
+}
+
+// speed up most browsers -- run my function As Soon As Possible
+function runASAP(func) {
+    if (document.addEventListener) { 
+        // Firefox 3.6, Chrome 4.0.249.89, Safari for Windows 4.04, Opera 10.5beta, and maybe older versions
+        // schedule func to be run when DOM complete
+        document.addEventListener("DOMContentLoaded", func, false);
+    } else {
+        // trick discovered by Diego Perini to test for IE DOM complete
+        if (document.documentElement.doScroll && window == window.top) {
+            try {
+                document.documentElement.doScroll("left");
+                // DOM is complete; run func now
+                func();
+            } catch(e) {
+                // wait and try again
+                setTimeout(arguments.callee, 1);
+            }
+        }
+    }
+}
+runASAP(runScrollTextareaInitOnce);
+// ensure init will be run by obsolete browsers
+addLoadEvent(runScrollTextareaInitOnce);
+
