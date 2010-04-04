@@ -337,19 +337,22 @@ class SearchResults(object):
                 displayHits = self.hits
 
             for page in displayHits:
-                # TODO handle interwiki search hits
-                if page.attachment:
+                if isinstance(page, FoundRemote):
+                    # TODO handle FoundRemote (interwiki) search hits
+                    continue
+                elif isinstance(page, FoundAttachment):
                     querydict = {
                         'action': 'AttachFile',
                         'do': 'view',
                         'target': page.attachment,
                     }
-                elif page.rev and page.rev != page.page.getRevList()[0]:
-                    querydict = {
-                        'rev': page.rev,
-                    }
-                else:
-                    querydict = None
+                elif isinstance(page, FoundPage):
+                    if page.rev and page.rev != page.page.getRevList()[0]:
+                        querydict = {
+                            'rev': page.rev,
+                        }
+                    else:
+                        querydict = None
                 querystr = self.querystring(querydict)
 
                 matchInfo = ''
