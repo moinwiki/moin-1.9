@@ -4,7 +4,7 @@
     MoinMoin - Version Information
 
     @copyright: 2000-2006 Juergen Hermann <jh@web.de>,
-                2003-2009 MoinMoin:ThomasWaldmann
+                2003-2010 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import sys
@@ -15,8 +15,8 @@ except:
     patchlevel = 'release'
 
 project = "MoinMoin"
-release = '1.9.2'
-release_short = '192' # used for url_prefix_static
+release = '1.9.3'
+release_short = '193' # used for url_prefix_static
 revision = patchlevel
 
 def update():
