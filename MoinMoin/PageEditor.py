@@ -322,6 +322,7 @@ Please review the page and save then. Do not save this page as it is!""")
                      'lock_secs': lock_secs,
                     }) or '',
             editor_mode=1,
+            allow_doubleclick=1,
         )
 
         request.write(request.formatter.startContent("content"))
