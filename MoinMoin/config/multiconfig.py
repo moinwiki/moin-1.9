@@ -1192,7 +1192,7 @@ options = {
       ('checkbox_defaults',
        {
         'mailto_author': 0,
-        'edit_on_doubleclick': 0,
+        'edit_on_doubleclick': 1,
         'remember_last_visit': 0,
         'show_comments': 0,
         'show_nonexist_qm': False,
