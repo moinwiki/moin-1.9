@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -1209,9 +1209,9 @@ msgstr ""
 "Puslapis „%(pagename)s“ buvo pervadintas iš „%(oldname)s“ %(editor)s:\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "%(sitename)s sukurta nauja naudotojo paskyra"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Jūsų wiki paskyros duomenys"
 
 #, fuzzy, python-format
 msgid ""
@@ -1227,8 +1227,8 @@ msgstr ""
 "    Naudotojo vardas: %(username)s\n"
 "    El. pašto adresas: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Naujas priedas įkeltas į %(sitename)s puslapį %(pagename)s"
 
 #, python-format
@@ -1251,8 +1251,8 @@ msgstr ""
 "Priedo pavadinimas: %(attach_name)s\n"
 "Priedo dydis: %(attach_size)s\n"
 
-#, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Priedas pašalintas iš %(sitename)s puslapio %(pagename)s"
 
 #, python-format
@@ -3197,17 +3197,23 @@ msgstr "Nežinomas atsarginio kopijavimo poveiksmis: %s."
 msgid "Please choose:"
 msgstr "Prašome pasirinkti:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Pervadinti ir visus /popuslapius?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Ar tikrai pervadinti šį puslapį?"
 
 msgid "New name"
 msgstr "Naujas pavadinimas"
 
 msgid "Optional reason for the renaming"
 msgstr "Neprivaloma priežastis pervadinimui"
-
-msgid "Really rename this page?"
-msgstr "Ar tikrai pervadinti šį puslapį?"
 
 msgid "Copy all /subpages too?"
 msgstr "Kopijuoti ir visus /popuslapius?"
@@ -3268,11 +3274,15 @@ msgid "Next change"
 msgstr "Kitas pakeitimas"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Nėra senesnių versijų!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Nėra senesnių versijų!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Nėra senesnių versijų!"
 
 msgid "Diff with newer revision in left pane"
@@ -3292,6 +3302,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Nėra senesnių versijų!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Nėra senesnių versijų!"
 
 #, python-format
@@ -3608,6 +3622,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "%(sitename)s sukurta nauja naudotojo paskyra"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "Prašome naudoti interaktyviąją naudotojo sąsają priedų perkėlimui!"

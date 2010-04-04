@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -1201,9 +1201,9 @@ msgstr ""
 "s:\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Jūsu viki konta dati"
 
 #, fuzzy, python-format
 msgid ""
@@ -1219,8 +1219,8 @@ msgstr ""
 "    Lietotāja vārds: %(username)s\n"
 "    E-pasta adrese: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Jauna piesaiste piesaistīta lapai %(pagename)s uz %(sitename)s"
 
 #, python-format
@@ -1236,7 +1236,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Jauna piesaiste piesaistīta lapai %(pagename)s uz %(sitename)s"
 
 #, fuzzy, python-format
@@ -3124,17 +3124,23 @@ msgstr "Nezināma dublēšanas apakšdarbība: %s."
 msgid "Please choose:"
 msgstr "Lūdzu izvēlieties:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Vai pārdēvēt arī visas apakšlapas?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Jūs tiešām vēlaties pārdēvēt šo lapu?"
 
 msgid "New name"
 msgstr "Jauns nosaukums"
 
 msgid "Optional reason for the renaming"
 msgstr "Pārdēvēšanas iemesls (neobligāts)"
-
-msgid "Really rename this page?"
-msgstr "Jūs tiešām vēlaties pārdēvēt šo lapu?"
 
 msgid "Copy all /subpages too?"
 msgstr "Kopēt ar apakšlapām?"
@@ -3195,11 +3201,15 @@ msgid "Next change"
 msgstr "Nākamais labojums"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Vecākas versijas nav!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Vecākas versijas nav!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Vecākas versijas nav!"
 
 msgid "Diff with newer revision in left pane"
@@ -3219,6 +3229,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Vecākas versijas nav!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Vecākas versijas nav!"
 
 #, python-format
@@ -3527,6 +3541,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonīms"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr ""

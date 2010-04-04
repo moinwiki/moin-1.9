@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -1095,7 +1095,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New user account created on %(sitename)s"
+msgid "[%(sitename)s] New user account created"
 msgstr ""
 
 #, python-format
@@ -1108,7 +1108,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -1124,7 +1124,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -3037,7 +3037,16 @@ msgstr "نفذ عملية %(actionname)s?"
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
 msgstr ""
 
 msgid "New name"
@@ -3045,9 +3054,6 @@ msgstr "الإسم الجديد"
 
 msgid "Optional reason for the renaming"
 msgstr "سبب إختياري لإعادة التسمية"
-
-msgid "Really rename this page?"
-msgstr ""
 
 msgid "Copy all /subpages too?"
 msgstr ""
@@ -3111,10 +3117,13 @@ msgstr "السابق"
 msgid "Next change"
 msgstr "لم يتغير أي شيء"
 
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr ""
 
 msgid "No older revision available for diff"
+msgstr ""
+
+msgid "Diff with older revision in left pane"
 msgstr ""
 
 msgid "Diff with newer revision in left pane"
@@ -3133,6 +3142,9 @@ msgid "Diff with newer revision in right pane"
 msgstr ""
 
 msgid "No newer revision available for diff"
+msgstr ""
+
+msgid "Diff with newest revision in right pane"
 msgstr ""
 
 #, python-format

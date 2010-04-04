@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1207,9 +1207,9 @@ msgstr ""
 "(editor)%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Дані вашого облікового рахунку wiki"
 
 #, python-format
 msgid ""
@@ -1221,7 +1221,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Нове вкладення додано до сторінки %(pagename)s на %(sitename)s"
 
 #, python-format
@@ -1237,7 +1237,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Нове вкладення додано до сторінки %(pagename)s на %(sitename)s"
 
 #, fuzzy, python-format
@@ -3210,17 +3210,23 @@ msgstr "Невідома вкладена дія резервного копію
 msgid "Please choose:"
 msgstr "Будь ласка, виберіть:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Перейменувати також всі /підсторінки?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Дійсно перейменувати цю сторінку?"
 
 msgid "New name"
 msgstr "Нова назва"
 
 msgid "Optional reason for the renaming"
 msgstr "Причина перейменування (необов'язково)"
-
-msgid "Really rename this page?"
-msgstr "Дійсно перейменувати цю сторінку?"
 
 msgid "Copy all /subpages too?"
 msgstr "Копіювати також усі /підсторінки?"
@@ -3281,11 +3287,15 @@ msgid "Next change"
 msgstr "Наступна зміна"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Немає більш старих виправлень!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Немає більш старих виправлень!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Немає більш старих виправлень!"
 
 msgid "Diff with newer revision in left pane"
@@ -3305,6 +3315,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Немає більш старих виправлень!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Немає більш старих виправлень!"
 
 #, python-format

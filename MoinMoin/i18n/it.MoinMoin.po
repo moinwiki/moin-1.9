@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2009-10-03 22:29+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1220,9 +1220,9 @@ msgstr ""
 "La pagina \"%(pagename)s\" è stata rinominata da \"%(oldname)s\" da parte di "
 "%(editor)s:\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Nuovo account creato su %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Dati del tuo account wiki"
 
 #, fuzzy, python-format
 msgid ""
@@ -1238,8 +1238,8 @@ msgstr ""
 "    Nome utente: %(username)s\n"
 "    Indirizzo email: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Aggiunto un nuovo allegato alla pagina %(pagename)s su %(sitename)s"
 
 #, python-format
@@ -1263,7 +1263,7 @@ msgstr ""
 "Dimensione allegato: %(attach_size)s\n"
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Aggiunto un nuovo allegato alla pagina %(pagename)s su %(sitename)s"
 
 #, fuzzy, python-format
@@ -3255,17 +3255,23 @@ msgstr "Sotto-azione di backup sconosciuta: %s."
 msgid "Please choose:"
 msgstr "Scegliere:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Rinominare anche tutte le /sotto-pagine?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Rinominare veramente questa pagina?"
 
 msgid "New name"
 msgstr "Nuovo nome"
 
 msgid "Optional reason for the renaming"
 msgstr "Ragione facoltativa per la rinomina"
-
-msgid "Really rename this page?"
-msgstr "Rinominare veramente questa pagina?"
 
 msgid "Copy all /subpages too?"
 msgstr "Copiare anche tutte le /sotto-pagine?"
@@ -3326,11 +3332,15 @@ msgid "Next change"
 msgstr "Modifica successiva"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Non ci sono revisioni precedenti."
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Non ci sono revisioni precedenti."
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Non ci sono revisioni precedenti."
 
 msgid "Diff with newer revision in left pane"
@@ -3350,6 +3360,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Non ci sono revisioni precedenti."
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Non ci sono revisioni precedenti."
 
 #, python-format
@@ -3667,6 +3681,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimo"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Nuovo account creato su %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "Usa l'interfaccia interattiva per spostare gli allegati."

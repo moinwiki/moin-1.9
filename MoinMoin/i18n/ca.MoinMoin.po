@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1185,9 +1185,9 @@ msgstr ""
 "%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Les dades del vostre compte wiki"
 
 #, python-format
 msgid ""
@@ -1199,7 +1199,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "<<Verbatim(attachment:)>>%(filename)s de %(pagename)s"
 
 #, python-format
@@ -1215,7 +1215,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "<<Verbatim(attachment:)>>%(filename)s de %(pagename)s"
 
 #, fuzzy, python-format
@@ -3154,17 +3154,23 @@ msgstr "L'acció %(action_name)s és desconeguda."
 msgid "Please choose:"
 msgstr "Seleccioneu:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Voleu canviar el nom també totes les /subpàgines?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Esteu segur de voler canviar el nom a aquesta pàgina?"
 
 msgid "New name"
 msgstr "Nom nou"
 
 msgid "Optional reason for the renaming"
 msgstr "Raó opcional per al canvi de nom"
-
-msgid "Really rename this page?"
-msgstr "Esteu segur de voler canviar el nom a aquesta pàgina?"
 
 msgid "Copy all /subpages too?"
 msgstr "Voleu copiar també totes les /subpàgines?"
@@ -3225,11 +3231,15 @@ msgid "Next change"
 msgstr "Canvi següent"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "No hi ha revisions més velles disponibles."
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "No hi ha revisions més velles disponibles."
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "No hi ha revisions més velles disponibles."
 
 msgid "Diff with newer revision in left pane"
@@ -3249,6 +3259,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "No hi ha revisions més velles disponibles."
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "No hi ha revisions més velles disponibles."
 
 #, python-format

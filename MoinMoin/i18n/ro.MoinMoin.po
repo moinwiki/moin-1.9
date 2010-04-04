@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -1179,9 +1179,9 @@ msgstr ""
 "%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Datele contului wiki al dumneavoastră"
 
 #, python-format
 msgid ""
@@ -1193,7 +1193,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "ataşament:%(filename)s al %(pagename)s"
 
 #, python-format
@@ -1209,7 +1209,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "ataşament:%(filename)s al %(pagename)s"
 
 #, fuzzy, python-format
@@ -3186,18 +3186,24 @@ msgstr "Acţiune necunoscută %(action_name)s."
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Sigur doriţi ştergerea acestei pagini ?"
 
 msgid "New name"
 msgstr "Nume nou"
 
 msgid "Optional reason for the renaming"
 msgstr "Motiv opţional referitor la redenumire."
-
-#, fuzzy
-msgid "Really rename this page?"
-msgstr "Sigur doriţi ştergerea acestei pagini ?"
 
 msgid "Copy all /subpages too?"
 msgstr ""
@@ -3262,11 +3268,15 @@ msgid "Next change"
 msgstr "Salvare modificări"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Nici o revizie mai veche nu este disponibilă!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Nici o revizie mai veche nu este disponibilă!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Nici o revizie mai veche nu este disponibilă!"
 
 msgid "Diff with newer revision in left pane"
@@ -3286,6 +3296,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Nici o revizie mai veche nu este disponibilă!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Nici o revizie mai veche nu este disponibilă!"
 
 #, python-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -1167,9 +1167,9 @@ msgstr ""
 "והוא נקרא כעת\n"
 "%(pagename)s\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "משתמש חדש נוצר ב %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] פרטי המשתמש שלך"
 
 #, fuzzy, python-format
 msgid ""
@@ -1184,8 +1184,8 @@ msgstr ""
 "    שם משתמש: %(username)s\n"
 "    כתובת דוא\"ל: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "קובץ חדש צורף לדף \"%(pagename)s\" באתר \"%(sitename)s\""
 
 #, python-format
@@ -1208,7 +1208,7 @@ msgstr ""
 "גודל הקובץ: %(attach_size)s\n"
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "קובץ חדש צורף לדף \"%(pagename)s\" באתר \"%(sitename)s\""
 
 #, fuzzy, python-format
@@ -3152,17 +3152,23 @@ msgstr "תת פעולת גיבוי בלתי ידועה: %s"
 msgid "Please choose:"
 msgstr "אפשרויות לבחירה:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "לשנות גם את השם של כל תת הדפים?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "באמת לשנות את שם הדף?"
 
 msgid "New name"
 msgstr "שם חדש"
 
 msgid "Optional reason for the renaming"
 msgstr "סיבה לשינוי שם"
-
-msgid "Really rename this page?"
-msgstr "באמת לשנות את שם הדף?"
 
 msgid "Copy all /subpages too?"
 msgstr "להעתיק גם את כל תת הדפים?"
@@ -3223,11 +3229,15 @@ msgid "Next change"
 msgstr "השינוי הבא"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "אין גרסאות ישנות יותר זמינות!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "אין גרסאות ישנות יותר זמינות!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "אין גרסאות ישנות יותר זמינות!"
 
 msgid "Diff with newer revision in left pane"
@@ -3247,6 +3257,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "אין גרסאות ישנות יותר זמינות!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "אין גרסאות ישנות יותר זמינות!"
 
 #, python-format
@@ -3554,6 +3568,9 @@ msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "משתמש חדש נוצר ב %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "אנא השתמשו במנשק המשתמש האינטראקטיבי להעברת קבצים מצורפים!"

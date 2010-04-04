@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -1203,9 +1203,9 @@ msgstr ""
 "%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Dine wiki brugerprofil-oplysninger"
 
 #, python-format
 msgid ""
@@ -1217,7 +1217,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "vedhæftning:%(filename)s til %(pagename)s"
 
 #, python-format
@@ -1233,7 +1233,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "vedhæftning:%(filename)s til %(pagename)s"
 
 #, fuzzy, python-format
@@ -3206,17 +3206,23 @@ msgstr "Ukendt backup-underrutine: %s."
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Omdøb alle /undersider også?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Er du sikker på at denne side skal omdøbes?"
 
 msgid "New name"
 msgstr "Nyt navn"
 
 msgid "Optional reason for the renaming"
 msgstr "Årsag til omdøbning (valgfrit)"
-
-msgid "Really rename this page?"
-msgstr "Er du sikker på at denne side skal omdøbes?"
 
 #, fuzzy
 msgid "Copy all /subpages too?"
@@ -3282,11 +3288,15 @@ msgid "Next change"
 msgstr "Intet ændret"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Ingen ældre udgaver tilgængelige!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Ingen ældre udgaver tilgængelige!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Ingen ældre udgaver tilgængelige!"
 
 msgid "Diff with newer revision in left pane"
@@ -3306,6 +3316,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Ingen ældre udgaver tilgængelige!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Ingen ældre udgaver tilgængelige!"
 
 #, python-format
