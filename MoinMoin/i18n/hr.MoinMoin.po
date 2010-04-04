@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -1202,9 +1202,9 @@ msgstr ""
 "Stranicu %(pagelink)s je izmijenio %(editor)s:\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Podaci o vašem korisničkom računu"
 
 #, python-format
 msgid ""
@@ -1216,7 +1216,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "<<Verbatim(attachment:)>>%(filename)s na strani %(pagename)s"
 
 #, python-format
@@ -1232,7 +1232,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "<<Verbatim(attachment:)>>%(filename)s na strani %(pagename)s"
 
 #, fuzzy, python-format
@@ -3206,17 +3206,23 @@ msgstr "Nepoznata akcija arhiviranja: %s."
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Preimenuj i sve /podstranice?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Zaista želite preimenovati ovu stranicu?"
 
 msgid "New name"
 msgstr "Novo ime"
 
 msgid "Optional reason for the renaming"
 msgstr "Razlog za preimenovanje (neobvezno)"
-
-msgid "Really rename this page?"
-msgstr "Zaista želite preimenovati ovu stranicu?"
 
 msgid "Copy all /subpages too?"
 msgstr "Kopiraj i sve /podstranice?"
@@ -3279,11 +3285,15 @@ msgid "Next change"
 msgstr "Nema izmjena"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Nema starijih inačica!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Nema starijih inačica!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Nema starijih inačica!"
 
 msgid "Diff with newer revision in left pane"
@@ -3303,6 +3313,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Nema starijih inačica!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Nema starijih inačica!"
 
 #, python-format

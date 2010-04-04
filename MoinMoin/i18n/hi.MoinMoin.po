@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -1084,7 +1084,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New user account created on %(sitename)s"
+msgid "[%(sitename)s] New user account created"
 msgstr ""
 
 #, python-format
@@ -1097,7 +1097,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -1113,7 +1113,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -2969,16 +2969,22 @@ msgstr "अज्ञान पुराना छोटी क्रिया: %
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
 msgstr ""
 
 msgid "New name"
 msgstr ""
 
 msgid "Optional reason for the renaming"
-msgstr ""
-
-msgid "Really rename this page?"
 msgstr ""
 
 msgid "Copy all /subpages too?"
@@ -3037,11 +3043,15 @@ msgid "Next change"
 msgstr "परिवर्तन सुरक्षित करे"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "पुराने रेविज़ंस नही !"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "पुराने रेविज़ंस नही !"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "पुराने रेविज़ंस नही !"
 
 msgid "Diff with newer revision in left pane"
@@ -3061,6 +3071,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "पुराने रेविज़ंस नही !"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "पुराने रेविज़ंस नही !"
 
 #, python-format

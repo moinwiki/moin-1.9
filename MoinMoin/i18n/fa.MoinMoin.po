@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1205,9 +1205,9 @@ msgstr ""
 "یافته است:\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "حساب کاربری جدید در %(sitename)s ایجاد شد"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] اطلاعات مربوط به حساب کاربری شما"
 
 #, python-format
 msgid ""
@@ -1223,8 +1223,8 @@ msgstr ""
 "    نام کاربری: %(username)s\n"
 "    آدرس ایمیل: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "ضمیمه جدید به صفحه %(pagename)s در سایت %(sitename)s الصاق شد"
 
 #, python-format
@@ -1249,8 +1249,8 @@ msgstr ""
 "نام ضمیمه: %(attach_name)s\n"
 "اندازه ضمیمه: %(attach_size)s\n"
 
-#, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "ضمیمهٔ صفحه %(pagename)s در سایت %(sitename)s حذف شد"
 
 #, python-format
@@ -3171,17 +3171,23 @@ msgstr "عملیات ناشناخته %s در پشتیبان‌گیری."
 msgid "Please choose:"
 msgstr "لطفا انتخاب نمایید:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "تغییرنام کلیه /زیر صفحات؟"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "از تغییرنام این صفحه مطمئنید؟"
 
 msgid "New name"
 msgstr "نام جدید"
 
 msgid "Optional reason for the renaming"
 msgstr "توضیحات اختیاری جهت تغببر نام صفحه"
-
-msgid "Really rename this page?"
-msgstr "از تغییرنام این صفحه مطمئنید؟"
 
 msgid "Copy all /subpages too?"
 msgstr "کپی کلیه زیر صفحات نیز انجام شود؟"
@@ -3235,11 +3241,15 @@ msgstr "تغییرات قبلی"
 msgid "Next change"
 msgstr "تغییرات بعدی"
 
-msgid "Diff with older revision in left pane"
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
 msgstr "تغییرات با نسخه‌های قدیمی‌تر در قسمت چپ"
 
 msgid "No older revision available for diff"
 msgstr "نسخهٔ با تغییرات قدیمی‌تر موجود نیست"
+
+msgid "Diff with older revision in left pane"
+msgstr "تغییرات با نسخه‌های قدیمی‌تر در قسمت چپ"
 
 msgid "Diff with newer revision in left pane"
 msgstr ""
@@ -3258,6 +3268,10 @@ msgstr ""
 
 msgid "No newer revision available for diff"
 msgstr "نسخهٔ با تغییرات جدیدتر موجود نیست"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "تغییرات با نسخه‌های قدیمی‌تر در قسمت چپ"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3572,6 +3586,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "حساب کاربری جدید در %(sitename)s ایجاد شد"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "لطفا جهت جابجایی ضمیمه‌ها از امکانات موجد استفاده نمایید!"

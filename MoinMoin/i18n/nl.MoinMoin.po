@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2010-02-16 11:29+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1215,9 +1215,9 @@ msgstr ""
 "De pagina \"%(oldname)s\" is door %(editor)s hernoemd naar \"%(pagename)s"
 "\":\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Nieuwe gebruikersaccount aangemaakt op %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Uw wiki account informatie"
 
 #, python-format
 msgid ""
@@ -1233,8 +1233,8 @@ msgstr ""
 "    Gebruikersnaam: %(username)s\n"
 "    E-mailadres: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Nieuwe bijlage toegevoegd aan pagina %(pagename)s op %(sitename)s"
 
 #, python-format
@@ -1257,8 +1257,8 @@ msgstr ""
 "Naam van de bijlage: %(attach_name)s\n"
 "Grootte: %(attach_size)s\n"
 
-#, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Bijlage verwijderd van pagina %(pagename)s op %(sitename)s"
 
 #, python-format
@@ -3224,17 +3224,23 @@ msgstr "Onbekende backup subactie: %s."
 msgid "Please choose:"
 msgstr "Kies:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Hernoem ook alle /subpagina's?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Bent u zeker dat u deze pagina wil hernoemen?"
 
 msgid "New name"
 msgstr "Nieuwe naam"
 
 msgid "Optional reason for the renaming"
 msgstr "Eventueel de reden voor deze hernoeming"
-
-msgid "Really rename this page?"
-msgstr "Bent u zeker dat u deze pagina wil hernoemen?"
 
 msgid "Copy all /subpages too?"
 msgstr "Kopieer alle /subpagina's ook?"
@@ -3288,11 +3294,15 @@ msgstr "Vorige wijziging"
 msgid "Next change"
 msgstr "Volgende wijziging"
 
-msgid "Diff with older revision in left pane"
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
 msgstr "Toon verschillen met oudere versie in linker paneel"
 
 msgid "No older revision available for diff"
 msgstr "Geen oudere versie beschikbaar om mee te vergelijken"
+
+msgid "Diff with older revision in left pane"
+msgstr "Toon verschillen met oudere versie in linker paneel"
 
 msgid "Diff with newer revision in left pane"
 msgstr "Toon verschillen met nieuwere versie in linker paneel"
@@ -3311,6 +3321,10 @@ msgstr "Toon verschillen met nieuwere versie in rechter paneel"
 
 msgid "No newer revision available for diff"
 msgstr "Geen nieuwere versie beschikbaar om mee te vergelijken"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "Toon verschillen met nieuwere versie in rechter paneel"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3628,6 +3642,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Nieuwe gebruikersaccount aangemaakt op %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr ""

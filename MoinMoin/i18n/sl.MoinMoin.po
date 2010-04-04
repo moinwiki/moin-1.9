@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1201,9 +1201,9 @@ msgstr ""
 "Stran \"%(pagename)s\" je %(editor)s preimenoval iz \"%(oldname)s\":\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Narejen je bil nov uporabniški račun na strežniku %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
 
 #, fuzzy, python-format
 msgid ""
@@ -1219,8 +1219,8 @@ msgstr ""
 "    Uporabniško ime: %(username)s\n"
 "    E-poštni naslov: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Nova priponka dodana strani %(pagename)s, strežnik %(sitename)s"
 
 #, python-format
@@ -1242,8 +1242,8 @@ msgstr ""
 "Ime priponke: %(attach_name)s\n"
 "Velikost priponke: %(attach_size)s\n"
 
-#, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Priponka odstranjena s strani %(pagename)s, strežnik %(sitename)s"
 
 #, python-format
@@ -3189,17 +3189,23 @@ msgstr "Neznana podakcija pri upravljanju z varnostno kopijo: %s"
 msgid "Please choose:"
 msgstr "Izberite:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Želite preimenovati tudi vse /podstrani?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Zares želite preimenovati to stran?"
 
 msgid "New name"
 msgstr "Novo ime"
 
 msgid "Optional reason for the renaming"
 msgstr "Razlog za preimenovanje (neobvezno)"
-
-msgid "Really rename this page?"
-msgstr "Zares želite preimenovati to stran?"
 
 msgid "Copy all /subpages too?"
 msgstr "Želite kopirati tudi vse podstrani?"
@@ -3254,11 +3260,15 @@ msgid "Next change"
 msgstr "Naslednja sprememba"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Ta stran nima starejših različic!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Ta stran nima starejših različic!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Ta stran nima starejših različic!"
 
 msgid "Diff with newer revision in left pane"
@@ -3278,6 +3288,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Ta stran nima starejših različic!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Ta stran nima starejših različic!"
 
 #, python-format
@@ -3591,6 +3605,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimno"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Narejen je bil nov uporabniški račun na strežniku %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "Za prestavitev priponk uporabite interaktivni uporabniški vmesnik!"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2010-02-13 23:15+0200\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -1203,9 +1203,9 @@ msgstr ""
 "%(editor)s on nimennyt sivun \"%(oldname)s\" uudelleen, sen uusi nimi on  \"%"
 "(pagename)s\":\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Wikiin %(sitename)s on luotu uusi käyttäjätunnus"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Wiki-tunnuksesi tiedot"
 
 #, python-format
 msgid ""
@@ -1221,8 +1221,8 @@ msgstr ""
 "    Käyttäjätunnus: %(username)s\n"
 "    Sähköpostiosoite: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Wikin %(sitename)s sivulle %(pagename)s on lisätty uusi liite"
 
 #, python-format
@@ -1243,8 +1243,8 @@ msgstr ""
 "Liitteen nimi: %(attach_name)s\n"
 "Liitteen koko: %(attach_size)s\n"
 
-#, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "Wikin %(sitename)s sivulta %(pagename)s on poistettu liitetiedosto"
 
 #, python-format
@@ -3247,17 +3247,23 @@ msgstr "Tuntematon varmistuksen osatoiminto: %s."
 msgid "Please choose:"
 msgstr "Valitse:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Uudelleennimetäänkö myös /alasivut?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Haluatko varmasti uudelleennimetä tämän sivun?"
 
 msgid "New name"
 msgstr "Uusi nimi"
 
 msgid "Optional reason for the renaming"
 msgstr "Uudelleennimeämisen syy (vapaaehtoinen)"
-
-msgid "Really rename this page?"
-msgstr "Haluatko varmasti uudelleennimetä tämän sivun?"
 
 msgid "Copy all /subpages too?"
 msgstr "Kopioidaanko myös kaikki /alasivut?"
@@ -3311,11 +3317,15 @@ msgstr "Edellinen muutos"
 msgid "Next change"
 msgstr "Seuraava muutos"
 
-msgid "Diff with older revision in left pane"
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
 msgstr "Erot vanhempaan versioon vasemmassa osassa"
 
 msgid "No older revision available for diff"
 msgstr "Vanhempia versioita ei saatavilla erojen näyttämistä varten"
+
+msgid "Diff with older revision in left pane"
+msgstr "Erot vanhempaan versioon vasemmassa osassa"
 
 msgid "Diff with newer revision in left pane"
 msgstr "Erot uudempaan versioon vasemmassa osassa"
@@ -3334,6 +3344,10 @@ msgstr "Erot uudempaan versioon oikeassa osassa"
 
 msgid "No newer revision available for diff"
 msgstr "Uudempaa versiota ei saatavilla erojen näyttämistä varten"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "Erot uudempaan versioon oikeassa osassa"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3648,6 +3662,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "﻿anonyymi"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Wikiin %(sitename)s on luotu uusi käyttäjätunnus"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "Käytä vuorovaikutteista käyttöliittymää liitetiedostojen siirtoon!"

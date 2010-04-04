@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -1213,9 +1213,9 @@ msgstr ""
 "\"\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Создадена е нова корисничка сметка на %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Потадоци за Вашата корисничка сметка"
 
 #, fuzzy, python-format
 msgid ""
@@ -1230,8 +1230,8 @@ msgstr ""
 "    Корисничко име: %(username)s\n"
 "    Адреса за е-пошта: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "На страницата %(pagename)s на %(sitename)s е додаден нов прилог"
 
 #, python-format
@@ -1255,7 +1255,7 @@ msgstr ""
 "Големина на прилогот: %(attach_size)s\n"
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "На страницата %(pagename)s на %(sitename)s е додаден нов прилог"
 
 #, fuzzy, python-format
@@ -3248,17 +3248,23 @@ msgstr "Непознато дејство за резервна копија: %s
 msgid "Please choose:"
 msgstr "Одберете:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Преименувај ги и сите /подстраници?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Навистина сакате да ја преименувате оваа страница?"
 
 msgid "New name"
 msgstr "Ново име"
 
 msgid "Optional reason for the renaming"
 msgstr "Причина за преименување (незадолжително)"
-
-msgid "Really rename this page?"
-msgstr "Навистина сакате да ја преименувате оваа страница?"
 
 msgid "Copy all /subpages too?"
 msgstr "Копирај ги и сите /подстраници?"
@@ -3319,11 +3325,15 @@ msgid "Next change"
 msgstr "Следна промена"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Не се достапни постари верзии!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Не се достапни постари верзии!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Не се достапни постари верзии!"
 
 msgid "Diff with newer revision in left pane"
@@ -3343,6 +3353,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Не се достапни постари верзии!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Не се достапни постари верзии!"
 
 #, python-format
@@ -3664,6 +3678,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Создадена е нова корисничка сметка на %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr ""

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
-"PO-Revision-Date: 2008-06-18 07:54+0900\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
+"PO-Revision-Date: 2010-03-24 01:17+0900\n"
 "Last-Translator: HiroshiIwasaki <iwskhrs@gmail.com>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -190,8 +190,9 @@ msgid ""
 "\n"
 "Try a different name."
 msgstr ""
-"ページ名{{{'%s'}}}のページがすでに存在します。\n"
-"違う名前を利用してください。"
+"'''{{{'%s'}}}という名前のページはすでに存在しています。'''\n"
+"\n"
+"違う名前を指定してください。"
 
 #, python-format
 msgid "Could not copy page because of file system error: %s."
@@ -225,16 +226,16 @@ msgstr ""
 
 msgid "Page could not get locked. Missing 'current' file?"
 msgstr ""
-"ページをロックすることができませんでした。'最新'のファイルが存在しないのかも"
-"しれません。"
+"ページをロックすることができませんでした。'current' というファイルはあります"
+"か?"
 
 #, python-format
 msgid ""
 "Unable to determine current page revision from the 'current' file. The page %"
 "s is damaged and cannot be edited right now."
 msgstr ""
-"現在のファイルから最新のリビジョンを判断することができません。ページ %s は破"
-"損しているため、編集することはできません。"
+"現在のページリビジョンを 'current' ファイルから判断することができません。ペー"
+"ジ %s は破損しているため、編集することはできません。"
 
 #, python-format
 msgid "Cannot save page %s, no storage space left."
@@ -245,13 +246,13 @@ msgid "An I/O error occurred while saving page %s (errno=%d)"
 msgstr "ページ %s を保存中にI/Oエラーが発生しました。(errno=%d)"
 
 msgid "You are not allowed to edit this page!"
-msgstr "このページを削除する権限がありません。"
+msgstr "このページを削除する権限がありません!"
 
 msgid "You cannot save empty pages."
 msgstr "空のページは保存できません。"
 
 msgid "You already saved this page!"
-msgstr "既にこのページを保存済みです。"
+msgstr "既にこのページを保存済みです!"
 
 msgid "You already edited this page! Please do not use the back button."
 msgstr ""
@@ -318,7 +319,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<不明>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -330,7 +331,7 @@ msgstr ""
 "\n"
 "パスワード回復トークン: %s\n"
 "\n"
-"パスワード初期化URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"パスワード初期化URL: %s?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -369,7 +370,7 @@ msgstr "テーマ名が設定されていません。"
 
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
-msgstr ""
+msgstr "%s の書き込み権限が無いためテーマはインストールされませんでした！"
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -545,7 +546,7 @@ msgid "Cannot remove all OpenIDs."
 msgstr "すべてのOpenIDを削除することはできません"
 
 msgid "The selected OpenIDs have been removed."
-msgstr "選択されたOpenIDは削除されています。"
+msgstr "選択されたOpenIDは削除されました。"
 
 msgid "No OpenID given."
 msgstr "OpenIDが指定されていません。"
@@ -573,7 +574,7 @@ msgid "OpenID added successfully."
 msgstr "OpenIDの追加が成功しました。"
 
 msgid "OpenID failure."
-msgstr "OpenID 失敗しました"
+msgstr "OpenID の検証に失敗しました"
 
 msgid "Current OpenIDs"
 msgstr "現在のOpenID"
@@ -701,13 +702,13 @@ msgid "Quick links"
 msgstr "クイックリンク"
 
 msgid "OpenID server"
-msgstr ""
+msgstr "OpenID サーバー"
 
 msgid "The selected websites have been removed."
-msgstr ""
+msgstr "選択されたウェブサイトが削除されました。"
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "信頼されたウェブサイト"
 
 msgid "Line"
 msgstr "行"
@@ -755,21 +756,18 @@ msgstr ""
 msgid "Associate this name"
 msgstr "この名前を関連付ける"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "検証はキャンセルされました。"
+msgstr "OpenID の検証はキャンセルされました。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "OpenID success. id: %s"
-msgstr "OpenIDの追加が成功しました。"
+msgstr "OpenIDの検証に成功しました。id: %s"
 
-#, fuzzy
 msgid "OpenID failure"
-msgstr "OpenID 失敗しました"
+msgstr "OpenIDの検証に失敗しました"
 
-#, fuzzy
 msgid "No OpenID found in session."
-msgstr "OpenIDが指定されていません。"
+msgstr "セッション中にOpenIDが見つかりません。"
 
 msgid "Your account is now associated to your OpenID."
 msgstr "あなたのアカウントはOpenIDと結びつけられています。"
@@ -808,18 +806,18 @@ msgstr "LDAP server %(server)s への接続に失敗しました。"
 msgid "Failed to connect to database."
 msgstr "データベースの接続に失敗しました。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
-"アカウントを持っていない場合、<a href=\"%(userprefslink)s\">作成することがで"
-"きます</a>。<a href=\"%(sendmypasswordlink)s\">もしくはパスワードをお忘れです"
-"か?</a>"
+"アカウントを持っていない場合、<a href=\"%(userprefslink)s\">すぐに作成するこ"
+"とができます</a>。"
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
+"<a href=\"%(sendmypasswordlink)s\">もしくはパスワードをお忘れですか?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -848,8 +846,8 @@ msgstr ""
 " 箇条書き:: * 小丸、** 子項目の小丸、# 数字付き項目、## 子の数字付きの項目 \n"
 " リンク:: <<Verbatim([[ターゲット]])>>、<<Verbatim([[ターゲット|リンクテキス"
 "ト]])>>\n"
-" 表:: |= 見出し | セルテキスト | 次のセルテキスト | \n"
-"(!) 詳細はHelpOnEditingや [[Creole記法のヘルプ]]を参照してください。\n"
+" 表:: |= ヘッダテキスト | セルテキスト | 次のセルテキスト | \n"
+"(!) 詳細は HelpOnEditing や [[Creole記法のヘルプ]]を参照してください。\n"
 
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
@@ -901,13 +899,15 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\"の後には色の値\"%(arg)s\"が必要です。"
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "パーサーのヘルプ"
 
 #, python-format
 msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see %"
 "(highlight_help_page)s."
 msgstr ""
+"'%(syntax)s' の構文ハイライトはサポートされていません。%(highlight_help_page)"
+"s を御覧下さい。"
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -976,17 +976,19 @@ msgid "%(errortype)s processing error"
 msgstr "processingエラー: %(errortype)s"
 
 msgid "Password is too short."
-msgstr ""
+msgstr "パスワードが短すぎます。"
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "パスワードが十分な種類の文字で構成されていません。"
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
 msgstr ""
+"パスワードが簡単すぎます（パスワードに名前が含まれるか、名前にパスワードが含"
+"まれています）。"
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "パスワードが簡単すぎます（キーボードの配列順です）"
 
 msgid "Diffs"
 msgstr "差分"
@@ -1136,7 +1138,7 @@ msgstr ""
 "とします。"
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "全ての添付ファイルがパッケージに収められました。"
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "出力ファイルがすでに存在します。安全のため処理を停止します。"
@@ -1203,10 +1205,10 @@ msgstr ""
 "\n"
 
 #, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "%(sitename)s において新規ユーザアカウントが作成されました。"
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] 新しいユーザーアカウントが作成されました"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on \"%(sitename)s\". "
 "Details follow:\n"
@@ -1214,14 +1216,15 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"スーパーユーザーさん、%(sitename)s\" において以下のユーザが作成されました。\n"
+"スーパーユーザーさん、\"%(sitename)s\" でユーザが作成されました。\n"
+"詳細は次の通りです:\n"
 "\n"
 "    ユーザ名: %(username)s\n"
 "    メールアドレス: %(useremail)s"
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "%(sitename)s の %(pagename)s に新しい添付ファイルが追加されました。"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "[%(sitename)s] %(pagename)s に新しい添付ファイルが追加されました"
 
 #, python-format
 msgid ""
@@ -1244,11 +1247,11 @@ msgstr ""
 "添付ファイル名: %(attach_name)s\n"
 "添付ファイルサイズ: %(attach_size)s\n"
 
-#, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr "%(sitename)s の %(pagename)s に新しい添付ファイルが追加されました。"
+#, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "[%(sitename)s] %(pagename)s から添付ファイルが削除されました"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1259,12 +1262,11 @@ msgid ""
 "Attachment name: %(attach_name)s\n"
 "Attachment size: %(attach_size)s\n"
 msgstr ""
-"Wikiユーザ様\n"
+"Wiki ユーザー様\n"
 "\n"
-"あなたはWikiページ \\\"%(page_name)s\\\" に対する変更の通知を購読していま"
-"す。\n"
-"%(editor)s によりページに添付ファイルが追加されました。\n"
-"詳細は以下を参照してください。:\n"
+"あなたは Wiki ページ \\\"%(page_name)s\\\" の変更通知を購読しています。\n"
+"%(editor)s によりページの添付ファイルが削除されました。\n"
+"詳細は次の通りです:\n"
 "\n"
 "添付ファイル名: %(attach_name)s\n"
 "添付ファイルサイズ: %(attach_size)s\n"
@@ -1281,8 +1283,8 @@ msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
 msgstr ""
-"添付ファイル: %(attach)s\n"
-"ページリンク: %(page)s\n"
+"添付ファイルへのリンク: %(attach)s\n"
+"ページへのリンク: %(page)s\n"
 
 msgid "Page has been modified"
 msgstr "ページが変更されました"
@@ -1302,9 +1304,8 @@ msgstr "ページがコピーされました"
 msgid "A new attachment has been added"
 msgstr "新しい添付ファイルが追加されました"
 
-#, fuzzy
 msgid "An attachment has been removed"
-msgstr "新しい添付ファイルが追加されました"
+msgstr "添付ファイルが削除されました"
 
 msgid "A page has been reverted to a previous state"
 msgstr "ページが前の状態に戻されました"
@@ -1332,8 +1333,8 @@ msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
+"%(pages)d ページ中 %(aboutHits)s %(bs)s%(hits)d%(be)s 件ヒットし、%(bs)s%"
+"(hitsFrom)d から %(hitsTo)d%(be)s を表示しています。"
 
 msgid "seconds"
 msgstr "秒"
@@ -1367,7 +1368,7 @@ msgid "RecentChanges"
 msgstr "更新履歴"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "今日のWiki技"
 
 msgid "TitleIndex"
 msgstr "タイトルインデックス"
@@ -1433,7 +1434,7 @@ msgid "RandomPage"
 msgstr "ランダムページ"
 
 msgid "XsltVersion"
-msgstr ""
+msgstr "Xsltのバージョン"
 
 msgid "FortuneCookies"
 msgstr "フォーチュンクッキー"
@@ -1445,94 +1446,94 @@ msgid "CategoryCategory"
 msgstr "すべてのカテゴリー"
 
 msgid "CategoryHomepage"
-msgstr ""
+msgstr "ホームページのカテゴリー"
 
 msgid "CategoryTemplate"
-msgstr ""
+msgstr "テンプレートのカテゴリー"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "ホームページのテンプレート"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "ヘルプのテンプレート"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "読み書きするホームページのテンプレート"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "読むだけのホームページのテンプレート"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "プライベートなホームページのテンプレート"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "ホームページグループのテンプレート"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "配布用スライドショーのテンプレート"
 
 msgid "SlideShowTemplate"
-msgstr ""
+msgstr "スライドショーのテンプレート"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "スライドのテンプレート"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "同期ジョブのテンプレート"
 
 msgid "HelpOnConfiguration"
-msgstr ""
+msgstr "設定のヘルプ"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "設定のヘルプ/電子メールのサポート"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "設定のヘルプ/セキュリティポリシー"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "設定のヘルプ/ファイルの貼付"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "設定のヘルプ/補足ページ"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "設定のヘルプ/高負荷からの保護"
 
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr ""
+msgstr "設定のヘルプ/ユーザー設定"
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "パッケージインストーラーのヘルプ"
 
 msgid "HelpOnUpdatingPython"
-msgstr ""
+msgstr "Pythonアップデートのヘルプ"
 
 msgid "HelpOnAdministration"
-msgstr ""
+msgstr "管理のヘルプ"
 
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "認証のヘルプ"
 
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "認証のヘルプ/外部クッキー"
 
 msgid "HelpOnMoinCommand"
-msgstr ""
+msgstr "Moinコマンドのヘルプ"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "Moinコマンドのヘルプ/ExportDump"
 
 msgid "HelpOnNotification"
-msgstr ""
+msgstr "通知のヘルプ"
 
 msgid "HelpOnSessions"
-msgstr ""
+msgstr "セッションのヘルプ"
 
 msgid "HelpOnUserHandling"
-msgstr ""
+msgstr "ユーザーの取り扱いのヘルプ"
 
 msgid "HelpOnXapian"
-msgstr ""
+msgstr "Xapianのヘルプ"
 
 msgid "HelpOnMoinWikiSyntax"
 msgstr "MoinWiki記法のヘルプ"
@@ -1550,258 +1551,257 @@ msgid "HelpContents"
 msgstr "ヘルプの目次"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "初心者用のヘルプ"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "ユーザー用のヘルプ"
 
 msgid "HelpIndex"
 msgstr "ヘルプインデックス"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "アクセス制御リストのヘルプ"
 
 msgid "HelpOnActions"
-msgstr ""
+msgstr "アクションのヘルプ"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "アクションのヘルプ/ファイルを貼付する"
 
 msgid "HelpOnAdmonitions"
-msgstr ""
+msgstr "管理のヘルプ"
 
 msgid "HelpOnAutoAdmin"
-msgstr ""
+msgstr "AutoAdminのヘルプ"
 
 msgid "HelpOnCategories"
-msgstr ""
+msgstr "カテゴリーのヘルプ"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "辞書のヘルプ"
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "書式のヘルプ"
+msgstr "図形描画のヘルプ"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "編集ロックのヘルプ"
 
 msgid "HelpOnEditing"
-msgstr ""
+msgstr "編集のヘルプ"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "編集のヘルプ/子ページ"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "グラフィカルエディタのヘルプ"
 
 msgid "HelpOnGroups"
-msgstr ""
+msgstr "グループのヘルプ"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "見出しのヘルプ"
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "書式のヘルプ"
+msgstr "画像のヘルプ"
 
 msgid "HelpOnLanguages"
-msgstr ""
+msgstr "言語のヘルプ"
 
 msgid "HelpOnLinking"
-msgstr ""
+msgstr "リンクのヘルプ"
 
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "リンクのヘルプ/Notesへのリンク"
 
 msgid "HelpOnLists"
-msgstr ""
+msgstr "リストのヘルプ"
 
 msgid "HelpOnLogin"
-msgstr ""
+msgstr "ログインのヘルプ"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "マクロのヘルプ"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
+msgstr "マクロのヘルプ/EmbedObject"
 
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "マクロのヘルプ/Include"
 
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "マクロのヘルプ/MailTo"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "マクロのヘルプ/MonthCalendar"
 
 msgid "HelpOnNavigation"
-msgstr ""
+msgstr "ナビゲーションのヘルプ"
 
 msgid "HelpOnOpenIDProvider"
-msgstr ""
+msgstr "OpenIDプロバイダのヘルプ"
 
 msgid "HelpOnPageCreation"
-msgstr ""
+msgstr "ページ作成のヘルプ"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "ページ削除のヘルプ"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "パーサーのヘルプ/ReStructuredText"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "パーサーのヘルプ/ReStructuredText/Rst入門"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "命令処理のヘルプ"
 
 msgid "HelpOnRules"
-msgstr ""
+msgstr "水平線のヘルプ"
 
 msgid "HelpOnSearching"
-msgstr ""
+msgstr "検索のヘルプ"
 
 msgid "HelpOnSlideShows"
-msgstr ""
+msgstr "スライドショーのヘルプ"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "スライドショーのヘルプ/000 はじめに"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "スライドショーのヘルプ/100 スライドを作成する"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
 msgstr ""
+"スライドショーのヘルプ/900 大切なことを忘れていた: プレゼンテーションを行う"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "顔文字のヘルプ"
 
 msgid "HelpOnSpam"
-msgstr ""
+msgstr "スパムのヘルプ"
 
 msgid "HelpOnSpellCheck"
-msgstr ""
+msgstr "スペルチェックのヘルプ"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "スーパーユーザーのヘルプ"
 
 msgid "HelpOnSynchronisation"
-msgstr ""
+msgstr "同期のヘルプ"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "表のヘルプ"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "テンプレートのヘルプ"
 
 msgid "HelpOnThemes"
-msgstr ""
+msgstr "テーマのヘルプ"
 
 msgid "HelpOnUserPreferences"
-msgstr ""
+msgstr "ユーザー設定のヘルプ"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "変数のヘルプ"
 
 msgid "HelpOnXmlPages"
-msgstr ""
+msgstr "Xmlページのヘルプ"
 
 msgid "HelpOnComments"
-msgstr ""
+msgstr "コメントのヘルプ"
 
 msgid "HelpOnSubscribing"
-msgstr ""
+msgstr "購読のヘルプ"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "キャメルケース"
 
 msgid "WikiCourse"
-msgstr ""
+msgstr "Wiki講座"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr ""
+msgstr "Wiki講座/01 MoinMoin wiki とは?"
 
 msgid "WikiCourse/02 Finding information"
-msgstr ""
+msgstr "Wiki講座/02 情報を見つけ出す"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr ""
+msgstr "Wiki講座/03 最新に保つ"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr ""
+msgstr "Wiki講座/04 Wikiアカウントを作成する"
 
 msgid "WikiCourse/05 User preferences"
-msgstr ""
+msgstr "Wiki講座/05 ユーザー設定"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr ""
+msgstr "Wiki講座/06 自分のwikiホームページ"
 
 msgid "WikiCourse/07 The text editor"
-msgstr ""
+msgstr "Wiki講座/07 テキストエディター"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr ""
+msgstr "Wiki講座/08 ショートカットキー"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr ""
+msgstr "Wiki講座/10 Wiki記法を使ったテキストのレイアウト"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr ""
+msgstr "Wiki講座/11 段落"
 
 msgid "WikiCourse/12 Headlines"
-msgstr ""
+msgstr "Wiki講座/12 見出し"
 
 msgid "WikiCourse/13 Lists"
-msgstr ""
+msgstr "Wiki講座/13 リスト"
 
 msgid "WikiCourse/14 Text styles"
-msgstr ""
+msgstr "Wiki講座/14 テキストの装飾"
 
 msgid "WikiCourse/15 Tables"
-msgstr ""
+msgstr "Wiki講座/15 表"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr ""
+msgstr "Wiki講座/16 Wiki 内のリンク"
 
 msgid "WikiCourse/17 External links"
-msgstr ""
+msgstr "Wiki講座/17 外部へのリンク"
 
 msgid "WikiCourse/18 Attachments"
-msgstr ""
+msgstr "Wiki講座/18 ファイルの貼付"
 
 msgid "WikiCourse/19 Symbols"
-msgstr ""
+msgstr "Wiki講座/19 記号"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr ""
+msgstr "Wiki講座/20 動的コンテンツ"
 
 msgid "WikiCourse/21 Macros"
-msgstr ""
+msgstr "Wiki講座/21 マクロ"
 
 msgid "WikiCourse/22 Parsers"
-msgstr ""
+msgstr "Wiki講座/22 パーサー"
 
 msgid "WikiCourse/23 Actions"
-msgstr ""
+msgstr "Wiki講座/23 アクション"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr ""
+msgstr "Wiki講座/30 グラフィカルエディタ"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr ""
+msgstr "Wiki講座/40 さらにページを作る"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr ""
+msgstr "Wiki講座/50 Wikiエチケット"
 
 msgid "WikiCourse/51 Applications"
-msgstr ""
+msgstr "Wiki講座/51 アプリケーション"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr ""
+msgstr "Wiki講座/52 Wikiの構造"
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "Wiki講座の配布"
 
 msgid "Sun"
 msgstr "日"
@@ -1867,7 +1867,7 @@ msgid "User"
 msgstr "ユーザ"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[添付]"
 
 msgid "[RSS]"
 msgstr "[RSS]"
@@ -1919,10 +1919,10 @@ msgid "Home"
 msgstr "ホーム"
 
 msgid "Click to do a full-text search for this title"
-msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
+msgstr "このタイトルで全文検索をするには、ここをクリックしてください"
 
 msgid "Clear message"
-msgstr "メッセージを消去"
+msgstr "メッセージを消す"
 
 #, python-format
 msgid "last edited %(time)s by %(editor)s"
@@ -1990,7 +1990,7 @@ msgid "Package Pages"
 msgstr "ページパッケージ化"
 
 msgid "Render as Docbook"
-msgstr "Docbookとして描画"
+msgstr "Docbookで表示"
 
 msgid "Sync Pages"
 msgstr "ページ同期"
@@ -2032,24 +2032,20 @@ msgstr "添付ファイルブラウザ"
 msgid "User account browser"
 msgstr "ユーザアカウントブラウザ"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "この決定を記憶する"
+msgstr "字句解析器の種類"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "ユーザ名"
+msgstr "字句解析器の名前"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "ファイルタイプ"
+msgstr "ファイルパターン"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "すべてのMIMEタイプ"
+msgstr "MIMEタイプ"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Wiki設定"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2057,9 +2053,13 @@ msgid ""
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
 msgstr ""
+"この表では wiki の設定のうちデフォルトの値を持っていないものを表示していま"
+"す。\n"
+"システムの設定で知らないものは''斜体''で表示しています。\n"
+"おそらくサードパーティ拡張で必要なものか Moin から削除された設定でしょう。"
 
 msgid "Variable name"
-msgstr ""
+msgstr "変数名"
 
 msgid "Setting"
 msgstr "設定"
@@ -2092,7 +2092,7 @@ msgstr "添付ファイル'%(filename)s'を削除しました。"
 
 #, python-format
 msgid "Drawing '%(filename)s' saved."
-msgstr "drawing '%(filename)s'を保存しました。"
+msgstr "図 '%(filename)s'を保存しました。"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -2178,10 +2178,10 @@ msgid "Enabled"
 msgstr "有効"
 
 msgid "index unavailable"
-msgstr "index無効"
+msgstr "インデックスの作成が無効"
 
 msgid "index available"
-msgstr "index有効"
+msgstr "インデックスの作成が有効"
 
 msgid "Xapian search"
 msgstr "Xapianによる検索"
@@ -2240,17 +2240,16 @@ msgid "Search for items"
 msgstr "アイテムの検索"
 
 msgid "containing all the following terms"
-msgstr "以下のすべての言葉を含む"
+msgstr "次のすべての言葉を含む"
 
 msgid "containing one or more of the following terms"
-msgstr "以下のひとつ以上の言葉を含む"
+msgstr "次のひとつ以上の言葉を含む"
 
 msgid "not containing the following terms"
-msgstr "以下の言葉を含まない"
+msgstr "次の言葉を含まない"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
-msgstr "最終更新日 (例: last 2 weeks)"
+msgstr "次の日以降に更新された (例: 2 weeks before)"
 
 msgid "any category"
 msgstr "すべてのカテゴリー"
@@ -2295,10 +2294,10 @@ msgid "Exclude system pages"
 msgstr "システムページを含めない"
 
 msgid "No wanted pages in this wiki."
-msgstr "このwikiに参照先がないページはありません。"
+msgstr "このwikiに作成が必要なページはありません。"
 
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #, python-format
 msgid ""
@@ -2348,6 +2347,8 @@ msgstr "スライド番号 %(pos)d/%(size)d"
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
+"<<%(macro_name)s: 実行に失敗しました [%(error_msg)s] (ログも参照してください)"
+">>"
 
 msgid "Go To Page"
 msgstr "ページへ移動"
@@ -2392,28 +2393,26 @@ msgstr "このページへのクイックリンクを削除できませんでし
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "追加していないページへのクイックリンクは削除できません。"
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "スライドショー"
+msgstr "スライドショーを編集"
 
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "スライドショー"
+msgstr "スライドショーを終了"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "最初のスライドを表示（上キー）"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "最後のスライドを表示（下キー）"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "前のスライドを表示（左キー）"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "次のスライドを表示（右キー）"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2450,7 +2449,7 @@ msgstr ""
 "Consumerサイトがそれを処理してくれます。)"
 
 msgid "Trust root"
-msgstr "Trust root"
+msgstr ""
 
 msgid "Identity URL"
 msgstr "認証URL"
@@ -2484,7 +2483,7 @@ msgstr ""
 "下のボタンを押して検証をキャンセルしてください。"
 
 msgid "If this account exists an email was sent."
-msgstr "このユーザ名のアカウントが存在した場合には、メール送信されました。"
+msgstr "もしこのアカウントがあるなら、メールは送信されました。"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -2917,8 +2916,8 @@ msgid ""
 "<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
-"リモートwikiのアカウントに対するパスワードを入力してください。<<BR>> /!\\ た"
-"だし、双方のwiki管理者にパスワードを見られる可能性があります。"
+"リモートwikiのアカウントとパスワードを入力してください。<<BR>> /!\\ ただし、"
+"双方のwiki管理者にパスワードを見られる可能性があります。"
 
 msgid "Operation was canceled."
 msgstr "操作はキャンセルされました。"
@@ -3095,17 +3094,18 @@ msgid ""
 "Showing page edit history entries from '''%(start_offset)d''' to '''%"
 "(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
+"ページの編集履歴で、総数 '''%(total_count)d''' のうち  '''%(start_offset)"
+"d''' から '''%(end_offset)d''' を表示しています。"
 
-#, fuzzy
 msgid "Newer"
-msgstr "新しい名前"
+msgstr "新しい"
 
 msgid "Older"
-msgstr ""
+msgstr "古い"
 
 #, python-format
 msgid "%s items per page"
-msgstr ""
+msgstr "ページあたり %s 個表示"
 
 msgid "Date"
 msgstr "日付"
@@ -3152,7 +3152,7 @@ msgid "You already have a quicklink to this page."
 msgstr "既にこのページへのクイックリンクは追加済みです。"
 
 msgid "Wiki Backup"
-msgstr ""
+msgstr "Wiki のバックアップ"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -3168,6 +3168,17 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= バックアップのダウンロード =\n"
+"\n"
+"注意:\n"
+" * バックアップは安心・安全な場所に保管してください - バックアップには機微な"
+"情報が含まれています。\n"
+" * wiki 設定の backup_* の値が正しいものかを確認してください。\n"
+" * 取得したバックアップファイルには、問題が発生したときに必要なものが全て含ま"
+"れているか確認してください。\n"
+" * 問題なくダウンロード出来るか確認してください。\n"
+"\n"
+"次をクリックするとバックアップを行います:"
 
 msgid "Backup"
 msgstr "バックアップ"
@@ -3182,17 +3193,23 @@ msgstr "未定義のバックアップサブアクション: %s 。"
 msgid "Please choose:"
 msgstr "選択してください:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr "変更後のページへ自動的にリダイレクトさせますか?"
+
 msgid "Rename all /subpages too?"
 msgstr "すべの /サブページ の名前も変更しますか？"
+
+msgid "Create redirect for renamed page?"
+msgstr "変更後のページへ自動的にリダイレクトさせますか?"
+
+msgid "Really rename this page?"
+msgstr "このページの名前を本当に変更しますか？"
 
 msgid "New name"
 msgstr "新しい名前"
 
 msgid "Optional reason for the renaming"
 msgstr "名前の変更についてのコメント(省略可)"
-
-msgid "Really rename this page?"
-msgstr "このページの名前を本当に変更しますか？"
 
 msgid "Copy all /subpages too?"
 msgstr "すべの /サブページ をコピーしますか？"
@@ -3203,29 +3220,24 @@ msgstr "コピーについてのコメント(省略可)"
 msgid "Really copy this page?"
 msgstr "このページを本当にコピーしますか？"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "添付ファイルへのリンク"
+msgstr "添付ファイルの場所"
 
-#, fuzzy
 msgid "Page name"
 msgstr "ページ名"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "新しい添付ファイル名"
+msgstr "添付ファイル名"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "添付ファイルへのリンク"
+msgstr "添付ファイルのリストを更新"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "添付ファイル"
+msgstr "添付ファイルのリスト"
 
 #, fuzzy
 msgid "Available attachments for page"
-msgstr "\"%(pagename)s の添付ファイル\""
+msgstr "このページで使える添付ファイル"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -3252,39 +3264,42 @@ msgstr "前の変更"
 msgid "Next change"
 msgstr "次の変更"
 
-#, fuzzy
-msgid "Diff with older revision in left pane"
-msgstr "古いリビジョンはありません。"
+msgid "Diff with oldest revision in left pane"
+msgstr "左ペインを最も古いリビジョンに変更して差分を表示"
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "古いリビジョンはありません。"
+msgstr "これ以上古いリビジョンはありません"
+
+msgid "Diff with older revision in left pane"
+msgstr "左ペインを一つ古いリビジョンに変更して差分を表示"
 
 msgid "Diff with newer revision in left pane"
-msgstr ""
+msgstr "左ペインを一つ新しいリビジョンに変更して差分を表示"
 
 msgid "Can't change to revision newer than in right pane"
-msgstr ""
+msgstr "右ペインはこれ以上新しいリビジョンに変更できません"
 
 msgid "Diff with older revision in right pane"
-msgstr ""
+msgstr "右ペインを一つ古いリビジョンに変更して差分を表示"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr ""
+msgstr "左ペインはこれ以上古いリビジョンに変更できません"
 
 msgid "Diff with newer revision in right pane"
-msgstr ""
+msgstr "右ペインを一つ新しいリビジョンに変更して差分を表示"
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "古いリビジョンはありません。"
+msgstr "これ以上新しいリビジョンはありません"
+
+msgid "Diff with newest revision in right pane"
+msgstr "右ペインを最も新しいリビジョンに変更して差分を表示"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "その間の保存: %(count)d回"
 
 msgid "(ignoring whitespace)"
-msgstr "(ホワイトスペースを無視)"
+msgstr "(空白を無視)"
 
 msgid "Ignore changes in the amount of whitespace"
 msgstr "空白文字数の違いを無視"
@@ -3294,7 +3309,7 @@ msgid "Invalid filename \"%s\"!"
 msgstr "ファイル名\"%s\"が不正です。"
 
 msgid "Include all attachments?"
-msgstr ""
+msgstr "添付ファイルを含めますか?"
 
 msgid "Package pages"
 msgstr "ページをパッケージ化"
@@ -3324,11 +3339,11 @@ msgstr "このアクションを行う権限がありません。"
 
 #, python-format
 msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "drawing\"%(filename)s\"の新規作成 (別ウィンドウにて)"
+msgstr "図 \"%(filename)s (新しいウィンドウで開きます)\" を新規作成"
 
 #, python-format
 msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "drawing\"%(filename)s\"を編集 (別ウィンドウにて)"
+msgstr "図 \"%(filename)s (新しいウィンドウで開きます)\" を編集"
 
 #, python-format
 msgid "Clickable drawing: %(filename)s"
@@ -3338,10 +3353,10 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "このページにdrawingを保存する権限がありません。"
 
 msgid "Empty target name given."
-msgstr ""
+msgstr "空のターゲットが渡されました。"
 
 msgid "Edit drawing"
-msgstr "drawingを編集"
+msgstr "図を編集"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "最初にホームページを作成してください。"
@@ -3398,22 +3413,20 @@ msgid "MyPages management"
 msgstr "マイページの管理"
 
 msgid "Only superuser is allowed to use this action."
-msgstr "このアクションを行うことができるのはスーパーユーザのみです。"
+msgstr "このアクションを使えるのはスーパーユーザーだけです。"
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "親ページが存在しません。"
+msgstr "ページのパッケージが見つかりません。"
 
-#, fuzzy
 msgid "page package"
-msgstr "変更されたページ"
+msgstr "ページのパッケージ"
 
 msgid "Choose:"
-msgstr ""
+msgstr "選択してください:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "'%s' の言語パックをインストール"
 
 msgid "Your subscription to this page has been removed."
 msgstr "このページの購読を停止しました。"
@@ -3423,8 +3436,7 @@ msgstr "正規表現で記述した購読を停止することはできません
 
 msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
-"[\"ユーザプレファレンス\"]にて、購読対象を指定する正規表現を編集してくださ"
-"い。"
+"[[ユーザプレファレンス]]にて、購読対象を指定する正規表現を編集してください。"
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "購読していないページの購読を止めることはできません。"
@@ -3461,20 +3473,20 @@ msgstr ""
 "HelpOnSearching を参照してください。%s"
 
 msgid "(!) Consider performing a"
-msgstr "(!) Consider performing a"
+msgstr "(!) 次のことを検討してください"
 
 msgid "full-text search with your search terms"
-msgstr "full-text search with your search terms"
+msgstr "同じ検索語で全文検索を行う"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. <<BR>>"
 msgstr ""
-"(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. <<BR>>"
+"(!) タイトル検索を行っていますが、関係する結果がすべて表示されていない可能性"
+"があります。<<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "この言葉でテキスト検索するには、ここをクリックしてください"
+msgstr "同じ検索語で全文検索をするには、ここをクリックしてください!"
 
 msgid "Load"
 msgstr "ロード"
@@ -3528,7 +3540,7 @@ msgstr "編集/日"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
-msgstr "%(chart_title)s for %(filterpage)s"
+msgstr ""
 
 msgid ""
 "green=view\n"
@@ -3571,7 +3583,7 @@ msgid "Content"
 msgstr "目次"
 
 msgid "No recipients, nothing to do"
-msgstr ""
+msgstr "送信先が空のため何も行いません"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -3591,7 +3603,10 @@ msgstr ""
 "た。"
 
 msgid "anonymous"
-msgstr ""
+msgstr "匿名"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "%(sitename)s において新規ユーザアカウントが作成されました。"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"

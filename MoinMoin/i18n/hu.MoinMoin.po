@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: MARTON Jozsef <jmarton@omikk.bme.hu>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -1173,9 +1173,9 @@ msgstr ""
 "változásának követésére.\n"
 "A megváltozott lap: %(pagelink)s, amit %(editor)s szerkesztett.\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] a wiki azonosítójának adata"
 
 #, python-format
 msgid ""
@@ -1187,7 +1187,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr ""
 "A(z) %(pagename)s lap melléklete: <<Verbatim(attachment:)>>%(filename)s"
 
@@ -1204,7 +1204,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr ""
 "A(z) %(pagename)s lap melléklete: <<Verbatim(attachment:)>>%(filename)s"
 
@@ -3171,18 +3171,24 @@ msgstr "Érvénytelen biztonsági mentési mód: %s."
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Biztosan törölni kívánja ezt a lapot?"
 
 msgid "New name"
 msgstr "Új név"
 
 msgid "Optional reason for the renaming"
 msgstr "Az átnevezés indoka (nem kötelező kitölteni)"
-
-#, fuzzy
-msgid "Really rename this page?"
-msgstr "Biztosan törölni kívánja ezt a lapot?"
 
 msgid "Copy all /subpages too?"
 msgstr ""
@@ -3247,11 +3253,15 @@ msgid "Next change"
 msgstr "Változások mentése"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Nincsenek régebbi módosítások!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Nincsenek régebbi módosítások!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Nincsenek régebbi módosítások!"
 
 msgid "Diff with newer revision in left pane"
@@ -3271,6 +3281,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Nincsenek régebbi módosítások!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Nincsenek régebbi módosítások!"
 
 #, python-format

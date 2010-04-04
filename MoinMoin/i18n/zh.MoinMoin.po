@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Dormouse.Young <dormouseyoung@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1157,9 +1157,9 @@ msgstr ""
 "\n"
 "用户 %(editor)s 将页面 \"%(pagename)s\" 改名为 \"%(oldname)s\"：\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "新用户帐号创建于 %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] 您的维基帐号资料"
 
 #, python-format
 msgid ""
@@ -1174,8 +1174,8 @@ msgstr ""
 "    用户名：%(username)s\n"
 "    邮件地址：%(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "添加新附件到页面 %(pagename)s 于站点 %(sitename)s"
 
 #, python-format
@@ -1197,8 +1197,8 @@ msgstr ""
 "附件名称：%(attach_name)s\n"
 "附件大小：%(attach_size)s\n"
 
-#, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "从 %(sitename)s 站点 %(pagename)s 页面删除和附件"
 
 #, python-format
@@ -3144,17 +3144,23 @@ msgstr "未知的备份子操作：%s。"
 msgid "Please choose:"
 msgstr "请选择："
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "重命名所有的子网页？"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "真的要重命名此页？"
 
 msgid "New name"
 msgstr "新名称"
 
 msgid "Optional reason for the renaming"
 msgstr "改名的原因(可选)"
-
-msgid "Really rename this page?"
-msgstr "真的要重命名此页？"
 
 msgid "Copy all /subpages too?"
 msgstr "复制所有子网页？"
@@ -3214,11 +3220,15 @@ msgstr "上个改动"
 msgid "Next change"
 msgstr "下个改动"
 
-msgid "Diff with older revision in left pane"
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
 msgstr "在左面板与旧版本比较"
 
 msgid "No older revision available for diff"
 msgstr "没有旧版本可比较"
+
+msgid "Diff with older revision in left pane"
+msgstr "在左面板与旧版本比较"
 
 msgid "Diff with newer revision in left pane"
 msgstr "在左面板与新版本比较"
@@ -3237,6 +3247,10 @@ msgstr "在右面板与新版本比较"
 
 msgid "No newer revision available for diff"
 msgstr "没有新版本可比较"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "在右面板与新版本比较"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3538,6 +3552,9 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 
 msgid "anonymous"
 msgstr "匿名"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "新用户帐号创建于 %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "请使用用户界面交互地移动附件！"

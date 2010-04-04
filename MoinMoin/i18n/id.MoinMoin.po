@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -1218,9 +1218,9 @@ msgstr ""
 "%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Data akun wiki Anda"
 
 #, python-format
 msgid ""
@@ -1232,7 +1232,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "lampiran:%(filename)s dari %(pagename)s"
 
 #, python-format
@@ -1248,7 +1248,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "lampiran:%(filename)s dari %(pagename)s"
 
 #, fuzzy, python-format
@@ -3226,17 +3226,23 @@ msgstr "Sub aksi untuk backup tidak diketahui: %s."
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Ganti nama semua /subhalaman?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Yakin mengubah nama halaman ini?"
 
 msgid "New name"
 msgstr "Nama baru"
 
 msgid "Optional reason for the renaming"
 msgstr "Alasan dari penggantian nama"
-
-msgid "Really rename this page?"
-msgstr "Yakin mengubah nama halaman ini?"
 
 msgid "Copy all /subpages too?"
 msgstr "Salin semua /subhalaman?"
@@ -3299,11 +3305,15 @@ msgid "Next change"
 msgstr "Tidak ada yang berubah"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Revisi terdahulu tak tersedia!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Revisi terdahulu tak tersedia!"
 
 msgid "Diff with newer revision in left pane"
@@ -3323,6 +3333,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Revisi terdahulu tak tersedia!"
 
 #, python-format

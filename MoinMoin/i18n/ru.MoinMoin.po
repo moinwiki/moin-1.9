@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -1224,8 +1224,8 @@ msgstr ""
 "\n"
 
 #, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Создана новая учетная запись пользователя на %(sitename)s"
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Создана новая учётная запись пользователя"
 
 #, python-format
 msgid ""
@@ -1242,8 +1242,8 @@ msgstr ""
 "    Адрес электронной почты: %(useremail)s"
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "Добавлен новый файл к странице %(pagename)s на %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "[%(sitename)s] Добавлен новый файл к странице %(pagename)s"
 
 #, python-format
 msgid ""
@@ -1266,8 +1266,8 @@ msgstr ""
 "Размер файла: %(attach_size)s\n"
 
 #, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr "Удалён прикреплённый файл со страницы %(pagename)s на %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "[%(sitename)s] Удалён прикреплённый файл со страницы %(pagename)s"
 
 #, python-format
 msgid ""
@@ -3218,17 +3218,23 @@ msgstr "Неизвестная команда резервного копиро�
 msgid "Please choose:"
 msgstr "Пожалуйста, выберите:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr "Создавать перенаправления для переименованных страниц?"
+
 msgid "Rename all /subpages too?"
 msgstr "Также переименовать все подстраницы?"
+
+msgid "Create redirect for renamed page?"
+msgstr "Создать перенаправление для переименованной страницы?"
+
+msgid "Really rename this page?"
+msgstr "Точно переименовать эту страницу?"
 
 msgid "New name"
 msgstr "Новое имя"
 
 msgid "Optional reason for the renaming"
 msgstr "Можете указать причину переименования"
-
-msgid "Really rename this page?"
-msgstr "Точно переименовать эту страницу?"
 
 msgid "Copy all /subpages too?"
 msgstr "Также скопировать все подстраницы (/subpages)?"
@@ -3282,11 +3288,14 @@ msgstr "Предыдущee изменение"
 msgid "Next change"
 msgstr "Следующее изменение"
 
-msgid "Diff with older revision in left pane"
-msgstr "Перейти к сравнению более старой версии в левой панели"
+msgid "Diff with oldest revision in left pane"
+msgstr "Перейти к сравнению самой старой версии в левой панели"
 
 msgid "No older revision available for diff"
 msgstr "Нет более старых версий для сравнения"
+
+msgid "Diff with older revision in left pane"
+msgstr "Перейти к сравнению более старой версии в левой панели"
 
 msgid "Diff with newer revision in left pane"
 msgstr "Перейти к сравнению более новой версии в левой панели"
@@ -3305,6 +3314,9 @@ msgstr "Перейти к сравнению более новой версии 
 
 msgid "No newer revision available for diff"
 msgstr "Нет более новых версий для сравнения"
+
+msgid "Diff with newest revision in right pane"
+msgstr "Перейти к сравнению самой новой версии в левой панели"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3615,6 +3627,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "анонимно"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Создана новая учетная запись пользователя на %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr ""

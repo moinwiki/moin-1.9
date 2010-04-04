@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -1211,9 +1211,9 @@ msgstr ""
 "%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Данни за Вашия уики акаунт"
 
 #, python-format
 msgid ""
@@ -1225,7 +1225,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "приложение:%(filename)s към %(pagename)s"
 
 #, python-format
@@ -1241,7 +1241,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "приложение:%(filename)s към %(pagename)s"
 
 #, fuzzy, python-format
@@ -3219,17 +3219,23 @@ msgstr "Непознато поддействие при архивиране: %
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Преименуване и на всички /подстраници?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Наистина ли искате да преименувате тази страница?"
 
 msgid "New name"
 msgstr "Ново име"
 
 msgid "Optional reason for the renaming"
 msgstr "Незадължителна причина за преименуването"
-
-msgid "Really rename this page?"
-msgstr "Наистина ли искате да преименувате тази страница?"
 
 #, fuzzy
 msgid "Copy all /subpages too?"
@@ -3295,11 +3301,15 @@ msgid "Next change"
 msgstr "Нищо не е променено"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "Няма по-стари версии!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "Няма по-стари версии!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "Няма по-стари версии!"
 
 msgid "Diff with newer revision in left pane"
@@ -3319,6 +3329,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "Няма по-стари версии!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "Няма по-стари версии!"
 
 #, python-format

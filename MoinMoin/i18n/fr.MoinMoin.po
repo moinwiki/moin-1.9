@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
-"PO-Revision-Date: 2010-02-14 11:08+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
+"PO-Revision-Date: 2010-03-23 23:12+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
 "MIME-Version: 1.0\n"
@@ -1249,8 +1249,8 @@ msgstr ""
 "La page « %(oldname)s » a été renommée « %(pagename)s » par %(editor)s :\n"
 
 #, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Nouveau compte utilisateur créé sur %(sitename)s"
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Nouveau compte utilisateur créé"
 
 #, python-format
 msgid ""
@@ -1267,10 +1267,8 @@ msgstr ""
 "    Adresse électronique : %(useremail)s"
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr ""
-"Une nouvelle pièce jointe a été ajoutée à la page %(pagename)s de %(sitename)"
-"s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "[%(sitename)s] Nouvelle pièce jointe ajoutée à la page %(pagename)s"
 
 #, python-format
 msgid ""
@@ -1293,9 +1291,8 @@ msgstr ""
 "Taille : %(attach_size)s\n"
 
 #, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr ""
-"La pièce-jointe de la page %(pagename)s a été supprimée du site %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "[%(sitename)s] Pièce-jointe supprimée de la page %(pagename)s"
 
 #, python-format
 msgid ""
@@ -3276,17 +3273,23 @@ msgstr "Sous-action de sauvegarde inconnue : %s."
 msgid "Please choose:"
 msgstr "Choisissez :"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr "Créer un renvoi pour la ou les pages renommées ?"
+
 msgid "Rename all /subpages too?"
 msgstr "Renommer également tous les /SousPages ?"
+
+msgid "Create redirect for renamed page?"
+msgstr "Créer un renvoi pour la page renommée ?"
+
+msgid "Really rename this page?"
+msgstr "Voulez-vous vraiment renommer cette page ?"
 
 msgid "New name"
 msgstr "Nouveau nom"
 
 msgid "Optional reason for the renaming"
 msgstr "Raison de ce changement de nom (optionnelle)"
-
-msgid "Really rename this page?"
-msgstr "Voulez-vous vraiment renommer cette page ?"
 
 msgid "Copy all /subpages too?"
 msgstr "Copier également toutes les /SousPages ?"
@@ -3340,11 +3343,14 @@ msgstr "Modification précédente"
 msgid "Next change"
 msgstr "Modification suivante"
 
-msgid "Diff with older revision in left pane"
-msgstr "Différences avec, à gauche, la version précédente."
+msgid "Diff with oldest revision in left pane"
+msgstr "Différences avec la plus ancienne révision de gauche"
 
 msgid "No older revision available for diff"
 msgstr "Pas de version antérieure à comparer."
+
+msgid "Diff with older revision in left pane"
+msgstr "Différences avec, à gauche, la version précédente."
 
 msgid "Diff with newer revision in left pane"
 msgstr "Différences avec, à gauche, la version suivante."
@@ -3363,6 +3369,9 @@ msgstr "Différences avec, à droite, la version suivante"
 
 msgid "No newer revision available for diff"
 msgstr "Pas de version plus récente à comparer."
+
+msgid "Diff with newest revision in right pane"
+msgstr "Différences avec la plus récente révision de droite"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"

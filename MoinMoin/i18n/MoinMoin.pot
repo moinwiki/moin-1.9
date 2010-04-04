@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
+"POT-Creation-Date: 2010-04-05 01:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1050,7 +1050,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New user account created on %(sitename)s"
+msgid "[%(sitename)s] New user account created"
 msgstr ""
 
 #, python-format
@@ -1063,7 +1063,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -1079,7 +1079,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -2895,16 +2895,22 @@ msgstr ""
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
 msgstr ""
 
 msgid "New name"
 msgstr ""
 
 msgid "Optional reason for the renaming"
-msgstr ""
-
-msgid "Really rename this page?"
 msgstr ""
 
 msgid "Copy all /subpages too?"
@@ -2959,10 +2965,13 @@ msgstr ""
 msgid "Next change"
 msgstr ""
 
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr ""
 
 msgid "No older revision available for diff"
+msgstr ""
+
+msgid "Diff with older revision in left pane"
 msgstr ""
 
 msgid "Diff with newer revision in left pane"
@@ -2981,6 +2990,9 @@ msgid "Diff with newer revision in right pane"
 msgstr ""
 
 msgid "No newer revision available for diff"
+msgstr ""
+
+msgid "Diff with newest revision in right pane"
 msgstr ""
 
 #, python-format

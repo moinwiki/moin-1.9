@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
-"PO-Revision-Date: 2010-02-14 09:40+0100\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
+"PO-Revision-Date: 2010-03-23 10:16+0100\n"
 "Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid "The wiki is currently not reachable."
 msgstr "Wikin går för tillfället inte att nå."
 
 msgid "Invalid username or password."
-msgstr "Felaktig användarnamn eller lösenord."
+msgstr "Felaktigt användarnamn eller lösenord."
 
 #, python-format
 msgid ""
@@ -1193,8 +1193,8 @@ msgstr ""
 "Sidan \"%(pagename)s\" har döpts om från \"%(oldname)s\" av %(editor)s:\n"
 
 #, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Ett nytt användarkonto skapades på %(sitename)s"
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Nytt konto skapat"
 
 #, python-format
 msgid ""
@@ -1211,8 +1211,8 @@ msgstr ""
 "    Epost-adress: %(useremail)s"
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "Ny bilaga lagts till sidan %(pagename)s på %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "[%(sitename)s] Ny bilaga har lagts till sidan %(pagename)s"
 
 #, python-format
 msgid ""
@@ -1233,8 +1233,8 @@ msgstr ""
 "Bilagans storlek: %(attach_size)s\n"
 
 #, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
-msgstr "Bilaga borttagen från sidan %(pagename)s på %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "[%(sitename)s] Bilaga borttagen från sidan  %(pagename)s"
 
 #, python-format
 msgid ""
@@ -3171,17 +3171,23 @@ msgstr "Okänd backup-underåtgärd: %s."
 msgid "Please choose:"
 msgstr "Var god välj:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr "Skapa omdirigering för sidor som bytt namn?"
+
 msgid "Rename all /subpages too?"
 msgstr "Döp om alla /undersidor också?"
+
+msgid "Create redirect for renamed page?"
+msgstr "Skapa omdirigering för sidan som bytt namn?"
+
+msgid "Really rename this page?"
+msgstr "Döpa om den här sidan, är du säker?"
 
 msgid "New name"
 msgstr "Nytt namn"
 
 msgid "Optional reason for the renaming"
 msgstr "Skäl till namnbyte (ej obligatoriskt)"
-
-msgid "Really rename this page?"
-msgstr "Döpa om den här sidan, är du säker?"
 
 msgid "Copy all /subpages too?"
 msgstr "Kopiera även alla /undersidor?"
@@ -3235,11 +3241,14 @@ msgstr "Föregående ändring"
 msgid "Next change"
 msgstr "Nästa ändring"
 
-msgid "Diff with older revision in left pane"
-msgstr "Diff med äldre version i vänstra panelen"
+msgid "Diff with oldest revision in left pane"
+msgstr "Diff med äldsta versionen i vänstra panelen"
 
 msgid "No older revision available for diff"
 msgstr "Ingen äldre version tillgänglig för diff"
+
+msgid "Diff with older revision in left pane"
+msgstr "Diff med äldre version i vänstra panelen"
 
 msgid "Diff with newer revision in left pane"
 msgstr "Diff med nyare version i vänstra panelen"
@@ -3258,6 +3267,9 @@ msgstr "Diff med nyare version i högra panelen"
 
 msgid "No newer revision available for diff"
 msgstr "Ingen nyare version tillgänglig för diff"
+
+msgid "Diff with newest revision in right pane"
+msgstr "Diff med nyaste versionen i högra panelen"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3570,6 +3582,9 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Ett nytt användarkonto skapades på %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr ""

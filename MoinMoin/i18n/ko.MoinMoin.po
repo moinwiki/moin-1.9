@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 17:00+0100\n"
-"PO-Revision-Date: 2008-03-12 15:01+0900\n"
-"Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
+"POT-Creation-Date: 2010-03-26 22:24+0100\n"
+"PO-Revision-Date: 2010-03-13 11:16+0900\n"
+"Last-Translator: YongjinCho <yongjin.cho@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -474,7 +474,7 @@ msgid "You are not allowed to view this page."
 msgstr "이 문서를 볼 수 있는 권한이 없습니다."
 
 msgid "Switch user"
-msgstr ""
+msgstr "사용자 전환"
 
 msgid "No user selected"
 msgstr ""
@@ -485,7 +485,7 @@ msgid ""
 msgstr ""
 
 msgid "You are the only user."
-msgstr ""
+msgstr "당신 외에 다른 사용자가 없습니다."
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
@@ -496,7 +496,7 @@ msgstr "사용자 선택"
 
 #, fuzzy
 msgid "Change password"
-msgstr "암호"
+msgstr "암호 변경"
 
 msgid "Passwords don't match!"
 msgstr "확인 암호가 일치하지 않습니다!"
@@ -509,10 +509,10 @@ msgid "Password not acceptable: %s"
 msgstr ""
 
 msgid "Your password has been changed."
-msgstr ""
+msgstr "암호가 변경되었습니다."
 
 msgid "To change your password, enter a new password twice."
-msgstr ""
+msgstr "암호를 변경하기 위해서 새 암호를 두 번 입력하세요."
 
 msgid "Password"
 msgstr "암호"
@@ -579,7 +579,7 @@ msgstr ""
 
 #, fuzzy
 msgid "'''Email'''"
-msgstr "Email"
+msgstr "'''이메일'''"
 
 msgid "'''Jabber'''"
 msgstr ""
@@ -637,7 +637,7 @@ msgstr "이 메일 주소는 이미 다른 사람이 사용 중입니다."
 
 #, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "이 메일 주소는 이미 다른 사람이 사용 중입니다."
+msgstr "이 jabber 아이디는 이미 다른 사람이 사용 중입니다."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1183,9 +1183,9 @@ msgstr ""
 "%(pagelink)s\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] 위키 계정 정보"
 
 #, python-format
 msgid ""
@@ -1197,7 +1197,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "%(pagename)s의 <<Verbatim(attachment:)>>%(filename)s"
 
 #, python-format
@@ -1213,7 +1213,7 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Removed attachment from page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
 msgstr "%(pagename)s의 <<Verbatim(attachment:)>>%(filename)s"
 
 #, fuzzy, python-format
@@ -1373,18 +1373,18 @@ msgid "FrontPage"
 msgstr "대문"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "연습장"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "위키"
+msgstr "인터위키"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "오래된문서"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "문서 묶기"
+msgstr "미참조문서"
 
 #, fuzzy
 msgid "WantedPages"
@@ -1404,7 +1404,7 @@ msgstr ""
 
 #, fuzzy
 msgid "PageSize"
-msgstr "크기"
+msgstr "문서크기"
 
 #, fuzzy
 msgid "PageHits"
@@ -1862,7 +1862,7 @@ msgid "SpellCheck"
 msgstr "철자 검사"
 
 msgid "Discussion"
-msgstr ""
+msgstr "토론"
 
 msgid "[all]"
 msgstr ""
@@ -1886,7 +1886,7 @@ msgid "User"
 msgstr "사용자"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[첨부]"
 
 msgid "[RSS]"
 msgstr "[RSS]"
@@ -1901,7 +1901,7 @@ msgid "[RENAMED]"
 msgstr ""
 
 msgid "[CONFLICT]"
-msgstr ""
+msgstr "[충돌]"
 
 msgid "[NEW]"
 msgstr "[새 문서]"
@@ -1916,7 +1916,7 @@ msgid "[TOP]"
 msgstr "[처음]"
 
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 msgid "Logout"
 msgstr "로그아웃"
@@ -1967,7 +1967,7 @@ msgid "More Actions:"
 msgstr "다른 작업:"
 
 msgid "------------------------"
-msgstr ""
+msgstr "------------------"
 
 msgid "Raw Text"
 msgstr "원문 보기"
@@ -2003,7 +2003,7 @@ msgid "Remove Spam"
 msgstr "스팸 제거"
 
 msgid "Revert to this revision"
-msgstr "이 버젼으로 되돌리기."
+msgstr "이 버젼으로 되돌리기"
 
 msgid "Package Pages"
 msgstr "문서 묶기"
@@ -2406,14 +2406,14 @@ msgstr "이 문서는 즐겨찾기에 없으므로 삭제할 수 없었습니다
 
 #, fuzzy
 msgid "Edit slide show"
-msgstr "슬라이드 쇼"
+msgstr "슬라이드 쇼 편집"
 
 msgid "Quit"
 msgstr ""
 
 #, fuzzy
 msgid "Quit slide show"
-msgstr "슬라이드 쇼"
+msgstr "슬라이드 쇼 종료"
 
 msgid "Show first slide (up arrow)"
 msgstr ""
@@ -3156,17 +3156,23 @@ msgstr "알 수 없는 백업 하위 작업: %s"
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "정말로 이 문서 이름을 바꾸시겠습니까?"
 
 msgid "New name"
 msgstr "새 이름"
 
 msgid "Optional reason for the renaming"
 msgstr "이름을 바꾸는 이유"
-
-msgid "Really rename this page?"
-msgstr "정말로 이 문서 이름을 바꾸시겠습니까?"
 
 msgid "Copy all /subpages too?"
 msgstr ""
@@ -3229,11 +3235,15 @@ msgid "Next change"
 msgstr "변경사항 없음"
 
 #, fuzzy
-msgid "Diff with older revision in left pane"
+msgid "Diff with oldest revision in left pane"
 msgstr "옛 버전이 저장되어 있지 않습니다!"
 
 #, fuzzy
 msgid "No older revision available for diff"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
 msgstr "옛 버전이 저장되어 있지 않습니다!"
 
 msgid "Diff with newer revision in left pane"
@@ -3253,6 +3263,10 @@ msgstr ""
 
 #, fuzzy
 msgid "No newer revision available for diff"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
 msgstr "옛 버전이 저장되어 있지 않습니다!"
 
 #, python-format
