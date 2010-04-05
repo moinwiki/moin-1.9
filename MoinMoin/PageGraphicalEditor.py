@@ -318,7 +318,16 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         themepath = '%s/%s' % (url_prefix_static, request.theme.name)
         smileypath = themepath + '/img'
         # auto-generating a list for SmileyImages does NOT work from here!
-        editor_size = int(request.user.edit_rows) * 22 # 22 height_pixels/line
+        text_rows = int(request.user.edit_rows)
+        if not text_rows:
+            # if no specific value is given for editor height, but 0, we
+            # compute the rows from the raw_body line count plus some
+            # extra rows for adding new text in the editor. Maybe this helps
+            # with the "double slider" usability issue, esp. for devices like
+            # the iphone where you can't operate both sliders.
+            current_rows = len(raw_body.split('\n'))
+            text_rows = max(10, int(current_rows * 1.5))
+        editor_size = text_rows * 22 # 22 height_pixels/line
         word_rule = self.word_rule()
 
         request.write("""
