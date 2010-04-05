@@ -1,0 +1,35 @@
+    # This is a sample configuration snippet that shows how to configure email support.
+    # See HelpOnConfiguration/EmailSupport and HelpOnConfiguration for more infos.
+
+    # SENDING MAIL - e.g. for page subscribtions or sending of forgotten passwords.
+
+    # the "from:" address [Unicode]
+    mail_from = u"wiki <wiki@example.org>"
+
+    # a) using a SMTP server, e.g. "mail.provider.com" (None to disable mail)
+    mail_smarthost = "smtp.example.org"
+
+    # if you need to use SMTP AUTH at your mail_smarthost:
+    #mail_login = "smtp_username smtp_password"
+
+    # b) alternatively to using SMTP, you can use the sendmail commandline tool:
+    #mail_sendmail = "/usr/sbin/sendmail -t -i"
+
+    # preload user subscribed pages with this page list:
+    #subscribed_pages_default = []
+
+
+    # RECEIVING MAIL - send email to your wiki (defaults shown)
+    # Note: this just configures the mail importing xmlrpc functionionality
+    # within moin, you need some script called by your MDA (e.g. procmail)
+    # to DO the xmlrpc calls for each mail arriving for your wiki!
+    #actions_excluded = list(multiconfig.DefaultConfig.actions_excluded)
+    #actions_excluded.remove('xmlrpc') # it won't work if 'xmlrpc' is excluded!
+    #mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
+    #mail_import_pagename_search = ['subject', 'to', ] # where to look for target pagename (and in which order)
+    #mail_import_pagename_envelope = u"%s" # use u"+ %s/" to add "+ " and "/" automatically
+    #mail_import_pagename_regex = r'\[\[([^\]]*)\]\]' # how to find/extract the pagename from the subject
+    #mail_import_wiki_addrs = [] # the e-mail addresses for e-mails that should go into the wiki
+    #secrets = ""  # or secrets["xmlrpc/ProcessMail"] - a shared secret also known to the mail importer xmlrpc script
+
+
