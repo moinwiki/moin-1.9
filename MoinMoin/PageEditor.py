@@ -484,7 +484,10 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         # QuickHelp originally by Georg Mischler <schorsch@lightingwiki.com>
         markup = self.pi['format'] or request.cfg.default_markup
-        parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", markup)
+        try:
+            parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", markup)
+        except wikiutil.PluginMissingError:
+            parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", "plain")
         quickhelp = getattr(parser, 'quickhelp', None)
         if quickhelp:
             request.write(request.formatter.div(1, id="editor-help"))

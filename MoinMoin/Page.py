@@ -1262,7 +1262,10 @@ class Page(object):
             self.getFormatterName() in self.cfg.caching_formats):
             # Everything is fine, now check the parser:
             if parser is None:
-                parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi['format'])
+                try:
+                    parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi['format'])
+                except wikiutil.PluginMissingError:
+                    return False
             return getattr(parser, 'caching', False)
         return False
 
@@ -1277,7 +1280,10 @@ class Page(object):
         """
         request.clock.start('send_page_content')
         # Load the parser
-        Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", format)
+        try:
+            Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", format)
+        except wikiutil.PluginMissingError:
+            Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", "plain")
         parser = Parser(body, request, format_args=format_args, **kw)
 
         if not (do_cache and self.canUseCache(Parser)):
