@@ -104,7 +104,7 @@ class PygmentsFormatter(pygments.formatter.Formatter):
         self.result.append(fmt.code_line(0))
 
     def format(self, tokensource, outfile):
-        fmt = self.formatter    
+        fmt = self.formatter
         self.lineno = self.start_line
         line_parts = []
         for ttype, value in tokensource:
@@ -121,7 +121,7 @@ class PygmentsFormatter(pygments.formatter.Formatter):
                     if class_:
                         line_parts.append(fmt.code_token(0, class_))
         if line_parts and line_parts != [u'']: # Don't output an empty line at the end.
-            self.add_next_line(line_parts)            
+            self.add_next_line(line_parts)
 
 
 class Parser:

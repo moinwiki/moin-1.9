@@ -280,7 +280,7 @@ class TestBlock(ParserTestCase):
 """
         for test, blockstart in self.cases:
             # We dont test here formatter white space generation
-            expected = r'<p.*?>AAA\s*</p>\s*%s' % blockstart
+            expected = r'<p.*?>AAA\s*</p>\s*(<span.*?></span>\s*)?%s' % blockstart
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
             assert needle.search(result)
