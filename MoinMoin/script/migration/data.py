@@ -23,7 +23,25 @@ from MoinMoin import wikiutil
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
-    """ Migration script class """
+    """\
+Purpose:
+========
+This tool allow you to migrate data of pages to a newer version
+
+Detailed Instructions:
+======================
+General syntax: moin [options] migration data [migration-data-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
+
+[migration-data-options] see below:
+    Please note:
+    * You must run this script as the owner of the wiki files.
+    * The file docs/UPDATE.html contains the general instructions
+      for upgrading a wiki.
+"""
+
 
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
