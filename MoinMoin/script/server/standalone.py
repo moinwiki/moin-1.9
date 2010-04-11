@@ -15,6 +15,25 @@ from MoinMoin.util.daemon import Daemon
 from MoinMoin.web.serving import run_server
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool allows you to start a standalone server
+
+Detailed Instructions:
+======================
+General syntax: moin [options] server standalone [standalone-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
+
+[standalone-options] see below:
+    Please note:
+    * You must run this script as the owner of the wiki files.
+    * You should not run this script as root. You should use --user and
+      --group to run the server without superuser privileges.
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
