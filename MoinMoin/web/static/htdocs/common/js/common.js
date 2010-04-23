@@ -396,14 +396,14 @@ var getElementsByClassName = function (className, tag, elm){
 // This code is public domain (or primarily public domain).
 // Do whatever you want with it.  In particular, you may release it under
 // GPL 2.0 or incorporate it into projects that use GPL 2.0.
-// -- Radomir Dopieralski
-// Copyright: 2010 Roger D. Haase
-// License: GNU GPL V2 or later
+// -- Radomir Dopieralski and Roger D. Haase
 
 // this scrolls the textarea after a doubleclick - jumpLine is scroll-to line
 function scrollTextarea(jumpLine) {
     var txtBox = document.getElementById('editor-textarea');
     if (txtBox) {
+        // scroll to top of page in case user  doubleclicked in edit preview  
+        scroll(0,0); 
         // Calculate the cursor position - IE supports innerText, not textContent
         var textLines = txtBox.textContent || txtBox.innerText;
         textLines = textLines.match(/(.*\n)/g);
@@ -452,56 +452,170 @@ function scrollTextarea(jumpLine) {
     }
 }
 
+// stop event bubbling
+function stopBubbling(e) {
+    if (e.stopPropagation) {
+        e.stopPropagation(); 
+    }
+    e.cancelBubble = true;
+}
+
+// stop bubbling and return event node 
+function getNode(e) {
+    // window.event and e.srcElement are IE
+    var e = e || window.event;
+    var targ = e.target || e.srcElement;
+    if (targ.nodeType == 3) {
+        // workaround safari
+        targ = targ.parentNode;
+    }
+    stopBubbling(e);
+    return targ;
+}
+
+// add action=edit and scrollLine to document.location
+function doActionEdit(e) {
+    var targ = getNode(e);
+    document.location.search = '?action=edit&line='+(targ.scrollLine-1);
+}
+
+// scroll textarea on this page
+function doTextareaScroll(e) {
+    var targ = getNode(e);
+    scrollTextarea(targ.scrollLine-1);
+}
+
+// functions used for testing - pops up tooltip with tagName and scroll line number
+function doMouseOver(e) {
+    var targ = getNode(e);
+    targ.title = 'tagName='+targ.tagName+'  line='+targ.scrollLine;
+}
+function doMouseOut(e) {
+    var targ = getNode(e);
+    targ.removeAttribute('title');
+}
+
 // This is the function that registers double clicks.
 // isPreview is true if the current page is an edit draft preview
 function setCallback(node, line, isPreview) {
-    if (!node.scrollLine) {
-        // Don't change the line number if there is one already.
-        // MoinMoin seems to be off by 2 lines
-        node.scrollLine = 0+line-2;
-    }
-    if (node.scrollLine || node.scrollLine === 0) {
+    if (node.scrollLine) {
+        // this node already processed
+        return;
+    } else {
+        // MoinMoin counts starting with 1, scrollTextarea starts with 0
+        node.scrollLine = line;
         if (isPreview) {
-            node.ondblclick = function () {
-                // scroll page locally and preserve existing edits
-                scrollTextarea([this.scrollLine]);
-            };
+            if(window.addEventListener){ 
+                node.addEventListener('dblclick',doTextareaScroll,false);
+                //~ node.addEventListener('mouseover', doMouseOver,false); // @@@ for testing
+                //~ node.addEventListener('mouseout',doMouseOut,false); // @@@ for testing
+            } else {
+                // IE
+                node.attachEvent('ondblclick',doTextareaScroll);
+                //~ node.attachEvent('onmouseover', doMouseOver,false); // @@@ for testing
+                //~ node.attachEvent('onmouseout',doMouseOut,false); // @@@ for testing
+            }
         } else {
-            node.ondblclick = function () {
-                // Only change the query part of the URL
-                document.location.search = '?action=edit&line='+this.scrollLine;
-            };
+            if(window.addEventListener){ 
+                node.addEventListener('dblclick',doActionEdit,false);
+                //~ node.addEventListener('mouseover', doMouseOver,false); // @@@ for testing
+                //~ node.addEventListener('mouseout',doMouseOut,false); // @@@ for testing
+            } else {
+                // IE
+                node.attachEvent('ondblclick',doActionEdit);
+                //~ node.attachEvent('onmouseover', doMouseOver,false); // @@@ for testing
+                //~ node.attachEvent('onmouseout',doMouseOut,false); // @@@ for testing
+            }
+        }
+    }
+}
+
+// walk part of DOM and add doubleclick function to all nodes with tagNames
+function walkDom (someNode, lineNbr, isPreview, nextId, topId) {
+
+    //~ // handle special cases of paragraph on line after <<TOC>> and ---- (horizontal rule)
+    //~ //   But this effects paragraphs on multiple lines: doubleclick goes to paragraph bottom rather than top.
+    //~ //   Seems best to live with TOC and HR problem and wait for Moin2.
+    //~ var next1, next2, next3;
+    //~ var nextNbr = 'line-' + (lineNbr-0+1);
+    //~ if (someNode.parentNode.tagName == 'P' && someNode.parentNode.scrollLine) {
+        //~ next1 = someNode.nextSibling;
+        //~ if (next1 && next1.tagName != 'SPAN') {
+            //~ next2 = next1.nextSibling;
+        //~ }
+        //~ if (next2 && next2.id == nextNbr) {
+            //~ alert('Correcting scrollLine='+lineNbr);
+            //~ someNode.parentNode.scrollLine = lineNbr;
+            //~ return;
+        //~ }
+    //~ }
+
+    var doChild = true;
+    while (!(someNode.id == nextId) && !(someNode.id == topId)) {
+        // add children, add siblings, add parent
+        if (doChild && someNode.firstChild) {
+            someNode = someNode.firstChild;
+        } else {
+            doChild = true;
+            if (someNode.nextSibling) {
+                someNode = someNode.nextSibling;
+            } else {
+                if (someNode.parentNode.nextSibling) {
+                someNode = someNode.parentNode.nextSibling;
+                } else {
+                    doChild = false;
+                    someNode = someNode.parentNode.parentNode;
+                }
+            }
+        }
+        if (doChild && someNode.tagName && !(someNode.id == nextId) && !(someNode.id == topId)) {
+            setCallback(someNode, lineNbr, isPreview);
         }
     }
 }
 
 // run during page load when user may edit current page OR is viewing draft preview
 function setSpanTags(isPreview) {
-    // Check all the SPAN tags
-    var marks = document.getElementsByTagName('span');
-    for (var i = 0; i < marks.length; ++i) {
+    // find all the SPAN tags with an ID beginning with "line-"
+    var spanTags = document.getElementsByTagName('span');
+    var marks = [];
+    for (var i = 0; i < spanTags.length; ++i) {
+        if (spanTags[i].id && spanTags[i].id.substring(0, 5) == 'line-') {
+            marks.push(spanTags[i]);
+        }
+    }
+    var bottom = document.getElementById('bottom');
+    var top = document.getElementById('content');
+    // add stopping point to end of array for convenience
+    marks.push(bottom); 
+    var skipTo = -1; 
+    // loop through span tags and apply double-click events to appropriate node(s) 
+    for (i = 0; i < marks.length-1; ++i) {
         var mark = marks[i];
-        if (mark.id && mark.id.substring(0, 5) == 'line-') {
-            // We have a line mark SPAN, get the line number from it
-            var line = mark.id.replace('line-', '');
-            if (mark.parentNode.tagName == 'DIV')  {
-                // If the SPAN is inside a DIV, set callback on the previous
-                // non-SPAN element in the same DIV.
-                var child = mark.parentNode.firstChild;
-                var last_child = null;
-                while (child) {
-                    if (child == mark && last_child) {
-                        setCallback(last_child, line, isPreview);
-                    }
-                    if (child.tagName && child.tagName != 'SPAN') {
-                        // Only consider tag that are not SPANs
-                        last_child = child;
-                    }
-                    child = child.nextSibling;
+        // skip span tags generated by embedded parsers
+        if (i > skipTo) {
+            // split the ID into parts: looks line "line-22" or "line-22-1"
+            var lineParts = mark.id.split('-');
+            var line = lineParts[1];
+            if (lineParts.length == 3) {
+                // have found output from embedded parser
+                // find next span id that looks like "line-n" and the "line-n-n" just before it
+                var j = i - 0;
+                while (lineParts.length == 3) {
+                    j++;
+                    lineParts = marks[j].id.split('-');
                 }
+                // determine how many lines, starting line number, and add double-click events
+                var nbrParsedLines = j - i;
+                var parsedLineNbr = lineParts[1] - nbrParsedLines - 1;
+                for (var k = 0; k < nbrParsedLines; ++k) { 
+                    walkDom (marks[i+k], parsedLineNbr+k, isPreview, marks[i+k+1].id, top.id);
+                }
+                // done with embedded parser lines, tell main loop to skip these
+                skipTo = j - 1; 
             } else {
-                // If the SPAN is inside a P, simply set callback on that P
-                setCallback(mark.parentNode, line, isPreview);
+                // walk part of DOM and apply doubleclick function to every node with a tagname
+                walkDom (mark, line, isPreview, marks[i+1].id, top.id);
             }
         }
     }
