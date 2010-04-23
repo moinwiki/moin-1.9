@@ -7,7 +7,7 @@ from MoinMoin.config import multiconfig
 Dependencies = ['user'] # table headings are translated to user language
 generates_headings = True
 
-def macro_WikiConfigHelp(macro, section=None):
+def macro_WikiConfigHelp(macro, section=None, show_heading=True, show_descriptions=True, heading_level=2):
     request = macro.request
     _ = request.getText
     f = macro.request.formatter
@@ -25,13 +25,15 @@ def macro_WikiConfigHelp(macro, section=None):
 
     for groupname, addgroup, optsdict in groups:
         heading, desc, opts = optsdict[groupname]
-        ret.extend([
-            f.heading(1, 1, id=groupname),
-            ## XXX: translate description?
-            f.text(heading),
-            f.heading(0, 1),
-        ])
-        if desc:
+        if show_heading:
+            ret.extend([
+                f.heading(1, heading_level, id=groupname),
+                ## XXX: translate description?
+                f.text(heading),
+                f.heading(0, heading_level),
+            ])
+
+        if desc and show_descriptions:
             ret.extend([
                 f.paragraph(1),
                 f.text(desc),
