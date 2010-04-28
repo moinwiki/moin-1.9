@@ -269,6 +269,10 @@ class HTTPContext(BaseContext):
 
     def http_redirect(self, url, code=302):
         """ Raise a simple redirect exception. """
+        # werkzeug >= 0.6 does iri-to-uri transform if it gets unicode, but our
+        # url is already url-quoted, so we better give it str to have same behaviour
+        # with werkzeug 0.5.x and 0.6.x:
+        url = str(url) # if url is unicode, it should contain ascii chars only
         abort(redirect(url, code=code))
 
     def http_user_agent(self):
