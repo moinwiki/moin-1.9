@@ -134,7 +134,7 @@ class XmlRpcBase:
                 # xmlrpc, you have to use multicall and getAuthToken / applyAuthToken
                 request.user = user.User(request, auth_method='xmlrpc:invalid')
 
-                data = request.in_data
+                data = request.read()
 
                 try:
                     params, method = xmlrpclib.loads(data)

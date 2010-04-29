@@ -67,10 +67,6 @@ class Request(ResponseBase, RequestBase):
     # XXX ugly hack end
 
     @cached_property
-    def in_data(self):
-        return self.in_stream.read()
-
-    @cached_property
     def in_headers(self):
         return EnvironHeaders(self.environ)
 
