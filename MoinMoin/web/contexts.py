@@ -227,7 +227,7 @@ class HTTPContext(BaseContext):
     def read(self, n=None):
         """ Read n bytes (or everything) from input stream. """
         if n is None:
-            return self.request.in_data
+            return self.request.in_stream.read()
         else:
             return self.request.in_stream.read(n)
 
