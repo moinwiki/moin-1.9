@@ -7,7 +7,7 @@ MoinMoin - cleancache script
 @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import caching, user
+from MoinMoin import caching, i18n, user
 from MoinMoin.Page import Page
 from MoinMoin.script import MoinScript
 
@@ -70,3 +70,7 @@ General syntax: moin [options] maint cleancache
         for key in uids:
             caching.CacheEntry(request, 'drafts', key, scope='wiki').remove()
 
+        # clean language cache files
+        wiki_languages = i18n.wikiLanguages().keys()
+        for key in wiki_languages:
+            caching.CacheEntry(request, 'i18n', key, scope='wiki').remove()
