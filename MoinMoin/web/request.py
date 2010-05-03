@@ -10,7 +10,9 @@ import re
 from StringIO import StringIO
 
 from werkzeug import Request as RequestBase
-from werkzeug import Response as ResponseBase
+from werkzeug import BaseResponse, ETagResponseMixin, \
+                     CommonResponseDescriptorsMixin, WWWAuthenticateMixin
+from werkzeug.wrappers import ResponseStream
 from werkzeug import EnvironHeaders, Headers, HeaderSet
 from werkzeug import Href, create_environ, url_encode, cached_property
 from werkzeug import Client # used by tests
@@ -22,6 +24,24 @@ logging = log.getLogger(__name__)
 
 class MoinMoinFinish(Exception):
     """ Raised to jump directly to end of run() function, where finish is called """
+
+class ModifiedResponseStreamMixin(object):
+    """
+    to avoid .stream attributes name collision when we mix together Request
+    and Response, we use "out_stream" instead of "stream" in the original
+    ResponseStreamMixin
+    """
+    @cached_property
+    def out_stream(self):
+        """The response iterable as write-only stream."""
+        return ResponseStream(self)
+
+class ResponseBase(BaseResponse, ETagResponseMixin, ModifiedResponseStreamMixin,
+                   CommonResponseDescriptorsMixin,
+                   WWWAuthenticateMixin):
+    """
+    similar to werkzeug.Response, but with ModifiedResponseStreamMixin
+    """
 
 class Request(ResponseBase, RequestBase):
     """ A full featured Request/Response object.
@@ -47,24 +67,11 @@ class Request(ResponseBase, RequestBase):
         self.response = []
         self.status_code = 200
 
-    # XXX ugly hack begin - works by sheer luck
+    # Note: we inherit a .stream attribute from RequestBase and this needs
+    # to refer to the input stream because inherited functionality of werkzeug
+    # base classes will access it as .stream.
+    # The output stream is .out_stream (see above).
     # TODO keep request and response separate, don't mix them together
-    stream = property() # protect inherited .stream attr from accessing
-
-    try:
-        # for werkzeug 0.6
-        in_stream = cached_property(RequestBase.stream.func, 'in_stream')
-    except AttributeError:
-        # no .func -> werkzeug 0.5
-        in_stream = RequestBase.stream
-
-    try:
-        # for werkzeug 0.6
-        out_stream = cached_property(ResponseBase.stream.func, 'out_stream')
-    except AttributeError:
-        # no .func -> werkzeug 0.5
-        out_stream = ResponseBase.stream
-    # XXX ugly hack end
 
     @cached_property
     def in_headers(self):

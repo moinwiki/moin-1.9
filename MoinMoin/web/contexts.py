@@ -227,9 +227,9 @@ class HTTPContext(BaseContext):
     def read(self, n=None):
         """ Read n bytes (or everything) from input stream. """
         if n is None:
-            return self.request.in_stream.read()
+            return self.request.stream.read()
         else:
-            return self.request.in_stream.read(n)
+            return self.request.stream.read(n)
 
     def makeForbidden(self, resultcode, msg):
         status = {401: Unauthorized,
