@@ -18,14 +18,25 @@ Known main issues:
 
 Version 1.9.current:
   Fixes:
+  * Fix XSS in Despam action (CVE-2010-0828).
   * MoinMoin.util.filesys: disable usage of dircache, deprecate dc* functions,
     because the dircache stdlib module can't work correctly for fast updates of
     directories.
   * rss_rc and sisterpages actions: fix Content-Type header (mimetype)
   * openidrp auth: fix undefined _ (gettext)
   * highlight parser: fixed MoinMoinBugs/LineNumberSpansForProcessInstructionsMissed
-  * pygments syntax highlighting: add missing code files
-  * notifications: use same email subject format for every notification
+  * Pygments syntax highlighting: add missing code files
+  * Notifications: use same email subject format for every notification
+  * Fix docbook formatter crashing, see MoinMoinPatch/IncludeMacroWithDocBookFormatter
+  * Fix regex content search for xapian search.
+  * Get rid of the empty line at the end of code highlights.
+  * GUI editor: compute editor height like the text editor does.
+  * Added help texts for: standalone server and moin migration.
+  * script.maint.cleancache: clean also i18n cache files
+  * Improved formatter.text_plain, see FeatureRequests/TextPlainFormatterRewrite
+    (fixes many issues of this formatter).
+  * Make moin compatible to werkzeug 0.5 .. 0.6.2 (1.9.2 had issues
+    with xmlrpc when used with werkzeug 0.6.x).
 
   New features:
   * RenamePage action: added ability to create redirect pages when renaming
@@ -38,6 +49,9 @@ Version 1.9.current:
   * MoinMoin.widget.browser: introduced feature for sorting tables, see:
     http://moinmo.in/FeatureRequests/SortableTables
   * SystemAdmin user and attachment browsers: sorting feature used there now
+  * Scrolling the text editor to the double clicked line.
+  * Enable double-click-editing by default.
+  * WikiConfigHelp macro: make heading and description display optional, heading level as a parameter (default 2)
 
   Other changes:
   * upgraded pygments from 1.2.2 to 1.3.1
