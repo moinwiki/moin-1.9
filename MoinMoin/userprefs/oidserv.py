@@ -61,9 +61,7 @@ class Settings(UserPrefBase):
             return self._handle_remove()
 
     def _make_form(self):
-        sn = self.request.script_root
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
+        action = "%s%s" % (self.request.script_root, self.request.path)
         _form = html.FORM(action=action)
         _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         _form.append(html.INPUT(type="hidden", name="handler", value="oidserv"))
