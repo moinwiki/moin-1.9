@@ -77,7 +77,7 @@ class CASAuth(BaseAuth):
         ticket = request.args.get('ticket')
         action = request.args.get("action", [])
         logoutRequest = request.args.get('logoutRequest', [])
-        url = request.getBaseURL() + urllib.quote_plus(request.getPathinfo().encode('utf-8'))
+        url = request.url_root + urllib.quote_plus(request.path.encode('utf-8'))
 
         # # handle logout request from CAS
         # if logoutRequest:
@@ -112,7 +112,7 @@ class CASAuth(BaseAuth):
 
     def logout(self, request, user_obj, **kw):
         if self.name and user_obj and user_obj.auth_method == self.name:
-            url = request.getBaseURL() + urllib.quote_plus(request.getPathinfo().encode('utf-8'))
+            url = request.url_root + urllib.quote_plus(request.path.encode('utf-8'))
             request.http_redirect(self.cas.logout_url(url))
 
             user_obj.valid = False
