@@ -1077,7 +1077,7 @@ class convert_tree(visitor):
                 align += self._alignment.get(value, "")
         if node.hasAttribute("width"):
             value = node.getAttribute("width")
-            if value[-1] == "%":
+            if value and value[-1] == "%":
                 align += value
             else:
                 result.append('width="%s"' % self._check_length(value))
