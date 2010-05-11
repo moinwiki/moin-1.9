@@ -79,13 +79,6 @@ def execute(pagename, request):
     # did user hit cancel button?
     cancelled = 'button_cancel' in request.form
 
-    if request.cfg.edit_ticketing:
-        ticket = request.form.get('ticket', '')
-        if not wikiutil.checkTicket(request, ticket):
-            request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
-            pg.send_page()
-            return
-
     from MoinMoin.error import ConvertError
     try:
         if lasteditor == 'gui':
@@ -147,8 +140,14 @@ def execute(pagename, request):
             savetext += ' '
         savetext += category + u'\n' # Should end with newline!
 
+    if request.cfg.edit_ticketing:
+        ticket = request.form.get('ticket', '')
+        if not wikiutil.checkTicket(request, ticket):
+            request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
+            pg.sendEditor(preview=savetext, comment=comment, staytop=1)
+
     # Preview, spellcheck or spellcheck add new words
-    if ('button_preview' in request.form or
+    elif ('button_preview' in request.form or
         'button_spellcheck' in request.form or
         'button_newwords' in request.form):
         pg.sendEditor(preview=savetext, comment=comment)
