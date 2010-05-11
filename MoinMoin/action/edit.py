@@ -140,11 +140,10 @@ def execute(pagename, request):
             savetext += ' '
         savetext += category + u'\n' # Should end with newline!
 
-    if request.cfg.edit_ticketing:
-        ticket = request.form.get('ticket', '')
-        if not wikiutil.checkTicket(request, ticket):
-            request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
-            pg.sendEditor(preview=savetext, comment=comment, staytop=1)
+    if (request.cfg.edit_ticketing and
+        not wikiutil.checkTicket(request, request.form.get('ticket', ''))):
+        request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
+        pg.sendEditor(preview=savetext, comment=comment, staytop=1)
 
     # Preview, spellcheck or spellcheck add new words
     elif ('button_preview' in request.form or
