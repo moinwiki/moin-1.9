@@ -567,7 +567,7 @@ class XmlRpcBase:
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
-        page = PageEditor(self.request, pagename)
+        page = PageEditor(self.request, pagename, do_editor_backup=0)
         try:
             if self.version == 2:
                 newtext = self._instr(pagetext)
@@ -601,7 +601,7 @@ class XmlRpcBase:
         # check ACLs
         if not (self.request.user.may.delete(pagename) and self.request.user.may.write(newpagename)):
             return xmlrpclib.Fault(1, "You are not allowed to rename this page")
-        editor = PageEditor(self.request, pagename)
+        editor = PageEditor(self.request, pagename, do_editor_backup=0)
 
         try:
             editor.renamePage(newpagename)
@@ -629,7 +629,7 @@ class XmlRpcBase:
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
         rev = int(self._instr(revision))
-        editor = PageEditor(self.request, pagename)
+        editor = PageEditor(self.request, pagename, do_editor_backup=0)
 
         try:
             editor.revertPage(rev)
