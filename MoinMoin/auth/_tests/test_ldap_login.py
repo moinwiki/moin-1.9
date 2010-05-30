@@ -2,12 +2,14 @@
 """
     MoinMoin - MoinMoin.auth.ldap Tests
 
-    @copyright: 2008 MoinMoin:ThomasWaldmann
+    @copyright: 2008 MoinMoin:ThomasWaldmann,
+                2010 MoinMoin:ReimarBauer
+
     @license: GNU GPL, see COPYING for details.
 """
 
 import py.test
-py.test.skip("Broken due to test Config refactoring")
+
 
 from MoinMoin._tests.ldap_testbase import LDAPTstBase, LdapEnvironment, check_environ, SLAPD_EXECUTABLE
 from MoinMoin._tests.ldap_testdata import *
@@ -50,15 +52,15 @@ class TestMoinLDAPLogin(LDAPTstBase):
 
     class Config(wikiconfig.Config):
         from MoinMoin.auth.ldap_login import LDAPAuth
-        server_uri = self.ldap_env.slapd.url # XXX no self
-        base_dn = self.ldap_env.basedn
+        #ToDo get these vars from the test environment
+        server_uri = 'ldap://127.0.0.1:3890'
+        base_dn = 'ou=testing,dc=example,dc=org'
+
         ldap_auth1 = LDAPAuth(server_uri=server_uri, base_dn=base_dn, autocreate=True)
         auth = [ldap_auth1, ]
 
     def testMoinLDAPLogin(self):
         """ Just try accessing the LDAP server and see if usera and userb are in LDAP. """
-
-        handle_auth = self.request.handle_auth
 
         # tests that must not authenticate:
         u = handle_login(self.request, None, username='', password='')
@@ -93,15 +95,16 @@ class TestBugDefaultPasswd(LDAPTstBase):
     class Config(wikiconfig.Config):
         from MoinMoin.auth.ldap_login import LDAPAuth
         from MoinMoin.auth import MoinAuth
-        server_uri = self.ldap_env.slapd.url # XXX no self
-        base_dn = self.ldap_env.basedn
+        #ToDo get these vars from the test environment
+        server_uri = 'ldap://127.0.0.1:3890'
+        base_dn = 'ou=testing,dc=example,dc=org'
         ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn, autocreate=True)
         moin_auth = MoinAuth()
         auth = [ldap_auth, moin_auth]
 
     def teardown_class(self):
         """ Stop slapd, remove LDAP server environment """
-        #self.ldap_env.stop_slapd()  # it is already stopped
+        self.ldap_env.stop_slapd()
         self.ldap_env.destroy_env()
 
     def testBugDefaultPasswd(self):
@@ -132,7 +135,6 @@ class TestBugDefaultPasswd(LDAPTstBase):
         # try using wrong password:
         u2 = handle_login(self.request, None, username='usera', password='wrong')
         assert u2 is None
-
 
 class TestTwoLdapServers:
     basedn = BASEDN
@@ -181,17 +183,6 @@ class TestLdapFailover:
     slapd_config = SLAPD_CONFIG
     ldif_content = LDIF_CONTENT
 
-    class Config(wikiconfig.Config):
-        from MoinMoin.auth.ldap_login import LDAPAuth
-        authlist = []
-        for ldap_env in self.ldap_envs: # XXX no self
-            server_uri = ldap_env.slapd.url
-            base_dn = ldap_env.basedn
-            ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn,
-                                 autocreate=True,
-                                 timeout=1) # short timeout, faster testing
-            authlist.append(ldap_auth)
-        auth = authlist
 
     def setup_class(self):
         """ Create LDAP servers environment, start slapds """
@@ -206,6 +197,22 @@ class TestLdapFailover:
             ldap_env.load_directory(ldif_content=self.ldif_content)
             self.ldap_envs.append(ldap_env)
 
+    class Config(wikiconfig.Config):
+        from MoinMoin.auth.ldap_login import LDAPAuth
+        #ToDo get these vars from the test environment
+        server_uri = 'ldap://127.0.0.1:3891'
+        base_dn = 'ou=testing,dc=example,dc=org'
+        ldap_auth1 = LDAPAuth(server_uri=server_uri, base_dn=base_dn,
+                             name="ldap1", autocreate=True,
+                             timeout=1)
+        # short timeout, faster testing
+        server_uri = 'ldap://127.0.0.1:3892'
+        ldap_auth2 = LDAPAuth(server_uri=server_uri, base_dn=base_dn,
+                             name="ldap2", autocreate=True,
+                             timeout=1)
+
+        auth = [ldap_auth1, ldap_auth2]
+
     def teardown_class(self):
         """ Stop slapd, remove LDAP server environment """
         for ldap_env in self.ldap_envs:
@@ -217,7 +224,6 @@ class TestLdapFailover:
 
     def testMoinLDAPFailOver(self):
         """ Try if it does a failover to a secondary LDAP, if the primary fails. """
-        handle_auth = self.request.handle_auth
 
         # authenticate user (with primary slapd):
         u1 = handle_login(self.request, None, username='usera', password='usera')
@@ -231,6 +237,4 @@ class TestLdapFailover:
         u2 = handle_login(self.request, None, username='usera', password='usera')
         assert u2 is not None
         assert u2.valid
-
-
 
