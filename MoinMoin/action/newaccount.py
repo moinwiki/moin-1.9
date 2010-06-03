@@ -59,7 +59,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     if pw_checker:
         pw_error = pw_checker(request, theuser.name, password)
         if pw_error:
-            return _("Password not acceptable: %s") % pw_error
+            return _("Password not acceptable: %s") % wikiutil.escape(pw_error)
 
     # Encode password
     if password and not password.startswith('{SHA}'):
@@ -67,7 +67,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             theuser.enc_password = user.encodePassword(password)
         except UnicodeError, err:
             # Should never happen
-            return "Can't encode password: %s" % str(err)
+            return "Can't encode password: %s" % wikiutil.escape(str(err))
 
     # try to get the email, for new users it is required
     email = wikiutil.clean_input(form.get('email', ''))

@@ -111,7 +111,7 @@ class Load(ActionBase):
     'upload_label_file': _('File to load page content from'),
     'upload_label_comment': _('Comment'),
     'upload_label_rename': _('Page name'),
-    'pagename': self.pagename,
+    'pagename': wikiutil.escape(self.pagename, quote=1),
     'buttons_html': buttons_html,
     'action_name': self.form_trigger,
     'textcha': TextCha(self.request).render(),
