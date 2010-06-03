@@ -80,7 +80,7 @@ class RenamePage(ActionBase):
     def get_form_html(self, buttons_html):
         _ = self._
         if self.subpages:
-            subpages = ' '.join(self.subpages)
+            subpages = ' '.join([wikiutil.escape(page) for page in self.subpages])
 
             d = {
                 'subpage': subpages,

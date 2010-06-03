@@ -175,7 +175,7 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
             if pw_checker:
                 pw_error = pw_checker(name, newpass)
                 if pw_error:
-                    msg = _("Password not acceptable: %s") % pw_error
+                    msg = _("Password not acceptable: %s") % wikiutil.escape(pw_error)
             if not pw_error:
                 u = user.User(request, user.getUserId(request, name))
                 if u and u.valid and u.apply_recovery_token(token, newpass):

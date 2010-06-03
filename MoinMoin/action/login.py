@@ -68,7 +68,7 @@ class LoginHandler:
             if hasattr(request, '_login_messages'):
                 for msg in request._login_messages:
                     error.append('<p>')
-                    error.append(msg)
+                    error.append(wikiutil.escape(msg))
                 error = ''.join(error)
             request.theme.add_msg(error, "error")
             return self.page.send_page()

@@ -114,7 +114,11 @@ Please make sure your wiki configuration backup_* values are correct and complet
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
+# NOTE: consider using ActionBase.render_msg instead of this function.
 def sendMsg(request, pagename, msg, msgtype):
+    """
+    @param msg: Message to show. Should be escaped.
+    """
     from MoinMoin import Page
     request.theme.add_msg(msg, msgtype)
     return Page.Page(request, pagename).send_page()
@@ -140,4 +144,4 @@ def execute(pagename, request):
         sendBackupForm(request, pagename)
     else:
         return sendMsg(request, pagename,
-                       msg=_('Unknown backup subaction: %s.') % dowhat, msgtype="error")
+                       msg=_('Unknown backup subaction: %s.') % wikiutil.escape(dowhat), msgtype="error")
