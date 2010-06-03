@@ -28,6 +28,7 @@ __author__ = 'Allan Saddi <allan@saddi.com>'
 __version__ = '$Revision$'
 
 import sys
+import thread
 import threading
 
 class ThreadPool(object):
