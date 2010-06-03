@@ -6,6 +6,7 @@
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
 
 def execute(pagename, request):
@@ -27,7 +28,7 @@ def execute(pagename, request):
     try:
         func = pysupport.importName("MoinMoin.stats.%s" % chart_type, 'draw')
     except (ImportError, AttributeError):
-        request.theme.add_msg(_('Bad chart type "%s"!') % chart_type, "error")
+        request.theme.add_msg(_('Bad chart type "%s"!') % wikiutil.escape(chart_type), "error")
         return request.page.send_page()
 
     func(pagename, request)
