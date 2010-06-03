@@ -86,7 +86,7 @@ A) Stuff below MoinMoin/support/:
 
 flup (cgi/fastcgi/scgi/ajp to WSGI adapter)
 ===========================================
-shipped: 1.0.2+, from repo: hg clone -r 3b07cc2b0c76 http://hg.saddi.com/flup-server
+shipped: 1.0.2+, from repo: hg clone -r 72496e17674f http://hg.saddi.com/flup-server
 minimum: 1.0.2
 
 
