@@ -19,11 +19,17 @@ Known main issues:
 Version 1.9.current:
   Fixes:
   * Fix XSS in Despam action (CVE-2010-0828).
+  * Fix XSS issues (see MoinMoinBugs/1.9.2UnescapedInputForThemeAddMsg):
+    * by escaping template name in messages
+  * Make moin compatible to werkzeug 0.5 .. 0.6.2 (1.9.2 had issues
+    with xmlrpc when used with werkzeug 0.6.x).
   * MoinMoin.util.filesys: disable usage of dircache, deprecate dc* functions,
     because the dircache stdlib module can't work correctly for fast updates of
     directories.
   * rss_rc and sisterpages actions: fix Content-Type header (mimetype)
+  * Fix associating OpenID identity with user, wasn't adapted to werkzeug yet.
   * openidrp auth: fix undefined _ (gettext)
+  * Fix auth.cas and userprefs.oidserv request object usage.
   * highlight parser: fixed MoinMoinBugs/LineNumberSpansForProcessInstructionsMissed
   * Pygments syntax highlighting: add missing code files
   * Notifications: use same email subject format for every notification
@@ -35,8 +41,12 @@ Version 1.9.current:
   * script.maint.cleancache: clean also i18n cache files
   * Improved formatter.text_plain, see FeatureRequests/TextPlainFormatterRewrite
     (fixes many issues of this formatter).
-  * Make moin compatible to werkzeug 0.5 .. 0.6.2 (1.9.2 had issues
-    with xmlrpc when used with werkzeug 0.6.x).
+  * text_html_text_moin_wiki: fixed index error for width="", see also:
+    MoinMoinBugs/GUI_convertor_list_index_out_of_range
+  * xmlrpc: disable editor backup for putPage, renamePage and revertPage
+    because if pages get uploaded by xmlrpc then the draft cache file can
+    rapidly increase in size, causing high memory usage because it needs to
+    get loaded into memory for updating/processing.
 
   New features:
   * RenamePage action: added ability to create redirect pages when renaming
@@ -52,6 +62,7 @@ Version 1.9.current:
   * Scrolling the text editor to the double clicked line.
   * Enable double-click-editing by default.
   * WikiConfigHelp macro: make heading and description display optional, heading level as a parameter (default 2)
+  * If edit ticket check fails, send the editor with the current content.
 
   Other changes:
   * upgraded pygments from 1.2.2 to 1.3.1
