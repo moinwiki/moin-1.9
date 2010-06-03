@@ -66,7 +66,7 @@ class LoginHandler:
                 return self.handle_multistage()
             if hasattr(request, '_login_messages'):
                 for msg in request._login_messages:
-                    request.theme.add_msg(msg, "error")
+                    request.theme.add_msg(wikiutil.escape(msg), "error")
             return self.page.send_page()
 
         else: # show login form

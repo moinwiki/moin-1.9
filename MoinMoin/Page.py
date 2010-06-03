@@ -1056,8 +1056,8 @@ class Page(object):
                 if 'highlight' in request.form:
                     del request.form['highlight']
                 request.theme.add_msg(_('Invalid highlighting regular expression "%(regex)s": %(error)s') % {
-                                          'regex': self.hilite_re,
-                                          'error': str(err),
+                                          'regex': wikiutil.escape(self.hilite_re),
+                                          'error': wikiutil.escape(str(err)),
                                       }, "warning")
                 self.hilite_re = None
 
@@ -1114,7 +1114,7 @@ class Page(object):
                     request.theme.add_msg("<strong>%s</strong><br>" % (
                         _('Revision %(rev)d as of %(date)s') % {
                             'rev': self.rev,
-                            'date': self.mtime_printable(request)
+                            'date': wikiutil.escape(self.mtime_printable(request))
                         }), "info")
 
                 # This redirect message is very annoying.

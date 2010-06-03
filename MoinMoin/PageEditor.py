@@ -279,14 +279,15 @@ Please review the page and save then. Do not save this page as it is!""")
         elif 'template' in form:
             # If the page does not exist, we try to get the content from the template parameter.
             template_page = wikiutil.unquoteWikiname(form['template'][0])
+            template_page_escaped = wikiutil.escape(template_page)
             if request.user.may.read(template_page):
                 raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
-                    request.theme.add_msg(_("[Content of new page loaded from %s]") % (template_page, ), 'info')
+                    request.theme.add_msg(_("[Content of new page loaded from %s]") % (template_page_escaped, ), 'info')
                 else:
-                    request.theme.add_msg(_("[Template %s not found]") % (template_page, ), 'warning')
+                    request.theme.add_msg(_("[Template %s not found]") % (template_page_escaped, ), 'warning')
             else:
-                request.theme.add_msg(_("[You may not read %s]") % (template_page, ), 'error')
+                request.theme.add_msg(_("[You may not read %s]") % (template_page_escaped, ), 'error')
 
         # Make backup on previews - but not for new empty pages
         if not use_draft and preview and raw_body:
