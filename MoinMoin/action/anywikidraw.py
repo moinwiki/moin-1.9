@@ -205,6 +205,6 @@ def execute(pagename, request):
     else:
         msg = awd.render()
     if msg:
-        request.theme.add_msg(msg, 'error')
+        request.theme.add_msg(wikiutil.escape(msg), 'error')
         do_show(pagename, request)
 

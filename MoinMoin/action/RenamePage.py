@@ -99,7 +99,7 @@ class RenamePage(ActionBase):
         if self.subpages:
             redirect_label = _('Create redirect for renamed page(s)?')
 
-            subpages = ' '.join(self.subpages)
+            subpages = ' '.join([wikiutil.escape(page) for page in self.subpages])
             subpages_html = """
                 <tr>
                 <dd>
@@ -117,6 +117,7 @@ class RenamePage(ActionBase):
         else:
             redirect_label = _('Create redirect for renamed page?')
             subpages_html = ""
+>>>>>>> other
 
         if self.show_redirect:
             redirect_html = '<tr><dd>%(redirect_label)s<input type="checkbox" name="rename_redirect" value="1" %(redirect)s></dd></tr>' % {

@@ -86,7 +86,7 @@ class CopyPage(ActionBase):
     def get_form_html(self, buttons_html):
         _ = self._
         if self.users_subpages:
-            subpages = ' '.join(self.users_subpages)
+            subpages = ' '.join([wikiutil.escape(page) for page in self.users_subpages])
 
             d = {
                 'textcha': TextCha(self.request).render(),

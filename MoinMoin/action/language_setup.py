@@ -11,7 +11,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import i18n, packages
+from MoinMoin import i18n, packages, wikiutil
 from MoinMoin.i18n import strings
 i18n.strings = strings
 
@@ -85,7 +85,7 @@ def execute(pagename, request):
 
     lang_selector = u''.join([fmt.paragraph(1), _("Choose:"), ' ', ' '.join(lang_links), fmt.paragraph(0)])
 
-    title = _("Install language packs for '%s'") % (lang)
+    title = _("Install language packs for '%s'") % wikiutil.escape(lang)
     request.theme.add_msg(msg, "info")
     request.theme.send_title(title, page=request.page, pagename=pagename)
     request.write(request.formatter.startContent("content"))

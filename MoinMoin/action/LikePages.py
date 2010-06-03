@@ -24,19 +24,19 @@ def execute(pagename, request):
 
     # Error?
     if isinstance(matches, (str, unicode)):
-        request.theme.add_msg(matches, "info")
+        request.theme.add_msg(wikiutil.escape(matches), "info")
         Page(request, pagename).send_page()
         return
 
     # No matches
     if not matches:
-        request.theme.add_msg(_('No pages like "%s"!') % (pagename, ), "error")
+        request.theme.add_msg(_('No pages like "%s"!') % (wikiutil.escape(pagename), ), "error")
         Page(request, pagename).send_page()
         return
 
     # One match - display it
     if len(matches) == 1:
-        request.theme.add_msg(_('Exactly one page like "%s" found, redirecting to page.') % (pagename, ), "info")
+        request.theme.add_msg(_('Exactly one page like "%s" found, redirecting to page.') % (wikiutil.escape(pagename), ), "info")
         Page(request, matches.keys()[0]).send_page()
         return
 
