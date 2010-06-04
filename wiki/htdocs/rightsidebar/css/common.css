@@ -17,6 +17,8 @@ html {
 
 a {color: maroon;}
 a:hover {color: red;}
+
+a.nonexistent:visited, a.badinterwiki:visited,
 a.nonexistent, a.badinterwiki {color: #404040;}
 
 a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
@@ -26,8 +28,8 @@ a.file:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
 a.ftp:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
 a.nntp:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
 a.news:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
-a.telnet:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
-a.irc:before,a.ircs:before  {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.telnet:before, a.ssh:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.irc:before, a.ircs:before  {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
 a.mailto:before {content: url(../img/moin-email.png); margin: 0 0.2em;}
 a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
 a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
@@ -143,17 +145,42 @@ hr {
 .strike {text-decoration: line-through;}
 
 /* TableOfContents macro */
-.table-of-contents { border: 1px solid #bbbbbb;
-                     color: black; background-color: #eeeeee;
-                     font-size: small;
-                     text-align:left;
-                     margin: 0.5em; padding-left: 2em;
-                     min-width:50%; }
-.table-of-contents ol { margin:0; margin-left:1em;
-                        list-style-type:decimal; }
-.table-of-contents ul { margin:0;
-                        list-style-type:none; }
-.table-of-contents-heading { font-weight:bold; padding:0; margin:0; }
+div.table-of-contents {
+    border: 1px solid #bbbbbb;
+    color: black;
+    background-color: #eeeeee;
+    font-size: 80%;
+    text-align: left;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.5em 0.75em 0.5em 0.5em;
+    max-width: 50%;
+    display: inline-table;
+}
+div.table-of-contents ol {
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+div.table-of-contents ul {
+    margin: 0;
+    list-style:none;
+}
+div.table-of-contents li {
+    margin:0;
+    padding: 0;
+}
+p.table-of-contents-heading {
+    font-weight:bold;
+    padding:0;
+    margin: 0 0 0.5em 0;
+    letter-spacing: 0.075em;
+}
+
+/* Navigation macro */
+table.navigation {
+    background: #fff;
+    margin: 0;
+}
+
 
 
 .footnotes ol {

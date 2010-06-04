@@ -61,7 +61,7 @@ def handle_attached(event):
         from MoinMoin.search.Xapian import Index
         index = Index(request)
         if index.exists():
-            index.update_page(request.page.page_name)
+            index.update_page(event.pagename)
 
 
 def handle(event):

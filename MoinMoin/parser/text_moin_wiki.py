@@ -15,10 +15,12 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
-from MoinMoin.support.python_compatibility import rsplit, set
+from MoinMoin.support.python_compatibility import set
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
+
+_ = lambda x: x
 
 class Parser:
     """
@@ -33,6 +35,15 @@ class Parser:
     # allow caching
     caching = 1
     Dependencies = Dependencies
+    quickhelp = _(u"""\
+ Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.
+ Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])>>.
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+""")
 
     # some common strings
     CHILD_PREFIX = wikiutil.CHILD_PREFIX
@@ -589,7 +600,8 @@ class Parser:
             text = groups.get('interwiki')
             return self.formatter.text(text)
         else:
-            return (self.formatter.interwikilink(1, wiki, page) +
+            page, anchor = wikiutil.split_anchor(page)
+            return (self.formatter.interwikilink(1, wiki, page, anchor=anchor) +
                     self.formatter.text(page) +
                     self.formatter.interwikilink(0, wiki, page))
     _interwiki_wiki_repl = _interwiki_repl
@@ -612,11 +624,7 @@ class Parser:
         if abs_name == current_page:
             return self.formatter.text(word)
         else:
-            # handle anchors
-            try:
-                abs_name, anchor = rsplit(abs_name, "#", 1)
-            except ValueError:
-                anchor = ""
+            abs_name, anchor = wikiutil.split_anchor(abs_name)
             return (bang +
                     self.formatter.pagelink(1, abs_name, anchor=anchor) +
                     self.formatter.text(word) +
@@ -731,9 +739,10 @@ class Parser:
                         return self.formatter.attachment_image(url, **tag_attrs)
                     else:
                         from MoinMoin.action import AttachFile
-                        pagename = self.formatter.page.page_name
-                        if AttachFile.exists(self.request, pagename, url):
-                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
+                        current_pagename = self.formatter.page.page_name
+                        pagename, filename = AttachFile.absoluteName(url, current_pagename)
+                        if AttachFile.exists(self.request, pagename, filename):
+                            href = AttachFile.getAttachUrl(pagename, filename, self.request, escaped=0)
                             tag_attrs, query_args = self._get_params(params,
                                                                      tag_attrs={'title': desc, },
                                                                      acceptable_attrs=acceptable_attrs_object)
@@ -758,7 +767,14 @@ class Parser:
                             return m.execute('EmbedObject', u'target=%s' % url)
                 elif scheme == 'drawing':
                     desc = self._transclude_description(desc, url)
-                    return self.formatter.attachment_drawing(url, desc)
+                    if desc:
+                        tag_attrs= {'alt': desc, 'title': desc, }
+                    else:
+                        tag_attrs = {}
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs=tag_attrs,
+                                                             acceptable_attrs=acceptable_attrs_img)
+                    return self.formatter.attachment_drawing(url, desc, **tag_attrs)
 
             elif m.group('page_name'):
                 # experimental client side transclusion
@@ -846,11 +862,7 @@ class Parser:
                 else:
                     err = True
                 if err: # not a interwiki link / not in interwiki map
-                    # handle anchors
-                    try:
-                        page_name, anchor = rsplit(page_name_and_anchor, "#", 1)
-                    except ValueError:
-                        page_name, anchor = page_name_and_anchor, ""
+                    page_name, anchor = wikiutil.split_anchor(page_name_and_anchor)
                     current_page = self.formatter.page.page_name
                     if not page_name:
                         page_name = current_page
@@ -863,10 +875,11 @@ class Parser:
                             self._link_description(desc, target, page_name_and_anchor) +
                             self.formatter.pagelink(0, abs_page_name))
                 else: # interwiki link
+                    page_name, anchor = wikiutil.split_anchor(page_name)
                     tag_attrs, query_args = self._get_params(params,
                                                              tag_attrs={},
                                                              acceptable_attrs=acceptable_attrs)
-                    return (self.formatter.interwikilink(1, wiki_name, page_name, querystr=query_args, **tag_attrs) +
+                    return (self.formatter.interwikilink(1, wiki_name, page_name, anchor=anchor, querystr=query_args, **tag_attrs) +
                             self._link_description(desc, target, page_name) +
                             self.formatter.interwikilink(0, wiki_name, page_name))
 
@@ -1353,7 +1366,9 @@ class Parser:
                     lastpos += 1 # proceed, we don't want to match this again
             else:
                 if self.in_pre:
-                    self._parser_content(line[lastpos:])
+                    # ilastpos is more then 0 and result of line slice is empty make useless line
+                    if not (lastpos > 0 and line[lastpos:] == ''):
+                        self._parser_content(line[lastpos:])
                 elif line[lastpos:]:
                     ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
                     if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or
@@ -1553,3 +1568,4 @@ class Parser:
         except wikiutil.PluginMissingError:
             self.parser = None
 
+del _

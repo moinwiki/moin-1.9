@@ -343,7 +343,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
 
             try:
                 is_zipfile = zipfile.is_zipfile(fullpath)
-                if is_zipfile:
+                if is_zipfile and not readonly:
                     is_package = packages.ZipPackage(request, fullpath).isPackage()
                     if is_package and request.user.isSuperUser():
                         links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
@@ -1069,7 +1069,7 @@ def send_viewfile(pagename, request):
                 fmt.url(0))
         request.write('For using an external program follow this link %s' % link)
         return
-    request.write(m.execute('EmbedObject', u'target=%s, pagename=%s' % (filename, pagename)))
+    request.write(m.execute('EmbedObject', u'target="%s", pagename="%s"' % (filename, pagename)))
     return
 
 
@@ -1138,7 +1138,7 @@ def do_admin_browser(request):
 
         browser = DataBrowserWidget(request)
         browser.setData(data)
-        return browser.toHTML()
+        return browser.render(method="GET")
 
     return ''
 

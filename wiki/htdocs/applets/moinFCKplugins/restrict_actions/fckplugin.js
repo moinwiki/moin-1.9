@@ -6,24 +6,24 @@
  */
 var RestrictedNamedCommand = function(commandName, forbidden)
 {
- this.Name = commandName;
- this.forbidden = forbidden;
+  this.Name = commandName;
+  this.forbidden = forbidden;
 }
 
 RestrictedNamedCommand.prototype = new FCKNamedCommand();
 
 RestrictedNamedCommand.prototype.GetState = function()
 {
- var bState = FCK.GetNamedCommandState(this.Name);
- if (FCKSelection.GetType() == 'Control')
- {
+  var bState = FCK.GetNamedCommandState(this.Name);
+  if (FCKSelection.GetType() == 'Control')
+  {
+    return bState;
+  }
+  else if (FCKSelection.CheckForNodeNames(this.forbidden))
+  { 
+    return FCK_TRISTATE_DISABLED;
+  }
   return bState;
- }
- else if (FCKSelection.CheckForNodeNames(this.forbidden))
- { 
-  return FCK_TRISTATE_DISABLED;
- }
- return bState;
 }
 
 /* #######################################################
@@ -34,8 +34,8 @@ RestrictedNamedCommand.prototype.GetState = function()
 
 var RestrictedUniqueNamedFormat = function(commandName, forbidden)
 {
- this.Name = commandName;
- this.forbidden = forbidden;
+  this.Name = commandName;
+  this.forbidden = forbidden;
 }
 
 RestrictedUniqueNamedFormat.prototype = new RestrictedNamedCommand();
@@ -44,6 +44,7 @@ RestrictedUniqueNamedFormat.prototype.Execute = function()
 {
   if (FCK.GetNamedCommandState(this.Name)==FCK_TRISTATE_OFF)
     FCK.ExecuteNamedCommand('RemoveFormat');
+
   FCK.ExecuteNamedCommand(this.Name);
 }
 
@@ -52,19 +53,18 @@ RestrictedUniqueNamedFormat.prototype.Execute = function()
  *  extends FCKFormatBlockCommand
  * #######################################################
  */
-
 var RestrictedFormatBlockCommand = function(forbidden)
 {
- this.Name = 'FormatBlock' ;
- this.forbidden = forbidden;
+  this.Name = 'FormatBlock' ;
+  this.forbidden = forbidden;
 }
 
 RestrictedFormatBlockCommand.prototype = new FCKFormatBlockCommand();
 
 RestrictedFormatBlockCommand.prototype.GetState = function()
 {
- if (FCKSelection.CheckForNodeNames(this.forbidden))
-   return FCK_TRISTATE_DISABLED;
+  if (FCKSelection.CheckForNodeNames(this.forbidden))
+    return FCK_TRISTATE_DISABLED;
  else
    return FCK.GetNamedCommandValue( 'FormatBlock' ) ;
 }
@@ -92,7 +92,6 @@ var RestrictedStyleCommand = function(forbidden)
 }
 
 RestrictedStyleCommand.prototype = new FCKStyleCommand();
-
 RestrictedStyleCommand.prototype.GetState =  function()
 {
  if (FCKSelection.CheckForNodeNames(this.forbidden))
@@ -121,10 +120,11 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
   {
     if (styleName == "Typewriter")
       FCK.ExecuteNamedCommand('RemoveFormat');
+
     styleComboItem.Style.ApplyToSelection() ;
   }
-  FCK.Focus() ;        
-  FCK.Events.FireEvent( "OnSelectionChange" ) ;
+  FCK.Focus();
+  FCK.Events.FireEvent( "OnSelectionChange" );
 }
 
 /* ####################################################################
@@ -134,7 +134,8 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
 
 var StyleButtonCommand = function(stylename, unique)
 {
-  this.style = this.StylesLoader.Styles[stylename];
+  // using FCK.Style instead of fckstylesloader
+  this.style = FCK.Styles.GetStyle(stylename);
   this.unique = unique;
 }
 
@@ -165,7 +166,7 @@ StyleButtonCommand.prototype.Execute = function()
 
 var RestrictedStyleButtonCommand = function(stylename, forbidden, unique)
 {
-  this.style = this.StylesLoader.Styles[stylename];
+  this.style = FCK.Styles.GetStyle(stylename);      // using FCK.Style instead of fckstylesloader
   this.forbidden = forbidden;
   this.unique = unique;
 }
@@ -198,8 +199,7 @@ var noSmileys = /^(?:H1|H2|H3|H4|H5|H6|PRE|A|TT|SUB|SUPER)$/i;
 var noTable = new RegExp("^(?:" + noextendedformat + "|TABLE|UL|OL|DL)$", "i");
 
 // Register some context sensitive commands
-
-if (1 || !FCKBrowserInfo.IsIE){
+// register commands every browser
 
 // formats
 FCKCommands.RegisterCommand('Bold', 
@@ -212,10 +212,12 @@ FCKCommands.RegisterCommand('Underline',
 FCKCommands.RegisterCommand('StrikeThrough',
  new RestrictedNamedCommand('StrikeThrough', noExtendedFormat));
 
+
 FCKCommands.RegisterCommand('Small',
  new RestrictedStyleButtonCommand('Small', noExtendedFormat));
 FCKCommands.RegisterCommand('Big',
  new RestrictedStyleButtonCommand('Big', noExtendedFormat));
+
 
 // formats no allowing formats inside
 FCKCommands.RegisterCommand('Subscript',
@@ -223,8 +225,10 @@ FCKCommands.RegisterCommand('Subscript',
 FCKCommands.RegisterCommand('Superscript',
  new RestrictedUniqueNamedFormat('Superscript', noFormat));
 
+
 FCKCommands.RegisterCommand('Typewriter',
  new RestrictedStyleButtonCommand('Typewriter', noTT, true));
+
 
 // lists, hline
 FCKCommands.RegisterCommand('Outdent',
@@ -243,6 +247,7 @@ FCKCommands.RegisterCommand('FontFormat',
  new RestrictedFormatBlockCommand(noBlock));
 FCKCommands.RegisterCommand('Style', 
  new RestrictedStyleCommand(noFormat));
+
 // misc
 FCKCommands.RegisterCommand('Smiley',
   new FCKDialogCommand( 'Smiley', FCKLang.DlgSmileyTitle, 
@@ -253,31 +258,21 @@ FCKCommands.RegisterCommand('Table', new FCKDialogCommand
  ('Table', FCKLang.DlgTableTitle, 'dialog/fck_table.html', 400, 250,
   FCKSelection.CheckForNodeNames, noTable));
 
-
+// useless code, this code make each menu's icon disapear.
+/*
 // Make toolbar items context sensitive
 FCKToolbarItems.RegisterItem('Smiley', new FCKToolbarButton
  ('Smiley', FCKLang.InsertSmileyLbl, FCKLang.InsertSmiley, null, false, true));
 FCKToolbarItems.RegisterItem('Table', new FCKToolbarButton
  ('Table', FCKLang.InsertTableLbl, FCKLang.InsertTable, null, false, true));
-
-
-}
-else // IE
-{
-
-FCKCommands.RegisterCommand('Small', new StyleButtonCommand('Small'));
-FCKCommands.RegisterCommand('Big', new StyleButtonCommand('Big'));
-FCKCommands.RegisterCommand('Typewriter', 
-  new StyleButtonCommand('Typewriter', true));
-}
+*/
 
 FCKToolbarItems.RegisterItem('Big', new FCKToolbarButton
-			     ('Big', 'Big>', 'Big', 
-			      FCK_TOOLBARITEM_ONLYICON, false, true));
-FCKToolbarItems.RegisterItem('Small', new FCKToolbarButton
-			     ('Small', 'Small', 'Small', 
-			      FCK_TOOLBARITEM_ONLYICON, false, true));
-FCKToolbarItems.RegisterItem('Typewriter', new FCKToolbarButton
-			     ('Typewriter', 'Typewriter', 'Typewriter', 
-			      FCK_TOOLBARITEM_ONLYICON, false, true));
-
+           ('Big', 'Big>', 'Big', 
+            FCK_TOOLBARITEM_ONLYICON, false, true));
+  FCKToolbarItems.RegisterItem('Small', new FCKToolbarButton
+           ('Small', 'Small', 'Small', 
+            FCK_TOOLBARITEM_ONLYICON, false, true));
+  FCKToolbarItems.RegisterItem('Typewriter', new FCKToolbarButton
+           ('Typewriter', 'Typewriter', 'Typewriter', 
+            FCK_TOOLBARITEM_ONLYICON, false, true));

@@ -1598,10 +1598,9 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 
 def createTicket(request, tm=None):
     """Create a ticket using a site-specific secret (the config)"""
-    import sha
+    from MoinMoin.support.python_compatibility import hash_new
     ticket = tm or "%010x" % time.time()
-    digest = sha.new()
-    digest.update(ticket)
+    digest = hash_new('sha1', ticket)
 
     varnames = ['data_dir', 'data_underlay_dir', 'language_default',
                 'mail_smarthost', 'mail_from', 'page_front_page',

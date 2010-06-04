@@ -27,8 +27,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import hmac, sha
-
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
@@ -39,6 +37,7 @@ import mimetypes
 from MoinMoin import config, caching
 from MoinMoin.util import filesys
 from MoinMoin.action import AttachFile
+from MoinMoin.support.python_compatibility import hmac_new
 
 action_name = __name__.split('.')[-1]
 
@@ -87,7 +86,7 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
     @param secret: secret for hMAC calculation (default: use secret from cfg)
     """
     if secret is None:
-        secret = request.cfg.secrets
+        secret = request.cfg.secrets['action/cache']
     if content:
         hmac_data = content
     elif itemname is not None and attachname is not None:
@@ -98,7 +97,7 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
         raise AssertionError('cache_key called with unsupported parameters')
 
     hmac_data = hmac_data.encode('utf-8')
-    key = hmac.new(secret, hmac_data, sha).hexdigest()
+    key = hmac_new(secret, hmac_data).hexdigest()
     return key
 
 

@@ -16,7 +16,7 @@ from MoinMoin.request import RequestBase, RemoteClosedConnection
 class Request(RequestBase):
     """ specialized on command line interface and script requests """
 
-    def __init__(self, url='CLI', pagename='', properties={}):
+    def __init__(self, url='CLI', pagename='', properties={}, given_config=None):
         self.saved_cookie = ''
         self.path_info = '/' + pagename
         self.query_string = ''
@@ -32,7 +32,7 @@ class Request(RequestBase):
         self.content_length = None
         self.if_modified_since = None
         self.if_none_match = None
-        RequestBase.__init__(self, properties)
+        RequestBase.__init__(self, properties, given_config)
         self.cfg.caching_formats = [] # don't spoil the cache
         self.initTheme() # usually request.run() does this, but we don't use it
 
@@ -94,7 +94,7 @@ class Request(RequestBase):
         """ private method to send out preprocessed list of HTTP headers """
         pass
 
-    def http_redirect(self, url):
+    def http_redirect(self, url, code=302):
         """ Redirect to a fully qualified, or server-rooted URL
 
         TODO: Does this work for rendering redirect pages?

@@ -18,10 +18,12 @@
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-var oEditor  = window.parent.InnerDialogLoaded();
+var dialog	= window.parent ;
+var oEditor  = dialog.InnerDialogLoaded();
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
 var FCKConfig = oEditor.FCKConfig;
+var isNameRelatedLink = false;
 
 //#### Dialog Tabs
 
@@ -31,7 +33,26 @@ window.parent.AddTab('Info', FCKLang.DlgLnkInfoTab);
 // Function called when a dialog tag is selected.
 function OnDialogTabChange(tabCode)
 {
- ShowE('divInfo'  , (tabCode == 'Info'));
+  ShowE('divInfo'  , (tabCode == 'Info'));
+}
+
+// Extends the String object, creating a "EndsWith" method on it.
+// this method is part of fckeditor dialog common library
+String.prototype.EndsWith = function( value, ignoreCase )
+{
+  var L1 = this.length ;
+  var L2 = value.length ;
+
+  if ( L2 > L1 )
+    return false ;
+
+  if ( ignoreCase )
+  {
+    var oRegex = new RegExp( value + '$' , 'i' ) ;
+    return oRegex.test( this ) ;
+  }
+  else
+    return ( L2 == 0 || this.substr( L1 - L2, L2 ) == value ) ;
 }
 
 //#### Regular Expressions library.
@@ -55,140 +76,165 @@ var oParser = new Object();
 
 oParser.ParseEMailUrl = function(emailUrl)
 {
- // Initializes the EMailInfo object.
- var oEMailInfo = new Object();
- oEMailInfo.Address = '';
- oEMailInfo.Subject = '';
- oEMailInfo.Body  = '';
+  // Initializes the EMailInfo object.
+  var oEMailInfo = new Object();
+  oEMailInfo.Address = '';
+  oEMailInfo.Subject = '';
+  oEMailInfo.Body  = '';
 
- var oParts = emailUrl.match(/^([^\?]+)\??(.+)?/);
- if (oParts)
- {
-  // Set the e-mail address.
-  oEMailInfo.Address = oParts[1];
-
-  // Look for the optional e-mail parameters.
-  if (oParts[2])
+  var oParts = emailUrl.match(/^([^\?]+)\??(.+)?/);
+  if (oParts)
   {
-   var oMatch = oParts[2].match(/(^|&)subject=([^&]+)/i);
-   if (oMatch) oEMailInfo.Subject = unescape(oMatch[2]);
+    // Set the e-mail address.
+    oEMailInfo.Address = oParts[1];
 
-   oMatch = oParts[2].match(/(^|&)body=([^&]+)/i);
-   if (oMatch) oEMailInfo.Body = unescape(oMatch[2]);
+    // Look for the optional e-mail parameters.
+    if (oParts[2])
+    {
+      var oMatch = oParts[2].match(/(^|&)subject=([^&]+)/i);
+      if (oMatch)
+        oEMailInfo.Subject = unescape(oMatch[2]);
+
+      oMatch = oParts[2].match(/(^|&)body=([^&]+)/i);
+      if (oMatch)
+        oEMailInfo.Body = unescape(oMatch[2]);
+    }
   }
- }
-
- return oEMailInfo;
+  return oEMailInfo;
 }
 
 oParser.CreateEMailUri = function(address, subject, body)
 {
- var sBaseUri = 'mailto:' + address;
+  var sBaseUri = 'mailto:' + address;
 
- var sParams = '';
+  var sParams = '';
 
- if (subject.length > 0)
-  sParams = '?subject=' + escape(subject);
+  if (subject.length > 0)
+    sParams = '?subject=' + escape(subject);
 
- if (body.length > 0)
- {
-  sParams += (sParams.length == 0 ? '?' : '&');
-  sParams += 'body=' + escape(body);
- }
+  if (body.length > 0)
+  {
+    sParams += (sParams.length == 0 ? '?' : '&');
+    sParams += 'body=' + escape(body);
+  }
 
- return sBaseUri + sParams;
+  return sBaseUri + sParams;
 }
 
 //#### Initialization Code
 
 // oLink: The actual selected link in the editor.
-var oLink = FCK.Selection.MoveToAncestorNode('A');
-if (oLink)
- FCK.Selection.SelectNode(oLink);
+var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
+if ( oLink )
+  FCK.Selection.SelectNode( oLink ) ;
 
 window.onload = function()
 {
- // Translate the dialog box texts.
- oEditor.FCKLanguageManager.TranslatePage(document);
+  // Translate the dialog box texts.
+  oEditor.FCKLanguageManager.TranslatePage(document);
 
- // Load the selected link information (if any).
- LoadSelection();
+  // Load the selected link information (if any).
+  var firstElement = LoadSelection();
 
- // Update the dialog box.
- SetLinkType(GetE('cmbLinkType').value);
+  // Update the dialog box.
+  SetLinkType(GetE('cmbLinkType').value);
 
- // Show the initial dialog content.
- GetE('divInfo').style.display = '';
+  // Show the initial dialog content.
+  GetE('divInfo').style.display = '';
 
- // Activate the "OK" button.
- window.parent.SetOkButton(true);
+  // Activate the "OK" button.
+  window.parent.SetOkButton(true);
+
+  // select first text input element of dialog for usability
+  SelectField(firstElement);
 }
 
 function LoadSelection()
 {
- if (!oLink) return;
+  // variable for first element of dialog
+  var firstElement = 'txtPagename';
 
- var sType = 'url';
+  if (!oLink) return firstElement;
 
- // Get the actual Link href.
- var sHRef = oLink.getAttribute('href',2) + '';
+  var sType = 'url';
 
- // Search for the protocol.
- var sProtocol = oRegex.UriProtocol.exec(sHRef);
+  // Get the actual Link href.
+  var sHRef = ''+oLink.getAttribute('href',2);
 
- if (sProtocol)
- {
-  sProtocol = sProtocol[0].toLowerCase();
-  GetE('cmbLinkProtocol').value = sProtocol;
+  // Search for the protocol.
+  var sProtocol = oRegex.UriProtocol.exec(sHRef);
 
-  // Remove the protocol and get the remainig URL.
-  var sUrl = sHRef.replace(oRegex.UriProtocol, '');
-
-  if (sProtocol == 'mailto:') // It is an e-mail link.
+  if (sProtocol)
   {
-   var oEMailInfo = oParser.ParseEMailUrl(sUrl);
-   GetE('txtUrl').value = oEMailInfo.Address;
+    sProtocol = sProtocol[0].toLowerCase();
+    GetE('cmbLinkProtocol').value = sProtocol;
+
+    // Remove the protocol and get the remainig URL.
+    var sUrl = sHRef.replace(oRegex.UriProtocol, '');
+
+    if (sProtocol == 'mailto:') // It is an e-mail link.
+    {
+      var oEMailInfo = oParser.ParseEMailUrl(sUrl);
+      GetE('txtUrl').value = oEMailInfo.Address;
+    }
+    else    // It is a normal link.
+    {
+      sType = 'url';
+      GetE('txtUrl').value = sUrl;
+    }
+
+    firstElement  = 'txtUrl';
   }
-  else    // It is a normal link.
+  else if (oLink.getAttribute('class')=='interwiki' || oLink.getAttribute('class')=='badinterwiki')
   {
-   sType = 'url';
-   GetE('txtUrl').value = sUrl;
+    sType = 'interwiki';
+    GetE('sctInterwiki').value = oLink.getAttribute('title');
+    GetE('txtInterwikipagename').value = decodeUrl(sHRef);
+    firstElement = 'txtInterwikipagename';
   }
- }
- else if (oLink.getAttribute('class')=='interwiki' || 
-          oLink.getAttribute('class')=='badinterwiki') 
- {
-  sType = 'interwiki';
-  GetE('sctInterwiki').value = oLink.getAttribute('title');
-  GetE('txtInterwikipagename').value = decodeUrl(sHRef);
- }
- else if (sHRef.startsWith(FCKConfig['WikiBasePath']))
- {
-  sType = 'wiki';
-  sHRef = sHRef.remove(0, FCKConfig['WikiBasePath'].length);
-  // make links to subpages of own page relative links
-  if (sHRef.startsWith(FCKConfig['WikiPage']))
-      sHRef = sHRef.remove(0, FCKConfig['WikiPage'].length);
-  GetE('txtPagename').value = decodeUrl(sHRef);
- }
- else     // It is another type of link.
- {
-  sType = 'url';
+  else if (sHRef.StartsWith(FCKConfig['WikiBasePath']))
+  {
+    sType = 'wiki';
+    sHRef = sHRef.Remove(0, FCKConfig['WikiBasePath'].length);
 
-  GetE('cmbLinkProtocol').value = '';
-  GetE('txtUrl').value = sHRef;
- }
+    // make links to subpages of own page relative links
+    if (sHRef.StartsWith(FCKConfig['WikiPage']))
+      sHRef = sHRef.Remove(0, FCKConfig['WikiPage'].length);
 
- // Update the Link type combo.
- GetE('cmbLinkType').value = sType;
+    // relative link ../
+    if (oLink.innerHTML.StartsWith('../') && sHRef.EndsWith(oLink.innerHTML.substring(3, oLink.innerHTML.length))) 
+      sHRef = oLink.innerHTML;
+
+    GetE('txtPagename').value = decodeUrl(sHRef);
+    firstElement  = 'txtPagename';
+  }
+  else     // It is another type of link.
+  {
+    sType = 'url';
+
+    GetE('cmbLinkProtocol').value = '';
+    GetE('txtUrl').value = sHRef;
+    firstElement  = 'txtUrl';
+  }
+
+  // Update the Link type combo.
+  GetE('cmbLinkType').value = sType;
+
+  // when inner html of link and url of link are same set isNameRelatedLink true
+  // if isNameRelatedLink is true, inner html is change when url change
+  if (sHRef == oLink.innerHTML) {
+    isNameRelatedLink = true;
+  }
+
+  return firstElement;
 }
 
 //#### Link type selection.
 function SetLinkType(linkType)
 {
- ShowE('divLinkTypeWiki'  , (linkType == 'wiki'));
- ShowE('divLinkTypeInterwiki' , (linkType == 'interwiki'));
- ShowE('divLinkTypeUrl'  , (linkType == 'url'));
+  ShowE('divLinkTypeWiki'  , (linkType == 'wiki'));
+  ShowE('divLinkTypeInterwiki' , (linkType == 'interwiki'));
+  ShowE('divLinkTypeUrl'  , (linkType == 'url'));
 }
 
 //#### Called when user selects Wikipage.
@@ -200,96 +246,106 @@ function OnChangePagename(pagename)
 //#### Called while the user types the URL.
 function OnUrlChange()
 {
- var sUrl = GetE('txtUrl').value;
- var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
+  var sUrl = GetE('txtUrl').value;
+  var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
 
- if (sProtocol)
- {
-  sUrl = sUrl.substr(sProtocol[0].length);
-  GetE('txtUrl').value = sUrl;
-  GetE('cmbLinkProtocol').value = sProtocol[0].toLowerCase();
- }
- else if (oRegex.UrlOnChangeTestOther.test(sUrl))
- {
-  GetE('cmbLinkProtocol').value = '';
- }
+  if (sProtocol)
+  {
+    sUrl = sUrl.substr(sProtocol[0].length);
+    GetE('txtUrl').value = sUrl;
+    GetE('cmbLinkProtocol').value = sProtocol[0].toLowerCase();
+  }
+  else if (oRegex.UrlOnChangeTestOther.test(sUrl))
+  {
+    GetE('cmbLinkProtocol').value = '';
+  }
 }
 
 //#### The OK button was hit.
 function Ok()
 {
- var sUri;
- var sText = '';
+  var sUri;
+  var sText = '';
 
- switch (GetE('cmbLinkType').value)
- {
-  case 'wiki' :
-   sUri = GetE('txtPagename').value;
-   if (sUri.length == 0)
-   {
-    alert(FCKLang.DlnLnkMsgNoUrl);
-    return false;
-   }
-   sText = sUri;
-   // pages starting with "/" are sub pages of current page, e.g. /SubPage 
-   if (sUri[0] == '/')
-   {
-      sUri = GetE('basepage').value + sUri
-   }
-   sUri = FCKConfig['WikiBasePath'] + encodeUrl(sUri);
-   break;
-
-  case 'interwiki' :
-   sUri = GetE('txtInterwikipagename').value;
-
-   if (sUri.length == 0)
-   {
-    alert(FCKLang.DlnLnkMsgNoUrl);
-    return false;
-   }
-   sText = sUri;
-   sUri = encodeUrl(sUri);
-   break;
-  case 'url' :
-   sUri = GetE('txtUrl').value;
-
-   if (sUri.length == 0)
-   {
-    alert(FCKLang.DlnLnkMsgNoUrl);
-    return false;
-   }
-
-   sUri = GetE('cmbLinkProtocol').value + sUri;
-   sText = sUri;
-   sUri = encodeUrl(sUri);
-   break;
- }
-
- if (oLink) // Modifying an existent link.
-  oLink.href = sUri;
- else   // Creating a new link.
- {
-  oLink = oEditor.FCK.CreateLink(sUri);
-  if (! oLink)
+  switch (GetE('cmbLinkType').value)
   {
-    oLink = oEditor.FCK.CreateElement('A');
-    oLink.href = sUri;
-    oLink.appendChild(oEditor.FCK.EditorDocument.createTextNode(sText)); 
+    case 'wiki' :
+      sUri = GetE('txtPagename').value;
+      if (sUri.length == 0)
+      {
+        alert(FCKLang.DlnLnkMsgNoUrl);
+        return false;
+      }
+
+      sText = sUri;
+
+      // pages starting with "/" are sub pages of current page, e.g. /SubPage 
+      if (sUri[0] == '/')
+      {
+        sUri = GetE('basepage').value + sUri
+      }
+
+      sUri = FCKConfig['WikiBasePath'] + encodeUrl(sUri);
+      break;
+
+    case 'interwiki' :
+      sUri = GetE('txtInterwikipagename').value;
+
+      if (sUri.length == 0)
+      {
+        alert(FCKLang.DlnLnkMsgNoUrl);
+        return false;
+      }
+
+      sText = sUri;
+      sUri = encodeUrl(sUri);
+      break;
+
+    case 'url' :
+      sUri = GetE('txtUrl').value;
+
+      if (sUri.length == 0)
+      {
+        alert(FCKLang.DlnLnkMsgNoUrl);
+        return false;
+      }
+
+      sUri = GetE('cmbLinkProtocol').value + sUri;
+      sText = sUri;
+      sUri = encodeUrl(sUri);
+      break;
   }
- }
 
- if (GetE('cmbLinkType').value == 'interwiki')
- { 
-  SetAttribute(oLink, 'class', 'badinterwiki'); // Bug on IE.5.5 makes this ineffective! Works on IE6/Moz....
-  SetAttribute(oLink, 'title', GetE('sctInterwiki').value);
- }
+  // Modifying an existent link.
+  if (oLink) {
+    oLink.href = sUri;
+    SetAttribute( oLink, '_fcksavedurl', sUri ) ;
+    if (isNameRelatedLink) {
+      oLink.innerHTML = sText;
+    }
+  }
+  else   // Creating a new link.
+  {
+    oLink = oEditor.FCK.CreateLink(sUri)[0];
+    if (! oLink)
+    {
+      oLink = oEditor.FCK.CreateElement('A');
+      oLink.href = sUri;
+      oLink.appendChild(oEditor.FCK.EditorDocument.createTextNode(sText)); 
+    }
+  }
 
- return true;
+  if (GetE('cmbLinkType').value == 'interwiki')
+  { 
+    SetAttribute(oLink, 'class', 'badinterwiki'); // Bug on IE.5.5 makes this ineffective! Works on IE6/Moz....
+    SetAttribute(oLink, 'title', GetE('sctInterwiki').value);
+  }
+
+  return true;
 }
 
 function SetUrl(url)
 {
- document.getElementById('txtUrl').value = url;
- OnUrlChange();
+  document.getElementById('txtUrl').value = url;
+  OnUrlChange();
 }
-

@@ -53,6 +53,9 @@ class RenamePage(ActionBase):
         self.page = PageEditor(self.request, self.pagename)
         success, msgs = self.page.renamePage(newpagename, comment)
 
+        if not success:
+            return success, msgs
+
         rename_subpages = 0
         if 'rename_subpages' in form:
             try:
@@ -73,7 +76,7 @@ class RenamePage(ActionBase):
     def do_action_finish(self, success):
         if success:
             url = Page(self.request, self.newpagename).url(self.request)
-            self.request.http_redirect(url)
+            self.request.http_redirect(url, code=301)
         else:
             self.render_msg(self.make_form(), "dialog")
 

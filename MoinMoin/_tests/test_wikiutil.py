@@ -909,9 +909,13 @@ class TestAnchorNames:
         tests = [
             # text                    expected output
             (u'\xf6\xf6ll\xdf\xdf',   'A.2BAPYA9g-ll.2BAN8A3w-'),
-            (u'level 2',              'level2'),
+            (u'level 2',              'level_2'),
+            (u'level_2',              'level_2'),
             (u'',                     'A'),
             (u'123',                  'A123'),
+            # make sure that a valid anchor is not modified:
+            (u'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789:_.-',
+             u'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789:_.-')
         ]
         for text, expected in tests:
             yield self._check, text, expected

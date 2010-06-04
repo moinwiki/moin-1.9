@@ -32,7 +32,7 @@ class TestPasswordChecker:
             py.test.skip("password_checker is disabled in the configuration, not testing it")
         else:
             for pw, result in self.tests_builtin:
-                pw_error = pw_checker(self.username, pw)
+                pw_error = pw_checker(self.request, self.username, pw)
                 print "%r: %s" % (pw, pw_error)
                 assert result == (pw_error is None)
 

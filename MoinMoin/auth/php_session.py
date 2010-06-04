@@ -21,7 +21,7 @@ class PHPSessionAuth(BaseAuth):
 
     name = 'php_session'
 
-    def __init__(self, apps=['egw'], s_path="/tmp", s_prefix="sess_"):
+    def __init__(self, apps=['egw'], s_path="/tmp", s_prefix="sess_", autocreate=False):
         """ @param apps: A list of the enabled applications. See above for
             possible keys.
             @param s_path: The path where the PHP sessions are stored.
@@ -31,6 +31,7 @@ class PHPSessionAuth(BaseAuth):
         self.s_path = s_path
         self.s_prefix = s_prefix
         self.apps = apps
+        self.autocreate = autocreate
 
     def request(self, request, user_obj, **kw):
         def handle_egroupware(session):
@@ -72,7 +73,7 @@ class PHPSessionAuth(BaseAuth):
                 u.email = email
                 changed = True
 
-            if u:
+            if u and self.autocreate:
                 u.create_or_update(changed)
             if u and u.valid:
                 return u, True # True to get other methods called, too

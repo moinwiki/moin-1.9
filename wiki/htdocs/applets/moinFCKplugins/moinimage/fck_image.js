@@ -15,6 +15,7 @@
  *   Florian Festi
  */
 
+var dialog	= window.parent ;
 var oEditor  = window.parent.InnerDialogLoaded();
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
@@ -30,7 +31,9 @@ if ( oImage && oImage.tagName != 'IMG')
  oImage = null;
 
 // Get the active link.
-var oLink = FCK.Selection.MoveToAncestorNode('A');
+var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
+if ( oLink )
+	FCK.Selection.SelectNode( oLink ) ;
 
 window.onload = function()
 {
@@ -42,6 +45,9 @@ window.onload = function()
 
   // Activate the "OK" button.
   window.parent.SetOkButton( true ) ;
+
+  // select first text input element of dialog for usability
+  SelectField('txtUrl');
 }
 
 function LoadSelection()
@@ -76,6 +82,8 @@ function OnProtocolChange()
 { 
   var sProtocol = GetE('cmbLinkProtocol').value;
   ShowE('divChkLink', (sProtocol!='attachment:' && sProtocol!='drawing:'));
+  // select first text input element of dialog for usability
+  SelectField('txtUrl');
 }
 
 //#### Called while the user types the URL.
@@ -160,7 +168,7 @@ function Ok()
         oLink.src = sSrc;
     } else
     {
-    if (oLink) FCK.ExecuteNamedCommand('Unlink');
+      if (oLink) FCK.ExecuteNamedCommand('Unlink');
     }
   }
   oImage.src = sSrc;

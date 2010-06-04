@@ -112,7 +112,7 @@ class RequestBase(object):
     proxy_host = 'x-forwarded-host' # original host: header as seen by the proxy (e.g. wiki.example.org)
     proxy_xff = 'x-forwarded-for' # list of original remote_addrs as seen by the proxies (e.g. <clientip>,<proxy1>,<proxy2>,...)
 
-    def __init__(self, properties={}):
+    def __init__(self, properties={}, given_config=None):
 
         # twistd's daemonize() overrides our umask, so we reset it here every
         # request. we do it for all request types to avoid similar problems.
@@ -163,7 +163,7 @@ class RequestBase(object):
             # order is important here!
             self.__dict__.update(properties)
             try:
-                self._load_multi_cfg()
+                self._load_multi_cfg(given_config)
             except error.NoConfigMatchedError:
                 self.makeForbidden(404, 'No wiki configuration matching the URL found!\r\n')
                 return
@@ -354,12 +354,15 @@ class RequestBase(object):
 
     dicts = property(getDicts, None, delDicts)
 
-    def _load_multi_cfg(self):
+    def _load_multi_cfg(self, given_config=None):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
-            self.clock.start('load_multi_cfg')
-            self.cfg = multiconfig.getConfig(self.url)
-            self.clock.stop('load_multi_cfg')
+            if given_config is None:
+                self.clock.start('load_multi_cfg')
+                self.cfg = multiconfig.getConfig(self.url)
+                self.clock.stop('load_multi_cfg')
+            else:
+                self.cfg = given_config('MoinMoin._tests.wikiconfig') # used for tests' TestConfig
 
     def setAcceptedCharsets(self, accept_charset):
         """ Set accepted_charsets by parsing accept-charset header
@@ -1186,7 +1189,7 @@ class RequestBase(object):
             pg = Page(self, pname)
             if pg.exists():
                 url = pg.url(self)
-                self.http_redirect(url)
+                self.http_redirect(url, code=301)
                 return True
         return False
 
@@ -1329,13 +1332,17 @@ class RequestBase(object):
 
         return self.finish()
 
-    def http_redirect(self, url):
+    def http_redirect(self, url, code=302):
         """ Redirect to a fully qualified, or server-rooted URL
 
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)
-        self.emit_http_headers(["Status: 302 Found", "Location: %s" % url])
+        header = {
+            301: "Status: 301 Moved Permanently",
+            302: "Status: 302 Found",
+        }[code]
+        self.emit_http_headers([header, "Location: %s" % url])
 
     def emit_http_headers(self, more_headers=[], testing=False):
         """ emit http headers after some preprocessing / checking
