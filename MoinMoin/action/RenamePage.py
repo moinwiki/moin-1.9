@@ -29,7 +29,10 @@ class RenamePage(ActionBase):
         filterfn = re.compile(ur"^%s/.*$" % re.escape(pagename), re.U).match
         subpagenames = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
         self.subpages = [pagename for pagename in subpagenames if self.request.user.may.delete(pagename)]
-        self.show_redirect = request.cfg.show_rename_redirect
+        try:
+            self.show_redirect = request.cfg.show_rename_redirect
+        except AttributeError:
+            self.show_redirect = False
         try:
             self.rename_redirect = int(self.request.form.get('rename_redirect', '0'))
         except ValueError:
