@@ -1,0 +1,15 @@
+    # This is a sample configuration snippet that shows moin's http auth configuration
+    # See HelpOnSessions, HelpOnAuthentication and HelpOnConfiguration for more infos.
+
+    # authentication methods used (default shown, see also other snippets):
+    #from MoinMoin.auth.http import HTTPAuth
+    #auth = [HTTPAuth()]
+
+    # If set to True user accounts are created automatically
+    #user_autocreate = True
+
+    # a list of form field names to be disabled in the UserPreferences.
+    #user_form_disable = ['name', ]
+ 
+    # a list of form field names to be removed from the UserPreferences.
+    #user_form_remove = ['password', 'password2', ]
