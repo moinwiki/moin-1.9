@@ -14,7 +14,6 @@ logging = log.getLogger(__name__)
 
 from MoinMoin.util import pysupport
 from MoinMoin import wikiutil
-from MoinMoin.support.python_compatibility import rsplit
 
 modules = pysupport.getPackageModules(__file__)
 
@@ -106,9 +105,6 @@ class FormatterBase:
         """
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         if wikitag == 'Self' or wikitag == self.request.cfg.interwikiname:
-            if '#' in wikitail:
-                wikitail, kw['anchor'] = rsplit(wikitail, '#', 1)
-                wikitail = wikiutil.url_unquote(wikitail)
             return self.pagelink(on, wikitail, **kw)
         return ''
 

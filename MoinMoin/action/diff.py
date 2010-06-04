@@ -3,7 +3,8 @@
     MoinMoin - show diff between 2 page revisions
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2006-2008 MoinMoin:ThomasWaldmann
+                2006-2008 MoinMoin:ThomasWaldmann,
+                2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -119,12 +120,12 @@ def execute(pagename, request):
     title = f.text(title)
 
     # Revision list starts from 2...
-    if oldrev == min(revlist):
+    if oldrev <= min(revlist):
         disable_prev = u' disabled="disabled"'
     else:
         disable_prev = u''
 
-    if newrev == max(revlist):
+    if newrev >= max(revlist):
         disable_next = u' disabled="disabled"'
     else:
         disable_next = u''

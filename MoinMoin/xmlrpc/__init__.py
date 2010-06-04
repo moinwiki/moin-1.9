@@ -19,6 +19,7 @@
 
     @copyright: 2003-2008 MoinMoin:ThomasWaldmann,
                 2004-2006 MoinMoin:AlexanderSchremmer
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details
 """
 from MoinMoin.util import pysupport
@@ -583,6 +584,9 @@ class XmlRpcBase:
         @return true on success
 
         """
+
+        pagename = self._instr(pagename)
+
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
@@ -706,7 +710,7 @@ class XmlRpcBase:
 
         @param jid: a bare Jabber ID
         """
-        if self.cfg.secret != secret:
+        if self.cfg.secrets['jabberbot'] != secret:
             return ""
 
         u = self.request.handle_jid_auth(jid)
@@ -966,8 +970,8 @@ class XmlRpcBase:
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
 
-        filename = wikiutil.taintfilename(self._instr(attachname))
-        filename = AttachFile.getFilename(self.request, pagename, filename)
+        attachname = wikiutil.taintfilename(self._instr(attachname))
+        filename = AttachFile.getFilename(self.request, pagename, attachname)
         if not os.path.isfile(filename):
             return self.noSuchPageFault()
         return self._outlob(open(filename, 'rb').read())
@@ -990,12 +994,12 @@ class XmlRpcBase:
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
-        attachname = wikiutil.taintfilename(attachname)
+        attachname = wikiutil.taintfilename(self._instr(attachname))
         filename = AttachFile.getFilename(self.request, pagename, attachname)
         if os.path.exists(filename) and not os.path.isfile(filename):
             return self.noSuchPageFault()
         open(filename, 'wb+').write(data.data)
-        AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
+        AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, attachname)
         return xmlrpclib.Boolean(1)
 
     # XXX END WARNING XXX

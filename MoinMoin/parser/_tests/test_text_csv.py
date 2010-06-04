@@ -47,7 +47,7 @@ class TestDelimiters(ParserTestCase):
     def testdelimiters(self):
         """ parser.text_csv: delimiter , """
         result = self.parse('a,b')
-        assert '<td><strong>a</strong></td>' in  result and '<td><strong>b</strong></td>' in  result
+        assert '<td class="hcolumn0"><strong>a</strong></td>' in  result and '<td class="hcolumn1"><strong>b</strong></td>' in  result
 
     def testemptyline(self):
         """ parser.text_csv: empty line """
@@ -57,7 +57,7 @@ class TestDelimiters(ParserTestCase):
     def testnodelimiter(self):
         """ parser.text_csv: line without delimiter """
         result = self.parse('ABCDEFGHIJ')
-        assert '<td><strong>ABCDEFGHIJ</strong></td>' in  result
+        assert '<td class="hcolumn0"><strong>ABCDEFGHIJ</strong></td>' in  result
 
 coverage_modules = ['MoinMoin.parser.text_csv']
 

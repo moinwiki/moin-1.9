@@ -18,18 +18,18 @@ class Parser(ParserBase):
 
     def __init__(self, raw, request, **kw):
         ParserBase.__init__(self, raw, request, **kw)
-        self._ignore_case = 1
+        self._ignore_case = True
 
     def setupRules(self):
         ParserBase.setupRules(self)
 
-        self.addRulePair("Comment", "\(\*", "\*\)")
-        self.addRulePair("Comment", "\{", "\}")
-        self.addRule("Comment", "//.*$")
-        self.addRulePair("String", '\'', '\'')
+        self.addRulePair("Comment", r"\(\*", r"\*\)")
+        self.addRulePair("Comment", r"\{", r"\}")
+        self.addRule("Comment", r"//.*$")
+        self.addRulePair("String", r"'", r"'")
         self.addRule("Char", r"'\\.'|#[a-f0-9][a-f0-9]")
         self.addRule("Number", r"[0-9](\.[0-9]*)?(eE[+-][0-9])?|\$[0-9a-fA-F]+")
-        self.addRule("ID", "[a-zA-Z_][0-9a-zA-Z_]*")
+        self.addRule("ID", r"[a-zA-Z_][0-9a-zA-Z_]*")
         self.addRule("SPChar", r"[~!%^&*()+=|\[\]:;,.<>/?{}-]")
 
         reserved_words = ['class', 'interface', 'set', 'uses', 'unit',
@@ -48,3 +48,4 @@ class Parser(ParserBase):
         constant_words = ['true', 'false', 'nil']
 
         self.addConstant(constant_words)
+

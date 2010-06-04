@@ -4,7 +4,7 @@
 
     Depends on: nothing (only python with zlib)
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006-2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -21,8 +21,13 @@ def execute(indexobj, filename):
         data = zf.read("content.xml")
         zf.close()
         data = " ".join(rx_stripxml.sub(" ", data).split())
-    except RuntimeError, err:
-        logging.error(str(err))
+    except (zipfile.BadZipfile, RuntimeError), err:
+        logging.error("%s [%s]" % (str(err), filename))
         data = ""
-    return data.decode('utf-8')
+    try:
+        data = data.decode('utf-8')
+    except UnicodeDecodeError:
+        # protected with password? no valid OpenDocument file?
+        data = u''
+    return data
 

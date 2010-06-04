@@ -23,11 +23,6 @@ from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestACLStringIterator(object):
 
-    def setup_method(self, method):
-        self.config = self.TestConfig(defaults=['acl_rights_valid', 'acl_rights_before'])
-    def teardown_method(self, method):
-        del self.config
-
     def testEmpty(self):
         """ security: empty acl string raise StopIteration """
         iter = acliter(self.request.cfg.acl_rights_valid, '')
@@ -192,18 +187,20 @@ class TestAcl(object):
     """
     def setup_method(self, method):
         # Backup user
-        self.config = self.TestConfig(defaults=['acl_rights_valid', 'acl_rights_before'])
         self.savedUser = self.request.user.name
 
     def teardown_method(self, method):
         # Restore user
         self.request.user.name = self.savedUser
-        del self.config
 
     def testApplyACLByUser(self):
         """ security: applying acl by user name"""
         # This acl string...
         acl_rights = [
+            "-MinusGuy:read "
+            "+MinusGuy:read "
+            "+PlusGuy:read "
+            "-PlusGuy:read "
             "Admin1,Admin2:read,write,delete,revert,admin  "
             "Admin3:read,write,admin  "
             "JoeDoe:read,write  "
@@ -233,6 +230,10 @@ class TestAcl(object):
             # All other users - every one not mentioned in the acl lines
             ('All', ('read', )),
             ('Anonymous', ('read', )),
+            # we check whether ACL processing stops for a user/right match
+            # with ACL modifiers
+            ('MinusGuy', ()),
+            ('PlusGuy', ('read', )),
             )
 
         # Check rights
@@ -250,35 +251,26 @@ class TestAcl(object):
 class TestPageAcls(object):
     """ security: real-life access control list on pages testing
     """
-    acls_before = u"WikiAdmin:admin,read,write,delete,revert"
-    acls_default = u"All:read,write"
-    acls_after = u"All:read"
     mainpage_name = u'AclTestMainPage'
     subpage_name = u'AclTestMainPage/SubPage'
     item_rwforall = u'EveryoneMayReadWriteMe'
     subitem_4boss = u'EveryoneMayReadWriteMe/OnlyTheBossMayWMe'
     pages = [
         # pagename, content
-        (mainpage_name, u"#acl JoeDoe: JaneDoe:read,write\nFoo!"),
+        (mainpage_name, u"#acl JoeDoe:\n#acl JaneDoe:read,write\nFoo!"),
         (subpage_name, u"FooFoo!"),
         (item_rwforall, u"#acl All:read,write\nMay be read from and written to by anyone"),
         (subitem_4boss, u"#acl JoeDoe:read,write\nOnly JoeDoe (the boss) may write"),
     ]
 
-    def setup_class(self):
-        self.config = self.TestConfig(
-            acl_rights_before=self.acls_before,
-            acl_rights_default=self.acls_default,
-            acl_rights_after=self.acls_after,
-            acl_hierarchic=False,
-            defaults=['acl_rights_valid'])
-        # TestConfig is crap, it does some wild hack and does not inherit from DefaultConfig
-        # nor call DefaultConfig's __init__() to do post processing, thus we do it here for now:
-        cfg = self.request.cfg
-        cfg.cache.acl_rights_before = AccessControlList(cfg, [cfg.acl_rights_before])
-        cfg.cache.acl_rights_default = AccessControlList(cfg, [cfg.acl_rights_default])
-        cfg.cache.acl_rights_after = AccessControlList(cfg, [cfg.acl_rights_after])
+    from MoinMoin._tests import wikiconfig
+    class Config(wikiconfig.Config):
+        acl_rights_before = u"WikiAdmin:admin,read,write,delete,revert"
+        acl_rights_default = u"All:read,write"
+        acl_rights_after = u"All:read"
+        acl_hierarchic = False
 
+    def setup_class(self):
         # Backup user
         self.savedUser = self.request.user.name
         self.request.user = User(self.request, auth_username=u'WikiAdmin')
@@ -288,12 +280,6 @@ class TestPageAcls(object):
             create_page(self.request, page_name, page_content)
 
     def teardown_class(self):
-        del self.config
-        cfg = self.request.cfg
-        cfg.cache.acl_rights_before = AccessControlList(cfg, [cfg.acl_rights_before])
-        cfg.cache.acl_rights_default = AccessControlList(cfg, [cfg.acl_rights_default])
-        cfg.cache.acl_rights_after = AccessControlList(cfg, [cfg.acl_rights_after])
-
         # Restore user
         self.request.user.name = self.savedUser
 
@@ -325,12 +311,11 @@ class TestPageAcls(object):
         ]
 
         for hierarchic, pagename, username, may in tests:
-            self.request.cfg.acl_hierarchic = hierarchic
             u = User(self.request, auth_username=username)
             u.valid = True
 
-            # User should have these rights...
-            for right in may:
+            def _have_right(u, right, pagename, hierarchic):
+                self.request.cfg.acl_hierarchic = hierarchic
                 can_access = u.may.__getattr__(right)(pagename)
                 if can_access:
                     print "page %s: %s test if %s may %s (success)" % (
@@ -340,10 +325,12 @@ class TestPageAcls(object):
                         pagename, ['normal', 'hierarchic'][hierarchic], username, right)
                 assert can_access
 
-            # User should NOT have these rights:
-            mayNot = [right for right in self.request.cfg.acl_rights_valid
-                      if right not in may]
-            for right in mayNot:
+            # User should have these rights...
+            for right in may:
+                yield _have_right, u, right, pagename, hierarchic
+
+            def _not_have_right(u, right, pagename, hierarchic):
+                self.request.cfg.acl_hierarchic = hierarchic
                 can_access = u.may.__getattr__(right)(pagename)
                 if can_access:
                     print "page %s: %s test if %s may not %s (failure)" % (
@@ -352,5 +339,11 @@ class TestPageAcls(object):
                     print "page %s: %s test if %s may not %s (success)" % (
                         pagename, ['normal', 'hierarchic'][hierarchic], username, right)
                 assert not can_access
+
+            # User should NOT have these rights:
+            mayNot = [right for right in self.request.cfg.acl_rights_valid
+                      if right not in may]
+            for right in mayNot:
+                yield _not_have_right, u, right, pagename, hierarchic
 
 coverage_modules = ['MoinMoin.security']

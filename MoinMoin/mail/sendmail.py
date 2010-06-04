@@ -32,15 +32,25 @@ def encodeAddress(address, charset):
     @rtype: string
     @return: encoded address
     """
-    composite = re.compile(r'(?P<phrase>.+)(?P<angle_addr>\<.*\>)', re.UNICODE)
+    assert isinstance(address, unicode)
+    composite = re.compile(r'(?P<phrase>.*?)(?P<blanks>\s*)\<(?P<addr>.*)\>', re.UNICODE)
     match = composite.match(address)
     if match:
-        phrase = match.group('phrase').encode(config.charset)
-        phrase = str(Header(phrase, charset))
-        angle_addr = match.group('angle_addr').encode(config.charset)
-        return phrase + angle_addr
+        phrase = match.group('phrase')
+        try:
+            str(phrase)  # is it pure ascii?
+        except UnicodeEncodeError:
+            phrase = phrase.encode(config.charset)
+            phrase = Header(phrase, charset)
+        blanks = match.group('blanks')
+        addr = match.group('addr')
+        if phrase:
+            return "%s%s<%s>" % (str(phrase), str(blanks), str(addr))
+        else:
+            return str(addr)
     else:
-        return address.encode(config.charset)
+        # a pure email address, should encode to ascii without problem
+        return str(address)
 
 
 def sendmail(request, to, subject, text, mail_from=None):
@@ -96,6 +106,8 @@ def sendmail(request, to, subject, text, mail_from=None):
     msg['Date'] = formatdate()
     msg['Message-ID'] = make_msgid()
     msg['Subject'] = Header(subject, charset)
+    # See RFC 3834 section 5:
+    msg['Auto-Submitted'] = 'auto-generated'
 
     if cfg.mail_sendmail:
         # Set the BCC.  This will be stripped later by sendmail.
@@ -156,6 +168,26 @@ def sendmail(request, to, subject, text, mail_from=None):
     logging.debug("Mail sent OK")
     return (1, _("Mail sent OK"))
 
+def encodeSpamSafeEmail(email_address, obfuscation_text=''):
+    """ Encodes a standard email address to an obfuscated address
+    @param email_address: mail address to encode.
+                          Known characters and their all-uppercase words translation:
+                          "." -> " DOT "
+                          "@" -> " AT "
+                          "-" -> " DASH "
+    @param obfuscation_text: optional text to obfuscate the email.
+                             All characters in the string must be alphabetic
+                             and they will be added in uppercase.
+    """
+    address = email_address.lower()
+    # uppercase letters will be stripped by decodeSpamSafeEmail
+    for word, sign in _transdict.items():
+        address = address.replace(sign, ' %s ' % word)
+    if obfuscation_text.isalpha():
+        # is the obfuscation_text alphabetic
+        address = address.replace(' AT ', ' AT %s ' % obfuscation_text.upper())
+
+    return address
 
 def decodeSpamSafeEmail(address):
     """ Decode obfuscated email address to standard email address
@@ -168,7 +200,7 @@ def decodeSpamSafeEmail(address):
         "AT"    -> "@"
         "DASH"  -> "-"
 
-    Any unknown all-uppercase words simply get stripped.
+    Any unknown all-uppercase words or an uppercase letter simply get stripped.
     Use that to make it even harder for spam bots!
 
     Blanks (spaces) simply get stripped.

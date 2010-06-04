@@ -24,6 +24,10 @@ try:
 except ImportError:
     pass
 
+class QueryError(ValueError):
+    """ error raised for problems when parsing the query """
+
+
 #############################################################################
 ### query objects
 #############################################################################
@@ -961,7 +965,7 @@ class QueryParser:
                             orexpr = OrExpression(terms)
                         terms = AndExpression(orexpr)
                     else:
-                        raise ValueError('Nothing to OR')
+                        raise QueryError('Nothing to OR')
                     remaining = self._analyse_items(items)
                     if remaining.__class__ == OrExpression:
                         for sub in remaining.subterms():
@@ -977,7 +981,7 @@ class QueryParser:
                     # being parsed rather than rejecting an empty string
                     # before parsing...
                     if not item:
-                        raise ValueError("Term too short")
+                        raise QueryError("Term too short")
                     regex = self.regex
                     case = self.case
                     if self.titlesearch:
@@ -997,7 +1001,7 @@ class QueryParser:
                 while len(item) > 1:
                     m = item[0]
                     if m is None:
-                        raise ValueError("Invalid search prefix")
+                        raise QueryError("Invalid search prefix")
                     elif m == M:
                         negate = True
                     elif "title".startswith(m):
@@ -1017,7 +1021,7 @@ class QueryParser:
                     elif "domain".startswith(m):
                         domain = True
                     else:
-                        raise ValueError("Invalid search prefix")
+                        raise QueryError("Invalid search prefix")
                     item = item[1:]
 
                 text = item[0]
@@ -1057,9 +1061,9 @@ class QueryParser:
                                                         multikey=True,
                                                         brackets=('()', ),
                                                         quotes='\'"')
-            logging.debug("parse_quoted_separated items: %r" % items)
         except wikiutil.BracketError, err:
-            raise ValueError(str(err))
+            raise QueryError(str(err))
+        logging.debug("parse_quoted_separated items: %r" % items)
         query = self._analyse_items(items)
         logging.debug("analyse_items query: %r" % query)
         return query

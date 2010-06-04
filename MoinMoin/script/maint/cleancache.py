@@ -3,11 +3,11 @@
 MoinMoin - cleancache script
 
 @copyright: 2005-2007 MoinMoin:ThomasWaldmann,
-            2007-2008 MoinMoin:ReimarBauer
+            2007-2009 MoinMoin:ReimarBauer
 @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import caching
+from MoinMoin import caching, user
 from MoinMoin.Page import Page
 from MoinMoin.script import MoinScript
 
@@ -61,3 +61,7 @@ General syntax: moin [options] maint cleancache
         for arena, key in arena_key_list:
             caching.CacheEntry(request, arena, key, scope='wiki').remove()
 
+        # clean drafts of users
+        uids = user.getUserList(request)
+        for key in uids:
+            caching.CacheEntry(request, 'drafts', key, scope='wiki').remove()

@@ -2,12 +2,17 @@
 """
     MoinMoin - locking functions
 
-    @copyright: 2005 Florian Festi, Nir Soffer
+    @copyright: 2005 Florian Festi, Nir Soffer,
+                2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, sys, tempfile, time, errno
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
+from MoinMoin.util import filesys
 
 class Timer:
     """ Simple count down timer
@@ -105,9 +110,9 @@ class ExclusiveLock:
         timer.start()
         while timer.haveTime():
             try:
-                os.mkdir(self.lockDir)
+                filesys.mkdir(self.lockDir)
                 self._locked = True
-                # log('acquired exclusive lock: %s\n' % (self.lockDir, ))
+                logging.debug('acquired exclusive lock: %s' % (self.lockDir, ))
                 return True
             except OSError, err:
                 if err.errno != errno.EEXIST:
@@ -115,15 +120,16 @@ class ExclusiveLock:
                 if self.expire():
                     continue # Try immediately to acquire
                 timer.sleep()
+        logging.debug('failed to acquire exclusive lock: %s' % (self.lockDir, ))
         return False
 
     def release(self):
         """ Release the lock """
         if not self._locked:
-            raise RuntimeError("lock already released")
+            raise RuntimeError('lock already released: %s' % self.lockDir)
         self._removeLockDir()
         self._locked = False
-        # log('released lock: %s\n' % self.lockDir)
+        logging.debug('released lock: %s' % self.lockDir)
 
     def isLocked(self):
         return self._locked
@@ -141,7 +147,7 @@ class ExclusiveLock:
         if self.timeout is None:
             return not self.exists()
         try:
-            lock_age = time.time() - os.stat(self.lockDir).st_mtime
+            lock_age = time.time() - filesys.stat(self.lockDir).st_mtime
             return lock_age > self.timeout
         except OSError, err:
             if err.errno == errno.ENOENT:
@@ -153,7 +159,7 @@ class ExclusiveLock:
         """ Return True if the lock is expired or missing; False otherwise. """
         if self.isExpired():
             self._removeLockDir()
-            # log("expired lock: %s\n" % self.lockDir)
+            logging.debug("expired lock: %s" % self.lockDir)
             return True
         return False
 
@@ -162,8 +168,8 @@ class ExclusiveLock:
     def _makeDir(self):
         """ Make sure directory exists """
         try:
-            os.mkdir(self.dir)
-            # log('created directory: %s\n' % self.dir)
+            filesys.mkdir(self.dir)
+            logging.debug('created directory: %s' % self.dir)
         except OSError, err:
             if err.errno != errno.EEXIST:
                 raise
@@ -171,7 +177,8 @@ class ExclusiveLock:
     def _removeLockDir(self):
         """ Remove lockDir ignoring 'No such file or directory' errors """
         try:
-            os.rmdir(self.lockDir)
+            filesys.rmdir(self.lockDir)
+            logging.debug('removed directory: %s' % self.dir)
         except OSError, err:
             if err.errno != errno.ENOENT:
                 raise
@@ -230,7 +237,7 @@ class WriteLock(ExclusiveLock):
                     timer.sleep()
             finally:
                 if result:
-                    # log('acquired write lock: %s\n' % (self.lockDir))
+                    logging.debug('acquired write lock: %s' % self.lockDir)
                     return True
                 else:
                     self.release()
@@ -291,7 +298,7 @@ class ReadLock(ExclusiveLock):
             try:
                 self.lockDir = tempfile.mkdtemp('', self.fileName, self.dir)
                 self._locked = True
-                # log('acquired read lock: %s\n' % self.lockDir)
+                logging.debug('acquired read lock: %s' % self.lockDir)
                 return True
             finally:
                 self.writeLock.release()
@@ -393,5 +400,3 @@ class LazyWriteLock(WriteLock):
             return WriteLock.expire(self)
         else: # POSIX
             return True
-
-

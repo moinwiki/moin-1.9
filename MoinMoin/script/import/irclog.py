@@ -89,7 +89,7 @@ General syntax: moin [options] import irclog [irclog-options]
                     acl = ""
                     if self.options.acl:
                         acl = "#acl %s\n" % (self.options.acl, )
-                    p.saveText(acl + "#format plain\n" + decodeLinewise(fileObj.read()), 0)
+                    p.saveText(acl + "#format irc\n" + decodeLinewise(fileObj.read()), 0)
                 except PageEditor.Unchanged, e:
                     pass
                 except PageEditor.SaveError, e:
