@@ -59,7 +59,7 @@ class Settings(UserPrefBase):
         _ = self.request.getText
         request = self.request
 
-        openid_id = request.form.get('openid_identifier', [''])[0]
+        openid_id = request.form.get('openid_identifier', '')
         if not openid_id:
             return 'error', _("No OpenID given.")
 
@@ -83,7 +83,7 @@ class Settings(UserPrefBase):
                     'handler': 'oid',
                     'oid.return': '1'}
             return_to = request.getQualifiedURL(request.page.url(request, qstr))
-            trust_root = request.getBaseURL()
+            trust_root = request.url_root
             if oidreq.shouldSendRedirect():
                 redirect_url = oidreq.redirectURL(trust_root, return_to)
                 request.http_redirect(redirect_url)
@@ -100,8 +100,8 @@ class Settings(UserPrefBase):
         oidconsumer = consumer.Consumer(request.session,
                                         MoinOpenIDStore(request))
         query = {}
-        for key in request.form:
-            query[key] = request.form[key][0]
+        for key in request.values:
+            query[key] = request.values[key]
         qstr = {'action': 'userprefs',
                 'handler': 'oid',
                 'oid.return': '1'}
@@ -133,16 +133,16 @@ class Settings(UserPrefBase):
         _ = self._
         form = self.request.form
 
-        if form.has_key('oid.return'):
+        if self.request.values.has_key('oid.return'):
             return self._handle_oidreturn()
 
         if form.has_key('cancel'):
             return
 
-        if self.request.request_method != 'POST':
+        if self.request.method != 'POST':
             return
 
-        if not wikiutil.checkTicket(self.request, form.get('ticket', [''])[0]):
+        if not wikiutil.checkTicket(self.request, form.get('ticket', '')):
             return
 
         if form.has_key('remove'):
@@ -152,9 +152,7 @@ class Settings(UserPrefBase):
             return self._handle_add()
 
     def _make_form(self):
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
+        action = "%s%s" % (self.request.script_root, self.request.path)
         _form = html.FORM(action=action)
         _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         _form.append(html.INPUT(type="hidden", name="handler", value="oid"))

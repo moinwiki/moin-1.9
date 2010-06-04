@@ -18,22 +18,7 @@ modules = pysupport.getPackageModules(__file__)
 
 standard_codings = ['utf-8', 'iso-8859-15', 'iso-8859-1', ]
 
-try:
-    # requires Python >= 2.4
-    from MoinMoin.util.SubProcess import exec_cmd
-except ImportError:
-    # Note: remove this after requiring 2.4 for moin
-    def exec_cmd(cmd, input=None, timeout=None):
-        child_stdin, child_stdout = os.popen2(cmd)
-        # Note: we do NOT use popen3 because it would cause
-        #       deadlocks with such simple code as below:
-        if input:
-            child_stdin.write(input)
-        data = child_stdout.read()
-        child_stdout.close()
-        errors = '' # we don't have it (see note above about popen3)
-        rc = 0 # we don't have it, TODO: check if we can get it somehow
-        return data, errors, rc
+from MoinMoin.util.SubProcess import exec_cmd
 
 
 def quote_filename(filename):

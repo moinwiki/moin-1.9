@@ -9,7 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os,re
+import os, re
 
 from xml.dom import getDOMImplementation
 from xml.dom.ext.reader import Sax
@@ -364,7 +364,7 @@ class Formatter(FormatterBase):
     def url(self, on, url=None, css=None, **kw):
         if url and url.startswith("/"):
             # convert to absolute path:
-            url = "%s%s"%(self.request.getBaseURL(), url)
+            url = "%s%s"%(self.request.base_url, url)
 
         if not on:
             self._cleanupUlinkNode()
@@ -422,8 +422,7 @@ class Formatter(FormatterBase):
             return self.text("[attachment:%s]" % url)
         else:
             return self.image(
-                src=AttachFile.getAttachUrl(pagename, filename,
-                                            self.request, addts=1),
+                src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
                 attachment_title=url,
                 **kw)
 
@@ -457,7 +456,7 @@ class Formatter(FormatterBase):
             src = kw['src']
             if src.startswith("/"):
                 # convert to absolute path:
-                src = self.request.getBaseURL()+src
+                src = self.request.url_root + src
             image.setAttribute('fileref', src)
         if kw.has_key('width'):
             image.setAttribute('width', str(kw['width']))
@@ -498,7 +497,7 @@ class Formatter(FormatterBase):
 
 ### Code area #######################################################
 
-    def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1, msg=None):
         """Creates a formatted code region using screen or programlisting,
         depending on if a programming language was defined (code_type).
 
@@ -612,11 +611,11 @@ class Formatter(FormatterBase):
             was_in_para = self.cur.nodeName == "para"
             if was_in_para:
                 self.paragraph(0)
-            
+
             # Regular Expression to match editlink arg, remove it because it causes trouble.
             _arg_editlink = r'(,\s*(?P<editlink>editlink))?'
             macro_args = re.sub(_arg_editlink, '', args)
-        
+
             text = FormatterBase.macro(self, macro_obj, name, macro_args)
             if text.strip():
                 self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)

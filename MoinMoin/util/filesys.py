@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, shutil, time, errno, random
+import sys, os, shutil, time, errno
 from stat import S_ISDIR, ST_MODE, S_IMODE
 import warnings
 
@@ -30,53 +30,131 @@ def chmod(name, mode, catchexception=True):
             raise
 
 
-def rename(oldname, newname):
-    """ Multiplatform rename
+# begin copy of werkzeug.posixemulation from werkzeug 0.6.1(pre) repo
+r"""
+    werkzeug.posixemulation
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
-    Needed because win32 rename is not POSIX compliant, and does not
-    remove target file if it exists.
+    Provides a POSIX emulation for some features that are relevant to
+    web applications.  The main purpose is to simplify support for
+    systems such as Windows NT that are not 100% POSIX compatible.
 
-    Problem: this "rename" is not atomic any more on win32.
+    Currently this only implements a :func:`rename` function that
+    follows POSIX semantics.  Eg: if the target file already exists it
+    will be replaced without asking.
 
-    FIXME: What about rename locking? we can have a lock file in the
-    page directory, named: PageName.lock, and lock this file before we
-    rename, then unlock when finished.
-    """
-    if os.name == 'nt':
-        # Windows "rename" taken from Mercurial's util.py. Thanks!
+    This module was introduced in 0.6.1 and is not a public interface.
+    It might become one in later versions of Werkzeug.
+
+    :copyright: (c) 2010 by the Werkzeug Team, see AUTHORS for more details.
+    :license: BSD, see LICENSE for more details.
+"""
+import os
+import errno
+import random
+
+
+can_rename_open_file = False
+if os.name == 'nt':
+    _rename = lambda src, dst: False
+    _rename_atomic = lambda src, dst: False
+
+    try:
+        import ctypes
+        _GetLastError = ctypes.windll.kernel32.GetLastError
+
+        def _LogLastError(fn):
+            err = _GetLastError()
+            logging.debug("%s returned: %r" % (fn, err))
+            # 5 = Access Denied
+            # 6800 = The function attempted to use a name that is reserved
+            #        for use by another transaction.
+
+        _MOVEFILE_REPLACE_EXISTING = 0x1
+        _MOVEFILE_WRITE_THROUGH = 0x8
+        _MoveFileEx = ctypes.windll.kernel32.MoveFileExW
+
+        def _rename(src, dst):
+            if not isinstance(src, unicode):
+                src = unicode(src, sys.getfilesystemencoding())
+            if not isinstance(dst, unicode):
+                dst = unicode(dst, sys.getfilesystemencoding())
+            if _rename_atomic(src, dst):
+                return True
+            logging.debug("PSEUDO-atomic rename %r %r" % (src, dst))
+            retry = 0
+            ret = 0
+            while not ret and retry < 100:
+                ret = _MoveFileEx(src, dst, _MOVEFILE_REPLACE_EXISTING |
+                                            _MOVEFILE_WRITE_THROUGH)
+                if ret == 0:
+                    _LogLastError("MoveFileExW")
+                    time.sleep(0.001)
+                    retry += 1
+                    logging.debug("retry %d after sleeping" % retry)
+            return ret
+
+        # this stuff only exists in windows >= vista / windows server 2008
+        _CreateTransaction = ctypes.windll.ktmw32.CreateTransaction
+        _CommitTransaction = ctypes.windll.ktmw32.CommitTransaction
+        _MoveFileTransacted = ctypes.windll.kernel32.MoveFileTransactedW
+        _CloseHandle = ctypes.windll.kernel32.CloseHandle
+        can_rename_open_file = True
+
+        def _rename_atomic(src, dst):
+            ta = _CreateTransaction(None, 0, 0, 0, 0, 1000, 'Werkzeug rename')
+            if ta == -1:
+                _LogLastError("CreateTransaction")
+                return False
+            try:
+                logging.debug("atomic rename %r %r" % (src, dst))
+                retry = 0
+                ret = 0
+                while not ret and retry < 100:
+                    ret = _MoveFileTransacted(src, dst, None, None,
+                                               _MOVEFILE_REPLACE_EXISTING |
+                                               _MOVEFILE_WRITE_THROUGH, ta)
+                    if ret == 0:
+                        _LogLastError("MoveFileTransacted")
+                        time.sleep(0.001)
+                        retry += 1
+                        logging.debug("retry %d after sleeping" % retry)
+                    else:
+                        ret = _CommitTransaction(ta)
+                        if ret == 0:
+                            _LogLastError("CommitTransaction")
+                return ret
+            finally:
+                ret = _CloseHandle(ta)
+                if ret == 0:
+                    _LogLastError("CloseHandle")
+    except Exception:
+        pass
+
+    def rename(src, dst):
+        # Try atomic or pseudo-atomic rename
+        if _rename(src, dst):
+            return
+        # Fall back to "move away and replace"
+        logging.debug("NON-atomic rename %r %r" % (src, dst))
         try:
-            os.rename(oldname, newname)
-        except OSError, err:
-            # On windows, rename to existing file is not allowed, so we
-            # must delete destination first. But if a file is open, unlink
-            # schedules it for delete but does not delete it. Rename
-            # happens immediately even for open files, so we rename
-            # destination to a temporary name, then delete that. Then
-            # rename is safe to do.
-            # The temporary name is chosen at random to avoid the situation
-            # where a file is left lying around from a previous aborted run.
-            # The usual race condition this introduces can't be avoided as
-            # we need the name to rename into, and not the file itself. Due
-            # to the nature of the operation however, any races will at worst
-            # lead to the rename failing and the current operation aborting.
-
-            if err.errno != errno.EEXIST:
+            os.rename(src, dst)
+        except OSError, e:
+            if e.errno != errno.EEXIST:
                 raise
+            old = "%s-%08x" % (dst, random.randint(0, sys.maxint))
+            os.rename(dst, old)
+            os.rename(src, dst)
+            try:
+                os.unlink(old)
+            except Exception:
+                pass
+else:
+    #logging.debug("atomic os.rename (POSIX)")
+    rename = os.rename
+    can_rename_open_file = True
 
-            def tempname(prefix):
-                for tries in xrange(10):
-                    temp = '%s-%08x' % (prefix, random.randint(0, 0xffffffff))
-                    if not os.path.exists(temp):
-                        return temp
-                raise IOError, (errno.EEXIST, "No usable temporary filename found")
-
-            temp = tempname(newname)
-            os.rename(newname, temp)
-            os.unlink(temp)
-            os.rename(oldname, newname)
-    else:
-        # POSIX: just do it :)
-        os.rename(oldname, newname)
+# end copy of werkzeug.posixemulation
 
 rename_overwrite = rename
 
@@ -313,11 +391,11 @@ if sys.platform == 'darwin':
         """
         try:
             from Carbon import File
+            try:
+                return File.FSRef(path).as_pathname()
+            except File.Error:
+                return None
         except ImportError:
-            return None
-        try:
-            return File.FSRef(path).as_pathname()
-        except File.Error:
             return None
 
 else:
@@ -352,3 +430,4 @@ def dcreset():
         return
     else:
         return dircache.reset()
+

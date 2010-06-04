@@ -30,7 +30,7 @@ def _do_recover(request):
 Contact the owner of the wiki, who can enable email.""")
 
     try:
-        email = wikiutil.clean_input(form['email'][0].lower())
+        email = wikiutil.clean_input(form['email'].lower())
         if not email:
             # continue if email not given
             raise KeyError
@@ -42,7 +42,7 @@ Contact the owner of the wiki, who can enable email.""")
         pass
 
     try:
-        username = wikiutil.clean_input(form['name'][0])
+        username = wikiutil.clean_input(form['name'])
         if not username:
             # continue if name not given
             raise KeyError
@@ -147,12 +147,12 @@ def execute(pagename, request):
 
     if not found:
         # we will not have linked, so forbid access
-        request.makeForbidden403()
+        request.makeForbidden(403, 'No MoinAuth in auth list')
         return
 
     page = Page(request, pagename)
     _ = request.getText
-    form = request.form
+    form = request.values # link in mail -> GET request
 
     if not request.cfg.mail_enabled:
         request.theme.add_msg(_("""This wiki is not enabled for mail processing.
@@ -160,13 +160,13 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
         page.send_page()
         return
 
-    submitted = form.get('account_sendmail', [''])[0]
-    token = form.get('token', [''])[0]
-    newpass = form.get('password', [''])[0]
-    name = form.get('name', [''])[0]
+    submitted = form.get('account_sendmail', '')
+    token = form.get('token', '')
+    newpass = form.get('password', '')
+    name = form.get('name', '')
 
     if token and name and newpass:
-        newpass2 = form.get('password_repeat', [''])[0]
+        newpass2 = form.get('password_repeat', '')
         msg = _("Passwords don't match!")
         msg_type = 'error'
         if newpass == newpass2:
@@ -190,7 +190,6 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
             return
 
     if token and name:
-        request.emit_http_headers()
         request.theme.send_title(_("Password reset"), pagename=pagename)
 
         request.write(request.formatter.startContent("content"))
@@ -205,13 +204,12 @@ Enter a new password below.""", wiki=True))
         request.theme.send_footer(pagename)
         request.theme.send_closing_html()
     elif submitted: # user pressed create button
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
         msg = _do_recover(request)
         request.theme.add_msg(msg, "dialog")
         page.send_page()
     else: # show create form
-        request.emit_http_headers()
         request.theme.send_title(_("Lost password"), pagename=pagename)
 
         request.write(request.formatter.startContent("content"))

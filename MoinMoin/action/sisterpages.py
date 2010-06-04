@@ -32,31 +32,25 @@ def execute(pagename, request):
     if request.if_modified_since == timestamp:
         if request.if_none_match:
             if request.if_none_match == etag:
-                request.emit_http_headers(["Status: 304 Not modified"])
+                request.status_code = 304
         else:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.status_code = 304
     elif request.if_none_match == etag:
         if request.if_modified_since:
             if request.if_modified_since == timestamp:
-                request.emit_http_headers(["Status: 304 Not modified"])
+                request.status_code = 304
         else:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.status_code = 304
     else:
         # generate an Expires header, using 1d cache lifetime of sisterpages list
-        expires = timefuncs.formathttpdate(time.time() + 24*3600)
+        expires = time.time() + 24*3600
 
-        httpheaders = ["Content-Type: text/plain; charset=UTF-8",
-                       "Expires: %s" % expires,
-                       "Last-Modified: %s" % timestamp,
-                       "Etag: %s" % etag, ]
+        request.mimetype = 'text/plain'
+        request.expires = expires
+        request.last_modified = timestamp
+        request.headers['Etag'] = etag
 
         # send the generated XML document
-        request.emit_http_headers(httpheaders)
-
-        baseurl = request.getBaseURL()
-        if not baseurl.endswith('/'):
-            baseurl += '/'
-
         # Get list of user readable pages
         pages = request.rootpage.getPageList()
         pages.sort()

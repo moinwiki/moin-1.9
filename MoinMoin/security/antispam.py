@@ -78,8 +78,7 @@ def getblacklist(request, pagename, do_update):
             master = xmlrpclib.ServerProxy(master_url)
             try:
                 # Get BadContent info
-                master.putClientInfo('ANTISPAM-CHECK',
-                                     request.http_host+request.script_name)
+                master.putClientInfo('ANTISPAM-CHECK', request.url)
                 response = master.getPageInfo(pagename)
 
                 # It seems that response is always a dict
@@ -101,7 +100,7 @@ def getblacklist(request, pagename, do_update):
                 if mydate < masterdate:
                     # Get new copy and save
                     logging.info("Fetching page from %s..." % master_url)
-                    master.putClientInfo('ANTISPAM-FETCH', request.http_host + request.script_name)
+                    master.putClientInfo('ANTISPAM-FETCH', request.url)
                     response = master.getPage(pagename)
                     if isinstance(response, dict) and 'faultCode' in response:
                         raise WikirpcError("failed to get BadContent data", response)

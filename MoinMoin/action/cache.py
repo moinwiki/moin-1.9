@@ -41,7 +41,7 @@ from MoinMoin.support.python_compatibility import hmac_new
 
 action_name = __name__.split('.')[-1]
 
-# Do NOT get this directly from request.form or user would be able to read any cache!
+# Do NOT get this directly from request.values or user would be able to read any cache!
 cache_arena = 'sendcache'  # just using action_name is maybe rather confusing
 
 # We maybe could use page local caching (not 'wiki' global) to have less directory entries.
@@ -146,15 +146,15 @@ def put(request, key, data,
     last_modified = last_modified or data_cache.mtime()
 
     httpdate_last_modified = timefuncs.formathttpdate(int(last_modified))
-    headers = ['Content-Type: %s' % content_type,
-               'Last-Modified: %s' % httpdate_last_modified,
-               'Content-Length: %s' % content_length,
+    headers = [('Content-Type', content_type),
+               ('Last-Modified', httpdate_last_modified),
+               ('Content-Length', content_length),
               ]
     if content_disposition and filename:
         # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
         # There is no solution that is compatible to IE except stripping non-ascii chars
         filename = filename.encode(config.charset)
-        headers.append('Content-Disposition: %s; filename="%s"' % (content_disposition, filename))
+        headers.append(('Content-Disposition', '%s; filename="%s"' % (content_disposition, filename)))
 
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update({
@@ -196,10 +196,7 @@ def remove(request, key):
 
 def url(request, key, do='get'):
     """ return URL for the object cached for key """
-    return "%s/?%s" % (
-        request.getScriptname(),
-        wikiutil.makeQueryString(dict(action=action_name, do=do, key=key), want_unicode=False))
-
+    return request.href(action=action_name, do=do, key=key)
 
 def _get_headers(request, key):
     """ get last_modified and headers cached for key """
@@ -220,19 +217,19 @@ def _do_get(request, key):
     try:
         last_modified, headers = _get_headers(request, key)
         if request.if_modified_since == last_modified:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.status_code = 304
         else:
+            for k, v in headers:
+                request.headers.add(k, v)
             data_file = _get_datafile(request, key)
-            request.emit_http_headers(headers)
             request.send_file(data_file)
     except caching.CacheError:
-        request.emit_http_headers(["Status: 404 Not found"])
+        request.status_code = 404
 
 
 def _do_remove(request, key):
     """ delete headers/data cache for key """
     remove(request, key)
-    request.emit_http_headers(["Status: 200 OK"])
 
 
 def _do(request, do, key):
@@ -242,7 +239,7 @@ def _do(request, do, key):
         _do_remove(request, key)
 
 def execute(pagename, request):
-    do = request.form.get('do', [None])[0]
-    key = request.form.get('key', [None])[0]
+    do = request.values.get('do')
+    key = request.values.get('key')
     _do(request, do, key)
 

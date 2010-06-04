@@ -280,7 +280,7 @@ class TestBlock(ParserTestCase):
 """
         for test, blockstart in self.cases:
             # We dont test here formatter white space generation
-            expected = r'<p.*?>AAA\s*</p>\s*%s' % blockstart
+            expected = r'<p.*?>AAA\s*</p>\s*(<span.*?></span>\s*)?%s' % blockstart
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
             assert needle.search(result)
@@ -303,20 +303,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert "r'{{{This is some nested text}}}'" in output
-
-    def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
-        """ tests nested {{{ }}} for the python colorized parser
-        """
-
-        raw = """{{{
-#!python
-import re
-pattern = re.compile(r'{{{This is some nested text}}}')
-}}}"""
-        output = self.parse(raw)
-        output = ''.join(output)
-        assert "r'{{{This is some nested text}}}'" in output
+        assert "{{{This is some nested text}}}" in output
 
     def testNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the wiki parser
@@ -370,14 +357,14 @@ class TestLinkingMarkup(ParserTestCase):
     needle = re.compile(text % r'(.+)')
     _tests = [
         # test,           expected
-        ('[[SomeNonExistentPage]]', '<a class="nonexistent" href="./SomeNonExistentPage">SomeNonExistentPage</a>'),
-        ('[[SomeNonExistentPage#anchor]]', '<a class="nonexistent" href="./SomeNonExistentPage#anchor">SomeNonExistentPage#anchor</a>'),
-        ('[[something]]', '<a class="nonexistent" href="./something">something</a>'),
-        ('[[some thing]]', '<a class="nonexistent" href="./some%20thing">some thing</a>'),
-        ('[[something|some text]]', '<a class="nonexistent" href="./something">some text</a>'),
-        ('[[../something]]', '<a class="nonexistent" href="./something">../something</a>'),
-        ('[[/something]]', '<a class="nonexistent" href="./%s/something">/something</a>' % PAGENAME),
-        ('[[something#anchor]]', '<a class="nonexistent" href="./something#anchor">something#anchor</a>'),
+        ('[[SomeNonExistentPage]]', '<a class="nonexistent" href="/SomeNonExistentPage">SomeNonExistentPage</a>'),
+        ('[[SomeNonExistentPage#anchor]]', '<a class="nonexistent" href="/SomeNonExistentPage#anchor">SomeNonExistentPage#anchor</a>'),
+        ('[[something]]', '<a class="nonexistent" href="/something">something</a>'),
+        ('[[some thing]]', '<a class="nonexistent" href="/some%20thing">some thing</a>'),
+        ('[[something|some text]]', '<a class="nonexistent" href="/something">some text</a>'),
+        ('[[../something]]', '<a class="nonexistent" href="/something">../something</a>'),
+        ('[[/something]]', '<a class="nonexistent" href="/%s/something">/something</a>' % PAGENAME),
+        ('[[something#anchor]]', '<a class="nonexistent" href="/something#anchor">something#anchor</a>'),
         ('[[MoinMoin:something]]', '<a class="interwiki" href="http://moinmo.in/something" title="MoinMoin">something</a>'),
         ('[[MoinMoin:something|some text]]', '<a class="interwiki" href="http://moinmo.in/something" title="MoinMoin">some text</a>'),
         ('[[MoinMoin:with space]]', '<a class="interwiki" href="http://moinmo.in/with%20space" title="MoinMoin">with space</a>'),

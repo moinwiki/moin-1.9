@@ -26,10 +26,10 @@ class Settings(UserPrefBase):
         if not self.request.cfg.openid_server_enabled:
             return False
 
-        grp = self.request.cfg.openid_server_restricted_users_group
-        if grp:
-            self.request.dicts.addgroup(self.request, grp)
-            if not self.request.dicts.has_member(grp, self.request.user.name):
+        groups = self.request.groups
+        openid_group_name = self.request.cfg.openid_server_restricted_users_group
+
+        if openid_group_name and self.request.user.name not in groups.get(openid_group_name, []):
                 return False
 
         return True
@@ -61,9 +61,7 @@ class Settings(UserPrefBase):
             return self._handle_remove()
 
     def _make_form(self):
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
+        action = "%s%s" % (self.request.script_root, self.request.path)
         _form = html.FORM(action=action)
         _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         _form.append(html.INPUT(type="hidden", name="handler", value="oidserv"))

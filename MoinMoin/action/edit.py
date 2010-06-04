@@ -10,6 +10,7 @@
 """
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
+from MoinMoin.web.utils import check_surge_protect
 
 def execute(pagename, request):
     """ edit a page """
@@ -17,13 +18,14 @@ def execute(pagename, request):
 
     if 'button_preview' in request.form and 'button_spellcheck' in request.form:
         # multiple buttons pressed at once? must be some spammer/bot
-        request.makeForbidden403()
-        request.surge_protect(kick_him=True) # get rid of him
+        check_surge_protect(request, kick=True) # get rid of him
         return
 
     if not request.user.may.write(pagename):
-        request.theme.add_msg(_('You are not allowed to edit this page.'), "error")
-        Page(request, pagename).send_page()
+        page = wikiutil.getLocalizedPage(request, 'PermissionDeniedPage')
+        page.body = _('You are not allowed to edit this page.')
+        page.page_name = pagename
+        page.send_page(send_special=True)
         return
 
     valideditors = ['text', 'gui', ]
@@ -33,7 +35,7 @@ def execute(pagename, request):
     if editor not in valideditors:
         editor = request.cfg.editor_default
 
-    editorparam = request.form.get('editor', [editor])[0]
+    editorparam = request.values.get('editor', editor)
     if editorparam == "guipossible":
         lasteditor = editor
     elif editorparam == "textonly":
@@ -49,11 +51,11 @@ def execute(pagename, request):
         editor = 'text'
 
     rev = request.rev or 0
-    savetext = request.form.get('savetext', [None])[0]
-    comment = request.form.get('comment', [u''])[0]
-    category = request.form.get('category', [None])[0]
-    rstrip = int(request.form.get('rstrip', ['0'])[0])
-    trivial = int(request.form.get('trivial', ['0'])[0])
+    savetext = request.form.get('savetext')
+    comment = request.form.get('comment', u'')
+    category = request.form.get('category')
+    rstrip = int(request.form.get('rstrip', '0'))
+    trivial = int(request.form.get('trivial', '0'))
 
     if 'button_switch' in request.form:
         if editor == 'text':
@@ -77,18 +79,11 @@ def execute(pagename, request):
     # did user hit cancel button?
     cancelled = 'button_cancel' in request.form
 
-    if request.cfg.edit_ticketing:
-        ticket = request.form.get('ticket', [''])[0]
-        if not wikiutil.checkTicket(request, ticket):
-            request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
-            pg.send_page()
-            return
-
     from MoinMoin.error import ConvertError
     try:
         if lasteditor == 'gui':
             # convert input from Graphical editor
-            format = request.form.get('format', ['wiki'])[0]
+            format = request.form.get('format', 'wiki')
             if format == 'wiki':
                 converter_name = 'text_html_text_moin_wiki'
             else:
@@ -145,8 +140,13 @@ def execute(pagename, request):
             savetext += ' '
         savetext += category + u'\n' # Should end with newline!
 
+    if (request.cfg.edit_ticketing and
+        not wikiutil.checkTicket(request, request.form.get('ticket', ''))):
+        request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
+        pg.sendEditor(preview=savetext, comment=comment, staytop=1)
+
     # Preview, spellcheck or spellcheck add new words
-    if ('button_preview' in request.form or
+    elif ('button_preview' in request.form or
         'button_spellcheck' in request.form or
         'button_newwords' in request.form):
         pg.sendEditor(preview=savetext, comment=comment)

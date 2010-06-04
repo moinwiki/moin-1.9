@@ -16,6 +16,440 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.9.current:
+  Fixes:
+  * Fix XSS in Despam action (CVE-2010-0828).
+  * Fix XSS issues (see MoinMoinBugs/1.9.2UnescapedInputForThemeAddMsg):
+    * by escaping template name in messages
+  * Make moin compatible to werkzeug 0.5 .. 0.6.2 (1.9.2 had issues
+    with xmlrpc when used with werkzeug 0.6.x).
+  * MoinMoin.util.filesys: disable usage of dircache, deprecate dc* functions,
+    because the dircache stdlib module can't work correctly for fast updates of
+    directories.
+  * rss_rc and sisterpages actions: fix Content-Type header (mimetype)
+  * Fix associating OpenID identity with user, wasn't adapted to werkzeug yet.
+  * openidrp auth: fix undefined _ (gettext)
+  * Fix auth.cas and userprefs.oidserv request object usage.
+  * highlight parser: fixed MoinMoinBugs/LineNumberSpansForProcessInstructionsMissed
+  * Pygments syntax highlighting: add missing code files
+  * Notifications: use same email subject format for every notification
+  * Fix docbook formatter crashing, see MoinMoinPatch/IncludeMacroWithDocBookFormatter
+  * Fix regex content search for xapian search.
+  * Get rid of the empty line at the end of code highlights.
+  * GUI editor: compute editor height like the text editor does.
+  * Added help texts for: standalone server and moin migration.
+  * script.maint.cleancache: clean also i18n cache files
+  * Improved formatter.text_plain, see FeatureRequests/TextPlainFormatterRewrite
+    (fixes many issues of this formatter).
+  * text_html_text_moin_wiki: fixed index error for width="", see also:
+    MoinMoinBugs/GUI_convertor_list_index_out_of_range
+  * xmlrpc: disable editor backup for putPage, renamePage and revertPage
+    because if pages get uploaded by xmlrpc then the draft cache file can
+    rapidly increase in size, causing high memory usage because it needs to
+    get loaded into memory for updating/processing.
+
+  New features:
+  * RenamePage action: added ability to create redirect pages when renaming
+    (turned off by default, see show_rename_redirect config option).
+  * formatter/text_html: Added line number links to code blocks.
+  * diff action:
+    * Fixed whitespace in generated (html) diff view table so white-space: pre
+      can be used (and whitespace in diffs preserved).
+    * Added links to first/last revision.
+  * MoinMoin.widget.browser: introduced feature for sorting tables, see:
+    http://moinmo.in/FeatureRequests/SortableTables
+  * SystemAdmin user and attachment browsers: sorting feature used there now
+  * Scrolling the text editor to the double clicked line.
+  * Enable double-click-editing by default.
+  * WikiConfigHelp macro: make heading and description display optional, heading level as a parameter (default 2)
+  * If edit ticket check fails, send the editor with the current content.
+
+  Other changes:
+  * upgraded pygments from 1.2.2 to 1.3.1
+  * upgraded FCKeditor from 2.6.4.1 to 2.6.6
+  * added configuration snippet for ldap authentication against 2 servers
+
+
+Version 1.9.2:
+  Fixes:
+  * Fixed CVE-2010-0668: major security issues were discovered in misc. parts
+    of moin.
+    HINT: if you have removed superuser configuration to workaround the issue
+    (following our security advisory), you may re-add it after installing this
+    moin release. If you don't need superuser capabilities often, it might be
+    wise to not have superusers configured all the time, though.
+  * Fixed CVE-2010-0669: potential security issue due to incomplete user profile
+    input sanitizing.
+  * Improved package security: cfg.packagepages_actions_excluded excludes
+    unsafe or otherwise questionable package actions by default now.
+  * wiki parser: fixed transclusion of (e.g. video) attachments from other
+    pages.
+  * Fixed edit locking for non-logged in editors and cfg.log_remote_addr=False.
+  * mailimport: fix missing wikiutil import for normalize_pagename
+  * SubProcess: fix "timeout" AttributeError
+  * "standalone" wikiserver.py: fixed calling non-existing os.getuid on win32
+  * HTTPAuth deprecation warning moved from class level to __init__
+  * Fixed MoinMoinBugs/1.9DiffActionThrowsException.
+  * Fixed misc. session related problems, avoid unneccessary session file
+    updates.
+  * Fix/improve rename-related problems on Win32 (depending on Windows version).
+  * Fixed spider / user agent detection.
+  * Make sure to use language_default when language_ignore_browser is set.
+  * diff action: fix for case when user can't revert page.
+  * Fix trail size (was off by one).
+  * Updated bundled flup middleware (upstream repo checkout), avoids
+    socket.fromfd AttributeError on win32 if cgi is forced, gives helpful
+    exception msg.
+  * wikiutil: Fixed required_arg handling (no exception when trying to raise
+    exception that choice is wrong).
+  * Do not use MoinMoin.support.* to import 3rd party code, give dist packages
+    a chance.
+  * wikiutil.clean_input: avoid crash if it gets str type
+  * request: fixed for werkzeug 0.6 and 0.5.1 compatibility. Please note that
+    we didn't do much testing with 0.6 yet. So, if you use 0.6, please do some
+    testing and provide feedback to us.
+  * AttachFile._build_filelist: verifies readonly flag for unzip file link
+  * attachUrl: fix wrongly generated tickets (e.g. for AttachList macro)
+  * http headers: fix duplicated http headers (e.g. content-type)
+
+  New features:
+  * info action: added pagination ability to revision history viewer.
+    Use cfg.history_paging = True [default] / False to enable/disable it.
+  * ldap_login auth: add report_invalid_credentials param to control wrong
+    credentials error message (this is typically used when using multiple
+    ldap authenticators).
+  * Add RenderAsDocbook to actions_excluded if we have no python-xml.
+  * Upgraded pygments to 1.2.2 (some fixes, some new lexers).
+  * Text editor: if edit_rows==0 (user profile or config), we dynamically size
+    the text editor height. This avoids double sliders for the editor page
+    in most cases.
+
+  Other changes:
+  * New docs/REQUIREMENTS.
+  * Added a less magic cgi/fcgi driver (moin.fcgi), added fixer middleware
+    for apache2/win32 to it.
+
+
+Version 1.9.1:
+  Bug fixes:
+  * Fixed CVE-2010-0667: sys.argv security issue.
+  * Fixed FileSessionService - use session_dir from CURRENT request.cfg (it
+    mixed up session_dirs in farm setups).
+    HINT: if you added the hotfix to your wikiconfig, please remove it now.
+  * Fixed creation of lots of session files (if anon session were enabled and
+    user agent did not support cookies).
+  * Fixed session file storage for a non-ascii base path.
+  * Fixed session cookie confusion for nested URL paths (like path=/ and
+    path=/mywiki - for more info, see also "New features").
+  * Handle cookie_lifetime / anonymous_session_lifetime upgrade issue
+    gracefully: emit errors/warnings to log, use old settings to create
+    cfg.cookie_lifetime as expected by moin 1.9.
+  * flup based frontends: fixed SCGI and AJP (didn't work).
+  * farmconfig example: remove wrong comment, add sample http/https entry.
+  * Fixed password reset url (email content needs full URL).
+  * Page: fixed adding of page contents (only data added now, without metadata) -
+    fixes MoinMoinBugs/DeprecatedPageInclusionErrornousPageInstructionsProcessing
+  * xmlrpc:
+    * Process attachname in get/putAttachment similarly.
+    * revertPage: convert pagename to internal representation.
+    * Fixed auth calls used by jabberbot (needs more work).
+  * Added missing config.umask support code (setting was not used), fixed
+    config.umask usage for page packages.
+  * Fixed browser language detection.
+  * Fixed language pack generation/installation for pt-br, zh, zh-tw.
+  * Fixed caching of formatted msgs, see MoinMoinBugs/1.9EditPageHelpLinksBroken.
+  * Fixed usage of i18n.wikiLanguages() on class level (moved to method), failed
+    when tools import the module (e.g. pydoc -k foo).
+  * highlight parser:
+    * fixed caching issue for "toggle line numbers" link.
+    * added missing support for console/bash session
+  * Fixed precedence of parsers: more special parsers now have precedence
+    before moin falls back to using the HighlightParser (syntax highlighting).
+  * Added extensions to the rst, moin and creole parser (example.rst, example.moin and
+    example.creole attachments are rendered now when viewed).
+  * Fixed MoinMoinBugs/LineNumberSpansForProcessInstructionsMissed for
+    moin_wiki, highlight and plain parser.
+  * Fixed MoinMoinBugs/LineNumberAnchorsInPreformattedText for highlight and
+    plain parser.
+  * Fixed MoinMoinBugs/TableOfContentsBrokenForIncludedPages.
+  * Exception raised on calling add_msg() after send_title(), which leads to 
+    Internal Server Error on calling several actions (diff, preview) for 
+    deprecated pages, is replaced with warning and call stack information in 
+    the log.
+  * AttachFile.move_file: send events (so e.g. xapian index update happens)
+  * SubProcess: fixed win32-specific parts, fixed imports (fixes calling of
+    external xapian index filters)
+  * Fixed auth methods that use redirects (like OpenID).
+  * OpenID client:
+    * Add setting cfg.openidrp_allowed_op, default is [].
+    * Fixed logging in with openid and associating with an existing account.
+    * openidrp_sreg extension: handle UnknownTimeZoneError gracefully
+  * OpenID server:
+    * Fixed TypeError.
+    * Fixed processing POSTed form data AND URL args.
+
+  New features:
+  * diff: Added displaying of information about revisions (editor, size, 
+    timestamp, comment), added revision navigation.
+  * text editor: added @TIMESTAMP@ variable for adding a raw time stamp
+  * xmlrpc: added renamePage and deleteAttachment methods.
+  * Accept "rel" attribute for links (moin wiki parser).
+  * Generate session cookie names to fix cookie path confusion and enable port-
+    based wiki farming.
+
+    HINT: New setting cfg.cookie_name:
+
+    None (default): use MOIN_SESSION_<PORT>_<PATH> as session cookie name. This
+                    should work out-of-the-box for most setups.
+
+    'siteidmagic': use MOIN_SESSION_<SITEID>, which is unique within a wiki farm
+                   created by a single farmconfig (currently, cfg.siteid is just
+                   the name of the wiki configuration module).
+
+    'other_value': use MOIN_SESSION_other_value - this gives YOU control. Just
+                   use same value to share the session between wikis and use a
+                   different value, if you want a separate session.
+
+    HINT: Please do not use cfg.cookie_path any more - it usually should not be
+    needed any more, as we now always put path=/ into the cookie except if you
+    explicitly configure something else (only do that if you know exactly what
+    you're doing and if the default does not work for you).
+
+    HINT: see also the HelpOnSessions page which shows some typical configs.
+  * Store expiry into sessions, use moin maint cleansessions script to clean up.
+    HINT: use moin ... maint cleansessions --all once after upgrading.
+    HINT: you may want to add a cron job calling moin ... maint cleansessions
+          to regularly cleanup expired sessions (it won't remove not expired
+          sessions).
+
+  Other changes:
+  * Added rtsp, rtp, rtcp protocols to url_schemas.
+  * Added more info about index building to xapian wikiconfig snippet.
+  * Updated the wikicreole parser to version 1.1.
+
+
+Version 1.9.0:
+  Note: This is a reduced CHANGES, ommitting details from rc/beta test and
+        also less interesting minor changes and fixes. It shows changes
+        relative to 1.8.6 release.
+        If you want to see full detail, read it there:
+        http://hg.moinmo.in/moin/1.9/file/b290d938be63/docs/CHANGES
+
+  New features: ==============================================================
+  * HINT: MoinMoin requires Python 2.4 now. If you only have Python 2.3 and
+    you don't want to upgrade it, please use MoinMoin 1.8.x.
+  * HINT: MoinMoin is now a WSGI application.
+    Please read the new install docs about how to use it, see:
+    http://master19.moinmo.in/InstallDocs
+    You also have a local copy of that page as docs/INSTALL.html.
+  * HINT: due to big changes in the request processing and the request
+    object (related to the WSGI refactoring), many 3rd party plugins might
+    need code updates to work with moin 1.9.
+  * HINT: We now offer different sized sets of system/help pages and the default
+    underlay just contains a single page: LanguageSetup. You need to be
+    superuser, visit that page and then install the language packs you like
+    (minimum is the essential set for English).
+  * HINT: LanguageSetup is the default page_front_page, you need to change that
+    after installing language packs (see above).
+
+  * New modular group and dict data access, you can use group and dict 
+    backend modules to access group and dict data stored anywhere you like.
+    Currently we provide these backends:
+      * WikiGroups and WikiDicts backends get data from wikipages. They work
+        similar to old wikidicts code (but with less caching issues :).
+      * ConfigGroups and ConfigDicts backends get data from a dictionary
+        defined in the wiki config.
+      * CompositeGroups and CompositeDicts compose several backends, so data
+        may be retrieved from several sources. For example, groups may be
+        defined in the wiki config and on wiki pages.
+    * Using cfg.groups and cfg.dicts, you can define the backend to use to
+      access group and dict information (default: WikiGroups / WikiDicts
+      backend).
+      See the wiki/config/more_samples/ directory (groups_wikiconfig_snippet
+      and dicts_wikiconfig_snippet).
+    * See also the new HelpOnDictionaries and HelpOnGroups pages.
+
+  * Improved Xapian indexing / search:
+    * Moin's Xapian based search code was refactored:
+      * It is now based on the xappy library (see MoinMoin.support.xappy).
+      * Minimum Xapian requirement is 1.0.6 now.
+      * Outdated and unmaintained xapwrap lib was removed.
+      * regex search with Xapian enabled also is based on the xapian index now
+    * Safe 2-stage xapian index rebuilding:
+      moin index build --mode=buildnewindex  # slow, concurrent
+      <stop wiki>
+      moin index build --mode=usenewindex  # fast
+      <start wiki>
+    * Added wikiconfig snippet for xapian search.
+
+  * Improved drawing support:
+    * TWikiDraw:
+      * Support code was refactored/moved to the twikidraw action.
+      * Use drawing:example.tdraw to invoke it (drawing:example also still
+        works for backwards compatibility)
+      * Drawings are now stored as a single attachment foo.tdraw.
+        We added a migration script that converts your existing drawings.
+    * AnyWikiDraw:
+      * Java applet added, source code see contrib/.
+      * Support code for it is in anywikidraw action.
+      * Use drawing:example.adraw to invoke it.
+      * Drawings are stored in a similar way as foo.adraw.
+    * cfg.extensions_mapping added for mapping of attachment file extensions
+      to actions (currently used for anywikidraw/twikidraw action)
+
+  * Themes / static files related:
+    * Added modernized_cms theme (hides most wiki widgets from modernized if the
+      user is not logged in).
+    * Static file serving built-in (moved wiki/htdocs to MoinMoin/web/static/htdocs).
+      MoinMoin.web.static has a static file serving wrapper that uses the files
+      from htdocs subdirectory by default (docs=True).
+      You can also give another path or switch off creation of that static wrapper.
+      See the docstring of the static package for details.
+    * Theme packages: do_copythemefile now copies theme files to
+      MoinMoin/web/static/htdocs.
+
+  * Syntax highlighting is based on the pygments library now, it does this for
+    LOTS of stuff (programming languages, config files, ...) - use it like this:
+    {{{#!highlight xxx
+    ...
+    }}}
+    xxx is any of the markups pygments supports (see HelpOnParsers).
+    Note: we still have some (deprecated) small wrappers around pygments,
+    so the old syntax #!python/pascal/cplusplus/... still works.
+
+  * Authentication improvements:
+    * HTTP auth related (see also HelpOnAuthentication):
+      * HTTPAuthMoin: http basic auth done by moin
+      * HINT: auth.http.HTTPAuth is now auth.GivenAuth
+        This was badly named from the beginning as for most servers, it just
+        looked at REMOTE_USER environment variable and relied on the server
+        doing the authentication (could be http basic auth or any other auth).
+    * LDAP/AD auth: new name_callback param to create a custom wiki username (not
+      the ldap login username)
+    * OpenID auth:
+      * Support for Simple Registration (SREG) extension.
+        Basic profile fields can be copied from OpenID provider when logging in.
+      * Support for Teams extension.
+      * Ability to accept logins from specific OpenID providers.
+        Login form changes based on configuration for better usability:
+        * 0 providers: normal text input box for OpenID URL
+        * 1 provider: hidden field, automatic form submission with JavaScript
+        * 2+ providers: select field, uses directed identity
+
+  * Sessions / cookies:
+    * HINT: cfg.cookie_lifetime is now a tuple (anon, loggedin), giving the
+      lifetime of the cookie in hours, accepting floats, for anon sessions and
+      logged-in sessions. Default is (0, 12). 0 means not to use a session
+      cookie (== not to establish a session) and makes only sense for anon users.
+    * cfg.cookie_httponly is new and defaults to False. Please note that if you
+      set it to True, TWikiDraw and similar stuff won't be able to use the session
+      cookie. Thus, if your wiki page doesn't allow writing for everybody, saving
+      a drawing will fail, because there is no session (== no logged in user) for
+      the TWikiDraw applet's saving POSTs.
+
+  * Macros:
+    * WikiConfigHelp: added section keyword for selecting a subset of the
+      description, e.g. <<WikiConfigHelp(section="xapian")>>
+    * HighlighterList: show Pygments syntax highlighters (see HelpOnParsers)
+
+  * Actions:
+    * SlideShow action added (please use the "modernized" theme [default])
+    * raw action mimetype support: ...?action=raw&mimetype=text/css
+    * PackagePages: create package file on-the-fly in memory and send it to the
+      client (do NOT create package.zip attachment)
+
+  * Improved logging / debugging / developer support:
+    * Main exception handler: include request url in log output.
+    * Environment variable MOIN_DEBUGGER=off/web/external (default is "off").
+    * Handle wikiserverconfig(_local) in the same way as wikiconfig(_local).
+
+  * GUI editor: improved attachment dialog
+
+  * "moin ... account homepage" script to create user homepages.
+
+
+  Removed features: ==========================================================
+  * Removed cfg.traceback_* settings (use logging configuration)
+  * Removed old session code and settings:
+    * Removed cfg.session_handler and session_id_handler (use cfg.session_service)
+    * Removed cfg.anonymous_session_lifetime (use cfg.cookie_lifetime)
+
+
+  Bug fixes: =================================================================
+  * Xapian indexing:
+    * Rely on xapian's locking (remove moin's additional and sometimes broken
+      locking, that blocked index-rebuilds or updates sometimes).
+    * Removed indexer threading.
+    * Fixed (reimplemented) indexer queue.
+    * Less disruptive xapian index rebuild.
+  * AdvancedSearch: example didn't work, fixed
+
+  * With the groups/dicts code rewrite, we fixed the caching problems that the
+    old code (< 1.9) sometimes had.
+
+  * Actions:
+    * Abort RenamePage if renaming of main page fails (do not try to rename
+      subpages).
+    * AttachFile do=view: quote filename and pagename params for EmbedObject
+      macro call
+    * unsubscribe action: add msg types so icons get displayed
+
+  * Parsers:
+    * fixed MoinMoinBugs/LineNumbersWorkingBuggyWithHighlightParser
+
+  * GUI editor: roundtripping works now for .pdf/doc/... attachment transclusion
+
+  * AttachFile: added remove_attachment() and FileRemovedEvent (mail and xapian
+    support, no jabber support yet).
+
+  * Fix makeForbidden403() calls - is makeForbidden(403, ...) now.
+  * sendmail: add more debug logging, check for empty recipients list
+  * Fix MoinMoinBugs/MissingPageShouldn'tOfferToCreatePageForReadonlyUsers
+  * Fix MoinMoinBugs/1.6XmlRpcPutPagePagenameEscape
+  * Bug with "language:en" was fixed for the Moin search. Now language:
+    behaves like described on HelpOnSearching.
+  * Fixed MoinMoinBugs/DeprecatedIsNotRespected (search ranking, WantedPages).
+  * OpenID: always return error messages with CancelLogin if OpenID process fails.
+  * suid: simplify and fix, bigger selection box
+
+  * patch werkzeug 0.5.1 to catch OverFlowError and ValueError so it doesn't
+    crash when receiving invalid If-modified-since header from client.
+
+
+  Other changes: =============================================================
+  * 'modernized' theme:
+    * use it by default (1.8 used 'modern')
+    * move title_with_separators() from Modernized theme to ThemeBase
+    * add a span with "pagepath" class to title_with_separators
+  * add the sidebar() method from Mandarin and Gugiel themes to ThemeBase
+  * updated flup to 1.0.2+ ( http://hg.saddi.com/flup-server/rev/6ea1ffac1bcb )
+  * updated pygments to 1.1.1+ ( http://dev.pocoo.org/hg/pygments-main/rev/948f8885af16 )
+  * updated parsedatetime to 0.8.7
+  * increase surge protection limits for AttachFile to avoid trouble with image galleries
+  * HINT: simplify wikiserver configuration by using same names as werkzeug's
+    run_simple() call.
+  * Removed moin account check's --lastsaved option, it is default now
+    (checking last use with trail file did not work in 1.9 anyway).
+  * ImageLink page has been killed (ImageLink macro is gone since 1.6.1).
+  * Allowed disabling of timezone and language user prefs if they are
+    part of the user's login fields (i.e. OpenID SREG).
+  * Added option to disable local registration links and direct user
+    to registration page at an OpenID provider instead.
+
+  Developer notes: ===========================================================
+  * groups and dicts API changes:
+    * request.groups and request.dicts provide access to groups and dicts.
+    * MoinMoin.wikidicts is gone, please use MoinMoin.datastruct.
+    * LazyGroup and LazyGroupsBackend base classes for implementing backends
+      which potentially deal with huge amounts of data (like a LDAP directory).
+      Use MoinMoin/datastruct/backends/config_lazy_groups.py as a draft for
+      new backends.
+    * See http://moinmo.in/Groups2009 for more details.
+  * i18n: new approach for defining sets of system/help pages (see i18n.strings).
+    CheckTranslation, page packager, wikiutil.isSystemPage() use those sets.
+  * killed deprecated macro.form attribute (didn't work as expected anyway due
+    to WSGI refactoring) - please use macro.request.{args,form,values}
+
 
 Version 1.8.7:
   Fixes:
@@ -123,6 +557,7 @@ Version 1.8.4:
   Other changes:    
     * Creole parser: Add second license: BSD
 
+
 Version 1.8.3:
   Bug fixes:
     * AttachFile XSS fixes: move escaping to error_msg / upload_form
@@ -214,6 +649,7 @@ Version 1.8.2:
     * Streamline attachment_drawing formatter behaviour.
     * Search results: only redirect to a single search result for titlesearch
       (fuzzy goto functionality), but not for fulltext search results.
+
 
 
 Version 1.8.1:

@@ -2,12 +2,50 @@
 """
     MoinMoin - DataBrowserWidget
 
-    @copyright: 2002 Juergen Hermann <jh@web.de>
+    @copyright: 2002 Juergen Hermann <jh@web.de>,
+                2010 MoinMoin:ReimarBauer,
+                2010 MoinMoin:EugeneSyromyatnikov
     @license: GNU GPL, see COPYING for details.
 """
-
 from MoinMoin.widget import base
 from MoinMoin import wikiutil
+
+def _compare(idx, text):
+    """
+    compare function for sorted
+    """
+    txt = text[idx]
+    if isinstance(txt, tuple):
+        txt = txt[1]
+    try:
+        decimal_string = txt
+        decimal_value = float(decimal_string)
+        txt = u""
+    except ValueError:
+        decimal_value = float('Infinity')
+        decimal_string = u""
+    return (decimal_value, decimal_string, txt)
+
+def sort_table(rows, sort_columns=None, reverse=None):
+    """
+    sorts table rows
+
+    @param rows: table rows to sort
+    @param sort_columns: column to sort. The instance must be list or tuple of integer values.
+                         By more than one entry it does a multiple sort.
+    @param reverse: reverse sort. The instance must be list or tuple of boolean values.
+                    It must be of the same length than sort_columns.
+    """
+    if not sort_columns:
+        return rows
+
+    assert isinstance(sort_columns, (list, tuple))
+    assert isinstance(reverse, (list, tuple))
+    assert len(rows[0]) == len(reverse)
+
+    for idx in reversed(sort_columns):
+        rows = sorted(rows, key=lambda x: _compare(idx, x), reverse=reverse[idx])
+    return rows
 
 class DataBrowserWidget(base.Widget):
 
@@ -28,14 +66,33 @@ class DataBrowserWidget(base.Widget):
         self.__filter = 'filter'
         self._show_header = show_header
 
-    def setData(self, dataset):
+    def setData(self, dataset, sort_columns=None, reverse=False):
         """ Sets the data for the browser (see MoinMoin.util.dataset).
 
         @param dataset: dataset containing either ascii, unicode or tuples.
                         If a dataset entry contains a tuple then the first
                         item in the tuple is displayed and the second item
                         is used for autofilters.
+        @param sort_columns: list of column index number for sorting
+        @param reverse: reverse sort
         """
+        if sort_columns:
+            # simplification if there is no reverse list given
+            # then all sort_columns should have the same reverse order
+            if not isinstance(reverse, (list, tuple)):
+                reverse_var = [reverse] * len(dataset.data[0])
+            else:
+                reverse_var = [False] * len(dataset.data[0])
+                for idx in reverse:
+                    reverse_var[idx] = True
+
+                # force that reverse columns listed in sort_columns
+                missing_columns = list(set(reverse) - set(sort_columns))
+                if missing_columns:
+                    sort_columns = sort_columns + missing_columns
+
+            dataset.data = sort_table(dataset.data, sort_columns, reverse=reverse_var)
+
         self.data = dataset
         if dataset.data_id:
             self.unqual_data_id = 'dbw.%s.' % dataset.data_id
@@ -75,8 +132,8 @@ class DataBrowserWidget(base.Widget):
 
         value = None
         name = '%sfilter%d' % (self.data_id, idx)
-        if name in self.request.form:
-            value = self.request.form[name][0]
+        if name in self.request.values:
+            value = self.request.values.getlist(name)
         while row:
             option = row[idx]
             if isinstance(option, tuple):
@@ -109,7 +166,7 @@ class DataBrowserWidget(base.Widget):
 
         result = []
         if method:
-            result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
+            result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.script_root, wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
         result.append(fmt.div(1))
 
         havefilters = False
@@ -155,8 +212,8 @@ class DataBrowserWidget(base.Widget):
             if havefilters:
                 for idx in range(len(row)):
                     name = '%sfilter%d' % (self.data_id, idx)
-                    if name in self.request.form:
-                        filters[idx] = self.request.form[name][0]
+                    if name in self.request.values:
+                        filters[idx] = self.request.getlist(name)
                         if filters[idx] == self._all:
                             filters[idx] = None
 

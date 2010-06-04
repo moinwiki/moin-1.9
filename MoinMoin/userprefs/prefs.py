@@ -9,6 +9,7 @@
 
 import time
 from MoinMoin import user, util, wikiutil, events
+from MoinMoin.theme import load_theme_fallback
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 
@@ -22,8 +23,6 @@ from MoinMoin.userprefs import UserPrefBase
 #    - wiki settings (editor, fancy diffs, theme, ...)
 #    - quick links (or leave in wiki settings?)
 ####
-
-_debug = 0
 
 
 class Settings(UserPrefBase):
@@ -46,7 +45,7 @@ class Settings(UserPrefBase):
         @rtype: list of unicode strings
         @return: list of normalized names
         """
-        text = self.request.form.get(key, [''])[0]
+        text = self.request.form.get(key, '')
         text = text.replace('\r', '')
         items = []
         for item in text.split('\n'):
@@ -63,7 +62,7 @@ class Settings(UserPrefBase):
 
         if not 'name' in request.user.auth_attribs:
             # Require non-empty name
-            new_name = wikiutil.clean_input(form.get('name', [request.user.name])[0]).strip()
+            new_name = wikiutil.clean_input(form.get('name', request.user.name)).strip()
 
             # Don't allow changing the name to an invalid one
             if not user.isValidName(request, new_name):
@@ -86,7 +85,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'email' in request.user.auth_attribs:
             # try to get the email
-            new_email = wikiutil.clean_input(form.get('email', [request.user.email])[0]).strip()
+            new_email = wikiutil.clean_input(form.get('email', request.user.email)).strip()
 
             # Require email
             if not new_email and 'email' not in request.cfg.user_form_remove:
@@ -105,7 +104,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'jid' in request.user.auth_attribs:
             # try to get the jid
-            new_jid = wikiutil.clean_input(form.get('jid', [''])[0]).strip()
+            new_jid = wikiutil.clean_input(form.get('jid', '')).strip()
 
             jid_changed = request.user.jid != new_jid
             previous_jid = request.user.jid
@@ -127,15 +126,15 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'aliasname' in request.user.auth_attribs:
             # aliasname
-            request.user.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0]).strip()
+            request.user.aliasname = wikiutil.clean_input(form.get('aliasname', '')).strip()
 
         # editor size
         request.user.edit_rows = util.web.getIntegerInput(request, 'edit_rows',
-                                                          request.user.edit_rows, 10, 60)
+                                                          request.user.edit_rows, 0, 999)
 
         # try to get the editor
-        request.user.editor_default = wikiutil.clean_input(form.get('editor_default', [self.cfg.editor_default])[0])
-        request.user.editor_ui = wikiutil.clean_input(form.get('editor_ui', [self.cfg.editor_ui])[0])
+        request.user.editor_default = wikiutil.clean_input(form.get('editor_default', self.cfg.editor_default))
+        request.user.editor_ui = wikiutil.clean_input(form.get('editor_ui', self.cfg.editor_ui))
 
         # time zone
         request.user.tz_offset = util.web.getIntegerInput(request, 'tz_offset',
@@ -143,14 +142,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         # datetime format
         try:
-            dt_d_combined = Settings._date_formats.get(form['datetime_fmt'][0], '')
+            dt_d_combined = Settings._date_formats.get(form['datetime_fmt'], '')
             request.user.datetime_fmt, request.user.date_fmt = dt_d_combined.split(' & ')
         except (KeyError, ValueError):
             request.user.datetime_fmt = '' # default
             request.user.date_fmt = '' # default
 
         # try to get the (optional) theme
-        theme_name = wikiutil.clean_input(form.get('theme_name', [self.cfg.theme_default])[0])
+        theme_name = wikiutil.clean_input(form.get('theme_name', self.cfg.theme_default))
         if theme_name != request.user.theme_name:
             # if the theme has changed, load the new theme
             # so the user has a direct feedback
@@ -159,12 +158,12 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             # already loaded theme is just replaced (works cause
             # nothing has been emitted yet)
             request.user.theme_name = theme_name
-            if request.loadTheme(theme_name) > 0:
+            if load_theme_fallback(request, theme_name) > 0:
                 theme_name = wikiutil.escape(theme_name)
                 return 'error', _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
         # try to get the (optional) preferred language
-        request.user.language = wikiutil.clean_input(form.get('language', [''])[0])
+        request.user.language = wikiutil.clean_input(form.get('language', ''))
         if request.user.language == u'': # For language-statistics
             from MoinMoin import i18n
             request.user.real_language = i18n.get_browser_language(request)
@@ -189,14 +188,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 or (key in already_handled)):
                 continue
             default = self.cfg.user_form_defaults[key]
-            value = form.get(key, [default])[0]
+            value = form.get(key, default)
             value = wikiutil.clean_input(value)
             setattr(request.user, key, value)
 
         # checkbox options
         for key, label in self.cfg.user_checkbox_fields:
             if key not in self.cfg.user_checkbox_disable and key not in self.cfg.user_checkbox_remove:
-                value = form.get(key, ["0"])[0]
+                value = form.get(key, "0")
                 try:
                     value = int(value)
                 except ValueError:
@@ -216,8 +215,6 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             request.user.valid = False
 
         result = _("User preferences saved!")
-        if _debug:
-            result = result + util.dumpFormData(form)
         return result
 
 
@@ -225,16 +222,16 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         request = self.request
         form = request.form
 
-        if form.has_key('cancel'):
+        if 'cancel' in form:
             return
 
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
 
-        if not wikiutil.checkTicket(request, form.get('ticket', [''])[0]):
+        if not wikiutil.checkTicket(request, form['ticket']):
             return
 
-        if form.has_key('save'): # Save user profile
+        if 'save' in form: # Save user profile
             return self._save_user_prefs()
 
     # form generation part
@@ -246,7 +243,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         'rfc': '%a %b %d %H:%M:%S %Y & %a %b %d %Y',
     }
 
-    def _tz_select(self):
+    def _tz_select(self, enabled=True):
         """ Create time zone selection. """
         tz = 0
         if self.request.user.valid:
@@ -268,7 +265,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 ),
             ))
 
-        return util.web.makeSelection('tz_offset', options, str(tz))
+        return util.web.makeSelection('tz_offset', options, str(tz), 1, False, enabled)
 
 
     def _dtfmt_select(self):
@@ -286,7 +283,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         return util.web.makeSelection('datetime_fmt', options, selected)
 
 
-    def _lang_select(self):
+    def _lang_select(self, enabled=True):
         """ Create language selection. """
         from MoinMoin import i18n
         _ = self._
@@ -298,7 +295,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             name = lang[1]['x-language']
             options.append((lang[0], name))
 
-        return util.web.makeSelection('language', options, cur_lang)
+        return util.web.makeSelection('language', options, cur_lang, 1, False, enabled)
 
     def _theme_select(self):
         """ Create theme selection. """

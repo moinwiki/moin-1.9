@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.7\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-04-05 01:00+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -314,13 +314,13 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<neznano>"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Uporabniško ime: %s\n"
 "\n"
@@ -346,16 +346,27 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Neznana akcija %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Akcije %(action_name)s nad to stranjo vam ni dovoljeno izvesti!"
+
+msgid "Login and try again."
+msgstr "Prijavite se in poskusite ponovno."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Paket potrebuje novejšo inačico MoinMoin (vsaj %s)."
 
 msgid "The theme name is not set."
 msgstr "Ime teme (izgleda) ni nastavljeno."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Namestitev datotek teme (izgleda) je podprto le za samostoječi tip "
-"strežnikov."
+"Datoteke teme (izgleda) niso bile nameščene. Pisanje ni dovoljeno za %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -455,9 +466,10 @@ msgstr ""
 "Neveljaven regularni izraz za poudarjanje besedila \"%(regex)s\": %(error)s"
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr "Vsebina varnostne kopije je zastarela in ne bo upoštevana pri iskanju!"
+msgstr ""
+"Vsebina varnostne kopije je zastarela in bo manj upoštevana pri iskanju!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -478,7 +490,7 @@ msgid "You are not allowed to view this page."
 msgstr "Ogled te strani vam ni dovoljen."
 
 msgid "Switch user"
-msgstr "Preklopi na uporabnika"
+msgstr "Preklopi na drugega uporabnika"
 
 msgid "No user selected"
 msgstr "Uporabnik ni izbran"
@@ -543,7 +555,7 @@ msgid "OpenID is already present."
 msgstr "OpenID je že prisoten."
 
 msgid "Failed to resolve OpenID."
-msgstr "OpenID ni bilo mogoče razviti/najti."
+msgstr "OpenID ni bilo mogoče najti."
 
 msgid "OpenID discovery failure, not a valid OpenID."
 msgstr "Napaka pri ugotavljanju OpenID, identiteta OpenID ni veljavna."
@@ -553,7 +565,7 @@ msgid "OpenID error: %s."
 msgstr "Napaka pri OpenID: %s."
 
 msgid "Verification canceled."
-msgstr "Preverjanje je bilo preklicana."
+msgstr "Preverjanje je bilo preklicano."
 
 msgid "This OpenID is already used for another account."
 msgstr "Ta OpenID je že uporabljen pri drugem uporabniškem računu."
@@ -713,8 +725,8 @@ msgstr "Zbrisani deli so označeni takole."
 msgid "Additions are marked like this."
 msgstr "Dodani deli so označeni takole."
 
-msgid "You need to log in."
-msgstr "Treba se je prijaviti."
+msgid "Please log in first."
+msgstr "Prosimo, da se najprej prijavite."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -747,11 +759,27 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Poveži to ime"
 
+msgid "OpenID verification canceled."
+msgstr "Preverjanje OpenID je bilo preklicano."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID uspešen. id: %s"
+
+msgid "OpenID failure"
+msgstr "Napaka pri OpenID"
+
+msgid "No OpenID found in session."
+msgstr "V seji ni bilo najdenega OpenID."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Vaš uporabniški račun je sedaj povezan z vašim OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Geslo, ki ste ga vnesli, ni veljavno."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr "OpenID: napaka: neznana faza nadaljevanja"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Za prijavo prek OpenID morajo biti anonimne seje omogočene."
@@ -774,7 +802,7 @@ msgstr "Manjka geslo. Prosimo vnesite uporabniško ime in geslo."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr "Strežnik LDAP %(server)s ne deluje."
+msgstr "Strežnik LDAP %(server)s je odpovedal."
 
 msgid "Failed to connect to database."
 msgstr "Neuspešna priključitev na podatkovno bazo."
@@ -782,10 +810,14 @@ msgstr "Neuspešna priključitev na podatkovno bazo."
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
-"Če ga še nimate, lahko <a href=\"%(userprefslink)s\">ustvarite uporabniški "
-"račun</a>. <a href=\"%(sendmypasswordlink)s\">Ste pozabili geslo?</a>"
+"Če ga še nimate, lahko tukaj <a href=\"%(userprefslink)s\">ustvarite svoj "
+"uporabniški račun</a>. "
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr "<a href=\"%(sendmypasswordlink)s\">Ste pozabili geslo?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -835,7 +867,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Poudarki:: <<Verbatim('')>>''kurziva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''polkrepko'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''polkrepko in "
@@ -852,7 +884,7 @@ msgstr ""
 " Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
 "na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.\n"
 "\n"
-"(!) Več o tem: HelpOnEditing, SyntaxReference.\n"
+"(!) Več o tem na HelpOnEditing ali HelpOnMoinWikiSyntax.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -869,6 +901,17 @@ msgstr "Za \"%(key)s\" bi moralo stati celo število \"%(arg)s\""
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Za \"%(key)s\" bi morala biti navedena barva \"%(arg)s\""
+
+msgid "HelpOnParsers"
+msgstr "PomočPriSintaktičnihAnalizatorjih"
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
+msgstr ""
+"Poudarjanje sintakse ni podprto za '%(syntax)s', glej %(highlight_help_page)"
+"s."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1071,18 +1114,6 @@ msgstr "Naloži novo priponko \"%(filename)s\" na strežnik"
 msgid "Inlined image: %(url)s"
 msgstr "Vsebovana slika: %(url)s"
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Ustvari novo risbo \"%(filename)s (odpre novo okno)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Spremeni risbo %(filename)s (odpre novo okno)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Risba s povezavo: %(filename)s"
-
 msgid "Toggle line numbers"
 msgstr "Vklopi/izklopi številke vrstic"
 
@@ -1093,17 +1124,6 @@ msgstr "Povrni v stanje različice %(rev)d."
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Preimenovano z '%(oldpagename)s'."
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Neznana akcija %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Akcije %(action_name)s nad to stranjo vam ni dovoljeno izvesti!"
-
-msgid "Login and try again."
-msgstr "Prijavite se in poskusite ponovno."
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Opciji --pages in --search se izključujeta!"
@@ -1181,14 +1201,14 @@ msgstr ""
 "Stran \"%(pagename)s\" je %(editor)s preimenoval iz \"%(oldname)s\":\n"
 "\n"
 
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Narejen je bil nov uporabniški račun na strežniku %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
@@ -1199,8 +1219,8 @@ msgstr ""
 "    Uporabniško ime: %(username)s\n"
 "    E-poštni naslov: %(useremail)s"
 
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Nova priponka dodana strani %(pagename)s, strežnik %(sitename)s"
 
 #, python-format
@@ -1218,6 +1238,29 @@ msgstr ""
 "\n"
 "Naročeni ste na obvestila o spremembah za stran \"%(page_name)s\". Strani je "
 "%(editor)s dodal priponko. Podrobnosti:\n"
+"\n"
+"Ime priponke: %(attach_name)s\n"
+"Velikost priponke: %(attach_size)s\n"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "Priponka odstranjena s strani %(pagename)s, strežnik %(sitename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Dragi uporabnik vikija,\n"
+"\n"
+"Naročeni ste na obvestila o spremembah na strani \"%(page_name)s\". S te "
+"strani %(editor)s odstranil priponko. Podrobnosti:\n"
 "\n"
 "Ime priponke: %(attach_name)s\n"
 "Velikost priponke: %(attach_size)s\n"
@@ -1257,6 +1300,9 @@ msgstr "Stran je bila kopirana"
 msgid "A new attachment has been added"
 msgstr "Dodana je bila nova priponka"
 
+msgid "An attachment has been removed"
+msgstr "Priponka je bila odstranjena"
+
 msgid "A page has been reverted to a previous state"
 msgstr "Stran je bila vrnjena v prejšnje stanje"
 
@@ -1277,9 +1323,6 @@ msgstr "Spremenjena stran"
 
 msgid "Page changed"
 msgstr "Stran je bila spremenjena"
-
-msgid "about"
-msgstr "več o tem"
 
 #, python-format
 msgid ""
@@ -1314,11 +1357,14 @@ msgstr "zadetek"
 msgid "matches"
 msgstr "zadetkov"
 
-msgid "FrontPage"
-msgstr "PrvaStran"
+msgid "about"
+msgstr "več o tem"
 
 msgid "RecentChanges"
 msgstr "ZadnjeSpremembe"
+
+msgid "WikiTipOfTheDay"
+msgstr "VikiNamigDneva"
 
 msgid "TitleIndex"
 msgstr "KazaloNaslovov"
@@ -1329,23 +1375,431 @@ msgstr "KazaloBesed"
 msgid "FindPage"
 msgstr "PoiščiStran"
 
-msgid "SiteNavigation"
-msgstr "Navigacija"
+msgid "MissingPage"
+msgstr "ManjkajočaStran"
 
-msgid "HelpContents"
-msgstr "PomočPriVsebini"
+msgid "MissingHomePage"
+msgstr "ManjkajočaOsebnaStran"
 
-msgid "HelpOnFormatting"
-msgstr "PomočPriOblikovanju"
+msgid "WikiHomePage"
+msgstr "DomačaVikiStran"
+
+msgid "WikiName"
+msgstr "VikiIme"
+
+msgid "WikiWikiWeb"
+msgstr "WikiWikiWeb"
+
+msgid "FrontPage"
+msgstr "PrvaStran"
+
+msgid "WikiSandBox"
+msgstr "VikiPeskovnik"
+
+msgid "InterWiki"
+msgstr "InterViki"
+
+msgid "AbandonedPages"
+msgstr "ZapuščeneStrani"
+
+msgid "OrphanedPages"
+msgstr "OsiroteleStrani"
+
+msgid "WantedPages"
+msgstr "ManjkajočeStrani"
+
+msgid "EventStats"
+msgstr "StatistikaDogodkov"
+
+msgid "EventStats/HitCounts"
+msgstr "StatistikaDogodkov/ŠtevciZadetkov"
+
+msgid "EventStats/Languages"
+msgstr "StatistikaDogodkov/Jeziki"
+
+msgid "EventStats/UserAgents"
+msgstr "StatistikaDogodkov/UporabnikoviBralniki"
+
+msgid "PageSize"
+msgstr "VelikostStrani"
+
+msgid "PageHits"
+msgstr "ZadetkiStrani"
+
+msgid "RandomPage"
+msgstr "NaključnaStran"
+
+msgid "XsltVersion"
+msgstr "XsltVerzija"
+
+msgid "FortuneCookies"
+msgstr "PiškotiSreče"
 
 msgid "WikiLicense"
 msgstr "VikiLicenca"
 
-msgid "MissingPage"
-msgstr "ManjkajočeStrani"
+msgid "CategoryCategory"
+msgstr "KategorijaKategorije"
 
-msgid "MissingHomePage"
-msgstr "ManjkajočeOsebneStrani"
+msgid "CategoryHomepage"
+msgstr "DomačaStranKategorije"
+
+msgid "CategoryTemplate"
+msgstr "PredlogaKategorije"
+
+msgid "HomepageTemplate"
+msgstr "PredlogaDomačeStrani"
+
+msgid "HelpTemplate"
+msgstr "PredlogaPomoči"
+
+msgid "HomepageReadWritePageTemplate"
+msgstr "PredlogaBralnoPisalneDomačeStrani"
+
+msgid "HomepageReadPageTemplate"
+msgstr "PredlogaBralneDomačeStrani"
+
+msgid "HomepagePrivatePageTemplate"
+msgstr "PredlogaZasebneStraniDomačeStrani"
+
+msgid "HomepageGroupsTemplate"
+msgstr "PedlogaGrupDomačeStrani"
+
+msgid "SlideShowHandOutTemplate"
+msgstr "PredlogaIzročkovPrikazaSlik"
+
+msgid "SlideShowTemplate"
+msgstr "PredlogaPrikazaSlik"
+
+msgid "SlideTemplate"
+msgstr "PredlogaSlike"
+
+msgid "SyncJobTemplate"
+msgstr "PredlogaZaSyncJob"
+
+msgid "HelpOnConfiguration"
+msgstr "PomočPriNastavitvah"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr "PomočPriNastavitvah/PodporaEpošte"
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr "PomočPriNastavitvah/VarnostnaPolitika"
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr "PomočPriNastavitvah/DatotečnePriponke"
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr "PomočPriNastavitvah/StranDodatkov"
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr "PomočPriNastavitvah/ZaščitaPredŠpicami"
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "PomočPriNastavitvah/UporabniškePreference"
+
+msgid "HelpOnPackageInstaller"
+msgstr "PomočPriNameščevalcuPaketov"
+
+msgid "HelpOnUpdatingPython"
+msgstr "PomočPriAžuriranjuPythona"
+
+msgid "HelpOnAdministration"
+msgstr "PomočPriUpravljanju"
+
+msgid "HelpOnAuthentication"
+msgstr "PomočPriPreverjanjuIstovetnosti"
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr "PomočPriPreverjanjuIstovetnosti/ZunanjiPiškot"
+
+msgid "HelpOnMoinCommand"
+msgstr "PomočPriMoinUkazu"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr "PomočPriMoinUkazu/IzvozPosnetkaStanja"
+
+msgid "HelpOnNotification"
+msgstr "PomočPriObveščanju"
+
+msgid "HelpOnSessions"
+msgstr "PomočPriSejah"
+
+msgid "HelpOnUserHandling"
+msgstr "PomočPriRokovanjuZUporabnikom"
+
+msgid "HelpOnXapian"
+msgstr "PomočPriXapianu"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr "PomočPriMoinVikiSintaksi"
+
+msgid "HelpOnCreoleSyntax"
+msgstr "PomočPriKreolskiSintaksi"
+
+msgid "HelpOnFormatting"
+msgstr "PomočPriOblikovanju"
+
+msgid "MoinMoin"
+msgstr "MoinMoin"
+
+msgid "HelpContents"
+msgstr "VsebinaPomoči"
+
+msgid "HelpForBeginners"
+msgstr "PomočZačetnikom"
+
+msgid "HelpForUsers"
+msgstr "PomočUporabnikom"
+
+msgid "HelpIndex"
+msgstr "KazaloPomoči"
+
+msgid "HelpOnAccessControlLists"
+msgstr "PomočPriKontroliDostopaACL"
+
+msgid "HelpOnActions"
+msgstr "PomočPriAkcijah"
+
+msgid "HelpOnActions/AttachFile"
+msgstr "PomočPriAkcijah/PripniDatoteko"
+
+msgid "HelpOnAdmonitions"
+msgstr "PomočPriOpozarjanju"
+
+msgid "HelpOnAutoAdmin"
+msgstr "PomočPriAvtoAdmin"
+
+msgid "HelpOnCategories"
+msgstr "PomočPriKategorijah"
+
+msgid "HelpOnDictionaries"
+msgstr "PomočPriSlovarjih"
+
+msgid "HelpOnDrawings"
+msgstr "PomočPriRisbah"
+
+msgid "HelpOnEditLocks"
+msgstr "PomočPriZaklepanjuObUrejanju"
+
+msgid "HelpOnEditing"
+msgstr "PomočPriUrejanju"
+
+msgid "HelpOnEditing/SubPages"
+msgstr "PomočPriUrejanju/Podstrani"
+
+msgid "HelpOnGraphicalEditor"
+msgstr "PomočPriGrafičnemUrejevalniku"
+
+msgid "HelpOnGroups"
+msgstr "PomočPriGrupah"
+
+msgid "HelpOnHeadlines"
+msgstr "PomočPriNaslovih"
+
+msgid "HelpOnImages"
+msgstr "PomočPriSlikah"
+
+msgid "HelpOnLanguages"
+msgstr "PomočPriJezikih"
+
+msgid "HelpOnLinking"
+msgstr "PomočPriPovezavah"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr "PomočPriPovezavah/OpombnePovezave"
+
+msgid "HelpOnLists"
+msgstr "PomočPriSeznamih"
+
+msgid "HelpOnLogin"
+msgstr "PomočPriPrijavi"
+
+msgid "HelpOnMacros"
+msgstr "PomočPriMakrojih"
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr "PomočPriMakrojih/EmbedObject"
+
+msgid "HelpOnMacros/Include"
+msgstr "PomočPriMakrojih/Include"
+
+msgid "HelpOnMacros/MailTo"
+msgstr "PomočPriMakrojih/MailTo"
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr "PomočPriMakrojih/MonthCalendar"
+
+msgid "HelpOnNavigation"
+msgstr "PomočPriNavigaciji"
+
+msgid "HelpOnOpenIDProvider"
+msgstr "PomočPriOpenIDPonudniku"
+
+msgid "HelpOnPageCreation"
+msgstr "PomočPriTvorjenjuStrani"
+
+msgid "HelpOnPageDeletion"
+msgstr "PomočPriBrisanjuStrani"
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr "PomočPriSintaktičnihAnalizatorjih/ReStructuredText"
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr "PomočPriSintaktičnihAnalizatorjih/ReStructuredText/RstPrimer"
+
+msgid "HelpOnProcessingInstructions"
+msgstr "PomočPriNavodilihZaObdelavo"
+
+msgid "HelpOnRules"
+msgstr "PomočPriPravilih"
+
+msgid "HelpOnSearching"
+msgstr "PomočPriIskanju"
+
+msgid "HelpOnSlideShows"
+msgstr "PomočPriPrikazuSlik"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr "HelpOnSlideShows/000 Introduction"
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr "HelpOnSlideShows/100 Creating the slides"
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr "HelpOnSlideShows/900 Last but not least: Running your presentation"
+
+msgid "HelpOnSmileys"
+msgstr "PomočPriSmejčkih"
+
+msgid "HelpOnSpam"
+msgstr "PomočPriSpamu"
+
+msgid "HelpOnSpellCheck"
+msgstr "PomočPriPreverbiČrkovanja"
+
+msgid "HelpOnSuperUser"
+msgstr "PomočPriSuperUporabniku"
+
+msgid "HelpOnSynchronisation"
+msgstr "PomočPriSinhronizaciji"
+
+msgid "HelpOnTables"
+msgstr "PomočPriTabelah"
+
+msgid "HelpOnTemplates"
+msgstr "PomočPriPredlogah"
+
+msgid "HelpOnThemes"
+msgstr "PomočPriTemah"
+
+msgid "HelpOnUserPreferences"
+msgstr "PomočPriUporabniškihNastavitvah"
+
+msgid "HelpOnVariables"
+msgstr "PomočPriSpremenljivkah"
+
+msgid "HelpOnXmlPages"
+msgstr "PomočPriXmlStraneh"
+
+msgid "HelpOnComments"
+msgstr "PomočPriKomentarjih"
+
+msgid "HelpOnSubscribing"
+msgstr "PomočPriNaročanju"
+
+msgid "CamelCase"
+msgstr "GrbasteBesede"
+
+msgid "WikiCourse"
+msgstr "WikiCourse"
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr "WikiCourse/01 What is a MoinMoin wiki?"
+
+msgid "WikiCourse/02 Finding information"
+msgstr "WikiCourse/02 Finding information"
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr "WikiCourse/03 Staying up to date"
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr "WikiCourse/04 Creating a wiki account"
+
+msgid "WikiCourse/05 User preferences"
+msgstr "WikiCourse/05 User preferences"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr "WikiCourse/06 Your own wiki homepage"
+
+msgid "WikiCourse/07 The text editor"
+msgstr "WikiCourse/07 The text editor"
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr "WikiCourse/08 Hot Keys"
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr "WikiCourse/10 Text layout with wiki markup"
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr "WikiCourse/11 Paragraphs"
+
+msgid "WikiCourse/12 Headlines"
+msgstr "WikiCourse/12 Headlines"
+
+msgid "WikiCourse/13 Lists"
+msgstr "WikiCourse/13 Lists"
+
+msgid "WikiCourse/14 Text styles"
+msgstr "WikiCourse/14 Text styles"
+
+msgid "WikiCourse/15 Tables"
+msgstr "WikiCourse/15 Tables"
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr "WikiCourse/16 Wiki internal links"
+
+msgid "WikiCourse/17 External links"
+msgstr "WikiCourse/17 External links"
+
+msgid "WikiCourse/18 Attachments"
+msgstr "WikiCourse/18 Attachments"
+
+msgid "WikiCourse/19 Symbols"
+msgstr "WikiCourse/19 Symbols"
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr "WikiCourse/20 Dynamic content"
+
+msgid "WikiCourse/21 Macros"
+msgstr "WikiCourse/21 Macros"
+
+msgid "WikiCourse/22 Parsers"
+msgstr "WikiCourse/22 Parsers"
+
+msgid "WikiCourse/23 Actions"
+msgstr "WikiCourse/23 Actions"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr "WikiCourse/30 The graphical editor"
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr "WikiCourse/40 Creating more pages"
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr "WikiCourse/50 Wiki etiquette"
+
+msgid "WikiCourse/51 Applications"
+msgstr "WikiCourse/51 Applications"
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr "WikiCourse/52 Structure in the wiki"
+
+msgid "WikiCourseHandOut"
+msgstr "WikiCourseHandOut"
+
+msgid "Sun"
+msgstr "ned"
 
 msgid "Mon"
 msgstr "pon"
@@ -1364,9 +1818,6 @@ msgstr "pet"
 
 msgid "Sat"
 msgstr "sob"
-
-msgid "Sun"
-msgstr "ned"
 
 msgid "AttachFile"
 msgstr "PripniDatoteko"
@@ -1440,9 +1891,6 @@ msgstr "[NA-KONEC]"
 msgid "[TOP]"
 msgstr "[NA-VRH]"
 
-msgid "Click to do a full-text search for this title"
-msgstr "Iskanje tega naslova po polnem besedilu strani"
-
 msgid "Settings"
 msgstr "Nastavitve"
 
@@ -1464,6 +1912,9 @@ msgstr "Preklic naročila na spremembe"
 
 msgid "Home"
 msgstr "Domov"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Iskanje tega naslova po polnem besedilu strani"
 
 msgid "Clear message"
 msgstr "Odstrani tole obvestilo"
@@ -1575,6 +2026,18 @@ msgstr "Pregledovalnik pripetih datotek"
 
 msgid "User account browser"
 msgstr "Pregledovalnik uporabniških računov"
+
+msgid "Lexer description"
+msgstr "Lexer opis"
+
+msgid "Lexer names"
+msgstr "Lexer imena"
+
+msgid "File patterns"
+msgstr "Vzorci datoteke (file patterns)"
+
+msgid "Mimetypes"
+msgstr "Tipi MIME"
 
 msgid "Wiki configuration"
 msgstr "Nastavitve vikija"
@@ -1698,23 +2161,20 @@ msgstr "Globalni sintaktični analizatorji (parserji)"
 msgid "Local extension parsers"
 msgstr "Lokalni sintaktični analizatorji (parserji)"
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Naveze za Xapian in/ali Python Xapian niso nameščene"
+
 msgid "Disabled"
 msgstr "Izklopljeno"
 
 msgid "Enabled"
 msgstr "Vklopljeno"
 
-msgid "index available"
-msgstr "kazalo je na voljo"
-
 msgid "index unavailable"
 msgstr "kazalo ni na voljo"
 
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Naveze za Xapian in/ali Python Xapian niso nameščene"
-
-msgid "N/A"
-msgstr "-"
+msgid "index available"
+msgstr "kazalo je na voljo"
 
 msgid "Xapian search"
 msgstr "Iskanje Xapian"
@@ -1724,6 +2184,9 @@ msgstr "Korenjenje za Xapian"
 
 msgid "Active threads"
 msgstr "Aktivne niti"
+
+msgid "N/A"
+msgstr "-"
 
 msgid "No orphaned pages in this wiki."
 msgstr "V tem vikuju ni nepovezanih strani (sirot)."
@@ -1777,7 +2240,7 @@ msgstr "vsebujoč vsaj enega od naslednjih izrazov"
 msgid "not containing the following terms"
 msgstr "ne vsebujoč naslednjih izrazov"
 
-msgid "last modified since (e.g. last 2 weeks)"
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr "nazadnje spremenjeno po... (n.pr. v zadnjih dveh tednih)"
 
 msgid "any category"
@@ -1875,6 +2338,12 @@ msgstr "Začni"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Slika %(pos)d od %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+"<<%(macro_name)s: izvajanje ni bilo uspešno [%(error_msg)s] (glej tudi "
+"dnevnik)>>"
+
 msgid "Go To Page"
 msgstr "Pojdi na stran"
 
@@ -1916,6 +2385,27 @@ msgstr "Vaše hitra povezava na to stran ni bilo mogoče odstraniti."
 
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Da bi jo odstranili je treba imeti hitro povezavo na to stran."
+
+msgid "Edit slide show"
+msgstr "Uredi samodejno predstavo"
+
+msgid "Quit"
+msgstr "Izhod"
+
+msgid "Quit slide show"
+msgstr "Zapusti samodejno predstavo"
+
+msgid "Show first slide (up arrow)"
+msgstr "Prikaži prvo sliko (puščica gor)"
+
+msgid "Show last slide (down arrow)"
+msgstr "Prikaži zadnjo sliko (puščica dol)"
+
+msgid "Show previous slide (left arrow)"
+msgstr "Prikaži prejšnjo sliko (puščica levo)"
+
+msgid "Show next slide (right arrow)"
+msgstr "Prikaži naslednjo sliko (puščica desno)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2114,9 +2604,6 @@ msgstr "namesti"
 msgid "No attachments stored for %(pagename)s"
 msgstr "Stran %(pagename)s nima priponk."
 
-msgid "Edit drawing"
-msgstr "Spremeni risbo"
-
 msgid "New Attachment"
 msgstr "Nova priponka"
 
@@ -2153,16 +2640,16 @@ msgstr "Za akcijo %(actionname)s uporabite interaktivni uporabniški vmesnik!"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Napačen odgovor! Pojdi nazaj in poskusi znova..."
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr ""
-"Datotečne priponke na tej strani vam ni dovoljeno prepisati z novo vsebino."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Prazna vsebina. Odstranite ne-ASCII znake z imena datoteke in poskusite "
 "znova."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr ""
+"Datotečne priponke na tej strani vam ni dovoljeno prepisati z novo vsebino."
 
 #, python-format
 msgid ""
@@ -2175,9 +2662,6 @@ msgstr ""
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Priponka '%(target)s' (ime '%(filename)s') že obstaja na strežniku."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Na to stran ni dovoljeno shraniti risb."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Ni vam dovoljeno odstraniti priponk s te strani."
@@ -2410,7 +2894,7 @@ msgid "You could not get subscribed to this page."
 msgstr "Niste se mogli naročiti na obvestila o spremembah s te strani."
 
 msgid "You are now logged out."
-msgstr "Odjavljeni ste."
+msgstr "Sedaj ste odjavljeni."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -2601,6 +3085,23 @@ msgstr "Naslednji uporabniki so naročeni na obvestila o tej strani:"
 msgid "This page links to the following pages:"
 msgstr "Ta stran vsebuje povezave na naslednje strani:"
 
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Novo ime"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
+
 msgid "Date"
 msgstr "Datum"
 
@@ -2688,17 +3189,23 @@ msgstr "Neznana podakcija pri upravljanju z varnostno kopijo: %s"
 msgid "Please choose:"
 msgstr "Izberite:"
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
 msgstr "Želite preimenovati tudi vse /podstrani?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Zares želite preimenovati to stran?"
 
 msgid "New name"
 msgstr "Novo ime"
 
 msgid "Optional reason for the renaming"
 msgstr "Razlog za preimenovanje (neobvezno)"
-
-msgid "Really rename this page?"
-msgstr "Zares želite preimenovati to stran?"
 
 msgid "Copy all /subpages too?"
 msgstr "Želite kopirati tudi vse podstrani?"
@@ -2708,6 +3215,24 @@ msgstr "Razlog za kopiranje (neobvezno)"
 
 msgid "Really copy this page?"
 msgstr "Želite zares kopirati to stran?"
+
+msgid "Attachment location"
+msgstr "Pozicija priponke"
+
+msgid "Page name"
+msgstr "Ime strani"
+
+msgid "Attachment name"
+msgstr "Ime priponke"
+
+msgid "Refresh attachment list"
+msgstr "Obnovi seznam priponk"
+
+msgid "List of attachments"
+msgstr "Seznam priponk"
+
+msgid "Available attachments for page"
+msgstr "Razpoložljive priponke za stran"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -2734,6 +3259,41 @@ msgstr "Prejšnja sprememba"
 msgid "Next change"
 msgstr "Naslednja sprememba"
 
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
+msgstr "Ta stran nima starejših različic!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Ta stran nima starejših različic!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Ta stran nima starejših različic!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Ta stran nima starejših različic!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "Ta stran nima starejših različic!"
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr "Stran je že bila %(count)d-krat shranjena!"
@@ -2747,10 +3307,6 @@ msgstr "Ne upoštevaj razlik v številu presledkov"
 #, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Neveljavno ime datoteke \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
 
 msgid "Include all attachments?"
 msgstr "Z vsemi priponkami?"
@@ -2781,8 +3337,26 @@ msgstr "Ni uporabnik:"
 msgid "You are not allowed to perform this action."
 msgstr "Te akcije vam ni dovoljeno izvesti."
 
-msgid "Please log in first."
-msgstr "Prosimo, da se najprej prijavite."
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Ustvari novo risbo \"%(filename)s (odpre novo okno)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Spremeni risbo %(filename)s (odpre novo okno)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Risba s povezavo: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Na to stran ni dovoljeno shraniti risb."
+
+msgid "Empty target name given."
+msgstr "Podano je bilo prazno ime cilja."
+
+msgid "Edit drawing"
+msgstr "Spremeni risbo"
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Prosimo, da naredite domačo stran preden dodajate druge strani."
@@ -2838,6 +3412,22 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Upravljanje z MyPages"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Ta akcija je na voljo le administratorju."
+
+msgid "No page packages found."
+msgstr "Nobenih paketov strani ni najti."
+
+msgid "page package"
+msgstr "paket strani"
+
+msgid "Choose:"
+msgstr "Izberi:"
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr "Namesti pakete jezikov za '%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "Naročilo na obvestila s te strani je bilo umaknjeno."
@@ -2921,9 +3511,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Datoteka iz katere bo naložena vsebina strani"
 
-msgid "Page Name"
-msgstr "Ime strani"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Struktura spletne predstavitve na \"%s\""
@@ -2945,9 +3532,6 @@ msgstr "Akcije %(actionname)s ta viki ne dovoljuje!"
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Akcija %(actionname)s nad to stranjo vam ni dovoljena!"
-
-msgid "Only superuser is allowed to use this action."
-msgstr "Ta akcija je na voljo le administratorju."
 
 msgid "Views/day"
 msgstr "obiskov/dan"
@@ -2999,6 +3583,9 @@ msgstr "Komu"
 msgid "Content"
 msgstr "Vsebina"
 
+msgid "No recipients, nothing to do"
+msgstr "Ni prejemnikov, ni kaj početi"
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Priklop na e-poštni strežnik '%(server)s' ni uspel: %(reason)s"
@@ -3017,7 +3604,13 @@ msgstr ""
 "tem vikiju."
 
 msgid "anonymous"
-msgstr ""
+msgstr "anonimno"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "Narejen je bil nov uporabniški račun na strežniku %(sitename)s"
 
 #~ msgid "Please use the interactive user interface to move attachments!"
 #~ msgstr "Za prestavitev priponk uporabite interaktivni uporabniški vmesnik!"
+
+#~ msgid "Page Name"
+#~ msgstr "Ime strani"

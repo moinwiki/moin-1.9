@@ -19,6 +19,7 @@ from MoinMoin.Page import Page
 ### Results
 ############################################################################
 
+
 class Match(object):
     """ Base class for all Matches (found pieces of pages).
 
@@ -92,7 +93,7 @@ class AttachmentMatch(Match):
     pass
 
 
-class FoundPage:
+class FoundPage(object):
     """ Represents a page in a search result """
 
     def __init__(self, page_name, matches=None, page=None, rev=0):
@@ -118,6 +119,8 @@ class FoundPage:
             weight += match.weight()
             # More sophisticated things to be added, like increase
             # weight of near matches.
+        if self.page.parse_processing_instructions().get('deprecated', False):
+            weight = int(weight / 4) # rank it down
         return weight
 
     def add_matches(self, matches):
@@ -199,7 +202,7 @@ class FoundAttachment(FoundPage):
 
 
 class FoundRemote(FoundPage):
-    """ Represents an attachment in search results """
+    """ Represents a remote search result """
 
     def __init__(self, wikiname, page_name, attachment, matches=None, page=None, rev=0):
         self.wikiname = wikiname
@@ -225,7 +228,8 @@ class FoundRemote(FoundPage):
 ### Search results formatting
 ############################################################################
 
-class SearchResults:
+
+class SearchResults(object):
     """ Manage search results, supply different views
 
     Search results can hold valid search results and format them for
@@ -333,19 +337,22 @@ class SearchResults:
                 displayHits = self.hits
 
             for page in displayHits:
-                # TODO handle interwiki search hits
-                if page.attachment:
+                if isinstance(page, FoundRemote):
+                    # TODO handle FoundRemote (interwiki) search hits
+                    continue
+                elif isinstance(page, FoundAttachment):
                     querydict = {
                         'action': 'AttachFile',
                         'do': 'view',
                         'target': page.attachment,
                     }
-                elif page.rev and page.rev != page.page.getRevList()[0]:
-                    querydict = {
-                        'rev': page.rev,
-                    }
-                else:
-                    querydict = None
+                elif isinstance(page, FoundPage):
+                    if page.rev and page.rev != page.page.getRevList()[0]:
+                        querydict = {
+                            'rev': page.rev,
+                        }
+                    else:
+                        querydict = None
                 querystr = self.querystring(querydict)
 
                 matchInfo = ''
@@ -377,11 +384,6 @@ class SearchResults:
     def pageListWithContext(self, request, formatter, info=1, context=180,
                             maxlines=1, paging=True, hitsFrom=0, hitsInfo=0):
         """ Format a list of found pages with context
-
-        The default parameter values will create Google-like search
-        results, as this is the most known search interface. Good
-        interface is familiar interface, so unless we have much better
-        solution (we don't), being like Google is the way.
 
         @param request: current request
         @param formatter: formatter to use
@@ -672,8 +674,8 @@ class SearchResults:
         """
         _ = self.request.getText
         f = self.formatter
+        querydict = dict(wikiutil.parseQueryString(self.request.query_string))
 
-        querydict = wikiutil.parseQueryString(self.request.query_string)
         def page_url(n):
             querydict.update({'from': n * hitsPerPage})
             return self.request.page.url(self.request, querydict, escape=0)
@@ -689,10 +691,9 @@ class SearchResults:
         # previous page available
         if cur_page > 0:
             textlinks.append(''.join([
-                f.url(1, href=page_url(cur_page-1)),
-                f.text(_('Previous')),
-                f.url(0)
-            ]))
+                        f.url(1, href=page_url(cur_page-1)),
+                        f.text(_('Previous')),
+                        f.url(0)]))
         else:
             textlinks.append('')
 
@@ -713,8 +714,7 @@ class SearchResults:
             textlinks.append(''.join([
                 f.url(1, href=page_url(cur_page+1)),
                 f.text(_('Next')),
-                f.url(0)
-            ]))
+                f.url(0)]))
         else:
             textlinks.append('')
 
@@ -799,8 +799,7 @@ class SearchResults:
 
         Do not call this, it should be called only by the instance code.
 
-        Each request might need different translations or other user
-        preferences.
+        Each request might need different translations or other user preferences.
 
         @param request: current request
         @param formatter: the formatter instance to use

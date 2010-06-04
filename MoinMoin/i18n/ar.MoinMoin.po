@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-04-05 01:00+0200\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -297,7 +297,7 @@ msgid ""
 "\n"
 "Password recovery token: %s\n"
 "\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 
 msgid ""
@@ -312,6 +312,17 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "نفذ عملية %(actionname)s?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
+
+msgid "Login and try again."
+msgstr "سجل الدخول و حاول مرة أخرى"
+
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr ""
@@ -319,7 +330,8 @@ msgstr ""
 msgid "The theme name is not set."
 msgstr ""
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
 
 #, python-format
@@ -419,7 +431,7 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 
@@ -676,9 +688,8 @@ msgstr ""
 msgid "Additions are marked like this."
 msgstr ""
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "لقد قمت بتسجيل الخروج."
+msgid "Please log in first."
+msgstr "رجاء سجل دخولك أولا."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -705,11 +716,28 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "تم إلغاء العملية."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
 msgstr "كلمة السر التي أدخلتها غير صالحة."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr ""
@@ -738,7 +766,11 @@ msgstr "فشلت محاولة الإتصال بقاعدة البيانات."
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 msgid ""
@@ -773,7 +805,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -790,6 +822,15 @@ msgstr ""
 
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see %"
+"(highlight_help_page)s."
 msgstr ""
 
 msgid ""
@@ -989,18 +1030,6 @@ msgstr ""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr ""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr ""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr ""
-
 msgid "Toggle line numbers"
 msgstr ""
 
@@ -1011,17 +1040,6 @@ msgstr ""
 #, python-format
 msgid "Renamed from '%(oldpagename)s'."
 msgstr ""
-
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "نفذ عملية %(actionname)s?"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
-
-msgid "Login and try again."
-msgstr "سجل الدخول و حاول مرة أخرى"
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1077,20 +1095,20 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "New user account created on %(sitename)s"
+msgid "[%(sitename)s] New user account created"
 msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
 "\n"
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr ""
 
 #, python-format
@@ -1099,6 +1117,22 @@ msgid ""
 "\n"
 "You have subscribed to a wiki page \"%(page_name)s\" for change "
 "notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
 "Following detailed information is available:\n"
 "\n"
 "Attachment name: %(attach_name)s\n"
@@ -1137,6 +1171,10 @@ msgstr "تم نسخ الصفحة"
 msgid "A new attachment has been added"
 msgstr "المرفقات"
 
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "المرفقات"
+
 msgid "A page has been reverted to a previous state"
 msgstr ""
 
@@ -1162,9 +1200,6 @@ msgstr "صفحات مشابه"
 #, fuzzy
 msgid "Page changed"
 msgstr "إحفظ التغييرات"
-
-msgid "about"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -1203,10 +1238,13 @@ msgstr "تطابق"
 msgid "matches"
 msgstr "تطابق"
 
-msgid "FrontPage"
+msgid "about"
 msgstr ""
 
 msgid "RecentChanges"
+msgstr ""
+
+msgid "WikiTipOfTheDay"
 msgstr ""
 
 msgid "TitleIndex"
@@ -1218,23 +1256,454 @@ msgstr ""
 msgid "FindPage"
 msgstr ""
 
-msgid "SiteNavigation"
-msgstr ""
-
-msgid "HelpContents"
-msgstr ""
-
-msgid "HelpOnFormatting"
-msgstr ""
-
-msgid "WikiLicense"
-msgstr ""
-
 msgid "MissingPage"
 msgstr ""
 
 msgid "MissingHomePage"
 msgstr ""
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "صفحات مشابه"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "اسم"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr ""
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "ويكي"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "صفحات مشابه"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "صفحات"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "الحجم"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "صفحات"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "أعد تسمية الصفحة"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "إصدار بايثون"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr ""
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+msgid "SlideShowTemplate"
+msgstr ""
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+msgid "HelpOnConfiguration"
+msgstr ""
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr ""
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+msgid "HelpOnUpdatingPython"
+msgstr ""
+
+msgid "HelpOnAdministration"
+msgstr ""
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+msgid "HelpOnMoinCommand"
+msgstr ""
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+msgid "HelpOnNotification"
+msgstr ""
+
+msgid "HelpOnSessions"
+msgstr ""
+
+msgid "HelpOnUserHandling"
+msgstr ""
+
+msgid "HelpOnXapian"
+msgstr ""
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+msgid "HelpOnCreoleSyntax"
+msgstr ""
+
+msgid "HelpOnFormatting"
+msgstr ""
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "إصدار موين موين"
+
+msgid "HelpContents"
+msgstr ""
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+msgid "HelpIndex"
+msgstr ""
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "إجراء"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+msgid "HelpOnAdmonitions"
+msgstr ""
+
+msgid "HelpOnAutoAdmin"
+msgstr ""
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "لغة"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+msgid "HelpOnEditing"
+msgstr ""
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "إجراء"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "لغة"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "لغة"
+
+msgid "HelpOnLinking"
+msgstr ""
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+msgid "HelpOnLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "ولوج"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+msgid "HelpOnNavigation"
+msgstr ""
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+msgid "HelpOnPageCreation"
+msgstr ""
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+msgid "HelpOnRules"
+msgstr ""
+
+msgid "HelpOnSearching"
+msgstr ""
+
+msgid "HelpOnSlideShows"
+msgstr ""
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+msgid "HelpOnSpellCheck"
+msgstr ""
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "تم الشروع بالمزامنة -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "التفضيلات"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+msgid "HelpOnXmlPages"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "تصريح"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "اشتراك"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "تم حفظ تفضيلات المستخدم!"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "ملف مرفق جديد"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "أفعال أكثر:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "الأحد"
 
 msgid "Mon"
 msgstr "الإثنين"
@@ -1253,9 +1722,6 @@ msgstr "الجمعة"
 
 msgid "Sat"
 msgstr "السبت"
-
-msgid "Sun"
-msgstr "الأحد"
 
 msgid "AttachFile"
 msgstr ""
@@ -1329,9 +1795,6 @@ msgstr ""
 msgid "[TOP]"
 msgstr ""
 
-msgid "Click to do a full-text search for this title"
-msgstr ""
-
 msgid "Settings"
 msgstr "إعدادات"
 
@@ -1352,6 +1815,9 @@ msgid "Unsubscribe"
 msgstr "إلغاء الإشتراك"
 
 msgid "Home"
+msgstr ""
+
+msgid "Click to do a full-text search for this title"
 msgstr ""
 
 msgid "Clear message"
@@ -1472,6 +1938,22 @@ msgstr "المرفقات"
 
 msgid "User account browser"
 msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "تذكر معلومات الدخول"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "المستخدم"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "نوع الملف"
+
+#, fuzzy
+msgid "Mimetypes"
+msgstr "أي نوع MIME"
 
 msgid "Wiki configuration"
 msgstr ""
@@ -1596,6 +2078,9 @@ msgstr ""
 msgid "Local extension parsers"
 msgstr ""
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
 msgid "Disabled"
 msgstr "معطل"
 
@@ -1603,18 +2088,11 @@ msgstr "معطل"
 msgid "Enabled"
 msgstr "مفعل"
 
-msgid "index available"
-msgstr ""
-
 msgid "index unavailable"
 msgstr ""
 
-msgid "Xapian and/or Python Xapian bindings not installed"
+msgid "index available"
 msgstr ""
-
-#, fuzzy
-msgid "N/A"
-msgstr "غير متاح"
 
 msgid "Xapian search"
 msgstr ""
@@ -1624,6 +2102,10 @@ msgstr ""
 
 msgid "Active threads"
 msgstr ""
+
+#, fuzzy
+msgid "N/A"
+msgstr "غير متاح"
 
 msgid "No orphaned pages in this wiki."
 msgstr ""
@@ -1673,7 +2155,7 @@ msgstr "يحتوي على واحدا أو أكثر من العبارات الت�
 msgid "not containing the following terms"
 msgstr "لا يحتوي على العبارات التالية"
 
-msgid "last modified since (e.g. last 2 weeks)"
+msgid "last modified since (e.g. 2 weeks before)"
 msgstr ""
 
 msgid "any category"
@@ -1769,6 +2251,10 @@ msgstr "إبدأ"
 msgid "Slide %(pos)d of %(size)d"
 msgstr ""
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 #, fuzzy
 msgid "Go To Page"
 msgstr "إذهب إلى الصفحة"
@@ -1813,6 +2299,28 @@ msgstr ""
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "تم إزالة رابطك السريع لهذه الصفحة."
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "حجم المحرر"
+
+msgid "Quit"
+msgstr ""
+
+msgid "Quit slide show"
+msgstr ""
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -1984,9 +2492,6 @@ msgstr "تثبيت"
 msgid "No attachments stored for %(pagename)s"
 msgstr ""
 
-msgid "Edit drawing"
-msgstr ""
-
 msgid "New Attachment"
 msgstr "ملف مرفق جديد"
 
@@ -2023,14 +2528,14 @@ msgstr ""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "لا يسمح لك بتحرير هذه الصفحة"
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
 #, python-format
 msgid ""
@@ -2040,9 +2545,6 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr ""
-
-msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
 msgid "You are not allowed to delete attachments on this page."
@@ -2437,6 +2939,23 @@ msgstr ""
 msgid "This page links to the following pages:"
 msgstr ""
 
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to '''%"
+"(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "الإسم الجديد"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
+
 msgid "Date"
 msgstr "التاريخ"
 
@@ -2518,7 +3037,16 @@ msgstr "نفذ عملية %(actionname)s?"
 msgid "Please choose:"
 msgstr ""
 
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
 msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
 msgstr ""
 
 msgid "New name"
@@ -2526,9 +3054,6 @@ msgstr "الإسم الجديد"
 
 msgid "Optional reason for the renaming"
 msgstr "سبب إختياري لإعادة التسمية"
-
-msgid "Really rename this page?"
-msgstr ""
 
 msgid "Copy all /subpages too?"
 msgstr ""
@@ -2540,6 +3065,30 @@ msgstr "سبب إختياري لإعادة التسمية"
 #, fuzzy
 msgid "Really copy this page?"
 msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+#, fuzzy
+msgid "Attachment location"
+msgstr "المرفقات"
+
+#, fuzzy
+msgid "Page name"
+msgstr "صفحة جديدة\n"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "المرفقات"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "المرفقات"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "المرفقات"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "المرفقات"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -2568,6 +3117,36 @@ msgstr "السابق"
 msgid "Next change"
 msgstr "لم يتغير أي شيء"
 
+msgid "Diff with oldest revision in left pane"
+msgstr ""
+
+msgid "No older revision available for diff"
+msgstr ""
+
+msgid "Diff with older revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+msgid "No newer revision available for diff"
+msgstr ""
+
+msgid "Diff with newest revision in right pane"
+msgstr ""
+
 #, python-format
 msgid "The page was saved %(count)d times, though!"
 msgstr ""
@@ -2580,10 +3159,6 @@ msgstr ""
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
-msgstr ""
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
 msgstr ""
 
 msgid "Include all attachments?"
@@ -2617,8 +3192,26 @@ msgstr "ليس مستدخما:"
 msgid "You are not allowed to perform this action."
 msgstr "لا يسمح لك القيام بهذا الإجراء."
 
-msgid "Please log in first."
-msgstr "رجاء سجل دخولك أولا."
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr ""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr ""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr ""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr ""
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
@@ -2652,6 +3245,25 @@ msgid ""
 msgstr ""
 
 msgid "MyPages management"
+msgstr ""
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "لا يسمح لك استعمال هذا الإجراء"
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "صفحات مشابه"
+
+#, fuzzy
+msgid "page package"
+msgstr "صفحات مشابه"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
 msgstr ""
 
 msgid "Your subscription to this page has been removed."
@@ -2726,10 +3338,6 @@ msgstr ""
 msgid "File to load page content from"
 msgstr ""
 
-#, fuzzy
-msgid "Page Name"
-msgstr "صفحة جديدة\n"
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr ""
@@ -2751,10 +3359,6 @@ msgstr "لا يسمح للويكي بتنفيذ عملية %(actionname)s!"
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
-
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "لا يسمح لك استعمال هذا الإجراء"
 
 msgid "Views/day"
 msgstr ""
@@ -2805,6 +3409,9 @@ msgstr "إلى"
 msgid "Content"
 msgstr "تصريح"
 
+msgid "No recipients, nothing to do"
+msgstr ""
+
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr ""
@@ -2823,6 +3430,30 @@ msgstr ""
 msgid "anonymous"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "صفحة جديدة\n"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "تثبيت"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "تصريح"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "تصريح"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "لقد قمت بتسجيل الخروج."
+
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "نسخ إحتياطي / إستعادة ويكي"
 
@@ -2838,10 +3469,6 @@ msgstr ""
 #~ "attachment for the current page"
 #~ msgstr ""
 #~ "بإمكانك تحميل ملف مع صفحة جديدة أو اختيار تحميل الملف كملحق للصفحة الحالية"
-
-#, fuzzy
-#~ msgid "attachment"
-#~ msgstr "المرفقات"
 
 #, fuzzy
 #~ msgid "New Name"
