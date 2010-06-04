@@ -117,7 +117,6 @@ class RenamePage(ActionBase):
         else:
             redirect_label = _('Create redirect for renamed page?')
             subpages_html = ""
->>>>>>> other
 
         if self.show_redirect:
             redirect_html = '<tr><dd>%(redirect_label)s<input type="checkbox" name="rename_redirect" value="1" %(redirect)s></dd></tr>' % {
