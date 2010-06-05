@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -2809,7 +2809,7 @@ msgid "File to load page content from"
 msgstr ""
 
 #, fuzzy
-msgid "Page Name"
+msgid "Page name"
 msgstr "Nom nou"
 
 #, python-format

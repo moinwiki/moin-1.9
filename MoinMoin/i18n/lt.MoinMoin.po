@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2009-02-03 00:05+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -2931,7 +2931,7 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Failas, iš kurio įkelti puslapio turinį"
 
-msgid "Page Name"
+msgid "Page name"
 msgstr "Puslapio pavadinimas"
 
 #, python-format

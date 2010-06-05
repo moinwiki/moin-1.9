@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2009-03-16 18:41+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -2954,7 +2954,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Bestand met pagina-inhoud"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Paginanaam"
 
 #, python-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -2946,7 +2946,7 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Файл для загрузки содержания страницы"
 
-msgid "Page Name"
+msgid "Page name"
 msgstr "Имя страницы"
 
 #, python-format

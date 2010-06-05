@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -2909,7 +2909,7 @@ msgid "File to load page content from"
 msgstr ""
 
 #, fuzzy
-msgid "Page Name"
+msgid "Page name"
 msgstr "Nama paket"
 
 #, python-format

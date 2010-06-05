@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2009-01-26 00:10+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: français <traduc@traduc.org>\n"
@@ -3014,7 +3014,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Choisissez le fichier d'où importer le contenu de la page"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Nom de la page"
 
 #, python-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-12-02 15:24+0100\n"
 "Last-Translator: Jon Nordby <jononor@gmail.com>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -2914,7 +2914,7 @@ msgid "File to load page content from"
 msgstr ""
 
 #, fuzzy
-msgid "Page Name"
+msgid "Page name"
 msgstr "Pakkenavn"
 
 #, python-format

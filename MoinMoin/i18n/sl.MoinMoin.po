@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -2921,7 +2921,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Datoteka iz katere bo naložena vsebina strani"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Ime strani"
 
 #, python-format

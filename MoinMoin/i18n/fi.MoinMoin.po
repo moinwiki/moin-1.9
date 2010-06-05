@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -2929,7 +2929,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Tiedosto, josta ladataan sisältö sivulle"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Sivun nimi"
 
 #, python-format
