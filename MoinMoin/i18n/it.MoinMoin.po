@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-05 01:00+0200\n"
-"PO-Revision-Date: 2009-10-03 22:29+0200\n"
-"Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
+"PO-Revision-Date: 2010-05-13 11:24+0200\n"
+"Last-Translator: Nico Zanferrari <nicozanf@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgid ""
 "than you specified (%(localname)s)."
 msgstr ""
 "Il wiki remoto usa internamente un altro nome InterWiki (%(remotename)s) "
-"rispetto a quello specifato (%(localname)s)."
+"rispetto a quello specificato (%(localname)s)."
 
 msgid "Your changes are not saved!"
 msgstr "Le modifiche non sono state salvate."
@@ -61,7 +61,7 @@ msgstr "Il nome della pagina è troppo lungo, provarne uno più corto."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "Anteprima di \"%(pagename)s\""
+msgstr "Bozza di \"%(pagename)s\""
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -99,7 +99,7 @@ msgstr ""
 "Rivedere la pagina e salvarla, non salvarla così com'è."
 
 msgid "[Content loaded from draft]"
-msgstr "[Contenuto caricato dall'anteprima]"
+msgstr "[Contenuto caricato dalla bozza]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -122,12 +122,12 @@ msgid ""
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
 "'''<<BR>>Se per qualche motivo sono state perse le ultime modifiche senza "
-"averle salvate, l'anteprima personale, basata sulla revisione %(draft_rev)d "
+"averle salvate, l'anteprima personale, basata sulla bozza %(draft_rev)d "
 "(salvata %(draft_timestamp_str)s), può essere caricata al posto della "
-"revisione attuale %(page_rev)d usando il pulsante Carica anteprima.''' "
-"Un'anteprima viene salvata automaticamente facendo clic su Anteprima, "
-"annullando una modifica o quando la memorizzazione di una modifica non è "
-"stata eseguita correttamente."
+"revisione attuale %(page_rev)d usando il pulsante Carica bozza.''' Una bozza "
+"viene salvata automaticamente facendo clic su Anteprima, annullando una "
+"modifica o quando la memorizzazione di una modifica non è stata eseguita "
+"correttamente."
 
 #, python-format
 msgid "Describe %s here."
@@ -161,7 +161,7 @@ msgid "GUI Mode"
 msgstr "Modo grafico"
 
 msgid "Load Draft"
-msgstr "Carica anteprima"
+msgstr "Carica bozza"
 
 msgid "Trivial change"
 msgstr "Cambiamento banale"
@@ -326,7 +326,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<informazione non disponibile>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -930,6 +930,8 @@ msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see %"
 "(highlight_help_page)s."
 msgstr ""
+"Evidenziazione della sintassi non supportata per \"%(syntax)s\", consultare %"
+"(highlight_help_page)s."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -1220,11 +1222,11 @@ msgstr ""
 "La pagina \"%(pagename)s\" è stata rinominata da \"%(oldname)s\" da parte di "
 "%(editor)s:\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] Dati del tuo account wiki"
+msgstr "[%(sitename)s] Nuovo account utente creato"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on \"%(sitename)s\". "
 "Details follow:\n"
@@ -1238,7 +1240,7 @@ msgstr ""
 "    Nome utente: %(username)s\n"
 "    Indirizzo email: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "Aggiunto un nuovo allegato alla pagina %(pagename)s su %(sitename)s"
 
@@ -1262,11 +1264,11 @@ msgstr ""
 "Nome allegato: %(attach_name)s\n"
 "Dimensione allegato: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "Aggiunto un nuovo allegato alla pagina %(pagename)s su %(sitename)s"
+msgstr "Allegato rimosso dalla pagina %(pagename)s su %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1279,9 +1281,9 @@ msgid ""
 msgstr ""
 "Gentile utente del wiki,\n"
 "\n"
-"ti sei appena abbonato/a alla pagina \"%(page_name)s\" per le notifiche sui "
-"cambiamenti. È stato aggiunto un allegato a quella pagina da parte di %"
-"(editor)s e sono disponibili le seguenti informazioni:\n"
+"ti sei appena abbonato alla pagina \"%(page_name)s\" per le notifiche sulle "
+"modifiche. È stato aggiunto un allegato a quella pagina da parte di %(editor)"
+"s e sono disponibili le seguenti informazioni:\n"
 "\n"
 "Nome allegato: %(attach_name)s\n"
 "Dimensione allegato: %(attach_size)s\n"
@@ -1289,7 +1291,7 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
-"[%(sitename)s] Cambiamenti%(trivial)s della \"%(pagename)s\" a opera di %"
+"[%(sitename)s] Modifiche %(trivial)s di \"%(pagename)s\" a opera di %"
 "(username)s"
 
 msgid "Trivial "
@@ -1307,7 +1309,7 @@ msgid "Page has been modified"
 msgstr "La pagina è stata modificata"
 
 msgid "Page has been modified in a trivial fashion"
-msgstr "La pagina è stata banalmente modificata"
+msgstr "La pagina è stata modificata banalmente"
 
 msgid "Page has been renamed"
 msgstr "La pagina è stata rinominata"
@@ -1321,9 +1323,8 @@ msgstr "La pagina è stata copiata"
 msgid "A new attachment has been added"
 msgstr "È stato aggiunto un nuovo allegato"
 
-#, fuzzy
 msgid "An attachment has been removed"
-msgstr "È stato aggiunto un nuovo allegato"
+msgstr "È stato rimosso un allegato"
 
 msgid "A page has been reverted to a previous state"
 msgstr "Una pagina è stata ripristinata a uno stato precedente"
@@ -1487,6 +1488,8 @@ msgstr "PaginaPersonalePrivataModello"
 msgid "HomepageGroupsTemplate"
 msgstr "PaginaPersonaleGruppiModello"
 
+# could someone please check/fix the fuzzy strings for the italian translation?
+# don't forget to remove the fuzzy markers after you've made sure the translation is ok.
 #, fuzzy
 msgid "SlideShowHandOutTemplate"
 msgstr "DispensaPresentazioneModello"
@@ -1608,7 +1611,7 @@ msgstr "AiutoSuDizionari"
 
 #, fuzzy
 msgid "HelpOnDrawings"
-msgstr "AiutoSuFormattazione"
+msgstr "AiutoSuDisegni"
 
 msgid "HelpOnEditLocks"
 msgstr "AiutoSuBloccoModifica"
@@ -2069,21 +2072,17 @@ msgstr "Esploratore allegati"
 msgid "User account browser"
 msgstr "Esploratore account utente"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "Descrizione"
+msgstr "Descrizione lexer"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "Nome utente"
+msgstr "Nomi lexer"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "Tipo del file"
+msgstr "Modelli di file"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "qualsiasi tipo mime"
+msgstr "Tipi MIME"
 
 msgid "Wiki configuration"
 msgstr "Configurazione wiki"
@@ -2290,9 +2289,8 @@ msgstr "contenente uno o più dei seguenti termini"
 msgid "not containing the following terms"
 msgstr "non contenente i seguenti termini"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
-msgstr "modificato per l'ultima volta durante (es. le ultime 2 settimane)"
+msgstr "modificato l'ultima volta da (es. le ultime 2 settimane)"
 
 msgid "any category"
 msgstr "qualsiasi categoria"
@@ -3157,17 +3155,19 @@ msgid ""
 "Showing page edit history entries from '''%(start_offset)d''' to '''%"
 "(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
+"È visualizzata la cronologia delle modifiche alla pagina da '''%"
+"(start_offset)d''' a '''%(end_offset)d''' su un totale di '''%(total_count)"
+"d'''."
 
-#, fuzzy
 msgid "Newer"
-msgstr "Nuovo nome"
+msgstr "Successiva"
 
 msgid "Older"
-msgstr ""
+msgstr "Precedente"
 
 #, python-format
 msgid "%s items per page"
-msgstr ""
+msgstr "%s elementi per pagina"
 
 msgid "Date"
 msgstr "Data"
@@ -3256,13 +3256,13 @@ msgid "Please choose:"
 msgstr "Scegliere:"
 
 msgid "Create redirect for renamed page(s)?"
-msgstr ""
+msgstr "Creare una ridirezione per le pagine rinominate?"
 
 msgid "Rename all /subpages too?"
 msgstr "Rinominare anche tutte le /sotto-pagine?"
 
 msgid "Create redirect for renamed page?"
-msgstr ""
+msgstr "Creare una ridirezione per la pagina rinominata?"
 
 msgid "Really rename this page?"
 msgstr "Rinominare veramente questa pagina?"
@@ -3282,29 +3282,23 @@ msgstr "Ragione facoltativa per la copia"
 msgid "Really copy this page?"
 msgstr "Copiare veramente questa pagina?"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "Collegamento allegato"
+msgstr "Percorso allegato"
 
-#, fuzzy
 msgid "Page name"
 msgstr "Nome pagina"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "Nuovo nome dell'allegato"
+msgstr "Nome allegato"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "Collegamento allegato"
+msgstr "Aggiorna elenco allegati"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "[%d allegati]"
+msgstr "Elenco allegati"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "Allegati per \"%(pagename)s\""
+msgstr "Allegati presenti nella pagina"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -3331,40 +3325,35 @@ msgstr "Modifica precedente"
 msgid "Next change"
 msgstr "Modifica successiva"
 
-#, fuzzy
 msgid "Diff with oldest revision in left pane"
-msgstr "Non ci sono revisioni precedenti."
+msgstr "Differenze con la versione più vecchia a sinistra"
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "Non ci sono revisioni precedenti."
+msgstr "Non ci sono revisioni precedenti da comparare"
 
-#, fuzzy
 msgid "Diff with older revision in left pane"
-msgstr "Non ci sono revisioni precedenti."
+msgstr "Differenze con la versione precedente a sinistra"
 
 msgid "Diff with newer revision in left pane"
-msgstr ""
+msgstr "Differenze con la versione successiva a sinistra"
 
 msgid "Can't change to revision newer than in right pane"
-msgstr ""
+msgstr "Impossibile passare a una revisione successiva di quella a destra"
 
 msgid "Diff with older revision in right pane"
-msgstr ""
+msgstr "Differenze con la versione precedente a destra"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr ""
+msgstr "Impossibile passare a una revisione precedente di quella a sinistra"
 
 msgid "Diff with newer revision in right pane"
-msgstr ""
+msgstr "Differenze con la versione successiva a destra"
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "Non ci sono revisioni precedenti."
+msgstr "Non ci sono revisioni successive da comparare"
 
-#, fuzzy
 msgid "Diff with newest revision in right pane"
-msgstr "Non ci sono revisioni precedenti."
+msgstr "Differenze con la versione più recente a destra"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3424,9 +3413,8 @@ msgstr "Disegno selezionabile: %(filename)s"
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Non si è autorizzati a salvare un disegno in questa pagina."
 
-#, fuzzy
 msgid "Empty target name given."
-msgstr "Fornito obiettivo vuoto."
+msgstr "Nome destinazione vuoto."
 
 msgid "Edit drawing"
 msgstr "Modifica il disegno"
@@ -3649,7 +3637,7 @@ msgid "page size upper bound [bytes]"
 msgstr "dimensione massima della pagina [byte]"
 
 msgid "# of pages of this size"
-msgstr "n. di pagine di questa dimensione"
+msgstr "n° di pagine di questa dimensione"
 
 msgid "From"
 msgstr "Da"
@@ -3661,7 +3649,7 @@ msgid "Content"
 msgstr "Oggetto"
 
 msgid "No recipients, nothing to do"
-msgstr ""
+msgstr "Nessun destinatario, non è possibile fare nulla"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"

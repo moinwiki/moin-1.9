@@ -1367,13 +1367,13 @@ msgid "about"
 msgstr ""
 
 msgid "RecentChanges"
-msgstr "СкорошниПромени"
+msgstr "ПоследниПромени"
 
 msgid "WikiTipOfTheDay"
 msgstr ""
 
 msgid "TitleIndex"
-msgstr "ЗаглавенУказател"
+msgstr "АзбученУказател"
 
 msgid "WordIndex"
 msgstr "ПредметенУказател"
@@ -1402,7 +1402,7 @@ msgid "FrontPage"
 msgstr "НачалнаСтраница"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "УикиПясъчник"
 
 #, fuzzy
 msgid "InterWiki"
@@ -1460,7 +1460,7 @@ msgid "CategoryHomepage"
 msgstr ""
 
 msgid "CategoryTemplate"
-msgstr ""
+msgstr "ШаблонКатегория"
 
 msgid "HomepageTemplate"
 msgstr ""
@@ -1557,7 +1557,7 @@ msgid "HelpOnXapian"
 msgstr "ПомощЗаФорматиране"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "СинтактичноУпътване"
 
 #, fuzzy
 msgid "HelpOnCreoleSyntax"

@@ -875,7 +875,7 @@ msgstr ""
 " Tabulky:: || text buněk |||| text dvou spojených buněk ||;    nejsou "
 "dovoleny mezery za nadpisy a tabulkami.\n"
 "\n"
-"(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.\n"
+"(!) Další nápověda viz HelpOnEditing nebo NapovedaProMoinWikiSyntax.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1357,7 +1357,7 @@ msgid "RecentChanges"
 msgstr "PosledniZmeny"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "WikiTipProTentoDen"
 
 msgid "TitleIndex"
 msgstr "RejstrikStranek"
@@ -1374,68 +1374,59 @@ msgstr "ChybejiciStranka"
 msgid "MissingHomePage"
 msgstr "ChybejiciDomovskaStranka"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "ChybejiciDomovskaStranka"
+msgstr "DomovskaStranka"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Jméno"
+msgstr "WikiNazev"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "SitWikiWiki"
 
 msgid "FrontPage"
 msgstr "HlavniStranka"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiPiskoviste"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "OdkazyInterWiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "OpusteneStranky"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "Zbalit stránky"
+msgstr "OsireleStranky"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "NajdiStranku"
+msgstr "ChybejiciStranky"
 
 msgid "EventStats"
-msgstr ""
+msgstr "Statistiky"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "Statistiky/Zhlednuti"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "Statistiky/Jazyky"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "Statistiky/Prohlizece"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "Velikost"
+msgstr "VelikostiStranek"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "Stránek"
+msgstr "NavstevnostStranek"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "PřejmenovatStránku"
+msgstr "NahodnaStranka"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Verze Python"
+msgstr "XsltVersion"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "KolackyStesteny"
 
 msgid "WikiLicense"
 msgstr "LicenceWiki"
@@ -1544,7 +1535,7 @@ msgid "HelpOnXapian"
 msgstr "HelpFormatovani"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "NapovedaProMoinWikiSyntax"
 
 #, fuzzy
 msgid "HelpOnCreoleSyntax"
@@ -1553,22 +1544,20 @@ msgstr "HelpObsah"
 msgid "HelpOnFormatting"
 msgstr "HelpFormatovani"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "Verze MoinMoin"
+msgstr "CoJeMoinMoin"
 
 msgid "HelpContents"
-msgstr "HelpObsah"
+msgstr "NapovedaObsah"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "NapovedaProZacatecniky"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "NapovedaProUzivatele"
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "RejstrikStranek"
+msgstr "NapovedaIndex"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
@@ -1616,7 +1605,7 @@ msgid "HelpOnGroups"
 msgstr "HelpObsah"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "NapovedaProNadpisy"
 
 #, fuzzy
 msgid "HelpOnImages"
@@ -1663,9 +1652,8 @@ msgstr "StromUmisteni"
 msgid "HelpOnOpenIDProvider"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "HelpFormatovani"
+msgstr "NapovedaTvorbaStranky"
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1683,9 +1671,8 @@ msgstr ""
 msgid "HelpOnRules"
 msgstr "HelpObsah"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "HelpFormatovani"
+msgstr "NapovedaVyhledavani"
 
 #, fuzzy
 msgid "HelpOnSlideShows"
@@ -2334,7 +2321,7 @@ msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
 msgstr ""
-"Váš dotaz {{{\"%s\"}}} je neplatný. Více informací viz HelpOnSearching."
+"Váš dotaz {{{\"%s\"}}} je neplatný. Více informací viz NapovedaVyhledavani."
 
 msgid "Markup"
 msgstr "Markup"
@@ -3484,7 +3471,7 @@ msgid ""
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
 "Váš dotaz {{{\"%s\"}}} je bez výsledků. Prosím změňte některý z výrazů a "
-"obraťte se na HelpOnSearching pro více informací.%s"
+"obraťte se na NapovedaVyhledavani pro více informací.%s"
 
 msgid "(!) Consider performing a"
 msgstr "(!) Zvažte"
