@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -2821,7 +2821,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "תוכן הדף"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "שם הדף"
 
 #, python-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -2924,7 +2924,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Датотека од која треба да се вчита содржината на страницата"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Име на страницата"
 
 #, python-format

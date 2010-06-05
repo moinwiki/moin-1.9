@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -2847,7 +2847,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Lapas satura ielādes datne"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Lapas nosaukums"
 
 #, python-format

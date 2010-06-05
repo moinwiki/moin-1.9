@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -2910,7 +2910,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "فایل بارگذاری محتویات صفحه"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "نام صفحه"
 
 #, python-format

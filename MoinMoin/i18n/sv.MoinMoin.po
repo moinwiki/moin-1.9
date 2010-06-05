@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-09-25 20:00+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -2904,7 +2904,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "Fil för att ladda sidinnehåll ifrån"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "Sidnamn"
 
 #, python-format

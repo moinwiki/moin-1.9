@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-14 02:48+0100\n"
+"POT-Creation-Date: 2010-03-06 22:44+0100\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -2822,7 +2822,8 @@ msgstr ""
 msgid "File to load page content from"
 msgstr "用于加载页面内容的文件"
 
-msgid "Page Name"
+#, fuzzy
+msgid "Page name"
 msgstr "打包文件名"
 
 #, python-format
