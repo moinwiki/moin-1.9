@@ -3310,13 +3310,13 @@ msgid "Can't change to revision older than revision in left pane"
 msgstr "Нельзя перейти к версии более старой, чем присутствует в левой панели"
 
 msgid "Diff with newer revision in right pane"
-msgstr "Перейти к сравнению более новой версии в левой панели"
+msgstr "Перейти к сравнению более новой версии в правой панели"
 
 msgid "No newer revision available for diff"
 msgstr "Нет более новых версий для сравнения"
 
 msgid "Diff with newest revision in right pane"
-msgstr "Перейти к сравнению самой новой версии в левой панели"
+msgstr "Перейти к сравнению самой новой версии в правой панели"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"

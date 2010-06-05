@@ -6,6 +6,11 @@
 #format gettext
 #language lv
 
+## Hi Radomir, sorry about that youtube texts, they accidentally got in because my repository contained non-repo stuff I worked on.
+## I noticed it some minutes later and did another update, but you were faster. :)
+## BTW, I noticed there are quite some fuzzy strings in lv translation. If you have a bit time, you maybe want to improve those by
+## checking whether the fuzzy translation is correct and (after fixing, if needed) REMOVING THE FUZZY MARKER.
+ 
 #
 # MoinMoin lv system text translation
 #
@@ -3541,6 +3546,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonīms"
+
+#~ msgid "View the related videos on YouTube."
+#~ msgstr "Skatīties saistītos YouTube video klipus."
+
+#~ msgid "View the video on YouTube."
+#~ msgstr "Skatīties YouTube video klipu."
 
 #~ msgid "New user account created on %(sitename)s"
 #~ msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
