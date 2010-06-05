@@ -17,6 +17,26 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
+Version 1.8.8:
+  Fixes:
+    * Fixed XSS issues (see MoinMoinBugs/1.9.2UnescapedInputForThemeAddMsg).
+    * Fixed XSS in Despam action (CVE-2010-0828).
+    * wikiutil.clean_input: avoid crash if it gets str type
+    * Add RenderAsDocbook to actions_excluded if we have no python-xml
+    * AttachFile._build_filelist: verifies readonly flag for unzip file link
+    * attachUrl: fix wrongly generated tickets (e.g. for AttachList macro)
+    * MoinMoin.util.filesys.dc* (dircache can't work reliably):
+      * disable usage of dircache, deprecate dc* functions
+      * remove all calls to filesys.dc* (dclistdir, dcdisable)
+    * Fixed crash, see MoinMoinPatch/IncludeMacroWithDocBookFormatter
+    * Avoid hardly recoverable crashes if #format specification is invalid
+
+  New features:
+    * auth.ldap_login: add report_invalid_credentials param to control wrong
+      credentials error message (typically used when using multiple ldap
+      authenticators)
+
+
 Version 1.8.7:
   Fixes:
   * Fixed major security issues in miscellaneous parts of moin.
