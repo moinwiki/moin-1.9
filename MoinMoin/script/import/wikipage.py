@@ -43,6 +43,8 @@ General syntax: moin [options] import wikipage [wikipage-options]
         self.parser.add_option('--no-backup', dest='revision_backup',
                 default=True, action='store_false',
                 help="Suppress making a page backup per revision")
+        self._update_option_help('--page',
+                'Name of the wiki page which should be imported')
 
     def mainloop(self):
         self.init_request()

@@ -171,6 +171,13 @@ class MoinScript(Script):
             help="wiki page name [default: all pages]"
         )
 
+    def _update_option_help(self, opt_string, help_msg):
+        """ Update the help string of an option. """
+        for option in self.parser.option_list:
+            if option.get_opt_string() == opt_string:
+                option.help = help_msg
+                break
+
     def init_request(self):
         """ create request """
         from MoinMoin.web.contexts import ScriptContext
