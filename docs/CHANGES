@@ -48,6 +48,8 @@ Version 1.9.3:
     because if pages get uploaded by xmlrpc then the draft cache file can
     rapidly increase in size, causing high memory usage because it needs to
     get loaded into memory for updating/processing.
+  * Emit Content-Type header (with charset) for SlideShow action and many other
+    actions that just call send_title().
 
   New features:
   * RenamePage action: added ability to create redirect pages when renaming
