@@ -1620,6 +1620,9 @@ var gui_editor_link_text = "%(text)s";
         page_find_page = wikiutil.getLocalizedPage(request, 'FindPage').page_name
         home_page = wikiutil.getInterwikiHomePage(request) # sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
         page_parent_page = getattr(page.getParentPage(), 'page_name', None)
+        
+        # set content_type, including charset, so web server doesn't touch it:
+        request.content_type = "text/html; charset=%s" % (config.charset, )
 
         # Prepare the HTML <head> element
         user_head = [request.cfg.html_head]
