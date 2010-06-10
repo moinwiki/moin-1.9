@@ -66,6 +66,8 @@ General syntax: moin [options] import irclog [irclog-options]
             help="read files from DIRECTORY"
         )
         self.parser.add_option("--acl", dest="acl", default="", help="Set a specific ACL for the pages.")
+        self._update_option_help("--page",
+            "page name prefix for the irc logs to be imported")
 
     def mainloop(self):
         self.init_request()
