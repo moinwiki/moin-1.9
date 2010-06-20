@@ -1643,7 +1643,7 @@ var gui_editor_link_text = "%(text)s";
             not keywords.get('print_mode', 0) and
             request.user.edit_on_doubleclick):
             if request.user.may.write(pagename): # separating this gains speed
-                user_head.append('<meta name="edit_on_doubleclick" content="1">\n')
+                user_head.append('<meta name="edit_on_doubleclick" content="%s">\n' % (request.script_root or '/'))
 
         # search engine precautions / optimization:
         # if it is an action or edit/search, send query headers (noindex,nofollow):
