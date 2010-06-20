@@ -398,12 +398,106 @@ var getElementsByClassName = function (className, tag, elm){
 // GPL 2.0 or incorporate it into projects that use GPL 2.0.
 // -- Radomir Dopieralski and Roger D. Haase
 
+// Debugging helpers
+//  save debugging state in cookie - presence of a cookie means debugging mode is on
+cookiePath = '/';
+function autoScrollSetCookie (){
+    document.cookie = 'autoscrolldebug=on; path=' + cookiePath + '; ';
+}
+function autoScrollDeleteCookie (){
+    var cookie_date = new Date ( );  // current date & time
+    cookie_date.setTime ( cookie_date.getTime() - 1 );
+    document.cookie = 'autoscrolldebug=; expires=' + cookie_date.toGMTString() + '; path=' + cookiePath + '; ';
+}
+function autoScrollGetCookie (){
+    var results = document.cookie.match ( '(^|;) ?' + "autoscrolldebug" + '=([^;]*)(;|$)' );
+    if ( results ) {
+        return ( unescape ( results[2] ) );
+    } else {
+        return null;
+    }
+}
+// turn on debugging mode by previewing, saving or reading a page with "auto scroll debug on" within an h1 header
+// = My Page auto scroll debug on =
+// once set on,debug mode says on for current session or until turned off with
+// = My Page auto scroll debug off =
+autoScrollDebugOn = 0;
+// this function executed on page load
+function turnDebugOnOrOff () {
+    // set global variable for use by cookie functions
+    cookiePath = document.getElementsByName('edit_on_doubleclick')[0].content;
+    var hOnes = document.getElementsByTagName('H1');
+    for (var i = 0; i < hOnes.length; ++i) {
+        var header = hOnes[i].textContent || hOnes[i].innerText;
+        if (header.match ('auto scroll debug on')) {
+            autoScrollSetCookie ();
+        }
+        if (header.match ('auto scroll debug off')) {
+            autoScrollDeleteCookie ();
+        }
+    }
+    if (autoScrollGetCookie ()) {
+        autoScrollDebugOn = 1;
+    } else {
+        autoScrollDebugOn = 0;
+    }
+}
+
+// functions used for testing - mouseover tooltip with tagName and scroll line number
+function doMouseOver(e) {
+    var targ = getNode(e);
+    targ.title = 'tagName='+targ.tagName+'  line='+targ.scrollLine;
+}
+function doMouseOut(e) {
+    var targ = getNode(e);
+    targ.removeAttribute('title');
+}
+// add leading zeros to hours, minutes, seconds, milliseconds
+function leadingZeros (nbr,count) { 
+    var strNbr = nbr + '';
+    while (strNbr.length < count) {
+        strNbr = "0" + strNbr; 
+    }
+    return strNbr;
+}
+// format hours, minutes, seconds, and ms
+function formatTime (t) {
+    var sHours = leadingZeros (t.getHours(), 2);
+    var sMinutes = leadingZeros (t.getMinutes (), 2);
+    var sSeconds = leadingZeros (t.getSeconds (), 2);
+    var sMilliseconds = leadingZeros (t.getMilliseconds (), 3);
+    return sHours + ':' + sMinutes + ':' + sSeconds + ':' + sMilliseconds;
+}
+
+// this variable is available as easy way to display trace info
+autoDebugTrace = '';
+function showStartStopTimes (startTime) {
+    // display a message with start and end times at top of page
+    var endTime = new Date();
+    var tStart ='auto scroll debug on -- Initialization start H:M:S:ms=' + formatTime (startTime);
+    var tEnd = '  end H:M:S:ms=' + formatTime (endTime);
+    var timingMsg = document.createElement ('P');
+    timingMsg.innerHTML = tStart + tEnd;
+    timingMsg.style. color = "red";
+    var contentDiv;
+    if (document.getElementById ('preview')) {
+        contentDiv = document.getElementById ('preview');
+    } else {
+        contentDiv = document.getElementById ('content');
+    }
+    contentDiv.insertBefore (timingMsg, contentDiv.firstChild);
+    // display trace info is there is any
+    if (autoDebugTrace) {
+        alert(autoDebugTrace);
+    }
+}
+// end of debugging helpers
+
 // this scrolls the textarea after a doubleclick - jumpLine is scroll-to line
 function scrollTextarea(jumpLine) {
     var txtBox = document.getElementById('editor-textarea');
+    scroll(0,0); 
     if (txtBox) {
-        // scroll to top of page in case user  doubleclicked in edit preview  
-        scroll(0,0); 
         // Calculate the cursor position - IE supports innerText, not textContent
         var textLines = txtBox.textContent || txtBox.innerText;
         textLines = textLines.match(/(.*\n)/g);
@@ -445,11 +539,7 @@ function scrollTextarea(jumpLine) {
             range.select();
             txtBox.__column = 1;
         }
-    } else {
-        // no editor-textarea means gui editor; scroll to top in case this was
-        // double-click on draft preview
-        scroll(0,0);
-    }
+    } 
 }
 
 // stop event bubbling
@@ -476,6 +566,7 @@ function getNode(e) {
 // add action=edit and scrollLine to document.location
 function doActionEdit(e) {
     var targ = getNode(e);
+    // MoinMoin counts starting with 1, scrollTextarea starts with 0
     document.location.search = '?action=edit&line='+(targ.scrollLine-1);
 }
 
@@ -485,16 +576,6 @@ function doTextareaScroll(e) {
     scrollTextarea(targ.scrollLine-1);
 }
 
-// functions used for testing - pops up tooltip with tagName and scroll line number
-function doMouseOver(e) {
-    var targ = getNode(e);
-    targ.title = 'tagName='+targ.tagName+'  line='+targ.scrollLine;
-}
-function doMouseOut(e) {
-    var targ = getNode(e);
-    targ.removeAttribute('title');
-}
-
 // This is the function that registers double clicks.
 // isPreview is true if the current page is an edit draft preview
 function setCallback(node, line, isPreview) {
@@ -502,29 +583,27 @@ function setCallback(node, line, isPreview) {
         // this node already processed
         return;
     } else {
-        // MoinMoin counts starting with 1, scrollTextarea starts with 0
         node.scrollLine = line;
-        if (isPreview) {
-            if(window.addEventListener){ 
+        if(window.addEventListener){ 
+            if (isPreview) {
                 node.addEventListener('dblclick',doTextareaScroll,false);
-                //~ node.addEventListener('mouseover', doMouseOver,false); // @@@ for testing
-                //~ node.addEventListener('mouseout',doMouseOut,false); // @@@ for testing
             } else {
-                // IE
-                node.attachEvent('ondblclick',doTextareaScroll);
-                //~ node.attachEvent('onmouseover', doMouseOver,false); // @@@ for testing
-                //~ node.attachEvent('onmouseout',doMouseOut,false); // @@@ for testing
+                node.addEventListener('dblclick',doActionEdit,false);
+            }
+            if (autoScrollDebugOn) {
+                node.addEventListener('mouseover', doMouseOver,false); 
+                node.addEventListener('mouseout',doMouseOut,false); 
             }
         } else {
-            if(window.addEventListener){ 
-                node.addEventListener('dblclick',doActionEdit,false);
-                //~ node.addEventListener('mouseover', doMouseOver,false); // @@@ for testing
-                //~ node.addEventListener('mouseout',doMouseOut,false); // @@@ for testing
+            // IE
+            if (isPreview) {
+                node.attachEvent('ondblclick',doTextareaScroll);
             } else {
-                // IE
                 node.attachEvent('ondblclick',doActionEdit);
-                //~ node.attachEvent('onmouseover', doMouseOver,false); // @@@ for testing
-                //~ node.attachEvent('onmouseout',doMouseOut,false); // @@@ for testing
+            }
+            if (autoScrollDebugOn) {
+                node.attachEvent('onmouseover', doMouseOver,false); 
+                node.attachEvent('onmouseout',doMouseOut,false);
             }
         }
     }
@@ -584,10 +663,16 @@ function setSpanTags(isPreview) {
             marks.push(spanTags[i]);
         }
     }
-    var bottom = document.getElementById('bottom');
     var top = document.getElementById('content');
-    // add stopping point to end of array for convenience
-    marks.push(bottom); 
+    var bottom = document.getElementById('bottom');
+    // add expected stopping point to end of array for convenience
+    if (bottom) {
+        marks.push(bottom); 
+    } else {
+        if (autoScrollDebugOn) {
+            alert("auto scroll debug 1: document.getElementById('bottom') failed");
+        }
+    }
     var skipTo = -1; 
     // loop through span tags and apply double-click events to appropriate node(s) 
     for (i = 0; i < marks.length-1; ++i) {
@@ -609,14 +694,32 @@ function setSpanTags(isPreview) {
                 var nbrParsedLines = j - i;
                 var parsedLineNbr = lineParts[1] - nbrParsedLines - 1;
                 for (var k = 0; k < nbrParsedLines; ++k) { 
-                    walkDom (marks[i+k], parsedLineNbr+k, isPreview, marks[i+k+1].id, top.id);
+                    if (marks[i+k] && marks[i+k+1] && marks[i+k+1].id) {
+                        walkDom (marks[i+k], parsedLineNbr+k, isPreview, marks[i+k+1].id, top.id);
+                    } else {
+                        if (autoScrollDebugOn) {
+                            alert('auto scroll debug 2: skipping walkDom, i=' + i + ' k=' + k + ' marks[i].id=' + marks[i].id);
+                        }
+                    }
                 }
                 // done with embedded parser lines, tell main loop to skip these
                 skipTo = j - 1; 
             } else {
                 // walk part of DOM and apply doubleclick function to every node with a tagname
-                walkDom (mark, line, isPreview, marks[i+1].id, top.id);
+                if (marks[i+1] && marks[i+1].id) {
+                    walkDom (mark, line, isPreview, marks[i+1].id, top.id);
+                } else {
+                    if (autoScrollDebugOn) {
+                        alert('auto scroll debug 3: skipping walkDom, i=' + i + ' marks[i].id=' + marks[i].id);
+                    }
+                }
             }
+        }
+    }
+    if (autoScrollDebugOn)  {
+        for (i = 0; i < marks.length-1; ++i) {
+            marks[i].innerHTML = ' ' + marks[i].id + ' ';
+            marks[i].style. color = "red";
         }
     }
 }
@@ -628,6 +731,7 @@ function scrollTextareaInit() {
     if (!document.getElementsByName('edit_on_doubleclick').length) {
         return;
     }
+    turnDebugOnOrOff ();
     // are we viewing a page - both gui and text editors will have button named button_save
     if (!document.getElementsByName('button_save').length) {
         setSpanTags(0);
@@ -637,7 +741,9 @@ function scrollTextareaInit() {
     var lineMatch = document.location.search.match(/line=(\d*)/);
     if (lineMatch) {
         scrollTextarea(lineMatch[1]);
-    } else {
+        return;
+    } 
+    if (document.getElementById('preview')) {
         // is an editor preview
         setSpanTags(1);
     }
@@ -663,7 +769,11 @@ function runScrollTextareaInitOnce() {
         return;
     }
     scrollTextareaInitComplete = 1;
+    var startTime = new Date();
     scrollTextareaInit();
+    if (autoScrollDebugOn && document.getElementById('content')) {
+        showStartStopTimes(startTime);
+    }
 }
 
 // speed up most browsers -- run my function As Soon As Possible
