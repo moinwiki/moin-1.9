@@ -45,9 +45,16 @@ class ActionBase:
 
     Note: the action name is the class name of the derived class
     """
-    def __init__(self, pagename, request):
+    def __init__(self, pagename, request, only_form=False):
         self.request = request
-        self.form = request.form
+        if only_form:
+            # use only form (POST) data, this was 1.9.0 .. 1.9.2 default,
+            # but different from 1.8 behaviour:
+            self.form = request.form
+        else:
+            # use query string values mixed with post form data - this gives
+            # better compatibility to moin 1.8 behaviour
+            self.form = request.values
         self.cfg = request.cfg
         self._ = _ = request.getText
         self.pagename = pagename
