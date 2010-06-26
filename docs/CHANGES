@@ -50,6 +50,8 @@ Version 1.9.3:
     get loaded into memory for updating/processing.
   * Emit Content-Type header (with charset) for SlideShow action and many other
     actions that just call send_title().
+  * ActionBase: better compatibility to moin 1.8, use request.values by
+    default, optionally use request.form data only
 
   New features:
   * RenamePage action: added ability to create redirect pages when renaming
@@ -73,7 +75,7 @@ Version 1.9.3:
   * upgraded pygments from 1.2.2 to 1.3.1
   * upgraded FCKeditor from 2.6.4.1 to 2.6.6
   * added configuration snippet for ldap authentication against 2 servers
-
+  * improved script help output
 
 Version 1.9.2:
   Fixes:
