@@ -152,7 +152,7 @@ class MoinWriter(html4css1.Writer):
         if current_version < required_version:
             err = 'ERROR: The installed docutils version is %s;' % ('.'.join([str(i) for i in current_version]))
             err += ' version %s or later is required.' % ('.'.join([str(i) for i in required_version]))
-            raise RuntimeError, err
+            raise RuntimeError(err)
 
     def translate(self):
         visitor = MoinTranslator(self.document,

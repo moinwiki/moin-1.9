@@ -146,7 +146,7 @@ class Permissions:
         """
         request = self.request
         if attr not in request.cfg.acl_rights_valid:
-            raise AttributeError, attr
+            raise AttributeError(attr)
         return lambda pagename: _check(self.request, pagename, self.name, attr)
 
 
