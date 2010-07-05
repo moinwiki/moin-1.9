@@ -358,7 +358,7 @@ def copytree(src, dst, symlinks=False):
         except (IOError, os.error), why:
             errors.append((srcname, dstname, why))
     if errors:
-        raise EnvironmentError, errors
+        raise EnvironmentError(str(errors))
 
 # Code could come from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65203
 

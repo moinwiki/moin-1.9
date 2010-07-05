@@ -98,7 +98,7 @@ class Formatter(FormatterBase):
         if tag == 'p':
             FormatterBase.paragraph(self, 0)
         if self.tag_stack[-1][0] != tag:
-            raise ValueError, "closing of <%s> expected, but <%s> closed" % (self.tag_stack[-1][0], tag)
+            raise ValueError("closing of <%s> expected, but <%s> closed" % (self.tag_stack[-1][0], tag))
         self.position = self.position.parentNode
         return self.tag_stack.pop()
 
@@ -157,7 +157,7 @@ class Formatter(FormatterBase):
                 else:
                     self.request.write("tag_stack: %r\n" % self.tag_stack)
                     self.request.write(self.document.documentElement.toprettyxml(" "))
-                    raise ValueError, "closing of <%s> expected, but <%s> closed" % (last_tag, tag)
+                    raise ValueError("closing of <%s> expected, but <%s> closed" % (last_tag, tag))
             self._close_tag(tag)
             tags_to_reopen.reverse()
             for tag_name, args in tags_to_reopen:

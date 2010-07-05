@@ -601,7 +601,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         if not (request.user.may.delete(self.page_name)
                 and request.user.may.write(newpagename)):
             msg = _('You are not allowed to rename this page!')
-            raise self.AccessDenied, msg
+            raise self.AccessDenied(msg)
 
         if not newpagename:
             return False, _("You can't rename to an empty pagename.")
@@ -708,7 +708,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         if not (request.user.may.write(self.page_name)
                 and request.user.may.delete(self.page_name)):
             msg = _('You are not allowed to delete this page!')
-            raise self.AccessDenied, msg
+            raise self.AccessDenied(msg)
 
         try:
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'', deleted=True, notify=False)
@@ -959,10 +959,10 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                     if err.errno == 2: # there was no 'current' file
                         time.sleep(0.1)
                     else:
-                        raise self.CouldNotLock, _("Page could not get locked. Unexpected error (errno=%d).") % err.errno
+                        raise self.CouldNotLock(_("Page could not get locked. Unexpected error (errno=%d).") % err.errno)
 
             if not got_lock:
-                raise self.CouldNotLock, _("Page could not get locked. Missing 'current' file?")
+                raise self.CouldNotLock(_("Page could not get locked. Missing 'current' file?"))
 
             # increment rev number of current(-locked) page
             f = file(clfn)
@@ -971,7 +971,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             try:
                 rev = int(revstr)
             except ValueError, err:
-                raise self.SaveError, _("Unable to determine current page revision from the 'current' file. The page %s is damaged and cannot be edited right now.") % self.page_name
+                raise self.SaveError(_("Unable to determine current page revision from the 'current' file. The page %s is damaged and cannot be edited right now.") % self.page_name)
 
             if not was_deprecated:
                 if self.do_revision_backup or rev == 0:
@@ -989,9 +989,9 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                     pass # we don't care for errors in the os.remove
                 # throw a nicer exception
                 if err.errno == errno.ENOSPC:
-                    raise self.SaveError, _("Cannot save page %s, no storage space left.") % self.page_name
+                    raise self.SaveError(_("Cannot save page %s, no storage space left.") % self.page_name)
                 else:
-                    raise self.SaveError, _("An I/O error occurred while saving page %s (errno=%d)") % (self.page_name, err.errno)
+                    raise self.SaveError(_("An I/O error occurred while saving page %s (errno=%d)") % (self.page_name, err.errno))
             # atomically put it in place (except on windows)
             else:
                 filesys.rename(cltfn, clfn)
@@ -1065,13 +1065,13 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         msg = ""
         if not request.user.may.save(self, newtext, rev, **kw):
             msg = _('You are not allowed to edit this page!')
-            raise self.AccessDenied, msg
+            raise self.AccessDenied(msg)
         elif not self.isWritable():
             msg = _('Page is immutable!')
-            raise self.Immutable, msg
+            raise self.Immutable(msg)
         elif not newtext:
             msg = _('You cannot save empty pages.')
-            raise self.EmptyPage, msg
+            raise self.EmptyPage(msg)
         elif rev != 0 and rev != self.current_rev():
             # check if we already saved that page
             other = False
@@ -1090,16 +1090,16 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                     return msg
                 else:
                     msg = _("You already edited this page! Please do not use the back button.")
-                    raise self.EditConflict, msg
+                    raise self.EditConflict(msg)
 
                 msg = _("""Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!""")
 
-            raise self.EditConflict, msg
+            raise self.EditConflict(msg)
         elif newtext == self.get_raw_body():
             msg = _('You did not change the page content, not saved!')
             self.lock.release()
-            raise self.Unchanged, msg
+            raise self.Unchanged(msg)
         else:
             from MoinMoin.security import parseACL
             # Get current ACL and compare to new ACL from newtext. If
@@ -1111,7 +1111,7 @@ Please review the page and save then. Do not save this page as it is!""")
                 parseACL(request, newtext).acl != acl.acl and
                 action != "SAVE/REVERT"):
                 msg = _("You can't change ACLs on this page since you have no admin rights on it!")
-                raise self.NoAdmin, msg
+                raise self.NoAdmin(msg)
 
         presave = PagePreSaveEvent(request, self, newtext)
         results = send_event(presave)
