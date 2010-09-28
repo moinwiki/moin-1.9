@@ -16,6 +16,12 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Current:
+  Fixes:
+   * fix for MoinMoinBugs/SinglePageSlideShowAndParserMarkup (thanks to Paul Boddie)
+  New Features:
+   * print mode to action.SlideShow added, FeatureRequests/PrintableSinglePageSlideshows (thanks to Paul Boddie)
+
 Version 1.9.3:
   Fixes:
   * Fix XSS in Despam action (CVE-2010-0828).
