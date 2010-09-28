@@ -4,6 +4,7 @@
  * Copy SlideShow.css to your theme's css/ directory.
  *
  * copyright: 2008 Thomas Waldmann
+ * copyright: 2010 Paul Boddie
  * license: GNU GPL, see COPYING for details
  */
 
@@ -18,7 +19,7 @@ html {
 
 body {
     margin: 1em;
-    padding: 20px;
+    padding-top: 20px;
 }
 
 /* Slide heading */
@@ -176,6 +177,20 @@ div.codearea pre span.Preprc     {color: #839;}
 
 @media print {
     #navigation {
-    display: none;
+        display: none;
     }
+
+    h1 {
+        page-break-before: always; /* show slides on separate pages */
+    }
+
+    pre {
+        white-space: pre-wrap;
+    }
+}
+
+/* Make tables more presentable. */
+
+td p {
+    margin: 0.5em;
 }

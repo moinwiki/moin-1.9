@@ -8,7 +8,8 @@ time, along with a navigation aid.
 @copyright: 2005 Jim Clark,
             2005 Nir Soffer,
             2008 MoinMoin:ThomasWaldmann,
-            2009 MoinMoin:ReimarBauer
+            2009 MoinMoin:ReimarBauer,
+            2010 Paul Boddie
 @license: GNU GPL, see COPYING for details.
 """
 
@@ -168,12 +169,16 @@ class SlideshowAction:
     # Private ----------------------------------------------------------------
 
     def setSlideNumber(self):
-        try:
-            slideNumber = int(self.request.values.get('n', 1))
-            if not 1 <= slideNumber <= len(self.page):
+        slideNumber = self.request.values.get('n', 1)
+        if slideNumber == "all":
+            slideNumber = None
+        else:
+            try:
+                slideNumber = int(slideNumber)
+                if not 1 <= slideNumber <= len(self.page):
+                    slideNumber = 1
+            except ValueError:
                 slideNumber = 1
-        except ValueError:
-            slideNumber = 1
         self.slideNumber = slideNumber
 
     def createParser(self, format, text):
@@ -253,7 +258,7 @@ class SlideshowAction:
         """ Return range of slides to display, current centered """
         other = self.maxSlideLinks - 1 # other slides except current
         first, last = self.first_slide(), self.last_slide()
-        start = max(first, self.slideNumber - other / 2)
+        start = max(first, (self.slideNumber or 1) - other / 2)
         end = min(start + other, last)
         start = max(first, end - other)
         return range(start, end + 1)
@@ -262,10 +267,10 @@ class SlideshowAction:
         return 1
 
     def next_slide(self):
-        return min(self.slideNumber + 1, self.last_slide())
+        return min((self.slideNumber or 1) + 1, self.last_slide())
 
     def previous_slide(self):
-        return max(self.slideNumber - 1, self.first_slide())
+        return max((self.slideNumber or 1) - 1, self.first_slide())
 
     def last_slide(self):
         return max(len(self.page), 1)
@@ -279,7 +284,7 @@ class SlideshowAction:
         else:
             return item
 
-    def item_language_attribtues(self):
+    def item_language_attributes(self):
         return self.languageAttributes(self.request.content_lang)
 
     def item_theme_url(self):
@@ -290,11 +295,23 @@ class SlideshowAction:
     def item_title(self):
         return wikiutil.escape(self.page.page_name)
 
-    def item_slide_title(self):
-        return wikiutil.escape(self.page.titleAt(self.slideNumber))
+    def item_slides(self):
+        if self.slideNumber is None:
+            slides = []
+            for n in xrange(0, len(self.page)):
+                slides.append(slide_template % {
+                    'slide_title' : self.item_slide_title(n + 1),
+                    'slide_body' : self.item_slide_body(n + 1)
+                    })
+            return ''.join(slides)
+        else:
+            return slide_template % self
 
-    def item_slide_body(self):
-        text = self.page.bodyAt(self.slideNumber)
+    def item_slide_title(self, number=None):
+        return wikiutil.escape(self.page.titleAt(number or self.slideNumber))
+
+    def item_slide_body(self, number=None):
+        text = self.page.bodyAt(number or self.slideNumber)
         format = self.page.pi['format']
         parser = self.createParser(format, text)
         formatter = self.createFormatter('text_html')
@@ -302,6 +319,14 @@ class SlideshowAction:
 
     def item_navigation_language_attributes(self):
         return self.languageAttributes(self.request.lang)
+
+    def item_navigation_print(self):
+        _ = self.request.getText
+        text = _('Print')
+        if self.slideNumber is None:
+            return self.disabledLink(text)
+        else:
+            return self.linkToSlide('all', text, title=_('Print slide show'))
 
     def item_navigation_edit(self):
         _ = self.request.getText
@@ -365,7 +390,10 @@ class SlideshowAction:
         return wikiutil.escape(self.request.getPragma('author', defval=''))
 
     def item_counter(self):
-        return "%d|%d" % (self.slideNumber, self.last_slide())
+        if self.slideNumber is not None:
+            return "%d|%d" % (self.slideNumber, self.last_slide())
+        else:
+            return ''
 
 # This is quite stupid template, but it cleans most of the code from
 # html. With smarter templates, there will be no html in the action code.
@@ -373,7 +401,7 @@ template = """
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
     "http://www.w3.org/TR/html4/strict.dtd">
 
-<html%(language_attribtues)s>
+<html%(language_attributes)s>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta name="robots" content="noindex,nofollow">
@@ -421,14 +449,11 @@ template = """
 </head>
 
 <body>
-    <h1>%(slide_title)s</h1>
-
-    <div id="content">
-        %(slide_body)s
-    </div>
+    %(slides)s
 
     <div id="navigation"%(navigation_language_attributes)s>
         <ul>
+            <li>%(navigation_print)s</li>
             <li>%(navigation_edit)s</li>
             <li>%(navigation_quit)s</li>
             <li>%(navigation_start)s</li>
@@ -439,9 +464,11 @@ template = """
         </ul>
     </div>
     <div id="footer">
-    <ul id="date">%(date)s</ul>
-    <ul id="author">%(author)s</ul>
-    <ul id="counter">%(counter)s</ul>
+    <ul>
+    <li id="date">%(date)s</li>
+    <li id="author">%(author)s</li>
+    <li id="counter">%(counter)s</li>
+    </ul>
     </div>
 <!--
     <p><a href="http://validator.w3.org/check?uri=referer">
@@ -452,6 +479,13 @@ template = """
 </html>
 """
 
+slide_template = """
+    <h1>%(slide_title)s</h1>
+
+    <div id="content">
+        %(slide_body)s
+    </div>
+"""
 
 def execute(pagename, request):
     """ Glue to current plugin system """
