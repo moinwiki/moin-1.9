@@ -39,7 +39,7 @@ class WikiSlideParser(object):
     """
     _heading_pattern = re.compile(r"""
         # TODO: check, mhz found bug here
-        (?P<skip>{{{(?:.*\n)+?}}}) |
+        (?P<skip>{{{(?:.|\n)*?}}}) |
         # Match headings level 1
         (?P<heading>^=\s(?P<text>.*)\s=$\n?)
         """, re.MULTILINE | re.UNICODE | re.VERBOSE)
