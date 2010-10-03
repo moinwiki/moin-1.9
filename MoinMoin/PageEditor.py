@@ -1249,14 +1249,14 @@ class PageLock:
         else:
             mins_valid = (secs_valid+59) / 60
             if self.locktype == 'lock':
-                # lout out user
+                # lock out user
+                timestamp_until = self.request.user.getFormattedDateTime(self.timestamp+secs_valid)
                 result = 0, _(
                     "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)s,"
                     " i.e. for %(mins_valid)d minute(s).",
-                    wiki=True) % {'owner': owner, 'timestamp': timestamp, 'mins_valid': mins_valid}
+                    wiki=True) % {'owner': owner, 'timestamp': timestamp_until, 'mins_valid': mins_valid}
             else:
                 # warn user about existing lock
-
                 result = 1, _(
 """This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.<<BR>>
 '''You should ''refrain from editing'' this page for at least another %(mins_valid)d minute(s),
