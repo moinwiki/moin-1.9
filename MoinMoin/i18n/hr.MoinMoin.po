@@ -1393,22 +1393,22 @@ msgid "FrontPage"
 msgstr "Početna"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "Pješčanik"
 
 #, fuzzy
 msgid "InterWiki"
 msgstr "Wiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "Napuštene stranice"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Zapakiraj stranice"
+msgstr "Ostavljene stranice"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "Traženje"
+msgstr "Tražene stranice"
 
 msgid "EventStats"
 msgstr ""
@@ -1424,15 +1424,15 @@ msgstr ""
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Veličina"
+msgstr "Veličine stranica"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Stranice"
+msgstr "Posjete stranica"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "Preimenuj stranicu"
+msgstr "Slučajna stranica"
 
 #, fuzzy
 msgid "XsltVersion"
@@ -1693,7 +1693,7 @@ msgstr "Kako sadržaj"
 
 #, fuzzy
 msgid "HelpOnSearching"
-msgstr "Kako oblikovati"
+msgstr "Kako pretraživati"
 
 #, fuzzy
 msgid "HelpOnSlideShows"

@@ -1254,7 +1254,7 @@ msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "FrontPage"
-msgstr ""
+msgstr "मुखपृष्ठ"
 
 msgid "WikiSandBox"
 msgstr ""

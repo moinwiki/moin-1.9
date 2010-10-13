@@ -1365,7 +1365,7 @@ msgid "RecentChanges"
 msgstr "ОстанніЗміни"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "ВікіПорадаДня"
 
 msgid "TitleIndex"
 msgstr "ПокажчикНазв"
@@ -1384,109 +1384,109 @@ msgstr "ВідсутняДомашняСторінка"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "ВідсутняДомашняСторінка"
+msgstr "ПерсональнаСторінкаВікі"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Ім'я"
+msgstr "ВікіНазва"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "ВікіВікіВеб"
 
 msgid "FrontPage"
-msgstr "Початок"
+msgstr "ТитульнаСторінка"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "ВікіПісочниця"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Вікі"
+msgstr "ІнтерВікі"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "ЗанедбаніСторінки"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Змінена сторінка"
+msgstr "ОдинокіСторінки"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "ЗнайтиСторінку"
+msgstr "НенаписаніСторінки"
 
 msgid "EventStats"
-msgstr ""
+msgstr "Статистика"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "Статистика/Відвідування"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "Статистика/Агенти"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Розмір"
+msgstr "РозміриСторінок"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Сторінки"
+msgstr "ВідвідуванняСторінок"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "ПерейменуватиСторінку"
+msgstr "ВипадковаСторінка"
 
 #, fuzzy
 msgid "XsltVersion"
 msgstr "Версія Python"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "ВипадковіПідказки"
 
 msgid "WikiLicense"
 msgstr "ЛіцензіяWiki"
 
 #, fuzzy
 msgid "CategoryCategory"
-msgstr "будь-яка категорія"
+msgstr "КатегоріяКатегорія"
 
 #, fuzzy
 msgid "CategoryHomepage"
-msgstr "Категорії"
+msgstr "КатегоріяПерсональнаСторінка"
 
 #, fuzzy
 msgid "CategoryTemplate"
-msgstr "Категорії"
+msgstr "ШаблонКатегорій"
 
 msgid "HomepageTemplate"
 msgstr "ШаблонПерсональноїСторінки"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "ШаблонДовідки"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "ШаблонПерсональноїСторінкиДляЧитанняЗапису"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "ШаблонПерсональноїСторінкиДляЧитання"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "ШаблонПриватноїПерсональноїСторінки"
 
 msgid "HomepageGroupsTemplate"
 msgstr ""
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "ШаблонДрукованоїПрезентації"
 
 #, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Показ слайдів"
+msgstr "ШаблонПрезентації"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "ШаблонСлайду"
 
 msgid "SyncJobTemplate"
 msgstr "ШаблонСинхронізації"
@@ -1566,30 +1566,30 @@ msgstr "ДовідкаФорматування"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "Версія MoinMoin"
+msgstr "МоінМоін"
 
 msgid "HelpContents"
 msgstr "ДовідкаЗміст"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "ДовідкаДляПочатківців"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "ДовідкаДляКористувачів"
 
 #, fuzzy
 msgid "HelpIndex"
-msgstr "ПокажчикНазв"
+msgstr "ДовідкаПокажчик"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "ДовідкаСпискиКонтролюДоступу"
 
 #, fuzzy
 msgid "HelpOnActions"
-msgstr "ДовідкаЗміст"
+msgstr "ДовідкаДії"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "ДовідкаДії/AttachFile"
 
 #, fuzzy
 msgid "HelpOnAdmonitions"
@@ -1697,20 +1697,20 @@ msgstr "ДовідкаЗміст"
 
 #, fuzzy
 msgid "HelpOnSearching"
-msgstr "ДовідкаФорматування"
+msgstr "ДовідкаПошук"
 
 #, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Показ слайдів"
+msgstr "ДовідкаПрезентації"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "ДовідкаПрезентації/000 Вступ"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "ДовідкаПрезентації/100 Створення слайдів"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "ДовідкаПрезентації/900 Зрештою: Показ презентації"
 
 msgid "HelpOnSmileys"
 msgstr ""
@@ -1758,7 +1758,7 @@ msgid "HelpOnSubscribing"
 msgstr "ПрипинитиСтеження"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "ГорбатийРегістр"
 
 msgid "WikiCourse"
 msgstr ""

@@ -1368,7 +1368,7 @@ msgid "RecentChanges"
 msgstr "SisteEndringer"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "WikiDagensTips"
 
 msgid "TitleIndex"
 msgstr "TittelIndeks"
@@ -1387,7 +1387,7 @@ msgstr "IkkeEksisterendeBrukerside"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "IkkeEksisterendeBrukerside"
+msgstr "WikiBrukerside"
 
 #, fuzzy
 msgid "WikiName"
@@ -1400,46 +1400,46 @@ msgid "FrontPage"
 msgstr "StartSide"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiLekePlass"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "InterWikiLenker"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "UtdaterteSider"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Endret side"
+msgstr "ForeldreløseSider"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "SøkeSide"
+msgstr "EtterspurteSider"
 
 msgid "EventStats"
-msgstr ""
+msgstr "HendelseStatistikk"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "HendelseStatistikk/SideTreff"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "HendelseStatistikk/SpråkInnstillinger"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "HendelseStatistikk/BrukerAgenter"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Størrelse"
+msgstr "SideStørrelsen"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Sider"
+msgstr "SideTreff"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "EndreSidenavn"
+msgstr "TilfeldigSide"
 
 #, fuzzy
 msgid "XsltVersion"
@@ -1453,18 +1453,18 @@ msgstr "WikiLisens"
 
 #, fuzzy
 msgid "CategoryCategory"
-msgstr "enhver klasse"
+msgstr "KlasseKlasse"
 
 #, fuzzy
 msgid "CategoryHomepage"
-msgstr "Klasser"
+msgstr "KlasseBrukerside"
 
 #, fuzzy
 msgid "CategoryTemplate"
 msgstr "Klasser"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "BrukersideSidemal"
 
 msgid "HelpTemplate"
 msgstr ""

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-05 01:00+0200\n"
-"PO-Revision-Date: 2010-05-13 11:24+0200\n"
+"PO-Revision-Date: 2010-09-22 16:48+0200\n"
 "Last-Translator: Nico Zanferrari <nicozanf@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -986,7 +986,7 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Impossibile trovare la pagina referenziata: %s**"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "Opzione XSLT disattivata, consultare AiutoSuConfigurazione."
+msgstr "Opzione XSLT disattivata, consultare HelpOnConfiguration."
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr "Elaborazione XSLT non disponibile, installare 4suite 1.x."
@@ -1453,7 +1453,7 @@ msgid "RandomPage"
 msgstr "PagineCasuali"
 
 msgid "XsltVersion"
-msgstr "XsltVersion"
+msgstr "VersioneXslt"
 
 msgid "FortuneCookies"
 msgstr "BiscottiDellaFortuna"
@@ -1488,9 +1488,6 @@ msgstr "PaginaPersonalePrivataModello"
 msgid "HomepageGroupsTemplate"
 msgstr "PaginaPersonaleGruppiModello"
 
-# could someone please check/fix the fuzzy strings for the italian translation?
-# don't forget to remove the fuzzy markers after you've made sure the translation is ok.
-#, fuzzy
 msgid "SlideShowHandOutTemplate"
 msgstr "DispensaPresentazioneModello"
 
@@ -1503,53 +1500,67 @@ msgstr "DiapositivaModello"
 msgid "SyncJobTemplate"
 msgstr "LavoroSincModello"
 
+# translation not needed, previously AiutoSuConfigurazione
 msgid "HelpOnConfiguration"
-msgstr "AiutoSuConfigurazione"
+msgstr "HelpOnConfiguration"
 
+# translation not needed, previously 
+# AiutoSuConfigurazione/SupportoPostaElettronica
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr "AiutoSuConfigurazione/SupportoPostaElettronica"
+msgstr "HelpOnConfiguration/EmailSupport"
 
+# translation not needed, previously AiutoSuConfigurazione/PoliticheDiSicurezza
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr "AiutoSuConfigurazione/PoliticheDiSicurezza"
+msgstr "HelpOnConfiguration/SecurityPolicy"
 
+# translation not needed, previously AiutoSuConfigurazione/FileAllegati
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr "AiutoSuConfigurazione/FileAllegati"
+msgstr "HelpOnConfiguration/FileAttachments"
 
+# translation not needed, previously AiutoSuConfigurazione/PaginaSupplementare
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr "AiutoSuConfigurazione/PaginaSupplementare"
+msgstr "HelpOnConfiguration/SupplementationPage"
 
+# translation not needed, previously AiutoSuConfigurazione/ProtezioneSovraccarico
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr "AiutoSuConfigurazione/ProtezioneSovraccarico"
+msgstr "HelpOnConfiguration/SurgeProtection"
 
-#, fuzzy
+# translation not needed, previously AiutoSuConfigurazione/PreferenzeUtente
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr "AiutoSuConfigurazione/PreferenzeUtente"
+msgstr "HelpOnConfiguration/UserPreferences"
 
-#, fuzzy
+# translation not needed, previously 
+# AiutoSuInstallazionePacchetto
 msgid "HelpOnPackageInstaller"
-msgstr "AiutoSuInstallazionePacchetto"
+msgstr "HelpOnPackageInstaller"
 
 msgid "HelpOnUpdatingPython"
 msgstr "AiutoSuAggiornamentoPython"
 
-#, fuzzy
+# translation not needed, previously 
+# AiutoSuAmministrazione
 msgid "HelpOnAdministration"
-msgstr "AiutoSuAmministrazione"
+msgstr "HelpOnAdministration"
 
-#, fuzzy
+# translation not needed, previously 
+# AiutoSuAutenticazione
 msgid "HelpOnAuthentication"
-msgstr "AiutoSuAutenticazione"
+msgstr "HelpOnAuthentication"
 
-#, fuzzy
+# translation not needed, previously 
+# AiutoSuAutenticazione/CookieEsterno
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr "AiutoSuAutenticazione/CookieEsterno"
+msgstr "HelpOnAuthentication/ExternalCookie"
 
+# translation not needed, previously 
+# AiutoSuComandiMoin
 msgid "HelpOnMoinCommand"
-msgstr "AiutoSuComandiMoin"
+msgstr "HelpOnMoinCommand"
 
-#, fuzzy
+# translation not needed, previously 
+# AiutoSuComandiMoin/DumpDiEsportazione
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr "AiutoSuComandiMoin/DumpDiEsportazione"
+msgstr "HelpOnMoinCommand/ExportDump"
 
 msgid "HelpOnNotification"
 msgstr "AiutoSuNotifiche"
@@ -1593,7 +1604,6 @@ msgstr "AiutoSuListeControlloAccesso"
 msgid "HelpOnActions"
 msgstr "AiutoSuAzioni"
 
-#, fuzzy
 msgid "HelpOnActions/AttachFile"
 msgstr "AiutoSuAzioni/AllegaFile"
 
@@ -1609,7 +1619,6 @@ msgstr "AiutoSuCategorie"
 msgid "HelpOnDictionaries"
 msgstr "AiutoSuDizionari"
 
-#, fuzzy
 msgid "HelpOnDrawings"
 msgstr "AiutoSuDisegni"
 
@@ -1625,14 +1634,12 @@ msgstr "AiutoSuModificaPagina/SottoPagine"
 msgid "HelpOnGraphicalEditor"
 msgstr "AiutoSuModificaPaginaModoGrafico"
 
-#, fuzzy
 msgid "HelpOnGroups"
 msgstr "AiutoSuGruppi"
 
 msgid "HelpOnHeadlines"
 msgstr "AiutoSuTitoliSezioni"
 
-#, fuzzy
 msgid "HelpOnImages"
 msgstr "AiutoSuImmagini"
 
@@ -1642,9 +1649,8 @@ msgstr "AiutoSuLingue"
 msgid "HelpOnLinking"
 msgstr "AiutoSuCollegamenti"
 
-#, fuzzy
 msgid "HelpOnLinking/NotesLinks"
-msgstr "AiutoSuCollegamenti/CollegamentiNote"
+msgstr "AiutoSuCollegamenti/CollegamentiNotes"
 
 msgid "HelpOnLists"
 msgstr "AiutoSuListe"
@@ -1652,23 +1658,18 @@ msgstr "AiutoSuListe"
 msgid "HelpOnLogin"
 msgstr "AiutoSuAccesso"
 
-#, fuzzy
 msgid "HelpOnMacros"
 msgstr "AiutoSuMacro"
 
-#, fuzzy
 msgid "HelpOnMacros/EmbedObject"
 msgstr "AiutoSuMacro/IncludiOggetto"
 
-#, fuzzy
 msgid "HelpOnMacros/Include"
 msgstr "AiutoSuMacro/Includi"
 
-#, fuzzy
 msgid "HelpOnMacros/MailTo"
 msgstr "AiutoSuMacro/MailTo"
 
-#, fuzzy
 msgid "HelpOnMacros/MonthCalendar"
 msgstr "AiutoSuMacro/CalendarioMensile"
 
@@ -1725,8 +1726,9 @@ msgstr "AiutoSuControlloOrtografico"
 msgid "HelpOnSuperUser"
 msgstr "AiutoSuSuperUtente"
 
+# translation not needed, previously AiutoSuSincronizzazione
 msgid "HelpOnSynchronisation"
-msgstr "AiutoSuSincronizzazione"
+msgstr "HelpOnSynchronisation"
 
 msgid "HelpOnTables"
 msgstr "AiutoSuTabelle"
@@ -2987,7 +2989,7 @@ msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
-"Definire un nome interwiki in wikiconfig (consultare AiutoSuConfigurazione) "
+"Definire un nome interwiki in wikiconfig (consultare HelpOnConfiguration) "
 "per poter usare questa azione."
 
 msgid ""
@@ -2995,7 +2997,7 @@ msgid ""
 "Refer to HelpOnSynchronisation for help."
 msgstr ""
 "Parametri non corretti. Definire almeno il parametro ''remoteWiki''. "
-"Consultare AiutoSuSincronizzazione per ulteriori informazioni."
+"Consultare HelpOnSynchronisation per ulteriori informazioni."
 
 msgid "The ''remoteWiki'' is unknown."
 msgstr "Il ''remoteWiki'' è sconosciuto."

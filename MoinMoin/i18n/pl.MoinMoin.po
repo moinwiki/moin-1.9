@@ -1382,66 +1382,66 @@ msgstr "NieistniejącaStronaDomowa"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "NieistniejącaStronaDomowa"
+msgstr "StronaDomowaWiki"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Nazwa"
+msgstr "NazwaWiki"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "SiećWikiWiki"
 
 msgid "FrontPage"
 msgstr "StronaGłówna"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "BrudnopisWiki"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "OdnośnikiInterWiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "OpuszczoneStrony"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Zmieniona strona"
+msgstr "OsieroconeStrony"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "ZnajdźStronę"
+msgstr "PotrzebneStrony"
 
 msgid "EventStats"
-msgstr ""
+msgstr "StatystykiZdarzeń"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "StatystykiZdarzeń/IlośćOdsłon"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "StatystykiZdarzeń/ListaPrzeglądarek"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Rozmiar"
+msgstr "RozmiarStron"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Strony"
+msgstr "OdsłonyStron"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "ZmieńNazwę"
+msgstr "LosowaStrona"
 
 #, fuzzy
 msgid "XsltVersion"
 msgstr "Wersja języka Python"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "PrzypadkoweMądrości"
 
 msgid "WikiLicense"
 msgstr "LicencjaWiki"
@@ -1459,7 +1459,7 @@ msgid "CategoryTemplate"
 msgstr "Kategorie"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "SzablonStronyDomowej"
 
 msgid "HelpTemplate"
 msgstr ""
@@ -1564,27 +1564,27 @@ msgstr "PomocPrzyFormatowaniu"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "Wersja MoinMoin"
+msgstr "CzymJestMoinMoin"
 
 msgid "HelpContents"
 msgstr "PomocSpisTreści"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "PomocDlaPoczątkujących"
 
 msgid "HelpForUsers"
 msgstr ""
 
 #, fuzzy
 msgid "HelpIndex"
-msgstr "IndeksTytułów"
+msgstr "PomocIndeks"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnActions"
-msgstr "PomocSpisTreści"
+msgstr "PomocPrzyAkcjach"
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
@@ -1599,7 +1599,7 @@ msgstr "PomocPrzyFormatowaniu"
 
 #, fuzzy
 msgid "HelpOnCategories"
-msgstr "Kategorie"
+msgstr "PomocPrzyKategoriach"
 
 msgid "HelpOnDictionaries"
 msgstr ""
@@ -1609,14 +1609,14 @@ msgid "HelpOnDrawings"
 msgstr "PomocPrzyFormatowaniu"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "PomocPrzyBlokadachEdycyjnych"
 
 #, fuzzy
 msgid "HelpOnEditing"
-msgstr "PomocPrzyFormatowaniu"
+msgstr "PomocPrzyEdycji"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "PomocPrzyEdycji/PodStrony"
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
@@ -1626,7 +1626,7 @@ msgid "HelpOnGroups"
 msgstr "PomocSpisTreści"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "PomocPrzyNagłówkach"
 
 #, fuzzy
 msgid "HelpOnImages"
@@ -1638,14 +1638,14 @@ msgstr "Język"
 
 #, fuzzy
 msgid "HelpOnLinking"
-msgstr "PomocPrzyFormatowaniu"
+msgstr "PomocPrzyLinkowaniu"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnLists"
-msgstr "PomocSpisTreści"
+msgstr "PomocPrzyListach"
 
 #, fuzzy
 msgid "HelpOnLogin"
@@ -1668,7 +1668,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnNavigation"
-msgstr "NawigacjaSerwisu"
+msgstr "PomocPrzyNawigacji"
 
 #, fuzzy
 msgid "HelpOnOpenIDProvider"
@@ -1676,7 +1676,7 @@ msgstr "Serwer OpenID"
 
 #, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "PomocPrzyFormatowaniu"
+msgstr "PomocPrzyTworzeniuStron"
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1688,11 +1688,11 @@ msgid "HelpOnParsers/ReStructuredText/RstPrimer"
 msgstr ""
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "PomocPrzyInstrukcjachPrzetwarzania"
 
 #, fuzzy
 msgid "HelpOnRules"
-msgstr "PomocSpisTreści"
+msgstr "PomocPrzyLiniachDzielących"
 
 #, fuzzy
 msgid "HelpOnSearching"
@@ -1712,7 +1712,7 @@ msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
 msgstr ""
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "PomocPrzyUśmieszkach"
 
 msgid "HelpOnSpam"
 msgstr ""
@@ -1729,7 +1729,7 @@ msgid "HelpOnSynchronisation"
 msgstr "Synchronizacja rozpoczęta -"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "PomocPrzyTabelach"
 
 msgid "HelpOnTemplates"
 msgstr ""
@@ -1739,14 +1739,14 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "PreferencjeCzytelnika"
+msgstr "PomocPrzyPreferencjachUżytkownika"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "PomocPrzyPodstawianychZmiannych"
 
 #, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "PomocPrzyFormatowaniu"
+msgstr "PomocPrzyStronachXml"
 
 #, fuzzy
 msgid "HelpOnComments"

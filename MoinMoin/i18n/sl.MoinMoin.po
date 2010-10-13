@@ -1,4 +1,4 @@
-## Please edit system and help pages ONLY in the master wiki!
+## Please edit system and help pages ONLY in the master wikihttp://master19.moinmo.in/4ct10n/edit/MoinI18n/sl?action=edit&editor=text
 ## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
@@ -6,7 +6,7 @@
 #format gettext
 #language sl
 
-#
+#msgstr ""
 # MoinMoin sl system text translation
 #
 msgid ""
@@ -314,7 +314,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<neznano>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -326,7 +326,7 @@ msgstr ""
 "\n"
 "Žeton za obnovo gesla: %s\n"
 "\n"
-"URL za obnovo gesla URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"URL za obnovo gesla: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -1201,11 +1201,11 @@ msgstr ""
 "Stran \"%(pagename)s\" je %(editor)s preimenoval iz \"%(oldname)s\":\n"
 "\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
+msgstr "[%(sitename)s] Nov uporabniški račun je narejen"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on \"%(sitename)s\". "
 "Details follow:\n"
@@ -1219,9 +1219,9 @@ msgstr ""
 "    Uporabniško ime: %(username)s\n"
 "    E-poštni naslov: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "Nova priponka dodana strani %(pagename)s, strežnik %(sitename)s"
+msgstr "[%(sitename)s] Strani %(pagename)s je bila dodana nova priponka"
 
 #, python-format
 msgid ""
@@ -1242,9 +1242,9 @@ msgstr ""
 "Ime priponke: %(attach_name)s\n"
 "Velikost priponke: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "Priponka odstranjena s strani %(pagename)s, strežnik %(sitename)s"
+msgstr "[%(sitename)s] S strani %(pagename)s je bila odstranjena priponka"
 
 #, python-format
 msgid ""
@@ -3090,17 +3090,18 @@ msgid ""
 "Showing page edit history entries from '''%(start_offset)d''' to '''%"
 "(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
+"Prikazana zgodovina sprememb strani od '''%(start_offset)d''' do '''%"
+"(end_offset)d''' od skupaj '''%(total_count)d''' sprememb."
 
-#, fuzzy
 msgid "Newer"
-msgstr "Novo ime"
+msgstr "Novejše"
 
 msgid "Older"
-msgstr ""
+msgstr "Starejše"
 
 #, python-format
 msgid "%s items per page"
-msgstr ""
+msgstr "%s elementov na stran"
 
 msgid "Date"
 msgstr "Datum"
@@ -3190,13 +3191,13 @@ msgid "Please choose:"
 msgstr "Izberite:"
 
 msgid "Create redirect for renamed page(s)?"
-msgstr ""
+msgstr "Tvori preusmeritve za preimenovane strani?"
 
 msgid "Rename all /subpages too?"
 msgstr "Želite preimenovati tudi vse /podstrani?"
 
 msgid "Create redirect for renamed page?"
-msgstr ""
+msgstr "Tvori preusmeritev za preimenovano stran?"
 
 msgid "Really rename this page?"
 msgstr "Zares želite preimenovati to stran?"
@@ -3259,40 +3260,35 @@ msgstr "Prejšnja sprememba"
 msgid "Next change"
 msgstr "Naslednja sprememba"
 
-#, fuzzy
 msgid "Diff with oldest revision in left pane"
-msgstr "Ta stran nima starejših različic!"
+msgstr "Razlike od najstarejše inačice v levem polju"
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "Ta stran nima starejših različic!"
+msgstr "Ta stran nima starejših različic"
 
-#, fuzzy
 msgid "Diff with older revision in left pane"
-msgstr "Ta stran nima starejših različic!"
+msgstr "Razlike od starejše različice v levem polju"
 
 msgid "Diff with newer revision in left pane"
-msgstr ""
+msgstr "Razlike od novejše različice v levem polju"
 
 msgid "Can't change to revision newer than in right pane"
-msgstr ""
+msgstr "Ni mogoče spremeniti na različico, novejšo od tiste v desnem polju"
 
 msgid "Diff with older revision in right pane"
-msgstr ""
+msgstr "Razlike od starejše različice v desnem polju"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr ""
+msgstr "Ni mogoče spremeniti na različico, starejšo od tiste v levem polju"
 
 msgid "Diff with newer revision in right pane"
-msgstr ""
+msgstr "Razlike od novejše različice v desnem polju"
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "Ta stran nima starejših različic!"
+msgstr "Ta stran nima novejših različic"
 
-#, fuzzy
 msgid "Diff with newest revision in right pane"
-msgstr "Ta stran nima starejših različic!"
+msgstr "Razlike od najnovejše različice v desnem polju"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3605,12 +3601,3 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonimno"
-
-#~ msgid "New user account created on %(sitename)s"
-#~ msgstr "Narejen je bil nov uporabniški račun na strežniku %(sitename)s"
-
-#~ msgid "Please use the interactive user interface to move attachments!"
-#~ msgstr "Za prestavitev priponk uporabite interaktivni uporabniški vmesnik!"
-
-#~ msgid "Page Name"
-#~ msgstr "Ime strani"

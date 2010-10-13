@@ -1388,7 +1388,7 @@ msgid "RecentChanges"
 msgstr "ПоследњеПромене"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "ВикиСаветДана"
 
 msgid "TitleIndex"
 msgstr "ИндексНаслова"
@@ -1407,84 +1407,84 @@ msgstr "НедостајућаЛичнаСтраница"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "НедостајућаЛичнаСтраница"
+msgstr "ВикиЛичнаСтраница"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Име"
+msgstr "ВикиИме"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "ВикиВикиВеб"
 
 msgid "FrontPage"
 msgstr "НасловнаСтрана"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "ВикиИгралиште"
 
 #, fuzzy
 msgid "InterWiki"
 msgstr "Вики"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "ЗапуштенеСтранице"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Странице пакета"
+msgstr "ОстављенеСтранице"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "НађиСтраницу"
+msgstr "ТраженеСтранице"
 
 msgid "EventStats"
-msgstr ""
+msgstr "СтатистикаДогађаја"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "СтатистикаДогађаја/БројПосета"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "СтатистикаДогађаја/КорисничкиАгенти"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Величина"
+msgstr "ВеличинаСтранице"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Странице"
+msgstr "БројПосета"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "ПреименујСтраницу"
+msgstr "НасумичнаСтраница"
 
 #, fuzzy
 msgid "XsltVersion"
-msgstr "Python верзија"
+msgstr "XsltVerzija"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "КинескиКолачићиЖеља"
 
 msgid "WikiLicense"
 msgstr "ВикиЛиценца"
 
 #, fuzzy
 msgid "CategoryCategory"
-msgstr "било које категорије"
+msgstr "KategorijaKategorija"
 
 #, fuzzy
 msgid "CategoryHomepage"
-msgstr "Категорије"
+msgstr "KategorijaHomepage"
 
 #, fuzzy
 msgid "CategoryTemplate"
 msgstr "Категорије"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "ШаблонЛичнеСтранице"
 
 msgid "HelpTemplate"
 msgstr ""

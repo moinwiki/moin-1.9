@@ -1329,7 +1329,7 @@ msgid "RecentChanges"
 msgstr "שינויים אחרונים"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "טיפ הויקי היומי"
 
 msgid "TitleIndex"
 msgstr "מפתח כותרות"
@@ -1352,13 +1352,13 @@ msgstr "דף בית חסר"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "שם"
+msgstr "שם ויקי"
 
 msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "FrontPage"
-msgstr "דף ראשי"
+msgstr "פתיחה"
 
 msgid "WikiSandBox"
 msgstr ""
@@ -1372,7 +1372,7 @@ msgstr ""
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "הדף ששונה"
+msgstr "דפים מיותמים"
 
 #, fuzzy
 msgid "WantedPages"
@@ -1392,7 +1392,7 @@ msgstr ""
 
 #, fuzzy
 msgid "PageSize"
-msgstr "גודל"
+msgstr "גודל דף"
 
 #, fuzzy
 msgid "PageHits"
@@ -1407,7 +1407,7 @@ msgid "XsltVersion"
 msgstr "גרסת פייתון"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "עוגיות מזל"
 
 msgid "WikiLicense"
 msgstr "רישיון ויקי"
@@ -1535,7 +1535,7 @@ msgid "HelpContents"
 msgstr "תוכן עזרה"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "עזרה למתחילים"
 
 msgid "HelpForUsers"
 msgstr ""

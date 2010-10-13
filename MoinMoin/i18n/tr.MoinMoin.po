@@ -1372,7 +1372,7 @@ msgid "RecentChanges"
 msgstr "SonDüzenlemeler"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "WikiGününİpucu"
 
 msgid "TitleIndex"
 msgstr "BaşlıkDizini"
@@ -1391,11 +1391,11 @@ msgstr "KayıpKişiselSayfa"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "KayıpKişiselSayfa"
+msgstr "WikiKişiselSayfası"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "İsim"
+msgstr "WikiAdı"
 
 msgid "WikiWikiWeb"
 msgstr ""
@@ -1404,53 +1404,53 @@ msgid "FrontPage"
 msgstr "AnaSayfa"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiKumHavuzu"
 
 #, fuzzy
 msgid "InterWiki"
 msgstr "Wiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "EskiyenSayfalar"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Paket sayfaları"
+msgstr "YetimSayfalar"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "SayfaBul"
+msgstr "İstenenSayfalar"
 
 msgid "EventStats"
-msgstr ""
+msgstr "Etkinlikİstatistikleri"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "Etkinlikİstatistikleri/ZiyaretçiSayacı"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "Etkinlikİstatistikleri/Kullanıcıİstemcileri"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Büyüklük"
+msgstr "SayfaBoyutu"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Sayfalar"
+msgstr "SayfaZiyaretleri"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "SayfaAdlandır"
+msgstr "RastgeleSayfa"
 
 #, fuzzy
 msgid "XsltVersion"
 msgstr "Python Sürümü"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "Wikiİpuçları"
 
 msgid "WikiLicense"
 msgstr "WikiLisansı"
@@ -1573,7 +1573,7 @@ msgid "MoinMoin"
 msgstr "MoinMoin Sürümü"
 
 msgid "HelpContents"
-msgstr "YardimKonuları"
+msgstr "YardımKonuları"
 
 msgid "HelpForBeginners"
 msgstr ""

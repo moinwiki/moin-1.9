@@ -1330,66 +1330,66 @@ msgstr "首頁不存在"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "首頁不存在"
+msgstr "Wiki個人首頁"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "名稱"
+msgstr "Wiki名稱"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "中文/WikiWikiWeb"
 
 msgid "FrontPage"
 msgstr "首頁"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "Wiki沙盤"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki 模式"
+msgstr "Wiki站際"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "遺棄頁面"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "改變過的頁面"
+msgstr "孤立頁面"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "上層頁面"
+msgstr "未定義頁"
 
 msgid "EventStats"
-msgstr ""
+msgstr "事件統計"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "事件統計/點擊次數"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "事件統計/瀏覽器"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "大小"
+msgstr "頁面大小"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "頁面"
+msgstr "頁面人氣"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "重新命名"
+msgstr "隨機選頁"
 
 #, fuzzy
 msgid "XsltVersion"
-msgstr "Python 版本"
+msgstr "Xslt版本信息"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "操作秘笈"
 
 msgid "WikiLicense"
 msgstr "Wiki版權"
@@ -1404,13 +1404,13 @@ msgstr "類別"
 
 #, fuzzy
 msgid "CategoryTemplate"
-msgstr "類別"
+msgstr "類別模板"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "首頁模板"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "說明模板"
 
 msgid "HomepageReadWritePageTemplate"
 msgstr ""
@@ -1425,14 +1425,14 @@ msgid "HomepageGroupsTemplate"
 msgstr ""
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "簡報講義模板"
 
 #, fuzzy
 msgid "SlideShowTemplate"
-msgstr "簡報模式"
+msgstr "簡報模板"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "投影片模板"
 
 msgid "SyncJobTemplate"
 msgstr ""
@@ -1512,27 +1512,27 @@ msgstr "說明/排版"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "!MoinMoin 版本"
+msgstr "中文/MoinMoin"
 
 msgid "HelpContents"
 msgstr "說明"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "說明/新手入門"
 
 msgid "HelpForUsers"
 msgstr ""
 
 #, fuzzy
 msgid "HelpIndex"
-msgstr "標題索引"
+msgstr "說明/索引"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "說明/存取控制清單"
 
 #, fuzzy
 msgid "HelpOnActions"
-msgstr "說明"
+msgstr "說明/操作"
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
@@ -1561,7 +1561,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnEditing"
-msgstr "說明/排版"
+msgstr "說明/編輯頁面"
 
 msgid "HelpOnEditing/SubPages"
 msgstr ""
@@ -1574,7 +1574,7 @@ msgid "HelpOnGroups"
 msgstr "說明"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "說明/標題"
 
 #, fuzzy
 msgid "HelpOnImages"
@@ -1586,21 +1586,21 @@ msgstr "語言"
 
 #, fuzzy
 msgid "HelpOnLinking"
-msgstr "說明/排版"
+msgstr "說明/連結"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnLists"
-msgstr "說明"
+msgstr "說明/條列"
 
 #, fuzzy
 msgid "HelpOnLogin"
 msgstr "說明/排版"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "說明/巨集"
 
 msgid "HelpOnMacros/EmbedObject"
 msgstr ""
@@ -1616,7 +1616,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnNavigation"
-msgstr "本站導覽"
+msgstr "說明/瀏覽本站"
 
 #, fuzzy
 msgid "HelpOnOpenIDProvider"
@@ -1624,7 +1624,7 @@ msgstr "無 OpenID 服務"
 
 #, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "說明/排版"
+msgstr "說明/建立新頁"
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1640,27 +1640,27 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnRules"
-msgstr "說明"
+msgstr "說明/分隔"
 
 #, fuzzy
 msgid "HelpOnSearching"
-msgstr "說明/排版"
+msgstr "說明/搜尋本站"
 
 #, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "簡報模式"
+msgstr "說明/簡報"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "說明/簡報/000 前言"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "說明/簡報/100 製作投影片"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "說明/簡報/900 尾頁，但尚未結束︰播放您的簡報"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "說明/笑臉"
 
 msgid "HelpOnSpam"
 msgstr ""
@@ -1687,7 +1687,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "使用者設定"
+msgstr "說明/使用者設定"
 
 msgid "HelpOnVariables"
 msgstr ""

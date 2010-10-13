@@ -1398,7 +1398,7 @@ msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "FrontPage"
-msgstr "Эхний хуудас"
+msgstr "НүүрХуудас"
 
 msgid "WikiSandBox"
 msgstr ""

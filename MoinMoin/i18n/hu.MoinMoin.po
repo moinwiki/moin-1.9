@@ -1357,34 +1357,34 @@ msgstr "HiányzóHonlap"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Név"
+msgstr "WikiNév"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "WikiWikiHáló"
 
 msgid "FrontPage"
 msgstr "KezdőLap"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiHomokozó"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "WikiPiac"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "ElhagyottLapok"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Oldalak csomagolása"
+msgstr "ÁrvaLapok"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "KeresőLap"
+msgstr "KívántLapok"
 
 msgid "EventStats"
-msgstr ""
+msgstr "EseményStatisztika"
 
 msgid "EventStats/HitCounts"
 msgstr ""
@@ -1397,15 +1397,15 @@ msgstr ""
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Méret"
+msgstr "LapMéretek"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Oldal"
+msgstr "LapTalálatok"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "LapÁtnevezés"
+msgstr "VéletlenLap"
 
 #, fuzzy
 msgid "XsltVersion"
@@ -1427,7 +1427,7 @@ msgid "CategoryTemplate"
 msgstr ""
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "WikiHonlap"
 
 msgid "HelpTemplate"
 msgstr ""
@@ -1521,7 +1521,7 @@ msgid "HelpOnXapian"
 msgstr "FormázásiSegédlet"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "SzerkesztésiSegédlet"
 
 #, fuzzy
 msgid "HelpOnCreoleSyntax"
@@ -1532,7 +1532,7 @@ msgstr "FormázásiSegédlet"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoin (MoinMoinLap) változat"
+msgstr "MoinMoinLap"
 
 msgid "HelpContents"
 msgstr "SegédletTartalomjegyzék"

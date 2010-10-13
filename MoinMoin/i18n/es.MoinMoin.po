@@ -1423,13 +1423,13 @@ msgid "FrontPage"
 msgstr "PáginaInicial"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "PáginaDePráctica"
 
 msgid "InterWiki"
 msgstr "InterWiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "PáginasEnAbandono"
 
 #, fuzzy
 msgid "OrphanedPages"
@@ -1443,7 +1443,7 @@ msgid "EventStats"
 msgstr ""
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "EstadísticaDeEventos/ContadorDeVisitas"
 
 msgid "EventStats/Languages"
 msgstr ""
@@ -1453,7 +1453,7 @@ msgstr ""
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Página"
+msgstr "TamañoDePágina"
 
 #, fuzzy
 msgid "PageHits"
@@ -1483,7 +1483,7 @@ msgstr "Categorías"
 
 #, fuzzy
 msgid "CategoryTemplate"
-msgstr "Categorías"
+msgstr "CategoríaPlantilla"
 
 msgid "HomepageTemplate"
 msgstr ""
@@ -1597,7 +1597,7 @@ msgid "HelpContents"
 msgstr "ContenidosDeAyuda"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "AyudaParaPrincipiantes"
 
 msgid "HelpForUsers"
 msgstr ""
@@ -1640,7 +1640,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnEditing"
-msgstr "AyudaSobreFormato"
+msgstr "AyudaSobreEdición"
 
 msgid "HelpOnEditing/SubPages"
 msgstr ""
@@ -1653,7 +1653,7 @@ msgid "HelpOnGroups"
 msgstr "ContenidosDeAyuda"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "AyudaSobreEncabezados"
 
 #, fuzzy
 msgid "HelpOnImages"
@@ -1665,14 +1665,14 @@ msgstr "Idioma"
 
 #, fuzzy
 msgid "HelpOnLinking"
-msgstr "AyudaSobreFormato"
+msgstr "AyudaSobreEnlaces"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnLists"
-msgstr "ContenidosDeAyuda"
+msgstr "AyudaSobreListas"
 
 #, fuzzy
 msgid "HelpOnLogin"
@@ -1695,7 +1695,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnNavigation"
-msgstr "NavegaciónDelSitio"
+msgstr "AyudaSobreNavegación"
 
 #, fuzzy
 msgid "HelpOnOpenIDProvider"
@@ -1703,7 +1703,7 @@ msgstr "Servidor OpenID"
 
 #, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "AyudaSobreFormato"
+msgstr "AyudaSobreCreaciónDePáginas"
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1719,7 +1719,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnRules"
-msgstr "ContenidosDeAyuda"
+msgstr "AyudaSobreLíneasHorizontales"
 
 #, fuzzy
 msgid "HelpOnSearching"
@@ -1739,7 +1739,7 @@ msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
 msgstr ""
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "AyudaSobreEmoticones"
 
 msgid "HelpOnSpam"
 msgstr ""
@@ -1756,7 +1756,7 @@ msgid "HelpOnSynchronisation"
 msgstr "Comienza la sincronización -"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "AyudaSobreTablas"
 
 msgid "HelpOnTemplates"
 msgstr ""
@@ -1766,7 +1766,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "Preferencias"
+msgstr "AyudaSobrePreferenciasDelUsuario"
 
 msgid "HelpOnVariables"
 msgstr ""
