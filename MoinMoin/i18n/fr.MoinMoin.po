@@ -698,7 +698,7 @@ msgid "User preferences saved!"
 msgstr "Vos préférences utilisateur ont été enregistrées !"
 
 msgid "Default"
-msgstr "par défaut"
+msgstr "Par défaut"
 
 msgid "<Browser setting>"
 msgstr "<langue du navigateur>"
@@ -1493,13 +1493,13 @@ msgid "CategoryHomepage"
 msgstr "CatégoriePagePersonnelle"
 
 msgid "CategoryTemplate"
-msgstr "ModèleDeCatégorie"
+msgstr "CatégorieTemplate"
 
 msgid "HomepageTemplate"
 msgstr "ModèleDePagePersonnelle"
 
 msgid "HelpTemplate"
-msgstr "ModèleDePageD'Aide"
+msgstr "AideTemplate"
 
 msgid "HomepageReadWritePageTemplate"
 msgstr "ModèleDePagePersonnelleEnLectureÉcriture"
@@ -1517,7 +1517,7 @@ msgid "SlideShowHandOutTemplate"
 msgstr "ModèleDeSupportPapierD'UnePrésentation"
 
 msgid "SlideShowTemplate"
-msgstr "ModèleDePrésentation"
+msgstr "PrésentationTemplate"
 
 msgid "SlideTemplate"
 msgstr "ModèleDeTransparent"
@@ -1739,7 +1739,7 @@ msgid "HelpOnTemplates"
 msgstr "AideDesModèles"
 
 msgid "HelpOnThemes"
-msgstr "AideDesThèmes"
+msgstr "AideDesStyles"
 
 msgid "HelpOnUserPreferences"
 msgstr "AideDesPréférencesUtilisateur"
@@ -2379,7 +2379,7 @@ msgid "No parent page found!"
 msgstr "Page supérieure non trouvée !"
 
 msgid "Slideshow"
-msgstr "Lancer"
+msgstr "Lancer la présentation"
 
 msgid "Start"
 msgstr "Début"
@@ -3590,8 +3590,8 @@ msgid ""
 "name, you can also upload content for another page. If the page name is "
 "empty, we derive the page name from the file name."
 msgstr ""
-"Vous pouvez ajouter du contenu à la page nommé ci-dessous. Si vous changez "
-"le nom de la page, vous pourrez ainsi ajouter du contenu à une autre page. "
+"Vous pouvez remplacer le contenu de la page indiquée ci-dessous. Si vous changez "
+"le nom de la page, vous pourrez remplacer le contenu d'une autre page. "
 "Si le champ donnant le nom de la page est vide, le nom du fichier sera "
 "utilisé comme nom de page."
 

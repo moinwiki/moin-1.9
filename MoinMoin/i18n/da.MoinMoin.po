@@ -1382,96 +1382,96 @@ msgstr "ManglendeHjemmeSide"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "ManglendeHjemmeSide"
+msgstr "WikiHjemmeSide"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Navn"
+msgstr "WikiNavn"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "WikiWikiWebDansk"
 
 msgid "FrontPage"
 msgstr "ForSide"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiSandKasse"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "InterWikiDansk"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "EfterladteSider"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Pakkesider"
+msgstr "ForældreløseSider"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "FindSide"
+msgstr "ØnskedeSider"
 
 msgid "EventStats"
-msgstr ""
+msgstr "HændelseStatistik"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "HændelseStatistik/TræfOptælling"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "HændelseStatistik/BrugerAgenter"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Størrelse"
+msgstr "SideStørrelse"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Sider"
+msgstr "SideTræfninger"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "OmdøbSide"
+msgstr "TilfældigSide"
 
 #, fuzzy
 msgid "XsltVersion"
-msgstr "Python-version"
+msgstr "XsltVersionDansk"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "LykkeKager"
 
 msgid "WikiLicense"
 msgstr "WikiLicens"
 
 msgid "CategoryCategory"
-msgstr ""
+msgstr "KategoriKategori"
 
 msgid "CategoryHomepage"
-msgstr ""
+msgstr "KategoriHjemmeside"
 
 msgid "CategoryTemplate"
-msgstr ""
+msgstr "KategoriSkabelon"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "HjemmesideSkabelon"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "HjælpSkabelon"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "HjemmesideLæseSkriveSideSkabelon"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "HjemmesideLæseSideSkabelon"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "HjemmesidePrivatSideSkabelon"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "HjemmesideGrupperSkabelon"
 
 msgid "SlideShowHandOutTemplate"
 msgstr ""
@@ -1567,14 +1567,14 @@ msgid "HelpContents"
 msgstr "HjælpIndhold"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "HjælpForBegyndere"
 
 msgid "HelpForUsers"
 msgstr ""
 
 #, fuzzy
 msgid "HelpIndex"
-msgstr "TitelListe"
+msgstr "HjælpListe"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
@@ -1609,7 +1609,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnEditing"
-msgstr "HjælpTilFormatering"
+msgstr "HjælpTilRedigering"
 
 msgid "HelpOnEditing/SubPages"
 msgstr ""
@@ -1630,11 +1630,11 @@ msgstr "HjælpTilFormatering"
 
 #, fuzzy
 msgid "HelpOnLanguages"
-msgstr "Sprog"
+msgstr "HjælpTilSprog"
 
 #, fuzzy
 msgid "HelpOnLinking"
-msgstr "HjælpTilFormatering"
+msgstr "HjælpTilHenvisninger"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
@@ -1648,7 +1648,7 @@ msgid "HelpOnLogin"
 msgstr "HjælpTilFormatering"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "HjælpTilMakroer"
 
 msgid "HelpOnMacros/EmbedObject"
 msgstr ""
@@ -1691,7 +1691,7 @@ msgstr "HjælpIndhold"
 
 #, fuzzy
 msgid "HelpOnSearching"
-msgstr "HjælpTilFormatering"
+msgstr "HjælpTilSøgning"
 
 #, fuzzy
 msgid "HelpOnSlideShows"

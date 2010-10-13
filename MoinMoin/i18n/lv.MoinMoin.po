@@ -6,11 +6,6 @@
 #format gettext
 #language lv
 
-## Hi Radomir, sorry about that youtube texts, they accidentally got in because my repository contained non-repo stuff I worked on.
-## I noticed it some minutes later and did another update, but you were faster. :)
-## BTW, I noticed there are quite some fuzzy strings in lv translation. If you have a bit time, you maybe want to improve those by
-## checking whether the fuzzy translation is correct and (after fixing, if needed) REMOVING THE FUZZY MARKER.
- 
 #
 # MoinMoin lv system text translation
 #
@@ -1371,10 +1366,10 @@ msgid "FindPage"
 msgstr "MeklētLapu"
 
 msgid "MissingPage"
-msgstr "IztrūkstošaLapa"
+msgstr "LapasNav"
 
 msgid "MissingHomePage"
-msgstr "IztrūkstošaMājasLapa"
+msgstr "LietotājaLapasNav"
 
 msgid "WikiHomePage"
 msgstr "VikiMājasLapa"
@@ -1386,10 +1381,10 @@ msgid "WikiWikiWeb"
 msgstr "VikiVikiTīmeklis"
 
 msgid "FrontPage"
-msgstr "SākumLapa"
+msgstr "SlaiduVeidne"
 
 msgid "WikiSandBox"
-msgstr "VikiSmilškaste"
+msgstr "VikiSmilšuKaste"
 
 msgid "InterWiki"
 msgstr "StarpViki"
@@ -1401,40 +1396,40 @@ msgid "OrphanedPages"
 msgstr "BāreņLapas"
 
 msgid "WantedPages"
-msgstr "MeklētāsLapas"
+msgstr "VajadzīgāsLapas"
 
 msgid "EventStats"
-msgstr "NotikumuStatistika"
+msgstr "NotikumuStatistikas"
 
 msgid "EventStats/HitCounts"
-msgstr "NotikumuStatistika/TrāpījumuSkaits"
+msgstr "NotikumuStatistikas/TrāpījumuSkaits"
 
 msgid "EventStats/Languages"
 msgstr "NotikumuStatistika/Valodas"
 
 msgid "EventStats/UserAgents"
-msgstr "NotikumuStatistika/LietotājuAģenti"
+msgstr "NotikumuStatistikas/LietotājaAģenti"
 
 msgid "PageSize"
-msgstr "LapasIzmērs"
+msgstr "LapuIzmēri"
 
 msgid "PageHits"
 msgstr "LapuTrāpījumi"
 
 msgid "RandomPage"
-msgstr "PatvaļīgaLapu"
+msgstr "JebkuraLapa"
 
 msgid "XsltVersion"
 msgstr "XsltVersija"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "Laimītes"
 
 msgid "WikiLicense"
 msgstr "VikiLicence"
 
 msgid "CategoryCategory"
-msgstr "KategorijasKategorija"
+msgstr "KategorijuKategorija"
 
 msgid "CategoryHomepage"
 msgstr "KategorijasMājasLapa"
@@ -1443,7 +1438,7 @@ msgid "CategoryTemplate"
 msgstr "KategorijasVeidne"
 
 msgid "HomepageTemplate"
-msgstr "MājasLapasVeidne"
+msgstr "MājasLapasKategorija"
 
 msgid "HelpTemplate"
 msgstr "PalīdzībasVeidne"
@@ -1461,7 +1456,7 @@ msgid "HomepageGroupsTemplate"
 msgstr ""
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "SlīdrādesIzklājumaVeidne"
 
 msgid "SlideShowTemplate"
 msgstr "SlīdrādesVeidne"
@@ -1500,7 +1495,7 @@ msgid "HelpOnUpdatingPython"
 msgstr ""
 
 msgid "HelpOnAdministration"
-msgstr ""
+msgstr "AdministrēšanasPalīdzība"
 
 msgid "HelpOnAuthentication"
 msgstr ""
@@ -1539,16 +1534,16 @@ msgid "MoinMoin"
 msgstr ""
 
 msgid "HelpContents"
-msgstr ""
+msgstr "PalīdzībasSaturaRādītājs"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "PalīdzībaIesācējiem"
 
 msgid "HelpForUsers"
 msgstr ""
 
 msgid "HelpIndex"
-msgstr ""
+msgstr "PalīdzībasIndekss"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
@@ -1566,7 +1561,7 @@ msgid "HelpOnAutoAdmin"
 msgstr ""
 
 msgid "HelpOnCategories"
-msgstr ""
+msgstr "KategorijuPalīdzība"
 
 msgid "HelpOnDictionaries"
 msgstr ""
@@ -1581,7 +1576,7 @@ msgid "HelpOnEditing"
 msgstr "RediģēšanasPalīdzība"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "RediģēšanasPalīdzība/ApakšLapas"
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
@@ -1605,7 +1600,7 @@ msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
 msgid "HelpOnLists"
-msgstr ""
+msgstr "SarakstuPalīdzība"
 
 msgid "HelpOnLogin"
 msgstr ""
@@ -1626,16 +1621,16 @@ msgid "HelpOnMacros/MonthCalendar"
 msgstr ""
 
 msgid "HelpOnNavigation"
-msgstr ""
+msgstr "NavigēšanasPalīdzība"
 
 msgid "HelpOnOpenIDProvider"
 msgstr ""
 
 msgid "HelpOnPageCreation"
-msgstr ""
+msgstr "LapuVeidošanasPalīdzība"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "LapuDzēšanasPalīdzība"
 
 msgid "HelpOnParsers/ReStructuredText"
 msgstr ""
@@ -1647,7 +1642,7 @@ msgid "HelpOnProcessingInstructions"
 msgstr ""
 
 msgid "HelpOnRules"
-msgstr ""
+msgstr "LīnijuPalīdzība"
 
 msgid "HelpOnSearching"
 msgstr "MeklēšanasPalīdzība"
@@ -1665,7 +1660,7 @@ msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
 msgstr ""
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "EmocijzīmjuPalīdzība"
 
 msgid "HelpOnSpam"
 msgstr ""
@@ -1680,16 +1675,16 @@ msgid "HelpOnSynchronisation"
 msgstr "SinhronizēšanasPalīdzība"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "TabuluPalīdzība"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "VeidņuPalīdzība"
 
 msgid "HelpOnThemes"
 msgstr ""
 
 msgid "HelpOnUserPreferences"
-msgstr ""
+msgstr "LietotājaIestatījumuPalīdzība"
 
 msgid "HelpOnVariables"
 msgstr ""

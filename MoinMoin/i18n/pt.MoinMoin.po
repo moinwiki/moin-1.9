@@ -1386,7 +1386,7 @@ msgid "TitleIndex"
 msgstr "ÍndiceDePáginas"
 
 msgid "WordIndex"
-msgstr "ÍndiceComPalavras"
+msgstr "ÍndiceDePalavras"
 
 msgid "FindPage"
 msgstr "PesquisaDePáginas"
@@ -1403,7 +1403,7 @@ msgstr "PáginaPrincipalEmFalta"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Nome"
+msgstr "WikiNome"
 
 msgid "WikiWikiWeb"
 msgstr ""
@@ -1412,14 +1412,14 @@ msgid "FrontPage"
 msgstr "FrontPage"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "PáginaDeTeste"
 
 #, fuzzy
 msgid "InterWiki"
 msgstr "Wiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "PáginasEsquecidas"
 
 #, fuzzy
 msgid "OrphanedPages"
@@ -1427,19 +1427,19 @@ msgstr "Páginas de pacote"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "PesquisaDePáginas"
+msgstr "PáginasProcuradas"
 
 msgid "EventStats"
-msgstr ""
+msgstr "EstatísticasDeEventos"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "EstatísticasDeEventos/ContadorDeHits"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "EstatísticasDeEventos/AgentesDeUsuário"
 
 #, fuzzy
 msgid "PageSize"
@@ -1447,7 +1447,7 @@ msgstr "Tamanho"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Páginas"
+msgstr "ContagemDeAcesso"
 
 #, fuzzy
 msgid "RandomPage"
@@ -1470,10 +1470,10 @@ msgid "CategoryHomepage"
 msgstr ""
 
 msgid "CategoryTemplate"
-msgstr ""
+msgstr "AjudaComListasDeControloDeAcesso"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "ModeloDePáginasPrincipais"
 
 msgid "HelpTemplate"
 msgstr ""
@@ -1567,7 +1567,7 @@ msgid "HelpOnXapian"
 msgstr "AjudaNaFormatação"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "MoinMoin/FormatoDeTexto"
 
 #, fuzzy
 msgid "HelpOnCreoleSyntax"
@@ -1591,7 +1591,7 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpIndex"
-msgstr "ÍndiceDePáginas"
+msgstr "ÍndiceDeAjuda"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""

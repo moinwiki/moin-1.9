@@ -1375,10 +1375,10 @@ msgid "about"
 msgstr ""
 
 msgid "RecentChanges"
-msgstr "PerubahanTerbaru"
+msgstr "PerubahanTerakhir"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "TipWikiHariIni"
 
 msgid "TitleIndex"
 msgstr "IndeksJudul"
@@ -1390,66 +1390,66 @@ msgid "FindPage"
 msgstr "CariHalaman"
 
 msgid "MissingPage"
-msgstr "HalamanHilang"
+msgstr "HalamanYangHilang"
 
 msgid "MissingHomePage"
-msgstr "LamanHilang"
+msgstr "LamanYangHilang"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "LamanHilang"
+msgstr "HomePageWiki"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Nama"
+msgstr "NamaWiki"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "SitusWikiWiki"
 
 msgid "FrontPage"
-msgstr "HalamanMuka"
+msgstr "HalamanDepan"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "KotakPasirWiki"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "WikiInter"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "HalamanYangTerlantar"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Halaman paket"
+msgstr "HalamanYatim"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "CariHalaman"
+msgstr "HalamanYangDicari"
 
 msgid "EventStats"
-msgstr ""
+msgstr "StatistikPeristiwa"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "StatistikPeristiwa/JumlahYangMasuk"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "StatistikPeristiwa/Bahasa"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "StatistikPeristiwa/AgenPengguna"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Ukuran"
+msgstr "UkuranHalaman"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Halaman"
+msgstr "PukulanHalaman"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "GantiNamaHalaman"
+msgstr "HalamanAcak"
 
 #, fuzzy
 msgid "XsltVersion"
@@ -1576,10 +1576,10 @@ msgstr "BantuanPemformatan"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "Versi MoinMoin"
+msgstr "TentangMoinMoin"
 
 msgid "HelpContents"
-msgstr "DaftarBantuan"
+msgstr "KontenBantuan"
 
 msgid "HelpForBeginners"
 msgstr ""

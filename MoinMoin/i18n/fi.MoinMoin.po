@@ -1364,7 +1364,7 @@ msgid "RecentChanges"
 msgstr "UusimmatMuutokset"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "WikiVinkki"
 
 msgid "TitleIndex"
 msgstr "SivuHakemisto"
@@ -1383,11 +1383,11 @@ msgstr "PuuttuvaKotisivu"
 
 #, fuzzy
 msgid "WikiHomePage"
-msgstr "PuuttuvaKotisivu"
+msgstr "WikiKotiSivu"
 
 #, fuzzy
 msgid "WikiName"
-msgstr "Nimi"
+msgstr "WikiNimi"
 
 msgid "WikiWikiWeb"
 msgstr ""
@@ -1396,60 +1396,60 @@ msgid "FrontPage"
 msgstr "EtuSivu"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiTestiSivu"
 
 #, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "InterWikit"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "HylätytSivut"
 
 #, fuzzy
 msgid "OrphanedPages"
-msgstr "Muutettu sivu"
+msgstr "OrvotSivut"
 
 #, fuzzy
 msgid "WantedPages"
-msgstr "SivuHaku"
+msgstr "KaivatutSivut"
 
 msgid "EventStats"
-msgstr ""
+msgstr "LokiTilastot"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "LokiTilastot/VierailuMäärät"
 
 msgid "EventStats/Languages"
 msgstr ""
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "LokiTilastot/SelainTunnisteTiedot"
 
 #, fuzzy
 msgid "PageSize"
-msgstr "Koko"
+msgstr "SivuKoko"
 
 #, fuzzy
 msgid "PageHits"
-msgstr "Sivut"
+msgstr "SivuVierailut"
 
 #, fuzzy
 msgid "RandomPage"
-msgstr "UudelleennimeäSivu"
+msgstr "SatunnainenSivu"
 
 #, fuzzy
 msgid "XsltVersion"
 msgstr "Python, versio"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "OnnenKeksit"
 
 msgid "WikiLicense"
 msgstr "WikiLisenssi"
 
 #, fuzzy
 msgid "CategoryCategory"
-msgstr "mikä tahansa kategoria"
+msgstr "KategoriaKategoria"
 
 #, fuzzy
 msgid "CategoryHomepage"
@@ -1457,35 +1457,35 @@ msgstr "Kategoriat"
 
 #, fuzzy
 msgid "CategoryTemplate"
-msgstr "Kategoriat"
+msgstr "KategoriaPohja"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "KotiSivuPohja"
 
 msgid "HelpTemplate"
 msgstr ""
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "KotiSivuLukuKirjoitusSivuPohja"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "KotiSivuLukuSivuPohja"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "KotiSivuYksityinenSivuPohja"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "KotiSivuRyhmätPohja"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "DiaEsitysTiivistelmäPohja"
 
 #, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Diaesitys"
+msgstr "DiaEsitysPohja"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "DiaPohja"
 
 msgid "SyncJobTemplate"
 msgstr ""
@@ -1565,27 +1565,27 @@ msgstr "OhjeMuotoilusta"
 
 #, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoin, versio"
+msgstr "MoinMoinWiki"
 
 msgid "HelpContents"
-msgstr "OhjeSisällys"
+msgstr "OhjeSisältö"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "OhjeAloittelijoille"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "OhjeKäyttäjille"
 
 #, fuzzy
 msgid "HelpIndex"
-msgstr "SivuHakemisto"
+msgstr "OhjeHakemisto"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnActions"
-msgstr "OhjeSisällys"
+msgstr "OhjeToiminnoista"
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
@@ -1600,7 +1600,7 @@ msgstr "OhjeMuotoilusta"
 
 #, fuzzy
 msgid "HelpOnCategories"
-msgstr "Kategoriat"
+msgstr "OhjeKategorioista"
 
 msgid "HelpOnDictionaries"
 msgstr ""
@@ -1610,24 +1610,24 @@ msgid "HelpOnDrawings"
 msgstr "OhjeMuotoilusta"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "OhjeMuokkausLukoista"
 
 #, fuzzy
 msgid "HelpOnEditing"
-msgstr "OhjeMuotoilusta"
+msgstr "OhjeMuokkauksesta"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "OhjeMuokkauksesta/AlaSivut"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "OhjeMuotoilutilasta"
 
 #, fuzzy
 msgid "HelpOnGroups"
 msgstr "OhjeSisällys"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "OhjeOtsikoista"
 
 #, fuzzy
 msgid "HelpOnImages"
@@ -1639,21 +1639,21 @@ msgstr "Kieli"
 
 #, fuzzy
 msgid "HelpOnLinking"
-msgstr "OhjeMuotoilusta"
+msgstr "OhjeLinkittämisestä"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnLists"
-msgstr "OhjeSisällys"
+msgstr "OhjeLuetteloista"
 
 #, fuzzy
 msgid "HelpOnLogin"
 msgstr "OhjeMuotoilusta"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "OhjeMakroista"
 
 msgid "HelpOnMacros/EmbedObject"
 msgstr ""
@@ -1677,10 +1677,10 @@ msgstr "OpenID-palvelin"
 
 #, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "OhjeMuotoilusta"
+msgstr "OhjeSivujenLuomisesta"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "OhjeSivujenPoistamisesta"
 
 msgid "HelpOnParsers/ReStructuredText"
 msgstr ""
@@ -1693,15 +1693,15 @@ msgstr ""
 
 #, fuzzy
 msgid "HelpOnRules"
-msgstr "OhjeSisällys"
+msgstr "OhjeViivoista"
 
 #, fuzzy
 msgid "HelpOnSearching"
-msgstr "OhjeMuotoilusta"
+msgstr "OhjeHakemisesta"
 
 #, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Diaesitys"
+msgstr "OhjeDiaEsityksestä"
 
 msgid "HelpOnSlideShows/000 Introduction"
 msgstr ""
@@ -1713,7 +1713,7 @@ msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
 msgstr ""
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "OhjeHymiöistä"
 
 msgid "HelpOnSpam"
 msgstr ""
@@ -1730,17 +1730,17 @@ msgid "HelpOnSynchronisation"
 msgstr "Synkronisointi aloitettu -"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "OhjeTaulukoista"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "OhjePohjista"
 
 msgid "HelpOnThemes"
 msgstr ""
 
 #, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "KäyttäjäAsetukset"
+msgstr "OhjeKäyttäjäAsetuksista"
 
 msgid "HelpOnVariables"
 msgstr ""

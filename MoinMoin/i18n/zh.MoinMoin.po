@@ -819,7 +819,7 @@ msgstr ""
 " 链接:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
 " 表格:: |= 表头文字 | 单元格文字 | 更多单元格文字 |;\n"
 "\n"
-"(!) 更多帮助见[[帮助-编辑]]，英文帮助查看 HelpOnEditing 或 "
+"(!) 更多帮助见[[帮助-编辑]]或[[帮助-Creole语法]]，英文帮助查看 HelpOnEditing 或 "
 "HelpOnCreoleSyntax。\n"
 
 msgid ""
@@ -850,8 +850,8 @@ msgstr ""
 " 链接:: <<Verbatim(JoinCapitalizedWords 紧连的两个以上大写开头单词)>>; "
 "<<Verbatim([[目标|链接文字]])>>。\n"
 " 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有尾随"
-"空格(!) 更多帮助见[[帮助-编辑]][[语法参考]]，英文帮助查看 HelpOnEditing 或 "
-"SyntaxReference。\n"
+"空格(!) 更多帮助见[[帮助-编辑]][[帮助-Moin维基语法]]，英文帮助查看 HelpOnEditing 或 "
+"HelpOnMoinWikiSyntax。\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -930,7 +930,7 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**未能找到引用的网页：%s**"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT选项没有激活，请参阅 [\"帮助-设置\"]，或者HelpOnConfiguration。"
+msgstr "XSLT选项没有激活，请参阅[[帮助-系统设置]]。"
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr "没有XSLT处理套件。请安装 4suite 1.x。"
@@ -1157,9 +1157,9 @@ msgstr ""
 "\n"
 "用户 %(editor)s 将页面 \"%(pagename)s\" 改名为 \"%(oldname)s\"：\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] 您的维基帐号资料"
+msgstr "[%(sitename)s] 新用户创建完成"
 
 #, python-format
 msgid ""
@@ -1174,9 +1174,9 @@ msgstr ""
 "    用户名：%(username)s\n"
 "    邮件地址：%(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "添加新附件到页面 %(pagename)s 于站点 %(sitename)s"
+msgstr "[%(sitename)s] 新附件已添加到 %(pagename)s"
 
 #, python-format
 msgid ""
@@ -1197,9 +1197,9 @@ msgstr ""
 "附件名称：%(attach_name)s\n"
 "附件大小：%(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "从 %(sitename)s 站点 %(pagename)s 页面删除和附件"
+msgstr "[%(sitename)s] 已从 %(pagename)s 删除附件"
 
 #, python-format
 msgid ""
@@ -1347,7 +1347,7 @@ msgid "FrontPage"
 msgstr "首页"
 
 msgid "WikiSandBox"
-msgstr "沙箱"
+msgstr "维基沙盘演练"
 
 msgid "InterWiki"
 msgstr "维基链"
@@ -1362,56 +1362,49 @@ msgid "WantedPages"
 msgstr "待建网页"
 
 msgid "EventStats"
-msgstr "事件状态"
+msgstr "事件统计"
 
 msgid "EventStats/HitCounts"
-msgstr "事件状态/点击统计"
+msgstr "事件统计/访问量"
 
 msgid "EventStats/Languages"
-msgstr "事件状态/语言支持"
+msgstr "事件统计/访问语言"
 
 msgid "EventStats/UserAgents"
-msgstr "事件状态/用户代理"
+msgstr "事件统计/访问客户端"
 
-# fixed fuzzy
 msgid "PageSize"
-msgstr "页面尺寸"
+msgstr "网页大小"
 
-# fixed fuzzy
 msgid "PageHits"
-msgstr "页面点击"
+msgstr "网页流量"
 
-# fixed fuzzy
 msgid "RandomPage"
-msgstr "随机页面"
+msgstr "随机网页"
 
-# fixed fuzzy
 msgid "XsltVersion"
 msgstr "XSLT版本"
 
 msgid "FortuneCookies"
-msgstr "技巧提点s"
+msgstr "名言警句"
 
 msgid "WikiLicense"
 msgstr "维基版权"
 
-# fixed fuzzy
 msgid "CategoryCategory"
-msgstr "分类的分类"
+msgstr "网页分类"
 
-# fixed fuzzy
 msgid "CategoryHomepage"
-msgstr "主页分类"
+msgstr "个人网页类"
 
-# fixed fuzzy
 msgid "CategoryTemplate"
 msgstr "分类模板"
 
 msgid "HomepageTemplate"
-msgstr "主页模板"
+msgstr "个人网页模板"
 
 msgid "HelpTemplate"
-msgstr "帮助页模板"
+msgstr "帮助模板"
 
 msgid "HomepageReadWritePageTemplate"
 msgstr "主页读写权限模板"
@@ -1426,48 +1419,44 @@ msgid "HomepageGroupsTemplate"
 msgstr "主页编辑组权限模板"
 
 msgid "SlideShowHandOutTemplate"
-msgstr "幻灯提纲模板"
+msgstr "幻灯讲义模板"
 
-# fixed fuzzy
 msgid "SlideShowTemplate"
-msgstr "幻灯展示模板"
+msgstr "幻灯放映模板"
 
 msgid "SlideTemplate"
-msgstr "幻灯页面模板"
+msgstr "幻灯片模板"
 
 msgid "SyncJobTemplate"
 msgstr "同步事务模板"
 
-# fixed fuzzy
 msgid "HelpOnConfiguration"
-msgstr "帮助-配置"
+msgstr "帮助-系统设置"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr "帮助-配置/邮件支持"
+msgstr "帮助-系统设置/邮件支持"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr "帮助-配置/安全策略"
+msgstr "帮助-系统设置/安全策略"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr "帮助-配置/文档附件"
+msgstr "帮助-系统设置/附件"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr "帮助-配置/增补页面"
+msgstr "帮助-系统设置/增补页面"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr "帮助-配置/汹涌防止"
+msgstr "帮助-系统设置/汹涌防止"
 
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr "帮助-配置/用户配置"
+msgstr "帮助-系统设置/用户配置"
 
 msgid "HelpOnPackageInstaller"
-msgstr "帮助-包安装"
+msgstr "帮助-包安装器"
 
-# fixed fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "帮助-Python更新"
+msgstr "帮助-升级Python"
 
-# fixed fuzzy
 msgid "HelpOnAdministration"
 msgstr "帮助-管理"
 
@@ -1477,125 +1466,105 @@ msgstr "帮助-认证"
 msgid "HelpOnAuthentication/ExternalCookie"
 msgstr "帮助-认证/扩展Cookie"
 
-# fixed fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "帮助-命令"
+msgstr "帮助-Moin命令"
 
 msgid "HelpOnMoinCommand/ExportDump"
 msgstr "帮助-命令/导出"
 
-# fixed fuzzy
 msgid "HelpOnNotification"
 msgstr "帮助-通知"
 
-# fixed fuzzy
 msgid "HelpOnSessions"
 msgstr "帮助-会话"
 
-# fixed fuzzy
 msgid "HelpOnUserHandling"
-msgstr "帮助-用户句柄"
+msgstr "帮助-用户管理"
 
-# fixed fuzzy
 msgid "HelpOnXapian"
 msgstr "帮助-Xapian"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr "帮助-维基语法"
+msgstr "帮助-Moin维基语法"
 
-# fixed fuzzy
 msgid "HelpOnCreoleSyntax"
 msgstr "帮助-Creole语法"
 
 msgid "HelpOnFormatting"
 msgstr "帮助-排版"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "摸一摸"
+msgstr "简体中文MoinMoin"
 
 msgid "HelpContents"
 msgstr "帮助目录"
 
 msgid "HelpForBeginners"
-msgstr "初学者帮助"
+msgstr "帮助-新手入门"
 
 msgid "HelpForUsers"
 msgstr "用户帮助"
 
-# fixed fuzzy
 msgid "HelpIndex"
 msgstr "帮助索引"
 
 msgid "HelpOnAccessControlLists"
-msgstr "帮助-访问控制"
+msgstr "帮助-访问权限控制表"
 
-# fixed fuzzy
 msgid "HelpOnActions"
-msgstr "帮助-动作"
+msgstr "帮助-操作"
 
 msgid "HelpOnActions/AttachFile"
-msgstr "帮助-动作/附加文件"
+msgstr "帮助-操作/附加文件"
 
-# fixed fuzzy
 msgid "HelpOnAdmonitions"
 msgstr "帮助-管理"
 
-# fixed fuzzy
 msgid "HelpOnAutoAdmin"
 msgstr "帮助-自动管理"
 
-# fixed fuzzy
 msgid "HelpOnCategories"
 msgstr "帮助-分类"
 
 msgid "HelpOnDictionaries"
 msgstr "帮助-字典"
 
-# fixed fuzzy
 msgid "HelpOnDrawings"
 msgstr "帮助-绘图"
 
 msgid "HelpOnEditLocks"
-msgstr "帮助-编辑锁"
+msgstr "帮助-编辑锁定"
 
-# fixed fuzzy
 msgid "HelpOnEditing"
 msgstr "帮助-编辑"
 
 msgid "HelpOnEditing/SubPages"
-msgstr "帮助-编辑/子页面"
+msgstr "帮助-编辑/子网页"
 
 msgid "HelpOnGraphicalEditor"
 msgstr "帮助-可视化编辑器"
 
-# fixed fuzzy
 msgid "HelpOnGroups"
 msgstr "帮助-群组"
 
 msgid "HelpOnHeadlines"
 msgstr "帮助-标题"
 
-# fixed fuzzy
 msgid "HelpOnImages"
 msgstr "帮助-图片"
 
-# fixed fuzzy
 msgid "HelpOnLanguages"
 msgstr "帮助-语言"
 
-# fixed fuzzy
 msgid "HelpOnLinking"
 msgstr "帮助-链接"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr "帮助-链接/说明链接"
 
-# fixed fuzzy
 msgid "HelpOnLists"
 msgstr "帮助-列表"
 
-# fixed fuzzy
 msgid "HelpOnLogin"
 msgstr "帮助-登录"
 
@@ -1614,50 +1583,44 @@ msgstr "帮助-宏/发送邮件"
 msgid "HelpOnMacros/MonthCalendar"
 msgstr "帮助-宏/月历"
 
-# fixed fuzzy
 msgid "HelpOnNavigation"
 msgstr "帮助-导航"
 
-# fixed fuzzy
 msgid "HelpOnOpenIDProvider"
 msgstr "帮助-OpenID认证"
 
-# fixed fuzzy
 msgid "HelpOnPageCreation"
-msgstr "帮助-页面创建"
+msgstr "帮助-新建网页"
 
 msgid "HelpOnPageDeletion"
-msgstr "帮助-页面删除"
+msgstr "帮助-删除网页"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr "帮助-解析/新结构化文本"
+msgstr "帮助-分析插件/ReStructuredText"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr "帮助-解析/新结构化文本/入门"
+msgstr "帮助-分析插件/ReStructuredText/入门"
 
 msgid "HelpOnProcessingInstructions"
-msgstr "帮助-解析介绍"
+msgstr "帮助-处理指令"
 
-# fixed fuzzy
 msgid "HelpOnRules"
-msgstr "帮助-规则"
+msgstr "帮助-横线"
 
-# fixed fuzzy
 msgid "HelpOnSearching"
 msgstr "帮助-搜索"
 
-# fixed fuzzy
 msgid "HelpOnSlideShows"
-msgstr "帮助-幻灯"
+msgstr "帮助-放映幻灯"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr "帮助-幻灯/000介绍"
+msgstr "帮助-放映幻灯/000前言"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr "帮助-幻灯/100创建"
+msgstr "帮助-放映幻灯/100创建幻灯片"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr "帮助-幻灯/900展示"
+msgstr "帮助-放映幻灯/900最后: 放映开始"
 
 msgid "HelpOnSmileys"
 msgstr "帮助-表情"
@@ -1665,14 +1628,12 @@ msgstr "帮助-表情"
 msgid "HelpOnSpam"
 msgstr "帮助-Spam"
 
-# fixed fuzzy
 msgid "HelpOnSpellCheck"
 msgstr "帮助-拼写检查"
 
 msgid "HelpOnSuperUser"
 msgstr "帮助-超级用户"
 
-# fixed fuzzy
 msgid "HelpOnSynchronisation"
 msgstr "帮助-同步"
 
@@ -1683,24 +1644,20 @@ msgid "HelpOnTemplates"
 msgstr "帮助-模板"
 
 msgid "HelpOnThemes"
-msgstr "帮助-样式"
+msgstr "帮助-主题"
 
-# fixed fuzzy
 msgid "HelpOnUserPreferences"
 msgstr "帮助-用户设置"
 
 msgid "HelpOnVariables"
 msgstr "帮助-变量"
 
-# fixed fuzzy
 msgid "HelpOnXmlPages"
-msgstr "帮助-XML页面"
+msgstr "帮助-XML网页"
 
-# fixed fuzzy
 msgid "HelpOnComments"
-msgstr "帮助-命令"
+msgstr "帮助-注释"
 
-# fixed fuzzy
 msgid "HelpOnSubscribing"
 msgstr "帮助-订阅"
 
@@ -1711,88 +1668,85 @@ msgid "WikiCourse"
 msgstr "维基教程"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr "维基教程/01什么是MoinMoin"
+msgstr "维基教程/01 什么是MoinMoin"
 
 msgid "WikiCourse/02 Finding information"
-msgstr "维基教程/02寻找信息"
+msgstr "维基教程/02 寻找信息"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr "维基教程/03保留日期"
+msgstr "维基教程/03 保留日期"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr "维基教程/04创建帐号"
+msgstr "维基教程/04 创建帐号"
 
-# fixed fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "维基教程/05用户配置"
+msgstr "维基教程/05 用户配置"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr "维基教程/06建立入口"
+msgstr "维基教程/06 建立入口"
 
 msgid "WikiCourse/07 The text editor"
-msgstr "维基教程/07文本编辑"
+msgstr "维基教程/07 文本编辑"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr "维基教程/08关键词"
+msgstr "维基教程/08 关键词"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr "维基教程/10用维基标记排版"
+msgstr "维基教程/10 用维基标记排版"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr "维基教程/11章节"
+msgstr "维基教程/11 章节"
 
 msgid "WikiCourse/12 Headlines"
-msgstr "维基教程/12标题"
+msgstr "维基教程/12 标题"
 
 msgid "WikiCourse/13 Lists"
-msgstr "维基教程/13列表"
+msgstr "维基教程/13 列表"
 
 msgid "WikiCourse/14 Text styles"
-msgstr "维基教程/14文本样式"
+msgstr "维基教程/14 文本样式"
 
 msgid "WikiCourse/15 Tables"
-msgstr "维基教程/15表格"
+msgstr "维基教程/15 表格"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr "维基教程/16互联维基链接"
+msgstr "维基教程/16 互联维基链接"
 
 msgid "WikiCourse/17 External links"
-msgstr "维基教程/17扩展链接"
+msgstr "维基教程/17 扩展链接"
 
-# fixed fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "维基教程/18附件"
+msgstr "维基教程/18 附件"
 
 msgid "WikiCourse/19 Symbols"
-msgstr "维基教程/19表情符"
+msgstr "维基教程/19 表情符"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr "维基教程/20动态内容"
+msgstr "维基教程/20 动态内容"
 
 msgid "WikiCourse/21 Macros"
-msgstr "维基教程/21宏"
+msgstr "维基教程/21 宏"
 
 msgid "WikiCourse/22 Parsers"
-msgstr "维基教程/22解析器"
+msgstr "维基教程/22 解析器"
 
-# fixed fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "维基教程/23动作"
+msgstr "维基教程/23 操作"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr "维基教程/30可视化编辑器"
+msgstr "维基教程/30 可视化编辑器"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr "维基教程/40创建页面"
+msgstr "维基教程/40 创建页面"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr "维基教程/50维基礼节"
+msgstr "维基教程/50 维基礼节"
 
 msgid "WikiCourse/51 Applications"
-msgstr "维基教程/51应用"
+msgstr "维基教程/51 应用"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr "维基教程/52维基结构"
+msgstr "维基教程/52 维基结构"
 
 msgid "WikiCourseHandOut"
 msgstr "维基教程大纲"
@@ -2026,21 +1980,17 @@ msgstr "附件浏览器"
 msgid "User account browser"
 msgstr "用户帐号浏览器"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "描述"
+msgstr "Lexer 描述"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "用户名"
+msgstr "Lexer 名称"
 
-#, fuzzy
 msgid "File patterns"
 msgstr "文件类型"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "任何MIME类型"
+msgstr "MIME类型"
 
 msgid "Wiki configuration"
 msgstr "维基配置"
@@ -2240,7 +2190,6 @@ msgstr "包含以下一个或多个条目"
 msgid "not containing the following terms"
 msgstr "未包含以下条目"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
 msgstr "最后一次修改在(如：两周前)"
 
@@ -2296,7 +2245,7 @@ msgstr "描述"
 msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
-msgstr "您的查询 {{{\"%s\"}}}无效。详情参阅HelpOnSearching。"
+msgstr "您的查询 {{{\"%s\"}}}无效。详情参阅[[帮助-搜索]]。"
 
 msgid "Markup"
 msgstr "标记"
@@ -2381,16 +2330,14 @@ msgstr "无法删除您对本页的快捷链接。"
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "您尚未添加本页的快捷链接，因此无法删除。"
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "幻灯片模式"
+msgstr "编辑幻灯片"
 
 msgid "Quit"
 msgstr "退出"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "幻灯片模式"
+msgstr "退出幻灯片放映"
 
 msgid "Show first slide (up arrow)"
 msgstr "展示首张幻灯(上箭头)"
@@ -3047,18 +2994,18 @@ msgstr "此页连到以下网页："
 msgid ""
 "Showing page edit history entries from '''%(start_offset)d''' to '''%"
 "(end_offset)d''' out of '''%(total_count)d''' entries total."
-msgstr ""
+msgstr "显示网页编辑历史，从第 '''%(start_offset)d''' 个到第 '''%"
+"(end_offset)d''' 个，共 '''%(total_count)d''' 个记录。"
 
-#, fuzzy
 msgid "Newer"
-msgstr "新名称"
+msgstr "更新"
 
 msgid "Older"
-msgstr ""
+msgstr "更旧"
 
 #, python-format
 msgid "%s items per page"
-msgstr ""
+msgstr "%s 个记录/页"
 
 msgid "Date"
 msgstr "日期"
@@ -3145,13 +3092,13 @@ msgid "Please choose:"
 msgstr "请选择："
 
 msgid "Create redirect for renamed page(s)?"
-msgstr ""
+msgstr "为重命名的网页创建重定向？"
 
 msgid "Rename all /subpages too?"
 msgstr "重命名所有的子网页？"
 
 msgid "Create redirect for renamed page?"
-msgstr ""
+msgstr "为重命名的网页创建重定向？"
 
 msgid "Really rename this page?"
 msgstr "真的要重命名此页？"
@@ -3171,29 +3118,23 @@ msgstr "复制的原因(可选)"
 msgid "Really copy this page?"
 msgstr "真的要复制此页？"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "附件链接"
+msgstr "附件位置"
 
-#, fuzzy
 msgid "Page name"
-msgstr "打包文件名"
+msgstr "网页名称"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "新附件名称"
+msgstr "附件名称"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "附件链接"
+msgstr "刷新附件列表"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "[%d个附件]"
+msgstr "附件列表"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "网页\"%(pagename)s\"的附件"
+msgstr "网页所允许的附件"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -3220,9 +3161,8 @@ msgstr "上个改动"
 msgid "Next change"
 msgstr "下个改动"
 
-#, fuzzy
 msgid "Diff with oldest revision in left pane"
-msgstr "在左面板与旧版本比较"
+msgstr "在左面板与最旧版本比较"
 
 msgid "No older revision available for diff"
 msgstr "没有旧版本可比较"
@@ -3248,9 +3188,8 @@ msgstr "在右面板与新版本比较"
 msgid "No newer revision available for diff"
 msgstr "没有新版本可比较"
 
-#, fuzzy
 msgid "Diff with newest revision in right pane"
-msgstr "在右面板与新版本比较"
+msgstr "在右面板与最新版本比较"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3363,7 +3302,7 @@ msgstr ""
 "||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
 "(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||仅%"
-"(username)s only||\n"
+"(username)s ||\n"
 "\n"
 
 msgid "MyPages management"
@@ -3521,7 +3460,7 @@ msgid "page size upper bound [bytes]"
 msgstr "网页大小上界[字节]"
 
 msgid "# of pages of this size"
-msgstr "相同大小的网页数"
+msgstr "# 相同大小的网页数"
 
 msgid "From"
 msgstr "寄件人"
@@ -3533,7 +3472,7 @@ msgid "Content"
 msgstr "目录"
 
 msgid "No recipients, nothing to do"
-msgstr "没有增订,什么也没有作"
+msgstr "没有增订,什么也没有做"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -3553,53 +3492,47 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 msgid "anonymous"
 msgstr "匿名"
 
-#~ msgid "New user account created on %(sitename)s"
-#~ msgstr "新用户帐号创建于 %(sitename)s"
+msgid "New user account created on %(sitename)s"
+msgstr "新用户帐号创建于 %(sitename)s"
 
-#~ msgid "Please use the interactive user interface to move attachments!"
-#~ msgstr "请使用用户界面交互地移动附件！"
+msgid "Please use the interactive user interface to move attachments!"
+msgstr "请使用用户界面交互地移动附件！"
 
-#~ msgid "Page Name"
-#~ msgstr "打包文件名"
+msgid "Page Name"
+msgstr "打包文件名"
 
-#, fuzzy
-#~ msgid "InstallDocs"
-#~ msgstr "安装"
+msgid "InstallDocs"
+msgstr "安装文档"
 
-#, fuzzy
-#~ msgid "HelpOnUpdating"
-#~ msgstr "帮助-排版"
+msgid "HelpOnUpdating"
+msgstr "帮助-升级"
 
-#, fuzzy
-#~ msgid "OpenID: handle verify continuation"
-#~ msgstr "OpenID 信任校验"
+msgid "OpenID: handle verify continuation"
+msgstr "OpenID： 处理连续校验"
 
-#, fuzzy
-#~ msgid "you may need to login to edit this page"
-#~ msgstr "您无权编辑此页。"
+msgid "you may need to login to edit this page"
+msgstr "只有登录以后才能编辑此网页。"
 
-#~ msgid ""
-#~ "Installing theme files is only supported for standalone type servers."
-#~ msgstr "只有独立型服务器才支持安装主题文件。"
+msgid ""
+"Installing theme files is only supported for standalone type servers."
+msgstr ""
+"只有独立型服务器才支持安装主题文件。"
 
-#, fuzzy
-#~ msgid "InterWikiMap"
-#~ msgstr "维基标记"
 
-#, fuzzy
-#~ msgid "BadContent"
-#~ msgstr "目录"
+msgid "InterWikiMap"
+msgstr "内部维基映射"
 
-#, fuzzy
-#~ msgid "LocalBadContent"
-#~ msgstr "目录"
+msgid "BadContent"
+msgstr "坏东西"
 
-#, fuzzy
-#~ msgid "EditedSystemPages"
-#~ msgstr "不包括系统网页"
+msgid "LocalBadContent"
+msgstr "本地坏东西"
 
-#~ msgid "Created the package %s containing the pages %s."
-#~ msgstr "生成的包%s包含网页%s。"
+msgid "EditedSystemPages"
+msgstr "已编辑过的系统网页"
 
-#~ msgid "You need to log in."
-#~ msgstr "您需要登录。"
+msgid "Created the package %s containing the pages %s."
+msgstr "生成的包%s包含网页%s。"
+
+msgid "You need to log in."
+msgstr "您需要登录。"

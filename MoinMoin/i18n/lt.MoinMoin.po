@@ -1541,7 +1541,7 @@ msgid "HelpOnXapian"
 msgstr ""
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "PagalbaMoinWikiSintaksės"
 
 msgid "HelpOnCreoleSyntax"
 msgstr ""
@@ -1556,10 +1556,10 @@ msgid "HelpContents"
 msgstr "PagalbosTurinys"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "PagalbaPradedantiesiems"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "PagalbaNaudotojams"
 
 msgid "HelpIndex"
 msgstr "PagalbosIndeksas"
@@ -1583,7 +1583,7 @@ msgid "HelpOnCategories"
 msgstr "PagalbaKategorijų"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "PagalbaŽodynų"
 
 msgid "HelpOnDrawings"
 msgstr ""
@@ -1604,7 +1604,7 @@ msgid "HelpOnGroups"
 msgstr ""
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "PagalbaAntraščių"
 
 msgid "HelpOnImages"
 msgstr "PagalbaPaveikslų"
