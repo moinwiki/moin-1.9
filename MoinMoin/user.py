@@ -15,11 +15,18 @@
       * storage code
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2003-2007 MoinMoin:ThomasWaldmann
+                2003-2007 MoinMoin:ThomasWaldmann,
+                2010 Michael Foetsch <foetsch@yahoo.com>
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, time, codecs, base64
+import md5crypt
+
+try:
+    import crypt
+except ImportError:
+    crypt = None
 
 from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
@@ -506,12 +513,35 @@ class User:
         if not password:
             return False, False
 
-        if epwd[:5] == '{SHA}':
-            enc = '{SHA}' + base64.encodestring(hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
-            if epwd == enc:
-                data['enc_password'] = encodePassword(password) # upgrade to SSHA
-                return True, True
-            return False, False
+        # Check and upgrade passwords from earlier MoinMoin versions and
+        # passwords imported from other wiki systems.
+        for method in ['{SHA}', '{APR1}', '{MD5}', '{DES}']:
+            if epwd.startswith(method):
+                d = epwd[len(method):]
+                if method == '{SHA}':
+                    enc = base64.encodestring(
+                        hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
+                elif method == '{APR1}':
+                    # d is of the form "$apr1$<salt>$<hash>"
+                    salt = d.split('$')[2]
+                    enc = md5crypt.apache_md5_crypt(password.encode('utf-8'),
+                                                    salt.encode('ascii'))
+                elif method == '{MD5}':
+                    # d is of the form "$1$<salt>$<hash>"
+                    salt = d.split('$')[2]
+                    enc = md5crypt.unix_md5_crypt(password.encode('utf-8'),
+                                                  salt.encode('ascii'))
+                elif method == '{DES}':
+                    if crypt is None:
+                        return False, False
+                    # d is 2 characters salt + 11 characters hash
+                    salt = d[:2]
+                    enc = crypt.crypt(password.encode('utf-8'), salt.encode('ascii'))
+
+                if epwd == method + enc:
+                    data['enc_password'] = encodePassword(password) # upgrade to SSHA
+                    return True, True
+                return False, False
 
         if epwd[:6] == '{SSHA}':
             data = base64.decodestring(epwd[6:])
