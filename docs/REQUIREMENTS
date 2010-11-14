@@ -1,10 +1,14 @@
 Python requirements
 ===================
 
-Please use Python 2.4.x, 2.5.x or 2.6.x, we recommend 2.5.x / 2.6.x.
+Please use Python 2.6.x, 2.5.x, 2.7.x, 2.4.x (in that order, first most
+recommended, last least recommended).
+2.4 is last because it is very OLD and not much tested any more.
+2.7 is 2nd last because it is very NEW and not much tested with moin yet.
 
 Python 2.3 is not supported by moin 1.9.x (use moin 1.8.x if you can't
-upgrade Python).
+upgrade Python now [but please begin planning your Python upgrade, 1.8.8 or
+1.8.9 will be the last moin 1.8.x release]).
 
 Python 3.x won't work for MoinMoin for now.
 
