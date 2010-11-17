@@ -98,7 +98,7 @@ class Collector(object):
                 difficulty = find_dict_entry("Difficulty", page_contents)
                 types = find_dict_entry("Type", page_contents)
             except DataNotFoundException, e:
-                print "Could not import %r because of %r" % (page, e)
+                print >>sys.stderr, "Could not import %r because of %r" % (page, e)
                 continue
             desc_m = re.search(desc_pattern, page_contents)
             if not desc_m:
@@ -162,10 +162,10 @@ def pull_and_gencsv():
         tmin, tmax = 0, None
     else:
         tmin, tmax = 0, None
-    print "Collecting tasks ..."
+    print >> sys.stderr, "Collecting tasks ..."
     tasks = Collector("http://moinmo.in/").collect_tasks()
-    print "Importing %i tasks ..." % (len(tasks), )
-    print "\n".join(repr(task) for task in tasks)
+    print >> sys.stderr, "Importing %i tasks ..." % (len(tasks), )
+    print >> sys.stderr, "\n".join(repr(task) for task in tasks)
 
     for task in tasks[tmin:tmax]:
         csvwriter.writerow([summary_prefix + task.summary, task.desc, task.hours, task.mentors, task.difficulty, task.types, task.label])
