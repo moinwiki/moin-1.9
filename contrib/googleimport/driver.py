@@ -13,24 +13,33 @@ import re
 import urllib2
 from urllib import quote
 import xmlrpclib
+import csv
+from MoinMoin.web.contexts import ScriptContext
+from MoinMoin.Page import Page
 
-sys.path.append("/home/alexander/dev/python/ghopimport")
-#sys.path.append("/srv/moin_tw/moin-1.6/contrib")
-
-from googleimport import googlepush
+request = ScriptContext(None, None)
 
 
 class DataNotFoundException(Exception): pass
 
 
 class Task(object):
-    def __init__(self, summary, desc, label):
+    def __init__(self, summary, desc, label, hours, mentors, difficulty, types):
         self.summary = summary
-        self.desc = desc
+        #self.desc = desc
         self.label = label
+        self.hours = hours
+        self.mentors = mentors
+        self.difficulty = difficulty
+        self.types = types
+
+        page = Page(request, "")
+        page.set_raw_body(desc)
+        self.desc = request.redirectedOutput(page.send_page, content_only=1).replace("\n", " ")
 
     def __repr__(self):
-        return (u"<Task summary=%r label=%r desc='''%s'''>" % (self.summary, self.label,  self.desc[:100] )).encode("utf-8")
+        return (u"<Task summary=%r label=%r hours=%i mentors=%r difficulty=%r types=%r desc='''%s'''>" % (self.summary, self.label,
+            self.hours, self.mentors, self.difficulty, self.types, self.desc[:100] )).encode("utf-8")
 
 
 def find_dict_entry(name, text):
@@ -39,66 +48,18 @@ def find_dict_entry(name, text):
         raise DataNotFoundException("%s not found" % (name, ))
     return m.groups()[0]
 
-desc_pattern = r"""== Short Description ==
+desc_pattern = r"""= Description =
 ([\s\S]*?)
-(= |$)"""
+= Discussion ="""
 
 bugpage_pattern = r"""= Description =
 ([\s\S]*?)
 ="""
 
 already_pushed_pages = set([x.strip() for x in """
-EasyToDo/ExtendFormsOfAdvancedSearch
-EasyToDo/ResearchMacOSXPluginSupport
-EasyToDo/Research_Python_code_usable_for_filters
-EasyToDo/Code_vCard_hCard_Support_For_Wikihomepages
-EasyToDo/UserPreferredLanguageStatistics
-EasyToDo/CloneWikiPagesByPackagePages
-EasyToDo/ResearchLinuxPluginSupport
-EasyToDo/ConvertMacrosToNewSyntax
-EasyToDo/CaseStudy
-EasyToDo/InstallMoinMoinForYourFriends
-EasyToDo/JabberBotRefactoring
-EasyToDo/ProofreadEnglishDocumentation
-EasyToDo/ImplementXEPEntityCapabilities 1
-EasyToDo/ImplementXEPEntityCapabilities 3
-EasyToDo/ImplementXEPEntityCapabilities 2
-EasyToDo/TestInstallDocs
-EasyToDo/DesignAMoinMoinTheme
-EasyToDo/ImproveStyleOfModernTheme
-EasyToDo/ThinkingAloudUsabilityTest
-EasyToDo/MakeAScreencast
-EasyToDo/IntroduceMoinMoinToYourFriends
-EasyToDo/RunJabberBotOnWindows
-EasyToDo/ResearchWindowsPluginSupport
-EasyToDo/DesignNewIconset
-EasyToDo/CreateAPoster
-EasyToDo/GermanWikiKurs
-EasyToDo/Firefox3CompatibilityCheck
-EasyToDo/SearchForMoinMoinIntegration
-EasyToDo/AddUsageInfoToMoinCommand
-EasyToDo/DumpPagesIntoZip
-EasyToDo/ShowAclIndicator
 """.split("\n")])
 
 already_pushed_bugs = set([x.strip() for x in """
-1.6devFAT32TroubleWithUnderlayFileNames
-1.6devMissingRightsI18n
-AclBlockMoinDump
-ArbitraryInjectionOfErrorMessage
-CannotUpdateCreateDrawings
-GuiEditorExcelPasteExpatErrorUnboundPrefix
-MailAccountDataGivesError
-MakeIconLinkLosesAltTitle
-ModPyConnectionErrors
-MoinDumpTheme
-NavigationMacroMultipleRepeat
-RenamingUserAllowsOldUsernameToLogin
-SubscribeAndUnsubscribeShareSameUrl
-TWikiDrawOnDebian
-TrivialChangeEasyAccess
-WrongAlignedAttachment
-XmlRpcPutPageAllowsEmptyPageName
 """.split("\n")])
 
 gatherers = []
@@ -129,9 +90,13 @@ class Collector(object):
                 continue
             page_contents = self.server.getPage(page)
             try:
-                summary = find_dict_entry("Summary", page_contents)
+                summary = find_dict_entry("Title", page_contents)
                 count = int(find_dict_entry("Count", page_contents))
-                label = find_dict_entry("Label", page_contents)
+                label = find_dict_entry("Tags", page_contents)
+                hours = int(find_dict_entry("Duration", page_contents))
+                mentors = find_dict_entry("Mentors", page_contents)
+                difficulty = find_dict_entry("Difficulty", page_contents)
+                types = find_dict_entry("Type", page_contents)
             except DataNotFoundException, e:
                 print "Could not import %r because of %r" % (page, e)
                 continue
@@ -139,17 +104,18 @@ class Collector(object):
             if not desc_m:
                 raise Exception("Desc not found")
             desc = desc_m.groups()[0]
+
+
             for i in range(1, count + 1):
-                print page
                 text = desc
                 new_summary = summary
-                text += "\n\nA more detailed description of this issue is available at the MoinMoin wiki: %s" % (self.url + quote(page.encode("utf-8")), )
+                text += "\n\nYou can discuss this issue at the MoinMoin wiki: %s" % (self.url + quote(page.encode("utf-8")), )
                 if count > 1:
                     text += "\n\nThis issue is available multiple times. This one is %i of %i." % (i, count)
                     new_summary += " %i/%i" % (i, count)
-                yield Task(new_summary, text, label)
+                yield Task(new_summary, text, label, hours, mentors, difficulty, types)
 
-    @is_gatherer
+    #@is_gatherer
     def moin_bugs(self):
         pages = [pagename for pagename, contents in self.server.searchPages(r"t:MoinMoinBugs/ r:CategoryEasy\b")]
         for page in pages:
@@ -189,10 +155,9 @@ class Collector(object):
                 yield Task(new_summary, text, "Translation")
 
 
-def pull_and_push():
-    #project_name = "google-highly-open-participation-moinmoin" # PRODUCTION IMPORT
-    project_name = "moin-sandbox" # TEST RUN
-    summary_prefix = "" # EMPTY FOR PRODUCTION IMPORT!
+def pull_and_gencsv():
+    csvwriter = csv.writer(sys.stdout, delimiter=",", doublequote=True)
+    summary_prefix = "[TEST] " # EMPTY FOR PRODUCTION IMPORT!
     if summary_prefix:
         tmin, tmax = 0, None
     else:
@@ -201,28 +166,11 @@ def pull_and_push():
     tasks = Collector("http://moinmo.in/").collect_tasks()
     print "Importing %i tasks ..." % (len(tasks), )
     print "\n".join(repr(task) for task in tasks)
-    argc = len(sys.argv)
-    if not (2 <= argc <= 3):
-        raise SystemExit("you must supply your username (and optionally your password) as argument(s) to this program")
-    user = sys.argv[1]
-    if argc == 2:
-        password = raw_input("Password for %s:" % user)
-    else:
-        password = sys.argv[2]
 
-
-    try:
-        googlepush.login(user, password)
-    except urllib2.URLError, e:
-        print "Ignored exception %r" % (e, )
-
-    i = 0
     for task in tasks[tmin:tmax]:
-        i += 1
-        print i, repr(task.summary)
-        googlepush.push_item(project_name, summary_prefix + task.summary, task.desc, "Open", task.label)
+        csvwriter.writerow([summary_prefix + task.summary, task.desc, task.hours, task.mentors, task.difficulty, task.types, task.label])
 
 
 if __name__ == "__main__":
-    pull_and_push()
+    pull_and_gencsv()
 
