@@ -4,16 +4,17 @@ MoinMoin wiki project -> Google Project Hosting converter
 
 full of evil antipatterns, incl. Exception exceptions
 
-@copyright: 2007 MoinMoin:AlexanderSchremmer
-@license: GPL v2
-
+@copyright: 2007,2010 MoinMoin:AlexanderSchremmer
+@license: GNU GPL v2
 """
+
 import sys
 import re
 import urllib2
 from urllib import quote
 import xmlrpclib
 import csv
+
 from MoinMoin.web.contexts import ScriptContext
 from MoinMoin.Page import Page
 
@@ -38,8 +39,9 @@ class Task(object):
         self.desc = request.redirectedOutput(page.send_page, content_only=1).replace("\n", " ")
 
     def __repr__(self):
-        return (u"<Task summary=%r label=%r hours=%i mentors=%r difficulty=%r types=%r desc='''%s'''>" % (self.summary, self.label,
-            self.hours, self.mentors, self.difficulty, self.types, self.desc[:100] )).encode("utf-8")
+        return (u"<Task summary=%r label=%r hours=%i mentors=%r difficulty=%r types=%r desc='''%s'''>" % (
+            self.summary, self.label, self.hours, self.mentors, self.difficulty,
+            self.types, self.desc[:100])).encode("utf-8")
 
 
 def find_dict_entry(name, text):
@@ -47,6 +49,7 @@ def find_dict_entry(name, text):
     if not m:
         raise DataNotFoundException("%s not found" % (name, ))
     return m.groups()[0]
+
 
 desc_pattern = r"""= Description =
 ([\s\S]*?)
