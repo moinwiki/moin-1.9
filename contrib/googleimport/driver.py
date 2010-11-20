@@ -108,7 +108,6 @@ class Collector(object):
                 raise Exception("Desc not found")
             desc = desc_m.groups()[0]
 
-
             for i in range(1, count + 1):
                 text = desc
                 new_summary = summary
@@ -159,17 +158,14 @@ class Collector(object):
 
 
 def pull_and_gencsv():
-    csvwriter = csv.writer(sys.stdout, delimiter=",", doublequote=True)
-    summary_prefix = "[TEST] " # EMPTY FOR PRODUCTION IMPORT!
-    if summary_prefix:
-        tmin, tmax = 0, None
-    else:
-        tmin, tmax = 0, None
     print >> sys.stderr, "Collecting tasks ..."
     tasks = Collector("http://moinmo.in/").collect_tasks()
     print >> sys.stderr, "Importing %i tasks ..." % (len(tasks), )
     print >> sys.stderr, "\n".join(repr(task) for task in tasks)
 
+    summary_prefix = '' # "[TEST] " # EMPTY FOR PRODUCTION IMPORT!
+    tmin, tmax = 0, None
+    csvwriter = csv.writer(sys.stdout, delimiter=",", doublequote=True)
     for task in tasks[tmin:tmax]:
         csvwriter.writerow([summary_prefix + task.summary, task.desc, task.hours, task.mentors, task.difficulty, task.types, task.label])
 
