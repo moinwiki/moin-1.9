@@ -123,7 +123,7 @@ class Collector(object):
             for i in range(1, count + 1):
                 text = desc
                 new_summary = summary
-                text += "\n\nYou can discuss this issue at the MoinMoin wiki: %s" % (self.url + quote(page.encode("utf-8")), )
+                text += "\n\nYou can discuss this issue in the !MoinMoin wiki: %s" % (self.url + quote(page.encode("utf-8")), )
                 if count > 1:
                     text += "\n\nThis issue is available multiple times. This one is %i of %i." % (i, count)
                     new_summary += " %i/%i" % (i, count)
