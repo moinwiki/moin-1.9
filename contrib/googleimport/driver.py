@@ -18,6 +18,10 @@ import csv
 from MoinMoin.web.contexts import ScriptContext
 from MoinMoin.Page import Page
 
+# monkeypatch the formatter to avoid line_anchors:
+from MoinMoin.formatter import text_html
+text_html.line_anchors = False
+
 request = ScriptContext(None, None)
 
 
@@ -35,7 +39,16 @@ class Task(object):
 
         page = Page(request, "")
         page.set_raw_body(desc)
-        self.desc = request.redirectedOutput(page.send_page, content_only=1).replace("\n", " ")
+        desc = request.redirectedOutput(page.send_page, content_only=1)
+        for s, r in [
+                ('\n', ' '),
+                (' class="line862"', ''),
+                (' class="line867"', ''),
+                (' class="line874"', ''),
+                (' class="line891"', ''),
+            ]:
+            desc = desc.replace(s, r)
+        self.desc = desc
 
     def __repr__(self):
         return (u"<Task summary=%r label=%r hours=%i mentors=%r difficulty=%r types=%r desc='''%s'''>" % (
