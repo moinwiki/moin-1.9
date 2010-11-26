@@ -41,7 +41,14 @@ apache_md5_crypt() provides a function compatible with Apache's
 MAGIC = '$1$'                   # Magic string
 ITOA64 = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-import hashlib
+try:
+    import hashlib
+    hash_md5 = hashlib.md5
+except ImportError:
+    # maybe we have python < 2.5 (no hashlib)
+    import md5
+    hash_md5 = md5.new
+
 
 def to64 (v, n):
     ret = ''
@@ -74,7 +81,7 @@ def unix_md5_crypt(pw, salt, magic=None):
 
     ctx = pw + magic + salt
 
-    md5 = hashlib.md5()
+    md5 = hash_md5()
     md5.update(pw + salt + pw)
     final = md5.digest()
 
@@ -95,7 +102,7 @@ def unix_md5_crypt(pw, salt, magic=None):
             ctx = ctx + pw[0]
         i = i >> 1
 
-    md5 = hashlib.md5()
+    md5 = hash_md5()
     md5.update(ctx)
     final = md5.digest()
 
@@ -123,7 +130,7 @@ def unix_md5_crypt(pw, salt, magic=None):
             ctx1 = ctx1 + pw
 
 
-        md5 = hashlib.md5()
+        md5 = hash_md5()
         md5.update(ctx1)
         final = md5.digest()
 
