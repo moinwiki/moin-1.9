@@ -117,7 +117,7 @@ class Collector(object):
                 continue
             desc_m = re.search(desc_pattern, page_contents)
             if not desc_m:
-                raise Exception("Desc not found")
+                raise Exception("Could not import %r because Desc not found" % page)
             desc = desc_m.groups()[0]
 
             for i in range(1, count + 1):
@@ -139,7 +139,7 @@ class Collector(object):
             page_contents = self.server.getPage(page)
             m = re.search(bugpage_pattern, page_contents)
             if not m:
-                raise Exception("bug desc not found")
+                raise Exception("Could not import %r because of bug desc not found" % page)
             desc = m.groups()[0]
             desc = "A user filed a bug report at the MoinMoin site. Here is a short description about the issue. A more detailed description is available at the MoinMoin wiki: %s\n\n" % (self.url + quote(page.encode("utf-8")), ) + desc
             yield Task(bug_name, desc, "Code")
@@ -157,7 +157,7 @@ class Collector(object):
             count = int(find_dict_entry("Count", page_contents))
             desc_m = re.search(desc_pattern, page_contents)
             if not desc_m:
-                raise Exception("Desc not found")
+                raise Exception("Could not import %r because Desc not found" % page)
             desc = desc_m.groups()[0]
             for i in range(1, count + 1):
                 text = desc
