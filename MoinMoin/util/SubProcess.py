@@ -224,6 +224,14 @@ class Popen(subprocess.Popen):
                 self.kill()
             else:
                 self.wait()
+
+            # make sure all files are closed:
+            for f in [self.stdin, self.stdout, self.stderr]:
+                try:
+                    f.close()
+                except:
+                    pass
+
             return (stdout, stderr)
 
 
