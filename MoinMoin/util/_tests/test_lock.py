@@ -118,7 +118,7 @@ class TestExclusiveLock(object):
         if second.acquire(0.1):
             py.test.skip("first lock is not exclusive")
         # Second lock should be acquired after timeout
-        assert second.acquire(timeout + 0.1)
+        assert second.acquire(timeout + 0.2)
 
     def unlock(self, lock, delay):
         time.sleep(delay)
