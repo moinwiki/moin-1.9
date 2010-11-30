@@ -147,14 +147,14 @@ class TestLoginWithPassword(object):
         theuser = user.User(self.request, name=name, password='12345')        
         assert theuser.enc_password[:6] == '{SSHA}'
 
-    def test_upgrade_password_from_arp1_to_ssha(self):
+    def test_upgrade_password_from_apr1_to_ssha(self):
         """
-        Create user with {ARP1} password and check that logging in
+        Create user with {APR1} password and check that logging in
         upgrades to {SSHA}.
         """
         # Create test user
         name = u'Test User'
-        password = '{ARP1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
+        password = '{APR1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
         self.createUser(name, password, True)
         
         #User don't require to be valid
