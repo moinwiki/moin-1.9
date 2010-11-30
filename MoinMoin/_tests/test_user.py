@@ -120,8 +120,6 @@ class TestLoginWithPassword(object):
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.valid
 
-    #This test is disabled because require crypt, which not 
-    #presented on some platforms
     def test_auth_with_des_stored_password(self):
         """
         Create user with {DES} password and check that user can login.
