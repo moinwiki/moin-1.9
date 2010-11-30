@@ -93,6 +93,51 @@ class TestLoginWithPassword(object):
         # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
         assert theUser.valid
+
+    def test_auth_with_apr1_stored_password(self):
+        """
+        Create user with {APR1} password and check that user can login.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '{APR1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
+        self.createUser(name, password, True)
+        
+        # Try to "login"
+        theuser = user.User(self.request, name=name, password='12345')
+        assert theuser.valid
+
+    def test_auth_with_md5_stored_password(self):
+        """
+        Create user with {MD5} password and check that user can login.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
+        self.createUser(name, password, True)
+        
+        # Try to "login"
+        theuser = user.User(self.request, name=name, password='12345')
+        assert theuser.valid
+
+    #This test is disabled because require crypt, which not 
+    #presented on some platforms
+    def test_auth_with_des_stored_password(self):
+        """
+        Create user with {DES} password and check that user can login.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '{DES}sajEeYaHYyeSU' # 12345
+        self.createUser(name, password, True)
+        
+        try:
+            import crypt
+            # Try to "login"
+            theuser = user.User(self.request, name=name, password='12345')
+            assert theuser.valid
+        except ImportError:
+            crypt = None            
         
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
