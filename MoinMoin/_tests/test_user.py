@@ -93,7 +93,7 @@ class TestLoginWithPassword(object):
         # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
         assert theUser.valid
-
+        
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
         pagename = u'HelpMiscellaneous'
@@ -134,7 +134,7 @@ class TestLoginWithPassword(object):
 
         assert not theUser.exists()
 
-    def test_upgrade_password_to_salted(self):
+    def test_upgrade_password_from_sha_to_ssha(self):
         """
         Create user with {SHA} password and check that logging in
         upgrades to {SSHA}.
@@ -142,6 +142,50 @@ class TestLoginWithPassword(object):
         name = u'/no such user/'
         password = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ=' # 12345
         self.createUser(name, password, True)
+
+        #User don't require to be valid                
+        theuser = user.User(self.request, name=name, password='12345')        
+        assert theuser.enc_password[:6] == '{SSHA}'
+
+    def test_upgrade_password_from_arp1_to_ssha(self):
+        """
+        Create user with {ARP1} password and check that logging in
+        upgrades to {SSHA}.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '{ARP1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
+        self.createUser(name, password, True)
+        
+        #User don't require to be valid
+        theuser = user.User(self.request, name=name, password='12345')
+        assert theuser.enc_password[:6] == '{SSHA}'
+
+    def test_upgrade_password_from_md5_to_ssha(self):
+        """
+        Create user with {MD5} password and check that logging in
+        upgrades to {SSHA}.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
+        self.createUser(name, password, True)
+        
+        #User don't require to be valid
+        theuser = user.User(self.request, name=name, password='12345')
+        assert theuser.enc_password[:6] == '{SSHA}'
+
+    def test_upgrade_password_from_des_to_ssha(self):
+        """
+        Create user with {DES} password and check that logging in
+        upgrades to {SSHA}.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '{DES}sajEeYaHYyeSU' # 12345
+        self.createUser(name, password, True)
+        
+        #User don't require to be valid        
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
