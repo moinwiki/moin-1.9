@@ -100,7 +100,8 @@ class TestLoginWithPassword(object):
         """
         # Create test user
         name = u'Test User'
-        password = '{APR1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
+        # generated with "htpasswd -nbm blaze 12345"
+        password = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.' # 12345
         self.createUser(name, password, True)
         
         # Try to "login"
@@ -126,7 +127,8 @@ class TestLoginWithPassword(object):
         """
         # Create test user
         name = u'Test User'
-        password = '{DES}sajEeYaHYyeSU' # 12345
+        # generated with "htpasswd -nbd blaze 12345"
+        password = '{DES}gArsfn7O5Yqfo' # 12345
         self.createUser(name, password, True)
         
         try:
@@ -197,7 +199,8 @@ class TestLoginWithPassword(object):
         """
         # Create test user
         name = u'Test User'
-        password = '{APR1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
+        # generated with "htpasswd -nbm blaze 12345"
+        password = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.' # 12345
         self.createUser(name, password, True)
         
         # User is not required to be valid
@@ -225,7 +228,8 @@ class TestLoginWithPassword(object):
         """
         # Create test user
         name = u'Test User'
-        password = '{DES}sajEeYaHYyeSU' # 12345
+        # generated with "htpasswd -nbm blaze 12345"
+        password = '{DES}gArsfn7O5Yqfo' # 12345
         self.createUser(name, password, True)
         
         # User is not required to be valid        
