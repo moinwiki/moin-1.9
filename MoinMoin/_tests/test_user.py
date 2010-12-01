@@ -135,7 +135,7 @@ class TestLoginWithPassword(object):
             theuser = user.User(self.request, name=name, password='12345')
             assert theuser.valid
         except ImportError:
-            crypt = None            
+            py.test.skip("Platform don't provide crypt module!")
         
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
