@@ -186,7 +186,7 @@ class TestLoginWithPassword(object):
         password = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ=' # 12345
         self.createUser(name, password, True)
 
-        # User don't require to be valid                
+        # User is not required to be valid                
         theuser = user.User(self.request, name=name, password='12345')        
         assert theuser.enc_password[:6] == '{SSHA}'
 
@@ -200,7 +200,7 @@ class TestLoginWithPassword(object):
         password = '{APR1}$apr1$salt$kKtoJ6r.fd87EWbzq2TiF0' # 12345
         self.createUser(name, password, True)
         
-        # User don't require to be valid
+        # User is not required to be valid
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
@@ -214,7 +214,7 @@ class TestLoginWithPassword(object):
         password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
         self.createUser(name, password, True)
         
-        # User don't require to be valid
+        # User is not required to be valid
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
@@ -228,7 +228,7 @@ class TestLoginWithPassword(object):
         password = '{DES}sajEeYaHYyeSU' # 12345
         self.createUser(name, password, True)
         
-        # User don't require to be valid        
+        # User is not required to be valid        
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
