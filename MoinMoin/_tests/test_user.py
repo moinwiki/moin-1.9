@@ -228,7 +228,7 @@ class TestLoginWithPassword(object):
         """
         # Create test user
         name = u'Test User'
-        # generated with "htpasswd -nbm blaze 12345"
+        # generated with "htpasswd -nbd blaze 12345"
         password = '{DES}gArsfn7O5Yqfo' # 12345
         self.createUser(name, password, True)
         
