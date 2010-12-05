@@ -170,7 +170,7 @@ class Formatter(FormatterBase):
             self.paragraph_begin()
             self._lists.append(-1)
             self._listitem_on.append(False)
-        else:
+        elif self._lists:
             self.paragraph_end()
             self._lists.pop()
             listitem_on = self._listitem_on.pop()
