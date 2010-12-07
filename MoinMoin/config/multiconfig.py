@@ -411,6 +411,8 @@ class ConfigFunctionality(object):
         secret_key_names = ['action/cache', 'wikiutil/tickets', 'xmlrpc/ProcessMail', 'xmlrpc/RemoteScript', ]
         if self.jabber_enabled:
             secret_key_names.append('jabberbot')
+        if self.textchas:
+            secret_key_names.append('security/textcha')
 
         secret_min_length = 10
         if isinstance(self.secrets, str):
@@ -820,6 +822,8 @@ options_no_group_name = {
      "Spam protection setup using site-specific questions/answers, see HelpOnSpam."),
     ('textchas_disabled_group', None,
      "Name of a group of trusted users who do not get asked !TextCha questions."),
+    ('textchas_expiry_time', 600,
+     "Time [s] for a !TextCha to expire."),
 
     ('antispam_master_url', "http://master.moinmo.in/?action=xmlrpc2",
      "where antispam security policy fetches spam pattern updates (if it is enabled)"),
