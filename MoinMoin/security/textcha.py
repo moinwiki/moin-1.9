@@ -12,7 +12,6 @@
 
     TODO:
     * roundtrip the question in some other way:
-     * use safe encoding / encryption for the q
      * make sure a q/a pair in the POST is for the q in the GET before
     * make some nice CSS
     * make similar changes to GUI editor
@@ -24,10 +23,16 @@
 import re
 import random
 
+from time import time
+
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil
+from MoinMoin.support.python_compatibility import hmac_new
+
+SHA1_LEN = 40 # length of hexdigest
+TIMESTAMP_LEN = 10 # length of timestamp
 
 class TextCha(object):
     """ Text CAPTCHA support """
@@ -41,6 +46,9 @@ class TextCha(object):
         self.request = request
         self.user_info = request.user.valid and request.user.name or request.remote_addr
         self.textchas = self._get_textchas()
+        if self.textchas:
+            self.secret = request.cfg.secrets["security/textcha"]
+            self.expiry_time = request.cfg.textchas_expiry_time
         self._init_qa(question)
 
     def _get_textchas(self):
@@ -73,6 +81,9 @@ class TextCha(object):
         else:
             logging.debug(u"TextCha: using lang = '%s'" % lang)
             return textchas[lang]
+
+    def _compute_signature(self, question, timestamp):
+        return hmac_new(self.secret, "%s%d" % (question, timestamp)).hexdigest()
 
     def _init_qa(self, question=None):
         """ Initialize the question / answer.
@@ -114,14 +125,22 @@ class TextCha(object):
         """
         return not not self.textchas # we don't want to return the dict
 
-    def check_answer(self, given_answer):
-        """ check if the given answer to the question is correct """
+    def check_answer(self, given_answer, timestamp, signature):
+        """ check if the given answer to the question is correct and within the correct timeframe"""
         if self.is_enabled():
             if self.answer_re is not None:
                 success = self.answer_re.match(given_answer.strip()) is not None
             else:
                 # someone trying to cheat!?
                 success = False
+            if not timestamp or timestamp + self.expiry_time < time():
+                success = False
+            try:
+                if self._compute_signature(self.question, timestamp) != signature:
+                    success = False
+            except TypeError:
+                success = False
+
             success_status = success and u"success" or u"failure"
             logging.info(u"TextCha: %s (u='%s', a='%s', re='%s', q='%s')" % (
                              success_status,
@@ -135,7 +154,12 @@ class TextCha(object):
             return True
 
     def _make_form_values(self, question, given_answer):
-        question_form = wikiutil.escape(question, True)
+        timestamp = time()
+        question_form = "%s %d%s" % (
+            wikiutil.escape(question, True),
+            timestamp,
+            self._compute_signature(question, timestamp)
+        )
         given_answer_form = wikiutil.escape(given_answer, True)
         return question_form, given_answer_form
 
@@ -143,8 +167,23 @@ class TextCha(object):
         if form is None:
             form = self.request.form
         question = form.get('textcha-question')
+        signature = None
+        timestamp = None
+        if question:
+            # the signature is the last SHA1_LEN bytes of the question
+            signature = question[-SHA1_LEN:]
+            
+            # operate on the remainder
+            question = question[:-SHA1_LEN]
+            try:
+                # the timestamp is the next TIMESTAMP_LEN bytes
+                timestamp = int(question[-TIMESTAMP_LEN:])
+            except ValueError:
+                pass
+            # there is a space between the timestamp and the question, so take away 1
+            question = question[:-TIMESTAMP_LEN - 1]
         given_answer = form.get('textcha-answer', u'')
-        return question, given_answer
+        return question, given_answer, timestamp, signature
 
     def render(self, form=None):
         """ Checks if textchas are enabled and returns HTML for one,
@@ -153,7 +192,7 @@ class TextCha(object):
             @return: unicode result html
         """
         if self.is_enabled():
-            question, given_answer = self._extract_form_values(form)
+            question, given_answer, timestamp, signature = self._extract_form_values(form)
             if question is None:
                 question = self.question
             question_form, given_answer_form = self._make_form_values(question, given_answer)
@@ -170,9 +209,9 @@ class TextCha(object):
 
     def check_answer_from_form(self, form=None):
         if self.is_enabled():
-            question, given_answer = self._extract_form_values(form)
+            question, given_answer, timestamp, signature = self._extract_form_values(form)
             self._init_qa(question)
-            return self.check_answer(given_answer)
+            return self.check_answer(given_answer, timestamp, signature)
         else:
             return True
 
