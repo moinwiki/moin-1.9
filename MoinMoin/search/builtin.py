@@ -59,6 +59,23 @@ class IndexerQueue(object):
             queue = []
         return queue
 
+    def mput(self, entries):
+        """ Put multiple entries into the queue (append at end)
+
+        @param entries: list of tuples (pagename, attachmentname, revno)
+                        pagename: page name [unicode]
+                        attachmentname: attachment name [unicode or None]
+                        revision number (int) or None (all revs)
+        """
+        cache = self.get_cache(locking=False) # we lock manually
+        cache.lock('w', 60.0)
+        try:
+            queue = self._queue(cache)
+            queue.extend(entries)
+            cache.update(queue)
+        finally:
+            cache.unlock()
+
     def put(self, pagename, attachmentname=None, revno=None):
         """ Put an entry into the queue (append at end)
 
@@ -75,6 +92,22 @@ class IndexerQueue(object):
             cache.update(queue)
         finally:
             cache.unlock()
+
+    def mget(self, count):
+        """ Get (and remove) first <count> entries from the queue
+
+        Raises IndexError if queue was empty when calling get().
+        """
+        cache = self.get_cache(locking=False) # we lock manually
+        cache.lock('w', 60.0)
+        try:
+            queue = self._queue(cache)
+            entries = queue[:count]
+            queue = queue[count:]
+            cache.update(queue)
+        finally:
+            cache.unlock()
+        return entries
 
     def get(self):
         """ Get (and remove) first entry from the queue
@@ -145,6 +178,27 @@ class BaseIndex(object):
         self.update_queue.put(pagename, attachmentname, revno)
         if now:
             self.do_queued_updates()
+
+    def queuePages(self, files=None, pages=None):
+        """ Put pages (and files, if given) into indexer queue
+
+        @param files: iterator or list of files to index additionally
+        @param mode: set the mode of indexing the pages, either 'update' or 'add'
+        @param pages: list of pages to index, if not given, all pages are indexed
+        """
+        start = time.time()
+        request = self._indexingRequest(self.request)
+        self._queue_pages(request, files, pages)
+        logging.info("queuing completed successfully in %0.2f seconds." %
+                    (time.time() - start))
+
+    def indexPagesQueued(self, count=-1):
+        """ Index <count> queued pages (and/or files)
+        """
+        start = time.time()
+        done_count = self.do_queued_updates(count)
+        logging.info("indexing %d items completed successfully in %0.2f seconds." %
+                    (done_count, time.time() - start))
 
     def indexPages(self, files=None, mode='update', pages=None):
         """ Index pages (and files, if given)

@@ -194,6 +194,7 @@ class XapianIndex(BaseIndex):
             request = self._indexingRequest(self.request)
             connection = self.get_indexer_connection()
             self.touch()
+            total = amount
             try:
                 done_count = 0
                 while amount:
@@ -205,17 +206,23 @@ class XapianIndex(BaseIndex):
                         # queue empty
                         break
                     else:
-                        logging.debug("got from indexer queue: %r %r %r" % (pagename, attachmentname, revno))
-                        if not attachmentname:
-                            if revno is None:
-                                # generic "index this page completely, with attachments" request
-                                self._index_page(request, connection, pagename, mode='update')
+                        logging.info("got from indexer queue: %r %r %r [%d/%d]" % (
+                            pagename, attachmentname, revno,
+                            done_count, total))
+                        if pagename:
+                            if not attachmentname:
+                                if revno is None:
+                                    # generic "index this page completely, with attachments" request
+                                    self._index_page(request, connection, pagename, mode='update')
+                                else:
+                                    # "index this page revision" request
+                                    self._index_page_rev(request, connection, pagename, revno, mode='update')
                             else:
-                                # "index this page revision" request
-                                self._index_page_rev(request, connection, pagename, revno, mode='update')
-                        else:
-                            # "index this attachment" request
-                            self._index_attachment(request, connection, pagename, attachmentname, mode='update')
+                                # "index this attachment" request
+                                self._index_attachment(request, connection, pagename, attachmentname, mode='update')
+                        else: # pagename == None
+                            # index an additional filesystem file (full path given in attachmentname)
+                            self._index_file(request, connection, attachmentname, mode='update')
                         done_count += 1
             finally:
                 logging.debug("updated xapian index with %d queued updates" % done_count)
@@ -223,6 +230,7 @@ class XapianIndex(BaseIndex):
         except XapianDatabaseLockError:
             # another indexer has locked the index, we can retry it later...
             logging.debug("can't lock xapian index, not doing queued updates now")
+        return done_count
 
     def _get_document(self, connection, doc_id, mtime, mode):
         do_index = False
@@ -528,6 +536,27 @@ class XapianIndex(BaseIndex):
 
         except (OSError, IOError, UnicodeError):
             logging.exception("_index_file crashed:")
+    
+    def _queue_pages(self, request, files=None, pages=None):
+        """ Put all (given) pages into indexer queue
+
+        This should be called from queuePages only!
+
+        @param request: request suitable for indexing
+        @param files: an optional list of files to index
+        @param pages: list of pages to index, if not given, all pages are indexed
+        """
+        if pages is None:
+            # Index all pages
+            pages = request.rootpage.getPageList(user='', exists=1)
+
+        logging.info("queuing %d pages..." % len(pages))
+        entries = [(pagename, None, None) for pagename in pages]
+        self.update_queue.mput(entries)
+        if files:
+            logging.info("indexing all files...")
+            entries = [(None, fname.strip(), None) for fname in files]
+            self.update_queue.mput(entries)
 
     def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index all (given) pages (and all given files)

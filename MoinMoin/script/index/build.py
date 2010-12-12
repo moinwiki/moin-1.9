@@ -71,6 +71,10 @@ General syntax: moin [options] index build [build-options]
             help="either add (unconditionally add), update (conditional update), rebuild (complete 1-stage index rebuild)"
                  " or buildnewindex and usenewindex (complete 2-stage index rebuild)"
         )
+        self.parser.add_option(
+            "--count", metavar="COUNT", dest="count",
+            help="for queued indexing only: how many queue entries to process in this indexing run"
+        )
 
     def mainloop(self):
         self.init_request()
@@ -87,23 +91,30 @@ class PluginScript(IndexScript):
     def command(self):
         from MoinMoin.search.Xapian import XapianIndex
         mode = self.options.mode
-        if mode in ('rebuild', 'buildnewindex'):
+        if mode in ['rebuild', 'buildnewindex', 'makequeue', 'buildnewindexqueued', ]:
             # rebuilding the DB into a new index directory, so the rebuild
             # process does not interfere with the currently in-use DB
             idx_mode, idx_name = 'add', 'index.new'
-        elif mode in ('add', 'update'):
+        elif mode in ['add', 'update', ]:
             # update/add in-place
             idx_mode, idx_name = mode, 'index'
-        elif mode == 'usenewindex':
+        elif mode in ['usenewindex', ]:
             pass # nothing todo
         else:
             pass # XXX give error msg about invalid mode
 
-        if mode != 'usenewindex':
+        if mode in ['makequeue', ]:
             idx = XapianIndex(self.request, name=idx_name)
-            idx.indexPages(self.files, idx_mode)
+            idx.queuePages()
 
-        if mode in ('rebuild', 'usenewindex'):
+        if mode in ['rebuild', 'buildnewindex', 'buildnewindexqueued', ]:
+            idx = XapianIndex(self.request, name=idx_name)
+            if mode == 'buildnewindexqueued':
+                idx.indexPagesQueued(int(self.options.count))
+            else:
+                idx.indexPages(self.files, idx_mode)
+
+        if mode in ['rebuild', 'usenewindex', ]:
             # 'rebuild' is still a bit dirty, because just killing old index will
             # fail currently running searches. Thus, maybe do this in a time
             # with litte wiki activity or better use 'buildnewindex' and
