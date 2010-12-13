@@ -536,7 +536,7 @@ class XapianIndex(BaseIndex):
 
         except (OSError, IOError, UnicodeError):
             logging.exception("_index_file crashed:")
-    
+
     def _queue_pages(self, request, files=None, pages=None):
         """ Put all (given) pages into indexer queue
 

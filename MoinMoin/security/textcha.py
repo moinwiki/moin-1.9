@@ -172,7 +172,7 @@ class TextCha(object):
         if question:
             # the signature is the last SHA1_LEN bytes of the question
             signature = question[-SHA1_LEN:]
-            
+
             # operate on the remainder
             question = question[:-SHA1_LEN]
             try:
