@@ -190,13 +190,13 @@ class XapianIndex(BaseIndex):
 
             @param amount: amount of queue entries to process (default: -1 == all)
         """
+        done_count = 0
         try:
             request = self._indexingRequest(self.request)
             connection = self.get_indexer_connection()
             self.touch()
             total = amount
             try:
-                done_count = 0
                 while amount:
                     # trick: if amount starts from -1, it will never get 0
                     amount -= 1
