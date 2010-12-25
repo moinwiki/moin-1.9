@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 01:00+0200\n"
+"POT-Creation-Date: 2010-12-24 23:58+0100\n"
 "PO-Revision-Date: 2010-03-13 11:16+0900\n"
 "Last-Translator: YongjinCho <yongjin.cho@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -110,10 +111,10 @@ msgstr "[%s를(을) 읽을 수 없음]"
 
 #, python-format
 msgid ""
-"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
-"(draft_timestamp_str)s) can be loaded instead of the current revision %"
-"(page_rev)d by using the load draft button - in case you lost your last edit "
-"somehow without saving it.''' A draft gets saved for you when you do a "
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
 
@@ -132,8 +133,8 @@ msgstr "취소"
 
 #, python-format
 msgid ""
-"By hitting '''%(save_button_text)s''' you put your changes under the %"
-"(license_link)s.\n"
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
@@ -219,8 +220,8 @@ msgstr "문서를 잠글 수 없었습니다. 'current' 파일이 없는 것 같
 
 #, python-format
 msgid ""
-"Unable to determine current page revision from the 'current' file. The page %"
-"s is damaged and cannot be edited right now."
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
 msgstr ""
 
 #, python-format
@@ -279,18 +280,18 @@ msgstr "잠금 기간을 연장하려면 '미리보기' 버튼을 누르세요."
 
 #, python-format
 msgid ""
-"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
-"s, i.e. for %(mins_valid)d minute(s)."
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
 "이 문서는 현재 %(owner)s가 %(timestamp)s (%(mins_valid)d 분 남음)까지 고칠 "
 "수 있도록 ''잠겨''있습니다."
 
 #, python-format
 msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.<<BR>>\n"
-"'''You should ''refrain from editing'' this page for at least another %"
-"(mins_valid)d minute(s),\n"
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
 "to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
@@ -886,8 +887,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see %"
-"(highlight_help_page)s."
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
 msgstr ""
 
 msgid ""
@@ -1171,8 +1172,8 @@ msgid ""
 "You have subscribed to a wiki page \"%(sitename)s\" for change "
 "notification.\n"
 "\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
 msgstr ""
 "위키사용자님,\n"
 "\n"
@@ -2235,8 +2236,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
 msgstr ""
 
 #, python-format
@@ -2403,6 +2404,10 @@ msgstr "이 문서를 즐겨찾기에서 삭제할 수 없었습니다."
 
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "이 문서는 즐겨찾기에 없으므로 삭제할 수 없었습니다."
+
+#, fuzzy
+msgid "Print slide show"
+msgstr "슬라이드 쇼 편집"
 
 #, fuzzy
 msgid "Edit slide show"
@@ -2672,8 +2677,8 @@ msgstr "첨부 파일 '%(filename)s'이(가) 이미 존재함."
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
-"(new_filename)s'."
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
 msgstr "첨부 파일 '%(filename)s'이(가) %(page)s (으)로 옮겨졌습니다."
 
 msgid "Nothing changed"
@@ -2730,8 +2735,8 @@ msgstr "파일 %(filename)s 는(은) .zip 파일이 아닙니다."
 #, fuzzy, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
-"either not in the same directory or exceeded the single file size limit (%"
-"(maxsize_file)d kB)."
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
 msgstr ""
 "첨부 파일 '%(filename)s'의 압축을 해제할 수 없었습니다. 파일이 너무 크거나 ."
 "zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다."
@@ -2754,8 +2759,8 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
-"s)."
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
 msgstr "첨부 파일 '%(filename)s'의 압축을 해제함"
 
 #, python-format
@@ -2848,11 +2853,11 @@ msgstr " (%(pagelink)s를 %(localwords)d개 포함)"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"다음 %(badwords)d 개의 단어는 사전에 있는 전체 %(totalwords)d 개의 단어 %"
-"(localwords)s 중에서 찾을 수 없었으며, 본문에도 표시되었습니다.:"
+"다음 %(badwords)d 개의 단어는 사전에 있는 전체 %(totalwords)d 개의 단어 "
+"%(localwords)s 중에서 찾을 수 없었으며, 본문에도 표시되었습니다.:"
 
 msgid "Add checked words to dictionary"
 msgstr "사전에 체크된 단어들을 추가"
@@ -3064,8 +3069,8 @@ msgstr "이 문서는 다음 링크들을 포함하고 있습니다:"
 
 #, python-format
 msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to '''%"
-"(end_offset)d''' out of '''%(total_count)d''' entries total."
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
 
 #, fuzzy
@@ -3358,10 +3363,10 @@ msgid ""
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
 "\n"
 msgstr ""
 
@@ -3740,8 +3745,8 @@ msgstr ""
 #~ "To create an account, see the %(userprefslink)s page. To recover a lost "
 #~ "password, go to %(sendmypasswordlink)s."
 #~ msgstr ""
-#~ "계정을 새로 만들려면 %(userprefslink)s 문서를, 암호를 잊어버렸으면%"
-#~ "(sendmypasswordlink)s 문서를 보세요."
+#~ "계정을 새로 만들려면 %(userprefslink)s 문서를, 암호를 잊어버렸으"
+#~ "면%(sendmypasswordlink)s 문서를 보세요."
 
 #~ msgid ""
 #~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
