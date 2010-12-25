@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 01:00+0200\n"
+"POT-Creation-Date: 2010-12-24 23:58+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -111,10 +112,10 @@ msgstr "[आप %s को नही पढ सकते समभ्त:]"
 
 #, python-format
 msgid ""
-"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
-"(draft_timestamp_str)s) can be loaded instead of the current revision %"
-"(page_rev)d by using the load draft button - in case you lost your last edit "
-"somehow without saving it.''' A draft gets saved for you when you do a "
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
 "'''<<BR>>आपका प्रारूप पुनरीक्षण %(draft_rev)d (सुरिक्षत %(draft_timestamp_str)s) "
@@ -138,14 +139,14 @@ msgstr "रदद् कीिजए"
 
 #, python-format
 msgid ""
-"By hitting '''%(save_button_text)s''' you put your changes under the %"
-"(license_link)s.\n"
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
 "'''%(save_button_text)s''' कुंजी को दबाने से आप अपना परिवर्तन %(license_link)s.\n"
-"में डाल सकते हैं। यदि आप ऐसा नही करना चाहते तो अपना परिवर्तननिरस्त करने के लिए '''%"
-"(cancel_button_text)s''' कुंजी दबाएं।"
+"में डाल सकते हैं। यदि आप ऐसा नही करना चाहते तो अपना परिवर्तननिरस्त करने के लिए "
+"'''%(cancel_button_text)s''' कुंजी दबाएं।"
 
 msgid "Preview"
 msgstr "अग्र प्रदर्शन"
@@ -223,8 +224,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Unable to determine current page revision from the 'current' file. The page %"
-"s is damaged and cannot be edited right now."
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
 msgstr ""
 
 #, python-format
@@ -279,16 +280,16 @@ msgstr ""
 
 #, python-format
 msgid ""
-"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
-"s, i.e. for %(mins_valid)d minute(s)."
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
 
 #, python-format
 msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.<<BR>>\n"
-"'''You should ''refrain from editing'' this page for at least another %"
-"(mins_valid)d minute(s),\n"
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
 "to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
@@ -831,8 +832,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see %"
-"(highlight_help_page)s."
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
 msgstr ""
 
 msgid ""
@@ -1079,8 +1080,8 @@ msgid ""
 "You have subscribed to a wiki page \"%(sitename)s\" for change "
 "notification.\n"
 "\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
 msgstr ""
 
 #, python-format
@@ -2081,8 +2082,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
 msgstr ""
 
 #, python-format
@@ -2244,6 +2245,9 @@ msgid "Your quicklink to this page could not be removed."
 msgstr ""
 
 msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+
+msgid "Print slide show"
 msgstr ""
 
 msgid "Edit slide show"
@@ -2498,8 +2502,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
-"(new_filename)s'."
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
 msgstr ""
 
 msgid "Nothing changed"
@@ -2554,8 +2558,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
-"either not in the same directory or exceeded the single file size limit (%"
-"(maxsize_file)d kB)."
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
 msgstr ""
 
 #, python-format
@@ -2572,8 +2576,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
-"s)."
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
 msgstr ""
 
 #, python-format
@@ -2666,8 +2670,8 @@ msgstr "(सम्मिलित %(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 
 msgid "Add checked words to dictionary"
@@ -2877,8 +2881,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to '''%"
-"(end_offset)d''' out of '''%(total_count)d''' entries total."
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
 
 #, fuzzy
@@ -3165,10 +3169,10 @@ msgid ""
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
 "\n"
 msgstr ""
 
@@ -3443,8 +3447,8 @@ msgstr ""
 #~ "To create an account, see the %(userprefslink)s page. To recover a lost "
 #~ "password, go to %(sendmypasswordlink)s."
 #~ msgstr ""
-#~ "एकाउंट बनाने के िलए कृपया %(userprefslink)s देखे। संकेत शब्द को जानन के िलए %"
-#~ "(sendmypasswordlink)s मे जाए।"
+#~ "एकाउंट बनाने के िलए कृपया %(userprefslink)s देखे। संकेत शब्द को जानन के िलए "
+#~ "%(sendmypasswordlink)s मे जाए।"
 
 #~ msgid ""
 #~ "'''A page with the name {{{'%s'}}} already exists.'''\n"

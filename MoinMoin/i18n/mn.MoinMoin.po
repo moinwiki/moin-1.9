@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 01:00+0200\n"
+"POT-Creation-Date: 2010-12-24 23:58+0100\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -114,17 +115,17 @@ msgstr "[%s уншигдахгүй байна]"
 
 #, python-format
 msgid ""
-"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
-"(draft_timestamp_str)s) can be loaded instead of the current revision %"
-"(page_rev)d by using the load draft button - in case you lost your last edit "
-"somehow without saving it.''' A draft gets saved for you when you do a "
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
-"'''<<BR>> %(draft_rev)d хяналтын ноорог (%(draft_timestamp_str)s  %(page_rev)"
-"d хяналтын хувилбарын оронд ''Ноорог ачаалах'' -товчин дээр дарахад "
-"хадгалагдана(Хэрэв та хадгалах гэж байсан сүүлийн өөрчлөлтүүдээ алдсан "
-"бол).''' Хэрэв та Үзүүлэх эсвэл Цуцлах гэсэн товчнууд дээр дарахад эсвэл "
-"хадгалж болохгүй бол ноорог болж хадгалагдана."
+"'''<<BR>> %(draft_rev)d хяналтын ноорог (%(draft_timestamp_str)s  "
+"%(page_rev)d хяналтын хувилбарын оронд ''Ноорог ачаалах'' -товчин дээр "
+"дарахад хадгалагдана(Хэрэв та хадгалах гэж байсан сүүлийн өөрчлөлтүүдээ "
+"алдсан бол).''' Хэрэв та Үзүүлэх эсвэл Цуцлах гэсэн товчнууд дээр дарахад "
+"эсвэл хадгалж болохгүй бол ноорог болж хадгалагдана."
 
 #, python-format
 msgid "Describe %s here."
@@ -141,8 +142,8 @@ msgstr "Цуцлах"
 
 #, python-format
 msgid ""
-"By hitting '''%(save_button_text)s''' you put your changes under the %"
-"(license_link)s.\n"
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
@@ -233,8 +234,8 @@ msgstr "Хуудсанд хаалт тавьж болохгүй байна. Ол
 
 #, python-format
 msgid ""
-"Unable to determine current page revision from the 'current' file. The page %"
-"s is damaged and cannot be edited right now."
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
 msgstr ""
 
 #, python-format
@@ -296,18 +297,19 @@ msgstr "\"Үзүүлэх\" -ээр хугацааг уртасгана."
 
 #, python-format
 msgid ""
-"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
-"s, i.e. for %(mins_valid)d minute(s)."
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"Энэхүү хуудсыг %(owner)s гэдэг хэрэглэгч өөрчлөлт хийлгэхгүй байхаар %"
-"(timestamp)s хүртэл ''хаасан'' ба одоогоор %(mins_valid)d минут үлдээд байна."
+"Энэхүү хуудсыг %(owner)s гэдэг хэрэглэгч өөрчлөлт хийлгэхгүй байхаар "
+"%(timestamp)s хүртэл ''хаасан'' ба одоогоор %(mins_valid)d минут үлдээд "
+"байна."
 
 #, python-format
 msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.<<BR>>\n"
-"'''You should ''refrain from editing'' this page for at least another %"
-"(mins_valid)d minute(s),\n"
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
 "to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
@@ -904,8 +906,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see %"
-"(highlight_help_page)s."
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
 msgstr ""
 
 msgid ""
@@ -1196,8 +1198,8 @@ msgid ""
 "You have subscribed to a wiki page \"%(sitename)s\" for change "
 "notification.\n"
 "\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
 msgstr ""
 "Эрхэм хүндэт Вики хэрэглэгч та,\n"
 "\n"
@@ -1264,8 +1266,8 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
-"Өөрчлөлт:[%(sitename)s] %(trivial)s, Хуудас: \"%(pagename)s\" Хэрэглэгч: %"
-"(username)s"
+"Өөрчлөлт:[%(sitename)s] %(trivial)s, Хуудас: \"%(pagename)s\" Хэрэглэгч: "
+"%(username)s"
 
 msgid "Trivial "
 msgstr "Ердийн"
@@ -2268,8 +2270,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
 msgstr ""
 
 #, python-format
@@ -2438,6 +2440,10 @@ msgstr "Таны энэ хуудас руу заасан quicklink устгаг�
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
+
+#, fuzzy
+msgid "Print slide show"
+msgstr "Слайд үзүүлэх"
 
 #, fuzzy
 msgid "Edit slide show"
@@ -2711,8 +2717,8 @@ msgstr "'%(filename)s'нэртэй хавсралт байна."
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
-"(new_filename)s'."
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
 msgstr "'%(filename)s' нэртэй хавсралт %(page)s хуудас руу зөөгдсөн байна."
 
 msgid "Nothing changed"
@@ -2770,8 +2776,8 @@ msgstr " %(target)s файл нь .zip-Файл биш байна."
 #, fuzzy, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
-"either not in the same directory or exceeded the single file size limit (%"
-"(maxsize_file)d kB)."
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
 msgstr ""
 "'%(filename)s' хавсралт файл задарсангүй.Учир нь зөвхөн .zip-файлыг задлахыг "
 "зөвшөөрдөг, эсвэл энэ файл өмнө нь байсан юм ууфайлууд нь хавтаснууддаа "
@@ -2795,8 +2801,8 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
-"s)."
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
 msgstr "'%(filename)s' хавсралт задарлаа."
 
 #, python-format
@@ -2889,8 +2895,8 @@ msgstr "хамрагдсан:(%(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 "Энэхүү %(badwords)d үгс нь %(totalwords)d Worten%(localwords)s -тай үгсийн "
 "тольд олдсонгүй ба текстэд тодорч харагдана:"
@@ -3135,8 +3141,8 @@ msgstr "Энэхүү хуудас нь дараахи хуудсуудтай х�
 
 #, python-format
 msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to '''%"
-"(end_offset)d''' out of '''%(total_count)d''' entries total."
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
 
 #, fuzzy
@@ -3434,10 +3440,10 @@ msgid ""
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
 "\n"
 msgstr ""
 "Та энд өмнө нь байсан нүүр хуудсандаа дэд хуудсууд нэмж оруулна.\n"
@@ -3453,8 +3459,8 @@ msgstr ""
 "үүсгэхийн тулд ГруппНүүрхуудасЗагвар -ыг ашигана уу.\n"
 "\n"
 "||'''Өөрийн шинэ хуудас нэмж оруулах:'''||'''Харъялагдах ACL-Груп:'''||\n"
-"||<<ШинэХуудас(HomepageReadWritePageTemplate,Хуудас (read/write),%(username)"
-"s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<ШинэХуудас(HomepageReadWritePageTemplate,Хуудас (read/write),"
+"%(username)s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
 "||<<ШинэХуудас(HomepageReadPageTemplate,Хуудас (read-only),%(username)s)>>||"
 "[\"%(username)s/ReadGroup\"]||\n"
 "||<<ШинэХуудас(HomepagePrivatePageTemplate,Хуудас (privat),%(username)s)>>||"
@@ -3849,8 +3855,8 @@ msgstr ""
 #~ "To create an account, see the %(userprefslink)s page. To recover a lost "
 #~ "password, go to %(sendmypasswordlink)s."
 #~ msgstr ""
-#~ "Хэрэглэгчийн данс үүсгэх эсвэл мартсан нууц үгээ авахын тулд%"
-#~ "(userprefslink)s рүү орж үзнэ үү."
+#~ "Хэрэглэгчийн данс үүсгэх эсвэл мартсан нууц үгээ авахын тулд"
+#~ "%(userprefslink)s рүү орж үзнэ үү."
 
 #, fuzzy
 #~ msgid ""

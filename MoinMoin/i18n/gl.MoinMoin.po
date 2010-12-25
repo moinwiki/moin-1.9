@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 01:00+0200\n"
+"POT-Creation-Date: 2010-12-24 23:58+0100\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,10 +116,10 @@ msgstr "[Non ten permiso para ler %s]"
 
 #, python-format
 msgid ""
-"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
-"(draft_timestamp_str)s) can be loaded instead of the current revision %"
-"(page_rev)d by using the load draft button - in case you lost your last edit "
-"somehow without saving it.''' A draft gets saved for you when you do a "
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
 
@@ -137,13 +138,13 @@ msgstr "Cancelar"
 
 #, python-format
 msgid ""
-"By hitting '''%(save_button_text)s''' you put your changes under the %"
-"(license_link)s.\n"
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
-"Ao premer '''%(save_button_text)s''' incorporará os seus cambios baixo %"
-"(license_link)s.\n"
+"Ao premer '''%(save_button_text)s''' incorporará os seus cambios baixo "
+"%(license_link)s.\n"
 "Se non quere iso, prema '''%(cancel_button_text)s''' para cancelar os seus "
 "cambios."
 
@@ -235,8 +236,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Unable to determine current page revision from the 'current' file. The page %"
-"s is damaged and cannot be edited right now."
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
 msgstr ""
 
 #, python-format
@@ -298,25 +299,25 @@ msgstr "Empregue o botón ''Vista previa'' para estender o tempo de protección.
 
 #, python-format
 msgid ""
-"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
-"s, i.e. for %(mins_valid)d minute(s)."
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"A edición desta páxina está actualmente ''bloqueada'' por %(owner)s até %"
-"(timestamp)s, isto é, durante %(mins_valid)d minuto(s)."
+"A edición desta páxina está actualmente ''bloqueada'' por %(owner)s até "
+"%(timestamp)s, isto é, durante %(mins_valid)d minuto(s)."
 
 #, python-format
 msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.<<BR>>\n"
-"'''You should ''refrain from editing'' this page for at least another %"
-"(mins_valid)d minute(s),\n"
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
 "to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
 "Esta páxina foi aberta para editala ou foi previsualizada o %(timestamp)s "
 "por %(owner)s.<<BR>>\n"
-"'''Debería ''evitar editar'' esta páxina durante, cando menos, outros %"
-"(mins_valid)d minuto(s),\n"
+"'''Debería ''evitar editar'' esta páxina durante, cando menos, outros "
+"%(mins_valid)d minuto(s),\n"
 "para evitar conflitos.'''<<BR>>\n"
 "Para abandonar o editor, prema o botón ''Cancelar''."
 
@@ -909,8 +910,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see %"
-"(highlight_help_page)s."
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
 msgstr ""
 
 #, fuzzy
@@ -1211,8 +1212,8 @@ msgid ""
 "You have subscribed to a wiki page \"%(sitename)s\" for change "
 "notification.\n"
 "\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
 msgstr ""
 "Prezado usuario do Wiki,\n"
 "\n"
@@ -2286,8 +2287,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
 msgstr ""
 
 #, python-format
@@ -2466,6 +2467,10 @@ msgstr "Eliminou a súa ligazón rápida a esta páxina."
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Eliminou a súa ligazón rápida a esta páxina."
+
+#, fuzzy
+msgid "Print slide show"
+msgstr "Proxectar diapositivas"
 
 #, fuzzy
 msgid "Edit slide show"
@@ -2703,8 +2708,8 @@ msgstr "Anexos para \"%(pagename)s\""
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
-"¡Por favor, use a interface interactiva de usuario para a acción %"
-"(actionname)s!"
+"¡Por favor, use a interface interactiva de usuario para a acción "
+"%(actionname)s!"
 
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
@@ -2741,8 +2746,8 @@ msgstr "O anexo '%(filename)s' foi instalado."
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
-"(new_filename)s'."
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
 msgstr "O anexo '%(filename)s' non existe!"
 
 msgid "Nothing changed"
@@ -2802,8 +2807,8 @@ msgstr "O arquivo %(target)s NON é un .zip."
 #, fuzzy, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
-"either not in the same directory or exceeded the single file size limit (%"
-"(maxsize_file)d kB)."
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
 msgstr ""
 "Os arquivos anexos '%(filename)s' non se descomprimiron porque os arquivos "
 "son demasiado grandes, só se admiten .zip, ou xa existen."
@@ -2826,8 +2831,8 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
-"s)."
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
 msgstr "O anexo '%(filename)s' foi descomprimido."
 
 #, python-format
@@ -2918,11 +2923,11 @@ msgstr "(incluídas %(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"As seguintes %(badwords)d palabras non foron achadas no dicionario de %"
-"(totalwords)d palabras%(localwords)s e aparecen marcadas abaixo:"
+"As seguintes %(badwords)d palabras non foron achadas no dicionario de "
+"%(totalwords)d palabras%(localwords)s e aparecen marcadas abaixo:"
 
 msgid "Add checked words to dictionary"
 msgstr "Engadir palabras seleccionadas ao dicionario"
@@ -3140,8 +3145,8 @@ msgstr "Esta páxina liga coas seguintes:"
 
 #, python-format
 msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to '''%"
-"(end_offset)d''' out of '''%(total_count)d''' entries total."
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
 
 #, fuzzy
@@ -3443,10 +3448,10 @@ msgid ""
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
 "\n"
 msgstr ""
 "Aquí pode engadir algunhas subpáxinas adicionais á súa páxina persoal xa "
@@ -3470,10 +3475,10 @@ msgstr ""
 "asociado:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s unicamente||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[\"%(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s unicamente||\n"
 "\n"
 
 # 

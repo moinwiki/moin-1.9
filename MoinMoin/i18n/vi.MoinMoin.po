@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 01:00+0200\n"
+"POT-Creation-Date: 2010-12-24 23:58+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,15 +114,15 @@ msgstr "[Bạn không thể xem %s]"
 
 #, python-format
 msgid ""
-"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
-"(draft_timestamp_str)s) can be loaded instead of the current revision %"
-"(page_rev)d by using the load draft button - in case you lost your last edit "
-"somehow without saving it.''' A draft gets saved for you when you do a "
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
-"'''<<BR>>Bản nháp của bạn dựa trên phiên bản %(draft_rev)d (đã lưu %"
-"(draft_timestamp_str)s) có thể được nạp thay vì dùng phiên bản hiện tại %"
-"(page_rev)d bằng cách ấn nút nạp bản nháp - trong trường hợp bạn đã làm mất "
+"'''<<BR>>Bản nháp của bạn dựa trên phiên bản %(draft_rev)d (đã lưu "
+"%(draft_timestamp_str)s) có thể được nạp thay vì dùng phiên bản hiện tại "
+"%(page_rev)d bằng cách ấn nút nạp bản nháp - trong trường hợp bạn đã làm mất "
 "nội dung chỉnh sửa cuối mà chưa lưu nó.''' Một bản nháp được lưu cho bạn khi "
 "bạn thực hiện việc xem thử, hủy bỏ chỉnh sửa hoặc lưu không thành công."
 
@@ -140,8 +141,8 @@ msgstr "Hủy bỏ"
 
 #, python-format
 msgid ""
-"By hitting '''%(save_button_text)s''' you put your changes under the %"
-"(license_link)s.\n"
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
@@ -228,8 +229,8 @@ msgstr "Trang này không thể khóa được. Thiếu tập tin 'hiện tại'
 
 #, python-format
 msgid ""
-"Unable to determine current page revision from the 'current' file. The page %"
-"s is damaged and cannot be edited right now."
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
 msgstr ""
 "Không thể xác định phiên bản trang hiện tại từ tập tin 'hiện tại'. Trang %s "
 "đã bị hư hỏng và không thể chỉnh sửa vào lúc này."
@@ -291,23 +292,23 @@ msgstr "Dùng nút Xem qua để gia hạn thời gian dành cho bạn."
 
 #, python-format
 msgid ""
-"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
-"s, i.e. for %(mins_valid)d minute(s)."
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
 "Trang này đang được ''dành riêng'' cho %(owner)s cho đến %(timestamp)s, hay "
 "trong vòng %(mins_valid)d phút."
 
 #, python-format
 msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.<<BR>>\n"
-"'''You should ''refrain from editing'' this page for at least another %"
-"(mins_valid)d minute(s),\n"
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
 "to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
-"Trang này đang được thay đổi, hoặc xem qua trước lần cuối cùng lúc %"
-"(timestamp)s bởi %(owner)s.<<BR>>\n"
+"Trang này đang được thay đổi, hoặc xem qua trước lần cuối cùng lúc "
+"%(timestamp)s bởi %(owner)s.<<BR>>\n"
 "'''Để tránh sự cố, bạn nên ''chờ'' ít nhất %(mins_valid)d phút "
 "nữa.'''<<BR>>\n"
 "Để thoát khung soạn thảo, nhấn nút Huỷ bỏ."
@@ -901,8 +902,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see %"
-"(highlight_help_page)s."
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
 msgstr ""
 
 msgid ""
@@ -1173,8 +1174,8 @@ msgid ""
 "You have subscribed to a wiki page \"%(sitename)s\" for change "
 "notification.\n"
 "\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
 msgstr ""
 "Chào bạn,\n"
 "\n"
@@ -2248,8 +2249,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
 msgstr ""
 
 #, python-format
@@ -2424,6 +2425,10 @@ msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 #, fuzzy
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+#, fuzzy
+msgid "Print slide show"
+msgstr "Slideshow"
 
 #, fuzzy
 msgid "Edit slide show"
@@ -2675,8 +2680,8 @@ msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
 msgstr ""
-"File gửi kèm '%(target)s' (tên ở máy chủ '%(filename)s') kích thước %(bytes)"
-"d bytes đã được lưu."
+"File gửi kèm '%(target)s' (tên ở máy chủ '%(filename)s') kích thước "
+"%(bytes)d bytes đã được lưu."
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -2691,8 +2696,8 @@ msgstr "File gửi kèm '%(filename)s' đã được xoá."
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
-"(new_filename)s'."
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
 msgstr "File gửi kèm '%(filename)s' không tồn tại!"
 
 msgid "Nothing changed"
@@ -2752,8 +2757,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
-"either not in the same directory or exceeded the single file size limit (%"
-"(maxsize_file)d kB)."
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
 msgstr ""
 
 #, python-format
@@ -2770,8 +2775,8 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
-"s)."
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
 msgstr "File gửi kèm '%(filename)s' đã được xoá."
 
 #, fuzzy, python-format
@@ -2862,8 +2867,8 @@ msgstr "(bao gồm cả %(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 "%(badwords)d từ không có trong từ điển (%(totalwords)d từ)%(localwords)s và "
 "được đánh dấu bên dưới:"
@@ -3081,8 +3086,8 @@ msgstr "Trang này liên kết tới các trang sau:"
 
 #, python-format
 msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to '''%"
-"(end_offset)d''' out of '''%(total_count)d''' entries total."
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
 
 #, fuzzy
@@ -3384,10 +3389,10 @@ msgid ""
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
 "\n"
 msgstr ""
 
