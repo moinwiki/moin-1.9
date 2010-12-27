@@ -1390,7 +1390,7 @@ msgid "RecentChanges"
 msgstr "ModificăriRecente"
 
 msgid "WikiTipOfTheDay"
-msgstr "WikiTipOfTheDay"
+msgstr "SfatulZileiWiki"
 
 msgid "TitleIndex"
 msgstr "IndexTitluri"
@@ -1411,58 +1411,58 @@ msgid "WikiHomePage"
 msgstr "Pagina Principală Wiki"
 
 msgid "WikiName"
-msgstr "WikiName"
+msgstr "NumeWiki"
 
 msgid "WikiWikiWeb"
-msgstr "WikiWikiWeb"
+msgstr "WikiWebWiki"
 
 msgid "FrontPage"
 msgstr "PaginaPrincipală"
 
 msgid "WikiSandBox"
-msgstr "WikiSandBox"
+msgstr "CutiaCuNisipWiki"
 
 msgid "InterWiki"
-msgstr "InterWiki"
+msgstr "ÎntreWiki"
 
 msgid "AbandonedPages"
 msgstr "PaginiAbandonate"
 
 msgid "OrphanedPages"
-msgstr "OrphanedPages"
+msgstr "PaginiOrfane"
 
 msgid "WantedPages"
-msgstr "WantedPages"
+msgstr "PaginiCăutate"
 
 msgid "EventStats"
-msgstr "EventStats"
+msgstr "StatisticiEveniment"
 
 msgid "EventStats/HitCounts"
-msgstr "EventStats/HitCounts"
+msgstr "StatisticiEveniment/NrAccesări"
 
 msgid "EventStats/Languages"
-msgstr "EventStats/Limbi"
+msgstr "StatisticiEveniment/Limbi"
 
 msgid "EventStats/UserAgents"
-msgstr "EventStats/UserAgents"
+msgstr "StatisticiEveniment/AgențiUtilizator"
 
 msgid "PageSize"
-msgstr "PageSize"
+msgstr "DimensiunePagină"
 
 msgid "PageHits"
-msgstr "PageHits"
+msgstr "AccesăriPagină"
 
 msgid "RandomPage"
-msgstr "RandomPage"
+msgstr "PaginăAleatoare"
 
 msgid "XsltVersion"
-msgstr "XsltVersion"
+msgstr "VersiuneXslt"
 
 msgid "FortuneCookies"
-msgstr "FortuneCookies"
+msgstr "CookieuriNorocoase"
 
 msgid "WikiLicense"
-msgstr "WikiLicense"
+msgstr "LicențăWiki"
 
 msgid "CategoryCategory"
 msgstr "CategoryCategory"
