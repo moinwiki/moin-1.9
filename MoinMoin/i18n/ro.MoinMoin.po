@@ -1438,13 +1438,13 @@ msgid "EventStats"
 msgstr "StatisticiEveniment"
 
 msgid "EventStats/HitCounts"
-msgstr "StatisticiEveniment/NrAccesări"
+msgstr "EventStats/HitCounts"
 
 msgid "EventStats/Languages"
-msgstr "StatisticiEveniment/Limbi"
+msgstr "EventStats/Languages"
 
 msgid "EventStats/UserAgents"
-msgstr "StatisticiEveniment/AgențiUtilizator"
+msgstr "EventStats/UserAgents"
 
 msgid "PageSize"
 msgstr "DimensiunePagină"
@@ -1462,7 +1462,7 @@ msgid "FortuneCookies"
 msgstr "CookieuriNorocoase"
 
 msgid "WikiLicense"
-msgstr "LicențăWiki"
+msgstr "WikiLicense"
 
 msgid "CategoryCategory"
 msgstr "CategoryCategory"
