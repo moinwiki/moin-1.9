@@ -11,12 +11,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.6\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-24 23:58+0100\n"
-"PO-Revision-Date: 2007-11-05 22:11+0100\n"
+"PO-Revision-Date: 2011-01-03 20:51+0100\n"
 "Last-Translator: Petr Pecha <nejlepsitextovyeditorjevim@gmail.com>\n"
-"Language-Team: Czech <moin@lists.sourceforge.net>\n"
+"Language-Team: Czech <moin-user@lists.sourceforge.net>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -613,9 +613,8 @@ msgstr ""
 "Než můžete být upozorněni, musíte zvolit způsob kontaktování ve vašemhlavním "
 "nastavení."
 
-#, fuzzy
 msgid "Subscribed events"
-msgstr "Přihlásit uživatele k odběru"
+msgstr "Upozornit na události"
 
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "Odebírat wiki stránky<<BR>>(jeden regulární výraz na řádku)"
@@ -820,7 +819,6 @@ msgstr ""
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr "<a href=\"%(sendmypasswordlink)s\">Zapomněl jsi svoje heslo?</a>"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
 ">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
@@ -837,25 +835,25 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-" Zvýraznění:: <<Verbatim('')>>''kurzíva''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''tučně'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''tučně "
-"kurzíva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''smíšené ''<<Verbatim(''')"
-">>'''''tučně'''<<Verbatim(''')>> a kurzíva''<<Verbatim('')>>; <<Verbatim"
-"(----)>> vodorovná čára.\n"
+" Zvýraznění:: <<Verbatim(//)>>''kurzíva''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''tučně'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''tučná "
+"kurzíva'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''smíšené ''<<Verbatim(**)"
+">>'''''tučně'''<<Verbatim(**)>> a kurzíva''<<Verbatim(//)>>;\n"
+"<<Verbatim(----)>> vodorovná čára\n"
+"<<Verbatim(\\\\)>> přerušení čáry\n"
 " Nadpisy:: <<Verbatim(=)>> Nadpis 1 <<Verbatim(=)>>; <<Verbatim(==)>> Nadpis "
 "2 <<Verbatim(==)>>; <<Verbatim(===)>> Nadpis 3 <<Verbatim(===)>>;   "
 "<<Verbatim(====)>> Nadpis 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Nadpis 5 "
 "<<Verbatim(=====)>>.\n"
-" Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované "
-"odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.\n"
+" Seznamy:: mezera a jeden z: * odrážky, ** subodrážky; 1., a., A., i., I. "
+"číslované odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.\n"
 " Odkazy:: <<Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)>>; <<Verbatim"
 "([[cíl odkazu|text odkazu]])>>.\n"
-" Tabulky:: || text buněk |||| text dvou spojených buněk ||;    nejsou "
-"dovoleny mezery za nadpisy a tabulkami.\n"
+" Tabulky:: |= Nadpis tabulky | text buněk || text dalších buněk spojených "
+"buněk ||; nejsou dovoleny mezery za nadpisy a tabulkami.\n"
 "\n"
 "(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -874,14 +872,12 @@ msgid ""
 "(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Zvýraznění:: <<Verbatim('')>>''kurzíva''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''tučně'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''tučně "
+">>'''tučně'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''tučná "
 "kurzíva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''smíšené ''<<Verbatim(''')"
 ">>'''''tučně'''<<Verbatim(''')>> a kurzíva''<<Verbatim('')>>; <<Verbatim"
 "(----)>> vodorovná čára.\n"
-" Nadpisy:: <<Verbatim(=)>> Nadpis 1 <<Verbatim(=)>>; <<Verbatim(==)>> Nadpis "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Nadpis 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Nadpis 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Nadpis 5 "
-"<<Verbatim(=====)>>.\n"
+" Nadpisy:: = Nadpis 1 =; == Nadpis 2 ==; === Nadpis 3 ===; ==== Nadpis 4 "
+"====; ===== Nadpis 5 =====.\n"
 " Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované "
 "odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.\n"
 " Odkazy:: <<Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)>>; <<Verbatim"
@@ -908,7 +904,7 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Očekávána hodnota barvy \"%(arg)s\" po \"%(key)s\""
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "NapovedaSyntaktickyAnalizator"
 
 #, python-format
 msgid ""
@@ -1362,7 +1358,7 @@ msgid "matches"
 msgstr "nálezů"
 
 msgid "about"
-msgstr ""
+msgstr "o"
 
 msgid "RecentChanges"
 msgstr "PosledniZmeny"
@@ -1458,19 +1454,19 @@ msgid "HelpTemplate"
 msgstr "NapovedaSablona"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "DomovskaStrankaCteniZapisSablona"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "DomovskaStrankaZapisSablona"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "DomovskaSoukromaStrankaSablona"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "DomovskaStrankaSkupinySablona"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "PrezentacaPodkladSablona"
 
 msgid "SlideShowTemplate"
 msgstr "PrezentaceŠablona"
@@ -1479,25 +1475,25 @@ msgid "SlideTemplate"
 msgstr "SnimekSablona"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "SynchronizacePraceSablona"
 
 msgid "HelpOnConfiguration"
 msgstr "NapovedaFormatovani"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "NapovedaNastaveni/EmailovaPodpora"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "NapovedaNastaveni/BezpecnostniOpatreni"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "NapovedaNastaveni/Prilohy"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "NapovedaNastaveni/DoplnkovaStranka"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "NapovedaNastaveni/OchranaProtiVnejsimuZasahu"
 
 msgid "HelpOnConfiguration/UserPreferences"
 msgstr "NapovedaNastaveni/NastaveniUzivatele"
@@ -1521,7 +1517,7 @@ msgid "HelpOnMoinCommand"
 msgstr "NapovedaMoinCommand"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "NapovedaMoinCommand/ExportVypisu"
 
 msgid "HelpOnNotification"
 msgstr "NapovedaUpozorneni"
@@ -1533,7 +1529,7 @@ msgid "HelpOnUserHandling"
 msgstr "NapovedaUzivatelskeUpravy"
 
 msgid "HelpOnXapian"
-msgstr ""
+msgstr "NapovedaXapian"
 
 msgid "HelpOnMoinWikiSyntax"
 msgstr "NapovedaProMoinWikiSyntax"
@@ -1560,7 +1556,7 @@ msgid "HelpIndex"
 msgstr "NapovedaIndex"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "NapovedaKontrolniPristupovySeznam"
 
 msgid "HelpOnActions"
 msgstr "NapovedaAkce"
@@ -1647,13 +1643,13 @@ msgid "HelpOnPageDeletion"
 msgstr "NápovědaSmazaniStranky"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "NapovedaSyntaktickyAnalizator/SkladaniTextu"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "NapovedaSyntaktickyAnalizator/SkladaniTextu/RstPrimer"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "NapovedaZpracovaniInstrukci"
 
 msgid "HelpOnRules"
 msgstr "NapovedaPravidla"
@@ -1713,7 +1709,7 @@ msgid "HelpOnSubscribing"
 msgstr "NapovedaOdber"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "PripadVelblouda"
 
 msgid "WikiCourse"
 msgstr "WikiNavod"
@@ -1800,7 +1796,7 @@ msgid "WikiCourse/52 Structure in the wiki"
 msgstr "WikiNavod/52 Struktura wiki"
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "WikiPodkladyProJejiBeh"
 
 msgid "Sun"
 msgstr "Ne"
@@ -2025,28 +2021,23 @@ msgstr "Ukázat %s dní."
 msgid "Wiki Markup"
 msgstr "Značkování Wiki"
 
-#, fuzzy
 msgid "File attachment browser"
-msgstr "Nový název přílohy"
+msgstr "Prohlížet přílohu"
 
 msgid "User account browser"
 msgstr "Prohledávám uživatelský účet"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "PyStemmer Verze"
+msgstr "Popis pravopisu"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "Uživatel"
+msgstr "Jméno pro pravopisný analizátor"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "Typ Souboru"
+msgstr "Soubor typů"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "jakýkoliv mimetype"
+msgstr "Mimetypes"
 
 msgid "Wiki configuration"
 msgstr "Nastavení wiki"
@@ -2215,18 +2206,24 @@ msgid ""
 "%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
 "missing."
 msgstr ""
+"%(extension_name)s %(extension_type)s: Požadovaný argument %(argument_name)s "
+"chybý."
 
 #, python-format
 msgid ""
 "%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
 "%(argument_value)s!"
 msgstr ""
+"%(extension_name)s %(extension_type)s: Chybný %(argument_name)s="
+"%(argument_value)s!"
 
 #, python-format
 msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
 "of its mimetype %(mimetype)s."
 msgstr ""
+"Současná konfigurace neumožňuje uložit tento soubor %(file)s protože je "
+"mimetype %(mimetype)s."
 
 msgid "Embedded"
 msgstr "Zabudováno"
@@ -2386,9 +2383,8 @@ msgstr "Pohotový odkaz na tuto stránku nelze odebrat."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Potřebujete mít pohotový odkaz, abyste mohli tuto stránku odstranit."
 
-#, fuzzy
 msgid "Print slide show"
-msgstr "Upravit prezentaci"
+msgstr "Vytisknout prezentaci"
 
 msgid "Edit slide show"
 msgstr "Upravit prezentaci"
@@ -2418,6 +2414,11 @@ msgid ""
 "\n"
 "Once you have logged in, simply reload this page."
 msgstr ""
+"Před tím než můžete použít OpenID,\n"
+"Musíte se přihlásit u svého poskytovatele. MoinMoin\n"
+"nebude nikdy chtít, abyste heslo zde zadávali.\n"
+"\n"
+"Jakmile budete přihlášení, načtěte znovu tuto stránku."
 
 msgid "OpenID Trust verification"
 msgstr "Kontrola důvěryhodnosti OpenID"
@@ -2434,9 +2435,13 @@ msgid ""
 "identity, the site will take care of reversing the\n"
 "delegation on its own.)"
 msgstr ""
+"\n"
+"Pokud souhlasíte, stránka byla reprezentována důvěryhodnou adresou níže\n"
+"bude ke stránce přistupováno přes URL %s. (Pokud budete používat přenesenou\n"
+"adresu, tak bude tato stránka sama zpětně měněná."
 
 msgid "Trust root"
-msgstr ""
+msgstr "Důvěryhodná adresa"
 
 msgid "Identity URL"
 msgstr "Identické URL"
@@ -2463,6 +2468,12 @@ msgid ""
 "and then reload this page or click the button below to cancel this\n"
 "verification."
 msgstr ""
+"\n"
+"Ještě jste si nevytvořili vaši osobní stránku. Proto \n"
+"nemůžete používat vaše OpenID. Nejprve si prosím vytvořte svoji osobní "
+"stránku\n"
+"a znovu načtěte tuto stránku a klikněte na tlačítko pro dokončení\n"
+"tohoto ověření."
 
 msgid "If this account exists an email was sent."
 msgstr "Pokud tento účet existuje, email byl odeslán."
@@ -2749,9 +2760,8 @@ msgstr ""
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Příloha '%(filename)s' rozbalena."
 
-#, fuzzy
 msgid "A severe error occurred:"
-msgstr "Nastala vážná chyba:"
+msgstr "Vyskytla se kritická chyba:"
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -3089,9 +3099,8 @@ msgstr "Rozdíl"
 msgid "Comment"
 msgstr "Komentář"
 
-#, fuzzy
 msgid "to previous"
-msgstr "Předchozí"
+msgstr "Přejít na předchozí"
 
 msgid "Revision History"
 msgstr "Historie verzí"
@@ -3335,7 +3344,7 @@ msgstr "Editace kresby"
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Prosím, nejdříve vytvořte domovskou stránku."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -3364,7 +3373,7 @@ msgid ""
 msgstr ""
 "Zde můžete přidat podstránky k existující domovské stránce.\n"
 "\n"
-"Je možné zvolit, jak budou tyto stránky otevřené pro ostatní uživatele.\n"
+"Je možné zvolit, jak se budou tyto stránky zobrazovat ostatním uživatelům.\n"
 "Přístup je řízen členstvím ve skupině k odpovídající stránce.\n"
 "\n"
 "Vložte jméno podstránky a stiskněte tlačítko pro vytvoření nové stránky\n"
@@ -3373,8 +3382,8 @@ msgstr ""
 "odpovídající stránky se skupinou a v ní příslušné členy.\n"
 "Pro vytvoření stránky se skupinou použijte HomepageGroupsTemplate.\n"
 "\n"
-"||'''Přidat novou osobní stránku:'''||'''Související stránka řídící "
-"přístup:'''||\n"
+"||'''Přidat novou osobní stránku:'''||'''Seznam souvisejících přístupových "
+"skupin:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
 "||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
@@ -3411,9 +3420,8 @@ msgstr "Nemohu zrušit odběr z regulárního výrazu!"
 msgid "Edit the subscription regular expressions in your settings."
 msgstr "Upravte regulární výraz pro odebírání ve vašem nastavení."
 
-#, fuzzy
 msgid "You need to be subscribed to unsubscribe."
-msgstr "Přihlásili jste se k odběru této stránky."
+msgstr "Abyste mohli zakázat odběr musíte být k němu přihlášený."
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -3476,6 +3484,9 @@ msgid ""
 "name, you can also upload content for another page. If the page name is "
 "empty, we derive the page name from the file name."
 msgstr ""
+"Můžete nahrát obsah ke stránce, jejíž název je níže. Když změníte tento "
+"název, tak můžete nahrát obsah pouze pro jinou stránku. Když bude název "
+"stránky prázdný, převezme se jméno z názvu souboru."
 
 msgid "File to load page content from"
 msgstr "Soubor bude nahrán z"
