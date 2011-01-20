@@ -873,6 +873,13 @@ MIMETYPES_MORE = {
  '.swf': 'application/x-shockwave-flash',
  '.moin': 'text/moin-wiki',
  '.creole': 'text/creole',
+ # Windows Server 2003 / Python 2.7 has no or strange entries for these:
+ '.svg': 'image/svg+xml',
+ '.svgz': 'image/svg+xml',
+ '.png': 'image/png',
+ '.jpg': 'image/jpeg',
+ '.jpeg': 'image/jpeg',
+ '.gif': 'image/gif',
 }
 
 # add all mimetype patterns of pygments
