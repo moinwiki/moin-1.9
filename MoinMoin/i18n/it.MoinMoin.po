@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-24 23:58+0100\n"
-"PO-Revision-Date: 2010-10-15 16:48+0200\n"
+"PO-Revision-Date: 2011-01-31 15:48+0200\n"
 "Last-Translator: Nico Zanferrari <nicozanf@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -1611,8 +1611,10 @@ msgstr "AiutoSuAzioni/AllegaFile"
 msgid "HelpOnAdmonitions"
 msgstr "AiutoSuAvvisi"
 
+# translation not needed, previously 
+# AiutoSuAutoAmministrazione
 msgid "HelpOnAutoAdmin"
-msgstr "AiutoSuAutoAmministrazione"
+msgstr "HelpOnAutoAdmin"
 
 msgid "HelpOnCategories"
 msgstr "AiutoSuCategorie"
