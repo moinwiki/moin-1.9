@@ -18,9 +18,49 @@ Known main issues:
 
 Current:
   Fixes:
-   * fix for MoinMoinBugs/SinglePageSlideShowAndParserMarkup (thanks to Paul Boddie)
-  New Features:
-   * print mode to action.SlideShow added, FeatureRequests/PrintableSinglePageSlideshows (thanks to Paul Boddie)
+   * Fix XSS / remove javascript URL support in rst parser (CVE-2011-1058).
+   * werkzeug: Removed a dummy import. Fixes Python 2.7 compatibility.
+   * Fix for MoinMoinBugs/SinglePageSlideShowAndParserMarkup.
+   * Simplify auto scroll initialization; fix bug in IE init discovered when
+     using IE7 on pages with wide tables.
+   * Fix timestamp in edit lock message to show the time when edit-locking ends.
+   * Updated wikiserverconfig.py from internal defaults, sync the one in
+     toplevel dir and the one in wiki/server/ - fixes hostname setting.
+   * SubProcess: make sure files are closed at the end (experimental change).
+   * text plain formatter: fix bullet_list, see number_list.
+   * Fixed install-docs sed commands.
+   * Add some image mimetypes to MIMETYPES_MORE to fix windows issues.
+
+  New features:
+   * Added print mode to action.SlideShow, see
+     FeatureRequests/PrintableSinglePageSlideshows.
+   * Add support for other password hashes (all of them will get auto-upgraded
+     to SSHA when user logs in):
+     * {DES} (Unix crypt(3))
+     * {MD5} (MD5-based crypt())
+     * {APR1} (Apache .htpasswd). 
+   * Experimental queued indexing support to work around memory leak - use it like this:
+     # put all pages into indexer queue:
+     python MoinMoin/script/moin.py index build --mode=makequeue
+     # take <count> pages out of the indexer queue and index them,
+     # you need to repeat the following line respective to the total amount of pages
+     # in your wiki (doing more indexer calls does no harm, doing less means an
+     # incomplete index):
+     python MoinMoin/script/moin.py index build --mode=buildnewindexqueued --count=500
+     python MoinMoin/script/moin.py index build --mode=buildnewindexqueued --count=500
+     python MoinMoin/script/moin.py index build --mode=buildnewindexqueued --count=500
+     # ...
+     # switch to new index:
+     python MoinMoin/script/moin.py index build --mode=usenewindex 
+
+  Other changes:
+   * Raise exceptions as recommended in PEP 8.
+   * Updated i18n / underlay pages.
+   * Use logging.traceback to get more information if a indexing filter crashes.
+   * u200b is not considered a space any more in unicode 4.0.1.
+   * Improve textcha security, use some crypto and timing to make cheating
+     harder - use cfg.textchas_expiry_time = 600 (default, seconds) to set the
+     time a textcha is valid.
 
 Version 1.9.3:
   Fixes:
