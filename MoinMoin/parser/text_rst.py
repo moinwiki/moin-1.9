@@ -391,6 +391,9 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 # for images with targets).
                 if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
                     node['classes'].append('interwiki')
+            elif prefix == 'javascript':
+                # is someone trying to do XSS with javascript?
+                node['refuri'] = 'javascript:alert("it does not work")'
             elif prefix != '':
                 # Some link scheme (http, file, https, mailto, etc.), add class
                 # information if the reference doesn't have a child image (don't
