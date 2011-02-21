@@ -47,7 +47,7 @@ msgid "You are not allowed to edit this page."
 msgstr "आप को यह पृष्ट को बदलने की आग्या नही है।"
 
 msgid "Page is immutable!"
-msgstr "ईस पृष्ट मे पिरवरतन नही िकया जा सकता!"
+msgstr "ईस पृष्ट मे पिरवरतन नही किया जा सकता!"
 
 msgid "Cannot edit old revisions!"
 msgstr "पुराने पुनरीक्षय को नही बदला जा सकता!"
@@ -60,55 +60,55 @@ msgstr "पृष्ठ का नाम बहुत बड़ा है, छ�
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "\"%(pagename)s\" का प्ारूप"
+msgstr "का मसौदा \"%(pagename)s\""
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
-msgstr "\"%(pagename)s\" को बदले"
+msgstr "संपादित करें \"%(pagename)s\""
 
 #, python-format
 msgid "Preview of \"%(pagename)s\""
-msgstr "\"%(pagename)s\" का अग्प्दर्शन"
+msgstr "का पूर्वावलोकन \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
-msgstr "%(lock_page)s को बदलने की समय सीमा समाप्त हो चुकी है।"
+msgstr "आपके समाप्त हो गया है पर %(lock_page)s संपादित ताला!"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "%(lock_page)s पेज को बदलने की समय सीमा # मींटो मे समाप्त हो जाएेगी।"
+msgstr "अपने पर ताला संपादित %(lock_page)s समाप्त हो जाएगा # मिनट में."
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr "%(lock_page)s पेज को बदलने की समय सीमा # सेकेंडो मे समाप्त हो जाएेगी।"
+msgstr "अपने पर ताला संपादित %(lock_page)s # सेकेंडो मे समाप्त हो जाएगा।"
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr "जब आप पन्ने को बदल रहे थे तो िकसी ने इसे िमटा िदया।"
+msgstr "जब आप पन्ने को बदल रहे थे तो किसी ने इसे मिटा दिया।"
 
 msgid "Someone else changed this page while you were editing!"
-msgstr "जब आप पन्ने को बदल रहे थे तो िकसी ने इसे बदल िदया।"
+msgstr "जब आप पन्ने को बदल रहे थे तो किसी ने इसे बदल दिया।"
 
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
-"जब आप पन्ने को बदल रहे थे तो िकसी ने इसको सुरिक्षत कर िदया!\n"
-"कृपया इस पृष्ट के पुनरावलोकन िक पश्चात ही इसे सुरिक्षत मत कीिजए।"
+"जब आप पन्ने को बदल रहे थे तो किसी ने इसको सुरिक्षत कर दिया!\n"
+"कृपया इस पृष्ट के पुनरावलोकन की पश्चात ही इसे सुरिक्षत मत कीजिए।"
 
 msgid "[Content loaded from draft]"
-msgstr "[प्ारूप दव्ारा िवषय वस्तु िलया गया]"
+msgstr "[सामग्री ड्राफ़्ट से भरा हुआ]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
-msgstr "[नये पृष्ट का वषय वस्तु %s िलया गया]"
+msgstr "[नए पेज की सामग्री से भरा हुआ %s]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[%s टेम्पलेट नही िमला]"
+msgstr "[टेम्पलेट %s नही मिला]"
 
 #, python-format
 msgid "[You may not read %s]"
-msgstr "[आप %s को नही पढ सकते समभ्त:]"
+msgstr "[तुम नहीं पढ़ सकते हैं %s]"
 
 #, python-format
 msgid ""
@@ -117,8 +117,9 @@ msgid ""
 "%(page_rev)d by using the load draft button - in case you lost your last "
 "edit somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
+
 msgstr ""
-"'''<<BR>>आपका प्रारूप पुनरीक्षण %(draft_rev)d (सुरिक्षत %(draft_timestamp_str)s) "
+"'''<<BR>>आपका प्रारूप पुनरीक्षण %(draft_rev)d (सुरिक्षत " %(draft_timestamp_str)s) "
 "पर आधारित है उसको बिना नये पुनरीक्षण की उपलब्धि पर उपयोग में डाला जा सकता है।यदि आपके "
 "द्वारा सबसे अंत में बदला गया विषय वस्तु %(page_rev)d खो गया हो तो लोड ड्राफ्ट बटन की "
 "सहायता से डाल सकते हैं।' ' ' जब आप अग्र प्रदर्शन, एक परिवर्तन का निरस्तीकरण या असफलता "
@@ -126,7 +127,7 @@ msgstr ""
 
 #, python-format
 msgid "Describe %s here."
-msgstr "यहां %s की व्याख्या है।"
+msgstr "वर्णन %s यहाँ है।"
 
 msgid "Check Spelling"
 msgstr "स्पेलिंग की जांच कर लें।"
@@ -135,7 +136,7 @@ msgid "Save Changes"
 msgstr "परिवर्तन सुरक्षित करे"
 
 msgid "Cancel"
-msgstr "रदद् कीिजए"
+msgstr "रद्द करना"
 
 #, python-format
 msgid ""
@@ -149,32 +150,32 @@ msgstr ""
 "'''%(cancel_button_text)s''' कुंजी दबाएं।"
 
 msgid "Preview"
-msgstr "अग्र प्रदर्शन"
+msgstr "पूर्वावलोकन"
 
 msgid "GUI Mode"
-msgstr "जी यू आई प्रकार।"
+msgstr "जीयूआई मोड।"
 
 msgid "Load Draft"
-msgstr "प्रारूप को डालें"
+msgstr "लोड मसौदा"
 
 msgid "Trivial change"
-msgstr "साधारण परिवर्तन"
+msgstr "तुच्छ परिवर्तन"
 
 msgid "Comment:"
-msgstr "टिप्पणी "
+msgstr "टिप्पणी:"
 
 msgid "<No addition>"
-msgstr ""
+msgstr "<कोई अतिरिक्त नहीं>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "में जोड़ें: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "प्रत्येक पंक्ति से अनियमित ह्वाइटस्पेस ? हटा दें "
+msgstr "प्रत्येक पंक्ति से अनियमित ह्वाइटस्पेस हटा दें "
 
 msgid "Edit was cancelled."
-msgstr "संपादन/परिवर्तन निरस्त किया गया।"
+msgstr "परिवर्तन निरस्त किया गया।"
 
 msgid "You can't copy to an empty pagename."
 msgstr "आप एक खाली पृष्ठ नाम पर कॉपी नहीं कर सकते। "
@@ -188,22 +189,24 @@ msgid ""
 "\n"
 "Try a different name."
 msgstr ""
-"{{{'%s'}}} नाम का पृष्ठ पहले से है।\n"
+"" नाम का पृष्ठ {{{'%s'}}} पहले से है।"'\n"
+"\n"
 "दूसरे नाम के साथ प्रयास करें।"
 
 #, python-format
 msgid "Could not copy page because of file system error: %s."
-msgstr "यह फाइल %s संयोजन त्रुटिपुर्ण होने के कारण कॉपी नहीं किया जा सकता।"
+msgstr "यह फाइल संयोजन त्रुटिपुर्ण होने के कारण कॉपी नहीं किया जा सकता: %s."
 
 msgid "You are not allowed to rename this page!"
-msgstr "आप यह पृष्ठ कॉपी नही कर सकते।"
+msgstr "आप यह पृष्ठ नाम बदल नही कर सकते!"
 
 msgid "You can't rename to an empty pagename."
-msgstr "आप कोई खाली पृष्ठ नाम कॉपी नही कर सकते।"
+msgstr "आप कोई खाली पृष्ठ नाम बदल नही कर सकते।"
+
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
-msgstr "यह फाइल संयोजन त्रुटिपुर्ण %s होने के कारण नाम नहीं बदला जा सकता।"
+msgstr "यह फाइल संयोजन त्रुटिपुर्ण होने के कारण नाम नहीं बदला जा सकता: %s."
 
 msgid "You are not allowed to delete this page!"
 msgstr "आपको यह पृष्ठ हटाने की आज्ञा नही है।"
@@ -213,50 +216,52 @@ msgstr "आपके द्वारा किये गये परिवर�
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
-msgstr "\"%s\" पृष्ठ को सफलतापुर्वक हटाया गया।"
+msgstr "पृष्ठ \"%s\" को सफलतापुर्वक हटाया गया!"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr ""
+msgstr "पृष्ठ बंद नहीं हो सका. अप्रत्याशित त्रुटि (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr ""
+msgstr "पृष्ठ बंद नहीं हो सका.लापता 'वर्तमान' फाइल?"
 
 #, python-format
 msgid ""
 "Unable to determine current page revision from the 'current' file. The page "
 "%s is damaged and cannot be edited right now."
-msgstr ""
+msgstr "के लिए 'वर्तमान' से वर्तमान पृष्ठ संशोधन निर्धारित करने में असमर्थ
+फ़ाइल. पेज "
+"% s क्षतिग्रस्त है और हो सकता है अब नहीं संपादित ठीक है."
 
 #, python-format
 msgid "Cannot save page %s, no storage space left."
-msgstr ""
+msgstr "पृष्ठ %s, को सहेज नहीं सकते, कोई भंडारण स्थान छोड़ दिया है."
 
 #, python-format
 msgid "An I/O error occurred while saving page %s (errno=%d)"
-msgstr ""
+msgstr "एक I/O त्रुटि हो गई पृष्ठ सेव करते हुए %s (errno=%d)"
 
 msgid "You are not allowed to edit this page!"
-msgstr ""
+msgstr "आप इस पृष्ठ को संपादित करने की अनुमति नहीं है!"
 
 msgid "You cannot save empty pages."
-msgstr ""
+msgstr "आप खाली पृष्ठों को नहीं बचा सकते."
 
 msgid "You already saved this page!"
-msgstr ""
+msgstr "आप पहले से ही इस पेज को सेव कर चुके है!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "आप पहले से ही इस पृष्ठ को संपादित कर चुके है! कृपया वापस बटन का उपयोग न करें."
 
 msgid "You did not change the page content, not saved!"
-msgstr ""
+msgstr "आप पेज की सामग्री को बदल नहीं किया था, नहीं सेव किया है!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
-msgstr ""
+msgstr "आप इस पेज पर ACLs नहीं बदल के बाद आप इस पर कोई व्यवस्थापक अधिकार हो सकता है!"
 
 msgid "Notifications sent to:"
-msgstr ""
+msgstr "नोटिफिकेशन के लिए भेजा:"
 
 #, python-format
 msgid ""
@@ -295,7 +300,7 @@ msgid ""
 msgstr ""
 
 msgid "<unknown>"
-msgstr ""
+msgstr "<अज्ञात>"
 
 #, python-format
 msgid ""
@@ -316,18 +321,18 @@ msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] आपके विकी खाते का डेटा "
 
 #, python-format
 msgid "Unknown action %(action_name)s."
-msgstr ""
+msgstr "अज्ञात कार्रवाई %(action_name)s."
 
 #, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
+msgstr "आप इस पृष्ठ पर %(action_name)s की अनुमति नहीं है."
 
 msgid "Login and try again."
-msgstr ""
+msgstr "लॉगिन और फिर कोशिश करें."
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -338,7 +343,7 @@ msgstr "विषय नाम निश्चित नही है"
 
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
-msgstr ""
+msgstr "विषय स्थापित फाइलें नहीं है! अधिकारों के लिए लिखें लापता %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -346,7 +351,7 @@ msgstr "'%(filename)s' का प्रतिस्थापन नहीं ह
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr " यह फाइल %s मोइनमोइन प्रकार की नहीं है।"
+msgstr "यह फाइल %s मोइनमोइन प्रकार की नहीं है।"
 
 #, python-format
 msgid "The page %s does not exist."
@@ -360,7 +365,7 @@ msgstr "पैकेज फाइल का प्रकार उपलब्�
 
 #, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "%(lineno)i वें पंक्ति में अमान्य उल्लेख/कार्य %(func)s। "
+msgstr "%(lineno)i वें पंक्ति में अमान्य उल्लेख/कार्य %(func)s."
 
 #, python-format
 msgid "The file %s was not found in the package."
@@ -375,49 +380,49 @@ msgstr "तर्क \"%s\" बूलियन मान में होने 
 
 #, python-format
 msgid "Argument must be a boolean value, not \"%s\""
-msgstr "तर्क बूलियन मान में होने चाहिए \"%s\" में नहीं। "
+msgstr "तर्क बूलियन मान में होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "तर्क \"%s\" पूर्णांक में होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क \"%s\" पूर्णांक में होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument must be an integer value, not \"%s\""
-msgstr "तर्क पूर्णांक में होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क पूर्णांक में होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "तर्क \"%s\" फ्लोअट पॉइंट में होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क \"%s\" फ्लोअट पॉइंट में होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument must be a floating point value, not \"%s\""
-msgstr "तर्क फ्लोअट पॉइंट में होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क फ्लोअट पॉइंट में होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "तर्क \"%s\" जटिल मान में होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क \"%s\" जटिल मान में होने चाहिए, \"%s\" में नहीं \"%s\""
 
 #, python-format
 msgid "Argument must be a complex value, not \"%s\""
-msgstr "तर्क जटिल मान में होने चाहिए \"%s\" में नहीं। "
+msgstr "तर्क जटिल मान में होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "तर्क \"%s\" कोई एक \"%s\" होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क \"%s\" कोई एक \"%s\" होने चाहिए, में नहीं \"%s\""
 
 #, python-format
 msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "तर्क कोई एक \"%s\" होने चाहिए \"%s\" में नहीं।"
+msgstr "तर्क कोई एक \"%s\" होने चाहिए, में नहीं \"%s\""
 
 msgid "Too many arguments"
 msgstr "बहुत ज्यादे तर्क"
 
 msgid "Cannot have arguments without name following named arguments"
-msgstr "बिना नाम के तर्क नहीं हो सकते, निम्नलिखित तर्क/संकेत नाम के साथ।"
+msgstr "नाम के बिना तर्क नाम तर्क निम्नलिखित नहीं कर सकते"
 
 #, python-format
 msgid "Argument \"%s\" is required"
-msgstr "तर्क \"%s\" आवश्यक है।"
+msgstr "तर्क \"%s\" आवश्यक है"
 
 #, python-format
 msgid "No argument named \"%s\""
@@ -425,153 +430,157 @@ msgstr "\"%s\" नाम का कोई तर्क नहीं।"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "\"%(token)s\" के बाद \"=\" अनुमािनत है।"
+msgstr "\"%(token)s\" के बाद \"=\" अनुमानित है"
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
-msgstr "\"%(token)s\" कुंजी के िलए अनुमािनत मान"
+msgstr "\"%(token)s\" कुंजी के लिए अनुमानित मान"
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
+msgstr "नियमित अभिव्यक्ति अवैध उजागर \"%(regex)s\": %(error)s"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr ""
+msgstr "इस पृष्ठ की सामग्री को समर्थन पदावनत है और में कम रैंक जाएगा " "खोज परिणाम!"
+
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
-msgstr ""
+msgstr "संशोधन %(rev)d के रूप में है %(तारीख)s"
 
 #, python-format
 msgid "Redirected from page \"%(page)s\""
-msgstr ""
+msgstr "पन्ने से पुनर्निदेशित \"%(page)s\""
 
 #, python-format
 msgid "This page redirects to page \"%(page)s\""
-msgstr ""
+msgstr "इस पृष्ठ पेज पर रीडायरेक्ट \"%(page)s\""
 
 msgid "Create New Page"
-msgstr ""
+msgstr "नया पेज बनाये"
 
 msgid "You are not allowed to view this page."
-msgstr ""
+msgstr "आपको इस पृष्ठ को देखने की अनुमति नहीं है."
 
 msgid "Switch user"
-msgstr ""
+msgstr "स्विच उपयोगकर्ता"
 
 msgid "No user selected"
-msgstr ""
+msgstr "कोई उपयोगकर्ता चुना नहीं है"
 
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
-msgstr ""
+msgstr "अब आप चुने उपयोगकर्ता खाते की सेटिंग्स बदल सकते हैं; लॉग बाहर निकलने के लिए" "वापस अपने खाते में."
+
 
 msgid "You are the only user."
-msgstr ""
+msgstr "आप केवल उपयोगकर्ता हैं."
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
+msgstr "एक सुपरउसर रूप में, आप अस्थायी रूप से किसी अन्य उपयोगकर्ता की पहचान मान सकते हैं."
 
 msgid "Select User"
-msgstr "उपयोगकर्ता को चुिनए"
+msgstr "उपयोगकर्ता को चुनिए"
 
 #, fuzzy
 msgid "Change password"
-msgstr "संकेत शब्द"
+msgstr "संकेत शब्द बदले"
 
 msgid "Passwords don't match!"
 msgstr "संकेत शब्द मेल नही खा रहा!"
 
 msgid "Please specify a password!"
-msgstr "कृपया संकेत शब्द िदिजए।"
+msgstr "कृपया संकेत शब्द दीजिये!"
 
 #, python-format
 msgid "Password not acceptable: %s"
-msgstr ""
+msgstr "पासवर्ड स्वीकार्य नहीं हैं:"
 
 msgid "Your password has been changed."
-msgstr ""
+msgstr "अपना पासवर्ड बदल दिया गया है."
 
 msgid "To change your password, enter a new password twice."
-msgstr ""
+msgstr "अपना पासवर्ड बदलने के लिए, एक नया पासवर्ड दो बार दर्ज करें."
 
 msgid "Password"
 msgstr "संकेत शब्द"
 
 msgid "Password repeat"
-msgstr ""
+msgstr "पासवर्ड दोहराएँ"
 
 msgid "OpenID settings"
-msgstr ""
+msgstr "OpenID सेटिंग्स"
 
 msgid "Cannot remove all OpenIDs."
-msgstr ""
+msgstr "सभी OpenIDs नहीं निकाल सकते."
 
 msgid "The selected OpenIDs have been removed."
-msgstr ""
+msgstr "चुने OpenIDs हटा दिया गया है."
 
 msgid "No OpenID given."
-msgstr ""
+msgstr "OpenID नहीं दिया."
 
 msgid "OpenID is already present."
-msgstr ""
+msgstr "OpenID पहले से ही मौजूद है."
 
 msgid "Failed to resolve OpenID."
-msgstr ""
+msgstr "OpenID के लिए हल करने में विफल."
 
 msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
+msgstr "OpenID खोज विफलता नहीं, एक उचित OpenID."
 
 #, python-format
 msgid "OpenID error: %s."
-msgstr ""
+msgstr "OpenID त्रुटि: %s."
+
 
 msgid "Verification canceled."
-msgstr ""
+msgstr "सत्यापन रद्द कर दिया."
 
+..
 msgid "This OpenID is already used for another account."
-msgstr ""
+msgstr "इस OpenID पहले से ही किसी अन्य खाते के लिए प्रयोग किया जाता है."
 
 msgid "OpenID added successfully."
-msgstr ""
+msgstr "OpenID सफलतापूर्वक जोड़ दिया."
 
 msgid "OpenID failure."
-msgstr ""
+msgstr "OpenID विफल."
 
 msgid "Current OpenIDs"
-msgstr ""
+msgstr "वर्तमान OpenIDs"
 
 msgid "Remove selected"
-msgstr ""
+msgstr "चुने हुए को हटाएँ"
 
 msgid "Add OpenID"
-msgstr ""
+msgstr "OpenID जोड़ें"
 
 msgid "OpenID verification requires that you click this button:"
-msgstr ""
+msgstr "OpenID सत्यापन की आवश्यकता है कि आप इस बटन पर क्लिक करें:"
 
 msgid "Notification"
-msgstr ""
+msgstr "अधिसूचना"
 
 msgid "Notification settings saved!"
-msgstr ""
+msgstr "सूचना सेटिंग सेव हो गए है!"
 
 #, fuzzy
 msgid "'''Email'''"
-msgstr "ईमेल"
+msgstr "'''ईमेल'''"
 
 msgid "'''Jabber'''"
-msgstr ""
+msgstr "'''जेबर'''"
 
 msgid "'''Event type'''"
-msgstr ""
+msgstr "'''घटना प्रकार'''"
 
 msgid "Select the events you want to be notified about."
-msgstr ""
+msgstr "घटनाओं के बारे में आपको सूचित किया जाएगा चाहते हैं."
 
 msgid ""
 "Before you can be notified, you need to provide a way to contact you in the "
@@ -580,7 +589,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Subscribed events"
-msgstr "%s के लिए अिभदािनत"
+msgstr "सब्स्क्राइब्ड घटनाओं"
 
 #, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
@@ -590,7 +599,7 @@ msgid "Save"
 msgstr "सुरिक्षत की जाए"
 
 msgid "Preferences"
-msgstr ""
+msgstr "प्राथमिकताएं"
 
 #, python-format
 msgid ""
@@ -603,7 +612,7 @@ msgstr ""
 "िरक्त स्थान भी हाे सकता है। समूह पेजाे के नाम का प्राेयग नही हाे सकता।"
 
 msgid "This user name already belongs to somebody else."
-msgstr "यह प्रयोगकर्ता का नाम िकसी अंन्य से सम्बंिधत  है।"
+msgstr "यह प्रयोगकर्ता का नाम किसी अंन्य से सम्बंिधत  है।"
 
 msgid "Empty user name. Please enter a user name."
 msgstr "प्याेगकर्ता का नाम िरक्त है। कुपया प्याेगकर्ता का नाम दे।"
@@ -616,11 +625,11 @@ msgstr ""
 "प्ाप्त कर सकते है।"
 
 msgid "This email already belongs to somebody else."
-msgstr "यह ईमेल पता िकसी दूसरे से संबिधत है।"
+msgstr "यह ईमेल पता किसी दूसरे से संबिधत है।"
 
 #, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "यह ईमेल पता िकसी दूसरे से संबिधत है।"
+msgstr "यह जेबर ईमेल पता किसी दूसरे से संबिधत है।"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -630,10 +639,10 @@ msgid "User preferences saved!"
 msgstr "यूजर उपयोगकर्ता की वरीयता सुरिक्षत कर ली गई है।"
 
 msgid "Default"
-msgstr "िडफालट"
+msgstr "डिफ़ॉल्ट"
 
 msgid "<Browser setting>"
-msgstr "<बर्ॉउजर सेिटंग>"
+msgstr "<ब्राउज़र सेटिंग>"
 
 msgid "the one preferred"
 msgstr "यह जो चुना गया"
@@ -642,7 +651,7 @@ msgid "free choice"
 msgstr "स्वतंत्र चुनाव"
 
 msgid "Preferred theme"
-msgstr "पसन्द िवषयवस्तू"
+msgstr "पसन्द विषय"
 
 msgid "Editor Preference"
 msgstr "सम्पादक वरीयता"
@@ -660,37 +669,37 @@ msgid "Server time is"
 msgstr "सर्वर समय है"
 
 msgid "Date format"
-msgstr "ितिथ रूपाकार"
+msgstr "तारीख रूपाकार"
 
 msgid "Preferred language"
 msgstr "भाषा विरयता"
 
 msgid "General options"
-msgstr "सामान्य िवक्लप"
+msgstr "सामान्य विक्लप"
 
 msgid "Quick links"
-msgstr "आवश्यक िलन्क"
+msgstr "आवश्यक लिन्क"
 
 msgid "OpenID server"
-msgstr ""
+msgstr "OpenID सर्वर"
 
 msgid "The selected websites have been removed."
-msgstr ""
+msgstr "चुने वेबसाइटों को हटा दिया गया है."
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "विश्वसनीय वेबसाइटों"
 
 msgid "Line"
-msgstr ""
+msgstr "लाइन"
 
 msgid "No differences found!"
-msgstr ""
+msgstr "कोई मतभेद नहीं मिला!"
 
 msgid "Deletions are marked like this."
-msgstr ""
+msgstr "विलोपन इस तरह से चिह्नित हैं."
 
 msgid "Additions are marked like this."
-msgstr ""
+msgstr "अतिरिक्त इस तरह से चिह्नित हैं."
 
 msgid "Please log in first."
 msgstr "कूपया लागीन कीजिए ।"
@@ -705,10 +714,10 @@ msgid "Name"
 msgstr "नाम"
 
 msgid "Choose this name"
-msgstr ""
+msgstr "इस नाम को चुनें"
 
 msgid "This is not a valid username, choose a different one."
-msgstr ""
+msgstr "यह एक मान्य उपयोगकर्ता नाम नहीं है, एक अलग चुनें."
 
 msgid ""
 "The username you have chosen is already\n"
@@ -718,35 +727,35 @@ msgid ""
 msgstr ""
 
 msgid "Associate this name"
-msgstr ""
+msgstr "इस नाम को एसोसिएट करे"
 
 msgid "OpenID verification canceled."
-msgstr ""
+msgstr "OpenID सत्यापन रद्द कर दिया."
 
 #, python-format
 msgid "OpenID success. id: %s"
-msgstr ""
+msgstr "OpenID सफलता. id: %s"
 
 msgid "OpenID failure"
-msgstr ""
+msgstr "OpenID असफलता"
 
 msgid "No OpenID found in session."
-msgstr ""
+msgstr "कोई OpenID सत्र में नहीं पाया है."
 
 msgid "Your account is now associated to your OpenID."
-msgstr ""
+msgstr "आपका खाता अब अपने OpenID करने के लिए जुड़ा हुआ है."
 
 msgid "The password you entered is not valid."
-msgstr ""
+msgstr "पासवर्ड आपके द्वारा दर्ज मान्य नहीं है."
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "OpenID त्रुटि: अज्ञात निरंतरता मंच"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr ""
 
 msgid "No OpenID."
-msgstr ""
+msgstr "OpenID नहीं है"
 
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
@@ -754,17 +763,17 @@ msgid ""
 msgstr ""
 
 msgid "Could not contact botbouncer.com."
-msgstr ""
+msgstr "Botbouncer.com संपर्क नहीं हो सका."
 
 msgid "Missing password. Please enter user name and password."
-msgstr ""
+msgstr "पासवर्ड याद आ रही है. उपयोगकर्ता नाम और पासवर्ड दर्ज करें."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "LDAP सर्वर %(सर्वर)s में विफल रहा है."
 
 msgid "Failed to connect to database."
-msgstr ""
+msgstr "को डेटाबेस से कनेक्ट करने में असफल."
 
 #, python-format
 msgid ""
@@ -828,7 +837,7 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr ""
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "HelpOnParsers"
 
 #, python-format
 msgid ""
@@ -879,78 +888,78 @@ msgstr ""
 
 #, python-format
 msgid "%(errortype)s processing error"
-msgstr ""
+msgstr "%(errortype)s प्रसंस्करण त्रुटि"
 
 #, fuzzy
 msgid "Password is too short."
-msgstr "संकेत शब्द"
+msgstr "संकेत शब्द बहुत छोटा है."
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "पासवर्ड काफी अलग वर्ण नहीं है."
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr ""
+msgstr "पासवर्ड बहुत आसान है (पासवर्ड का नाम शामिल है या नाम पासवर्ड शामिल हैं)."
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "पासवर्ड बहुत आसान है (कुंजीपटल अनुक्रम)."
 
 msgid "Diffs"
-msgstr ""
+msgstr "Diffs"
 
 msgid "Info"
-msgstr ""
+msgstr "जानकारी"
 
 msgid "Edit"
-msgstr ""
+msgstr "संपादित करें"
 
 msgid "UnSubscribe"
-msgstr ""
+msgstr "सदस्यता समाप्त"
 
 msgid "Subscribe"
-msgstr ""
+msgstr "सदस्यता करें"
 
 msgid "Raw"
-msgstr ""
+msgstr "अधूरा"
 
 msgid "XML"
-msgstr ""
+msgstr "XML"
 
 msgid "Print"
-msgstr ""
+msgstr "प्रिंट"
 
 msgid "View"
-msgstr ""
+msgstr "देखें"
 
 msgid "Up"
-msgstr ""
+msgstr "ऊपर"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "प्रकाशित लेखक में मेरा नहीं है (मेरे विकी मुखपृष्ठ) ईमेल जानकारी"
 
 msgid "Open editor on double click"
-msgstr ""
+msgstr "दो क्लिक ओपन संपादक"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "लॉगिन करने के बाद, पृष्ठ का दौरा किया आखिरी छलांग"
 
 msgid "Show comment sections"
-msgstr ""
+msgstr "दिखाएँ टिप्पणी वर्गों"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr ""
+msgstr "दिखाएँ गैर मौजूदा पृष्ठ लिंक के लिए प्रश्न चिह्न"
 
 msgid "Show page trail"
-msgstr ""
+msgstr "दिखाएँ पृष्ठ निशान"
 
 msgid "Show icon toolbar"
-msgstr ""
+msgstr "दिखाएँ उपकरण पट्टी चिह्न"
 
 msgid "Show top/bottom links in headings"
-msgstr ""
+msgstr "दिखाएँ शीर्षों में ऊपर/नीचे लिंक"
 
 msgid "Show fancy diffs"
-msgstr ""
+msgstr "दिखाएँ फैंसी diffs"
 
 msgid "Add spaces to displayed wiki names"
 msgstr ""
@@ -1010,7 +1019,7 @@ msgid "OpenID"
 msgstr ""
 
 msgid "Login"
-msgstr "लॉिगन"
+msgstr "लॉगइन"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -3307,53 +3316,54 @@ msgstr ""
 msgid ""
 "green=view\n"
 "red=edit"
-msgstr ""
+msgstr "हरा=देखने\n"
+"लाल=संपादित करें"
 
 msgid "date"
-msgstr ""
+msgstr "तारीख"
 
 msgid "# of hits"
 msgstr ""
 
 msgid "User agent"
-msgstr ""
+msgstr "प्रयोक्ता एजेंट"
 
 msgid "Others"
-msgstr ""
+msgstr "दूसरों"
 
 msgid "Distribution of User-Agent Types"
 msgstr ""
 
 msgid "Page Size Distribution"
-msgstr ""
+msgstr "पृष्ठ आकार वितरण"
 
 msgid "page size upper bound [bytes]"
-msgstr ""
+msgstr "पृष्ठ आकार ऊपरी बाध्य [बाइट्स]"
 
 msgid "# of pages of this size"
-msgstr ""
+msgstr "# इस आकार के पृष्ठों की"
 
 msgid "From"
-msgstr ""
+msgstr "द्वारा"
 
 msgid "To"
-msgstr ""
+msgstr "के लिए"
 
 msgid "Content"
-msgstr ""
+msgstr "सामग्री"
 
 msgid "No recipients, nothing to do"
-msgstr ""
+msgstr "कोई प्राप्तकर्ता नहीं,कुछ भी नहीं करने के लिए"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr ""
 
 msgid "Mail not sent"
-msgstr ""
+msgstr "मेल भेजा नहीं गया है"
 
 msgid "Mail sent OK"
-msgstr ""
+msgstr "ठीक मेल भेजा गया है"
 
 #, python-format
 msgid ""
@@ -3361,15 +3371,15 @@ msgid ""
 msgstr ""
 
 msgid "anonymous"
-msgstr ""
+msgstr "गुमनाम"
 
 #, fuzzy
 #~ msgid "Page Name"
-#~ msgstr "पेकेज नाम"
+#~ msgstr "पेज का नाम"
 
 #, fuzzy
 #~ msgid "you may need to login to edit this page"
-#~ msgstr "आप को यह पृष्ट को बदलने की आग्या नही है।"
+#~ msgstr "आप को यह पृष्ट को बदलने के लिए प्रवेश की जरूरत है।"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."
@@ -3380,7 +3390,7 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "You need to log in."
-#~ msgstr "आप अभी लागूड आवूट है।"
+#~ msgstr "तुम में प्रवेश करने की जरूरत है।"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3393,7 +3403,7 @@ msgstr ""
 #~ msgstr "बचाव बहाल करना: %(filename)s से ढिक्शनर्ी लक्ष्य: %(targetdir)s असफल ।"
 
 #~ msgid "Wiki Backup / Restore"
-#~ msgstr "विकी बचाव / बहाल"
+#~ msgstr "विकी बैकअप / बहाल"
 
 #~ msgid ""
 #~ "Some hints:\n"
@@ -3425,19 +3435,20 @@ msgstr ""
 #~ "कृपया यह दयान में रखे की वीकी कानफिगरेशन पुरी अाैरसही है ।\n"
 
 #~ msgid "Restore"
-#~ msgstr "बहाल करना"
+#~ msgstr "बहाल"
 
 #~ msgid "Found no account matching the given email address '%(email)s'!"
 #~ msgstr "िदया गये इमेल पते '%(email)s' से काेइ खाता नही िमल रहा है!"
 
 #~ msgid "SendMyPassword"
-#~ msgstr "मेरा संकेत शब्द बेिजए"
+#~ msgstr "मेरा संकेत शब्द भेजिए"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
-#~ msgstr "खाता खाेलने अथवा सेिटंग में पिरवर्तन के िलए यूजर िप्फरेंस का प्याेग करें।"
+#~ msgstr "खाता खालने अथवा सेटिंग्स में पिरवर्तन के लिए यूजरप्राथमिकताएं का लिए 
+प्रयोग करें।"
 
 #~ msgid "Use UserPreferences to change settings of the selected user account"
-#~ msgstr "चुने गए उपयोगकर्ता सैैिटग मे पिरवरतन के िलए यूजरिप्फरेंसेस का प्योग करें।"
+#~ msgstr "चुने गए उपयोगकर्ता सेटिंग्स मे पिरवरतन के लिए यूजरिप्फरेंसेस का प्योग करें।"
 
 #~ msgid ""
 #~ "This list does not work, unless you have entered a valid email address!"
@@ -3447,13 +3458,13 @@ msgstr ""
 #~ "To create an account, see the %(userprefslink)s page. To recover a lost "
 #~ "password, go to %(sendmypasswordlink)s."
 #~ msgstr ""
-#~ "एकाउंट बनाने के िलए कृपया %(userprefslink)s देखे। संकेत शब्द को जानन के िलए "
+#~ "एकाउंट बनाने के लिए कृपया %(userprefslink)s देखे। संकेत शब्द को जानन के लिए  "
 #~ "%(sendmypasswordlink)s मे जाए।"
 
 #~ msgid ""
 #~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
 #~ "Try a different name."
-#~ msgstr "{{{'%s'}}} नाम का पृष्ठ पहले से उपलब्ध है। दूसरे नाम के साथ प्रयास करें।"
+#~ msgstr "नाम का पृष्ठ{{{'%s'}}} पहले से उपलब्ध है।\n दूसरे नाम के साथ प्रयास करें।"
 
 #~ msgid ""
 #~ "The remote version of MoinMoin is too old, version 1.6 is required at "

@@ -307,7 +307,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<לא ידוע>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -357,7 +357,7 @@ msgstr "שם ערכת הנושא לא נקבע."
 
 #, python-format
 msgid "Theme files not installed! Write rights missing for %s."
-msgstr ""
+msgstr "קבצי נושא לא מותקנים! זכויות כתיבה חסרים ל %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -454,11 +454,10 @@ msgstr "ציפיתי לערך למפתח \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "הביטוי הרגולרי \"%(regex)s\" שנבחר להדגשה שגוי: %(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr "גרסאות הגיבוי של הדף לא יכללו בתוצאות החיפוש"
+msgstr "גרסאות הגיבוי של הדף מיושנים וימצאו בסוף תוצאות החיפושים"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -527,54 +526,53 @@ msgid "Password repeat"
 msgstr "הסיסמא שוב"
 
 msgid "OpenID settings"
-msgstr ""
+msgstr "הגדרות OpenID"
 
 msgid "Cannot remove all OpenIDs."
-msgstr ""
+msgstr "לא יכול להסיר את כל ה-OpenID-ים"
 
 msgid "The selected OpenIDs have been removed."
-msgstr ""
+msgstr "ה-OpenID-ים שנבחרו הוסרו."
 
 msgid "No OpenID given."
-msgstr ""
+msgstr "שום OpenID לא ניתנה."
 
 msgid "OpenID is already present."
-msgstr ""
+msgstr "כבר יש OpenID נוחכי."
 
 msgid "Failed to resolve OpenID."
-msgstr ""
+msgstr "לא יכל לפתור OpenID."
 
 msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
+msgstr "גילוי כשלון ב-OpenID, לא OpenID תקין."
 
 #, python-format
 msgid "OpenID error: %s."
-msgstr ""
+msgstr "שגיאה ב-OpenID: %s."
 
-#, fuzzy
 msgid "Verification canceled."
-msgstr "פעולה בוטלה."
+msgstr "אימות בוטלה."
 
 msgid "This OpenID is already used for another account."
-msgstr ""
+msgstr "ה-OpenID הזה כבר בשימוש לחשבון אחר."
 
 msgid "OpenID added successfully."
-msgstr ""
+msgstr "OpenID הצתרף בהצלחה."
 
 msgid "OpenID failure."
-msgstr ""
+msgstr "כישלון OpenID."
 
 msgid "Current OpenIDs"
-msgstr ""
+msgstr "OpenID-ים נוחכים."
 
 msgid "Remove selected"
-msgstr ""
+msgstr "הסר מובחרים"
 
 msgid "Add OpenID"
-msgstr ""
+msgstr "הוסף OpenID"
 
 msgid "OpenID verification requires that you click this button:"
-msgstr ""
+msgstr "אימות OpenID מצריך שתלחץ על הכפתור הזה:"
 
 msgid "Notification"
 msgstr "הודעות"
@@ -691,13 +689,13 @@ msgid "Quick links"
 msgstr "קישורים מהירים"
 
 msgid "OpenID server"
-msgstr ""
+msgstr "שרת OpenID"
 
 msgid "The selected websites have been removed."
-msgstr ""
+msgstr "האתרים שנבחרו הוסרו."
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "אתרים בטוחים"
 
 msgid "Line"
 msgstr "שורה"
@@ -718,85 +716,90 @@ msgid ""
 "Please choose an account name now.\n"
 "If you choose an existing account name you will be asked for the\n"
 "password and be able to associate the account with your OpenID."
-msgstr ""
+msgstr "אנא בחר שם לחשבון עכשיו.\n"
+"אם תבחר בשם שכבר קיים תתבקש לתת את \n"
+"הסיסמה ותוכל לשייך את החשבון ל-OpenID שלך."
 
 msgid "Name"
 msgstr "שם"
 
 msgid "Choose this name"
-msgstr ""
+msgstr "בחר בשם הזה"
 
 msgid "This is not a valid username, choose a different one."
-msgstr ""
+msgstr "זה לא שם תקין, בחר באחד אחר."
 
 msgid ""
 "The username you have chosen is already\n"
 "taken. If it is your username, enter your password below to associate\n"
 "the username with your OpenID. Otherwise, please choose a different\n"
 "username and leave the password field blank."
-msgstr ""
+msgstr "השם שבחרת כבר\n"
+"תפוס. אם זה השם משתמש שלך, הכנס את הסיסמה שלך למטה כדי לשייך\n"
+"את השם ל-OpenID שלך. אחרת, בבקשה תבחר שם משתמש\n"
+"שונה והשאר את שדה הסיסמה ריקה."
 
 msgid "Associate this name"
-msgstr ""
+msgstr "שייך את השם הזה"
 
-#, fuzzy
 msgid "OpenID verification canceled."
-msgstr "פעולה בוטלה."
+msgstr "אימות ה-OpenID בוטלה."
 
 #, python-format
 msgid "OpenID success. id: %s"
-msgstr ""
+msgstr "הצלחה ב-OpenID. מ\"ז: %s"
 
 msgid "OpenID failure"
-msgstr ""
+msgstr "כישלון ב-OpenID"
 
 msgid "No OpenID found in session."
-msgstr ""
+msgstr "OpenID לא נמצאה בהפעלה הזאת."
 
 msgid "Your account is now associated to your OpenID."
-msgstr ""
+msgstr "החשבון שלך עכשיו משוייך ל-OpenID שלך."
 
 msgid "The password you entered is not valid."
-msgstr ""
+msgstr "הסיסמה שהכנסת לא תקינה."
 
 msgid "OpenID error: unknown continuation stage"
-msgstr ""
+msgstr "שגיאת OpenID: שלב המשכה לא ידועה"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
+msgstr "דרושה הפעלה אנונומית כדי לאפשר כניסה של OpenID."
 
 msgid "No OpenID."
-msgstr ""
+msgstr "חסר OpenID."
 
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
 "create one during login."
 msgstr ""
+"אם אין לך עדין חשבון, אתה עדין יכול להתחבר עם ה-OpenID שלך"
+"וליצור אחד בהתחברות."
 
 msgid "Could not contact botbouncer.com."
-msgstr ""
+msgstr "לא יכל להתחבר ל-botbouncer.com"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "סיסמה חסרה. אנא הכנס שם משתמש וסיסמה."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "שרת LDAP %(server)s נכשל."
 
 msgid "Failed to connect to database."
-msgstr ""
+msgstr "נכשל להתחבר לבסיס נתונים."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
 "אם אין לך חשבון במערכת, ניתן לפתוח <a href=\"%(userprefslink)s\">חשבון חדש</"
-"a>. האם <a href=\"%(sendmypasswordlink)s\">שכחת את הססמה?</a>"
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
+msgstr "<a href=\"%(sendmypasswordlink)s\">שחכת סיסמה?</a>"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -827,7 +830,6 @@ msgstr ""
 "\n"
 "(!) לעזרה נוספת, ראה HelpOnEditing או HelpOnCreoleSyntax\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -845,15 +847,17 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
-" הדגשה:: {{{''}}}''נטוי''{{{''}}}, {{{'''}}}'''מודגש'''{{{'''}}}, "
-"{{{'''''}}}'''''נטוי ומודגש'''''{{{'''''}}}, {{{''}}}''נטוי ו"
-"{{{'''}}}'''מודגש'''{{{'''}}} מעורבים''{{{''}}}, {{{----}}} קו אפקי\n"
+" הדגשה:: <<Verbatim('')>>''נטוי''<<Verbatim(''(<<;<<Verbatim('''("
+">>'''מודגש'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''מודגש "
+"נטוי'''''<<Verbatim(''''')>>; <<Verbatim('')>>''מעורב ''<<Verbatim(''')"
+">>'''''מודגש'''<<Verbatim(''')>> ונטוי ''<<Verbatim('')>>; <<Verbatim"
+"(----)>> קו אופקי.\n"
 " כותרות:: = כותרת ראשית =, ==  כותרת משנה ==, === כותרת 3 ===, ==== כותרת 4 "
 "====, ===== כותרת 5 =====\n"
 " רשימות:: רווח וכוכבית (*) \" * פריט ברשימה לא ממוספרת\", רווח מספר ונקודה "
-"\" 1. פריט ברשימה ממוספרת\", רווח בלבד מזיח את הפסקה.\n"
+"\" 1. פריט ברשימה ממוספרת\", סולמית ומספר \" מתחיל מהמספר \", רווח בלבד מזיח את הפסקה.\n"
 " קישורים:: {{{[[}}}שם דף{{{]]}}}, {{{[[}}}שם דף|טקסט בקישור{{{]]}}} "
-"<<Verbatim(JoinCapitalizedWords)>>\n"
+"\n"
 " טבלאות:: {{{||}}} תא {{{||||}}} תא ברוחב כפול {{{||}}};    אין להשאיר "
 "רווחים אחרי כותרות וטבלאות.\n"
 "\n"
@@ -876,19 +880,20 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "ציפיתי לערך של צבע \"%(arg)s\" אחרי \"%(key)s\""
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "HelpOnParsers"
 
 #, python-format
 msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see "
 "%(highlight_help_page)s."
 msgstr ""
+"הדגשת תחביר לא תומכת ב-'%(syntax)s', ראה "
+"%(highlight_help_page)s."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr "עיבוד טקסט reStructed בלתי אפשרי, אנא התקן את Docutils."
 
-#, fuzzy
 msgid ""
 "{{{\n"
 "Emphasis: *italic* **bold** ``monospace``\n"
@@ -908,8 +913,9 @@ msgid ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
-"הדגשה: <i>*נטוי*</i> <b>**מודגש**</b> ``רווח קבוע``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"הדגשה: *נטוי* **מודגש** ``רווח קבוע``\n"
+"\n"
 "כותרות: כותרת 1  כותרת 2  כותרת 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
@@ -919,8 +925,7 @@ msgstr ""
 ".. _חיצוני: http://external-site.net/foo/\n"
 "\n"
 "רשימות: * תבליטים; 1., a. פריטים ממוספרים.\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) לעזרה נוספת, ראה את \n"
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
@@ -947,20 +952,18 @@ msgstr "עיבוד XSLT לא זמין."
 msgid "%(errortype)s processing error"
 msgstr "%(errortype)s טעות בעיבוד"
 
-#, fuzzy
 msgid "Password is too short."
-msgstr "איפוס ססמה"
+msgstr "הססמה קצרה מידי"
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "אין מספיק תווים שונים בסיסמה."
 
-#, fuzzy
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "סיסמה חסרה. אנא הכנס שם משתמש וסיסמה."
+msgstr "סיסמה קלה מידי (סיסמה מכילה שם או שם מכיל סיסמה)."
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "סיסמה קלה מידי (רצף במקלדת)"
 
 msgid "Diffs"
 msgstr "הבדלים"
@@ -1074,7 +1077,7 @@ msgid "Mail account data"
 msgstr "שלח את פרטי החשבון בדואר"
 
 msgid "OpenID"
-msgstr ""
+msgstr "OpenID"
 
 msgid "Login"
 msgstr "התחבר"
@@ -1099,19 +1102,19 @@ msgid "Renamed from '%(oldpagename)s'."
 msgstr "השם שונה מ-'%(oldpagename)s'."
 
 msgid "Options --pages and --search are mutually exclusive!"
-msgstr ""
+msgstr "אפשרויות --דפים ו--חיפוש שוללות זו את זו!"
 
 msgid "You must specify an output file!"
-msgstr ""
+msgstr "אתה חייב לציין קובץ לפלט!"
 
 msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
+msgstr "שום דף נבחר בעזרת --דפים או --חיפוש, מניחים חבילה מלאה."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "כל הנספחים נכללו אל תוך החבילה."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr ""
+msgstr "קובץ פלט כבר קיים! מסרב בפחדנות מלהמשיך!"
 
 #, python-format
 msgid ""
@@ -1169,11 +1172,11 @@ msgstr ""
 "והוא נקרא כעת\n"
 "%(pagename)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] פרטי המשתמש שלך"
+msgstr "[%(sitename)s] חשבון משתמש חדש נוצר"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on \"%(sitename)s\". "
 "Details follow:\n"
@@ -1181,12 +1184,13 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"מנהל יקר, משתמש חדש נרשם במערכת. להלן פרטי המשתמש:\n"
+"מנהל יקר, משתמש חדש נוצר ב-\"%(sitename)s\"."
+"להלן פרטי המשתמש:\n"
 "\n"
 "    שם משתמש: %(username)s\n"
 "    כתובת דוא\"ל: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New attachment added to page %(pagename)s"
 msgstr "קובץ חדש צורף לדף \"%(pagename)s\" באתר \"%(sitename)s\""
 
@@ -1209,11 +1213,11 @@ msgstr ""
 "שם הקובץ: %(attach_name)s\n"
 "גודל הקובץ: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "קובץ חדש צורף לדף \"%(pagename)s\" באתר \"%(sitename)s\""
+msgstr "נספח הוסר מדף \"%(pagename)s\" באתר \"%(sitename)s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1226,7 +1230,7 @@ msgid ""
 msgstr ""
 "משתמש יקר,\n"
 "\n"
-"ביצעת מינוי לשינויים בעמוד \"%(page_name)s\". לעמוד זה צורף קובץ על ידי "
+"ביצעת מינוי לשינויים בעמוד \"%(page_name)s\". לעמוד זה הוסר נספח על ידי "
 "%(editor)s.להלן פרטי הקובץ המצורף:\n"
 "\n"
 "שם הקובץ: %(attach_name)s\n"
@@ -1266,9 +1270,8 @@ msgstr "הדף הועתק"
 msgid "A new attachment has been added"
 msgstr "צורף קובץ חדש"
 
-#, fuzzy
 msgid "An attachment has been removed"
-msgstr "צורף קובץ חדש"
+msgstr "נספח הוסר"
 
 msgid "A page has been reverted to a previous state"
 msgstr "הדף שוחזר למצב קודם"
@@ -1348,472 +1351,422 @@ msgstr "דף חסר"
 msgid "MissingHomePage"
 msgstr "דף בית חסר"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "דף בית חסר"
+msgstr "WikiHomePage"
 
-#, fuzzy
 msgid "WikiName"
 msgstr "שם ויקי"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "אנטרנט ויקי ויקי"
 
 msgid "FrontPage"
-msgstr "פתיחה"
+msgstr "דף חזית"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "ויקי קופסת חול"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "וויקי"
+msgstr "בין ויקי"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "דפים נטושים"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "דפים מיותמים"
+msgstr "דפים יתומים"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "מצא דף"
+msgstr "דפים מבוקשים"
 
 msgid "EventStats"
-msgstr ""
+msgstr "EventStats"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "EventStats/HitCounts"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "EventStats/Languages"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "EventStats/UserAgents"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "גודל דף"
+msgstr "PageSize"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "דפים"
+msgstr "PageHits"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "שנה שם דף"
+msgstr "RandomPage"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "גרסת פייתון"
+msgstr "XsltVersion"
 
 msgid "FortuneCookies"
-msgstr "עוגיות מזל"
+msgstr "FortuneCookies"
 
 msgid "WikiLicense"
-msgstr "רישיון ויקי"
+msgstr "WikiLicense"
 
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "כל קטגוריה"
+msgstr "CategoryCategory"
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "קטגוריות"
+msgstr "CategoryHomepage"
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "קטגוריות"
+msgstr "CategoryTemplate"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "HomepageTemplate"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "HelpTemplate"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "HomepageReadWritePageTemplate"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "HomepageReadPageTemplate"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "HomepagePrivatePageTemplate"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "HomepageGroupsTemplate"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "SlideShowHandOutTemplate"
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "מצגת שקפים"
+msgstr "SlideShowTemplate"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "SlideTemplate"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "SyncJobTemplate"
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnConfiguration"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "HelpOnConfiguration/EmailSupport"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "HelpOnConfiguration/SecurityPolicy"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "HelpOnConfiguration/FileAttachments"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "HelpOnConfiguration/SupplementationPage"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "HelpOnConfiguration/SurgeProtection"
 
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr ""
+msgstr "HelpOnConfiguration/UserPreferences"
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "HelpOnPackageInstaller"
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnUpdatingPython"
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnAdministration"
 
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "HelpOnAuthentication"
 
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "HelpOnAuthentication/ExternalCookie"
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnMoinCommand"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "HelpOnMoinCommand/ExportDump"
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "הודעות"
+msgstr "HelpOnNotification"
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "תוכן עזרה"
+msgstr "HelpOnSessions"
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnUserHandling"
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnXapian"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "HelpOnMoinWikiSyntax"
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "תוכן עזרה"
+msgstr "HelpOnCreoleSyntax"
 
 msgid "HelpOnFormatting"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnFormatting"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "גרסת מוין מוין"
+msgstr "MoinMoin"
 
 msgid "HelpContents"
-msgstr "תוכן עזרה"
+msgstr "HelpContents"
 
 msgid "HelpForBeginners"
-msgstr "עזרה למתחילים"
+msgstr "HelpForBeginners"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "HelpForUsers"
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "מפתח כותרות"
+msgstr "HelpIndex"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "HelpOnAccessControlLists"
 
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "תוכן עזרה"
+msgstr "HelpOnActions"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "HelpOnActions/AttachFile"
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "תוכן עזרה"
+msgstr "HelpOnAdmonitions"
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnAutoAdmin"
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "קטגוריות"
+msgstr "HelpOnCategories"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "HelpOnDictionaries"
 
-#, fuzzy
 msgid "HelpOnDrawings"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnDrawings"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "HelpOnEditLocks"
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnEditing"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "HelpOnEditing/SubPages"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "HelpOnGraphicalEditor"
 
-#, fuzzy
 msgid "HelpOnGroups"
-msgstr "תוכן עזרה"
+msgstr "HelpOnGroups"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "HelpOnHeadlines"
 
-#, fuzzy
 msgid "HelpOnImages"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnImages"
 
-#, fuzzy
 msgid "HelpOnLanguages"
-msgstr "שפה"
+msgstr "HelpOnLanguages"
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnLinking"
 
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "HelpOnLinking/NotesLinks"
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "תוכן עזרה"
+msgstr "HelpOnLists"
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnLogin"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "HelpOnMacros"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
+msgstr "HelpOnMacros/EmbedObject"
 
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "HelpOnMacros/Include"
 
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "HelpOnMacros/MailTo"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "HelpOnMacros/MonthCalendar"
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "ניווט באתר"
+msgstr "HelpOnNavigation"
 
 msgid "HelpOnOpenIDProvider"
-msgstr ""
+msgstr "HelpOnOpenIDProvider"
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnPageCreation"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "HelpOnPageDeletion"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "HelpOnParsers/ReStructuredText"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "HelpOnParsers/ReStructuredText/RstPrimer"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "HelpOnProcessingInstructions"
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "תוכן עזרה"
+msgstr "HelpOnRules"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnSearching"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "מצגת שקפים"
+msgstr "HelpOnSlideShows"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "HelpOnSlideShows/000 הקדמה"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "HelpOnSlideShows/100 ליצור את השקפים"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "HelpOnSlideShows/900 אחרון אחרון חביב: להריץ את המצגת שלך"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "HelpOnSmileys"
 
 msgid "HelpOnSpam"
-msgstr ""
+msgstr "HelpOnSpam"
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "בדוק איות"
+msgstr "HelpOnSpellCheck"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "HelpOnSuperUser"
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "סנכרון החל -"
+msgstr "HelpOnSynchronisation"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "HelpOnTables"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "HelpOnTemplates"
 
 msgid "HelpOnThemes"
-msgstr ""
+msgstr "HelpOnThemes"
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "העדפות"
+msgstr "HelpOnUserPreferences"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "HelpOnVariables"
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "עזרה בעריכה"
+msgstr "HelpOnXmlPages"
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "תוכן עזרה"
+msgstr "HelpOnComments"
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "בטל מינוי"
+msgstr "HelpOnSubscribing"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "CamelCase"
 
 msgid "WikiCourse"
-msgstr ""
+msgstr "WikiCourse"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr ""
+msgstr "WikiCourse/01 מהו ויקי מוין מוין?"
 
 msgid "WikiCourse/02 Finding information"
-msgstr ""
+msgstr "WikiCourse/02 למצוא מידע"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr ""
+msgstr "WikiCourse/03 להישאר מעודכן"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr ""
+msgstr "WikiCourse/04 יצירת חשבון ויקי"
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "העדפות משתמש נשמרו."
+msgstr "WikiCourse/05 הגדרות משתמשים"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr ""
+msgstr "WikiCourse/06 דף הבית האישי שלך בויקי"
 
 msgid "WikiCourse/07 The text editor"
-msgstr ""
+msgstr "WikiCourse/07 העורך טקסט"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr ""
+msgstr "WikiCourse/08 \"מקשים חמים\""
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr ""
+msgstr "WikiCourse/10 תסדיר טקסט עם סימון ויקי"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr ""
+msgstr "WikiCourse/11 פסקאות"
 
 msgid "WikiCourse/12 Headlines"
-msgstr ""
+msgstr "WikiCourse/12 כותרות"
 
 msgid "WikiCourse/13 Lists"
-msgstr ""
+msgstr "WikiCourse/13 רשימות"
 
 msgid "WikiCourse/14 Text styles"
-msgstr ""
+msgstr "WikiCourse/14 סיגנוני טקסט"
 
 msgid "WikiCourse/15 Tables"
-msgstr ""
+msgstr "WikiCourse/15 טבלאות"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr ""
+msgstr "WikiCourse/16 קישורים פנימיים בויקי"
 
 msgid "WikiCourse/17 External links"
-msgstr ""
+msgstr "WikiCourse/17 קישורים חיצוניים"
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "קובץ מצורף חדש"
+msgstr "WikiCourse/18 נספחים"
 
 msgid "WikiCourse/19 Symbols"
-msgstr ""
+msgstr "WikiCourse/19 סמלים"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr ""
+msgstr "WikiCourse/20 תוכן דינמי"
 
 msgid "WikiCourse/21 Macros"
-msgstr ""
+msgstr "WikiCourse/21 פקודות מאקרו"
 
 msgid "WikiCourse/22 Parsers"
-msgstr ""
+msgstr "WikiCourse/22 מנתחים"
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "פעולות נוספות:"
+msgstr "WikiCourse/23 פעולות"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr ""
+msgstr "WikiCourse/30 העורך הגרפי"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr ""
+msgstr "WikiCourse/40 יצירת עוד דפים"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr ""
+msgstr "WikiCourse/50 כללי התנהגות בויקי"
 
 msgid "WikiCourse/51 Applications"
-msgstr ""
+msgstr "WikiCourse/51 ישומים"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr ""
+msgstr "WikiCourse/52 מבנה בויקי"
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "WikiCourseHandOut"
 
 msgid "Sun"
 msgstr "ראשון"
@@ -1879,7 +1832,7 @@ msgid "User"
 msgstr "משתמש"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[הוסף]"
 
 msgid "[RSS]"
 msgstr "[RSS]"
@@ -2044,39 +1997,36 @@ msgstr "ניהול קבצים מצורפים"
 msgid "User account browser"
 msgstr "ניהול משתמשים רשומים"
 
-#, fuzzy
 msgid "Lexer description"
-msgstr "גרסת PyStemmer"
+msgstr "תאור Lexer"
 
-#, fuzzy
 msgid "Lexer names"
-msgstr "שם משתמש"
+msgstr "שם Lexer"
 
-#, fuzzy
 msgid "File patterns"
-msgstr "סוג קובץ"
+msgstr "תבניות קבצים"
 
-#, fuzzy
 msgid "Mimetypes"
-msgstr "כל סוג MIME"
+msgstr "Mimetypes"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "קונפיגורציית ויקי"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
 "Settings that the configuration system doesn't know about are shown in "
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
-msgstr ""
+msgstr "הטבלה הזאת מראה את כל ההגדרות בויקי הזה שאין להם ערכים לברירת מחדל. "
+"הגדרות שמערכת התצורה לא יודעת עליהם מוצגים "
+"ב''נטוי'', אפשרי שזה בגלל הרחבות צד שלישי שצריכים תצורה "
+"אוהגדרות שהוסרו מ-Moin."
 
-#, fuzzy
 msgid "Variable name"
-msgstr "שם חבילה"
+msgstr "שם משתנה"
 
-#, fuzzy
 msgid "Setting"
-msgstr "הגדרות"
+msgstr "הגדרה"
 
 msgid "Search Titles"
 msgstr "חפש כותרות"
@@ -2226,12 +2176,16 @@ msgid ""
 "%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
 "missing."
 msgstr ""
+"%(extension_name)s %(extension_type)s: פרמטרים דרושים %(argument_name)s "
+"חסרים."
 
 #, python-format
 msgid ""
 "%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
 "%(argument_value)s!"
 msgstr ""
+"%(extension_name)s %(extension_type)s: %(argument_name)s פסול ="
+"%(argument_value)s!"
 
 #, python-format
 msgid ""
@@ -2256,7 +2210,6 @@ msgstr "מכיל אחד או יותר מהמונחים הבאים"
 msgid "not containing the following terms"
 msgstr "לא מכיל את המונחים הבאים"
 
-#, fuzzy
 msgid "last modified since (e.g. 2 weeks before)"
 msgstr "שונה לאחרונה מאז (לדוגמה: בשבועיים האחרונים)"
 
@@ -2306,7 +2259,7 @@ msgid "No wanted pages in this wiki."
 msgstr "אין בוויקי הזה קישורים לדפים חסרים."
 
 msgid "Description"
-msgstr ""
+msgstr "תאור"
 
 #, python-format
 msgid ""
@@ -2353,7 +2306,7 @@ msgstr "שקף %(pos)d מתוך %(size)d"
 
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
+msgstr "<<%(macro_name)s: ההרצה נכשלה [%(error_msg)s] (גם ראה את היומן)>>"
 
 msgid "Go To Page"
 msgstr "בקר בדף"
@@ -2397,32 +2350,29 @@ msgstr "לא ניתן להסיר את הקישור המהיר שלך לדף זה
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "חובה להוסיף קישור מהיר לדף זה בכדי להסירו."
 
-#, fuzzy
 msgid "Print slide show"
-msgstr "מצגת שקפים"
+msgstr "הדפס מצגת שקפים"
 
-#, fuzzy
 msgid "Edit slide show"
-msgstr "מצגת שקפים"
+msgstr "ערוך מצגת שקפים"
 
 msgid "Quit"
-msgstr ""
+msgstr "יציאה"
 
-#, fuzzy
 msgid "Quit slide show"
-msgstr "מצגת שקפים"
+msgstr "צא ממצגת שקפים"
 
 msgid "Show first slide (up arrow)"
-msgstr ""
+msgstr "הראה שקף ראשונה (חץ למעלה)"
 
 msgid "Show last slide (down arrow)"
-msgstr ""
+msgstr "הראה שקף אחרונה (חץ למטה)"
 
 msgid "Show previous slide (left arrow)"
-msgstr ""
+msgstr "עבור לשקף הקודם (חץ שמואל)"
 
 msgid "Show next slide (right arrow)"
-msgstr ""
+msgstr "עבור לשקף הבא (חץ ימין)"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2430,14 +2380,17 @@ msgid ""
 "never allow you to enter your password here.\n"
 "\n"
 "Once you have logged in, simply reload this page."
-msgstr ""
+msgstr "אתה צריך להכנס לחשבון הויקי של מספק ה-OpenID שלך\n"
+" ליפני שאתה יכול להשתמש בו. מוין מוין לא\n"
+" יאשפר לך להכנים את הסיסמה פה.\n\n"
+"אחרי שנכנסת, שחזר את הדף הזה."
 
 msgid "OpenID Trust verification"
-msgstr ""
+msgstr "אימות ביטוח OpenID"
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr ""
+msgstr "האתר %s ביקש את הזהות שלך."
 
 #, python-format
 msgid ""
@@ -2446,29 +2399,32 @@ msgid ""
 "told that you control the identity URL %s. (If you are using a delegated\n"
 "identity, the site will take care of reversing the\n"
 "delegation on its own.)"
-msgstr ""
+msgstr "\n"
+"אם תאשר, יאמר לאתר מיוצג על ידי הביטוח למטה\n"
+" שאתה שולט על הזיהוי הURL %s. (אם אתה משתמש בזיהוי\n"
+" משולח, האתר ידאג לתפל על הפיכת\n"
+" המשלחת לבדו.)"
 
 msgid "Trust root"
-msgstr ""
+msgstr "בטח ב-root"
 
 msgid "Identity URL"
-msgstr ""
+msgstr "זיהוי URL"
 
-#, fuzzy
 msgid "Remember decision"
-msgstr "גרסת PyStemmer"
+msgstr "זכור החלטה"
 
 msgid "Remember this trust decision and don't ask again"
-msgstr ""
+msgstr "זכור את החלטת האמינות הזאת ואל תשאל שוב"
 
 msgid "Approve"
-msgstr ""
+msgstr "אשר"
 
 msgid "Don't approve"
-msgstr ""
+msgstr "אל תאשר"
 
 msgid "OpenID not served"
-msgstr ""
+msgstr "OpenID לא משורת"
 
 msgid ""
 "\n"
@@ -2476,7 +2432,11 @@ msgid ""
 "we cannot serve an OpenID for you. Please create your homepage first\n"
 "and then reload this page or click the button below to cancel this\n"
 "verification."
-msgstr ""
+msgstr "\n"
+"למרבה הצער עוד לא יצרת את דף הבית שלך. לכן, \n"
+" אנחנו לא יכולים לשרת OpenID לך. אנא צור את דף הבית שלך, \n"
+"ואז שחזר את הדף הזה או לחץ על הכפתור למטה לבטל את \n"
+"האימות הזה."
 
 msgid "If this account exists an email was sent."
 msgstr "אם משתמש בשם זה קיים, נשלחה הודעת דוא\"ל"
@@ -3070,17 +3030,18 @@ msgid ""
 "Showing page edit history entries from '''%(start_offset)d''' to "
 "'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
+"מראה היסטוריית עריכת דף מ'''%(start_offset)d''' עד "
+"'''%(end_offset)d''' מתוך '''%(total_count)d''' ערכים."
 
-#, fuzzy
 msgid "Newer"
-msgstr "שם חדש"
+msgstr "חדש יותר"
 
 msgid "Older"
-msgstr ""
+msgstr "ישן יותר"
 
 #, python-format
 msgid "%s items per page"
-msgstr ""
+msgstr "%s פריטים לדף"
 
 msgid "Date"
 msgstr "תאריך"
@@ -3126,9 +3087,8 @@ msgstr "לא ניתן להוסיף עבורך קישור מהיר לדף זה."
 msgid "You already have a quicklink to this page."
 msgstr "כבר יש לך קישור מהיר לדף זה."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "סימון ויקי"
+msgstr "גיבוי ויקי"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -3144,6 +3104,15 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= מוריד גיבוי =\n"
+"\n"
+"לצומת ליבך:\n"
+" * שמור גיביוים במקום מאובטחת - הם מכילים מידע רגיש\n"
+" * ודא שערכי תצורת הגיבוי של הויקי שלך נכונים ושלמים.\n"
+" * ודא שקובץ הגיבוי שאת(ה) מקבל(ת) מכיל את כל מה שתהיה צריך במקרה של בעיה\n"
+" * ודא שזה ידר בלי בעיות.\n"
+"\n"
+"לקבל גיבוי, פשוט תלחצו פה:"
 
 msgid "Backup"
 msgstr "גיבוי"
@@ -3159,13 +3128,13 @@ msgid "Please choose:"
 msgstr "אפשרויות לבחירה:"
 
 msgid "Create redirect for renamed page(s)?"
-msgstr ""
+msgstr "ליצור הפניה לדפים עם שמות חדשים?"
 
 msgid "Rename all /subpages too?"
 msgstr "לשנות גם את השם של כל תת הדפים?"
 
 msgid "Create redirect for renamed page?"
-msgstr ""
+msgstr "ליצור הפניה לדף עם שם חדש?"
 
 msgid "Really rename this page?"
 msgstr "באמת לשנות את שם הדף?"
@@ -3185,29 +3154,23 @@ msgstr "סיבה אפשרית להעתקה"
 msgid "Really copy this page?"
 msgstr "באמת להעתיק את הדף?"
 
-#, fuzzy
 msgid "Attachment location"
-msgstr "קישור לקובץ מצורף"
+msgstr "מיקום של הנספח"
 
-#, fuzzy
 msgid "Page name"
 msgstr "שם הדף"
 
-#, fuzzy
 msgid "Attachment name"
-msgstr "שם קובץ מצורף חדש"
+msgstr "שם נספח"
 
-#, fuzzy
 msgid "Refresh attachment list"
-msgstr "קישור לקובץ מצורף"
+msgstr "רענן רשימת נספחים"
 
-#, fuzzy
 msgid "List of attachments"
-msgstr "[%d קבצים מצורפים]"
+msgstr "רשימת נספחים"
 
-#, fuzzy
 msgid "Available attachments for page"
-msgstr "קבצים מצורפים ל–\"%(pagename)s\""
+msgstr "נספחים זמינים לדף"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -3234,40 +3197,35 @@ msgstr "השינוי הקודם"
 msgid "Next change"
 msgstr "השינוי הבא"
 
-#, fuzzy
 msgid "Diff with oldest revision in left pane"
-msgstr "אין גרסאות ישנות יותר זמינות!"
+msgstr "הבדל עם העדכון הכי ישן בחלונית השמאלית"
 
-#, fuzzy
 msgid "No older revision available for diff"
-msgstr "אין גרסאות ישנות יותר זמינות!"
+msgstr "אין גרסאות ישנות יותר זמינות"
 
-#, fuzzy
 msgid "Diff with older revision in left pane"
-msgstr "אין גרסאות ישנות יותר זמינות!"
+msgstr "הבדל עם עדכון ישן יותר בחלונית השמאלית"
 
 msgid "Diff with newer revision in left pane"
-msgstr ""
+msgstr "הבדל עם עדכון חדש יותר בחלונית השמאלית"
 
 msgid "Can't change to revision newer than in right pane"
-msgstr ""
+msgstr "אי אפשר לשנות לעדכון יותר חדש מאשר בחלונית הימינית"
 
 msgid "Diff with older revision in right pane"
-msgstr ""
+msgstr "הבדל עם העדכון הכי ישן בחלונית הימינית"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr ""
+msgstr "אי אפשר לשנות לעדכון יותר ישן מאשר בחלונית השמאלית"
 
 msgid "Diff with newer revision in right pane"
-msgstr ""
+msgstr "הבדל עם העדכון הכי ישן בחלונית השמאלית"
 
-#, fuzzy
 msgid "No newer revision available for diff"
-msgstr "אין גרסאות ישנות יותר זמינות!"
+msgstr "אין גרסאות חדשות יותר זמינות"
 
-#, fuzzy
 msgid "Diff with newest revision in right pane"
-msgstr "אין גרסאות ישנות יותר זמינות!"
+msgstr "הבדל עם העדכון הכי חדש בחלונית הימינית"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -3283,9 +3241,8 @@ msgstr "התעלם משינויים בכמות הרווחים"
 msgid "Invalid filename \"%s\"!"
 msgstr "שם קובץ בלתי חוקי \"%s\"!"
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d קבצים מצורפים]"
+msgstr "לכלול את כל הנספחים?"
 
 msgid "Package pages"
 msgstr "דפי חבילה"
@@ -3329,7 +3286,7 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "אין לכם הרשאות לשמור איור בדף."
 
 msgid "Empty target name given."
-msgstr ""
+msgstr "ניתן שם יעד ריק."
 
 msgid "Edit drawing"
 msgstr "ערוך איור"
@@ -3337,7 +3294,7 @@ msgstr "ערוך איור"
 msgid "Please first create a homepage before creating additional pages."
 msgstr "אנא צור דף בית ראשית ליצירת דפים נוספים."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -3372,16 +3329,16 @@ msgstr ""
 "פשוט הכנס את שמו של תת הדף ולחץ על הכפתור בכדי ליצור דף חדש.\n"
 "\n"
 "לפני יצירת דפים עם גישה מוגבלת, וודא שדף הקבוצה המתאימה\n"
-"קיים וקיימים בתוכו החברים המתאימים. השתמש בתבנית דף קבוצה ליצירת\n"
+"קיים וקיימים בתוכו החברים המתאימים. השתמש בHomepageGroupsTemplate ליצירת\n"
 "דפי הקבוצה.\n"
 "\n"
-"||'''הוסף דף אישי חדש:'''||'''קבוצת רשימת בקרת גישה קשורה:'''||\n"
+"||'''הוסף דף אישי חדש:'''||'''רשימת בקרת גישה קשורה:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
 "||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
 "[\"%(username)s/ReadGroup\"]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
-"%(username)s only||\n"
+"רק %(username)s||\n"
 "\n"
 
 msgid "MyPages management"
@@ -3390,20 +3347,18 @@ msgstr "ניהול העמודים שלי"
 msgid "Only superuser is allowed to use this action."
 msgstr "רק מנהל רשאי לבצע פעולה זו"
 
-#, fuzzy
 msgid "No page packages found."
-msgstr "לא נמצא דף אב."
+msgstr "לא נמצא חבילות דף."
 
-#, fuzzy
 msgid "page package"
-msgstr "הדף ששונה"
+msgstr "חבילת דף"
 
 msgid "Choose:"
-msgstr ""
+msgstr "בחר:"
 
 #, python-format
 msgid "Install language packs for '%s'"
-msgstr ""
+msgstr "התקן חבילת שפה ל'%s'"
 
 msgid "Your subscription to this page has been removed."
 msgstr "המינוי שלך לדף זה הוסר."
@@ -3555,7 +3510,7 @@ msgid "Content"
 msgstr "תוכן"
 
 msgid "No recipients, nothing to do"
-msgstr ""
+msgstr "אין לקוחות, אין מה לעשות"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -3573,7 +3528,7 @@ msgid ""
 msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)s\" לא מורשה בוויקי הזה."
 
 msgid "anonymous"
-msgstr ""
+msgstr "ללא שם"
 
 #~ msgid "New user account created on %(sitename)s"
 #~ msgstr "משתמש חדש נוצר ב %(sitename)s"
@@ -3584,37 +3539,30 @@ msgstr ""
 #~ msgid "Page Name"
 #~ msgstr "שם הדף"
 
-#, fuzzy
 #~ msgid "InstallDocs"
-#~ msgstr "התקן"
+#~ msgstr "InstallDocs"
 
-#, fuzzy
 #~ msgid "HelpOnUpdating"
-#~ msgstr "עזרה בעריכה"
+#~ msgstr "HelpOnUpdating"
 
-#, fuzzy
 #~ msgid "you may need to login to edit this page"
-#~ msgstr "אין לך הרשאות לערוך את הדף"
+#~ msgstr "ייתכן שתצטרך להיכנס לחשבון כדי לערוך דף זה"
 
 #~ msgid ""
 #~ "Installing theme files is only supported for standalone type servers."
 #~ msgstr "התקנת קבצי ערכות נושא נתמכת רק לשרתי standalone."
 
-#, fuzzy
 #~ msgid "InterWikiMap"
-#~ msgstr "סימון ויקי"
+#~ msgstr "InterWikiMap"
 
-#, fuzzy
 #~ msgid "BadContent"
-#~ msgstr "תוכן"
+#~ msgstr "BadContent"
 
-#, fuzzy
 #~ msgid "LocalBadContent"
-#~ msgstr "תוכן"
+#~ msgstr "LocalBadContent"
 
-#, fuzzy
 #~ msgid "EditedSystemPages"
-#~ msgstr "הסתר דפי מערכת"
+#~ msgstr "EditedSystemPages"
 
 #~ msgid "Created the package %s containing the pages %s."
 #~ msgstr "נוצרה חבילה %s המכילה את הדפים %s."
