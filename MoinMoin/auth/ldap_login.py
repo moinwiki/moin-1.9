@@ -132,6 +132,7 @@ class LDAPAuth(BaseAuth):
             try:
                 u = None
                 dn = None
+                server = self.server_uri
                 coding = self.coding
                 logging.debug("Setting misc. ldap options...")
                 ldap.set_option(ldap.OPT_PROTOCOL_VERSION, ldap.VERSION3) # ldap v2 is outdated
@@ -151,7 +152,6 @@ class LDAPAuth(BaseAuth):
                         if value is not None:
                             ldap.set_option(option, value)
 
-                server = self.server_uri
                 logging.debug("Trying to initialize %r." % server)
                 l = ldap.initialize(server)
                 logging.debug("Connected to LDAP server %r." % server)
