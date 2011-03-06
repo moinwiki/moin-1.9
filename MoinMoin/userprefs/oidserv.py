@@ -54,7 +54,7 @@ class Settings(UserPrefBase):
         if form.has_key('cancel'):
             return
 
-        if self.request.request_method != 'POST':
+        if self.request.method != 'POST':
             return
 
         if form.has_key('remove'):
