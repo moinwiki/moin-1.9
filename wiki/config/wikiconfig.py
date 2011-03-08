@@ -140,7 +140,7 @@ class Config(multiconfig.DefaultConfig):
     ]
 
     # The default theme anonymous or new users get
-    theme_default = 'modern'
+    theme_default = 'modernized'
 
 
     # Language options --------------------------------------------------
