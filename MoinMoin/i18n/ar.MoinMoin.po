@@ -37,7 +37,8 @@ msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
-"الويكي البعيد يستخدم اسم InterWiki (%(remotename)s) مختلف داخلياً عن ما ادخلته (%(localname)s)."
+"الويكي البعيد يستخدم اسم InterWiki (%(remotename)s) مختلف داخلياً عن ما "
+"ادخلته (%(localname)s)."
 
 msgid "Your changes are not saved!"
 msgstr "لم يتم حفظ تغييراتك!"
@@ -119,8 +120,9 @@ msgid ""
 msgstr ""
 "'''<<BR>>مسودتك المؤسسة علي نسخة %(draft_rev)d (حفظت "
 "%(draft_timestamp_str)s) يمكن ان تحمل بدلاً من هذه النسخة %(page_rev)d "
-"باستخدام زر حمل مسودة - ان كنت خسرت اخر تحرير لك بدون حفظه.'''"
-"مسودة تحفظ لك عندما تعاين او تلغي التحرير او بحفظ غير ناجح."
+"باستخدام زر حمل مسودة - ان كنت خسرت اخر تحرير لك بدون حفظه.'''مسودة تحفظ لك "
+"عندما تعاين او تلغي التحرير او بحفظ غير ناجح."
+
 #, python-format
 msgid "Describe %s here."
 msgstr "صوّر %s هنا."
@@ -187,6 +189,7 @@ msgstr ""
 "'''صفحة بأسم {{{'%s'}}} موجودة بالفعل.'''\n"
 "\n"
 "جرب اسماً اّخر."
+
 #, python-format
 msgid "Could not copy page because of file system error: %s."
 msgstr "تعذر نسخ الصفة بسبب خطأ في نظام الملفات: %s."
@@ -222,9 +225,9 @@ msgstr "لم يمكن قفل الصفحة. هل الملف 'الحالي' مفق
 msgid ""
 "Unable to determine current page revision from the 'current' file. The page "
 "%s is damaged and cannot be edited right now."
-msgstr
-"عاجز عن تحديد نسخة الصفحة الحالية من الملف الحالي."
-"الصفحة %s تالفة و غير قابلة للتحرير الان."
+msgstr ""
+"عاجز عن تحديد نسخة الصفحة الحالية من الملف الحالي.الصفحة %s تالفة و غير "
+"قابلة للتحرير الان."
 
 #, python-format
 msgid "Cannot save page %s, no storage space left."
@@ -251,8 +254,7 @@ msgstr "لم تقم بتغيير محتوى الصفحة، لم يتم الحف�
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
-msgstr ""
-"لا تستطيع تغيير ACLs علي هذه الصفحة لانك لا تملك حقوق admin عليها."
+msgstr "لا تستطيع تغيير ACLs علي هذه الصفحة لانك لا تملك حقوق admin عليها."
 
 msgid "Notifications sent to:"
 msgstr "بعثت الاعلامات الي:"
@@ -262,14 +264,12 @@ msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"قفل %(owner)s نفذ وقته منذ %(mins_ago)d دقائق, و لقد منحت القفل "
-"لهذه الصفحة"
+"قفل %(owner)s نفذ وقته منذ %(mins_ago)d دقائق, و لقد منحت القفل لهذه الصفحة"
 
 #, python-format
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
-msgstr ""
-"المستخدمون الاخرون سيمنعون من تحرير هذه الصفحة حتي %(bumptime)s."
+msgstr "المستخدمون الاخرون سيمنعون من تحرير هذه الصفحة حتي %(bumptime)s."
 
 #, python-format
 msgid ""
@@ -285,8 +285,9 @@ msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until "
 "%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"الصفحة '''مقفولة''' حالياً من التحرير من قبل %(owner)s حتي"
-"%(timestamp)s (ل%(mins_valid)d دقائق.)"
+"الصفحة '''مقفولة''' حالياً من التحرير من قبل %(owner)s حتي%(timestamp)s (ل"
+"%(mins_valid)d دقائق.)"
+
 #, python-format
 msgid ""
 "This page was opened for editing or last previewed at %(timestamp)s by "
@@ -296,10 +297,9 @@ msgid ""
 "to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
-"هذه الصفحة تم فتحها للتحرير او عوينت اخر مرة في %(timestamp)s"
-"من قبل %(owner)s.<<BR>>\n"
-"'''يجب عليك ''الامتناع عن تحرير'' هذه الصفحة علي الاقل ل%(mins_valid)d"
-"دقائق\n"
+"هذه الصفحة تم فتحها للتحرير او عوينت اخر مرة في %(timestamp)sمن قبل "
+"%(owner)s.<<BR>>\n"
+"'''يجب عليك ''الامتناع عن تحرير'' هذه الصفحة علي الاقل ل%(mins_valid)dدقائق\n"
 "لتجنب التضادات في التحرير.'''<<BR>>\n"
 "لترك المحرر، اضغط زر الالغاء"
 
@@ -427,7 +427,8 @@ msgstr "المعطى \"%s\" لابد ان يكون واحد من \"%s\", ليس 
 msgid "Argument must be one of \"%s\", not \"%s\""
 msgstr "المعطى لابد ان يكون واحد من \"%s\", ليس \"%s\""
 
-msgid "Too many 2"
+#, fuzzy
+msgid "Too many arguments"
 msgstr "معطيات أكثر من المطلوب"
 
 msgid "Cannot have arguments without name following named arguments"
@@ -456,8 +457,7 @@ msgstr "Regular expression للتبريز باطل \"%(regex)s\": %(error)s"
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
-msgstr ""
-"النسخة الاحتياطية لهذه الصفحة قد قدمت و ستظهر اسفل نتائج البحث."
+msgstr "النسخة الاحتياطية لهذه الصفحة قد قدمت و ستظهر اسفل نتائج البحث."
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -487,15 +487,14 @@ msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
 msgstr ""
-"تستطيع الان تغيير اعدادات حساب المستخدم المختار؛ سجل خروجك"
-"لترجع الي حسابك."
+"تستطيع الان تغيير اعدادات حساب المستخدم المختار؛ سجل خروجكلترجع الي حسابك."
+
 msgid "You are the only user."
 msgstr "أنت المستخدم الوحيد."
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-"كsuperuser، تستطيع انتحال شخصية مستخدم اخر."
+msgstr "كsuperuser، تستطيع انتحال شخصية مستخدم اخر."
 
 msgid "Select User"
 msgstr "إختر مستخدم"
@@ -616,8 +615,8 @@ msgid ""
 "space between words. Group page name is not allowed."
 msgstr ""
 "اسم مستخدم باطل {{{'%s'}}}.\n"
-"الاسم قد يحتوي علي اي unicode رقم او حرف, بفراغ واحد بين الكلمات."
-"غير مسموح بأسم صفحة مجموعة."
+"الاسم قد يحتوي علي اي unicode رقم او حرف, بفراغ واحد بين الكلمات.غير مسموح "
+"بأسم صفحة مجموعة."
 
 msgid "This user name already belongs to somebody else."
 msgstr "إسم المستخدم هذا مسجل لشخص آخر."
@@ -774,8 +773,8 @@ msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
 "create one during login."
 msgstr ""
-"اذ كنت لا تملك حساب حتي الان، تستطيع الولوج بالOpenID خاص بك"
-"و انشاء حساب عند الدخول."
+"اذ كنت لا تملك حساب حتي الان، تستطيع الولوج بالOpenID خاص بكو انشاء حساب عند "
+"الدخول."
 
 msgid "Could not contact botbouncer.com."
 msgstr "لم يمكن الاتصال ب botbouncer.com"
@@ -795,7 +794,8 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. "
 msgstr ""
-"ان كنت لا تملك حساب، <a href=\"%(userprefslink)s\">، تستطيع انشاء واحد الان</a>."
+"ان كنت لا تملك حساب، <a href=\"%(userprefslink)s\">، تستطيع انشاء واحد الان</"
+"a>."
 
 #, python-format
 msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
@@ -818,15 +818,14 @@ msgid ""
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
 " ابراز:: <<Verbatim(//)>>''مائل''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''عريض'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''عريض "
-"مائل'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''مخلوط ''<<Verbatim(**)"
-">>'''''عريض'''<<Verbatim(**)>> و مائل''<<Verbatim(//)>>;\n"
+">>'''عريض'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''عريض مائل'''''<<Verbatim"
+"(//**)>>; <<Verbatim(//)>>''مخلوط ''<<Verbatim(**)>>'''''عريض'''<<Verbatim"
+"(**)>> و مائل''<<Verbatim(//)>>;\n"
 " Horizontal Rule:: <<Verbatim(----)>>\n"
 " Force Linebreak:: <<Verbatim(\\\\)>>\n"
 " العناوين:: = عنوان 1 =; == عنوان 2 ==; === عنوان 3 ===; ==== عنوان 4 ====; "
 "===== عنوان 5 =====.\n"
-" قوائم:: * bullets; ** sub-bullets; # البنود المرقمة; ## بنود فرعية "
-"مرقمة.\n"
+" قوائم:: * bullets; ** sub-bullets; # البنود المرقمة; ## بنود فرعية مرقمة.\n"
 " Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
 " Tables:: |= header text | cell text | more cell text |;\n"
 "\n"
@@ -852,14 +851,14 @@ msgstr ""
 " ابراز:: <<Verbatim('')>>''مائل''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''عريض'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
 "مائل'''''<<Verbatim(''''')>>; <<Verbatim('')>>''مخلوط ''<<Verbatim(''')"
-">>'''''عريض'''<<Verbatim(''')>> و مائل''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
+">>'''''عريض'''<<Verbatim(''')>> و مائل''<<Verbatim('')>>; <<Verbatim(----)>> "
+"horizontal rule.\n"
 " عناوين:: = عنوان 1 =; == عنوان 2 ==; === عنوان 3 ===; ==== عنوان 4 ====; "
 "===== عنوان 5 =====.\n"
-" قوائم:: space and one of: * bullets; 1., a., A., i., I. بنود مرقمة; 1."
-"#n يبدأ الترقيم من n; space alone indents.\n"
-" الروابط:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
+" قوائم:: space and one of: * bullets; 1., a., A., i., I. بنود مرقمة; 1.#n "
+"يبدأ الترقيم من n; space alone indents.\n"
+" الروابط:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
 " الجداول:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
@@ -889,8 +888,7 @@ msgid ""
 "Syntax highlighting not supported for '%(syntax)s', see "
 "%(highlight_help_page)s."
 msgstr ""
-"Syntax highlighting غير مدعوم ل'%(syntax)s'، انظر في"
-"%(highlight_help_page)s."
+"Syntax highlighting غير مدعوم ل'%(syntax)s'، انظر في%(highlight_help_page)s."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -962,8 +960,7 @@ msgstr "كلمة السر لا تحتوي علي حروف مختلفة كافي�
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr ""
-"كلمة السر سهلة جداً(تحتوي علي اسم او الاسم يحتوي علي الكلمة)."
+msgstr "كلمة السر سهلة جداً(تحتوي علي اسم او الاسم يحتوي علي الكلمة)."
 
 msgid "Password is too easy (keyboard sequence)."
 msgstr "(كلمة السر سهلة جداً )تسلسل في لوحة المفاتيح"
@@ -1112,7 +1109,8 @@ msgid "You must specify an output file!"
 msgstr "لابد ان تحدد ملف الاخراج!"
 
 msgid "No pages specified using --pages or --search, assuming full package."
-msgstr "لا توجد صفحات محددة بواسطة --pages او --search، سيفترض انها حزمة كاملة."
+msgstr ""
+"لا توجد صفحات محددة بواسطة --pages او --search، سيفترض انها حزمة كاملة."
 
 msgid "All attachments included into the package."
 msgstr "شملت جميع الملحقات ضمن الحزمة,"
@@ -1157,7 +1155,6 @@ msgstr ""
 "\n"
 "صفحة \"%(pagename)s\" قد حذفت من قبل %(editor)s:\n"
 
-
 #, python-format
 msgid ""
 "Dear wiki user,\n"
@@ -1186,8 +1183,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"عزيزي Superuser، مستخدم جديد قد انشئ للتو علي \"%(sitename)s\". "
-"تفاصيل:\n"
+"عزيزي Superuser، مستخدم جديد قد انشئ للتو علي \"%(sitename)s\". تفاصيل:\n"
 "\n"
 "    اسم المستخدم: %(username)s\n"
 "    البريد الأكتروني: %(useremail)s"
@@ -1210,8 +1206,7 @@ msgstr ""
 "عزيزي مستخدم الويكي،\n"
 "\n"
 "لقد اشتركت بصفحة ويكي \"%(page_name)s\" لالأعلام بالتغيير\n"
-"لقد ضيف مرفق لتلك الصفحة من قبل %(editor)s. "
-"تفاصيل:\n"
+"لقد ضيف مرفق لتلك الصفحة من قبل %(editor)s. تفاصيل:\n"
 "\n"
 "اسم المرفق: %(attach_name)s\n"
 "حجم المرفق: %(attach_size)s\n"
@@ -1234,15 +1229,15 @@ msgstr ""
 "عزيزي مستخدم الويكي،\n"
 "\n"
 "لقد اشتركت بصفحة ويكي \"%(page_name)s\" لالأعلام بالتغيير\n"
-"لقد حذف مرفق لتلك الصفحة من قبل %(editor)s. "
-"تفاصيل:\n"
+"لقد حذف مرفق لتلك الصفحة من قبل %(editor)s. تفاصيل:\n"
 "\n"
 "اسم المرفق: %(attach_name)s\n"
 "حجم المرفق: %(attach_size)s\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(trivial)sتحديث صفحة \"%(pagename)s\" من قبل %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)sتحديث صفحة \"%(pagename)s\" من قبل %(username)s"
 
 msgid "Trivial "
 msgstr "بديهي"
@@ -1563,8 +1558,6 @@ msgstr "HelpOnEditing/SubPages"
 
 msgid "HelpOnGraphicalEditor"
 msgstr "HelpOnGraphicalEditor"
-
-
 
 msgid "HelpOnGroups"
 msgstr "HelpOnGroups"
@@ -2024,8 +2017,8 @@ msgid ""
 "or settings that were removed from Moin."
 msgstr ""
 "هذا الجدول يظهر كل الاعدادات في هذه الويكي التي ليس لديها قيم افتراضية."
-"الاعدادات التي لا يعلم بها نظام التكوين يظهر ''بميل''. سبب ذلك قديكون احتياج ملحقات خارجية"
-"الي اعدادات حذفت حذفت من Moin."
+"الاعدادات التي لا يعلم بها نظام التكوين يظهر ''بميل''. سبب ذلك قديكون احتياج "
+"ملحقات خارجيةالي اعدادات حذفت حذفت من Moin."
 
 msgid "Variable name"
 msgstr "إسم المتغير"
@@ -2188,15 +2181,16 @@ msgid ""
 "%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
 "%(argument_value)s!"
 msgstr ""
-"%(extension_name)s %(extension_type)s: %(argument_name)s="
-"%(argument_value)s باطل!"
+"%(extension_name)s %(extension_type)s: %(argument_name)s=%(argument_value)s "
+"باطل!"
 
 #, python-format
 msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
 "of its mimetype %(mimetype)s."
 msgstr ""
-"التكوين الحالي لا يسمح بدمج الملف %(file)s بسبب الmimetype الخاص به %(mimetype)s."
+"التكوين الحالي لا يسمح بدمج الملف %(file)s بسبب الmimetype الخاص به "
+"%(mimetype)s."
 
 msgid "Embedded"
 msgstr "مدمج"
@@ -2269,8 +2263,8 @@ msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
 msgstr ""
-"ما ادخلته في البحث {{{\"%s\"}}} باطل. الرجاء مراجعة HelpOnSearching "
-"لمزيد من المعلومات"
+"ما ادخلته في البحث {{{\"%s\"}}} باطل. الرجاء مراجعة HelpOnSearching لمزيد من "
+"المعلومات"
 
 msgid "Markup"
 msgstr "Markup"
@@ -2337,8 +2331,7 @@ msgstr "%(matchcount)d %(matches)s ل\"%(title)s\""
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"لا يمكن انشاء صفحة جديد بدون توفير اسمها. الرجاء تحديده."
+msgstr "لا يمكن انشاء صفحة جديد بدون توفير اسمها. الرجاء تحديده."
 
 #, python-format
 msgid "You must login to use this action: %(action)s."
@@ -2387,9 +2380,8 @@ msgid ""
 "\n"
 "Once you have logged in, simply reload this page."
 msgstr ""
-"يجب عليك زيارة الويكي الخاصة بمزود OpenID لديك"
-"والولوج قبل ان تستخدم OpenID. MoinMoin ان تسمح لك"
-"بكتابة كلمة السر هنا.\n"
+"يجب عليك زيارة الويكي الخاصة بمزود OpenID لديكوالولوج قبل ان تستخدم OpenID. "
+"MoinMoin ان تسمح لكبكتابة كلمة السر هنا.\n"
 "\n"
 "بعد الولوج، انعش هذه الصفحة."
 
@@ -2409,9 +2401,8 @@ msgid ""
 "delegation on its own.)"
 msgstr ""
 "\n"
-"ان وافقت، الموقع الممثل من قبل الtrust root في الاسفل"
-"سيعرف ان رابط الهوية %s خاص بك. (ان كنت تستخدم هوية مندوبة"
-"الموقع سيعكس الانتداب بنفسه."
+"ان وافقت، الموقع الممثل من قبل الtrust root في الاسفلسيعرف ان رابط الهوية %s "
+"خاص بك. (ان كنت تستخدم هوية مندوبةالموقع سيعكس الانتداب بنفسه."
 
 msgid "Trust root"
 msgstr "Trust root"
@@ -2487,10 +2478,11 @@ msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr
+msgstr ""
 "\n"
 "== تغيير كلمة السر ==\n"
 "ادخل كلمة سر جديدة تحت."
+
 msgid "Lost password"
 msgstr "خسرت كلمة السرّ"
 
@@ -2508,7 +2500,9 @@ msgstr ""
 "ان كنت قد نسيت كلمة سرك، ادخل بريدك الالكتروني او\n"
 "او اسم المستخدم و انقر علي '''راسلني ببيانات حسابي'''.\n"
 "ستصلك رسالة علي بريدك الالكتروني بها رمز للاسترداد الذي يستخدم\n"
-"لتغيير كلمة سرك. الرسالة ستحتوي علي مزيد من التعليمات\n."
+"لتغيير كلمة سرك. الرسالة ستحتوي علي مزيد من التعليمات\n"
+"."
+
 msgid ""
 "\n"
 "=== Password reset ===\n"
@@ -2528,8 +2522,7 @@ msgstr "[%d مرفقات]"
 msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
-msgstr ""
-"هناك <a href=\"%(link)s\">%(count)s مرفقات</a> محفوظة لهذه الصفحة."
+msgstr "هناك <a href=\"%(link)s\">%(count)s مرفقات</a> محفوظة لهذه الصفحة."
 
 msgid "Filename of attachment not specified!"
 msgstr "اسم المرفق لم يحدد!"
@@ -2609,8 +2602,7 @@ msgstr "TextCha: اجابة خاطئة! ارجع وحاول مرة اخري"
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
-msgstr ""
-"ملف غير موجود. الرجاء حذف الحروف "
+msgstr "ملف غير موجود. الرجاء حذف الحروف "
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "لا يسمح لك باستبدال ملف مرفق بهذه الصفحة"
@@ -2620,8 +2612,7 @@ msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
 msgstr ""
-"المرفق '%(target)s' ('اسم بعيد '%(filename)s') بحجم %(bytes)d bytes "
-"حفظ."
+"المرفق '%(target)s' ('اسم بعيد '%(filename)s') بحجم %(bytes)d bytes حفظ."
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -2638,7 +2629,8 @@ msgstr "المرفق %(new_pagename)s/%(new_filename)s' موجود بالفعل.
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
 "%(new_filename)s'."
-msgstr "المرفق '%(pagename)s/%(filename)s' نقل الي '%(new_pagename)s/"
+msgstr ""
+"المرفق '%(pagename)s/%(filename)s' نقل الي '%(new_pagename)s/"
 "%(new_filename)s'."
 
 msgid "Nothing changed"
@@ -2696,31 +2688,30 @@ msgid ""
 "either not in the same directory or exceeded the single file size limit "
 "(%(maxsize_file)d kB)."
 msgstr ""
-"المرفق '%(filename)s' لم يفك لان بعض الملفات في الملف المضغوط ليسوا بنفس"
-"المجلد او حجمهم اكتر من الحد الاقصي (%(maxsize_file)d kB)."
+"المرفق '%(filename)s' لم يفك لان بعض الملفات في الملف المضغوط ليسوا "
+"بنفسالمجلد او حجمهم اكتر من الحد الاقصي (%(maxsize_file)d kB)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"المرفق '%(filename)s' لم يفك لان حجمه سيتعدي الحد الاقصي للملفات"
-"في الصفحة (%(size)d kB)."
+"المرفق '%(filename)s' لم يفك لان حجمه سيتعدي الحد الاقصي للملفاتفي الصفحة "
+"(%(size)d kB)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
-"المرفق '%(filename)s' لم يفك لانه كان سيتعدي الحد الاقصي لعدد المرفقات"
-"في الصفحة (%(count)d)."
+"المرفق '%(filename)s' لم يفك لانه كان سيتعدي الحد الاقصي لعدد المرفقاتفي "
+"الصفحة (%(count)d)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: "
 "%(filelist)s)."
-msgstr ""
-"المرفق '%(filename)s' فك جزئياً (لم يستبدلوا: %(filelist)s)."
+msgstr "المرفق '%(filename)s' فك جزئياً (لم يستبدلوا: %(filelist)s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -2793,9 +2784,8 @@ msgid ""
 "revert action. If you want to revert to an older revision, first view that "
 "older revision and then call revert to this (older) revision again."
 msgstr ""
-"كنت تعرض النسخة الحالية من هذه الصفحة عندما ناديت اجراء"
-"الاعادة الي حالة سابقة. الرجاء عرض الحالة السابقة من الصفحة و"
-"تنفيذ الاجراء ثانياً."
+"كنت تعرض النسخة الحالية من هذه الصفحة عندما ناديت اجراءالاعادة الي حالة "
+"سابقة. الرجاء عرض الحالة السابقة من الصفحة وتنفيذ الاجراء ثانياً."
 
 msgid "Optional reason for reverting this page"
 msgstr "سبب إختياري لإعادة الصفحة الي حالة سابقة"
@@ -2812,8 +2802,8 @@ msgid ""
 "The following %(badwords)d words could not be found in the dictionary of "
 "%(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"الكلمات %(badwords)d التالية لم توجد في القاموس الذي يشمل "
-"%(totalwords)d كلمة%(localwords)s:"
+"الكلمات %(badwords)d التالية لم توجد في القاموس الذي يشمل %(totalwords)d كلمة"
+"%(localwords)s:"
 
 msgid "Add checked words to dictionary"
 msgstr "أضف الكلمات المشار إليها إلى القاموس"
@@ -2840,8 +2830,7 @@ msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
 msgstr ""
-"اضف بريدك الالكتروني او عنوان Jabber في اعدادات المستخدم "
-"لاسخدام الاشتراكات."
+"اضف بريدك الالكتروني او عنوان Jabber في اعدادات المستخدم لاسخدام الاشتراكات."
 
 msgid "You are already subscribed to this page."
 msgstr "انت مشترك بالفعل بهذه الصفحة."
@@ -2867,9 +2856,8 @@ msgid ""
 "<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
-"الرجاء ادخال كلمة سر حسابك في الويكي البعيد في الاسفل. "
-"<<BR>> /!\\ يجب ان تثق بكلتا الويكيهات لان كلمة السر يمكن ان يقرأها"
-"بعض الاداريين."
+"الرجاء ادخال كلمة سر حسابك في الويكي البعيد في الاسفل. <<BR>> /!\\ يجب ان "
+"تثق بكلتا الويكيهات لان كلمة السر يمكن ان يقرأهابعض الاداريين."
 
 msgid "Operation was canceled."
 msgstr "تم إلغاء العملية."
@@ -2881,15 +2869,15 @@ msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
-"الرجاء ضبط interwikiname بتكوين الويكي لديك (اقرأ HelpOnConfiguration)"
-"لتقدر ان تستخدم هذا الاجراء."
+"الرجاء ضبط interwikiname بتكوين الويكي لديك (اقرأ HelpOnConfiguration)لتقدر "
+"ان تستخدم هذا الاجراء."
 
 msgid ""
 "Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
 "Refer to HelpOnSynchronisation for help."
 msgstr ""
-"عوامل غير صحيحة. الرجاء توفير عامل ''remoteWiki'' علي الاقل."
-"للمساعدة، انظر في HelpOnSynchronisation."
+"عوامل غير صحيحة. الرجاء توفير عامل ''remoteWiki'' علي الاقل.للمساعدة، انظر "
+"في HelpOnSynchronisation."
 
 msgid "The ''remoteWiki'' is unknown."
 msgstr "''remoteWiki'' مجهول."
@@ -2904,9 +2892,7 @@ msgstr "تم الشروع بالمزامنة -"
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
-msgstr ""
-"حصلت علي قائمة ب %s صفحات محلية و %s بعيدة. %s صفحات سيحتاجون"
-"للمعالجة."
+msgstr "حصلت علي قائمة ب %s صفحات محلية و %s بعيدة. %s صفحات سيحتاجونللمعالجة."
 
 #, python-format
 msgid "After filtering: %s pages"
@@ -2937,24 +2923,24 @@ msgid ""
 "The item %s cannot be merged automatically but was changed in both wikis. "
 "Please delete it in one of both wikis and try again."
 msgstr ""
-"البند %s لا بمكن ان يدمج تلقائياً لانه تغيير في كلا الويكي. "
-"الرجاء حذف الصفحة من احد الويكي و المحاولة مرة اخري."
+"البند %s لا بمكن ان يدمج تلقائياً لانه تغيير في كلا الويكي. الرجاء حذف الصفحة "
+"من احد الويكي و المحاولة مرة اخري."
 
 #, python-format
 msgid ""
 "The item %s has different mime types in both wikis and cannot be merged. "
 "Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
-"البند %s لديها mimetype مختلف في كلا الويكي و لا يمكن ان تدمج. "
-"الرجاء حذفه من احد الويكي او توحيد mimetype و حاول مرة اخري."
+"البند %s لديها mimetype مختلف في كلا الويكي و لا يمكن ان تدمج. الرجاء حذفه "
+"من احد الويكي او توحيد mimetype و حاول مرة اخري."
 
 #, python-format
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
 msgstr ""
-"البند %s تغير اسمه محلياً. هذا غير مدعوم حالياً. لذلك قد ضاعت"
-"مكتبة التزامن كلها لهذه الصفحة."
+"البند %s تغير اسمه محلياً. هذا غير مدعوم حالياً. لذلك قد ضاعتمكتبة التزامن "
+"كلها لهذه الصفحة."
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
@@ -2969,8 +2955,8 @@ msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
-"لم يمكن تزامن %s. الصفحة البعيدة تغير اسمها. هذا غير مدعوم"
-"حالياً. قد تحتاج الي حذف احد الصفحات لتُزامنها."
+"لم يمكن تزامن %s. الصفحة البعيدة تغير اسمها. هذا غير مدعومحالياً. قد تحتاج "
+"الي حذف احد الصفحات لتُزامنها."
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
@@ -2980,16 +2966,14 @@ msgstr "تخطيت صفحة %s بسبب تضادات محلية او بعيدة 
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
-msgstr ""
-"هذا اول تزامن بين الويكي البعيد والمحلي لهذه الصفحة %s."
+msgstr "هذا اول تزامن بين الويكي البعيد والمحلي لهذه الصفحة %s."
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
 msgstr ""
-"لم يمكن ان تدمج صفحة %s لانك غير مسموح لك ان تعدل في صفحات "
-"الويكي البعيد."
+"لم يمكن ان تدمج صفحة %s لانك غير مسموح لك ان تعدل في صفحات الويكي البعيد."
 
 #, python-format
 msgid "Page %s successfully merged."
@@ -3340,12 +3324,12 @@ msgstr ""
 "ادخل اسم الصفحة الفرعية و انقر علي الزر لانشاء صفحة جديدة.\n"
 "\n"
 "قبل انشاء صفحات محمية، تأكد من وجود صفحة المجموعة المقابلة\n"
-"و وجود الاعضاء المناسبين بها. استخدم HomepageGroupsTemplate لانشاء"
-"صفحات المجموعات.\n"
+"و وجود الاعضاء المناسبين بها. استخدم HomepageGroupsTemplate لانشاءصفحات "
+"المجموعات.\n"
 "\n"
-"||'''ضيف صفحة شخصية جديدة:'''||'''مجموعة الACL الخاصة بها:'''||\n "
-"||<<NewPage(HomepageReadWritePageTemplate,صفحة قرائة او كتابة,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
+"||'''ضيف صفحة شخصية جديدة:'''||'''مجموعة الACL الخاصة بها:'''||\n"
+" ||<<NewPage(HomepageReadWritePageTemplate,صفحة قرائة او كتابة,%(username)s)"
+">>||[[%(username)s/ReadWriteGroup]]||\n"
 "||<<NewPage(HomepageReadPageTemplate,صفحة قرائة فقط,%(username)s)>>||"
 "[[%(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,صفحة خاصة,%(username)s)>>||"
@@ -3390,8 +3374,9 @@ msgstr "(!) فقط الصفحات التي يغيرت منذ '''%s''' ظاهرة
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
-msgstr "/!\\ تاريخ التعديل الذي ادخلته لم يتعرف عليه ولذلك لم "
-"يؤخذ في اعتبار نتائج البحث!"
+msgstr ""
+"/!\\ تاريخ التعديل الذي ادخلته لم يتعرف عليه ولذلك لم يؤخذ في اعتبار نتائج "
+"البحث!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -3410,8 +3395,8 @@ msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
-"البحث {{{\"%s\"}}} لم يعطي اي نتائج. الرجاء تغيير المعطيات و "
-"النظر في HelpOnSearching للمزيد من المعلومات.%s"
+"البحث {{{\"%s\"}}} لم يعطي اي نتائج. الرجاء تغيير المعطيات و النظر في "
+"HelpOnSearching للمزيد من المعلومات.%s"
 
 msgid "(!) Consider performing a"
 msgstr "(!) الرجاء النظر في اداء"
@@ -3423,8 +3408,8 @@ msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. <<BR>>"
 msgstr ""
-"(!) انت تجري بحث عنواني. قد لا يحتوي علي كل النتائج ذات صلة بالبحث "
-"في هذا الويكي. <<BR>>"
+"(!) انت تجري بحث عنواني. قد لا يحتوي علي كل النتائج ذات صلة بالبحث في هذا "
+"الويكي. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "انقر هنا لاجراء بحث نصي كامل بمعطياتك"
@@ -3443,9 +3428,9 @@ msgid ""
 "name, you can also upload content for another page. If the page name is "
 "empty, we derive the page name from the file name."
 msgstr ""
-"تستطيع ان ترفع محتوي للصفحة المسماة في الاسفل. ان غيرت اسم الصفحة "
-"تستطيع ايضاً رفع محتوي لصفحة اخري. ان كان اسم الصفحة فارغ، سيؤخذ اسم "
-"الصفحة من اسم الملف."
+"تستطيع ان ترفع محتوي للصفحة المسماة في الاسفل. ان غيرت اسم الصفحة تستطيع "
+"ايضاً رفع محتوي لصفحة اخري. ان كان اسم الصفحة فارغ، سيؤخذ اسم الصفحة من اسم "
+"الملف."
 
 msgid "File to load page content from"
 msgstr "الملف لرفع محتوي الصفحة"
