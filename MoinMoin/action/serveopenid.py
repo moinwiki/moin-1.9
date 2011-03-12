@@ -16,7 +16,7 @@ from openid.consumer.discover import OPENID_1_0_TYPE, \
 from openid import sreg
 from openid.cryptutil import randomString
 from openid.server import server
-from openid.message import IDENTIFIER_SELECT
+from openid.message import IDENTIFIER_SELECT, OPENID_NS
 from MoinMoin.widget import html
 from MoinMoin.web.request import MoinMoinFinish
 
@@ -295,7 +295,24 @@ class MoinOpenIDServer:
         #       sreg_resp = sreg.SRegResponse.extractResponse(openidreq, sreg_data)
         #       sreg_resp.addToOpenIDResponse(reply.fields)
 
-        reply = openidreq.answer(True, identity=identity, server_url=server_url)
+        request = self.request
+
+        # obtain the endpoint if not overridden by an identity endpoint
+        page_url = request.getQualifiedURL(
+                         request.page.url(request, querystr={'action': 'serveopenid'}))
+        endpoint_changed = server_url != page_url
+
+        # prepare the response
+        reply = openidreq.answer(True, identity=identity, server_url=server_url or page_url)
+
+        # if the endpoint has changed, perhaps reflecting an identity-specific
+        # endpoint, remove any association handle in use, working around any
+        # association-related issues in relying parties (such as python-openid)
+        if openidreq.assoc_handle and endpoint_changed:
+            store = MoinOpenIDStore(request)
+            signatory = server.Signatory(store)
+            reply.fields.setArg(OPENID_NS, "invalidate_handle", openidreq.assoc_handle)
+            signatory.invalidate(openidreq.assoc_handle, dumb=False)
         return reply
 
     def user_trusts_url(self, trustroot):
