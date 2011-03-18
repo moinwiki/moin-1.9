@@ -2,8 +2,7 @@
 """
     MoinMoin - FootNote Macro
 
-    Collect and emit footnotes. Note that currently footnote
-    text cannot contain wiki markup.
+    Collect and emit footnotes.
 
     @copyright: 2002 Juergen Hermann <jh@web.de>,
                 2007 MoinMoin:ReimarBauer,
