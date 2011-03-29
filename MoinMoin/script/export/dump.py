@@ -151,8 +151,8 @@ General syntax: moin [options] export dump [dump-options]
         self.init_request()
         request = self.request
 
-        # fix url_prefix_static so we get relative paths in output html
-        request.cfg.url_prefix_static = url_prefix_static
+        # fix script_root so we get relative paths in output html
+        request.script_root = url_prefix_static
 
         # use this user for permissions checks
         request.user = user.User(request, name=self.options.dump_user)
