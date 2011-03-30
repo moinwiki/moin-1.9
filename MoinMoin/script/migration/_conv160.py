@@ -76,6 +76,9 @@ class EventLog:
 
     def read(self):
         """ read complete event-log from disk """
+        print "Reading event-log. Depending on the size of event-log this may take a long time and"
+        print "consume lots of memory (if you don't need statistics, truncate event-log to speed this"
+        print "up and use less memory)."
         data = []
         try:
             lineno = 0
@@ -102,6 +105,7 @@ class EventLog:
 
     def write(self, fname):
         """ write complete event-log to disk """
+        print "Writing event-log. Depending on the size of event-log this may take a long time."
         if self.data:
             f = file(fname, 'w')
             for timestamp, action, kvdict in self.data:
