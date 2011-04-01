@@ -2,8 +2,9 @@
 """
     MoinMoin - logging auth plugin
 
-    This does nothing except logging the auth parameters (the password is NOT
-    logged, of course).
+    This does nothing except logging the auth parameters.
+    Be careful with the logs, they contain sensitive data.
+    Do not use this except for debugging auth problems.
 
     @copyright: 2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
