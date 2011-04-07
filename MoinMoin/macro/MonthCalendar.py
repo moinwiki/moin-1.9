@@ -361,12 +361,13 @@ def execute(macro, text):
                             title = match.group(1)
                             title = wikiutil.escape(title).replace("'", "\\'")
                             titletext.append(title)
+                    tipname_unescaped = link.replace("'", "\\'")
                     link = wikiutil.escape(link).replace("'", "\\'")
                     tipname = link
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)
                     maketip_js.append("maketip('%s','%s','%s');" % (tipname, tiptitle, tiptext))
-                    attrs = {'onMouseOver': "tip('%s')" % tipname,
+                    attrs = {'onMouseOver': "tip('%s')" % tipname_unescaped,
                              'onMouseOut': "untip()"}
                 else:
                     csslink = "cal-emptyday"
