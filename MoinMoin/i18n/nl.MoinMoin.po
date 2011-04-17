@@ -2046,10 +2046,10 @@ msgid "User account browser"
 msgstr "Gebruikersaccountbeheer"
 
 msgid "Lexer description"
-msgstr ""
+msgstr "Lexer beschrijving"
 
 msgid "Lexer names"
-msgstr ""
+msgstr "Lexer namen"
 
 msgid "File patterns"
 msgstr "Bestandspatronen"
@@ -3230,13 +3230,13 @@ msgid "Please choose:"
 msgstr "Kies:"
 
 msgid "Create redirect for renamed page(s)?"
-msgstr ""
+msgstr "Omleiding aanmaken voor de hernoemde pagina(s)?"
 
 msgid "Rename all /subpages too?"
 msgstr "Hernoem ook alle /subpagina's?"
 
 msgid "Create redirect for renamed page?"
-msgstr ""
+msgstr "Omleiding aanmaken voor de hernoemde pagina?"
 
 msgid "Really rename this page?"
 msgstr "Bent u zeker dat u deze pagina wil hernoemen?"
