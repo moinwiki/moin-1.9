@@ -10,6 +10,7 @@ MoinMoin - Package Generator
 
 import os
 import zipfile
+import time
 from datetime import datetime
 
 from MoinMoin.support.python_compatibility import set
@@ -100,6 +101,8 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
 
         script = [packLine(['MoinMoinPackage', '1']), ]
 
+        fallback_timestamp = int(time.time())
+
         cnt = 0
         for pagename in existing_pages:
             pagename = pagename.strip()
@@ -116,7 +119,11 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             zipname = "%d" % cnt
             script.append(packLine([function, zipname, pagename]))
             timestamp = wikiutil.version2timestamp(page.mtime_usecs())
-            zi = zipfile.ZipInfo(filename=zipname, date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
+            if not timestamp:
+                # page.mtime_usecs() returns 0 for underlay pages
+                timestamp = fallback_timestamp
+            dt = datetime.fromtimestamp(timestamp)
+            zi = zipfile.ZipInfo(filename=zipname, date_time=dt.timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
 
