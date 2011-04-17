@@ -28,8 +28,12 @@ Current:
      toplevel dir and the one in wiki/server/ - fixes hostname setting.
    * SubProcess: make sure files are closed at the end (experimental change).
    * text plain formatter: fix bullet_list, see number_list.
-   * Fixed install-docs sed commands.
    * Add some image mimetypes to MIMETYPES_MORE to fix windows issues.
+   * Include page name in password reset URL.
+   * Fix moin export dump to generate relative URLs.
+   * Fix MonthCalendar mouseover for pages with ampersand in page name.
+   * ldap_login: assign server early, it is used in exception handler.
+   * OpenID server preferences: fix traceback related to request method.
 
   New features:
    * Added print mode to action.SlideShow, see
