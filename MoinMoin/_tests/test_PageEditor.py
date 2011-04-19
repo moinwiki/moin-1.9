@@ -12,6 +12,7 @@ import py
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
+from MoinMoin.security import parseACL
 
 # TODO: check if and where we can use the helpers:
 from MoinMoin._tests import become_trusted, create_page, nuke_page
@@ -193,6 +194,44 @@ class TestSave(object):
         print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
         page = Page(self.request, pagename)
         assert page.body != testtext
+
+
+class TestSaveACLChange(object):
+    from MoinMoin._tests import wikiconfig
+    class Config(wikiconfig.Config):
+        acl_rights_before = 'Trusted:read,write,delete,revert'
+        acl_rights_default = 'All:read,write'
+
+    pagename = u'PageACLTest'
+    oldtext = u'''\
+## foo
+#lang en
+
+foo
+'''
+    newtext = u'''\
+## foo
+#acl -All:write Default
+#lang en
+
+foo
+'''
+
+    def setup_method(self, method):
+        p = PageEditor(self.request, self.pagename)
+        p.saveText(self.oldtext, 0)
+
+    def teardown_method(self, method):
+        become_trusted(self.request)
+        nuke_page(self.request, self.pagename)
+
+    def test_acls(self):
+        p = PageEditor(self.request, self.pagename)
+        oldacl = p.getACL(self.request).acl
+        assert not self.request.user.may.admin(p.page_name)
+        newacl = parseACL(self.request, self.newtext).acl
+        assert newacl != oldacl
+        py.test.raises(PageEditor.NoAdmin, p.saveText, self.newtext, 0)
 
 
 class TestDictPageDeletion(object):
