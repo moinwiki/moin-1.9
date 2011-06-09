@@ -63,7 +63,6 @@ def execute(pagename, request):
             continue
         if (not line.action.startswith('SAVE') or
             ((line.pagename in pages) and unique)): continue
-        #if log.dayChanged() and log.daycount > _MAX_DAYS: break
         line.editor = line.getInterwikiEditorData(request)
         line.time = timefuncs.tmtuple(wikiutil.version2timestamp(line.ed_time_usecs)) # UTC
         logdata.append(line)
