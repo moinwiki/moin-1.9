@@ -1386,25 +1386,25 @@ msgid "MissingHomePage"
 msgstr "ManglendeHjemmeSide"
 
 msgid "WikiHomePage"
-msgstr "WikiHjemmeside"
+msgstr "WikiHjemmeSide"
 
 msgid "WikiName"
 msgstr "WikiNavn"
 
 msgid "WikiWikiWeb"
-msgstr "WikiWikiWeb"
+msgstr "WikiWikiWebDansk"
 
 msgid "FrontPage"
 msgstr "ForSide"
 
 msgid "WikiSandBox"
-msgstr "WikiSandkasse"
+msgstr "WikiSandKasse"
 
 msgid "InterWiki"
-msgstr "InterWiki"
+msgstr "InterWikiDansk"
 
 msgid "AbandonedPages"
-msgstr "ForladteSider"
+msgstr "EfterladteSider"
 
 msgid "OrphanedPages"
 msgstr "ForældreløseSider"
@@ -1413,28 +1413,28 @@ msgid "WantedPages"
 msgstr "ØnskedeSider"
 
 msgid "EventStats"
-msgstr "BegivenhedsStatistik"
+msgstr "HændelseStatistik"
 
 msgid "EventStats/HitCounts"
-msgstr "BegivenhedsStatistik/AntalHits"
+msgstr "BegivenhedsStatistik/TræfOptælling"
 
 msgid "EventStats/Languages"
 msgstr "BegivenhedsStatistik/Sprog"
 
 msgid "EventStats/UserAgents"
-msgstr "BegivenhedsStatistik/BrugerAgent"
+msgstr "BegivenhedsStatistik/BrugerAgenter"
 
 msgid "PageSize"
 msgstr "SideStørrelse"
 
 msgid "PageHits"
-msgstr "SideTræffere"
+msgstr "SideTræfninger"
 
 msgid "RandomPage"
 msgstr "TilfældigSide"
 
 msgid "XsltVersion"
-msgstr "XsltVersion"
+msgstr "XsltVersionDansk"
 
 msgid "FortuneCookies"
 msgstr "LykkeKager"
@@ -1458,10 +1458,10 @@ msgid "HelpTemplate"
 msgstr "HjælpSkabelon"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr "HjemmesideLæsSkrivSideSkabelon"
+msgstr "HjemmesideLæseSkriveSideSkabelon"
 
 msgid "HomepageReadPageTemplate"
-msgstr "HjemmesideLæsSideSkabelon"
+msgstr "HjemmesideLæseSideSkabelon"
 
 msgid "HomepagePrivatePageTemplate"
 msgstr "HjemmesidePrivatSideSkabelon"
@@ -1557,7 +1557,7 @@ msgid "HelpForUsers"
 msgstr "HjælpForBrugere"
 
 msgid "HelpIndex"
-msgstr "Hjælpeindeks"
+msgstr "HjælpListe"
 
 msgid "HelpOnAccessControlLists"
 msgstr "HjælpTilAccesKontrolLister"
