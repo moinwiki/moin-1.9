@@ -64,7 +64,7 @@ msgstr "Черновик «%(pagename)s»"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
-msgstr "Редактировать «%(pagename)s»"
+msgstr "Редактирование «%(pagename)s»"
 
 #, python-format
 msgid "Preview of \"%(pagename)s\""
