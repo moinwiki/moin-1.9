@@ -62,9 +62,7 @@ class revert(ActionBase):
             msg = pg.revertPage(rev, comment)
             # make it show the current version...
             self.request.rev = None
-        except PageEditor.RevertError, error:
-            msg = unicode(error)
-        except PageEditor.Unchanged, error:
+        except PageEditor.SaveError, error:
             msg = unicode(error)
 
         return True, msg
