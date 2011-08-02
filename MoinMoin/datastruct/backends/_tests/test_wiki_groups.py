@@ -181,5 +181,39 @@ class TestWikiGroupBackend(GroupsBackendTest):
         assert not has_rights_before, 'AnotherUser has no read rights because in the beginning he is not a member of a group page NewGroup'
         assert has_rights_after, 'AnotherUser must have read rights because after appendage he is member of NewGroup'
 
+    def test_simple_group_page(self):
+        """
+        Tests if a simple group page is evaluated correctly.
+        """
+        request = self.request
+        become_trusted(request)
+        group_name = u'SimpleGroup'
+        page_text = u"""\
+ * FirstUser
+ * SecondUser
+ * LastUser"""
+        page = create_page(request, group_name, page_text)
+        group_members = set(request.groups[group_name])
+        assert group_members == set([u'FirstUser', u'SecondUser', u'LastUser'])
+        nuke_page(request, group_name)
+
+    def test_complex_group_page(self):
+        """
+        Tests if a complex group page is evaluated correctly.
+        """
+        request = self.request
+        become_trusted(request)
+        group_name = u'ComplexGroup'
+        page_text = u"""\
+ * FirstUser
+  * any text
+ * SecondUser
+ * LastUser
+  * any text"""
+        page = create_page(request, group_name, page_text)
+        group_members = set(request.groups[group_name])
+        assert group_members == set([u'FirstUser', u'SecondUser', u'LastUser'])
+        nuke_page(request, group_name)
+
 coverage_modules = ['MoinMoin.datastruct.backends.wiki_groups']
 
