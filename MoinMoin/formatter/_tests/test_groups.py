@@ -56,19 +56,6 @@ class TestGroupFormatterWikiMarkup(object):
         assert len(members) == 1
         assert u'extended link' in members
 
-    def test_extended_link_and_text(self):
-        text = """
- * [[extended link]] other text
- * other text [[extended link]]
- * other text [[extended link]] other text
-
-"""
-        members = self.get_members(text)
-        assert len(members) == 3
-        assert u'extended link other text' in members
-        assert u'other text extended link' in members
-        assert u'other text extended link other text' in members
-
     def test_ignore_not_first_level_list(self):
         text = """
  * first level
@@ -162,19 +149,6 @@ class TestGroupFormatterCreole(object):
         members = self.get_members(text)
         assert len(members) == 1
         assert u'FrontPage' in members
-
-    def test_extended_link_and_text(self):
-        text = """
- * [[extended link]] other text
- * other text [[extended link]]
- * other text [[extended link]] other text
-
-"""
-        members = self.get_members(text)
-        assert len(members) == 3
-        assert u'extended link other text' in members
-        assert u'other text extended link' in members
-        assert u'other text extended link other text' in members
 
     def test_ignore_not_first_level_list(self):
         text = """

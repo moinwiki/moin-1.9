@@ -21,8 +21,7 @@ class Formatter(FormatterBase):
 
         self.members = []
         self._bullet_list_level = 0
-        self._inside_link = False
-        self._new_member = ''
+        self._catch_name = False
 
     def bullet_list(self, on, **kw):
         if on:
@@ -35,27 +34,24 @@ class Formatter(FormatterBase):
         return self.null()
 
     def listitem(self, on, **kw):
-        if self._bullet_list_level == 1:
-            if not on:
-                stripped_new_member = self._new_member.strip()
-                if stripped_new_member:
-                    self.members.append(stripped_new_member)
-            self._new_member = ''
+        if on and self._bullet_list_level == 1:
+            self._catch_name = True
         return self.null()
 
     def text(self, text, **kw):
-        if self._bullet_list_level == 1 and not self._inside_link:
-            self._new_member += text
+        if self._catch_name:
+            name = text.strip()
+            self.members.append(name)
+            self._catch_name = False
         return self.null()
 
     def pagelink(self, on, pagename='', page=None, **kw):
-        if self._bullet_list_level == 1:
-            self._inside_link = on
-            if not on:
-                if not pagename and page:
-                    pagename = page.page_name
-                pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
-                self._new_member += pagename
+        if self._catch_name:
+            if not pagename and page:
+                pagename = page.page_name
+            name = wikiutil.normalize_pagename(pagename, self.request.cfg)
+            self.members.append(name)
+            self._catch_name = False
         return self.null()
 
     def null(self, *args, **kw):
