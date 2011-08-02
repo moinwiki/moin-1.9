@@ -201,6 +201,11 @@ class PackagePages:
             script.append(packLine(["AddRevision", str(cnt), page.page_name, userid, "Created by the PackagePages action."]))
 
             timestamp = wikiutil.version2timestamp(page.mtime_usecs())
+            
+            # avoid getting strange exceptions from zipfile in case of pre-1980 timestamps
+            nineteeneighty = (10 * 365 + 3) * 24 * 3600 # 1970 + 10y + 3d
+            timestamp = max(nineteeneighty, timestamp) # zip can not store timestamps before 1980
+
             zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
