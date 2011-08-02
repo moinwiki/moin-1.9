@@ -103,7 +103,7 @@ class TestLoginWithPassword(object):
         # generated with "htpasswd -nbm blaze 12345"
         password = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.' # 12345
         self.createUser(name, password, True)
-        
+
         # Try to "login"
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.valid
@@ -116,7 +116,7 @@ class TestLoginWithPassword(object):
         name = u'Test User'
         password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
         self.createUser(name, password, True)
-        
+
         # Try to "login"
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.valid
@@ -130,7 +130,7 @@ class TestLoginWithPassword(object):
         # generated with "htpasswd -nbd blaze 12345"
         password = '{DES}gArsfn7O5Yqfo' # 12345
         self.createUser(name, password, True)
-        
+
         try:
             import crypt
             # Try to "login"
@@ -138,7 +138,7 @@ class TestLoginWithPassword(object):
             assert theuser.valid
         except ImportError:
             py.test.skip("Platform does not provide crypt module!")
-        
+
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
         pagename = u'HelpMiscellaneous'
@@ -188,8 +188,8 @@ class TestLoginWithPassword(object):
         password = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ=' # 12345
         self.createUser(name, password, True)
 
-        # User is not required to be valid                
-        theuser = user.User(self.request, name=name, password='12345')        
+        # User is not required to be valid
+        theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
     def test_upgrade_password_from_apr1_to_ssha(self):
@@ -202,7 +202,7 @@ class TestLoginWithPassword(object):
         # generated with "htpasswd -nbm blaze 12345"
         password = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.' # 12345
         self.createUser(name, password, True)
-        
+
         # User is not required to be valid
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
@@ -216,7 +216,7 @@ class TestLoginWithPassword(object):
         name = u'Test User'
         password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
         self.createUser(name, password, True)
-        
+
         # User is not required to be valid
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
@@ -231,8 +231,8 @@ class TestLoginWithPassword(object):
         # generated with "htpasswd -nbd blaze 12345"
         password = '{DES}gArsfn7O5Yqfo' # 12345
         self.createUser(name, password, True)
-        
-        # User is not required to be valid        
+
+        # User is not required to be valid
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
