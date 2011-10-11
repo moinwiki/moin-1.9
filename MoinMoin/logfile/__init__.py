@@ -159,7 +159,7 @@ class LogFile:
                     raise
             return self._input
         elif name == "_output":
-            self._output = codecs.open(self.__filename, 'a', config.charset)
+            self._output = codecs.open(self.__filename, 'ab', config.charset)
             return self._output
         else:
             raise AttributeError(name)

@@ -82,7 +82,7 @@ class EventLog:
         data = []
         try:
             lineno = 0
-            f = file(self.fname, 'r')
+            f = file(self.fname, 'r') # read in text mode, so we can iterate over text lines
             for line in f:
                 lineno += 1
                 line = line.replace('\r', '').replace('\n', '')
@@ -107,7 +107,8 @@ class EventLog:
         """ write complete event-log to disk """
         print "Writing event-log. Depending on the size of event-log this may take a long time."
         if self.data:
-            f = file(fname, 'w')
+            f = file(fname, 'wb') # write in binary mode, so it stays exactly as we write it, even on windows.
+                                  # the code in MoinMoin.logfile also uses binary mode and writes \n only.
             for timestamp, action, kvdict in self.data:
                 pagename = kvdict.get('pagename')
                 if pagename and ('PAGE', pagename) in self.renames:
@@ -136,7 +137,7 @@ class EditLog:
         data = {}
         try:
             lineno = 0
-            f = file(self.fname, 'r')
+            f = file(self.fname, 'r') # read in text mode, so we can iterate over text lines
             for line in f:
                 lineno += 1
                 line = line.replace('\r', '').replace('\n', '')
@@ -164,7 +165,8 @@ class EditLog:
         if self.data:
             editlog = self.data.items()
             editlog.sort()
-            f = file(fname, "w")
+            f = file(fname, 'wb') # write in binary mode, so it stays exactly as we write it, even on windows.
+                                  # the code in MoinMoin.logfile also uses binary mode and writes \n only.
             max_rev = 0
             for key, fields in editlog:
                 timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields
