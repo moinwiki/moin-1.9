@@ -77,7 +77,7 @@ class LineBuffer:
         self.offsets = offsets
         self.len = linecount
         # Decode lines after offset in file is calculated
-        self.lines = [unicode(line, config.charset) for line in lines]
+        self.lines = [unicode(line.rstrip('\n'), config.charset) for line in lines]
 
 
 class LogFile:
