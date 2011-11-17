@@ -111,7 +111,7 @@ class Collector(object):
                 hours = int(find_dict_entry("Duration", page_contents))
                 mentors = find_dict_entry("Mentors", page_contents)
                 difficulty = find_dict_entry("Difficulty", page_contents)
-                types = find_dict_entry("Type", page_contents)
+                types = find_dict_entry("Types", page_contents)
             except (DataNotFoundException, ValueError), e:
                 print >>sys.stderr, "Could not import %r because of %r" % (page, e)
                 continue
