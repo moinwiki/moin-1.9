@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
 """
 MoinMoin wiki project -> Google Project Hosting converter
 
-full of evil antipatterns, incl. Exception exceptions
+Full of evil antipatterns, incl. Exception exceptions.
 
 @copyright: 2007,2010 MoinMoin:AlexanderSchremmer
-@license: GNU GPL v2
+@license: GNU GPL, see COPYING for details.
 """
 
 import sys
