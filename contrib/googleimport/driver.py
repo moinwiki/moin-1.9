@@ -80,6 +80,13 @@ already_pushed_bugs = set([x.strip() for x in """
 
 gatherers = []
 
+def first(s):
+    """ return first word or '' """
+    splitted = s.strip().split()
+    if splitted:
+        return splitted[0]
+    else:
+        return ''
 
 class Collector(object):
     def is_gatherer(function):
@@ -107,12 +114,16 @@ class Collector(object):
             page_contents = self.server.getPage(page)
             try:
                 summary = find_dict_entry("Title", page_contents)
-                count = int(find_dict_entry("Count", page_contents))
+                count = int(first(find_dict_entry("Count", page_contents)))
                 label = find_dict_entry("Tags", page_contents)
-                hours = int(find_dict_entry("Duration", page_contents))
+                hours = int(first(find_dict_entry("Duration", page_contents)))
                 mentors = find_dict_entry("Mentors", page_contents)
                 difficulty = find_dict_entry("Difficulty", page_contents)
-                types = find_dict_entry("Types", page_contents)
+                try:
+                    types = find_dict_entry("Types", page_contents)
+                except DataNotFoundException:
+                    # old tasks use "Type"
+                    types = find_dict_entry("Type", page_contents)
             except (DataNotFoundException, ValueError), e:
                 print >>sys.stderr, "Could not import %r because of %r" % (page, e)
                 continue
@@ -155,7 +166,7 @@ class Collector(object):
             page_contents = self.server.getPage(page)
             page_contents = page_contents.replace("LANG", language)
             summary = find_dict_entry("Summary", page_contents)
-            count = int(find_dict_entry("Count", page_contents))
+            count = int(first(find_dict_entry("Count", page_contents)))
             desc_m = re.search(desc_pattern, page_contents)
             if not desc_m:
                 raise Exception("Could not import %r because Desc not found" % page)
