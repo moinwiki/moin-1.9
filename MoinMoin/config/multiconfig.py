@@ -832,7 +832,7 @@ options_no_group_name = {
     # and receive a FORBIDDEN for anything except viewing a page
     # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
     ('ua_spiders',
-     ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
+     ('archiver|cfetch|charlotte|crawler|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
       'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
       'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
       'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti'),
