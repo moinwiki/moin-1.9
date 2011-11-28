@@ -34,6 +34,10 @@ Current:
    * Fix MonthCalendar mouseover for pages with ampersand in page name.
    * ldap_login: assign server early, it is used in exception handler.
    * OpenID server preferences: fix traceback related to request method.
+   * Work around page.mtime_usecs() returning 0 for pages without edit-log.
+   * revert action: catch and display all SaveErrors when revert failed.
+   * Fixed bug in groups formatter which caused the last list item to be not in the group.
+   * Avoid strange exception in zipfile.py for pre-1980 timestamps.
 
   New features:
    * Added print mode to action.SlideShow, see
@@ -60,6 +64,7 @@ Current:
   Other changes:
    * Raise exceptions as recommended in PEP 8.
    * Updated i18n / underlay pages.
+   * Updated interwiki map.
    * Use logging.traceback to get more information if a indexing filter crashes.
    * u200b is not considered a space any more in unicode 4.0.1.
    * Improve textcha security, use some crypto and timing to make cheating
