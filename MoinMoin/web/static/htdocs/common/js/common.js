@@ -500,7 +500,7 @@ function scrollTextarea(jumpLine) {
     if (txtBox) {
         // Calculate the cursor position - IE supports innerText, not textContent
         var textLines = txtBox.textContent || txtBox.innerText;
-        textLines = textLines.match(/(.*\n)/g);
+        textLines = textLines.match(/(.*(\r\n|\r|\n))/g);
         var scrolledText = '';
         for (var i = 0; i < textLines.length && i < jumpLine; ++i) {
             scrolledText += textLines[i];
@@ -628,9 +628,16 @@ function walkDom (someNode, lineNbr, isPreview, nextId, topId) {
             //~ return;
         //~ }
     //~ }
-
+    
+    var ie8LoopCounter = 0;
     var doChild = true;
     while (!(someNode.id == nextId) && !(someNode.id == topId)) {
+        // workaround IE8 bug:  http://moinmo.in/MoinMoinBugs/FormInsideTableCausesIE8ScriptLoop
+        ie8LoopCounter += 1;
+        if (ie8LoopCounter > 10000) {
+            return;
+        }
+        
         // add children, add siblings, add parent
         if (doChild && someNode.firstChild) {
             someNode = someNode.firstChild;
