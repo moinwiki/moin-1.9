@@ -70,6 +70,8 @@ Current:
    * Improve textcha security, use some crypto and timing to make cheating
      harder - use cfg.textchas_expiry_time = 600 (default, seconds) to set the
      time a textcha is valid.
+   * Upgraded bundled werkzeug to 0.8.1, pygments to 1.4, flup to repo tip.
+
 
 Version 1.9.3:
   Fixes:
