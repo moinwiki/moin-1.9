@@ -26,7 +26,7 @@ __all__ = ['CLexer', 'CppLexer', 'DLexer', 'DelphiLexer', 'JavaLexer',
            'ScalaLexer', 'DylanLexer', 'OcamlLexer', 'ObjectiveCLexer',
            'FortranLexer', 'GLShaderLexer', 'PrologLexer', 'CythonLexer',
            'ValaLexer', 'OocLexer', 'GoLexer', 'FelixLexer', 'AdaLexer',
-           'Modula2Lexer']
+           'Modula2Lexer', 'BlitzMaxLexer']
 
 
 class CLexer(RegexLexer):
@@ -43,8 +43,12 @@ class CLexer(RegexLexer):
 
     tokens = {
         'whitespace': [
-            (r'^\s*#if\s+0', Comment.Preproc, 'if0'),
-            (r'^\s*#', Comment.Preproc, 'macro'),
+            # preprocessor directives: without whitespace
+            ('^#if\s+0', Comment.Preproc, 'if0'),
+            ('^#', Comment.Preproc, 'macro'),
+            # or with whitespace
+            ('^' + _ws + r'#if\s+0', Comment.Preproc, 'if0'),
+            ('^' + _ws + '#', Comment.Preproc, 'macro'),
             (r'^(\s*)([a-zA-Z_][a-zA-Z0-9_]*:(?!:))', bygroups(Text, Name.Label)),
             (r'\n', Text),
             (r'\s+', Text),
@@ -55,11 +59,11 @@ class CLexer(RegexLexer):
         'statements': [
             (r'L?"', String, 'string'),
             (r"L?'(\\.|\\[0-7]{1,3}|\\x[a-fA-F0-9]{1,2}|[^\\\'\n])'", String.Char),
-            (r'(\d+\.\d*|\.\d+|\d+)[eE][+-]?\d+[lL]?', Number.Float),
+            (r'(\d+\.\d*|\.\d+|\d+)[eE][+-]?\d+[LlUu]*', Number.Float),
             (r'(\d+\.\d*|\.\d+|\d+[fF])[fF]?', Number.Float),
-            (r'0x[0-9a-fA-F]+[Ll]?', Number.Hex),
-            (r'0[0-7]+[Ll]?', Number.Oct),
-            (r'\d+[Ll]?', Number.Integer),
+            (r'0x[0-9a-fA-F]+[LlUu]*', Number.Hex),
+            (r'0[0-7]+[LlUu]*', Number.Oct),
+            (r'\d+[LlUu]*', Number.Integer),
             (r'\*/', Error),
             (r'[~!%^&*+=|?:<>/-]', Operator),
             (r'[()\[\],.]', Punctuation),
@@ -168,10 +172,17 @@ class CppLexer(RegexLexer):
     filenames = ['*.cpp', '*.hpp', '*.c++', '*.h++', '*.cc', '*.hh', '*.cxx', '*.hxx']
     mimetypes = ['text/x-c++hdr', 'text/x-c++src']
 
+    #: optional Comment or Whitespace
+    _ws = r'(?:\s|//.*?\n|/[*].*?[*]/)+'
+
     tokens = {
         'root': [
-            (r'^\s*#if\s+0', Comment.Preproc, 'if0'),
-            (r'^\s*#', Comment.Preproc, 'macro'),
+            # preprocessor directives: without whitespace
+            ('^#if\s+0', Comment.Preproc, 'if0'),
+            ('^#', Comment.Preproc, 'macro'),
+            # or with whitespace
+            ('^' + _ws + r'#if\s+0', Comment.Preproc, 'if0'),
+            ('^' + _ws + '#', Comment.Preproc, 'macro'),
             (r'\n', Text),
             (r'\s+', Text),
             (r'\\\n', Text), # line continuation
@@ -180,11 +191,11 @@ class CppLexer(RegexLexer):
             (r'[{}]', Punctuation),
             (r'L?"', String, 'string'),
             (r"L?'(\\.|\\[0-7]{1,3}|\\x[a-fA-F0-9]{1,2}|[^\\\'\n])'", String.Char),
-            (r'(\d+\.\d*|\.\d+|\d+)[eE][+-]?\d+[lL]?', Number.Float),
+            (r'(\d+\.\d*|\.\d+|\d+)[eE][+-]?\d+[LlUu]*', Number.Float),
             (r'(\d+\.\d*|\.\d+|\d+[fF])[fF]?', Number.Float),
-            (r'0x[0-9a-fA-F]+[Ll]?', Number.Hex),
-            (r'0[0-7]+[Ll]?', Number.Oct),
-            (r'\d+[Ll]?', Number.Integer),
+            (r'0x[0-9a-fA-F]+[LlUu]*', Number.Hex),
+            (r'0[0-7]+[LlUu]*', Number.Oct),
+            (r'\d+[LlUu]*', Number.Integer),
             (r'\*/', Error),
             (r'[~!%^&*+=|?:<>/-]', Operator),
             (r'[()\[\],.;]', Punctuation),
@@ -204,6 +215,8 @@ class CppLexer(RegexLexer):
              r'uuidof|unaligned|super|single_inheritance|raise|noop|'
              r'multiple_inheritance|m128i|m128d|m128|m64|interface|'
              r'identifier|forceinline|event|assume)\b', Keyword.Reserved),
+            # Offload C++ extensions, http://offload.codeplay.com/
+            (r'(__offload|__blockingoffload|__outer)\b', Keyword.Psuedo),
             (r'(true|false)\b', Keyword.Constant),
             (r'NULL\b', Name.Builtin),
             ('[a-zA-Z_][a-zA-Z0-9_]*:(?!:)', Name.Label),
@@ -1038,7 +1051,7 @@ class DylanLexer(RegexLexer):
 
     name = 'Dylan'
     aliases = ['dylan']
-    filenames = ['*.dylan']
+    filenames = ['*.dylan', '*.dyl']
     mimetypes = ['text/x-dylan']
 
     flags = re.DOTALL
@@ -1051,10 +1064,10 @@ class DylanLexer(RegexLexer):
              r'|open|primary|sealed|si(deways|ngleton)|slot'
              r'|v(ariable|irtual))\b', Name.Builtin),
             (r'<\w+>', Keyword.Type),
-            (r'#?"(?:\\.|[^"])+?"', String.Double),
             (r'//.*?\n', Comment.Single),
             (r'/\*[\w\W]*?\*/', Comment.Multiline),
-            (r'\'.*?\'', String.Single),
+            (r'"', String, 'string'),
+            (r"'(\\.|\\[0-7]{1,3}|\\x[a-fA-F0-9]{1,2}|[^\\\'\n])'", String.Char),
             (r'=>|\b(a(bove|fterwards)|b(e(gin|low)|y)|c(ase|leanup|reate)'
              r'|define|else(|if)|end|f(inally|or|rom)|i[fn]|l(et|ocal)|otherwise'
              r'|rename|s(elect|ignal)|t(hen|o)|u(n(less|til)|se)|wh(en|ile))\b',
@@ -1070,6 +1083,13 @@ class DylanLexer(RegexLexer):
             (r'\s+', Text),
             (r'#[a-zA-Z0-9-]+', Keyword),
             (r'[a-zA-Z0-9-]+', Name.Variable),
+        ],
+        'string': [
+            (r'"', String, '#pop'),
+            (r'\\([\\abfnrtv"\']|x[a-fA-F0-9]{2,4}|[0-7]{1,3})', String.Escape),
+            (r'[^\\"\n]+', String), # all other characters
+            (r'\\\n', String), # line continuation
+            (r'\\', String), # stray backslash
         ],
     }
 
@@ -1090,8 +1110,12 @@ class ObjectiveCLexer(RegexLexer):
 
     tokens = {
         'whitespace': [
-            (r'^(\s*)(#if\s+0)', bygroups(Text, Comment.Preproc), 'if0'),
-            (r'^(\s*)(#)', bygroups(Text, Comment.Preproc), 'macro'),
+            # preprocessor directives: without whitespace
+            ('^#if\s+0', Comment.Preproc, 'if0'),
+            ('^#', Comment.Preproc, 'macro'),
+            # or with whitespace
+            ('^' + _ws + r'#if\s+0', Comment.Preproc, 'if0'),
+            ('^' + _ws + '#', Comment.Preproc, 'macro'),
             (r'\n', Text),
             (r'\s+', Text),
             (r'\\\n', Text), # line continuation
@@ -1323,7 +1347,7 @@ class GLShaderLexer(RegexLexer):
         'root': [
             (r'^#.*', Comment.Preproc),
             (r'//.*', Comment.Single),
-            (r'/\*[\w\W]*\*/', Comment.Multiline),
+            (r'/(\\\n)?[*](.|\n)*?[*](\\\n)?/', Comment.Multiline),
             (r'\+|-|~|!=?|\*|/|%|<<|>>|<=?|>=?|==?|&&?|\^|\|\|?',
              Operator),
             (r'[?:]', Operator), # quick hack for ternary
@@ -1333,7 +1357,7 @@ class GLShaderLexer(RegexLexer):
             (r'[+-]?\d*\.\d+([eE][-+]?\d+)?', Number.Float),
             (r'[+-]?\d+\.\d*([eE][-+]?\d+)?', Number.Float),
             (r'0[xX][0-9a-fA-F]*', Number.Hex),
-            (r'0[0-7]*', Number.Octal),
+            (r'0[0-7]*', Number.Oct),
             (r'[1-9][0-9]*', Number.Integer),
             (r'\b(attribute|const|uniform|varying|centroid|break|continue|'
              r'do|for|while|if|else|in|out|inout|float|int|void|bool|true|'
@@ -1346,11 +1370,12 @@ class GLShaderLexer(RegexLexer):
              r'lowp|mediump|highp|precision|input|output|hvec[234]|'
              r'[df]vec[234]|sampler[23]DRect|sampler2DRectShadow|sizeof|'
              r'cast|namespace|using)\b', Keyword), #future use
-            (r'[a-zA-Z_][a-zA-Z_0-9]*', Name.Variable),
+            (r'[a-zA-Z_][a-zA-Z_0-9]*', Name),
             (r'\.', Punctuation),
             (r'\s+', Text),
         ],
     }
+
 
 class PrologLexer(RegexLexer):
     """
@@ -1371,7 +1396,7 @@ class PrologLexer(RegexLexer):
             (r'[0-9]+', Number),
             (r'[\[\](){}|.,;!]', Punctuation),
             (r':-|-->', Punctuation),
-            (r'"(?:\\x[0-9a-fA-F]+\\|\\u[0-9a-fA-F]{4}|\U[0-9a-fA-F]{8}|'
+            (r'"(?:\\x[0-9a-fA-F]+\\|\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}|'
              r'\\[0-7]+\\|\\[\w\W]|[^"])*"', String.Double),
             (r"'(?:''|[^'])*'", String.Atom), # quoted atom
             # Needs to not be followed by an atom.
@@ -1707,7 +1732,7 @@ class OocLexer(RegexLexer):
             (r'[:(){}\[\];,]', Punctuation),
 
             (r'0x[0-9a-fA-F]+', Number.Hex),
-            (r'0c[0-9]+', Number.Octal),
+            (r'0c[0-9]+', Number.Oct),
             (r'0b[01]+', Number.Binary),
             (r'[0-9_]\.[0-9_]*(?!\.)', Number.Float),
             (r'[0-9_]+', Number.Decimal),
@@ -2363,3 +2388,95 @@ class Modula2Lexer(RegexLexer):
                     token = Keyword.Pervasive
             # return result
             yield index, token, value
+
+
+class BlitzMaxLexer(RegexLexer):
+    """
+    For `BlitzMax <http://blitzbasic.com>`_ source code.
+
+    *New in Pygments 1.4.*
+    """
+
+    name = 'BlitzMax'
+    aliases = ['blitzmax', 'bmax']
+    filenames = ['*.bmx']
+    mimetypes = ['text/x-bmx']
+
+    bmax_vopwords = r'\b(Shl|Shr|Sar|Mod)\b'
+    bmax_sktypes = r'@{1,2}|[!#$%]'
+    bmax_lktypes = r'\b(Int|Byte|Short|Float|Double|Long)\b'
+    bmax_name = r'[a-z_][a-z0-9_]*'
+    bmax_var = r'(%s)(?:(?:([ \t]*)(%s)|([ \t]*:[ \t]*\b(?:Shl|Shr|Sar|Mod)\b)|([ \t]*)([:])([ \t]*)(?:%s|(%s)))(?:([ \t]*)(Ptr))?)' % (bmax_name, bmax_sktypes, bmax_lktypes, bmax_name)
+    bmax_func = bmax_var + r'?((?:[ \t]|\.\.\n)*)([(])'
+
+    flags = re.MULTILINE | re.IGNORECASE
+    tokens = {
+        'root': [
+            # Text
+            (r'[ \t]+', Text),
+            (r'\.\.\n', Text), # Line continuation
+            # Comments
+            (r"'.*?\n", Comment.Single),
+            (r'([ \t]*)\bRem\n(\n|.)*?\s*\bEnd([ \t]*)Rem', Comment.Multiline),
+            # Data types
+            ('"', String.Double, 'string'),
+            # Numbers
+            (r'[0-9]+\.[0-9]*(?!\.)', Number.Float),
+            (r'\.[0-9]*(?!\.)', Number.Float),
+            (r'[0-9]+', Number.Integer),
+            (r'\$[0-9a-f]+', Number.Hex),
+            (r'\%[10]+', Number), # Binary
+            # Other
+            (r'(?:(?:(:)?([ \t]*)(:?%s|([+\-*/&|~]))|Or|And|Not|[=<>^]))' %
+             (bmax_vopwords), Operator),
+            (r'[(),.:\[\]]', Punctuation),
+            (r'(?:#[\w \t]*)', Name.Label),
+            (r'(?:\?[\w \t]*)', Comment.Preproc),
+            # Identifiers
+            (r'\b(New)\b([ \t]?)([(]?)(%s)' % (bmax_name),
+             bygroups(Keyword.Reserved, Text, Punctuation, Name.Class)),
+            (r'\b(Import|Framework|Module)([ \t]+)(%s\.%s)' %
+             (bmax_name, bmax_name),
+             bygroups(Keyword.Reserved, Text, Keyword.Namespace)),
+            (bmax_func, bygroups(Name.Function, Text, Keyword.Type,
+                                 Operator, Text, Punctuation, Text,
+                                 Keyword.Type, Name.Class, Text,
+                                 Keyword.Type, Text, Punctuation)),
+            (bmax_var, bygroups(Name.Variable, Text, Keyword.Type, Operator,
+                                Text, Punctuation, Text, Keyword.Type,
+                                Name.Class, Text, Keyword.Type)),
+            (r'\b(Type|Extends)([ \t]+)(%s)' % (bmax_name),
+             bygroups(Keyword.Reserved, Text, Name.Class)),
+            # Keywords
+            (r'\b(Ptr)\b', Keyword.Type),
+            (r'\b(Pi|True|False|Null|Self|Super)\b', Keyword.Constant),
+            (r'\b(Local|Global|Const|Field)\b', Keyword.Declaration),
+            (r'\b(TNullMethodException|TNullFunctionException|'
+             r'TNullObjectException|TArrayBoundsException|'
+             r'TRuntimeException)\b', Name.Exception),
+            (r'\b(Strict|SuperStrict|Module|ModuleInfo|'
+             r'End|Return|Continue|Exit|Public|Private|'
+             r'Var|VarPtr|Chr|Len|Asc|SizeOf|Sgn|Abs|Min|Max|'
+             r'New|Release|Delete|'
+             r'Incbin|IncbinPtr|IncbinLen|'
+             r'Framework|Include|Import|Extern|EndExtern|'
+             r'Function|EndFunction|'
+             r'Type|EndType|Extends|'
+             r'Method|EndMethod|'
+             r'Abstract|Final|'
+             r'If|Then|Else|ElseIf|EndIf|'
+             r'For|To|Next|Step|EachIn|'
+             r'While|Wend|EndWhile|'
+             r'Repeat|Until|Forever|'
+             r'Select|Case|Default|EndSelect|'
+             r'Try|Catch|EndTry|Throw|Assert|'
+             r'Goto|DefData|ReadData|RestoreData)\b', Keyword.Reserved),
+            # Final resolve (for variable names and such)
+            (r'(%s)' % (bmax_name), Name.Variable),
+        ],
+        'string': [
+            (r'""', String.Double),
+            (r'"C?', String.Double, '#pop'),
+            (r'[^"]+', String.Double),
+        ],
+    }

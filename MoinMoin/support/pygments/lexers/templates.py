@@ -13,7 +13,7 @@ import re
 
 from pygments.lexers.web import \
      PhpLexer, HtmlLexer, XmlLexer, JavascriptLexer, CssLexer
-from pygments.lexers.agile import PythonLexer
+from pygments.lexers.agile import PythonLexer, PerlLexer
 from pygments.lexers.compiled import JavaLexer
 from pygments.lexer import Lexer, DelegatingLexer, RegexLexer, bygroups, \
      include, using, this
@@ -30,12 +30,14 @@ __all__ = ['HtmlPhpLexer', 'XmlPhpLexer', 'CssPhpLexer',
            'JavascriptDjangoLexer', 'GenshiLexer', 'HtmlGenshiLexer',
            'GenshiTextLexer', 'CssGenshiLexer', 'JavascriptGenshiLexer',
            'MyghtyLexer', 'MyghtyHtmlLexer', 'MyghtyXmlLexer',
-           'MyghtyCssLexer', 'MyghtyJavascriptLexer', 'MakoLexer',
+           'MyghtyCssLexer', 'MyghtyJavascriptLexer', 'MasonLexer', 'MakoLexer',
            'MakoHtmlLexer', 'MakoXmlLexer', 'MakoJavascriptLexer',
            'MakoCssLexer', 'JspLexer', 'CheetahLexer', 'CheetahHtmlLexer',
            'CheetahXmlLexer', 'CheetahJavascriptLexer',
            'EvoqueLexer', 'EvoqueHtmlLexer', 'EvoqueXmlLexer',
-           'ColdfusionLexer', 'ColdfusionHtmlLexer']
+           'ColdfusionLexer', 'ColdfusionHtmlLexer',
+           'VelocityLexer', 'VelocityHtmlLexer', 'VelocityXmlLexer',
+           'SspLexer']
 
 
 class ErbLexer(Lexer):
@@ -188,6 +190,121 @@ class SmartyLexer(RegexLexer):
         return rv
 
 
+class VelocityLexer(RegexLexer):
+    """
+    Generic `Velocity <http://velocity.apache.org/>`_ template lexer.
+
+    Just highlights velocity directives and variable references, other
+    data is left untouched by the lexer.
+    """
+
+    name = 'Velocity'
+    aliases = ['velocity']
+    filenames = ['*.vm','*.fhtml']
+
+    flags = re.MULTILINE | re.DOTALL
+
+    identifier = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
+    tokens = {
+        'root': [
+            (r'[^{#$]+', Other),
+            (r'(#)(\*.*?\*)(#)',
+             bygroups(Comment.Preproc, Comment, Comment.Preproc)),
+            (r'(##)(.*?$)',
+             bygroups(Comment.Preproc, Comment)),
+            (r'(#\{?)(' + identifier + r')(\}?)(\s?\()',
+             bygroups(Comment.Preproc, Name.Function, Comment.Preproc, Punctuation),
+             'directiveparams'),
+            (r'(#\{?)(' + identifier + r')(\}|\b)',
+             bygroups(Comment.Preproc, Name.Function, Comment.Preproc)),
+            (r'\$\{?', Punctuation, 'variable')
+        ],
+        'variable': [
+            (identifier, Name.Variable),
+            (r'\(', Punctuation, 'funcparams'),
+            (r'(\.)(' + identifier + r')', bygroups(Punctuation, Name.Variable), '#push'),
+            (r'\}', Punctuation, '#pop'),
+            (r'', Other, '#pop')
+        ],
+        'directiveparams': [
+            (r'(&&|\|\||==?|!=?|[-<>+*%&\|\^/])|\b(eq|ne|gt|lt|ge|le|not|in)\b', Operator),
+            (r'\[', Operator, 'rangeoperator'),
+            (r'\b' + identifier + r'\b', Name.Function),
+            include('funcparams')
+        ],
+        'rangeoperator': [
+            (r'\.\.', Operator),
+            include('funcparams'),
+            (r'\]', Operator, '#pop')
+        ],
+        'funcparams': [
+            (r'\$\{?', Punctuation, 'variable'),
+            (r'\s+', Text),
+            (r',', Punctuation),
+            (r'"(\\\\|\\"|[^"])*"', String.Double),
+            (r"'(\\\\|\\'|[^'])*'", String.Single),
+            (r"0[xX][0-9a-fA-F]+[Ll]?", Number),
+            (r"\b[0-9]+\b", Number),
+            (r'(true|false|null)\b', Keyword.Constant),
+            (r'\(', Punctuation, '#push'),
+            (r'\)', Punctuation, '#pop')
+        ]
+    }
+
+    def analyse_text(text):
+        rv = 0.0
+        if re.search(r'#\{?macro\}?\(.*?\).*?#\{?end\}?', text):
+            rv += 0.25
+        if re.search(r'#\{?if\}?\(.+?\).*?#\{?end\}?', text):
+            rv += 0.15
+        if re.search(r'#\{?foreach\}?\(.+?\).*?#\{?end\}?', text):
+            rv += 0.15
+        if re.search(r'\$\{?[a-zA-Z_][a-zA-Z0-9_]*(\([^)]*\))?(\.[a-zA-Z0-9_]+(\([^)]*\))?)*\}?', text):
+            rv += 0.01
+        return rv
+
+
+class VelocityHtmlLexer(DelegatingLexer):
+    """
+    Subclass of the `VelocityLexer` that highlights unlexer data
+    with the `HtmlLexer`.
+
+    """
+
+    name = 'HTML+Velocity'
+    aliases = ['html+velocity']
+    alias_filenames = ['*.html','*.fhtml']
+    mimetypes = ['text/html+velocity']
+
+    def __init__(self, **options):
+        super(VelocityHtmlLexer, self).__init__(HtmlLexer, VelocityLexer,
+                                              **options)
+
+
+class VelocityXmlLexer(DelegatingLexer):
+    """
+    Subclass of the `VelocityLexer` that highlights unlexer data
+    with the `XmlLexer`.
+
+    """
+
+    name = 'XML+Velocity'
+    aliases = ['xml+velocity']
+    alias_filenames = ['*.xml','*.vm']
+    mimetypes = ['application/xml+velocity']
+
+    def __init__(self, **options):
+        super(VelocityXmlLexer, self).__init__(XmlLexer, VelocityLexer,
+                                               **options)
+
+    def analyse_text(text):
+        rv = VelocityLexer.analyse_text(text) - 0.01
+        if looks_like_xml(text):
+            rv += 0.5
+        return rv
+
+
 class DjangoLexer(RegexLexer):
     """
     Generic `django <http://www.djangoproject.com/documentation/templates/>`_
@@ -239,7 +356,7 @@ class DjangoLexer(RegexLexer):
              r'with(?:(?:out)?\s*context)?|scoped|ignore\s+missing)\b',
              Keyword),
             (r'(loop|block|super|forloop)\b', Name.Builtin),
-            (r'[a-zA-Z][a-zA-Z0-9_]*', Name.Variable),
+            (r'[a-zA-Z][a-zA-Z0-9_-]*', Name.Variable),
             (r'\.[a-zA-Z0-9_]+', Name.Variable),
             (r':?"(\\\\|\\"|[^"])*"', String.Double),
             (r":?'(\\\\|\\'|[^'])*'", String.Single),
@@ -387,6 +504,61 @@ class MyghtyCssLexer(DelegatingLexer):
     def __init__(self, **options):
         super(MyghtyCssLexer, self).__init__(CssLexer, MyghtyLexer,
                                              **options)
+
+
+class MasonLexer(RegexLexer):
+    """
+    Generic `mason templates`_ lexer. Stolen from Myghty lexer. Code that isn't
+    Mason markup is HTML.
+
+    .. _mason templates: http://www.masonhq.com/
+
+    *New in Pygments 1.4.*
+    """
+    name = 'Mason'
+    aliases = ['mason']
+    filenames = ['*.m', '*.mhtml', '*.mc', '*.mi', 'autohandler', 'dhandler']
+    mimetypes = ['application/x-mason']
+
+    tokens = {
+        'root': [
+            (r'\s+', Text),
+            (r'(<%doc>)(.*?)(</%doc>)(?s)',
+             bygroups(Name.Tag, Comment.Multiline, Name.Tag)),
+            (r'(<%(def|method))(\s*)(.*?)(>)(.*?)(</%\2\s*>)(?s)',
+             bygroups(Name.Tag, None, Text, Name.Function, Name.Tag,
+                      using(this), Name.Tag)),
+            (r'(<%(\w+))(.*?)(>)(.*?)(</%\2\s*>)(?s)',
+             bygroups(Name.Tag, None, Name.Function, Name.Tag,
+                      using(PerlLexer), Name.Tag)),
+            (r'(<&[^|])(.*?)(,.*?)?(&>)(?s)',
+             bygroups(Name.Tag, Name.Function, using(PerlLexer), Name.Tag)),
+            (r'(<&\|)(.*?)(,.*?)?(&>)(?s)',
+             bygroups(Name.Tag, Name.Function, using(PerlLexer), Name.Tag)),
+            (r'</&>', Name.Tag),
+            (r'(<%!?)(.*?)(%>)(?s)',
+             bygroups(Name.Tag, using(PerlLexer), Name.Tag)),
+            (r'(?<=^)#[^\n]*(\n|\Z)', Comment),
+            (r'(?<=^)(%)([^\n]*)(\n|\Z)',
+             bygroups(Name.Tag, using(PerlLexer), Other)),
+            (r"""(?sx)
+                 (.+?)               # anything, followed by:
+                 (?:
+                  (?<=\n)(?=[%#]) |  # an eval or comment line
+                  (?=</?[%&]) |      # a substitution or block or
+                                     # call start or end
+                                     # - don't consume
+                  (\\\n) |           # an escaped newline
+                  \Z                 # end of string
+                 )""", bygroups(using(HtmlLexer), Operator)),
+        ]
+    }
+
+    def analyse_text(text):
+        rv = 0.0
+        if re.search('<&', text) is not None:
+            rv = 1.0
+        return rv
 
 
 class MakoLexer(RegexLexer):
@@ -1376,7 +1548,7 @@ class ColdfusionHtmlLexer(DelegatingLexer):
     """
     Coldfusion markup in html
     """
-    name = 'Coldufsion HTML'
+    name = 'Coldfusion HTML'
     aliases = ['cfm']
     filenames = ['*.cfm', '*.cfml', '*.cfc']
     mimetypes = ['application/x-coldfusion']
@@ -1385,3 +1557,27 @@ class ColdfusionHtmlLexer(DelegatingLexer):
         super(ColdfusionHtmlLexer, self).__init__(HtmlLexer, ColdfusionMarkupLexer,
                                                   **options)
 
+
+class SspLexer(DelegatingLexer):
+    """
+    Lexer for Scalate Server Pages.
+
+    *New in Pygments 1.4.*
+    """
+    name = 'Scalate Server Page'
+    aliases = ['ssp']
+    filenames = ['*.ssp']
+    mimetypes = ['application/x-ssp']
+
+    def __init__(self, **options):
+        super(SspLexer, self).__init__(XmlLexer, JspRootLexer, **options)
+
+    def analyse_text(text):
+        rv = 0.0
+        if re.search('val \w+\s*:', text):
+            rv += 0.6
+        if looks_like_xml(text):
+            rv += 0.2
+        if '<%' in text and '%>' in text:
+            rv += 0.1
+        return rv
