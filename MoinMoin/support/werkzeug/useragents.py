@@ -8,7 +8,7 @@
     browsers.
 
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re
@@ -18,7 +18,7 @@ class UserAgentParser(object):
     """A simple user agent parser.  Used by the `UserAgent`."""
 
     platforms = (
-        ('iphone', 'iphone'),
+        ('iphone|ios', 'iphone'),
         (r'darwin|mac|os\s*x', 'macos'),
         ('win', 'windows'),
         (r'android', 'android'),
@@ -150,6 +150,7 @@ class UserAgent(object):
 
         the language of the browser
     """
+
     _parser = UserAgentParser()
 
     def __init__(self, environ_or_string):

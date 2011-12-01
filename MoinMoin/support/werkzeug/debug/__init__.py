@@ -5,16 +5,20 @@
 
     WSGI application traceback debugger.
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import mimetypes
 from os.path import join, dirname, basename, isfile
 from werkzeug.wrappers import BaseRequest as Request, BaseResponse as Response
-from werkzeug.debug.repr import debug_repr
-from werkzeug.debug.tbtools import get_current_traceback
+from werkzeug.debug.tbtools import get_current_traceback, render_console_html
 from werkzeug.debug.console import Console
-from werkzeug.debug.utils import render_template
+from werkzeug.security import gen_salt
+
+
+#: import this here because it once was documented as being available
+#: from this module.  In case there are users left ...
+from werkzeug.debug.repr import debug_repr
 
 
 class _ConsoleFrame(object):
@@ -37,6 +41,9 @@ class DebuggedApplication(object):
     The `evalex` keyword argument allows evaluating expressions in a
     traceback's frame context.
 
+    .. versionadded:: 0.7
+       The `lodgeit_url` parameter was added.
+
     :param app: the WSGI application to run debugged.
     :param evalex: enable exception evaluation feature (interactive
                    debugging).  This requires a non-forking server.
@@ -50,11 +57,17 @@ class DebuggedApplication(object):
     :param show_hidden_frames: by default hidden traceback frames are skipped.
                                You can show them by setting this parameter
                                to `True`.
+    :param lodgeit_url: the base URL of the LodgeIt instance to use for
+                        pasting tracebacks.
     """
+
+    # this class is public
+    __module__ = 'werkzeug'
 
     def __init__(self, app, evalex=False, request_key='werkzeug.request',
                  console_path='/console', console_init_func=None,
-                 show_hidden_frames=False):
+                 show_hidden_frames=False,
+                 lodgeit_url='http://paste.pocoo.org/'):
         if not console_init_func:
             console_init_func = dict
         self.app = app
@@ -65,6 +78,8 @@ class DebuggedApplication(object):
         self.console_path = console_path
         self.console_init_func = console_init_func
         self.show_hidden_frames = show_hidden_frames
+        self.lodgeit_url = lodgeit_url
+        self.secret = gen_salt(20)
 
     def debug_application(self, environ, start_response):
         """Run the application and conserve the traceback frames."""
@@ -75,7 +90,7 @@ class DebuggedApplication(object):
                 yield item
             if hasattr(app_iter, 'close'):
                 app_iter.close()
-        except:
+        except Exception:
             if hasattr(app_iter, 'close'):
                 app_iter.close()
             traceback = get_current_traceback(skip=1, show_hidden_frames=
@@ -89,17 +104,19 @@ class DebuggedApplication(object):
                 start_response('500 INTERNAL SERVER ERROR', [
                     ('Content-Type', 'text/html; charset=utf-8')
                 ])
-            except:
+            except Exception:
                 # if we end up here there has been output but an error
                 # occurred.  in that situation we can do nothing fancy any
                 # more, better log something into the error log and fall
                 # back gracefully.
                 environ['wsgi.errors'].write(
-                    'Debugging middleware catched exception in streamed '
+                    'Debugging middleware caught exception in streamed '
                     'response at a point where response headers were already '
                     'sent.\n')
             else:
-                yield traceback.render_full(evalex=self.evalex) \
+                yield traceback.render_full(evalex=self.evalex,
+                                            lodgeit_url=self.lodgeit_url,
+                                            secret=self.secret) \
                                .encode('utf-8', 'replace')
 
             traceback.log(environ['wsgi.errors'])
@@ -112,13 +129,15 @@ class DebuggedApplication(object):
         """Display a standalone shell."""
         if 0 not in self.frames:
             self.frames[0] = _ConsoleFrame(self.console_init_func())
-        return Response(render_template('console.html'), mimetype='text/html')
+        return Response(render_console_html(secret=self.secret),
+                        mimetype='text/html')
 
     def paste_traceback(self, request, traceback):
         """Paste the traceback and return a JSON response."""
-        paste_id = traceback.paste()
-        return Response('{"url": "http://paste.pocoo.org/show/%s/", "id": %s}'
-                        % (paste_id, paste_id), mimetype='application/json')
+        paste_id = traceback.paste(self.lodgeit_url)
+        return Response('{"url": "%sshow/%s/", "id": "%s"}'
+                        % (self.lodgeit_url, paste_id, paste_id),
+                        mimetype='application/json')
 
     def get_source(self, request, frame):
         """Render the source viewer."""
@@ -144,20 +163,23 @@ class DebuggedApplication(object):
         # any more!
         request = Request(environ)
         response = self.debug_application
-        if self.evalex and self.console_path is not None and \
-           request.path == self.console_path:
-            response = self.display_console(request)
-        elif request.path.rstrip('/').endswith('/__debugger__'):
+        if request.args.get('__debugger__') == 'yes':
             cmd = request.args.get('cmd')
             arg = request.args.get('f')
+            secret = request.args.get('s')
             traceback = self.tracebacks.get(request.args.get('tb', type=int))
             frame = self.frames.get(request.args.get('frm', type=int))
             if cmd == 'resource' and arg:
                 response = self.get_resource(request, arg)
-            elif cmd == 'paste' and traceback is not None:
+            elif cmd == 'paste' and traceback is not None and \
+                 secret == self.secret:
                 response = self.paste_traceback(request, traceback)
-            elif cmd == 'source' and frame:
+            elif cmd == 'source' and frame and self.secret == secret:
                 response = self.get_source(request, frame)
-            elif self.evalex and cmd is not None and frame is not None:
+            elif self.evalex and cmd is not None and frame is not None and \
+                 self.secret == secret:
                 response = self.execute_command(request, cmd, frame)
+        elif self.evalex and self.console_path is not None and \
+           request.path == self.console_path:
+            response = self.display_console(request)
         return response(environ, start_response)

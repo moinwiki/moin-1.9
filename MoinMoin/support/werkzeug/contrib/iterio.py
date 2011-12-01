@@ -36,12 +36,12 @@ r"""
 
     .. _greenlet: http://codespeak.net/py/dist/greenlet.html
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 try:
-    from py.magic import greenlet
-except:
+    import greenlet
+except ImportError:
     greenlet = None
 
 
@@ -127,24 +127,21 @@ class IterI(IterIO):
         if greenlet is None:
             raise RuntimeError('IterI requires greenlet support')
         stream = object.__new__(cls)
-        stream.__init__(greenlet.getcurrent())
+        stream._parent = greenlet.getcurrent()
+        stream._buffer = []
+        stream.closed = False
+        stream.pos = 0
 
         def run():
             func(stream)
             stream.flush()
 
-        g = greenlet(run, stream._parent)
+        g = greenlet.greenlet(run, stream._parent)
         while 1:
             rv = g.switch()
             if not rv:
                 return
             yield rv[0]
-
-    def __init__(self, parent):
-        self._parent = parent
-        self._buffer = []
-        self.closed = False
-        self.pos = 0
 
     def close(self):
         if not self.closed:
@@ -171,13 +168,12 @@ class IterO(IterIO):
     """Iter output.  Wrap an iterator and give it a stream like interface."""
 
     def __new__(cls, gen):
-        return object.__new__(cls)
-
-    def __init__(self, gen):
+        self = object.__new__(cls)
         self._gen = gen
         self._buf = ''
         self.closed = False
         self.pos = 0
+        return self
 
     def __iter__(self):
         return self

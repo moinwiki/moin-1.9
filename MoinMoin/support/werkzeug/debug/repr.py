@@ -10,7 +10,7 @@
     Together with the CSS and JavaScript files of the debugger this gives
     a colorful and more compact output.
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD.
 """
 import sys
@@ -18,15 +18,29 @@ import re
 from traceback import format_exception_only
 try:
     from collections import deque
-except ImportError:
+except ImportError: # pragma: no cover
     deque = None
 from werkzeug.utils import escape
-from werkzeug.debug.utils import render_template
 
 
 missing = object()
 _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
 RegexType = type(_paragraph_re)
+
+
+HELP_HTML = '''\
+<div class=box>
+  <h3>%(title)s</h3>
+  <pre class=help>%(text)s</pre>
+</div>\
+'''
+OBJECT_DUMP_HTML = '''\
+<div class=box>
+  <h3>%(title)s</h3>
+  %(repr)s
+  <table>%(items)s</table>
+</div>\
+'''
 
 
 def debug_repr(obj):
@@ -51,23 +65,25 @@ class _Helper(object):
     debugger only because it requires a patched sys.stdout.
     """
 
-    def __call__(self, topic=None):
-        sys.stdout._write(self.get_help(topic))
+    def __repr__(self):
+        return 'Type help(object) for help about object.'
 
-    def get_help(self, topic):
-        title = text = None
-        if topic is not None:
-            import pydoc
-            pydoc.help(topic)
-            rv = sys.stdout.reset().decode('utf-8', 'ignore')
-            paragraphs = _paragraph_re.split(rv)
-            if len(paragraphs) > 1:
-                title = paragraphs[0]
-                text = '\n\n'.join(paragraphs[1:])
-            else:
-                title = 'Help'
-                text = paragraphs[0]
-        return render_template('help_command.html', title=title, text=text)
+    def __call__(self, topic=None):
+        if topic is None:
+            sys.stdout._write('<span class=help>%s</span>' % repr(self))
+            return
+        import pydoc
+        pydoc.help(topic)
+        rv = sys.stdout.reset().decode('utf-8', 'ignore')
+        paragraphs = _paragraph_re.split(rv)
+        if len(paragraphs) > 1:
+            title = paragraphs[0]
+            text = '\n\n'.join(paragraphs[1:])
+        else: # pragma: no cover
+            title = 'Help'
+            text = paragraphs[0]
+        sys.stdout._write(HELP_HTML % {'title': title, 'text': text})
+
 
 helper = _Helper()
 
@@ -167,7 +183,7 @@ class DebugReprGenerator(object):
 
     def dispatch_repr(self, obj, recursive):
         if obj is helper:
-            return helper.get_help(None)
+            return u'<span class="help">%r</span>' % helper
         if isinstance(obj, (int, long, float, complex)):
             return u'<span class="number">%r</span>' % obj
         if isinstance(obj, basestring):
@@ -191,7 +207,7 @@ class DebugReprGenerator(object):
     def fallback_repr(self):
         try:
             info = ''.join(format_exception_only(*sys.exc_info()[:2]))
-        except:
+        except Exception: # pragma: no cover
             info = '?'
         return u'<span class="brokenrepr">&lt;broken repr (%s)&gt;' \
                u'</span>' % escape(info.decode('utf-8', 'ignore').strip())
@@ -206,7 +222,7 @@ class DebugReprGenerator(object):
         try:
             try:
                 return self.dispatch_repr(obj, recursive)
-            except:
+            except Exception:
                 return self.fallback_repr()
         finally:
             self._stack.pop()
@@ -227,14 +243,25 @@ class DebugReprGenerator(object):
             for key in dir(obj):
                 try:
                     items.append((key, self.repr(getattr(obj, key))))
-                except:
+                except Exception:
                     pass
             title = 'Details for'
         title += ' ' + object.__repr__(obj)[1:-1]
-        return render_template('dump_object.html', items=items,
-                               title=title, repr=repr)
+        return self.render_object_dump(items, title, repr)
 
     def dump_locals(self, d):
         items = [(key, self.repr(value)) for key, value in d.items()]
-        return render_template('dump_object.html', items=items,
-                               title='Local variables in frame', repr=None)
+        return self.render_object_dump(items, 'Local variables in frame')
+
+    def render_object_dump(self, items, title, repr=None):
+        html_items = []
+        for key, value in items:
+            html_items.append('<tr><th>%s<td><pre class=repr>%s</pre>' %
+                              (escape(key), value))
+        if not html_items:
+            html_items.append('<tr><td><em>Nothing</em>')
+        return OBJECT_DUMP_HTML % {
+            'title':    escape(title),
+            'repr':     repr and '<pre class=repr>%s</pre>' % repr or '',
+            'items':    '\n'.join(html_items)
+        }

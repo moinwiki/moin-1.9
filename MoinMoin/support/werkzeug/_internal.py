@@ -5,20 +5,21 @@
 
     This module provides internally used helpers and constants.
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import inspect
 from weakref import WeakKeyDictionary
 from cStringIO import StringIO
-from Cookie import BaseCookie, Morsel, CookieError
+from Cookie import SimpleCookie, Morsel, CookieError
 from time import gmtime
-from datetime import datetime
+from datetime import datetime, date
 
 
 _logger = None
 _empty_stream = StringIO('')
 _signature_cache = WeakKeyDictionary()
+_epoch_ord = date(1970, 1, 1).toordinal()
 
 
 HTTP_STATUS_CODES = {
@@ -64,7 +65,7 @@ HTTP_STATUS_CODES = {
     423:    'Locked',
     424:    'Failed Dependency',
     426:    'Upgrade Required',
-    449:    'Retry With',           # propritary MS extension
+    449:    'Retry With',           # proprietary MS extension
     500:    'Internal Server Error',
     501:    'Not Implemented',
     502:    'Bad Gateway',
@@ -93,13 +94,22 @@ def _proxy_repr(cls):
     return proxy_repr
 
 
+def _get_environ(obj):
+    env = getattr(obj, 'environ', obj)
+    assert isinstance(env, dict), \
+        '%r is not a WSGI environment (has to be a dict)' % type(obj).__name__
+    return env
+
+
 def _log(type, message, *args, **kwargs):
     """Log into the internal werkzeug logger."""
     global _logger
     if _logger is None:
         import logging
         _logger = logging.getLogger('werkzeug')
-        if _logger.level == logging.NOTSET:
+        # Only set up a default log handler if the
+        # end-user application didn't set anything up.
+        if not logging.root.handlers and _logger.level == logging.NOTSET:
             _logger.setLevel(logging.INFO)
             handler = logging.StreamHandler()
             _logger.addHandler(handler)
@@ -178,7 +188,7 @@ def _patch_wrapper(old, new):
         new.__module__ = old.__module__
         new.__doc__ = old.__doc__
         new.__dict__ = old.__dict__
-    except:
+    except Exception:
         pass
     return new
 
@@ -194,7 +204,7 @@ def _decode_unicode(value, charset, errors):
         return value.decode(charset, errors)
     except UnicodeError, e:
         if fallback is not None:
-            return value.decode(fallback, 'ignore')
+            return value.decode(fallback, 'replace')
         from werkzeug.exceptions import HTTPUnicodeError
         raise HTTPUnicodeError(str(e))
 
@@ -237,19 +247,20 @@ def _dump_date(d, delim):
     )
 
 
-_timegm = None
 def _date_to_unix(arg):
     """Converts a timetuple, integer or datetime object into the seconds from
     epoch in utc.
     """
-    global _timegm
     if isinstance(arg, datetime):
         arg = arg.utctimetuple()
     elif isinstance(arg, (int, long, float)):
         return int(arg)
-    if _timegm is None:
-        from calendar import timegm as _timegm
-    return _timegm(arg)
+    year, month, day, hour, minute, second = arg[:6]
+    days = date(year, month, 1).toordinal() - _epoch_ord + day - 1
+    hours = days * 24 + hour
+    minutes = hours * 60 + minute
+    seconds = minutes * 60 + second
+    return seconds
 
 
 class _ExtendedMorsel(Morsel):
@@ -269,7 +280,7 @@ class _ExtendedMorsel(Morsel):
         return result
 
 
-class _ExtendedCookie(BaseCookie):
+class _ExtendedCookie(SimpleCookie):
     """Form of the base cookie that doesn't raise a `CookieError` for
     malformed keys.  This has the advantage that broken cookies submitted
     by nonstandard browsers don't cause the cookie to be empty.
@@ -372,8 +383,11 @@ mj2Z/FM1vQWgDynsRwNvrWnJHlespkrp8+vO1jNaibm+PhqXPPv30YwDZ6jApe3wUjFQobghvW9p
         if environ.get('QUERY_STRING') != 'macgybarchakku':
             return app(environ, injecting_start_response)
         injecting_start_response('200 OK', [('Content-Type', 'text/html')])
-        return ['''<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<title>About Werkzeug</>
+        return ['''
+<!DOCTYPE html>
+<html>
+<head>
+<title>About Werkzeug</title>
 <style type="text/css">
   body { font: 15px Georgia, serif; text-align: center; }
   a { color: #333; text-decoration: none; }
@@ -381,7 +395,11 @@ mj2Z/FM1vQWgDynsRwNvrWnJHlespkrp8+vO1jNaibm+PhqXPPv30YwDZ6jApe3wUjFQobghvW9p
   p { margin: 0 0 30px 0; }
   pre { font: 11px 'Consolas', 'Monaco', monospace; line-height: 0.95; }
 </style>
+</head>
+<body>
 <h1><a href="http://werkzeug.pocoo.org/">Werkzeug</a></h1>
-<p>the Swiss Army knife of Python web development.
-<pre>%s\n\n\n</>''' % gyver]
+<p>the Swiss Army knife of Python web development.</p>
+<pre>%s\n\n\n</pre>
+</body>
+</html>''' % gyver]
     return easteregged

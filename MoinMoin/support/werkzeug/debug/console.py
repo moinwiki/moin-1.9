@@ -5,7 +5,7 @@
 
     Interactive console support.
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD.
 """
 import sys
@@ -14,7 +14,6 @@ from types import CodeType
 from werkzeug.utils import escape
 from werkzeug.local import Local
 from werkzeug.debug.repr import debug_repr, dump, helper
-from werkzeug.debug.utils import render_template
 
 
 _local = Local()
@@ -31,6 +30,19 @@ class HTMLStringO(object):
 
     def close(self):
         pass
+
+    def flush(self):
+        pass
+
+    def seek(self, n, mode=0):
+        pass
+
+    def readline(self):
+        if len(self._buffer) == 0:
+            return ''
+        ret = self._buffer[0]
+        del self._buffer[0]
+        return ret
 
     def reset(self):
         val = ''.join(self._buffer)
@@ -53,7 +65,7 @@ class ThreadedStream(object):
     """Thread-local wrapper for sys.stdout for the interactive console."""
 
     def push():
-        if sys.stdout is sys.__stdout__:
+        if not isinstance(sys.stdout, ThreadedStream):
             sys.stdout = ThreadedStream()
         _local.stream = HTMLStringO()
     push = staticmethod(push)
@@ -161,7 +173,7 @@ class _InteractiveConsole(code.InteractiveInterpreter):
     def runcode(self, code):
         try:
             exec code in self.globals, self.locals
-        except:
+        except Exception:
             self.showtraceback()
 
     def showtraceback(self):
