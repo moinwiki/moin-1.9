@@ -93,7 +93,7 @@ class WSGIServer(BaseFCGIServer, SingleServer):
             if kw.has_key(key):
                 del kw[key]
         SingleServer.__init__(self, jobClass=self._connectionClass,
-                              jobArgs=(self,), **kw)
+                              jobArgs=(self, None), **kw)
         self.capability = {
             FCGI_MAX_CONNS: 1,
             FCGI_MAX_REQS: 1,
