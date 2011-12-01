@@ -3,6 +3,12 @@ r'''
     werkzeug.script
     ~~~~~~~~~~~~~~~
 
+    .. admonition:: Deprecated Functionality
+
+       ``werkzeug.script`` is deprecated without replacement functionality.
+       Python's command line support improved greatly with :mod:`argparse`
+       and a bunch of alternative modules.
+
     Most of the time you have recurring tasks while writing an application
     such as starting up an interactive python interpreter with some prefilled
     imports, starting the development server, initializing the database or
@@ -61,7 +67,7 @@ r'''
     or as named parameters, pretty much like Python function calls.
 
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 '''
 import sys
@@ -87,7 +93,7 @@ converters = {
 
 
 def run(namespace=None, action_prefix='action_', args=None):
-    """Run the script.  Participating actions are looked up in the callers
+    """Run the script.  Participating actions are looked up in the caller's
     namespace if no namespace is given, otherwise in the dict provided.
     Only items that start with action_prefix are processed as actions.  If
     you want to use all items in the namespace provided as actions set
@@ -112,14 +118,13 @@ def run(namespace=None, action_prefix='action_', args=None):
         fail('Unknown action \'%s\'' % args[0])
 
     arguments = {}
-    conv = {}
+    types = {}
     key_to_arg = {}
     long_options = []
     formatstring = ''
     func, doc, arg_def = actions[args.pop(0)]
     for idx, (arg, shortcut, default, option_type) in enumerate(arg_def):
         real_arg = arg.replace('-', '_')
-        converter = converters[option_type]
         if shortcut:
             formatstring += shortcut
             if not isinstance(default, bool):
@@ -128,7 +133,7 @@ def run(namespace=None, action_prefix='action_', args=None):
         long_options.append(isinstance(default, bool) and arg or arg + '=')
         key_to_arg['--' + arg] = real_arg
         key_to_arg[idx] = real_arg
-        conv[real_arg] = converter
+        types[real_arg] = option_type
         arguments[real_arg] = default
 
     try:
@@ -144,7 +149,7 @@ def run(namespace=None, action_prefix='action_', args=None):
             fail('Too many parameters')
         specified_arguments.add(arg)
         try:
-            arguments[arg] = conv[arg](value)
+            arguments[arg] = converters[types[arg]](value)
         except ValueError:
             fail('Invalid value for argument %s (%s): %s' % (key, arg, value))
 
@@ -152,12 +157,13 @@ def run(namespace=None, action_prefix='action_', args=None):
         arg = key_to_arg[key]
         if arg in specified_arguments:
             fail('Argument \'%s\' is specified twice' % arg)
-        if arg.startswith('no_'):
-            value = 'no'
-        elif not value:
-            value = 'yes'
+        if types[arg] == 'boolean':
+            if arg.startswith('no_'):
+                value = 'no'
+            else:
+                value = 'yes'
         try:
-            arguments[arg] = conv[arg](value)
+            arguments[arg] = converters[types[arg]](value)
         except ValueError:
             fail('Invalid value for \'%s\': %s' % (key, value))
 
@@ -256,11 +262,15 @@ def make_shell(init_func=None, banner=None, use_ipython=True):
         namespace = init_func()
         if ipython:
             try:
-                import IPython
+                try:
+                    from IPython.frontend.terminal.embed import InteractiveShellEmbed
+                    sh = InteractiveShellEmbed(banner1=banner)
+                except ImportError:
+                    from IPython.Shell import IPShellEmbed
+                    sh = IPShellEmbed(banner=banner)
             except ImportError:
                 pass
             else:
-                sh = IPython.Shell.IPShellEmbed(banner=banner)
                 sh(global_ns={}, local_ns=namespace)
                 return
         from code import interact
@@ -271,11 +281,14 @@ def make_shell(init_func=None, banner=None, use_ipython=True):
 def make_runserver(app_factory, hostname='localhost', port=5000,
                    use_reloader=False, use_debugger=False, use_evalex=True,
                    threaded=False, processes=1, static_files=None,
-                   extra_files=None):
+                   extra_files=None, ssl_context=None):
     """Returns an action callback that spawns a new development server.
 
     .. versionadded:: 0.5
        `static_files` and `extra_files` was added.
+
+    ..versionadded:: 0.6.1
+       `ssl_context` was added.
 
     :param app_factory: a function that returns a new WSGI application.
     :param hostname: the default hostname the server should listen on.
@@ -284,8 +297,9 @@ def make_runserver(app_factory, hostname='localhost', port=5000,
     :param use_evalex: the default setting for the evalex flag of the debugger.
     :param threaded: the default threading setting.
     :param processes: the default number of processes to start.
-    :param static_files: optionally a dict of static files.
-    :param extra_files: optionally a list of extra files to track for reloading.
+    :param static_files: optional dict of static files.
+    :param extra_files: optional list of extra files to track for reloading.
+    :param ssl_context: optional SSL context for running server in HTTPS mode.
     """
     def action(hostname=('h', hostname), port=('p', port),
                reloader=use_reloader, debugger=use_debugger,
@@ -295,5 +309,5 @@ def make_runserver(app_factory, hostname='localhost', port=5000,
         app = app_factory()
         run_simple(hostname, port, app, reloader, debugger, evalex,
                    extra_files, 1, threaded, processes,
-                   static_files=static_files)
+                   static_files=static_files, ssl_context=ssl_context)
     return action

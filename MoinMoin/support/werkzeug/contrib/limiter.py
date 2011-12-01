@@ -9,30 +9,12 @@
     .. _Trac: http://trac.edgewall.org/
     .. _Django: http://www.djangoproject.com/
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 from warnings import warn
-from werkzeug.utils import LimitedStream as LimitedStreamBase
 
-
-class _SilentLimitedStream(LimitedStreamBase):
-
-    def __init__(self, environ, limit):
-        LimitedStreamBase.__init__(self,
-            environ['wsgi.input'],
-            min(limit, int(environ.get('CONTENT_LENGTH') or 0)),
-            silent=True
-        )
-
-
-class LimitedStream(_SilentLimitedStream):
-
-    def __init__(self, environ, limit):
-        _SilentLimitedStream.__init__(self, environ, limit)
-        warn(DeprecationWarning('contrib limited stream is deprecated, use '
-                                'werkzeug.LimitedStream instead.'),
-             stacklevel=2)
+from werkzeug.wsgi import LimitedStream
 
 
 class StreamLimitMiddleware(object):
@@ -49,5 +31,6 @@ class StreamLimitMiddleware(object):
         self.maximum_size = maximum_size
 
     def __call__(self, environ, start_response):
-        environ['wsgi.input'] = _SilentLimitedStream(environ, self.maximum_size)
+        limit = min(self.maximum_size, int(environ.get('CONTENT_LENGTH') or 0))
+        environ['wsgi.input'] = LimitedStream(environ['wsgi.input'], limit)
         return self.app(environ, start_response)

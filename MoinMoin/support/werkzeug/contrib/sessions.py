@@ -37,7 +37,7 @@ r"""
 
         def application(environ, start_response):
             request = Request(environ)
-            sid = request.cookie.get('cookie_name')
+            sid = request.cookies.get('cookie_name')
             if sid is None:
                 request.session = session_store.new()
             else:
@@ -48,11 +48,13 @@ r"""
                 response.set_cookie('cookie_name', request.session.sid)
             return response(environ, start_response)
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re
 import os
+import sys
+import tempfile
 from os import path
 from time import time
 from random import random
@@ -62,11 +64,13 @@ except ImportError:
     from sha import new as sha1
 from cPickle import dump, load, HIGHEST_PROTOCOL
 
-from werkzeug.utils import ClosingIterator, dump_cookie, parse_cookie
 from werkzeug.datastructures import CallbackDict
+from werkzeug.utils import dump_cookie, parse_cookie
+from werkzeug.wsgi import ClosingIterator
+from werkzeug.posixemulation import rename
 
 
-_sha1_re = re.compile(r'^[a-fA-F0-9]{40}$')
+_sha1_re = re.compile(r'^[a-f0-9]{40}$')
 
 
 def _urandom():
@@ -124,8 +128,13 @@ class Session(ModificationTrackingDict):
 
     @property
     def should_save(self):
-        """True if the session should be saved."""
-        return self.modified or self.new
+        """True if the session should be saved.
+
+        .. versionchanged:: 0.6
+           By default the session is now only saved if the session is
+           modified, not if it is new like it was before.
+        """
+        return self.modified
 
 
 class SessionStore(object):
@@ -173,9 +182,19 @@ class SessionStore(object):
         return self.session_class({}, sid, True)
 
 
+#: used for temporary files by the filesystem session store
+_fs_transaction_suffix = '.__wz_sess'
+
+
 class FilesystemSessionStore(SessionStore):
-    """Simple example session store that saves sessions in the filesystem like
-    PHP does.
+    """Simple example session store that saves sessions on the filesystem.
+    This store works best on POSIX systems and Windows Vista / Windows
+    Server 2008 and newer.
+
+    .. versionchanged:: 0.6
+       `renew_missing` was added.  Previously this was considered `True`,
+       now the default changed to `False` and it can be explicitly
+       deactivated.
 
     :param path: the path to the folder used for storing the sessions.
                  If not provided the default temporary directory is used.
@@ -184,47 +203,92 @@ class FilesystemSessionStore(SessionStore):
                               session id.
     :param session_class: The session class to use.  Defaults to
                           :class:`Session`.
+    :param renew_missing: set to `True` if you want the store to
+                          give the user a new sid if the session was
+                          not yet saved.
     """
 
     def __init__(self, path=None, filename_template='werkzeug_%s.sess',
-                 session_class=None):
+                 session_class=None, renew_missing=False, mode=0644):
         SessionStore.__init__(self, session_class)
         if path is None:
-            from tempfile import gettempdir
-            path = gettempdir()
+            path = tempfile.gettempdir()
         self.path = path
+        if isinstance(filename_template, unicode):
+            filename_template = filename_template.encode(
+                sys.getfilesystemencoding() or 'utf-8')
+        assert not filename_template.endswith(_fs_transaction_suffix), \
+            'filename templates may not end with %s' % _fs_transaction_suffix
         self.filename_template = filename_template
+        self.renew_missing = renew_missing
+        self.mode = mode
 
     def get_session_filename(self, sid):
+        # out of the box, this should be a strict ASCII subset but
+        # you might reconfigure the session object to have a more
+        # arbitrary string.
+        if isinstance(sid, unicode):
+            sid = sid.encode(sys.getfilesystemencoding() or 'utf-8')
         return path.join(self.path, self.filename_template % sid)
 
     def save(self, session):
-        f = file(self.get_session_filename(session.sid), 'wb')
+        fn = self.get_session_filename(session.sid)
+        fd, tmp = tempfile.mkstemp(suffix=_fs_transaction_suffix,
+                                   dir=self.path)
+        f = os.fdopen(fd, 'wb')
         try:
             dump(dict(session), f, HIGHEST_PROTOCOL)
         finally:
             f.close()
+        try:
+            rename(tmp, fn)
+            os.chmod(fn, self.mode)
+        except (IOError, OSError):
+            pass
 
     def delete(self, session):
         fn = self.get_session_filename(session.sid)
         try:
-            # Late import because Google Appengine won't allow os.unlink
-            from os import unlink
-            unlink(fn)
+            os.unlink(fn)
         except OSError:
             pass
 
     def get(self, sid):
-        fn = self.get_session_filename(sid)
-        if not self.is_valid_key(sid) or not path.exists(fn):
+        if not self.is_valid_key(sid):
             return self.new()
+        try:
+            f = open(self.get_session_filename(sid), 'rb')
+        except IOError:
+            if self.renew_missing:
+                return self.new()
+            data = {}
         else:
-            f = file(fn, 'rb')
             try:
-                data = load(f)
+                try:
+                    data = load(f)
+                except Exception:
+                    data = {}
             finally:
                 f.close()
         return self.session_class(data, sid, False)
+
+    def list(self):
+        """Lists all sessions in the store.
+
+        .. versionadded:: 0.6
+        """
+        before, after = self.filename_template.split('%s', 1)
+        filename_re = re.compile(r'%s(.{5,})%s$' % (re.escape(before),
+                                                    re.escape(after)))
+        result = []
+        for filename in os.listdir(self.path):
+            #: this is a session that is still being saved.
+            if filename.endswith(_fs_transaction_suffix):
+                continue
+            match = filename_re.match(filename)
+            if match is not None:
+                result.append(match.group(1))
+        return result
 
 
 class SessionMiddleware(object):
@@ -237,7 +301,7 @@ class SessionMiddleware(object):
     the WSGI environment only relevant for the application which is against
     the concept of WSGI.
 
-    The cookie parameters are the same as for the :func:`~werkzeug.dump_cookie`
+    The cookie parameters are the same as for the :func:`~dump_cookie`
     function just prefixed with ``cookie_``.  Additionally `max_age` is
     called `cookie_age` and not `cookie_max_age` because of backwards
     compatibility.

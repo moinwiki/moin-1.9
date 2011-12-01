@@ -108,11 +108,8 @@ minimum: 0.8.7(?)
 
 werkzeug (WSGI toolkit)
 =======================
-shipped: 0.5.1 with a few patches
-minimum: 0.5.1 will work, maybe 0.5 and 0.6.x also
-
-Note: for Python 2.7 compatibility you will either need to use the bundled and
-patched 0.5.1 or try werkzeug >= 0.6. See moin/1.9 repo cs 5721:a4a7f275b7b3.
+shipped: 0.8.1
+minimum: 0.6
 
 
 xappy (High-Level Python library for Xapian)

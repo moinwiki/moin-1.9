@@ -21,7 +21,7 @@ $(function() {
      * Add an interactive console to the frames
      */
     if (EVALEX)
-      $('<img src="./__debugger__?cmd=resource&f=console.png">')
+      $('<img src="?__debugger__=yes&cmd=resource&f=console.png">')
         .attr('title', 'Open an interactive python shell in this frame')
         .click(function() {
           consoleNode = openShell(consoleNode, target, frameID);
@@ -32,7 +32,7 @@ $(function() {
     /**
      * Show sourcecode
      */
-    var sourceButton = $('<img src="./__debugger__?cmd=resource&f=source.png">')
+    var sourceButton = $('<img src="?__debugger__=yes&cmd=resource&f=source.png">')
       .attr('title', 'Display the sourcecode for this frame')
       .click(function() {
         if (!sourceView)
@@ -44,7 +44,8 @@ $(function() {
             .click(function() {
               sourceView.slideUp('fast');
             });
-        $.get('./__debugger__', {cmd: 'source', frm: frameID}, function(data) {
+        $.get(document.location.pathname, {__debugger__: 'yes', cmd:
+            'source', frm: frameID, s: SECRET}, function(data) {
           $('table', sourceView)
             .replaceWith(data);
           if (!sourceView.is(':visible'))
@@ -76,13 +77,13 @@ $(function() {
     .removeClass('nojavascript')
     .html('<p>To switch between the interactive traceback and the plaintext ' +
           'one, you can click on the "Traceback" headline.  From the text ' +
-          'traceback you can also create a paste of it.  For code execution ' +
-          'mouse-over the frame you want to debug and click on the console ' +
-          'icon on the right side.' +
+          'traceback you can also create a paste of it. ' + (!EVALEX ? '' :
+          'For code execution mouse-over the frame you want to debug and ' +
+          'click on the console icon on the right side.' +
           '<p>You can execute arbitrary Python code in the stack frames and ' +
           'there are some extra helpers available for introspection:' +
           '<ul><li><code>dump()</code> shows all variables in the frame' +
-          '<li><code>dump(obj)</code> dumps all what\'s know about the object</ul>');
+          '<li><code>dump(obj)</code> dumps all that\'s known about the object</ul>'));
 
   /**
    * Add the pastebin feature
@@ -94,8 +95,9 @@ $(function() {
       label.val('submitting...');
       $.ajax({
         dataType:     'json',
-        url:          './__debugger__',
-        data:         {tb: TRACEBACK, cmd: 'paste'},
+        url:          document.location.pathname,
+        data:         {__debugger__: 'yes', tb: TRACEBACK, cmd: 'paste',
+                       s: SECRET},
         success:      function(data) {
           $('div.plain span.pastemessage')
             .removeClass('pastemessage')
@@ -132,7 +134,8 @@ function openShell(consoleNode, target, frameID) {
   var form = $('<form>&gt;&gt;&gt; </form>')
     .submit(function() {
       var cmd = command.val();
-      $.get('./__debugger__', {cmd: cmd, frm: frameID}, function(data) {
+      $.get(document.location.pathname, {
+          __debugger__: 'yes', cmd: cmd, frm: frameID, s: SECRET}, function(data) {
         var tmp = $('<div>').html(data);
         $('span.extended', tmp).each(function() {
           var hidden = $(this).wrap('<span>').hide();
@@ -147,6 +150,7 @@ function openShell(consoleNode, target, frameID) {
         });
         output.append(tmp);
         command.focus();
+        consoleNode.scrollTop(command.position().top);
         var old = history.pop();
         history.push(cmd);
         if (typeof old != 'undefined')
@@ -160,7 +164,7 @@ function openShell(consoleNode, target, frameID) {
 
   var command = $('<input type="text">')
     .appendTo(form)
-    .keypress(function(e) {
+    .keydown(function(e) {
       if (e.charCode == 100 && e.ctrlKey) {
         output.text('--- screen cleared ---');
         return false;
@@ -191,6 +195,6 @@ function focusSourceBlock() {
       break
     line = tmp;
   }
-  var container = $('div.sourceview')[0];
-  container.scrollTop = line.offset().top - container.offsetTop;
+  var container = $('div.sourceview');
+  container.scrollTop(line.offset().top);
 }

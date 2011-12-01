@@ -12,7 +12,8 @@
 
     ::
 
-        from werkzeug import BaseRequest, responder
+        from werkzeug.wrappers import BaseRequest
+        from werkzeug.wsgi import responder
         from werkzeug.exceptions import HTTPException, NotFound
 
         def view(request):
@@ -53,11 +54,11 @@
                 return e
 
 
-    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import sys
-from werkzeug._internal import HTTP_STATUS_CODES
+from werkzeug._internal import HTTP_STATUS_CODES, _get_environ
 
 
 class HTTPException(Exception):
@@ -75,9 +76,9 @@ class HTTPException(Exception):
         if description is not None:
             self.description = description
 
+    @classmethod
     def wrap(cls, exception, name=None):
-        """
-        This method returns a new subclass of the exception provided that
+        """This method returns a new subclass of the exception provided that
         also is a subclass of `BadRequest`.
         """
         class newcls(cls, exception):
@@ -87,15 +88,15 @@ class HTTPException(Exception):
         newcls.__module__ = sys._getframe(1).f_globals.get('__name__')
         newcls.__name__ = name or cls.__name__ + exception.__name__
         return newcls
-    wrap = classmethod(wrap)
 
+    @property
     def name(self):
         """The status name."""
         return HTTP_STATUS_CODES[self.code]
-    name = property(name, doc=name.__doc__)
 
     def get_description(self, environ):
         """Get the description."""
+        environ = _get_environ(environ)
         return self.description
 
     def get_body(self, environ):
@@ -121,10 +122,11 @@ class HTTPException(Exception):
         :param environ: the environ for the request.
         :return: a :class:`BaseResponse` object or a subclass thereof.
         """
-        # lazyly imported for various reasons.  For one can use the exceptions
+        # lazily imported for various reasons.  For one, we can use the exceptions
         # with custom responses (testing exception instances against types) and
         # so we don't ever have to import the wrappers, but also because there
-        # are ciruclar dependencies when bootstrapping the module.
+        # are circular dependencies when bootstrapping the module.
+        environ = _get_environ(environ)
         from werkzeug.wrappers import BaseResponse
         headers = self.get_headers(environ)
         return BaseResponse(self.get_body(environ), self.code, headers)
@@ -138,6 +140,19 @@ class HTTPException(Exception):
         """
         response = self.get_response(environ)
         return response(environ, start_response)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        if 'description' in self.__dict__:
+            txt = self.description
+        else:
+            txt = self.name
+        return '%d: %s' % (self.code, txt)
+
+    def __repr__(self):
+        return '<%s \'%s\'>' % (self.__class__.__name__, self)
 
 
 class _ProxyException(HTTPException):
@@ -162,6 +177,21 @@ class BadRequest(HTTPException):
         '<p>The browser (or proxy) sent a request that this server could '
         'not understand.</p>'
     )
+
+
+class ClientDisconnected(BadRequest):
+    """Internal exception that is raised if Werkzeug detects a disconnected
+    client.  Since the client is already gone at that point attempting to
+    send the error message to the client might not work and might ultimately
+    result in another exception in the server.  Mainly this is here so that
+    it is silenced by default as far as Werkzeug is concerned.
+
+    Since disconnections cannot be reliably detected and are unspecified
+    by WSGI to a large extend this might or might not be raised if a client
+    is gone.
+
+    .. versionadded:: 0.8
+    """
 
 
 class Unauthorized(HTTPException):
@@ -264,6 +294,21 @@ class RequestTimeout(HTTPException):
     )
 
 
+class Conflict(HTTPException):
+    """*409* `Conflict`
+
+    Raise to signal that a request cannot be completed because it conflicts
+    with the current state on the server.
+
+    .. versionadded:: 0.7
+    """
+    code = 409
+    description = (
+        '<p>A conflict happened while processing the request.  The resource '
+        'might have been modified while the request was being processed.'
+    )
+
+
 class Gone(HTTPException):
     """*410* `Gone`
 
@@ -340,6 +385,47 @@ class UnsupportedMediaType(HTTPException):
     )
 
 
+class RequestedRangeNotSatisfiable(HTTPException):
+    """*416* `Requested Range Not Satisfiable`
+
+    The client asked for a part of the file that lies beyond the end
+    of the file.
+
+    .. versionadded:: 0.7
+    """
+    code = 416
+    description = (
+        '<p>The server cannot provide the requested range.'
+    )
+
+
+class ExpectationFailed(HTTPException):
+    """*417* `Expectation Failed`
+
+    The server cannot meet the requirements of the Expect request-header.
+
+    .. versionadded:: 0.7
+    """
+    code = 417
+    description = (
+        '<p>The server could not meet the requirements of the Expect header'
+    )
+
+
+class ImATeapot(HTTPException):
+    """*418* `I'm a teapot`
+
+    The server should return this if it is a teapot and someone attempted
+    to brew coffee with it.
+
+    .. versionadded:: 0.7
+    """
+    code = 418
+    description = (
+        '<p>This server is a teapot, not a coffee machine'
+    )
+
+
 class InternalServerError(HTTPException):
     """*500* `Internal Server Error`
 
@@ -403,7 +489,7 @@ def _find_exceptions():
             if getattr(obj, 'code', None) is not None:
                 default_exceptions[obj.code] = obj
                 __all__.append(obj.__name__)
-        except TypeError:
+        except TypeError: # pragma: no cover
             continue
 _find_exceptions()
 del _find_exceptions
@@ -418,7 +504,7 @@ class Aborter(object):
     """
     When passed a dict of code -> exception items it can be used as
     callable that raises exceptions.  If the first argument to the
-    callable is a integer it will be looked up in the mapping, if it's
+    callable is an integer it will be looked up in the mapping, if it's
     a WSGI application it will be raised in a proxy exception.
 
     The rest of the arguments are forwarded to the exception constructor.
@@ -439,6 +525,11 @@ class Aborter(object):
         raise self.mapping[code](*args, **kwargs)
 
 abort = Aborter()
+
+
+#: an exception that is used internally to signal both a key error and a
+#: bad request.  Used by a lot of the datastructures.
+BadRequestKeyError = BadRequest.wrap(KeyError)
 
 
 # imported here because of circular dependencies of werkzeug.utils
