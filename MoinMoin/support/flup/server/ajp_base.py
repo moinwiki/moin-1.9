@@ -960,7 +960,8 @@ class BaseAJPServer(object):
         all errors should be caught at the application level.
         """
         if self.debug:
-            request.startResponse(200, 'OK', [('Content-Type', 'text/html')])
+            request.startResponse(500, 'Internal Server Error',
+                                  [('Content-Type', 'text/html')])
             import cgitb
             request.write(cgitb.html(sys.exc_info()))
         else:
@@ -972,5 +973,6 @@ class BaseAJPServer(object):
 <p>An unhandled exception was thrown by the application.</p>
 </body></html>
 """
-            request.startResponse(200, 'OK', [('Content-Type', 'text/html')])
+            request.startResponse(500, 'Internal Server Error',
+                                  [('Content-Type', 'text/html')])
             request.write(errorpage)

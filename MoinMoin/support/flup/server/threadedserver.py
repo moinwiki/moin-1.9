@@ -105,7 +105,8 @@ class ThreadedServer(object):
             self._mainloopPeriodic()
 
         # Restore signal handlers.
-        self._restoreSignalHandlers()
+        if not sys.platform.startswith('win'):
+            self._restoreSignalHandlers()
 
         # Return bool based on whether or not SIGHUP was received.
         return self._hupReceived

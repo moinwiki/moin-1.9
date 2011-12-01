@@ -31,6 +31,7 @@ import select
 import struct
 import socket
 import errno
+import types
 
 __all__ = ['SCGIApp']
 
@@ -136,11 +137,14 @@ class SCGIApp(object):
         return [result]
 
     def _getConnection(self):
-        if type(self._connect) is str:
+        if isinstance(self._connect, types.StringTypes):
             sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            sock.connect(self._connect)
+        elif hasattr(socket, 'create_connection'):
+            sock = socket.create_connection(self._connect)
         else:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect(self._connect)
+            sock.connect(self._connect)
         return sock
     
     _environPrefixes = ['SERVER_', 'HTTP_', 'REQUEST_', 'REMOTE_', 'PATH_',

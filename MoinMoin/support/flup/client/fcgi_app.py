@@ -31,6 +31,7 @@ import select
 import struct
 import socket
 import errno
+import types
 
 __all__ = ['FCGIApp']
 
@@ -386,11 +387,14 @@ class FCGIApp(object):
         if self._connect is not None:
             # The simple case. Create a socket and connect to the
             # application.
-            if type(self._connect) is str:
+            if isinstance(self._connect, types.StringTypes):
                 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                sock.connect(self._connect)
+            elif hasattr(socket, 'create_connection'):
+                sock = socket.create_connection(self._connect)
             else:
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.connect(self._connect)
+                sock.connect(self._connect)
             return sock
 
         # To be done when I have more time...

@@ -821,7 +821,7 @@ class Connection(object):
         outrec = Record(FCGI_UNKNOWN_TYPE)
         outrec.contentData = struct.pack(FCGI_UnknownTypeBody, inrec.type)
         outrec.contentLength = FCGI_UnknownTypeBody_LEN
-        self.writeRecord(rec)
+        self.writeRecord(outrec)
         
 class MultiplexedConnection(Connection):
     """
@@ -1186,7 +1186,10 @@ class BaseFCGIServer(object):
 
         if not environ.has_key('PATH_INFO') or not environ['PATH_INFO']:
             if reqUri is not None:
-                environ['PATH_INFO'] = reqUri[0]
+                scriptName = environ['SCRIPT_NAME']
+                if not reqUri[0].startswith(scriptName):
+                    environ['wsgi.errors'].write('WARNING: SCRIPT_NAME does not match REQUEST_URI')
+                environ['PATH_INFO'] = reqUri[0][len(scriptName):]
             else:
                 environ['PATH_INFO'] = ''
         if not environ.has_key('QUERY_STRING') or not environ['QUERY_STRING']:
@@ -1214,7 +1217,8 @@ class BaseFCGIServer(object):
         """
         if self.debug:
             import cgitb
-            req.stdout.write('Content-Type: text/html\r\n\r\n' +
+            req.stdout.write('Status: 500 Internal Server Error\r\n' +
+                             'Content-Type: text/html\r\n\r\n' +
                              cgitb.html(sys.exc_info()))
         else:
             errorpage = """<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
@@ -1225,5 +1229,6 @@ class BaseFCGIServer(object):
 <p>An unhandled exception was thrown by the application.</p>
 </body></html>
 """
-            req.stdout.write('Content-Type: text/html\r\n\r\n' +
+            req.stdout.write('Status: 500 Internal Server Error\r\n' +
+                             'Content-Type: text/html\r\n\r\n' +
                              errorpage)
