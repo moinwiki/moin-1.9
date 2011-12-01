@@ -109,7 +109,7 @@ minimum: 0.8.7(?)
 werkzeug (WSGI toolkit)
 =======================
 shipped: 0.8.1
-minimum: 0.6
+minimum: 0.6.1
 
 
 xappy (High-Level Python library for Xapian)
