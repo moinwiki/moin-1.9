@@ -21,12 +21,12 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import config
-from MoinMoin.util import pysupport, lock
 from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
-from MoinMoin import web # needed so that next line works:
+from MoinMoin import web # needed so that next lines work:
 import werkzeug
+from MoinMoin.util import pysupport, lock
 
 # Exceptions
 class InvalidFileNameError(Exception):
