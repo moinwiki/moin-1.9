@@ -153,10 +153,10 @@ class MatlabLexer(RegexLexer):
             (r'%.*$', Comment),
             (r'^\s*function', Keyword, 'deffunc'),
 
-            # from 'iskeyword' on version 7.4.0.336 (R2007a):
-            (r'(break|case|catch|classdef|continue|else|elseif|end|for|function|'
-             r'global|if|otherwise|parfor|persistent|return|switch|try|while)\b',
-             Keyword),
+            # from 'iskeyword' on version 7.11 (R2010):
+            (r'(break|case|catch|classdef|continue|else|elseif|end|enumerated|'
+             r'events|for|function|global|if|methods|otherwise|parfor|'
+             r'persistent|properties|return|spmd|switch|try|while)\b', Keyword),
 
             ("(" + "|".join(elfun+specfun+elmat) + r')\b',  Name.Builtin),
 
@@ -228,7 +228,7 @@ class MatlabSessionLexer(Lexer):
                 # without is showing error on same line as before...?
                 line = "\n" + line
                 token = (0, Generic.Traceback, line)
-                insertions.append(  (idx, [token,]) )
+                insertions.append((idx, [token]))
 
             else:
                 if curcode:

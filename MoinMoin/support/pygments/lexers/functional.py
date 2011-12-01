@@ -381,6 +381,7 @@ class HaskellLexer(RegexLexer):
         'import': [
             # Import statements
             (r'\s+', Text),
+            (r'"', String, 'string'),
             # after "funclist" state
             (r'\)', Punctuation, '#pop'),
             (r'qualified\b', Keyword),
@@ -550,7 +551,7 @@ class OcamlLexer(RegexLexer):
 
     tokens = {
         'escape-sequence': [
-            (r'\\[\"\'ntbr]', String.Escape),
+            (r'\\[\\\"\'ntbr]', String.Escape),
             (r'\\[0-9]{3}', String.Escape),
             (r'\\x[0-9a-fA-F]{2}', String.Escape),
         ],
@@ -601,7 +602,7 @@ class OcamlLexer(RegexLexer):
             (r'\.', Punctuation),
             (r'[A-Z][A-Za-z0-9_\']*(?=\s*\.)', Name.Namespace),
             (r'[A-Z][A-Za-z0-9_\']*', Name.Class, '#pop'),
-            (r'[a-z][a-z0-9_\']*', Name, '#pop'),
+            (r'[a-z_][A-Za-z0-9_\']*', Name, '#pop'),
         ],
     }
 
@@ -688,7 +689,7 @@ class ErlangLexer(RegexLexer):
             (r'[+-]?'+base_re+r'#[0-9a-zA-Z]+', Number.Integer),
             (r'[+-]?\d+', Number.Integer),
             (r'[+-]?\d+.\d+', Number.Float),
-            (r'[][:_@\".{}()|;,]', Punctuation),
+            (r'[]\[:_@\".{}()|;,]', Punctuation),
             (variable_re, Name.Variable),
             (atom_re, Name),
             (r'\?'+macro_re, Name.Constant),
