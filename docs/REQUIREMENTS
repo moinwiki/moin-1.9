@@ -109,7 +109,10 @@ minimum: 0.8.7(?)
 werkzeug (WSGI toolkit)
 =======================
 shipped: 0.8.1
-minimum: 0.6.1
+minimum: 0.7.0
+
+Note: >= 0.6.1 will also likely work if the missing "import sys" in
+      posixemulation.py is patched.
 
 
 xappy (High-Level Python library for Xapian)
