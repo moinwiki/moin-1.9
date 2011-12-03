@@ -16,7 +16,19 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Current:
+Version 1.9.4:
+
+  HINT: Python >= 2.5 is maybe required!
+  To use all the code that is bundled in the MoinMoin download release,
+  you are required to have Python >= 2.5 now. This is primarily due to
+  werkzeug 0.8 requiring it. Also, because Python 2.4 is rather rare these
+  days, moin 1.9.4 did not get tested on Python 2.4. So if you still must
+  run it on 2.4, try replacing MoinMoin/support/werkzeug with some werkzeug
+  version < 0.8 and hope the best. Contact us if it does not work.
+  Python requirements might be different for (linux or other) distribution
+  packages, depending on the werkzeug version they use. Usually you do
+  not have to care then, because the package maintainer already did it for you.
+
   Fixes:
    * Fix XSS / remove javascript URL support in rst parser (CVE-2011-1058).
    * werkzeug: Removed a dummy import. Fixes Python 2.7 compatibility.
