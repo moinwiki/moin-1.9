@@ -447,6 +447,19 @@ class XmlRpcBase:
             'version': version,
             }
 
+    def xmlrpc_get_format(self, pagename):
+        """
+        Returns format of a page
+        """
+        # User may read page?
+        if not self.request.user.may.read(pagename):
+            return self.notAllowedFault()
+        page = Page(self.request, pagename)
+        if not page.exists():
+            return xmlrpclib.Fault("NOT_EXIST", "Page does not exist.")
+        format = page.pi['format']
+        return self._outstr(format)
+
     def xmlrpc_getPage(self, pagename):
         """
         Invoke xmlrpc_getPageVersion with rev=None
