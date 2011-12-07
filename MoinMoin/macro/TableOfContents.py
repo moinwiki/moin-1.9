@@ -157,7 +157,8 @@ Prints a table of contents.
 
     # this is so we get a correctly updated TOC if we just preview in the editor -
     # the new content is not stored on disk yet, but available as macro.parser.raw:
-    p.set_raw_body(macro.parser.raw, modified=1)
+    format = '#format %s\n' % p.pi['format']
+    p.set_raw_body(format + macro.parser.raw, modified=1)
 
     output = macro.request.redirectedOutput(p.send_page,
                                             content_only=True,
