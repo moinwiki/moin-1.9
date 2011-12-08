@@ -90,6 +90,7 @@ acl rights for the user. @EMAIL@ becomes expanded to the users obfuscated mail a
             homepage_default_text = homepage_default_text.replace('@EMAIL@', "<<MailTo(%(obfuscated_mail)s)>>")
         else:
             homepage_default_text = '''#acl %(username)s:read,write,delete,revert Default
+#format wiki
 
 == %(username)s ==
 
