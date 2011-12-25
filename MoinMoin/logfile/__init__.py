@@ -77,7 +77,7 @@ class LineBuffer:
         self.offsets = offsets
         self.len = linecount
         # Decode lines after offset in file is calculated
-        self.lines = [unicode(line, config.charset) for line in lines]
+        self.lines = [unicode(line.rstrip('\n'), config.charset) for line in lines]
 
 
 class LogFile:
@@ -159,7 +159,7 @@ class LogFile:
                     raise
             return self._input
         elif name == "_output":
-            self._output = codecs.open(self.__filename, 'a', config.charset)
+            self._output = codecs.open(self.__filename, 'ab', config.charset)
             return self._output
         else:
             raise AttributeError(name)
