@@ -447,6 +447,36 @@ class XmlRpcBase:
             'version': version,
             }
 
+    def xmlrpc_getProcessingInstruction(self, pagename, pi):
+        """
+        Invoke getProcessingInstructionVersion with rev=None
+        """
+        return self.xmlrpc_getProcessingInstructionVersion(pagename, rev=None, pi=pi)
+
+    def xmlrpc_getProcessingInstructionVersion(self, pagename, rev, pi):
+        """
+        Returns value of Processing Instruction
+        @param pagename: pagename (utf-8)
+        @param rev: revision number (int)
+        @param pi: PI key
+        """
+        # User may read page?
+        if not self.request.user.may.read(pagename):
+            return self.notAllowedFault()
+        if rev is not None:
+            page = Page(self.request, pagename, rev=rev)
+        else:
+            page = Page(self.request, pagename)
+        if not page.exists():
+            return xmlrpclib.Fault("NOT_EXIST", "Page does not exist.")
+        if pi is None:
+            return xmlrpclib.Fault("NOT_EXIST", "Processing Instruction not given.")
+        try:
+            instruction = page.pi[pi]
+        except KeyError:
+            return xmlrpclib.Fault("NOT_EXIST", "Processing Instruction does not exist.")
+        return self._outstr(instruction)
+
     def xmlrpc_getPage(self, pagename):
         """
         Invoke xmlrpc_getPageVersion with rev=None
