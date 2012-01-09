@@ -32,6 +32,9 @@ Version 1.9.4:
   Fixes:
    * Fix XSS / remove javascript URL support in rst parser (CVE-2011-1058).
    * werkzeug: Removed a dummy import. Fixes Python 2.7 compatibility.
+   * Fix linux-to-windows edit-log migration/upgrade issue (wrong line endings)
+   * logfile: strip \n lineends from line data (\n is part of the file
+     structure, not of the data)
    * Fix for MoinMoinBugs/SinglePageSlideShowAndParserMarkup.
    * Simplify auto scroll initialization; fix bug in IE init discovered when
      using IE7 on pages with wide tables.
@@ -50,10 +53,13 @@ Version 1.9.4:
    * revert action: catch and display all SaveErrors when revert failed.
    * Fixed bug in groups formatter which caused the last list item to be not in the group.
    * Avoid strange exception in zipfile.py for pre-1980 timestamps.
+   * TableOfContents: fix for other markups than default wiki markup, e.g. rst
+   * script.account.homepage: added wiki format to homepage_default_text
 
   New features:
    * Added print mode to action.SlideShow, see
      FeatureRequests/PrintableSinglePageSlideshows.
+   * xmlrpc: new methods xmlrpc_getProcessingInstruction(Version)
    * Add support for other password hashes (all of them will get auto-upgraded
      to SSHA when user logs in):
      * {DES} (Unix crypt(3))
