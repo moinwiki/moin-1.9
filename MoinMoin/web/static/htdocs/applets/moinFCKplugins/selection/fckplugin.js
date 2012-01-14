@@ -321,6 +321,8 @@ else {
   FCKSelection.GetStartNode = function()
     {
       var oSelection = FCKSelection.GetSelection();
+      if (oSelection.rangeCount == 0) // this fixes Chrome Browser exception on FCKeditor init
+        return null;
       // startContainer returns the parent of the first node in the selection
       var oContainer = oSelection.getRangeAt(0).startContainer;
       // The offset within the startContainer where the range starts
@@ -343,6 +345,8 @@ else {
   FCKSelection.GetEndNode = function()
   {
     var oSelection = FCKSelection.GetSelection();
+    if (oSelection.rangeCount == 0) // this fixes Chrome Browser exception on FCKeditor init
+      return null;
     var oContainer = oSelection.getRangeAt(0).endContainer;
     var iOffset = oSelection.getRangeAt(0).startEndset;
 
