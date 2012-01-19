@@ -64,7 +64,7 @@ class Parser:
         self.rules = MoinRules(wiki_words=True,
                                url_protocols=config.url_schemas)
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         """Create and call the true parser and emitter."""
 
         document = CreoleParser(self.raw, self.rules).parse()

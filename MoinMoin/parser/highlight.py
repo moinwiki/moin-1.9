@@ -152,7 +152,7 @@ class Parser:
             params = format_args
         self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, params)
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         _ = self.request.getText
         fmt = PygmentsFormatter(formatter, start_line=self.start_line)
 

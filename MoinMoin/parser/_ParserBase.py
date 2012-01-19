@@ -196,7 +196,7 @@ class ParserBase:
             fmt = FormatText(name)
         self.rule_fmt[name] = fmt
 
-    def format(self, formatter, form=None):
+    def format(self, formatter, form=None, **kw):
         """ Send the text.
         """
 

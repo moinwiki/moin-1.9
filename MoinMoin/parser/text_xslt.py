@@ -36,7 +36,7 @@ class Parser:
         self.base_uri = 'wiki://Self/'
         self.key = 'xslt'
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         """ Send the text. """
         _ = self._
 
