@@ -63,7 +63,7 @@ except ImportError:
             self.raw = raw
             self.request = request
 
-        def format(self, formatter):
+        def format(self, formatter, **kw):
             _ = self.request.getText
             from MoinMoin.parser.text import Parser as TextParser
             self.request.write(formatter.sysmsg(1) +
@@ -200,7 +200,7 @@ Lists: * bullets; 1., a. numbered items.
         self.request = request
         self.form = request.form
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         # Create our simple parser
         parser = MoinDirectives(self.request)
 

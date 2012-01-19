@@ -59,7 +59,7 @@ class Parser(XsltParser):
         self.wikiParser = WikiParser(raw=self.raw, request=self.request, pretty_url=1)
         self.key = 'docbook'
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         self.wikiParser.formatter = formatter
         XsltParser.format(self, formatter)
 

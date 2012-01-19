@@ -182,7 +182,7 @@ class Parser:
             data.addRow(tuple(row))
         self.data = data
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         browser = DataBrowserWidget(self.request, show_header=self._show_header)
         browser.setData(self.data)
         self.request.write(browser.render(method="GET"))

@@ -1425,7 +1425,7 @@ class Parser:
         else:
             return ''
 
-    def format(self, formatter, inhibit_p=False):
+    def format(self, formatter, inhibit_p=False, **kw):
         """ For each line, scan through looking for magic
             strings, outputting verbatim any intervening text.
         """

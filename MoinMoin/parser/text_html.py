@@ -23,7 +23,7 @@ class Parser:
         self.raw = raw
         self.request = request
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         """ Send the text. """
         try:
             self.request.write(formatter.rawHTML(Markup(self.raw).sanitize()))

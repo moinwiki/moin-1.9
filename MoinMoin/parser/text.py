@@ -29,7 +29,7 @@ class Parser:
         self._ = request.getText
         self.start_line = kw.get('start_line', 0)
 
-    def format(self, formatter):
+    def format(self, formatter, **kw):
         """ Send the text. """
 
         self.lines = self.raw.expandtabs().split('\n')
