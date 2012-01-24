@@ -18,6 +18,10 @@ Known main issues:
 
 Version 1.9.4:
 
+  SECURITY HINT: make sure you have allow_xslt = False (or just do not use
+  allow_xslt at all in your wiki configs, False is the internal default).
+  Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
+
   HINT: Python >= 2.5 is maybe required!
   To use all the code that is bundled in the MoinMoin download release,
   you are required to have Python >= 2.5 now. This is primarily due to
