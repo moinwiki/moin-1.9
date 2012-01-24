@@ -787,7 +787,7 @@ options_no_group_name = {
      "Exclude unwanted actions (list of strings)"),
 
     ('allow_xslt', False,
-     "if True, enables XSLT processing via 4Suite (note that this enables anyone with enough know-how to insert '''arbitrary HTML''' into your wiki, which is why it defaults to `False`)"),
+        "if True, enables XSLT processing via 4Suite (Note that this is DANGEROUS. It enables anyone who can edit the wiki to get '''read/write access to your filesystem as the moin process uid/gid''' and to insert '''arbitrary HTML''' into your wiki pages, which is why this setting defaults to `False` (XSLT disabled). Do not set it to other values, except if you know what you do and if you have very trusted editors only)."),
 
     ('password_checker', DefaultExpression('_default_password_checker'),
      'checks whether a password is acceptable (default check is length >= 6, at least 4 different chars, no keyboard sequence, not username used somehow (you can switch this off by using `None`)'),
