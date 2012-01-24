@@ -1687,8 +1687,7 @@ msgid "HelpOnSlideShows/100 Creating the slides"
 msgstr "ПомощЗаПрезентации/100 Създаване на слайдове"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
-"ПомощЗаПрезентации/900 Пускане на вашата презентация"
+msgstr "ПомощЗаПрезентации/900 Пускане на вашата презентация"
 
 msgid "HelpOnSmileys"
 msgstr "ПомощЗаЕмотиконки"
