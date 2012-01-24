@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-24 23:58+0100\n"
-"PO-Revision-Date: 2011-01-31 15:48+0200\n"
+"PO-Revision-Date: 2011-11-16 15:48+0200\n"
 "Last-Translator: Nico Zanferrari <nicozanf@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -54,7 +54,7 @@ msgstr "Non è permesso modificare le versioni precedenti."
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"Il blocco alle modifiche è scaduto, prepararsi a possibili conflitti di "
+"Il blocco alle modifiche è scaduto, prepararsi a possibili conflitti tra "
 "modifiche."
 
 msgid "Page name is too long, try shorter name."
@@ -171,7 +171,7 @@ msgid "Comment:"
 msgstr "Commento:"
 
 msgid "<No addition>"
-msgstr "<nessuna>"
+msgstr "<nessuna aggiunta>"
 
 #, python-format
 msgid "Add to: %(category)s"
@@ -218,7 +218,7 @@ msgstr "Non si è autorizzati a eliminare questa pagina."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
-"Grazie per il proprio contributo. La vostra attenzione ai dettagli è molto "
+"Grazie del contributo. L'attenzione ai dettagli è molto "
 "apprezzata."
 
 #, python-format
@@ -259,7 +259,7 @@ msgstr "Pagina già salvata."
 
 msgid "You already edited this page! Please do not use the back button."
 msgstr ""
-"La pagina è già stata salvata. Non usare il pulsante per tornare indietro."
+"La pagina è già stata modificata. Non usare il pulsante torna indietro."
 
 msgid "You did not change the page content, not saved!"
 msgstr ""
