@@ -59,6 +59,9 @@ Version 1.9.4:
    * Avoid strange exception in zipfile.py for pre-1980 timestamps.
    * TableOfContents: fix for other markups than default wiki markup, e.g. rst
    * script.account.homepage: added wiki format to homepage_default_text
+   * Enable webkit based browsers (try chrome/safari/konqueror now) for GUI
+     editing (after fixing selection FCKeditor plugin for chrome).
+   * Parsers: avoid crash when Parser.format() call gets inhibit_p kw arg.
 
   New features:
    * Added print mode to action.SlideShow, see
