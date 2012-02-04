@@ -99,7 +99,11 @@ General syntax: moin [options] maint globaledit [globaledit-options]
             content_lines.append('')
 
         if masterpage and masterpage.endswith('Template'):
-            changedtext = master_lines + [format_line, language_line, ] + pragma_lines + content_lines
+            if masterpage.startswith('Homepage'):
+                # keep the comments on the Homepage...Template, but after the master lines:
+                changedtext = master_lines + comment_lines + [format_line, language_line, ] + pragma_lines + content_lines
+            else:
+                changedtext = master_lines + [format_line, language_line, ] + pragma_lines + content_lines
         else:
             changedtext = comment_lines + master_lines + acl_lines + [format_line, language_line, ] + pragma_lines + content_lines
         changedtext = '\n'.join(changedtext)
