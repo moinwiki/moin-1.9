@@ -141,7 +141,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         else:
             mtime_msg = None
 
-        word_re = re.compile(r'(\"[\w\s]+"|\w+)')
+        word_re = re.compile(r'(\"[\w\s]+"|\w+)', re.UNICODE)
         needle = ''
         if categories[0]:
             needle += 'category:%s ' % ','.join(categories)
