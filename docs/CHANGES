@@ -62,6 +62,9 @@ Version 1.9.4:
    * Enable webkit based browsers (try chrome/safari/konqueror now) for GUI
      editing (after fixing selection FCKeditor plugin for chrome).
    * Parsers: avoid crash when Parser.format() call gets inhibit_p kw arg.
+   * advancedsearch: fix problem with non-ascii chars breaking up words for OR
+     and NOT terms
+   * fix globaledit script to keep comments on Homepage...Template pages
 
   New features:
    * Added print mode to action.SlideShow, see
