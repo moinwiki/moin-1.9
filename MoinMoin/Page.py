@@ -924,6 +924,9 @@ class Page(object):
                         args = args.split()
                         if len(args) >= 1:
                             delay = max(int(args[0]), mindelay)
+                        else:
+                            # we need at least 1 argument
+                            raise ValueError
                         if len(args) >= 2:
                             target = args[1]
                         else:
