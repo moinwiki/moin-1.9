@@ -190,12 +190,14 @@ def execute(pagename, request):
                 # searching for the matching pages doesn't really belong here
                 revisions = page.getRevList()
 
+                item_rev = int(item.rev)
+
                 rl = len(revisions)
                 for idx in range(rl):
                     rev = revisions[idx]
-                    if rev <= item.rev:
+                    if rev <= item_rev:
                         if idx + 1 < rl:
-                            lines = wikiutil.pagediff(request, item.pagename, revisions[idx+1], item.pagename, 0, ignorews=1)
+                            lines = wikiutil.pagediff(request, item.pagename, revisions[idx+1], item.pagename, item_rev, ignorews=1)
                             if len(lines) > 20:
                                 lines = lines[:20] + ['...\n']
                             lines = '\n'.join(lines)
