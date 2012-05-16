@@ -1307,6 +1307,10 @@ options = {
                             "lines URL query parameter of rss_rc action."),
       ('lines_limit', 100, "Limit for possible line count for diffs added as "
                            "item descriptions in RSS."),
+      ('show_attachment_entries', 0, "If set to 1, items, related to "
+                                     "attachment management, would be added to "
+                                     "RSS feed. Can be changed via show_att "
+                                     "URL query parameter of rss_rc action."),
     )),
 }
 
