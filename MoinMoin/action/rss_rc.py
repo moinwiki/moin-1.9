@@ -232,24 +232,25 @@ def execute(pagename, request):
                 handler.simpleNode('description', desc_text)
 
             # contributor
-            edattr = {}
-            if cfg.show_hosts:
-                edattr[(handler.xmlns['wiki'], 'host')] = item.hostname
-            if item.editor[0] == 'interwiki':
-                edname = "%s:%s" % item.editor[1]
-                ##edattr[(None, 'link')] = baseurl + wikiutil.quoteWikiname(edname)
-            else: # 'ip'
-                edname = item.editor[1]
-                ##edattr[(None, 'link')] = link + "?action=info"
+            if cfg.show_names:
+                edattr = {}
+                if cfg.show_hosts:
+                    edattr[(handler.xmlns['wiki'], 'host')] = item.hostname
+                if item.editor[0] == 'interwiki':
+                    edname = "%s:%s" % item.editor[1]
+                    ##edattr[(None, 'link')] = baseurl + wikiutil.quoteWikiname(edname)
+                else: # 'ip'
+                    edname = item.editor[1]
+                    ##edattr[(None, 'link')] = link + "?action=info"
 
-            # this edattr stuff, esp. None as first tuple element breaks things (tracebacks)
-            # if you know how to do this right, please send us a patch
+                # this edattr stuff, esp. None as first tuple element breaks things (tracebacks)
+                # if you know how to do this right, please send us a patch
 
-            handler.startNode(('dc', 'contributor'))
-            handler.startNode(('rdf', 'Description'), attr=edattr)
-            handler.simpleNode(('rdf', 'value'), edname)
-            handler.endNode(('rdf', 'Description'))
-            handler.endNode(('dc', 'contributor'))
+                handler.startNode(('dc', 'contributor'))
+                handler.startNode(('rdf', 'Description'), attr=edattr)
+                handler.simpleNode(('rdf', 'value'), edname)
+                handler.endNode(('rdf', 'Description'))
+                handler.endNode(('dc', 'contributor'))
 
             # wiki extensions
             handler.simpleNode(('wiki', 'version'), "%i" % (item.ed_time_usecs))
