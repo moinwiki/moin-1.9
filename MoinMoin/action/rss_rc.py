@@ -30,31 +30,37 @@ def execute(pagename, request):
     cfg = request.cfg
 
     # get params
-    items_limit = 100
-    lines_limit = 100
+    def_max_items = max_items = getattr(cfg, "rss_items_default", 15)
+    items_limit = getattr(cfg, "rss_items_limit", 100)
+    unique = getattr(cfg, "rss_unique", 0)
+    diffs = getattr(cfg, "rss_diffs", 0)
+    ddiffs = getattr(cfg, "rss_ddiffs", 0)
+    max_lines = getattr(cfg, "rss_lines_default", 20)
+    lines_limit = getattr(cfg, "rss_lines_limit", 100)
+
     try:
-        max_items = int(request.values['items'])
-        max_items = min(max_items, items_limit) # not more than `items_limit`
-    except (KeyError, ValueError):
-        # not more than 15 items in a RSS file by default
-        max_items = 15
-    try:
-        unique = int(request.values.get('unique', 0))
+        max_items = min(int(request.values.get('items', max_items)),
+                        items_limit)
     except ValueError:
-        unique = 0
+        pass
     try:
-        diffs = int(request.values.get('diffs', 0))
+        unique = int(request.values.get('unique', unique))
     except ValueError:
-        diffs = 0
+        pass
+    try:
+        diffs = int(request.values.get('diffs', diffs))
+    except ValueError:
+        pass
     ## ddiffs inserted by Ralf Zosel <ralf@zosel.com>, 04.12.2003
     try:
-        ddiffs = int(request.values.get('ddiffs', 0))
+        ddiffs = int(request.values.get('ddiffs', ddiffs))
     except ValueError:
-        ddiffs = 0
+        pass
     try:
-        max_lines = min(int(request.values.get('lines', 20)), lines_limit)
+        max_lines = min(int(request.values.get('lines', max_lines)),
+                        lines_limit)
     except ValueError:
-        max_lines = 20
+        pass
 
     # get data
     log = editlog.EditLog(request)
@@ -122,7 +128,7 @@ def execute(pagename, request):
         handler.startDocument()
         handler._out.write(
             '<!--\n'
-            '    Add an "items=nnn" URL parameter to get more than the default 15 items.\n'
+            '    Add an "items=nnn" URL parameter to get more than the default %d items.\n'
             '    You cannot get more than %d items though.\n'
             '    \n'
             '    Add "unique=1" to get a list of changes where page names are unique,\n'
@@ -137,8 +143,8 @@ def execute(pagename, request):
             '    \n'
             '    Current settings: items=%i, unique=%i, diffs=%i, ddiffs=%i, \n'
             '    lines=%i\n'
-            '-->\n' % (items_limit, lines_limit, max_items, unique, diffs,
-                       ddiffs, max_lines)
+            '-->\n' % (def_max_items, items_limit, lines_limit, max_items,
+                       unique, diffs, ddiffs, max_lines)
             )
 
         # emit channel description
