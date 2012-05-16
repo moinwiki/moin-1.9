@@ -24,6 +24,20 @@ def attach_url(request, pagename, filename, do):
     url = AttachFile.getAttachUrl(pagename, filename, request, do=do)
     return request.getQualifiedURL(url)
 
+def match_page(pagename, page_pattern):
+    # Match everything for empty pattern
+    if not page_pattern:
+        return True
+    # If pattern begins with circumflex, interpret it as regex
+    elif page_pattern[0] == "^":
+        return re.match(page_pattern, pagename) is not None
+    # Handy hack for getting rss for page tree
+    elif page_pattern.endswith("/"):
+        return (pagename == page_pattern[:-1]) or \
+            pagename.startswith(page_pattern)
+    else:
+        return pagename == page_pattern
+
 def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
@@ -44,6 +58,7 @@ def execute(pagename, request):
     max_lines = getattr(cfg, "rss_lines_default", 20)
     lines_limit = getattr(cfg, "rss_lines_limit", 100)
     show_att = getattr(cfg, "rss_show_attachment_entries", 0)
+    page_pattern = getattr(cfg, "rss_page_filter_pattern", "")
 
     try:
         max_items = min(int(request.values.get('items', max_items)),
@@ -72,6 +87,10 @@ def execute(pagename, request):
         show_att = int(request.values.get('show_att', show_att))
     except ValueError:
         pass
+    try:
+        page_pattern = request.values.get('page', page_pattern)
+    except ValueError:
+        pass
 
     # get data
     log = editlog.EditLog(request)
@@ -83,7 +102,9 @@ def execute(pagename, request):
         if not request.user.may.read(line.pagename):
             continue
         if ((not show_att and not line.action.startswith('SAVE')) or
-            ((line.pagename in pages) and unique)): continue
+            ((line.pagename in pages) and unique) or
+            not match_page(line.pagename, page_pattern)):
+            continue
         line.editor = line.getInterwikiEditorData(request)
         line.time = timefuncs.tmtuple(wikiutil.version2timestamp(line.ed_time_usecs)) # UTC
         logdata.append(line)
@@ -155,10 +176,17 @@ def execute(pagename, request):
             '    \n'
             '    Add "show_att=1" to show items related to attachments.\n'
             '    \n'
+            '    Add "page=pattern" to show feed only for specific pages.\n'
+            '    Pattern can be empty (it would match to all pages), \n'
+            '    can start with circumflex (it would be interpreted as \n'
+            '    regular expression in this case), end with slash (for \n'
+            '    getting feed for page tree) or point to specific page (if \n'
+            '    none of the above can be applied).\n'
+            '    \n'
             '    Current settings: items=%i, unique=%i, diffs=%i, ddiffs=%i, \n'
-            '    lines=%i, show_att=%i\n'
+            '    lines=%i, show_att=%i, page=%s\n'
             '-->\n' % (def_max_items, items_limit, lines_limit, max_items,
-                       unique, diffs, ddiffs, max_lines, show_att)
+                       unique, diffs, ddiffs, max_lines, show_att, page_pattern)
             )
 
         # emit channel description
