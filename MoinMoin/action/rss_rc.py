@@ -161,8 +161,9 @@ def execute(pagename, request):
         handler.startDocument()
         handler._out.write(unicode(
             '<!--\n'
-            '    Add an "items=nnn" URL parameter to get more than the default %d items.\n'
-            '    You cannot get more than %d items though.\n'
+            '    Add an "items=nnn" URL parameter to get more than the \n'
+            '    default %(def_max_items)d items. You cannot get more than \n'
+            '    %(items_limit)d items though.\n'
             '    \n'
             '    Add "unique=1" to get a list of changes where page names are unique,\n'
             '    i.e. where only the latest change of each page is reflected.\n'
@@ -172,7 +173,7 @@ def execute(pagename, request):
             '    Add "ddiffs=1" to link directly to the diff (good for FeedReader).\n'
             '    \n'
             '    Add "lines=nnn" to change maximum number of diff/body lines \n'
-            '    to show. Cannot be more than %d.\n'
+            '    to show. Cannot be more than %(lines_limit)d.\n'
             '    \n'
             '    Add "show_att=1" to show items related to attachments.\n'
             '    \n'
@@ -183,10 +184,10 @@ def execute(pagename, request):
             '    getting feed for page tree) or point to specific page (if \n'
             '    none of the above can be applied).\n'
             '    \n'
-            '    Current settings: items=%i, unique=%i, diffs=%i, ddiffs=%i, \n'
-            '    lines=%i, show_att=%i, page=%s\n'
-            '-->\n' % (def_max_items, items_limit, lines_limit, max_items,
-                       unique, diffs, ddiffs, max_lines, show_att, page_pattern)
+            '    Current settings: items=%(max_items)i, unique=%(unique)i, \n'
+            '    diffs=%(diffs)i, ddiffs=%(ddiffs)i, lines=%(max_lines)i, \n'
+            '    show_att=%(show_att)i, page=%(page_pattern)s\n'
+            '-->\n' % locals()
             ).encode(config.charset))
 
         # emit channel description
