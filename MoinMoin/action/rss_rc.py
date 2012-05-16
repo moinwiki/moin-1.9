@@ -159,7 +159,7 @@ def execute(pagename, request):
 
         # start SAX stream
         handler.startDocument()
-        handler._out.write(
+        handler._out.write(unicode(
             '<!--\n'
             '    Add an "items=nnn" URL parameter to get more than the default %d items.\n'
             '    You cannot get more than %d items though.\n'
@@ -187,7 +187,7 @@ def execute(pagename, request):
             '    lines=%i, show_att=%i, page=%s\n'
             '-->\n' % (def_max_items, items_limit, lines_limit, max_items,
                        unique, diffs, ddiffs, max_lines, show_att, page_pattern)
-            )
+            ).encode(config.charset))
 
         # emit channel description
         handler.startNode('channel', {
