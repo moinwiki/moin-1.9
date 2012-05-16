@@ -31,6 +31,7 @@ def execute(pagename, request):
 
     # get params
     items_limit = 100
+    lines_limit = 100
     try:
         max_items = int(request.values['items'])
         max_items = min(max_items, items_limit) # not more than `items_limit`
@@ -50,6 +51,10 @@ def execute(pagename, request):
         ddiffs = int(request.values.get('ddiffs', 0))
     except ValueError:
         ddiffs = 0
+    try:
+        max_lines = min(int(request.values.get('lines', 20)), lines_limit)
+    except ValueError:
+        max_lines = 20
 
     # get data
     log = editlog.EditLog(request)
@@ -76,7 +81,7 @@ def execute(pagename, request):
     del log
 
     timestamp = timefuncs.formathttpdate(lastmod)
-    etag = "%d-%d-%d-%d-%d" % (lastmod, max_items, diffs, ddiffs, unique)
+    etag = "%d-%d-%d-%d-%d-%d" % (lastmod, max_items, diffs, ddiffs, unique, max_lines)
 
     # for 304, we look at if-modified-since and if-none-match headers,
     # one of them must match and the other is either not there or must match.
@@ -126,8 +131,14 @@ def execute(pagename, request):
             '    Add "diffs=1" to add change diffs to the description of each items.\n'
             '    \n'
             '    Add "ddiffs=1" to link directly to the diff (good for FeedReader).\n'
-            '    Current settings: items=%i, unique=%i, diffs=%i, ddiffs=%i'
-            '-->\n' % (items_limit, max_items, unique, diffs, ddiffs)
+            '    \n'
+            '    Add "lines=nnn" to change maximum number of diff/body lines \n'
+            '    to show. Cannot be more than %d.\n'
+            '    \n'
+            '    Current settings: items=%i, unique=%i, diffs=%i, ddiffs=%i, \n'
+            '    lines=%i\n'
+            '-->\n' % (items_limit, lines_limit, max_items, unique, diffs,
+                       ddiffs, max_lines)
             )
 
         # emit channel description
@@ -200,7 +211,7 @@ def execute(pagename, request):
                     lines = wikiutil.pagediff(request, item.pagename,
                         item_rev - 1, item.pagename, item_rev, ignorews=1)
 
-                if len(lines) > 20:
+                if len(lines) > max_lines:
                     lines = lines[:max_lines] + ['...\n']
 
                 lines = '\n'.join(lines)
