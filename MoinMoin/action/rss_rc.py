@@ -175,34 +175,42 @@ def execute(pagename, request):
 
             # general attributes
             handler.simpleNode('title', item.pagename)
-            if ddiffs:
-                handler.simpleNode('link', full_url(request, page, querystr={'action': 'diff'}))
-            else:
-                handler.simpleNode('link', full_url(request, page))
-
             handler.simpleNode(('dc', 'date'), timefuncs.W3CDate(item.time))
 
             # description
             desc_text = item.comment
+
+            item_rev = int(item.rev)
+
+            # If we use diffs/ddiffs, we should calculate proper links and content
+            if ddiffs:
+                # first revision can't have older revisions to diff with
+                if item_rev == 1:
+                    handler.simpleNode('link', full_url(request, page,
+                        querystr={'action': 'recall', 'rev': str(item_rev)}))
+                else:
+                        handler.simpleNode('link', full_url(request, page,
+                            querystr={'action': 'diff', 'rev1': str(item_rev),
+                                      'rev2': str(item_rev - 1)}))
+
             if diffs:
-                # TODO: rewrite / extend wikiutil.pagediff
-                # searching for the matching pages doesn't really belong here
-                revisions = page.getRevList()
+                if item_rev == 1:
+                    lines = Page(request, item.pagename, rev=item_rev).getlines()
+                else:
+                    lines = wikiutil.pagediff(request, item.pagename,
+                        item_rev - 1, item.pagename, item_rev, ignorews=1)
 
-                item_rev = int(item.rev)
+                if len(lines) > 20:
+                    lines = lines[:max_lines] + ['...\n']
 
-                rl = len(revisions)
-                for idx in range(rl):
-                    rev = revisions[idx]
-                    if rev <= item_rev:
-                        if idx + 1 < rl:
-                            lines = wikiutil.pagediff(request, item.pagename, revisions[idx+1], item.pagename, item_rev, ignorews=1)
-                            if len(lines) > 20:
-                                lines = lines[:20] + ['...\n']
-                            lines = '\n'.join(lines)
-                            lines = wikiutil.escape(lines)
-                            desc_text = '%s\n<pre>\n%s\n</pre>\n' % (desc_text, lines)
-                        break
+                lines = '\n'.join(lines)
+                lines = wikiutil.escape(lines)
+
+                desc_text = '%s\n<pre>\n%s\n</pre>\n' % (desc_text, lines)
+
+            if not ddiffs:
+                handler.simpleNode('link', full_url(request, page))
+
             if desc_text:
                 handler.simpleNode('description', desc_text)
 
