@@ -28,6 +28,7 @@ def execute(pagename, request):
         return
 
     cfg = request.cfg
+    _ = request.getText
 
     # get params
     def_max_items = max_items = getattr(cfg, "rss_items_default", 15)
@@ -183,9 +184,18 @@ def execute(pagename, request):
             handler.simpleNode('url', logo)
             handler.endNode('image')
 
+        # Mapping { oldname: curname } for maintaining page renames
+        pagename_map = {}
+
         # emit items
         for item in logdata:
-            page = Page(request, item.pagename)
+            if item.pagename in pagename_map:
+                cur_pagename = pagename_map[item.pagename]
+            else:
+                cur_pagename = item.pagename
+            page = Page(request, cur_pagename)
+            action = item.action
+            comment = item.comment
             anchor = "%04d%02d%02d%02d%02d%02d" % item.time[:6]
             rdflink = full_url(request, page, anchor=anchor)
             handler.startNode('item', attr={(handler.xmlns['rdf'], 'about'): rdflink, })
@@ -194,8 +204,28 @@ def execute(pagename, request):
             handler.simpleNode('title', item.pagename)
             handler.simpleNode(('dc', 'date'), timefuncs.W3CDate(item.time))
 
-            # description
-            desc_text = item.comment
+            show_diff = diffs
+
+            if action == 'SAVE/REVERT':
+                to_rev = int(item.extra)
+                comment = (_("Revert to revision %(rev)d.") % {
+                    'rev': to_rev}) + "<br />" \
+                    + _("Comment:") + " " + comment
+
+            elif action == 'SAVE/RENAME':
+                show_diff = 0
+                comment = (_("Renamed from '%(oldpagename)s'.") % {
+                    'oldpagename': item.extra}) + "<br />" \
+                    + _("Comment:") + " " + comment
+                if item.pagename in pagename_map:
+                    newpage = pagename_map[item.pagename]
+                    del pagename_map[item.pagename]
+                    pagename_map[item.extra] = newpage
+                else:
+                    pagename_map[item.extra] = item.pagename
+
+            elif action == 'SAVENEW':
+                comment = _("New page:\n") + comment
 
             item_rev = int(item.rev)
 
@@ -206,16 +236,17 @@ def execute(pagename, request):
                     handler.simpleNode('link', full_url(request, page,
                         querystr={'action': 'recall', 'rev': str(item_rev)}))
                 else:
-                        handler.simpleNode('link', full_url(request, page,
-                            querystr={'action': 'diff', 'rev1': str(item_rev),
-                                      'rev2': str(item_rev - 1)}))
+                    handler.simpleNode('link', full_url(request, page,
+                        querystr={'action': 'diff',
+                                  'rev1': str(item_rev),
+                                  'rev2': str(item_rev - 1)}))
 
-            if diffs:
+            if show_diff:
                 if item_rev == 1:
-                    lines = Page(request, item.pagename, rev=item_rev).getlines()
+                    lines = Page(request, cur_pagename, rev=item_rev).getlines()
                 else:
-                    lines = wikiutil.pagediff(request, item.pagename,
-                        item_rev - 1, item.pagename, item_rev, ignorews=1)
+                    lines = wikiutil.pagediff(request, cur_pagename,
+                        item_rev - 1, cur_pagename, item_rev, ignorews=1)
 
                 if len(lines) > max_lines:
                     lines = lines[:max_lines] + ['...\n']
@@ -223,13 +254,13 @@ def execute(pagename, request):
                 lines = '\n'.join(lines)
                 lines = wikiutil.escape(lines)
 
-                desc_text = '%s\n<pre>\n%s\n</pre>\n' % (desc_text, lines)
+                comment = '%s\n<pre>\n%s\n</pre>\n' % (comment, lines)
 
             if not ddiffs:
                 handler.simpleNode('link', full_url(request, page))
 
-            if desc_text:
-                handler.simpleNode('description', desc_text)
+            if comment:
+                handler.simpleNode('description', comment)
 
             # contributor
             if cfg.show_names:
