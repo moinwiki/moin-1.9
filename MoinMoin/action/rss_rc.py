@@ -197,7 +197,7 @@ def execute(pagename, request):
         handler.simpleNode('title', cfg.sitename)
         page = Page(request, pagename)
         handler.simpleNode('link', full_url(request, page))
-        handler.simpleNode('description', 'RecentChanges at %s' % cfg.sitename)
+        handler.simpleNode('description', u'RecentChanges at %s' % cfg.sitename)
         if logo:
             handler.simpleNode('image', None, {
                 (handler.xmlns['rdf'], 'resource'): logo,
@@ -261,7 +261,7 @@ def execute(pagename, request):
                         handler.simpleNode('link', attach_url(request,
                             cur_pagename, filename, do='get'))
 
-                    comment = _("Upload of attachment '%(filename)s'.") % {
+                    comment = _(u"Upload of attachment '%(filename)s'.") % {
                         'filename': filename}
 
                 elif action == 'ATTDEL':
@@ -269,7 +269,7 @@ def execute(pagename, request):
                         handler.simpleNode('link', full_url(request, page,
                             querystr={'action': 'AttachFile'}))
 
-                    comment = _("Attachment '%(filename)s' deleted.") % {
+                    comment = _(u"Attachment '%(filename)s' deleted.") % {
                         'filename': filename}
 
                 elif action == 'ATTDRW':
@@ -277,19 +277,19 @@ def execute(pagename, request):
                         handler.simpleNode('link', attach_url(request,
                             cur_pagename, filename, do='view'))
 
-                    comment = _("Drawing '%(filename)s' saved.") % {
+                    comment = _(u"Drawing '%(filename)s' saved.") % {
                         'filename': filename}
 
             elif action.startswith('SAVE'):
                 if action == 'SAVE/REVERT':
                     to_rev = int(item.extra)
-                    comment = (_("Revert to revision %(rev)d.") % {
+                    comment = (_(u"Revert to revision %(rev)d.") % {
                         'rev': to_rev}) + "<br />" \
                         + _("Comment:") + " " + comment
 
                 elif action == 'SAVE/RENAME':
                     show_diff = 0
-                    comment = (_("Renamed from '%(oldpagename)s'.") % {
+                    comment = (_(u"Renamed from '%(oldpagename)s'.") % {
                         'oldpagename': item.extra}) + "<br />" \
                         + _("Comment:") + " " + comment
                     if item.pagename in pagename_map:
@@ -300,7 +300,7 @@ def execute(pagename, request):
                         pagename_map[item.extra] = item.pagename
 
                 elif action == 'SAVENEW':
-                    comment = _("New page:\n") + comment
+                    comment = _(u"New page:\n") + comment
 
                 item_rev = int(item.rev)
 
@@ -332,7 +332,7 @@ def execute(pagename, request):
                     lines = '\n'.join(lines)
                     lines = wikiutil.escape(lines)
 
-                    comment = '%s\n<pre>\n%s\n</pre>\n' % (comment, lines)
+                    comment = u'%s\n<pre>\n%s\n</pre>\n' % (comment, lines)
 
                 if not ddiffs:
                     handler.simpleNode('link', full_url(request, page))
