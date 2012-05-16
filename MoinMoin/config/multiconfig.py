@@ -1311,6 +1311,14 @@ options = {
                                      "attachment management, would be added to "
                                      "RSS feed. Can be changed via show_att "
                                      "URL query parameter of rss_rc action."),
+      ('page_filter_pattern', "", "Default page filter pattern for RSS feed. "
+                                  "Empty pattern matches to any page. Pattern "
+                                  "beginning with circumflex is interpreted as "
+                                  "regular expression. Pattern ending with "
+                                  "slash matches page and all its subpages. "
+                                  "Otherwise pattern sets specific pagename. "
+                                  "Can be changed via page URL query parameter "
+                                  "of rss_rc action."),
     )),
 }
 
