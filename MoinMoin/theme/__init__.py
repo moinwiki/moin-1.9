@@ -869,8 +869,10 @@ var search_hint = "%(search_hint)s";
         """
         if not rss_supported:
             return False
-        return page.page_name == u'RecentChanges' or \
-           page.page_name == self.request.getText(u'RecentChanges')
+        return page.page_name in [u'RecentChanges',
+            self.request.getText(u'RecentChanges'),
+            self.request.cfg.page_front_page,
+            self.request.getText(self.request.cfg.page_front_page)]
 
     def rsshref(self, page):
         """ Create rss href, used for rss button and head link
@@ -899,6 +901,14 @@ var search_hint = "%(search_hint)s";
                     u'href="%s" type="application/rss+xml">') % (
                         wikiutil.escape(self.cfg.sitename, True),
                         wikiutil.escape(self.rsshref(page), True) )
+        elif rss_supported:
+            link = (u'<link rel="alternate" title="%s: %s" '
+                    u'href="%s" type="application/rss+xml">') % (
+                        wikiutil.escape(self.cfg.sitename, True), page.page_name,
+                        wikiutil.escape(page.url(self.request, querystr={
+                            'action': 'rss_rc', 'ddiffs': '1', 'unique': '0',
+                            'diffs': '1', 'show_att': '1',
+                            'page': page.page_name }, escape=0), True) )
         return link
 
     def html_head(self, d):
