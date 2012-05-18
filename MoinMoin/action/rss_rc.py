@@ -259,7 +259,7 @@ def execute(pagename, request):
                     # RSS readers.
                     if ddiffs:
                         handler.simpleNode('link', attach_url(request,
-                            cur_pagename, filename, do='get'))
+                            cur_pagename, filename, do='view'))
 
                     comment = _(u"Upload of attachment '%(filename)s'.") % {
                         'filename': filename}
