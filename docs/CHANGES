@@ -16,6 +16,24 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Current:
+
+  Fixes:
+   * rss_rc: Fix diffs added in RSS with diffs=1 (now they correspond to item
+     listed in feed and not just last page diffs). Links generated with ddiffs=1
+     also fixed.
+
+  New features:
+   * rss_rc: several new options added: lines parameter gives ability to set
+     maximum size of diffs showed in RSS. show_att parameter gives ability
+     to show information aboout attachment-related items in RSS. page parameter
+     gives ability to specify set of pages for which changes RSS feed should be
+     generated. Confgiuration of defaults and limits can now be done via wiki
+     configuration mechanism.
+   * As soon as it is now possible to provide RSS for page change history,
+     appropriate alternate link is now added for every page (controlled by
+     rss_show_page_history_link configuration parameter).
+
 Version 1.9.4:
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
