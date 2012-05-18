@@ -1319,6 +1319,8 @@ options = {
                                   "Otherwise pattern sets specific pagename. "
                                   "Can be changed via page URL query parameter "
                                   "of rss_rc action."),
+      ('show_page_history_link', True, "Add link to page change history "
+                                       "RSS feed in theme."),
     )),
 }
 

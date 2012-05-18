@@ -901,7 +901,7 @@ var search_hint = "%(search_hint)s";
                     u'href="%s" type="application/rss+xml">') % (
                         wikiutil.escape(self.cfg.sitename, True),
                         wikiutil.escape(self.rsshref(page), True) )
-        elif rss_supported:
+        elif rss_supported and self.cfg.rss_show_page_history_link:
             link = (u'<link rel="alternate" title="%s: %s" '
                     u'href="%s" type="application/rss+xml">') % (
                         wikiutil.escape(self.cfg.sitename, True), page.page_name,
