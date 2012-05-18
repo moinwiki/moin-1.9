@@ -50,15 +50,15 @@ def execute(pagename, request):
     _ = request.getText
 
     # get params
-    def_max_items = max_items = getattr(cfg, "rss_items_default", 15)
-    items_limit = getattr(cfg, "rss_items_limit", 100)
-    unique = getattr(cfg, "rss_unique", 0)
-    diffs = getattr(cfg, "rss_diffs", 0)
-    ddiffs = getattr(cfg, "rss_ddiffs", 0)
-    max_lines = getattr(cfg, "rss_lines_default", 20)
-    lines_limit = getattr(cfg, "rss_lines_limit", 100)
-    show_att = getattr(cfg, "rss_show_attachment_entries", 0)
-    page_pattern = getattr(cfg, "rss_page_filter_pattern", "")
+    def_max_items = max_items = cfg.rss_items_default
+    items_limit = cfg.rss_items_limit
+    unique = cfg.rss_unique
+    diffs = cfg.rss_diffs
+    ddiffs = cfg.rss_ddiffs
+    max_lines = cfg.rss_lines_default
+    lines_limit = cfg.rss_lines_limit
+    show_att = cfg.rss_show_attachment_entries
+    page_pattern = cfg.rss_page_filter_pattern
 
     try:
         max_items = min(int(request.values.get('items', max_items)),
