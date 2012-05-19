@@ -186,7 +186,7 @@ def execute(pagename, request):
             '    \n'
             '    Current settings: items=%(max_items)i, unique=%(unique)i, \n'
             '    diffs=%(diffs)i, ddiffs=%(ddiffs)i, lines=%(max_lines)i, \n'
-            '    show_att=%(show_att)i, page=%(page_pattern)s\n'
+            '    show_att=%(show_att)i\n'
             '-->\n' % locals()
             ).encode(config.charset))
 
