@@ -302,7 +302,8 @@ class SearchResults(object):
         return ''.join(output)
 
     def pageList(self, request, formatter, info=0, numbered=1,
-            paging=True, hitsFrom=0, hitsInfo=0):
+            paging=True, hitsFrom=0, hitsInfo=0, highlight_titles=True,
+            highlight_pages=True):
         """ Format a list of found pages
 
         @param request: current request
@@ -312,6 +313,9 @@ class SearchResults(object):
         @param paging: toggle paging
         @param hitsFrom: current position in the hits
         @param hitsInfo: toggle hits info line
+        @param highlight_titles: performa highlighting in page list
+        @param highlight_pages: add highlight parameter to page link URLs in
+                                search results
         @rtype: unicode
         @return formatted page list
         """
@@ -353,7 +357,7 @@ class SearchResults(object):
                         }
                     else:
                         querydict = None
-                querystr = self.querystring(querydict)
+                querystr = self.querystring(querydict, do_highlight=highlight_pages)
 
                 matchInfo = ''
                 if info:
@@ -366,7 +370,7 @@ class SearchResults(object):
                 item = [
                     f.listitem(1),
                     f.pagelink(1, page.page_name, querystr=querystr),
-                    self.formatTitle(page),
+                    self.formatTitle(page, highlight_titles=highlight_titles),
                     f.pagelink(0, page.page_name),
                     matchInfo,
                     info_for_hits,
@@ -382,7 +386,8 @@ class SearchResults(object):
         return self.getvalue()
 
     def pageListWithContext(self, request, formatter, info=1, context=180,
-                            maxlines=1, paging=True, hitsFrom=0, hitsInfo=0):
+                            maxlines=1, paging=True, hitsFrom=0, hitsInfo=0,
+                            highlight_titles=True, highlight_pages=True):
         """ Format a list of found pages with context
 
         @param request: current request
@@ -393,6 +398,8 @@ class SearchResults(object):
         @param paging: toggle paging
         @param hitsFrom: current position in the hits
         @param hitsInfo: toggle hits info line
+        @param highlight_titles: perform highlighting in page list
+        @param highlight_pages: add highlight parameter to page URLs
         @rtype: unicode
         @return formatted page list with context
         """
@@ -437,11 +444,12 @@ class SearchResults(object):
                         }
                     else:
                         querydict = None
-                querystr = self.querystring(querydict)
+                querystr = self.querystring(querydict,
+                    do_highlight=highlight_pages)
                 item = [
                     f.definition_term(1),
                     f.pagelink(1, page.page_name, querystr=querystr),
-                    self.formatTitle(page),
+                    self.formatTitle(page, highlight_titles=highlight_titles),
                     f.pagelink(0, page.page_name),
                     matchInfo,
                     f.definition_term(0),
@@ -600,17 +608,22 @@ class SearchResults(object):
 
         return cstart, cend
 
-    def formatTitle(self, page):
+    def formatTitle(self, page, highlight_titles=True):
         """ Format page title
 
         Invoke format match on all unique matches in page title.
 
         @param page: found page
+        @param highlight_titles: highlight search query matches
         @rtype: unicode
         @return: formatted title
         """
-        # Get unique title matches sorted by match.start
-        matches = page.get_matches(unique=1, sort='start', type=TitleMatch)
+
+        if highlight_titles:
+            # Get unique title matches sorted by match.start
+            matches = page.get_matches(unique=1, sort='start', type=TitleMatch)
+        else:
+            matches = []
 
         # Format
         pagename = page.page_name
@@ -756,14 +769,16 @@ class SearchResults(object):
                  f.paragraph(0)
         return result
 
-    def querystring(self, querydict=None):
+    def querystring(self, querydict=None, do_highlight=True):
         """ Return query string, used in the page link
 
         @keyword querydict: use these parameters (default: None)
+        @keyword do_highlight: add highlight parameter to URL (default: yes)
         """
         if querydict is None:
             querydict = {}
-        if 'action' not in querydict or querydict['action'] == 'AttachFile':
+        if do_highlight and ('action' not in querydict or
+            querydict['action'] == 'AttachFile'):
             highlight = self.query.highlight_re()
             if highlight:
                 querydict.update({'highlight': highlight})
