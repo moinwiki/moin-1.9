@@ -80,8 +80,7 @@ def search_box(type, macro):
     html = u'\n'.join(html)
     return macro.formatter.rawHTML(html)
 
-
-def execute(macro, needle):
+def execute(macro, needle, titlesearch=False, case=False):
     request = macro.request
     _ = request.getText
 
@@ -89,22 +88,76 @@ def execute(macro, needle):
     if needle is None:
         return search_box("fullsearch", macro)
 
+    highlight_titles = getattr(request.cfg, "search_macro_highlight_titles", 1)
+    highlight_pages = getattr(request.cfg, "search_macro_highlight_pages", 1)
+
+    err = None
+    # It is needed because otherwise macro instances like
+    # <<FullSearch(..., highlight=1)>> (which found occurrences of "...," and
+    # "highlight=1" before the change) begin behaving differently.
+    if getattr(request.cfg, "search_macro_parse_args", False):
+        needle_found = False
+
+        # parse_quoted_separated() is used instead of rsplit() and such for
+        # proper parsing cases like FullSearch(",") and so.
+        args = wikiutil.parse_quoted_separated_ext(needle,
+                                                   separator=",",
+                                                   name_value_separator="=")
+
+        # First non-tuple item in resulting list to be needle
+        for arg in args:
+            if isinstance(arg, tuple):
+                val = arg[1].lower() in [u'1', u'true', u'y']
+                if arg[0] == u"highlight_pages":
+                    highlight_pages = val
+                elif arg[0] == u"highlight_titles":
+                    highlight_titles = val
+                else:
+                    err = _(u"Unknown macro parameter: %s.") % arg[0]
+            elif isinstance(arg, basestring):
+                if not needle_found:
+                    needle_found = True
+                    needle = arg
+                else:
+                    err = _(u"More than one needle with "
+                             "search_macro_parse_args config option enabled "
+                             "('%(needle)s' found already, '%(arg)s' occured)"
+                             ) % {'needle': wikiutil.escape(needle),
+                                  'arg': wikiutil.escape(arg)}
+
+        if not needle_found:
+            needle = ''
+
     # With empty arguments, simulate title click (backlinks to page)
-    elif needle == '':
-        needle = '"%s"' % macro.formatter.page.page_name
+    if needle == '' and not titlesearch:
+        needle = u'"%s"' % macro.formatter.page.page_name
 
     # With whitespace argument, show error message like the one used in the search box
     # TODO: search should implement those errors message for clients
-    elif needle.isspace():
-        err = _('Please use a more selective search term instead of '
+    elif not needle.strip():
+        err = _(u'Please use a more selective search term instead of '
                 '{{{"%s"}}}', wiki=True) % needle
-        return '<span class="error">%s</span>' % err
+
+    if err:
+        return u'<span class="error">%s</span>' % err
 
     needle = needle.strip()
 
     # Search the pages and return the results
-    results = search.searchPages(request, needle, sort='page_name')
+    try:
+        results = search.searchPages(request, needle, titlesearch=titlesearch,
+                                     case=case, sort='page_name')
 
-    return results.pageList(request, macro.formatter, paging=False)
+        ret = results.pageList(request, macro.formatter, paging=False,
+            highlight_titles=highlight_titles, highlight_pages=highlight_pages)
 
+    except ValueError:
+        # same error as in MoinMoin/action/fullsearch.py, keep it that way!
+        ret = ''.join([macro.formatter.text(u'<<%s(' % macro.name),
+                      _(u'Your search query {{{"%s"}}} is invalid. Please refer '
+                        'to HelpOnSearching for more information.', wiki=True,
+                        percent=True) % wikiutil.escape(needle),
+                      macro.formatter.text(u')>>')])
+
+    return ret
 
