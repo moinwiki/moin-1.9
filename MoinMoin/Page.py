@@ -1063,6 +1063,20 @@ class Page(object):
                                           'error': wikiutil.escape(str(err)),
                                       }, "warning")
                 self.hilite_re = None
+            else:
+                if getattr(request.cfg, "show_highlight_msg", False):
+                    request.theme.add_msg(_(u'Text matching regular expression '
+                        '"%(regex)s" is highlighted. %(switch_link)s.') % {
+                            'regex': wikiutil.escape(self.hilite_re),
+                            'switch_link': ''.join([
+                                request.formatter.url(1, request.getQualifiedURL(
+                                   self.url(request, dict([i for i in
+                                   request.values.iteritems()
+                                   if i[0] != 'highlight'])))),
+                                _(u"Switch to non-highlighted view"),
+                                request.formatter.url(0)
+                            ])
+                        }, "info")
 
         if 'deprecated' in pi:
             # deprecated page, append last backup version to current contents
