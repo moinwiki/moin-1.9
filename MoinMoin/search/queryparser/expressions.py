@@ -39,8 +39,9 @@ class BaseExpression(object):
     # It allows to do the fast searches first.
     costs = 0
     _tag = ""
+    highlight = 1
 
-    def __init__(self, pattern, use_re=False, case=False):
+    def __init__(self, pattern, use_re=False, case=False, highlight=1):
         """ Init a text search
 
         @param pattern: pattern to search for, ascii string or unicode
@@ -51,6 +52,7 @@ class BaseExpression(object):
         self.negated = 0
         self.use_re = use_re
         self.case = case
+        self.highlight = highlight
 
         if use_re:
             self._tag += 're:'
@@ -226,6 +228,9 @@ class AndExpression(BaseExpression):
         return matches
 
     def highlight_re(self):
+        if not self.highlight:
+            return u''
+
         result = []
         for s in self._subterms:
             highlight_re = s.highlight_re()
@@ -360,6 +365,9 @@ class TextSearch(BaseTextFieldSearch):
     _field_to_search = 'content'
 
     def highlight_re(self):
+        if not self.highlight:
+            return u''
+
         return u"(%s)" % self.pattern
 
     def _get_matches(self, page):
@@ -455,6 +463,9 @@ class LinkSearch(BaseFieldSearch):
         self.textsearch = TextSearch(self._textpattern, use_re=True, case=case)
 
     def highlight_re(self):
+        if not self.highlight:
+            return u''
+
         return u"(%s)" % self._textpattern
 
     def _get_matches(self, page):
@@ -535,6 +546,9 @@ class CategorySearch(BaseFieldSearch):
         return matches
 
     def highlight_re(self):
+        if not self.highlight:
+            return u''
+
         return u'(\\b%s\\b)' % self._pattern
 
     def xapian_term(self, request, connection):
