@@ -33,6 +33,21 @@ Current:
    * As soon as it is now possible to provide RSS for page change history,
      appropriate alternate link is now added for every page (controlled by
      rss_show_page_history_link configuration parameter).
+   * "no_highlight:" search query option provided for suppressing highlighting
+     search results.
+   * New options for search macros (namedly, FullSearch/FullSearchCached and
+     PageList) available:
+     # highlight_titles option controls highlighting of matches in search
+       results provided by these macros. Default value is set in
+       search_macro_highlight_titles configuration option)
+     # highlight_pages option controls adding of highlight URL parameter to
+       page links (so search term is highlighted when user goes to one of
+       these pages via provided link) in search results. Default value is set
+       in search_macro_highlight_pages configuration option.
+     Usage of these options is disabled (via search_macro_parse_args
+     configuration option) by default due to behavioural changes introduced
+     in macro parameter parsing mechanism to support them. Related to
+     http://moinmo.in/FeatureRequests/FullSearchResultsWithoutHighlight .
 
 Version 1.9.4:
 
