@@ -946,7 +946,9 @@ options_no_group_name = {
         'up': ('page_parent_page', {}, _("Up"), "up"),
      },
      "dict of {'iconname': (url, title, icon-img-key), ...}. Available only in classic theme."),
-
+    ('show_highlight_msg', False, "Show message that page has highlighted text "
+                                  "and provide link to non-highlighted "
+                                  "version."),
   )),
   # ==========================================================================
   'editor': ('Editor related', None, (
