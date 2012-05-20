@@ -12,6 +12,7 @@
 
 Dependencies = ["namespace"]
 from MoinMoin import search, wikiutil
+from MoinMoin.macro.FullSearch import execute as fs_execute
 
 def execute(macro, args):
     _ = macro._
@@ -20,22 +21,5 @@ def execute(macro, args):
     # If called with empty or no argument, default to regex search for .+, the full page list.
     needle = wikiutil.get_unicode(macro.request, args, 'needle', u'regex:.+')
 
-    # With whitespace argument, return same error message as FullSearch
-    if not needle.strip():
-        err = _('Please use a more selective search term instead of {{{"%s"}}}', wiki=True) % needle
-        return '<span class="error">%s</span>' % err
+    return fs_execute(macro, needle, titlesearch=True, case=case)
 
-    # Return a title search for needle, sorted by name.
-    try:
-        results = search.searchPages(macro.request, needle,
-                                     titlesearch=1, case=case,
-                                     sort='page_name')
-        ret = results.pageList(macro.request, macro.formatter, paging=False)
-    except ValueError:
-        # same error as in MoinMoin/action/fullsearch.py, keep it that way!
-        ret = ''.join([macro.formatter.text('<<PageList('),
-                      _('Your search query {{{"%s"}}} is invalid. Please refer to '
-                        'HelpOnSearching for more information.', wiki=True,
-                        percent=True) % wikiutil.escape(needle),
-                      macro.formatter.text(')>>')])
-    return ret
