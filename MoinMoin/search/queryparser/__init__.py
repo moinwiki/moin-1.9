@@ -38,6 +38,7 @@ class QueryParser(object):
         self.titlesearch = kw.get('titlesearch', 0)
         self.case = kw.get('case', 0)
         self.regex = kw.get('regex', 0)
+        self.no_highlight = kw.get('no_highlight', 0)
         self._M = wikiutil.ParserPrefix('-')
 
     def _analyse_items(self, items):
@@ -89,6 +90,7 @@ class QueryParser(object):
                 title_search = self.titlesearch
                 regex = self.regex
                 case = self.case
+                no_highlight = self.no_highlight
                 linkto = False
                 lang = False
                 category = False
@@ -116,6 +118,8 @@ class QueryParser(object):
                         mimetype = True
                     elif "domain".startswith(m):
                         domain = True
+                    elif "no_highlight".startswith(m):
+                        no_highlight = True
                     else:
                         raise QueryError("Invalid search prefix")
                     item = item[1:]
@@ -136,6 +140,7 @@ class QueryParser(object):
                 else:
                     obj = TextSearch(text, use_re=regex, case=case)
                 obj.negated = negate
+                obj.highlight = not no_highlight
                 terms.append(obj)
             elif isinstance(item, list):
                 # strip off the opening parenthesis
