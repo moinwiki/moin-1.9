@@ -117,6 +117,7 @@ admin_pages = [
     _('HelpOnMoinCommand'),
     _('HelpOnMoinCommand/ExportDump'),
     _('HelpOnNotification'),
+    _('HelpOnRobots'),
     _('HelpOnSessions'),
     _('HelpOnUserHandling'),
     _('HelpOnXapian'),
