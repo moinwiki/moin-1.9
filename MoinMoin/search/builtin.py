@@ -270,18 +270,22 @@ class BaseIndex(object):
 
         @param request: current request
         """
-        import copy
         from MoinMoin.security import Permissions
-        from MoinMoin.logfile import editlog
+        from MoinMoin.user import User
 
         class SecurityPolicy(Permissions):
-
             def read(self, *args, **kw):
                 return True
 
-        r = copy.copy(request)
+        class FakeRequest(object):
+            """ minimal request object for indexing code """
+
+        r = FakeRequest()
+        r.cfg = request.cfg
+        r.page = request.page
+        r.rootpage = request.rootpage
+        r.user = User(request)
         r.user.may = SecurityPolicy(r.user)
-        r.editlog = editlog.EditLog(r)
         return r
 
 
