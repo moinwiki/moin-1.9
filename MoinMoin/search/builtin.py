@@ -284,6 +284,8 @@ class BaseIndex(object):
         r.cfg = request.cfg
         r.page = request.page
         r.rootpage = request.rootpage
+        r.getPragma = request.getPragma
+        r.setPragma = request.setPragma
         r.user = User(request)
         r.user.may = SecurityPolicy(r.user)
         return r
