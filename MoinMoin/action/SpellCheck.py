@@ -55,10 +55,10 @@ def _loadWordsFile(request, dict, filename):
     request.clock.start('spellread')
     try:
         try:
-            f = codecs.open(filename, 'rt', config.charset)
+            f = codecs.open(filename, 'r', config.charset)
             lines = f.readlines()
         except UnicodeError:
-            f = codecs.open(filename, 'rt', 'iso-8859-1')
+            f = codecs.open(filename, 'r', 'iso-8859-1')
             lines = f.readlines()
     finally:
         f.close()
