@@ -286,6 +286,7 @@ class BaseIndex(object):
         r.rootpage = request.rootpage
         r.getPragma = request.getPragma
         r.setPragma = request.setPragma
+        r.parsePageLinks_running = {}
         r.user = User(request)
         r.user.may = SecurityPolicy(r.user)
         return r
