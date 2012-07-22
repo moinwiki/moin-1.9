@@ -281,14 +281,34 @@ class BaseIndex(object):
             """ minimal request object for indexing code """
 
         r = FakeRequest()
+        r.action = request.action
         r.cfg = request.cfg
-        r.page = request.page
-        r.rootpage = request.rootpage
+        r.clock = request.clock
+        r.current_lang = request.current_lang
+        r.dicts = request.dicts
+        r.form = request.form
         r.getPragma = request.getPragma
+        r.getText = request.getText
+        r.href = request.href
+        r.html_formatter = request.html_formatter
+        r.isSpiderAgent = request.isSpiderAgent
+        r.mode_getpagelinks = request.mode_getpagelinks
+        r.page = request.page
+        r.parsePageLinks_running = request.parsePageLinks_running
+        r.redirect = request.redirect
+        r.redirectedOutput = request.redirectedOutput
+        r.rev = request.rev
+        r.rootpage = request.rootpage
+        r.script_root = request.script_root
+        r.session = request.session
+        r.setContentLanguage = request.setContentLanguage
         r.setPragma = request.setPragma
-        r.parsePageLinks_running = {}
+        r.theme = request.theme
+        r.uid_generator = request.uid_generator
         r.user = User(request)
         r.user.may = SecurityPolicy(r.user)
+        r.values = request.values
+        r.write = request.write
         return r
 
 
