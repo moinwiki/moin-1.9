@@ -277,39 +277,24 @@ class BaseIndex(object):
             def read(self, *args, **kw):
                 return True
 
+        user = User(request)
+        user.may = SecurityPolicy(user)
+
         class FakeRequest(object):
             """ minimal request object for indexing code """
+            def __init__(self, request, user):
+                NAMES = """action cfg clock current_lang dicts form
+                           getPragma getText href html_formatter
+                           isSpiderAgent mode_getpagelinks page
+                           parsePageLinks_running redirect redirectedOutput
+                           rev rootpage script_root session setContentLanguage
+                           setPragma theme uid_generator values write""".split()
+                for name in NAMES:
+                    value = getattr(request, name, None)
+                    setattr(self, name, value)
+                self.user = user
 
-        r = FakeRequest()
-        r.action = request.action
-        r.cfg = request.cfg
-        r.clock = request.clock
-        r.current_lang = request.current_lang
-        r.dicts = request.dicts
-        r.form = request.form
-        r.getPragma = request.getPragma
-        r.getText = request.getText
-        r.href = request.href
-        r.html_formatter = request.html_formatter
-        r.isSpiderAgent = request.isSpiderAgent
-        r.mode_getpagelinks = request.mode_getpagelinks
-        r.page = request.page
-        r.parsePageLinks_running = request.parsePageLinks_running
-        r.redirect = request.redirect
-        r.redirectedOutput = request.redirectedOutput
-        r.rev = request.rev
-        r.rootpage = request.rootpage
-        r.script_root = request.script_root
-        r.session = request.session
-        r.setContentLanguage = request.setContentLanguage
-        r.setPragma = request.setPragma
-        r.theme = request.theme
-        r.uid_generator = request.uid_generator
-        r.user = User(request)
-        r.user.may = SecurityPolicy(r.user)
-        r.values = request.values
-        r.write = request.write
-        return r
+        return FakeRequest(request, user)
 
 
 ##############################################################################
