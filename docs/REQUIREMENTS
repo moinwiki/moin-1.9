@@ -1,14 +1,24 @@
 Python requirements
 ===================
 
-Please use Python 2.6.x, 2.5.x, 2.7.x, 2.4.x (in that order, first most
-recommended, last least recommended).
-2.4 is last because it is very OLD and not much tested any more.
-2.7 is 2nd last because it is very NEW and not much tested with moin yet.
+Please use Python 2.6.x, 2.7.x, 2.5.x (in that order, first most
+recommended, last least recommended). See below about Python 2.4.
 
-Python 2.3 is not supported by moin 1.9.x (use moin 1.8.x if you can't
-upgrade Python now [but please begin planning your Python upgrade, 1.8.8 or
-1.8.9 will be the last moin 1.8.x release]).
+2.7 is 2nd because it is less long tested than 2.6. If you have 2.7 by default
+then just use it, there is usually no need to get 2.6. But if you have 2.6 by
+default, just use that, because there is also no need to get 2.7.
+
+2.5 is last because it is OLD and not much tested any more.
+
+2.4 was supported "out of the box" until (and including) moin 1.9.3.
+Since 1.9.4 the download release of moin has bundled libraries that need 2.5
+at least. Also, no moin developer still tests moin on 2.4.
+If you are willing to experiment a bit and use older libraries than the
+bundled ones, you might be able to get it working on 2.4 by replacing
+MoinMoin/support/werkzeug with werkzeug version 0.7.x and hope the best.
+Python requirements might be different for (linux or other) distribution
+packages, depending on the werkzeug version they use. Usually you do not have
+to care then, because the package maintainer already did it for you.
 
 Python 3.x won't work for MoinMoin for now.
 
