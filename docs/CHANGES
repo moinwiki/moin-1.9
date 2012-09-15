@@ -21,28 +21,40 @@ Current:
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
   Fixes:
+   * Security fix: fix virtual group bug in ACL evaluation.
+   * Avoid crash if #refresh processing instruction is used without arguments.
+   * Fix issue with non-ASCII textchas.
+   * Xapian indexing: remove copy.copy() that crashed on Windows/IIS/isapi-wsgi
+     after page save.
+   * Fix dictionary file reading crash under Windows.
+   * Work around crash of AdvancedSearch macro rendering caused by non-ascii
+     mimetypes.types_map entries.
+   * Added migration script for moin 1.8.9.
    * rss_rc: Fix diffs added in RSS with diffs=1 (now they correspond to item
      listed in feed and not just last page diffs). Links generated with ddiffs=1
      also fixed.
+   * rss_rc: fix double escaping issue.
+   * rss_rc: respect show_names configuration option.
+   * rss_rc: proper support of rename, revert, page creation.
 
   New features:
    * rss_rc: several new options added: lines parameter gives ability to set
      maximum size of diffs showed in RSS. show_att parameter gives ability
      to show information aboout attachment-related items in RSS. page parameter
      gives ability to specify set of pages for which changes RSS feed should be
-     generated. Confgiuration of defaults and limits can now be done via wiki
+     generated. Configuration of defaults and limits can now be done via wiki
      configuration mechanism.
    * As soon as it is now possible to provide RSS for page change history,
      appropriate alternate link is now added for every page (controlled by
      rss_show_page_history_link configuration parameter).
-   * "no_highlight:" search query option provided for suppressing highlighting
-     search results.
-   * New options for search macros (namedly, FullSearch/FullSearchCached and
-     PageList) available:
-     # highlight_titles option controls highlighting of matches in search
+   * Search: "no_highlight:" search query option provided for suppressing
+     highlighting search results.
+   * Search macros: new options for FullSearch, FullSearchCached and PageList
+     available:
+     * highlight_titles option controls highlighting of matches in search
        results provided by these macros. Default value is set in
        search_macro_highlight_titles configuration option)
-     # highlight_pages option controls adding of highlight URL parameter to
+     * highlight_pages option controls adding of highlight URL parameter to
        page links (so search term is highlighted when user goes to one of
        these pages via provided link) in search results. Default value is set
        in search_macro_highlight_pages configuration option.
@@ -50,6 +62,7 @@ Current:
      configuration option) by default due to behavioural changes introduced
      in macro parameter parsing mechanism to support them. Related to
      http://moinmo.in/FeatureRequests/FullSearchResultsWithoutHighlight .
+
 
 Version 1.9.4:
 
