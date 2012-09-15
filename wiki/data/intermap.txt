@@ -51,6 +51,7 @@ MBWiki http://wiki.musicbrainz.org/
 SquidWiki http://wiki.squid-cache.org/
 AltLinux http://altlinux.org/
 AltLinuxEn http://en.altlinux.org/
+hg http://mercurial.selenic.com/wiki/
 
 ## Updated 2004-11-19 from http://www.usemod.com/cgi-bin/mb.pl?InterMapTxt
 ## Please modify the upper part of this page only
