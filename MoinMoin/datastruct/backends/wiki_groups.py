@@ -91,7 +91,7 @@ class WikiGroups(BaseGroupsBackend):
         #  * ExampleUser
         #  * TestGroup
         #
-        page.send_page(content_only=True, send_special=True)
+        self.request.redirectedOutput(page.send_page, content_only=True, send_special=True)
 
         if request_page:
             self.request.page = request_page
