@@ -24,7 +24,7 @@ function print_textinputs_var() {
 	global $textinputs;
 	foreach( $textinputs as $key=>$val ) {
 		# $val = str_replace( "'", "%27", $val );
-		echo "textinputs[$key] = decodeURIComponent(\"" . $val . "\");\n";
+		echo "textinputs[$key] = decodeURIComponent(\"" . htmlspecialchars($val, ENT_QUOTES) . "\");\n";
 	}
 }
 

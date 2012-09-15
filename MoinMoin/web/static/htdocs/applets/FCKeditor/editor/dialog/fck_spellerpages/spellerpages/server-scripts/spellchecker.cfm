@@ -65,7 +65,7 @@ others files in certain cases.
 <!--- Generate Text Inputs --->
 <cfset i = 0>
 <cfloop list="#submitted_text#" index="textinput">
-  <cfset texts.textinputs = ListAppend(texts.textinputs, 'textinputs[#i#] = decodeURIComponent("#textinput#");', CRLF)>
+  <cfset texts.textinputs = ListAppend(texts.textinputs, 'textinputs[#i#] = decodeURIComponent("' & htmleditformat( textinput ) & '");', CRLF)>
   <cfset i = i + 1>
 </cfloop>
 

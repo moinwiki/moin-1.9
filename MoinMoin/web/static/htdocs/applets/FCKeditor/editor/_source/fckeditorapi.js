@@ -40,7 +40,7 @@ function InitializeAPI()
 		// objects that aren't really FCKeditor instances.
 		var sScript =
 			'window.FCKeditorAPI = {' +
-				'Version : "2.6.6",' +
+				'Version : "2.6.8",' +
 				'VersionBuild : "25427",' +
 				'Instances : window.FCKeditorAPI && window.FCKeditorAPI.Instances || {},' +
 
