@@ -36,6 +36,10 @@ Current:
    * rss_rc: fix double escaping issue.
    * rss_rc: respect show_names configuration option.
    * rss_rc: proper support of rename, revert, page creation.
+   * modern/modernized theme: fix padding/width for editor preview
+   * group/pagelinks formatters: avoid to create unnecessary output, redirect
+     output of send_page call with the groups formatter, it must not be written
+     to the output stream
 
   New features:
    * rss_rc: several new options added: lines parameter gives ability to set
