@@ -387,7 +387,8 @@ textarea {
 
 #preview, #previewbelow {
     border: 1px solid #6C7680;
-    padding: 10px 30px 20px 30px;
+    padding: 3px;
+    width: 100%;
     background: url(../img/draft.png);
     margin-top: 0.5em;
 }
