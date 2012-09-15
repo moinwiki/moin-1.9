@@ -151,7 +151,7 @@ python_compatibility.py (to be compatible with older Pythons)
 
 
 B) MoinMoin/web/static/htdocs/applets/FCKEditor/
-shipped: 2.6.6
+shipped: 2.6.8
 required: 2.6.x
 
 
