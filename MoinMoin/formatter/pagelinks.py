@@ -28,4 +28,7 @@ class Formatter(FormatterBase):
     definition_term = definition_desc = heading = table = null
     table_row = table_cell = attachment_link = attachment_image = attachment_drawing = null
     transclusion = transclusion_param = null
+    macro = lang = anchordef = span = line_anchordef = sysmsg = null
+    startContent = escapedText = line_anchorlink = null
+    div = endContent = anchorlink = interwikilink = null
 
