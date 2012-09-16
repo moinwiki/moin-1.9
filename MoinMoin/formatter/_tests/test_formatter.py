@@ -27,22 +27,15 @@ class TestFormatter:
 
     def testSyntaxReferenceDocBook(self):
         py.test.skip("docbook is broken")
+        f_name = 'text_docbook'
         try:
-            from xml.dom import getDOMImplementation
-            dom = getDOMImplementation("4DOM")
-        except ImportError:
-            # if we don't have 4suite installed, the docbook formatter would just raise an exception
-            py.test.skip("not testing docbook formatter because no 4suite installed")
+            formatter = wikiutil.importPlugin(self.request.cfg, "formatter", f_name, "Formatter")
+        except wikiutil.PluginAttributeError:
+            pass
         else:
-            f_name = 'text_docbook'
-            try:
-                formatter = wikiutil.importPlugin(self.request.cfg, "formatter", f_name, "Formatter")
-            except wikiutil.PluginAttributeError:
-                pass
-            else:
-                print "Formatting using %r" % formatter
-                self.formatPage("HelpOnMoinWikiSyntax", formatter)
-                print "Done."
+            print "Formatting using %r" % formatter
+            self.formatPage("HelpOnMoinWikiSyntax", formatter)
+            print "Done."
 
     def testSyntaxReferenceOthers(self):
         formatters = wikiutil.getPlugins("formatter", self.request.cfg)
@@ -86,12 +79,6 @@ class TestIdIdempotency:
                 assert id == origid
 
         formatters = wikiutil.getPlugins("formatter", self.request.cfg)
-        try:
-            from xml.dom import getDOMImplementation
-            dom = getDOMImplementation("4DOM")
-        except ImportError:
-            # if we don't have 4suite installed, the docbook formatter would just raise an exception
-            formatters.remove('text_docbook')
 
         testids = [
             r"tho/zeequeen&angu\za",
