@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-01-10 17:16+0100\n"
 "Last-Translator: George Stephanos <gaf.stephanos@gmail.com>\n"
 "Language-Team: Arabic <moin-user@lists.sourceforge.net>\n"
@@ -279,6 +279,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Regular expression للتبريز باطل \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1604,6 +1613,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "نوع chart باطل \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "رفع مرفق '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "رسم '%(filename)s' حفظ."
+
+msgid "New page:\n"
+msgstr "صفحة جديدة\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) فقط الصفحات التي يغيرت منذ '''%s''' ظاهرة!"
 
@@ -1974,9 +1994,6 @@ msgstr ""
 "لقد اشتركت بصفحة ويكي او فئة ويكي علي \"%(sitename)s\" لالأعلام بالتغيير\n"
 "\n"
 "صفحة \"%(pagename)s\" قد تغيرت من قبل %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "صفحة جديدة\n"
 
 msgid "No differences found!\n"
 msgstr "ْلا توجد اختلافات \n"
@@ -2652,6 +2669,10 @@ msgstr "HelpOnMoinCommand/ExportDump"
 msgid "HelpOnNotification"
 msgstr "HelpOnNotification"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "HelpOnRules"
+
 msgid "HelpOnSessions"
 msgstr "HelpOnSessions"
 
@@ -3322,6 +3343,16 @@ msgstr "بحث حساس لحالة الحرف"
 msgid "Search Text"
 msgstr "ابحث في النص"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "اجراء نسخ احطياتي مجهول: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "وصف Lexer"
 
@@ -3337,14 +3368,6 @@ msgstr "أنواع MIME"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "لا اقتباسات في %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "رفع مرفق '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "رسم '%(filename)s' حفظ."
 
 #, python-format
 msgid "%(mins)dm ago"

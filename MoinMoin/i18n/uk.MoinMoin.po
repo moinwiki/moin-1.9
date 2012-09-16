@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -287,6 +287,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1643,6 +1652,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Неправильний тип діаграми \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Відвантажити вкладення '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Малюнок '%(filename)s' збережено."
+
+msgid "New page:\n"
+msgstr "Нова сторінка:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Відображаються лише сторінки змінені з '''%s'''!"
 
@@ -2034,9 +2054,6 @@ msgstr ""
 "Ця сторінка змінена %(editor)s:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Нова сторінка:\n"
 
 msgid "No differences found!\n"
 msgstr "Відмінностей на знайдено!\n"
@@ -2722,6 +2739,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "ДовідкаЗміст"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3428,6 +3449,16 @@ msgstr "Пошук з урахуванням регістру"
 msgid "Search Text"
 msgstr "Пошук у тексті"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Невідома вкладена дія резервного копіювання: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Запам'ятати вибір"
@@ -3447,14 +3478,6 @@ msgstr "будь-який тип mime"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Цитати відсутні на %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Відвантажити вкладення '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Малюнок '%(filename)s' збережено."
 
 #, python-format
 msgid "%(mins)dm ago"

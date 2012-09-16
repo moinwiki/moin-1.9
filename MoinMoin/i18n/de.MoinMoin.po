@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-03-27 02:46+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -286,6 +286,17 @@ msgstr ""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Ungültiger regulärer Ausdruck zur Hervorhebung \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+"Text, der auf den regulären Ausdruck \"%(regex)s\" passt, ist hervorgehobem. "
+"%(switch_link)s."
+
+msgid "Switch to non-highlighted view"
+msgstr "Umschalten auf nicht-hervorgehobene Ansicht"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1693,6 +1704,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Unbekannter Diagrammtyp \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Dateianhang '%(filename)s' wurde angelegt."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Zeichnung '%(filename)s' wurde gesichert."
+
+msgid "New page:\n"
+msgstr "Neue Seite:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Nur Seiten, die seit '''%s''' geändert wurden, werden angezeigt!"
 
@@ -2080,9 +2102,6 @@ msgstr ""
 "\n"
 "Die Seite \"%(pagename)s\" wurde durch %(editor)s verändert:\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Neue Seite:\n"
 
 msgid "No differences found!\n"
 msgstr "Es wurden keine Änderungen gefunden!\n"
@@ -2772,6 +2791,9 @@ msgstr ""
 msgid "HelpOnNotification"
 msgstr ""
 
+msgid "HelpOnRobots"
+msgstr ""
+
 msgid "HelpOnSessions"
 msgstr ""
 
@@ -3456,6 +3478,16 @@ msgstr "Groß-/Kleinschreibung beachten"
 msgid "Search Text"
 msgstr "Text durchsuchen"
 
+#, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Unbekannter Macro-Parameter: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer-Beschreibung"
 
@@ -3471,14 +3503,6 @@ msgstr "MIME-Typen"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Keine Zitate auf Seite %(pagename)s gefunden."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Dateianhang '%(filename)s' wurde angelegt."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Zeichnung '%(filename)s' wurde gesichert."
 
 #, python-format
 msgid "%(mins)dm ago"

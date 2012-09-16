@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-10-13 22:01+0200\n"
 "Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -281,6 +281,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Ogiltigt reguliärt uttryck för emfas \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1650,6 +1659,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Ogiltig diagramtyp \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Uppladdning av bilaga '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Teckningen '%(filename)s' sparad."
+
+msgid "New page:\n"
+msgstr "Ny sida:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Bara sidor som ändrats sedan '''%s''' visas!"
 
@@ -2023,9 +2043,6 @@ msgstr ""
 "Du prenumerar på en wikisida eller wikikategori på \"%(sitename)s\".\n"
 "\n"
 "Sidan \"%(pagename)s\" har ändrats av %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Ny sida:\n"
 
 msgid "No differences found!\n"
 msgstr "Inga skillnader funna!\n"
@@ -2701,6 +2718,10 @@ msgstr "HjälpMedMoinKommando/ExportTipp"
 
 msgid "HelpOnNotification"
 msgstr "HjälpMedMeddelande"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "HjälpMedRegler"
 
 msgid "HelpOnSessions"
 msgstr "HjälpMedSessioner"
@@ -3381,6 +3402,16 @@ msgstr "Sökning känslig för gemener/VERSALER"
 msgid "Search Text"
 msgstr "Sök i text"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Okänd backup-underåtgärd: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexikalisk beskrivning"
 
@@ -3396,14 +3427,6 @@ msgstr "Mime-typer"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Inga citattecken på %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Uppladdning av bilaga '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Teckningen '%(filename)s' sparad."
 
 #, python-format
 msgid "%(mins)dm ago"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -282,6 +282,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Nepravilno označavanje regular expressiona \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -1645,6 +1654,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Pogrešan ili nepoznat tip diagrama \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Podizanje privitka '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Crtež '%(filename)s' je spremljen."
+
+msgid "New page:\n"
+msgstr "Nova stranica:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Samo stranice izmijenjene iza '''%s''' će biti prikazane!"
 
@@ -2038,9 +2058,6 @@ msgstr ""
 "\n"
 "Stranicu %(pagelink)s je izmijenio %(editor)s:\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Nova stranica:\n"
 
 msgid "No differences found!\n"
 msgstr "Nema razlika!\n"
@@ -2724,6 +2741,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "Kako oblikovati"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "Kako sadržaj"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3428,6 +3449,16 @@ msgstr "Razlikuj mala i velika slova pri pretraživanju"
 msgid "Search Text"
 msgstr "Traži po tekstu"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Nepoznata akcija arhiviranja: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Inačica PyStemmer"
@@ -3447,14 +3478,6 @@ msgstr "bilo koji mime tip"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Na stranici %(pagename)s nema citata."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Podizanje privitka '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Crtež '%(filename)s' je spremljen."
 
 #, python-format
 msgid "%(mins)dm ago"

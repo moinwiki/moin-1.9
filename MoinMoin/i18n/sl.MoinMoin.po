@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -284,6 +284,15 @@ msgstr ""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Neveljaven regularni izraz za poudarjanje besedila \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1249,8 +1258,8 @@ msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
 msgstr ""
-"Priponka '%(target)s' je shranjena pod imenom '%(filename)s', %(bytes)d "
-"znakov."
+"Priponka '%(target)s' je shranjena (ime na oddaljenem računalniku je "
+"'%(filename)s'), %(bytes)d znakov."
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -1409,9 +1418,8 @@ msgstr "Ime strani"
 msgid "Print"
 msgstr "Tiskanje"
 
-#, fuzzy
 msgid "Print slide show"
-msgstr "Uredi samodejno predstavo"
+msgstr "Natisni samodejno predstavo"
 
 msgid "Edit"
 msgstr "Spremeni"
@@ -1655,6 +1663,17 @@ msgstr "Treba je navesti tip diagramov!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Napačen ali neznan tip diagramov \"%s\"!"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Naložitev priponke '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Risba '%(filename)s' je shranjena."
+
+msgid "New page:\n"
+msgstr "Nova stran:\n"
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -2036,9 +2055,6 @@ msgstr ""
 "\n"
 "Stran \"%(pagename)s\" je spremenil %(editor)s:\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Nova stran:\n"
 
 msgid "No differences found!\n"
 msgstr "Ni razlik!\n"
@@ -2720,6 +2736,10 @@ msgstr "PomočPriMoinUkazu/IzvozPosnetkaStanja"
 msgid "HelpOnNotification"
 msgstr "PomočPriObveščanju"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "PomočPriPravilih"
+
 msgid "HelpOnSessions"
 msgstr "PomočPriSejah"
 
@@ -3400,6 +3420,16 @@ msgstr "Loči med velikimi in malimi črkami pri iskanju"
 msgid "Search Text"
 msgstr "Iskanje po polnem besedilu"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Neznana podakcija pri upravljanju z varnostno kopijo: %s"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer opis"
 
@@ -3415,14 +3445,6 @@ msgstr "Tipi MIME"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Na strani %(pagename)s ni citatov."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Naložitev priponke '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Risba '%(filename)s' je shranjena."
 
 #, python-format
 msgid "%(mins)dm ago"

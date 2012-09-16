@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-01-06 00:04+0200\n"
 "Last-Translator: Giannis Konstantinidis <gloooabvoe9a@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -284,6 +284,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 msgid ""
@@ -1582,6 +1591,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Λανθασμένος τύπος γραφήματος \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Μεταφόρτωση του επισυναπτόμενου αρχείου '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Η σχεδίαση του '%(filename)s' αποθηκεύτηκε."
+
+msgid "New page:\n"
+msgstr "Νέα σελίδα:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Μόνο οι σελίδες που άλλαξαν από το '''%s''' εμφανίζονται!"
 
@@ -1912,9 +1932,6 @@ msgstr ""
 "\n"
 "Η σελίδα \"%(pagename)s\" έχει τροποποιηθεί από τον %(editor)s:\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Νέα σελίδα:\n"
 
 msgid "No differences found!\n"
 msgstr "Δε βρέθηκαν διαφορές!\n"
@@ -2623,6 +2640,10 @@ msgstr ""
 msgid "HelpOnNotification"
 msgstr ""
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "Σχόλιο:"
+
 msgid "HelpOnSessions"
 msgstr ""
 
@@ -3307,6 +3328,16 @@ msgstr "Αναζήτηση με σημασία στον τύπο των χαρα
 msgid "Search Text"
 msgstr "Αναζήτηση Κειμένου"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Άγνωστη εντολή %(action_name)s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr ""
 
@@ -3324,14 +3355,6 @@ msgstr "Mimetypes"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr ""
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Μεταφόρτωση του επισυναπτόμενου αρχείου '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Η σχεδίαση του '%(filename)s' αποθηκεύτηκε."
 
 #, python-format
 msgid "%(mins)dm ago"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -281,6 +281,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "正規表示式 \"%(regex)s\" 不合法: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -1592,6 +1601,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "錯誤的圖表類型 \"%s\"！"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "上傳附件 '%(filename)s'。"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "圖片 '%(filename)s' 已儲存。"
+
+msgid "New page:\n"
+msgstr "新的頁面：\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) 自 '''%s''' 以後改變的頁面才會顯示！"
 
@@ -1957,9 +1977,6 @@ msgstr ""
 "在此通知你以下頁面被 %(editor)s 編輯過了：\n"
 "\"%(pagename)s\"\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "新的頁面：\n"
 
 msgid "No differences found!\n"
 msgstr "新舊版完全相同！\n"
@@ -2635,6 +2652,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "通知"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "說明/分隔"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3334,6 +3355,16 @@ msgstr "區分大小寫"
 msgid "Search Text"
 msgstr "全文檢索"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "不明的備份子操作：%s。"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "記下決定"
@@ -3353,14 +3384,6 @@ msgstr "任何 MIME 型態"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "%(pagename)s 中沒有可引用的格言。"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "上傳附件 '%(filename)s'。"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "圖片 '%(filename)s' 已儲存。"
 
 #, python-format
 msgid "%(mins)dm ago"

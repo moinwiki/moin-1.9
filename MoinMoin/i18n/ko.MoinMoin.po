@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-03-13 11:16+0900\n"
 "Last-Translator: YongjinCho <yongjin.cho@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -275,6 +275,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1579,6 +1588,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "잘못된 차트 종류 입니다: \"%s\""
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "첨부 '%(filename)s'를(을) 업로드"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "그림 '%(filename)s'가(이) 저장되었습니다."
+
+msgid "New page:\n"
+msgstr "새 문서:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 
@@ -1966,9 +1986,6 @@ msgstr ""
 "%(editor)s님께서 다음 문서를 고치셨습니다:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "새 문서:\n"
 
 msgid "No differences found!\n"
 msgstr "차이점이 없습니다!\n"
@@ -2647,6 +2664,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "도움말"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3355,6 +3376,16 @@ msgstr "대소문자 구별"
 msgid "Search Text"
 msgstr "내용에서 찾기"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "알 수 없는 백업 하위 작업: %s"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "PyStemmer 버전"
@@ -3373,14 +3404,6 @@ msgstr ""
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "%(pagename)s에 인용할 문구가 없음."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "첨부 '%(filename)s'를(을) 업로드"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "그림 '%(filename)s'가(이) 저장되었습니다."
 
 #, python-format
 msgid "%(mins)dm ago"

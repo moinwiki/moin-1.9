@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2007-01-05 22:27+0000\n"
 "Last-Translator: Rita Farinha <rita.farinha@intraneia.com>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -287,6 +287,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1658,6 +1667,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Tipo de gráfico incorrecto \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Envio do anexo '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Desenho '%(filename)s' guardado."
+
+msgid "New page:\n"
+msgstr "Nova página:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) São apenas apresentadas as páginas alteradas desde '''%s'''!"
 
@@ -2061,9 +2081,6 @@ msgstr ""
 "A seguinte página foi alterada por %(editor)s:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Nova página:\n"
 
 msgid "No differences found!\n"
 msgstr "Nenhuma diferença encontrada!\n"
@@ -2744,6 +2761,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "AjudaNaFormatação"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "ConteúdosDeAjuda"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3452,6 +3473,16 @@ msgstr "Pesquisa sensível a maiúsculas e minúsculas"
 msgid "Search Text"
 msgstr "Pesquisa por Texto"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Sub-acção desconhecida de cópia de segurança: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Versão do PyStemmer"
@@ -3471,14 +3502,6 @@ msgstr "qualquer mimetype"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Não há citações em %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Envio do anexo '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Desenho '%(filename)s' guardado."
 
 #, python-format
 msgid "%(mins)dm ago"

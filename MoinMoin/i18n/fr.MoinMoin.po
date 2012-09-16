@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-11-09 22:37+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
@@ -295,6 +295,15 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "L'expression rationnelle de mise en évidence : « %(regex)s » est "
 "incorrecte : %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1725,6 +1734,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Type de graphique « %s » incorrect !"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Ajout de la pièce jointe « %(filename)s »."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Enregistrement du dessin « %(filename)s »."
+
+msgid "New page:\n"
+msgstr "Nouvelle page :\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Seules les pages modifiées depuis '''%s''' sont affichées !"
 
@@ -2115,9 +2135,6 @@ msgstr ""
 "d'une catégorie du wiki « %(sitename)s ».\n"
 "\n"
 "La page « %(pagename)s » a été modifiée par %(editor)s :\n"
-
-msgid "New page:\n"
-msgstr "Nouvelle page :\n"
 
 msgid "No differences found!\n"
 msgstr "Aucune différence n'a été trouvée !\n"
@@ -2812,6 +2829,10 @@ msgstr "AideDesCommandesMoin/ExportDump"
 msgid "HelpOnNotification"
 msgstr "AideDesNotifications"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "AideDesFiletsHorizontaux"
+
 msgid "HelpOnSessions"
 msgstr "AideDesSessions"
 
@@ -3496,6 +3517,16 @@ msgstr "Recherche respectant la casse"
 msgid "Search Text"
 msgstr "Recherche de texte"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Sous-action de sauvegarde inconnue : %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Description de l'analyseur lexical"
 
@@ -3511,14 +3542,6 @@ msgstr "type MIME"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Aucune citation sur %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Ajout de la pièce jointe « %(filename)s »."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Enregistrement du dessin « %(filename)s »."
 
 #, python-format
 msgid "%(mins)dm ago"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-01-06 22:08+0200\n"
 "Last-Translator: Krasi <wtfn00bz@ymail.com>\n"
 "Language-Team: Bulgarian <moin-user@lists.sourceforge.net>\n"
@@ -283,6 +283,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1665,6 +1674,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Лош тип на схема \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Качване на приложение '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Чертеж '%(filename)s' - записан."
+
+msgid "New page:\n"
+msgstr "Нова страница:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Показани са само страници, променяни след '''%s'''!"
 
@@ -2050,9 +2070,6 @@ msgstr ""
 "за известия при промени.\n"
 "\n"
 "Страницата \"%(pagename)s\" е променена от %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Нова страница:\n"
 
 msgid "No differences found!\n"
 msgstr "Не са открити разлики!\n"
@@ -2732,6 +2749,10 @@ msgstr ""
 
 msgid "HelpOnNotification"
 msgstr "ПомощЗаИзвестия"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "ПомощЗаПравила"
 
 msgid "HelpOnSessions"
 msgstr "ПомощЗаСесии"
@@ -3414,6 +3435,16 @@ msgstr "Чувствителност към големината на букви
 msgid "Search Text"
 msgstr "Търсене в текста"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Непознато поддействие при архивиране: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Версия на Python"
@@ -3432,14 +3463,6 @@ msgstr ""
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Няма цитати на страница %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Качване на приложение '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Чертеж '%(filename)s' - записан."
 
 #, python-format
 msgid "%(mins)dm ago"

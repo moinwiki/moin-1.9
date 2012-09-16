@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -281,6 +281,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1655,6 +1664,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Tipo de gráfico incorrecto \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Subida (upload) do anexo '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Debuxo '%(filename)s' gardado."
+
+msgid "New page:\n"
+msgstr "Nova páxina:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 
@@ -2056,9 +2076,6 @@ msgstr ""
 "A seguinte páxina foi modificada por %(editor)s:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Nova páxina:\n"
 
 msgid "No differences found!\n"
 msgstr "Non se acharon diferenzas!\n"
@@ -2752,6 +2769,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "AxudaSobreFormato"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "ContidosDeAxuda"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3459,6 +3480,16 @@ msgstr "A busca é sensíbel a maiúsculas e minúsculas"
 msgid "Search Text"
 msgstr "Busca por texto"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Subacción de copia de seguranza descoñecida: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Versión de Python"
@@ -3477,14 +3508,6 @@ msgstr ""
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Non hai citas en %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Subida (upload) do anexo '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Debuxo '%(filename)s' gardado."
 
 #, python-format
 msgid "%(mins)dm ago"

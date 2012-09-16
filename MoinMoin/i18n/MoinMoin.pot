@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,6 +258,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 msgid ""
@@ -1467,6 +1476,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr ""
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr ""
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr ""
+
+msgid "New page:\n"
+msgstr ""
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 
@@ -1773,9 +1793,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-
-msgid "New page:\n"
 msgstr ""
 
 msgid "No differences found!\n"
@@ -2410,6 +2427,9 @@ msgid "HelpOnMoinCommand/ExportDump"
 msgstr ""
 
 msgid "HelpOnNotification"
+msgstr ""
+
+msgid "HelpOnRobots"
 msgstr ""
 
 msgid "HelpOnSessions"
@@ -3071,6 +3091,16 @@ msgstr ""
 msgid "Search Text"
 msgstr ""
 
+#, python-format
+msgid "Unknown macro parameter: %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr ""
 
@@ -3085,14 +3115,6 @@ msgstr ""
 
 #, python-format
 msgid "No quotes on %(pagename)s."
-msgstr ""
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr ""
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
 msgstr ""
 
 #, python-format

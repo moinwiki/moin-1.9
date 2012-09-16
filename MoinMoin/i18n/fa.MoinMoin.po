@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -285,6 +285,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "پر رنگ شدن نامعتبر \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1644,6 +1653,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "چارت \"%s\" صحیح نمی‌باشد!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "ارسال ضمیمه '%(filename)s'"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "ترسیم '%(filename)s' ذخیره شد."
+
+msgid "New page:\n"
+msgstr "صفحه جدید:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) تنها صفحاتی که پس از '''%s''' شده‌اند نمایش داده شدند!"
 
@@ -2022,9 +2042,6 @@ msgstr ""
 "شما در صفحه یا طبقه‌بندی \"%(sitename)s\" برای اطلاع از تغییرات صورت گرفته "
 "عضو می‌باشید\n"
 "صفحه \"%(pagename)s\" توسط %(editor)s ویرایش شده است:\n"
-
-msgid "New page:\n"
-msgstr "صفحه جدید:\n"
 
 msgid "No differences found!\n"
 msgstr "تغییری مشاهده نشد!\n"
@@ -2713,6 +2730,10 @@ msgstr ""
 msgid "HelpOnNotification"
 msgstr "راهنمای سیستم آگاه‌سازی"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "عناوین فهرستها"
+
 msgid "HelpOnSessions"
 msgstr "راهنمای نشستها"
 
@@ -3386,6 +3407,16 @@ msgstr "جستجوی حساس به حروف بزرگ و کوچک"
 msgid "Search Text"
 msgstr "جستجو در متون"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "عملیات ناشناخته %s در پشتیبان‌گیری."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "توضیحات Lexer"
 
@@ -3401,14 +3432,6 @@ msgstr "انواع علائم"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "برای صفحه %(pagename)s نظری وجود ندارد."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "ارسال ضمیمه '%(filename)s'"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "ترسیم '%(filename)s' ذخیره شد."
 
 #, python-format
 msgid "%(mins)dm ago"

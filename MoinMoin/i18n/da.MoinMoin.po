@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-01-06 23:21+0100\n"
 "Last-Translator: Jeppe Hallgren <jeppe@hallgren.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -284,6 +284,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Ugyldig fremhævelse af regulært udtryk \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1665,6 +1674,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Dårlig diagram-type·\"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Overførsel af vedhæftet fil '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Tegningen '%(filename)s' er gemt."
+
+msgid "New page:\n"
+msgstr "Ny side:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Kun sider ændret siden '''%s''' vises!"
 
@@ -2040,9 +2060,6 @@ msgstr ""
 "du får besked om ændringer.\n"
 "\n"
 "Siden \"%(pagename)s\" er blevet ændret af %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Ny side:\n"
 
 msgid "No differences found!\n"
 msgstr "Ingen forskelle fundet!\n"
@@ -2727,6 +2744,10 @@ msgstr "HjælpTilMoinKommando/EksportDump"
 msgid "HelpOnNotification"
 msgstr "HjælpTilNotifikation"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "HjælpTilRegler"
+
 msgid "HelpOnSessions"
 msgstr "HjælpTilSessioner"
 
@@ -3407,6 +3428,16 @@ msgstr "Søgning med skelnen mellem STORE og små bogstaver"
 msgid "Search Text"
 msgstr "Søg i tekst"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Ukendt backup-underrutine: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer beskrivelse"
 
@@ -3422,14 +3453,6 @@ msgstr "Mimetyper"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Ingen citater i %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Overførsel af vedhæftet fil '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Tegningen '%(filename)s' er gemt."
 
 #, python-format
 msgid "%(mins)dm ago"

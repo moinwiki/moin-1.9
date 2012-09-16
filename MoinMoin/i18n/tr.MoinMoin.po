@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -293,6 +293,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1669,6 +1678,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Geçersiz çizelge tipi: \"%s\""
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "'%(filename)s' ekinin gönderimi."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "'%(filename)s' çizimi kaydedildi."
+
+msgid "New page:\n"
+msgstr "Yeni sayfa:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 "(!) Sadece '''%s''' tarihinden sonra değiştirilen sayfalar gösteriliyor!"
@@ -2061,9 +2081,6 @@ msgstr ""
 "Aşağıdaki sayfa %(editor)s tarafından düzenlendi.\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Yeni sayfa:\n"
 
 msgid "No differences found!\n"
 msgstr "Fark bulunamadı!\n"
@@ -2744,6 +2761,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "YardımBiçimHakkında"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "YardimKonuları"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3452,6 +3473,16 @@ msgstr "Büyük-küçük harf duyarlı arama"
 msgid "Search Text"
 msgstr "Metin Arama"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Bilinmeyen yedekleme alt eylemi: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Python Sürümü"
@@ -3470,14 +3501,6 @@ msgstr ""
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "%(pagename)s sayfasında alıntı bulunmamakta."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "'%(filename)s' ekinin gönderimi."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "'%(filename)s' çizimi kaydedildi."
 
 #, python-format
 msgid "%(mins)dm ago"

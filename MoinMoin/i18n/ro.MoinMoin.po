@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-12-24 23:47+0300\n"
 "Last-Translator: Nicolae Antonio <anto.nicolae@gmail.com>\n"
 "Language-Team: Romanian\n"
@@ -295,6 +295,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Marcarea expresiei regulate „%(regex)s” este invalidă: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1704,6 +1713,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Este invalid tipul de grafic \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Trimiterea atașamentului '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Desenul '%(filename)s' a fost salvat."
+
+msgid "New page:\n"
+msgstr "Pagină noua:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Doar paginile schimbate de la '''%s''' sunt afișate!"
 
@@ -2091,9 +2111,6 @@ msgstr ""
 "pentru anunțarea schimbărilor.\n"
 "\n"
 "Pagina \"%(pagename)s\" a fost schimbată de %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Pagină noua:\n"
 
 msgid "No differences found!\n"
 msgstr "Nu s-a găsit nici o diferență!\n"
@@ -2781,6 +2798,10 @@ msgstr "HelpOnMoinCommand/ExportDump"
 msgid "HelpOnNotification"
 msgstr "HelpOnNotification"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "Ajutor"
+
 msgid "HelpOnSessions"
 msgstr "HelpOnSessions"
 
@@ -3464,6 +3485,16 @@ msgstr "Căutare case-sensitive"
 msgid "Search Text"
 msgstr "Căutare Text"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Subacțiune a copiei de rezervă necunoscută %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Descrierea lexer"
 
@@ -3479,14 +3510,6 @@ msgstr "Mimetypes"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Nu există citate la %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Trimiterea atașamentului '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Desenul '%(filename)s' a fost salvat."
 
 #, python-format
 msgid "%(mins)dm ago"

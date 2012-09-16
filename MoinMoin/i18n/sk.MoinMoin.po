@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -282,6 +282,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Neplatný regulárny výraz pre zvýrazňovanie: „%(regex)s“: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1617,6 +1626,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Nesprávny typ diagramu \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Nahrať prílohu „ %(filename)s “."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Obrázok „%(filename)s“ uložený."
+
+msgid "New page:\n"
+msgstr "Nová stránka:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Zobrazujú sa len stránky zmenené od '''%s'''!"
 
@@ -1963,9 +1983,6 @@ msgstr ""
 "\"%(sitename)s.\n"
 "\n"
 "Stránku %(pagename)s zmenil užívateľ %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Nová stránka:\n"
 
 msgid "No differences found!\n"
 msgstr "Nenašli sa nijaké rozdiely!\n"
@@ -2625,6 +2642,10 @@ msgstr ""
 
 msgid "HelpOnNotification"
 msgstr "PomocSOznamami"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "PomocSoZoznamami"
 
 msgid "HelpOnSessions"
 msgstr "PomocSoSedeniami"
@@ -3291,6 +3312,16 @@ msgstr "Rozlišovať pri vyhľadávaní veľkosť písmen"
 msgid "Search Text"
 msgstr "Hľadaj text"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Neznáma subakcia zálohy: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Popis"
@@ -3310,14 +3341,6 @@ msgstr "akýkoľvek mimetype"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Žiadne citáty na stránke %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Nahrať prílohu „ %(filename)s “."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Obrázok „%(filename)s“ uložený."
 
 #, python-format
 msgid "%(mins)dm ago"

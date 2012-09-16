@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-01-03 20:51+0100\n"
 "Last-Translator: Petr Pecha <nejlepsitextovyeditorjevim@gmail.com>\n"
 "Language-Team: Czech <moin-user@lists.sourceforge.net>\n"
@@ -283,6 +283,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Chybný regulární výraz pro zvírozňování: \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1639,6 +1648,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Neplatný diagram typu \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Upload přílohy '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Obrázek '%(filename)s' uložen."
+
+msgid "New page:\n"
+msgstr "Nová stránka:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Jsou zobrazeny pouze stránky změněné po '''%s'''!"
 
@@ -2017,9 +2037,6 @@ msgstr ""
 "\"%(sitename)s\" .\n"
 "\n"
 "Stránku \"%(pagename)s\" změnil uživatel %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Nová stránka:\n"
 
 msgid "No differences found!\n"
 msgstr "Nenalezeny žádné změny!\n"
@@ -2702,6 +2719,10 @@ msgstr "NapovedaMoinCommand/ExportVypisu"
 msgid "HelpOnNotification"
 msgstr "NapovedaUpozorneni"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "NapovedaPravidla"
+
 msgid "HelpOnSessions"
 msgstr "NapovedaSessions"
 
@@ -3380,6 +3401,16 @@ msgstr "Rozlišovat velikost písmen"
 msgid "Search Text"
 msgstr "Hledat v textu"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Neznámá podakce zálohy: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Popis pravopisu"
 
@@ -3395,14 +3426,6 @@ msgstr "Mimetypes"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Žádné citáty na stránce %(pagename)s nenalezeny."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Upload přílohy '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Obrázek '%(filename)s' uložen."
 
 #, python-format
 msgid "%(mins)dm ago"

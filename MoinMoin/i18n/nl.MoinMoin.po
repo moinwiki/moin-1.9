@@ -13,18 +13,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
-"PO-Revision-Date: 2010-02-16 11:29+0100\n"
-"Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
+"PO-Revision-Date: 2012-06-12 10:41+0200\n"
+"Last-Translator: Rachid BM <rachidbm@ubuntu.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Direction: ltr\n"
 "X-Language: Nederlands\n"
 "X-Language-in-English: Dutch\n"
 "X-HasWikiMarkup: True\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -44,17 +45,17 @@ msgstr "De installatie van '%(filename)s' is mislukt."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr "Het bestand %s is geen MoinMoin pakket bestand."
+msgstr "Het bestand %s is geen pakketbestand van MoinMoin."
 
 #, python-format
 msgid "The page %s does not exist."
 msgstr "De pagina %s bestaat niet."
 
 msgid "Invalid package file header."
-msgstr "Ongeldige pakket bestandsheader."
+msgstr "Ongeldige header van pakketbestand."
 
 msgid "Package file format unsupported."
-msgstr "Pakketbestand formaat wordt niet ondersteund."
+msgstr "Formaat van pakketbestand wordt niet ondersteund."
 
 #, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
@@ -62,7 +63,7 @@ msgstr "Onbekende functie %(func)s op regel %(lineno)i."
 
 #, python-format
 msgid "The file %s was not found in the package."
-msgstr "Het bestand %s werd niet in het pakket teruggevonden."
+msgstr "Het bestand %s kon niet gevonden worden in het pakket."
 
 #, python-format
 msgid "Argument \"%s\" must be a boolean value, not \"%s\""
@@ -105,7 +106,7 @@ msgid "Argument must be one of \"%s\", not \"%s\""
 msgstr "Het argument moet één van \"%s\" zijn, niet \"%s\""
 
 msgid "Too many arguments"
-msgstr "Teveel argumenten"
+msgstr "Te veel argumenten"
 
 msgid "Cannot have arguments without name following named arguments"
 msgstr ""
@@ -117,7 +118,7 @@ msgstr "Argument \"%s\" is vereist"
 
 #, python-format
 msgid "No argument named \"%s\""
-msgstr "Er bestaat geen argument met de naam \"%s\"!"
+msgstr "Er bestaat geen argument met de naam \"%s\""
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -149,7 +150,7 @@ msgstr "\"%(pagename)s\" bewerken"
 
 #, python-format
 msgid "Preview of \"%(pagename)s\""
-msgstr "Vooraanzicht van \"%(pagename)s\""
+msgstr "Voorbeeld van \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
@@ -181,7 +182,7 @@ msgstr ""
 "Herzie de pagina voor u hem opslaat. Bewaar deze pagina niet zoals hij nu is!"
 
 msgid "[Content loaded from draft]"
-msgstr "[Inhoud van een ontwerp geladen]"
+msgstr "[Inhoud van ontwerp geladen]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -205,10 +206,10 @@ msgid ""
 msgstr ""
 "'''<<BR>>Uw ontwerp dat gebaseerd is op de versie %(draft_rev)d (opgeslagen "
 "%(draft_timestamp_str)s) kan ook worden geladen van de huidige versie "
-"%(page_rev)d door de laad ontwerp knop te gebruiken - als je je laatste "
+"%(page_rev)d door de 'Ontwerp laden'-knop te gebruiken - als je je laatste "
 "bewerking hebt verloren zonder op te slaan.''' Een ontwerp wordt voor u "
-"opgeslagen als u een vooraanzicht, annulering van een bewerking of een "
-"mislukte opslagbewerking maakt."
+"opgeslagen als u een voorbeeld, annulering van een bewerking of een mislukte "
+"opslagbewerking maakt."
 
 #, python-format
 msgid "Describe %s here."
@@ -236,13 +237,13 @@ msgstr ""
 "te annuleren."
 
 msgid "Preview"
-msgstr "Vooraanzicht"
+msgstr "Voorbeeld"
 
 msgid "Text mode"
 msgstr "Tekstmodus"
 
 msgid "Load Draft"
-msgstr "Laad een ontwerp"
+msgstr "Ontwerp laden"
 
 msgid "Trivial change"
 msgstr "Triviale wijziging"
@@ -289,6 +290,15 @@ msgstr ""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Ongeldige reguliere expressie voor het markeren \"%(regex)s\":%(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -441,7 +451,7 @@ msgstr ""
 "pagina aan het bewerken bent."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Gebruik de knop Vooraanzicht om de vergrendeling te verlengen."
+msgstr "Gebruik de knop Voorbeeld om de vergrendeling te verlengen."
 
 #, python-format
 msgid ""
@@ -461,7 +471,7 @@ msgid ""
 "To leave the editor, press the Cancel button."
 msgstr ""
 "Deze pagina werd voor het laatst om %(timestamp)s geopend voor bewerking of "
-"vooraanzicht door %(owner)s.<<BR>>\n"
+"voorbeeld door %(owner)s.<<BR>>\n"
 "'''U dient nog tenminste %(mins_valid)d minuten te ''wachten met bewerken''\n"
 "van deze pagina om bewerkingsconflicten te voorkomen.'''<<BR>>\n"
 "Klik op Annuleren om de tekstbewerker te verlaten."
@@ -595,40 +605,38 @@ msgstr "Datum"
 msgid "Comment"
 msgstr "Commentaar"
 
-#, fuzzy
 msgid "Diff with oldest revision in left pane"
-msgstr "Toon verschillen met oudere versie in linker paneel"
+msgstr "Toon verschillen met oudere versie in linkerpaneel"
 
 msgid "No older revision available for diff"
 msgstr "Geen oudere versie beschikbaar om mee te vergelijken"
 
 msgid "Diff with older revision in left pane"
-msgstr "Toon verschillen met oudere versie in linker paneel"
+msgstr "Toon verschillen met oudere versie in linkerpaneel"
 
 msgid "Diff with newer revision in left pane"
-msgstr "Toon verschillen met nieuwere versie in linker paneel"
+msgstr "Toon verschillen met nieuwere versie in linkerpaneel"
 
 msgid "Can't change to revision newer than in right pane"
-msgstr "Kan geen nieuwere versie vinden dan die in het rechter paneel"
+msgstr "Kan geen nieuwere versie vinden dan die in het rechterpaneel"
 
 msgid "N/A"
 msgstr "n.v.t."
 
 msgid "Diff with older revision in right pane"
-msgstr "Toon verschillen met oudere versie in rechter paneel"
+msgstr "Toon verschillen met oudere versie in rechterpaneel"
 
 msgid "Can't change to revision older than revision in left pane"
-msgstr "Kan geen oudere versie vinden dan die in het linker paneel"
+msgstr "Kan geen oudere versie vinden dan die in het linkerpaneel"
 
 msgid "Diff with newer revision in right pane"
-msgstr "Toon verschillen met nieuwere versie in rechter paneel"
+msgstr "Toon verschillen met nieuwere versie in rechterpaneel"
 
 msgid "No newer revision available for diff"
 msgstr "Geen nieuwere versie beschikbaar om mee te vergelijken"
 
-#, fuzzy
 msgid "Diff with newest revision in right pane"
-msgstr "Toon verschillen met nieuwere versie in rechter paneel"
+msgstr "Toon verschillen met nieuwere versie in rechterpaneel"
 
 msgid "No differences found!"
 msgstr "Geen verschillen gevonden!"
@@ -638,7 +646,7 @@ msgid "The page was saved %(count)d times, though!"
 msgstr "De pagina is weliswaar %(count)d keer opgeslagen!"
 
 msgid "(ignoring whitespace)"
-msgstr "(witruimte niet meegeteld)"
+msgstr "(witruimte negeren)"
 
 msgid "Ignore changes in the amount of whitespace"
 msgstr "Wijzigingen in de hoeveelheid witruimte negeren"
@@ -661,13 +669,13 @@ msgstr ""
 "gemarkeerd:"
 
 msgid "Add checked words to dictionary"
-msgstr "Voeg gecontroleerde woorden toe aan het woordenboek"
+msgstr "Gecontroleerde woorden toevoegen aan het woordenboek"
 
 msgid "No spelling errors found!"
 msgstr "Geen spelfouten gevonden!"
 
 msgid "You can't save spelling words."
-msgstr "U kunt geen spelling woorden opslaan."
+msgstr "U kunt geen spellingwoorden opslaan."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
@@ -687,11 +695,11 @@ msgstr "Actie %(actionname)s is op deze wiki uitgesloten!"
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
-"U hebt geen toestemming niet om de actie %(actionname)s op deze pagina uit "
-"te voeren!"
+"U hebt geen toestemming om de actie %(actionname)s op deze pagina uit te "
+"voeren!"
 
 msgid "Please log in first."
-msgstr "Log eerst in."
+msgstr "Eerst inloggen alstublieft."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Maak eerst een thuispagina voor u extra pagina's aanmaakt alstublieft."
@@ -723,10 +731,10 @@ msgid ""
 "%(username)s only||\n"
 "\n"
 msgstr ""
-"U kan hier enkele bijkomende subpagina's aan uw reeds bestaande thuispagina "
+"U kunt hier enkele bijkomende subpagina's aan uw reeds bestaande thuispagina "
 "toevoegen.\n"
 "\n"
-"U kan kiezen hoe open deze pagina's zullen zijn voor andere lezers en "
+"U kunt kiezen hoe open deze pagina's zullen zijn voor andere lezers en "
 "schrijvers,\n"
 "de toegang wordt bepaald door lidmaatschap van de groep overeenstemmende met "
 "de groepspagina.\n"
@@ -777,9 +785,9 @@ msgid ""
 "Showing page edit history entries from '''%(start_offset)d''' to "
 "'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
-"Nu getoond: bewerkingsgeschiedenis voor deze pagina van "
-"'''%(start_offset)d''' tot '''%(end_offset)d''' uit een totaal van "
-"'''%(total_count)d''' bewerkingen."
+"Nu getoond: revisiegeschiedenis voor deze pagina van '''%(start_offset)d''' "
+"tot '''%(end_offset)d''' uit een totaal van '''%(total_count)d''' "
+"bewerkingen."
 
 msgid "Newer"
 msgstr "Nieuwer"
@@ -974,8 +982,8 @@ msgid ""
 "Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
 "Het object %s heeft verschillende mimetypes in beide wiki's en kon niet "
-"samengevoegd worden. Verwijder het in één van de beide wiki's of "
-"vereenzelvig de mimetypes en probeer opnieuw.s"
+"samengevoegd worden. Verwijder het in één van beide wiki's of maak de "
+"mimetypes gelijk en probeer het opnieuw."
 
 #, python-format
 msgid ""
@@ -1097,7 +1105,7 @@ msgstr ""
 "op."
 
 msgid "Empty user name. Please enter a user name."
-msgstr "Geen gebruikersnaam ingevuld. Voer een gebruikersnaam in!"
+msgstr "Geen gebruikersnaam ingevuld. Voer een gebruikersnaam in."
 
 #, python-format
 msgid ""
@@ -1441,9 +1449,8 @@ msgstr "Paginanaam"
 msgid "Print"
 msgstr "Afdrukken"
 
-#, fuzzy
 msgid "Print slide show"
-msgstr "Diavoorstelling bewerken"
+msgstr "Diavoorstelling afdrukken"
 
 msgid "Edit"
 msgstr "Bewerken"
@@ -1689,6 +1696,17 @@ msgstr "U dient een grafiektype op te geven!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Ongeldig grafiektype \"%s\"!"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Versturen van bijlage '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Tekening '%(filename)s' opgeslagen."
+
+msgid "New page:\n"
+msgstr "Nieuwe pagina:\n"
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -2072,9 +2090,6 @@ msgstr ""
 "\n"
 "De pagina \"%(pagename)s\" is door %(editor)s gewijzigd:\n"
 
-msgid "New page:\n"
-msgstr "Nieuwe pagina:\n"
-
 msgid "No differences found!\n"
 msgstr "Geen verschillen gevonden!\n"
 
@@ -2112,9 +2127,9 @@ msgstr ""
 "De pagina \"%(oldname)s\" is door %(editor)s hernoemd naar \"%(pagename)s"
 "\":\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] Uw wiki account informatie"
+msgstr "[%(sitename)s] Nieuw gebruikersaccount aangemaakt"
 
 #, python-format
 msgid ""
@@ -2130,9 +2145,9 @@ msgstr ""
 "    Gebruikersnaam: %(username)s\n"
 "    E-mailadres: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "Nieuwe bijlage toegevoegd aan pagina %(pagename)s op %(sitename)s"
+msgstr "[%(sitename)s] Nieuwe bijlage toegevoegd aan pagina %(pagename)s"
 
 #, python-format
 msgid ""
@@ -2154,9 +2169,9 @@ msgstr ""
 "Naam van de bijlage: %(attach_name)s\n"
 "Grootte: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "Bijlage verwijderd van pagina %(pagename)s op %(sitename)s"
+msgstr "[%(sitename)s] Bijlage verwijderd van pagina %(pagename)s"
 
 #, python-format
 msgid ""
@@ -2237,10 +2252,11 @@ msgid ""
 "the username with your OpenID. Otherwise, please choose a different\n"
 "username and leave the password field blank."
 msgstr ""
-"De gebruikersnaam die u koos is al\n"
+"De gebruikersnaam die u heeft gekozen is al\n"
 "in gebruik. Als dit uw gebruikersnaam is, voer hieronder uw wachtwoord in "
 "om\n"
-"uw gebruikersnaam met uw OpenID te koppelen. Indien niet, kies een andere\n"
+"uw gebruikersnaam met uw OpenID te koppelen. Indien dit niet het geval is, "
+"kies een andere\n"
 "gebruikersnaam en laat het wachtwoord veld leeg."
 
 msgid "Associate this name"
@@ -2248,10 +2264,10 @@ msgstr "Koppel deze naam"
 
 #, python-format
 msgid "OpenID error: %s."
-msgstr "OpenID fout: %s."
+msgstr "OpenID-fout: %s."
 
 msgid "OpenID verification canceled."
-msgstr "OpenID verificatie geannuleerd."
+msgstr "OpenID-verificatie geannuleerd."
 
 msgid "Verification canceled."
 msgstr "Verificatie geannuleerd."
@@ -2261,10 +2277,10 @@ msgid "OpenID success. id: %s"
 msgstr "OpenID succesvol. id: %s"
 
 msgid "OpenID failure"
-msgstr "OpenID storing"
+msgstr "OpenID-storing"
 
 msgid "OpenID failure."
-msgstr "OpenID storing."
+msgstr "OpenID-storing."
 
 msgid "No OpenID found in session."
 msgstr "Geen OpenID gevonden in deze sessie."
@@ -2276,10 +2292,10 @@ msgid "The password you entered is not valid."
 msgstr "Het wachtwoord dat u opgaf is ongeldig."
 
 msgid "OpenID error: unknown continuation stage"
-msgstr "OpenID fout: onbekende configuratiefase"
+msgstr "OpenID-fout: onbekende configuratiefase"
 
 msgid "OpenID verification requires that you click this button:"
-msgstr "OpenID verificatie vereist dat u op deze knop drukt:"
+msgstr "OpenID-verificatie vereist dat u op deze knop drukt:"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Anonieme sessies moeten geactiveerd zijn voor OpenID login."
@@ -2302,7 +2318,7 @@ msgstr ""
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr "LDAP server %(server)s storing."
+msgstr "LDAP-server %(server)s storing."
 
 msgid "Line"
 msgstr "Regel"
@@ -2317,10 +2333,10 @@ msgid "Diffs"
 msgstr "Verschillen"
 
 msgid "Info"
-msgstr "Informatie"
+msgstr "Info"
 
 msgid "Unsubscribe"
-msgstr "Abonnement opzeggen"
+msgstr "Uitschrijven"
 
 msgid "Subscribe"
 msgstr "Abonneren"
@@ -2403,7 +2419,7 @@ msgid "------------------------"
 msgstr "------------------------"
 
 msgid "Raw Text"
-msgstr "Ruwe tekst"
+msgstr "Brontekst"
 
 msgid "Print View"
 msgstr "Afdrukvoorbeeld"
@@ -2415,7 +2431,7 @@ msgid "Delete Page"
 msgstr "Pagina verwijderen"
 
 msgid "Like Pages"
-msgstr "Gelijkende pagina's"
+msgstr "Gelijke pagina's"
 
 msgid "Local Site Map"
 msgstr "Lokaal site overzicht"
@@ -2445,22 +2461,22 @@ msgid "Comments"
 msgstr "Commentaar"
 
 msgid "Edit (Text)"
-msgstr "Bewerken (Tekst)"
+msgstr "Bewerk (Tekst)"
 
 msgid "Edit (GUI)"
-msgstr "Bewerken (GUI)"
+msgstr "Bewerk (GUI)"
 
 msgid "Immutable Page"
 msgstr "Vastliggende pagina"
 
 msgid "Remove Link"
-msgstr "Verwijzing verwijderen"
+msgstr "Link verwijderen"
 
 msgid "Add Link"
-msgstr "Verwijzing toevoegen"
+msgstr "Link toevoegen"
 
 msgid "Attachments"
-msgstr "Bijlage"
+msgstr "Bijlages"
 
 #, python-format
 msgid "Show %s days."
@@ -2477,7 +2493,7 @@ msgid "(cached %s)"
 msgstr "(%s gebufferd)"
 
 msgid "Or try one of these actions:"
-msgstr "Of probeer één van deze acties: "
+msgstr "Of probeer één van deze acties:"
 
 msgid "Wiki"
 msgstr "Wiki"
@@ -2505,7 +2521,7 @@ msgid "Password is too easy (keyboard sequence)."
 msgstr "Wachtwoord is te eenvoudig (opeenvolging van toetsen)."
 
 msgid "UnSubscribe"
-msgstr "Abonnement opzeggen"
+msgstr "Uitschrijven"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
@@ -2546,7 +2562,7 @@ msgid "Disable this account forever"
 msgstr "Dit account permanent uitschakelen"
 
 msgid "Alias-Name"
-msgstr "Alias-Naam"
+msgstr "Alias-naam"
 
 msgid "Jabber ID"
 msgstr "Jabber ID"
@@ -2565,14 +2581,14 @@ msgstr "anoniem"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
-msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
+msgstr "Nieuwe bijlage uploaden \"%(filename)s\""
 
 #, python-format
 msgid "Inlined image: %(url)s"
 msgstr "Afbeelding in de tekst: %(url)s"
 
 msgid "Toggle line numbers"
-msgstr "Regelnummers aan/uit doen"
+msgstr "Regelnummers aan/uit"
 
 msgid "From"
 msgstr "Van"
@@ -2757,6 +2773,10 @@ msgstr "HelpOverMoinComando/ExportDump"
 
 msgid "HelpOnNotification"
 msgstr "HelpOverMelding"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "HelpOverRegels"
 
 msgid "HelpOnSessions"
 msgstr "HelpOverSessies"
@@ -3147,13 +3167,13 @@ msgid "Trusted websites"
 msgstr "Vertrouwde websites"
 
 msgid "Remove selected"
-msgstr "Verwijder geselecteerden"
+msgstr "Geselecteerden verwijderen"
 
 msgid "Change password"
 msgstr "Wachtwoord wijzigen"
 
 msgid "Your password has been changed."
-msgstr "Uw wachtwoord werd gewijzigd."
+msgstr "Uw wachtwoord is gewijzigd."
 
 msgid "To change your password, enter a new password twice."
 msgstr "Om uw wachtwoord te wijzigen: voer tweemaal een nieuw wachtwoord in."
@@ -3178,7 +3198,7 @@ msgid "<Browser setting>"
 msgstr "<Browserinstelling>"
 
 msgid "the one preferred"
-msgstr "de verkiesbare"
+msgstr "degene met de voorkeur"
 
 msgid "free choice"
 msgstr "vrije keuze"
@@ -3214,13 +3234,13 @@ msgid "Quick links"
 msgstr "Snelkoppelingen"
 
 msgid "OpenID settings"
-msgstr "OpenID instellingen"
+msgstr "OpenID-instellingen"
 
 msgid "Cannot remove all OpenIDs."
-msgstr "Alle OpenID's kunnen niet verwijderd worden."
+msgstr "Niet alle OpenID's kunnen verwijderd worden."
 
 msgid "The selected OpenIDs have been removed."
-msgstr "De geselecteerde OpenID's werden verwijderd."
+msgstr "De geselecteerde OpenID's zijn verwijderd."
 
 msgid "No OpenID given."
 msgstr "Geen OpenID opgegeven."
@@ -3229,7 +3249,7 @@ msgid "OpenID is already present."
 msgstr "OpenID is reeds aanwezig."
 
 msgid "This OpenID is already used for another account."
-msgstr "Deze OpenID is al in gebruik."
+msgstr "Deze OpenID is al in gebruik voor een ander account."
 
 msgid "OpenID added successfully."
 msgstr "OpenID met succes toegevoegd."
@@ -3306,7 +3326,7 @@ msgid "Jabber"
 msgstr "Jabber"
 
 msgid "Disable user"
-msgstr "Gebruiker desactiveren"
+msgstr "Gebruiker deactiveren"
 
 msgid "Enable user"
 msgstr "Gebruiker activeren"
@@ -3368,7 +3388,7 @@ msgstr "Geïntegreerd"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
-msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
+msgstr "Ongeldige argumenten voor invoegen (include) \"%s\"!"
 
 #, python-format
 msgid "Nothing found for \"%s\"!"
@@ -3442,6 +3462,16 @@ msgstr "Hoofdlettergevoelig zoeken"
 msgid "Search Text"
 msgstr "Tekst doorzoeken"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Onbekende backup subactie: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer beschrijving"
 
@@ -3457,14 +3487,6 @@ msgstr "Mimetypen"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Geen citaten op %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Versturen van bijlage '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Tekening '%(filename)s' opgeslagen."
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -3643,7 +3665,7 @@ msgid "rev"
 msgstr "revisie"
 
 msgid "current"
-msgstr "huidig"
+msgstr "huidige"
 
 msgid "about"
 msgstr "over"

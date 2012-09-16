@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2006-12-08 18:50+0000\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -276,6 +276,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1551,6 +1560,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr ""
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr ""
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr ""
+
+msgid "New page:\n"
+msgstr "Rûpela nu:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 
@@ -1871,9 +1891,6 @@ msgid ""
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
 msgstr ""
-
-msgid "New page:\n"
-msgstr "Rûpela nu:\n"
 
 msgid "No differences found!\n"
 msgstr "Ferq nehate dîtin!\n"
@@ -2524,6 +2541,10 @@ msgstr ""
 
 msgid "HelpOnNotification"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "NaverokaAlîkariyê"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3208,6 +3229,16 @@ msgstr ""
 msgid "Search Text"
 msgstr "Lêgerîna Nivîsê"
 
+#, python-format
+msgid "Unknown macro parameter: %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Guhertoya Python"
@@ -3225,14 +3256,6 @@ msgstr ""
 
 #, python-format
 msgid "No quotes on %(pagename)s."
-msgstr ""
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr ""
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
 msgstr ""
 
 #, python-format

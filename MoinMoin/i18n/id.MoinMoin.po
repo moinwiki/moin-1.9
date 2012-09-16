@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -288,6 +288,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1661,6 +1670,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Jenis bagan tidak benar \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Upload lampiran '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Penggambaran '%(filename)s' disimpan."
+
+msgid "New page:\n"
+msgstr "Halaman baru:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Hanya halaman yang diubah sejak '''%s''' sedang ditampilkan!"
 
@@ -2063,9 +2083,6 @@ msgstr ""
 "Halaman berikut telah diubah oleh %(editor)s:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Halaman baru:\n"
 
 msgid "No differences found!\n"
 msgstr "Tidak ditemukan perbedaan!\n"
@@ -2746,6 +2763,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "DaftarBantuan"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3450,6 +3471,16 @@ msgstr "Pencarian yang peka huruf besar-kecil"
 msgid "Search Text"
 msgstr "Cari Teks"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Sub aksi untuk backup tidak diketahui: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Versi PyStemmer"
@@ -3469,14 +3500,6 @@ msgstr "tipemime yang diinginkan"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Tidak ada kutipan pada %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Upload lampiran '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Penggambaran '%(filename)s' disimpan."
 
 #, python-format
 msgid "%(mins)dm ago"
