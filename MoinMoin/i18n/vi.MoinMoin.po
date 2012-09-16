@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -284,6 +284,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1598,6 +1607,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Không hiểu loại biểu đồ \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Tải lên file '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Bản vẽ '%(filename)s' đã được lưu."
+
+msgid "New page:\n"
+msgstr "Trang mới:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 
@@ -1975,9 +1995,6 @@ msgstr ""
 "Trang sau đã được thay đổi bởi %(editor)s:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Trang mới:\n"
 
 msgid "No differences found!\n"
 msgstr "Không có sự khác biệt!\n"
@@ -2664,6 +2681,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "Chỉ dẫn cách định dạng"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "Trang chỉ dẫn"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3369,6 +3390,16 @@ msgstr "Tìm kiếm phân biệt chữ hoa và chữ thường"
 msgid "Search Text"
 msgstr "Tìm nội dung"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Việc không rõ"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Phiên bản Python"
@@ -3387,14 +3418,6 @@ msgstr ""
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Không có lời trích trong trang %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Tải lên file '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Bản vẽ '%(filename)s' đã được lưu."
 
 #, fuzzy, python-format
 msgid "%(mins)dm ago"

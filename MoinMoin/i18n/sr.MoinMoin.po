@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -288,6 +288,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Неисправни регуларни израз за наглашавање „%(regex)s“: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -1655,6 +1664,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Лош графикон врсте „%s“!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Учитавање прилога '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Цртеж '%(filename)s' је сачуван."
+
+msgid "New page:\n"
+msgstr "Нова страница:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Само странице промењене од '''%s''' су приказане"
 
@@ -2050,9 +2070,6 @@ msgstr ""
 "Ова страница је промењена од стране %(editor)s :\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Нова страница:\n"
 
 msgid "No differences found!\n"
 msgstr "Нема разлике!\n"
@@ -2752,6 +2769,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "Обавештење"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "HelpContents"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3461,6 +3482,16 @@ msgstr "Претрага са разликовањем великих и мал�
 msgid "Search Text"
 msgstr "Тражи текст"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Непозната подрадња прављења резерве: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "PyStemmer верзија"
@@ -3480,14 +3511,6 @@ msgstr "сваке „mime“ врсте"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Нема цитата на %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Учитавање прилога '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Цртеж '%(filename)s' је сачуван."
 
 #, python-format
 msgid "%(mins)dm ago"

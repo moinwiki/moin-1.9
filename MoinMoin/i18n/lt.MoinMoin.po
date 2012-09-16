@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -287,6 +287,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Klaidinga paryškinimo reguliarioji išraiška „%(regex)s“: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1674,6 +1683,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Klaidingas diagramos tipas „%s“!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Įkelti priedą '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Piešinys '%(filename)s' išsaugotas."
+
+msgid "New page:\n"
+msgstr "Naujas puslapis:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Tik puslapiai, pasikeitę nuo '''%s''', yra rodomi!"
 
@@ -2051,9 +2071,6 @@ msgstr ""
 "pranešimų apie pakeitimus gavimui.\n"
 "\n"
 "Puslapis „%(pagename)s“ buvo pakeistas %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Naujas puslapis:\n"
 
 msgid "No differences found!\n"
 msgstr "Pakeitimų nerasta!\n"
@@ -2739,6 +2756,10 @@ msgstr ""
 msgid "HelpOnNotification"
 msgstr ""
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "PagalbaLiniuočių"
+
 msgid "HelpOnSessions"
 msgstr ""
 
@@ -3422,6 +3443,16 @@ msgstr "Didžiųjų-mažųjų raidžių jautrumas"
 msgid "Search Text"
 msgstr "Paieškos tekstas"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Nežinomas atsarginio kopijavimo poveiksmis: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer aprašymas"
 
@@ -3437,14 +3468,6 @@ msgstr "MIME tipai"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Puslapyje %(pagename)s nėra citatų."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Įkelti priedą '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Piešinys '%(filename)s' išsaugotas."
 
 #, python-format
 msgid "%(mins)dm ago"

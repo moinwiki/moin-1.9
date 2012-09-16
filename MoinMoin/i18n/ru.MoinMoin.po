@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-01-27 16:25+0300\n"
 "Last-Translator: Eugene Syromyatnikov <evgsyr@gmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -287,6 +287,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Неправильное регулярное выражение для подсветки «%(regex)s»: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1671,6 +1680,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Тип диаграммы «%s» неверен."
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Загружен файл «%(filename)s»."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Рисунок «%(filename)s» записан."
+
+msgid "New page:\n"
+msgstr "Новая страница:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Показаны только страницы, изменённые с '''%s'''."
 
@@ -2049,9 +2069,6 @@ msgstr ""
 "«%(sitename)s».\n"
 "\n"
 "Страница «%(pagename)s» была изменена пользователем %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Новая страница:\n"
 
 msgid "No differences found!\n"
 msgstr "Различий не найдено.\n"
@@ -2743,6 +2760,10 @@ msgstr "ПомощьПоКомандамMoin/ExportDump"
 msgid "HelpOnNotification"
 msgstr "ПомощьПоОповещению"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "ПомощьПоЛиниям"
+
 msgid "HelpOnSessions"
 msgstr "ПомощьПоСеансам"
 
@@ -3425,6 +3446,16 @@ msgstr "Поиск с учетом регистра"
 msgid "Search Text"
 msgstr "Искать по тексту"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Неизвестная команда резервного копирования: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Описание лексера"
 
@@ -3440,14 +3471,6 @@ msgstr "MIME-типы"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Отсутствуют цитаты на странице %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Загружен файл «%(filename)s»."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Рисунок «%(filename)s» записан."
 
 #, python-format
 msgid "%(mins)dm ago"

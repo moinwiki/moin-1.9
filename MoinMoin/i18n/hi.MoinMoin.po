@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: hppy <nawanihappy@gmail.com>\n"
 "Language-Team: \n"
@@ -281,6 +281,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "नियमित अभिव्यक्ति अवैध उजागर \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1633,6 +1642,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Bad chart type \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "अनुलग्नक के अपलोड  '%(filename)s'|"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "रेखाचित्र '%(filename)s'सुरक्षित किया  गया|"
+
+msgid "New page:\n"
+msgstr "नया पृष्ठ:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!)केवल पृष्ठों में बदलाव'''%s'''  से दिखया जा रहा है !"
 
@@ -2003,9 +2023,6 @@ msgstr ""
 "के लिए| \n"
 "\n"
 "यह \"%(pagename)s\"पृष्ठ बदला गया है इसके द्वारा %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "नया पृष्ठ:\n"
 
 msgid "No differences found!\n"
 msgstr "कोई अंतर नहीं पाया गया!\n"
@@ -2681,6 +2698,10 @@ msgstr "मोइन कमांड में मदद/डंप निर्�
 
 msgid "HelpOnNotification"
 msgstr "अधिसूचना में मदद"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "नियमों पर मदद"
 
 msgid "HelpOnSessions"
 msgstr "सत्र में मदद"
@@ -3359,6 +3380,16 @@ msgstr "प्रकरण - संवेदनशील खोज"
 msgid "Search Text"
 msgstr "पाठ खोजें"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "अज्ञात बैकअप subaction: %s"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer वर्णन"
 
@@ -3374,14 +3405,6 @@ msgstr "mimeके प्रकार "
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr " %(pagename)s पर कोई उद्धरण नहीं|"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "अनुलग्नक के अपलोड  '%(filename)s'|"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "रेखाचित्र '%(filename)s'सुरक्षित किया  गया|"
 
 #, python-format
 msgid "%(mins)dm ago"

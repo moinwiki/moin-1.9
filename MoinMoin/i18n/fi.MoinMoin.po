@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-02-13 23:15+0200\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -286,6 +286,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Virheellinen korostava säännöllinen lauseke \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1668,6 +1677,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Kelvoton kaavion tyyppi \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Liitetiedosto '%(filename)s' on lisätty."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Piirros '%(filename)s' on tallennettu."
+
+msgid "New page:\n"
+msgstr "Uusi sivu:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "Ainoastaan '''%s''' jälkeen muokatut sivut näytetään."
 
@@ -2049,9 +2069,6 @@ msgstr ""
 "muutosilmoitukset.\n"
 "\n"
 "%(editor)s on muuttanut sivua \"%(pagename)s\":\n"
-
-msgid "New page:\n"
-msgstr "Uusi sivu:\n"
 
 msgid "No differences found!\n"
 msgstr "Eroja ei löytynyt!\n"
@@ -2749,6 +2766,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "Ilmoitus"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "OhjeViivoista"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3462,6 +3483,16 @@ msgstr "Huomioi kirjainten koko (esim. a ja A)"
 msgid "Search Text"
 msgstr "Etsi sivujen sisällöstä"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Tuntematon varmistuksen osatoiminto: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Selaajan kuvaus"
 
@@ -3477,14 +3508,6 @@ msgstr "MIME-tyypit"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Sivulla %(pagename)s ei ole lainauksia."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Liitetiedosto '%(filename)s' on lisätty."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Piirros '%(filename)s' on tallennettu."
 
 #, python-format
 msgid "%(mins)dm ago"

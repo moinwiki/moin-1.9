@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -282,6 +282,15 @@ msgstr ""
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
 msgstr ""
 
 #, fuzzy
@@ -1660,6 +1669,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Буруу диаграмын төрөл \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "'%(filename)s' файл хавсаргагдсан байна."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Зураг '%(filename)s' хадгалагдлаа."
+
+msgid "New page:\n"
+msgstr "Шинэ хуудас:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Зөвхөн '''%s''' -аас хойш өөрчлөгдсөн хуудсуудыг үзүүл!"
 
@@ -2065,9 +2085,6 @@ msgstr ""
 "Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
 "%(pagelink)s\n"
 "\n"
-
-msgid "New page:\n"
-msgstr "Шинэ хуудас:\n"
 
 msgid "No differences found!\n"
 msgstr "Өөрчлөлт олдсонгүй!\n"
@@ -2750,6 +2767,10 @@ msgstr ""
 #, fuzzy
 msgid "HelpOnNotification"
 msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "АгуулгынТусламж"
 
 #, fuzzy
 msgid "HelpOnSessions"
@@ -3458,6 +3479,16 @@ msgstr "Том, бага үсгийн ялгааг анхаарах"
 msgid "Search Text"
 msgstr "Текстээр хайх"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Тодорхойгүй backup -ын туслах үйлдэл: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 #, fuzzy
 msgid "Lexer description"
 msgstr "Python хувилбар"
@@ -3476,14 +3507,6 @@ msgstr ""
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr " %(pagename)s хуудсанд ишлэл олдсонгүй."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "'%(filename)s' файл хавсаргагдсан байна."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Зураг '%(filename)s' хадгалагдлаа."
 
 #, python-format
 msgid "%(mins)dm ago"

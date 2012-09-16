@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2010-12-25 04:00+0300\n"
 "Last-Translator: Nicolae Antonio <anto.nicolae@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -288,6 +288,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "expresión regular inválida \"%(regex)s\":·%(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1690,6 +1699,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "¡Tipo de gráfico incorrecto \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Subida (upload) del adjunto '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Dibujo '%(filename)s' guardado."
+
+msgid "New page:\n"
+msgstr "Nueva página:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Solamente desplegamos las páginas que han cambiado desde '''%s'''!"
 
@@ -2074,9 +2094,6 @@ msgstr ""
 "recibir vía correo notificaciones ante cambios en la misma.\n"
 "\n"
 "%(editor)s ha modificado la página \"%(pagename)s\":\n"
-
-msgid "New page:\n"
-msgstr "Nueva página:\n"
 
 msgid "No differences found!\n"
 msgstr "¡No se encontraron diferencias!\n"
@@ -2772,6 +2789,10 @@ msgstr "HelpOnMoinCommand/ExportDump"
 msgid "HelpOnNotification"
 msgstr "HelpOnNotification"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "AyudaSobreLíneasHorizontales"
+
 msgid "HelpOnSessions"
 msgstr "HelpOnSessions"
 
@@ -3453,6 +3474,16 @@ msgstr "Búsqueda sensible a mayúsculas y minúsculas"
 msgid "Search Text"
 msgstr "Búsqueda por texto"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Subacción de copia de seguridad desconocida: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Descripción de Lexer"
 
@@ -3468,14 +3499,6 @@ msgstr "tipos MIME"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "No hay citas en %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Subida (upload) del adjunto '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Dibujo '%(filename)s' guardado."
 
 #, python-format
 msgid "%(mins)dm ago"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Dormouse.Young <dormouseyoung@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -279,6 +279,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "无效的加亮效果正则表达式 \"%(regex)s\"：%(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1592,6 +1601,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "错误的图表类型\"%s\"！"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "上载附件'%(filename)s'。"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "图片'%(filename)s'已保存。"
+
+msgid "New page:\n"
+msgstr "新网页：\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) 仅显示'''%s'''后发生改动的网页！"
 
@@ -1951,9 +1971,6 @@ msgstr ""
 "您在 \"%(sitename)s\" 上订阅了一个维基页面或者维基分类的改动通知。\n"
 "\n"
 "页面 \"%(pagename)s\" 被用户 %(editor)s 更改：\n"
-
-msgid "New page:\n"
-msgstr "新网页：\n"
 
 msgid "No differences found!\n"
 msgstr "没有区别！\n"
@@ -2624,6 +2641,10 @@ msgstr "帮助-命令/导出"
 msgid "HelpOnNotification"
 msgstr "帮助-通知"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "帮助-横线"
+
 msgid "HelpOnSessions"
 msgstr "帮助-会话"
 
@@ -3291,6 +3312,16 @@ msgstr "大小写敏感搜索"
 msgid "Search Text"
 msgstr "正文检索"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "未知的备份子操作：%s。"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Lexer 描述"
 
@@ -3306,14 +3337,6 @@ msgstr "MIME类型"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "页面 %(pagename)s 中无引用。"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "上载附件'%(filename)s'。"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "图片'%(filename)s'已保存。"
 
 #, python-format
 msgid "%(mins)dm ago"

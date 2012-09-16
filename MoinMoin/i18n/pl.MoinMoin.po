@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -287,6 +287,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Niewłaściwe wyrażenie regularne podświetlania \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1656,6 +1665,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Przekazano załącznik '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Rysunek '%(filename)s' zachowany."
+
+msgid "New page:\n"
+msgstr "Nowa strona:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Wyłącznie strony zmieniane od '''%s''' są wyświetlane!"
 
@@ -2037,9 +2057,6 @@ msgstr ""
 "otrzymywania informacji o zmianach.\n"
 "\n"
 "Strona \"%(pagename)s\" została zmieniona przez %(editor)s.\n"
-
-msgid "New page:\n"
-msgstr "Nowa strona:\n"
 
 msgid "No differences found!\n"
 msgstr "Nie znaleziono różnic!\n"
@@ -2717,6 +2734,10 @@ msgstr ""
 
 msgid "HelpOnNotification"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "PomocPrzyLiniachDzielących"
 
 msgid "HelpOnSessions"
 msgstr ""
@@ -3398,6 +3419,16 @@ msgstr "Przeszukiwanie z uwzględnieniem wielkości liter"
 msgid "Search Text"
 msgstr "Szukaj frazy"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Nieznana akcja: %s"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "Opis Lexer"
 
@@ -3413,14 +3444,6 @@ msgstr "Typy MIME"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "Brak przytoczeń na %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Przekazano załącznik '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Rysunek '%(filename)s' zachowany."
 
 #, python-format
 msgid "%(mins)dm ago"

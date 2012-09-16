@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 20:58+0100\n"
+"POT-Creation-Date: 2012-09-16 01:10+0200\n"
 "PO-Revision-Date: 2011-02-02 05:05+0900\n"
 "Last-Translator: HiroshiIwasaki <iwskhrs@gmail.com>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -283,6 +283,15 @@ msgstr ""
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "不正な正規表現ハイライト: \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1651,6 +1660,17 @@ msgid "Bad chart type \"%s\"!"
 msgstr "チャートタイプ\"%s\"が不正です。"
 
 #, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "添付ファイル'%(filename)s'をアップロードしました。"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "図 '%(filename)s'を保存しました。"
+
+msgid "New page:\n"
+msgstr "新しいページ:\n"
+
+#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) '''%s''' 以降に変更されたページのみが表示されています。"
 
@@ -2030,9 +2050,6 @@ msgstr ""
 "変更通知を希望したユーザにお送りしています。\n"
 "\n"
 "\"%(pagename)s\"のページが%(editor)sさんによって変更されました。\n"
-
-msgid "New page:\n"
-msgstr "新しいページ:\n"
 
 msgid "No differences found!\n"
 msgstr "違いは見つかりませんでした。\n"
@@ -2722,6 +2739,10 @@ msgstr "Moinコマンドのヘルプ/ExportDump"
 msgid "HelpOnNotification"
 msgstr "通知のヘルプ"
 
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "水平線のヘルプ"
+
 msgid "HelpOnSessions"
 msgstr "セッションのヘルプ"
 
@@ -3400,6 +3421,16 @@ msgstr "大文字/小文字を区別して検索"
 msgid "Search Text"
 msgstr "テキスト検索"
 
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "未定義のバックアップサブアクション: %s 。"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occured)"
+msgstr ""
+
 msgid "Lexer description"
 msgstr "字句解析器の種類"
 
@@ -3415,14 +3446,6 @@ msgstr "MIMEタイプ"
 #, python-format
 msgid "No quotes on %(pagename)s."
 msgstr "%(pagename)sにquoteはありません。"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "添付ファイル'%(filename)s'をアップロードしました。"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "図 '%(filename)s'を保存しました。"
 
 #, python-format
 msgid "%(mins)dm ago"
