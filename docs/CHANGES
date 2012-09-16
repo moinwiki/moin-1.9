@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Current:
+Version 1.9.5:
 
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
@@ -40,6 +40,7 @@ Current:
    * group/pagelinks formatters: avoid to create unnecessary output, redirect
      output of send_page call with the groups formatter, it must not be written
      to the output stream
+   * rst parser: fix include and macro directives
 
   New features:
    * rss_rc: several new options added: lines parameter gives ability to set
@@ -66,6 +67,11 @@ Current:
      configuration option) by default due to behavioural changes introduced
      in macro parameter parsing mechanism to support them. Related to
      http://moinmo.in/FeatureRequests/FullSearchResultsWithoutHighlight .
+
+  Other changes:
+   * Remove 4suite dependency for docbook formatter, use minidom (included in
+     Python).
+   * Upgraded FCKeditor to 2.6.8.
 
 
 Version 1.9.4:
