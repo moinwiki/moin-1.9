@@ -5,33 +5,23 @@
     @copyright: 2005,2008 by Mikko Virkkilä <mvirkkil@cc.hut.fi>
     @copyright: 2005 by MoinMoin:AlexanderSchremmer (small modifications)
     @copyright: 2005 by MoinMoin:Petr Pytelka <pyta@lightcomp.com> (small modifications)
+    @copyright: 2009 by MoinMoin:ThomasWaldmann (make it work again, use stdlib xml instead 4suite-xml)
 
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, re
 
-from xml.dom import getDOMImplementation
-from xml.dom.ext.reader import Sax
-from xml.dom.ext import Node
+from xml.dom import minidom, Node, getDOMImplementation
+dom = getDOMImplementation()
 
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil
-from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
 
 #For revision history
 from MoinMoin.logfile import editlog
 from MoinMoin import user
-
-
-class InternalError(CompositeError):
-    pass
-
-try:
-    dom = getDOMImplementation("4DOM")
-except ImportError:
-    raise InternalError("You need to install 4suite to use the DocBook formatter.")
 
 
 class Formatter(FormatterBase):
@@ -101,14 +91,8 @@ class Formatter(FormatterBase):
         return ""
 
     def endDocument(self):
-        from xml.dom.ext import PrettyPrint, Print
-        import StringIO
-
-        f = StringIO.StringIO()
-        Print(self.doc, f)
-        txt = f.getvalue()
-        f.close()
-
+        toxml = self.doc.toxml  # toprettyxml
+        txt = toxml(encoding='utf-8')
         self.cur = None
         return txt
 
@@ -419,7 +403,7 @@ class Formatter(FormatterBase):
         fname = wikiutil.taintfilename(filename)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
-            return self.text("[attachment:%s]" % url)
+            return self.text("{{attachment:%s}}" % url)
         else:
             return self.image(
                 src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
@@ -436,7 +420,7 @@ class Formatter(FormatterBase):
         filename = filename + ".png"
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
-            return self.text("[drawing:%s]" % url)
+            return self.text("{{drawing:%s}}" % url)
         else:
             src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
             return self.image(alt=drawing, src=src, html_class="drawing")
@@ -618,7 +602,7 @@ class Formatter(FormatterBase):
 
             text = FormatterBase.macro(self, macro_obj, name, macro_args)
             if text.strip():
-                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)
+                self._copyExternalNodes(minidom.parseString(text).documentElement.childNodes, exclude=excludes)
             if was_in_para:
                 self.paragraph(1)
 
@@ -627,7 +611,7 @@ class Formatter(FormatterBase):
             if text:
                 from xml.parsers.expat import ExpatError
                 try:
-                    xml_dom = Sax.FromXml(text).documentElement.childNodes
+                    xml_dom = minidom.parseString(text).documentElement.childNodes
                     self._copyExternalNodes(xml_dom, exclude=excludes)
                 except ExpatError:
                     self._emitComment("The macro %s caused an error and should be blacklisted. It returned the data '%s' which caused the docbook-formatter to choke. Please file a bug." % (name, text))
