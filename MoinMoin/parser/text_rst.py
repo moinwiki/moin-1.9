@@ -580,7 +580,7 @@ class MoinDirectives:
         else:
             lines = [_("**Maximum number of allowed includes exceeded**")]
             state_machine.insert_input(lines, 'MoinDirectives')
-            return
+            return []
 
         if len(content):
             pagename = content[0]
@@ -598,7 +598,7 @@ class MoinDirectives:
                     lines = [_("**Could not find the referenced page: %s**") % (pagename, )]
             # Insert the text from the included document and then continue parsing
             state_machine.insert_input(lines, 'MoinDirectives')
-        return
+        return []
 
     include.has_content = include.content = True
     include.option_spec = {}
@@ -623,7 +623,7 @@ class MoinDirectives:
             ref = reference(macro, refuri=macro)
             ref['name'] = macro
             return [ref]
-        return
+        return []
 
     macro.has_content = macro.content = True
     macro.option_spec = {}
