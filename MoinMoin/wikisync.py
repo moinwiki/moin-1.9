@@ -168,7 +168,7 @@ class MoinRemoteWiki(RemoteWiki):
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwikiname, '')
         self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
         self.valid = not wikitag_bad
-        self.xmlrpc_url = self.wiki_url + "?action=xmlrpc2"
+        self.xmlrpc_url = str(self.wiki_url + "?action=xmlrpc2")
         if not self.valid:
             self.connection = None
             return
