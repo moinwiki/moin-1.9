@@ -18,6 +18,10 @@ Known main issues:
 
 Version 1.9.5:
 
+  SECURITY HINT: make sure you have allow_xslt = False (or just do not use
+  allow_xslt at all in your wiki configs, False is the internal default).
+  Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
+
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
   Fixes:
@@ -41,6 +45,7 @@ Version 1.9.5:
      output of send_page call with the groups formatter, it must not be written
      to the output stream
    * rst parser: fix include and macro directives
+   * wikisync: fix unicode pagename sending for python 2.7 httplib
 
   New features:
    * rss_rc: several new options added: lines parameter gives ability to set
@@ -75,10 +80,6 @@ Version 1.9.5:
 
 
 Version 1.9.4:
-
-  SECURITY HINT: make sure you have allow_xslt = False (or just do not use
-  allow_xslt at all in your wiki configs, False is the internal default).
-  Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
