@@ -22,7 +22,7 @@ def execute(xmlrpcobj, secret, mail):
     try:
         mailimport.import_mail_from_string(request, mail)
     except mailimport.ProcessingError, e:
-        err = u"An error occured while processing the message: " + str(e.args)
+        err = u"An error occurred while processing the message: " + str(e.args)
         logging.error(err)
         return xmlrpcobj._outstr(err)
     return xmlrpcobj._outstr(u"OK")

@@ -142,7 +142,7 @@ module name does not include the ".py" suffix.
 }
         raise error.ConfigurationError(msg)
     except AttributeError, err:
-        logging.exception('An exception occured.')
+        logging.exception('An exception occurred.')
         msg = """AttributeError: %(err)s
 
 Could not find required "Config" class in "%(name)s.py".

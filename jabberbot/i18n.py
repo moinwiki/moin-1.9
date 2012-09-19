@@ -54,11 +54,11 @@ def request_translations(config):
         translations =  wiki.getBotTranslations()
         return translations
     except xmlrpclib.Fault, fault:
-        log.error("XML RPC fault occured while getting translations: %s" % (str(fault), ))
+        log.error("XML RPC fault occurred while getting translations: %s" % (str(fault), ))
     except xmlrpclib.Error, error:
-        log.error("XML RPC error occured while getting translations: %s" % (str(error), ))
+        log.error("XML RPC error occurred while getting translations: %s" % (str(error), ))
     except Exception, exc:
-        log.error("Unexpected exception occured while getting translations: %s" % (str(exc), ))
+        log.error("Unexpected exception occurred while getting translations: %s" % (str(exc), ))
 
     log.error("Translations could not be downloaded, is wiki is accesible?")
     return None

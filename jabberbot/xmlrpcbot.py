@@ -51,11 +51,11 @@ def _xmlrpc_decorator(function):
                 self.log.error(str(fault))
                 self.report_error(jid, msg, {'error': fault.faultString})
             except xmlrpclib.Error, err:
-                msg = _("A serious error occured while processing your request:\n%(error)s")
+                msg = _("A serious error occurred while processing your request:\n%(error)s")
                 self.log.error(str(err))
                 self.report_error(jid, msg, {'error': str(err)})
             except Exception, exc:
-                msg = _("An internal error has occured, please contact the administrator.")
+                msg = _("An internal error has occurred, please contact the administrator.")
                 self.log.critical(str(exc))
                 self.report_error(jid, msg)
 
