@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-16 01:10+0200\n"
+"POT-Creation-Date: 2012-09-19 11:30+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -3397,7 +3397,7 @@ msgstr "Việc không rõ"
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occured)"
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
 
 #, fuzzy

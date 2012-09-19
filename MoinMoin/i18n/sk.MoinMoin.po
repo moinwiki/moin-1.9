@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-16 01:10+0200\n"
+"POT-Creation-Date: 2012-09-19 11:30+0200\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -3319,7 +3319,7 @@ msgstr "Neznáma subakcia zálohy: %s."
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occured)"
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
 
 #, fuzzy

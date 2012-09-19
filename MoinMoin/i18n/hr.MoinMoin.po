@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-16 01:10+0200\n"
+"POT-Creation-Date: 2012-09-19 11:30+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -3456,7 +3456,7 @@ msgstr "Nepoznata akcija arhiviranja: %s."
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occured)"
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
 
 #, fuzzy
