@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-16 01:10+0200\n"
+"POT-Creation-Date: 2012-09-19 11:30+0200\n"
 "PO-Revision-Date: 2011-01-27 16:25+0300\n"
 "Last-Translator: Eugene Syromyatnikov <evgsyr@gmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -3453,7 +3453,7 @@ msgstr "Неизвестная команда резервного копиро�
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occured)"
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
 
 msgid "Lexer description"

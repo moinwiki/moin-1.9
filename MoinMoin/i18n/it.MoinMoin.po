@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-16 01:10+0200\n"
-"PO-Revision-Date: 2011-11-16 15:48+0200\n"
+"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"PO-Revision-Date: 2012-09-18 22:48+0200\n"
 "Last-Translator: Nico Zanferrari <nicozanf@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -296,9 +296,11 @@ msgid ""
 "Text matching regular expression \"%(regex)s\" is highlighted. "
 "%(switch_link)s."
 msgstr ""
+"Espressione regolare di ricerca del testo \"%(regex)s\" evidenziata. "
+"%(switch_link)s."
 
 msgid "Switch to non-highlighted view"
-msgstr ""
+msgstr "Passare alla vista senza evidenziazioni"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -2798,9 +2800,8 @@ msgstr "HelpOnMoinCommand/ExportDump"
 msgid "HelpOnNotification"
 msgstr "AiutoSuNotifiche"
 
-#, fuzzy
 msgid "HelpOnRobots"
-msgstr "AiutoSuLineeOrizzontali"
+msgstr "HelpOnRobots"
 
 msgid "HelpOnSessions"
 msgstr "AiutoSuSessioni"
@@ -3491,15 +3492,17 @@ msgstr "Ricerca differenziando tra maiuscolo e minuscolo"
 msgid "Search Text"
 msgstr "Cerca nel testo"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown macro parameter: %s."
-msgstr "Sotto-azione di backup sconosciuta: %s."
+msgstr "Parametro di macro sconosciuto: %s."
 
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occured)"
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
+"Più di una stringa di ricerca con l'opzione search_macro_parse_args "
+"abilitata ('%(needle)s' già trovate, '%(arg)s' presenti)"
 
 msgid "Lexer description"
 msgstr "Descrizione lexer"
