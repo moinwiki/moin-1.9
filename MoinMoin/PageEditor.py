@@ -723,7 +723,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             # XXX do not only catch base class SaveError here, but
             # also the derived classes, so we can give better err msgs
             success = False
-            msg = "SaveError has occured in PageEditor.deletePage. We need locking there."
+            msg = "SaveError has occurred in PageEditor.deletePage. We need locking there."
 
         # delete pagelinks
         arena = self

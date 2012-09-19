@@ -121,7 +121,7 @@ def execute(macro, needle, titlesearch=False, case=False):
                 else:
                     err = _(u"More than one needle with "
                              "search_macro_parse_args config option enabled "
-                             "('%(needle)s' found already, '%(arg)s' occured)"
+                             "('%(needle)s' found already, '%(arg)s' occurred)"
                              ) % {'needle': wikiutil.escape(needle),
                                   'arg': wikiutil.escape(arg)}
 

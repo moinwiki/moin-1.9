@@ -326,5 +326,5 @@ if __name__ == "__main__":
     try:
         import_mail_from_file(request, infile)
     except ProcessingError, e:
-        print >> sys.stderr, "An error occured while processing the message:", e.args
+        print >> sys.stderr, "An error occurred while processing the message:", e.args
 
