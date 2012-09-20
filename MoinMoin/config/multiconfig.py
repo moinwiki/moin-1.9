@@ -952,6 +952,7 @@ options_no_group_name = {
     ('edit_locking', 'warn 10', "Editor locking policy: `None`, `'warn <timeout in minutes>'`, or `'lock <timeout in minutes>'`"),
     ('edit_ticketing', True, None),
     ('edit_rows', 20, "Default height of the edit box"),
+    ('require_comment', False, "if True, only allow saving when a comment is filled in"),
 
   )),
   # ==========================================================================
