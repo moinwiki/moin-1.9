@@ -160,9 +160,9 @@ def execute(pagename, request):
         try:
             from MoinMoin.security.textcha import TextCha
             if not TextCha(request).check_answer_from_form():
-                raise pg.SaveError(_('TextCha: Wrong answer! Go back and try again...'))
+                raise pg.SaveError(_('TextCha: Wrong answer! Try again below...'))
             if request.cfg.require_comment and not comment:
-                raise pg.SaveError(_('Supplying a comment is mandatory. Go back, write a comment and try again...'))
+                raise pg.SaveError(_('Supplying a comment is mandatory.  Write a comment below and try again...'))
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:
             msg = e.message
@@ -176,10 +176,13 @@ def execute(pagename, request):
             return
 
         except pg.SaveError, msg:
-            # msg contains a unicode string
-            savemsg = unicode(msg)
+            # Show the error message
+            request.theme.add_msg(unicode(msg), "error")
+            # And show the editor again
+            pg.sendEditor(preview=savetext, comment=comment, staytop=1)
+            return
 
-        # Send new page after save or after unsuccessful conflict merge.
+        # Send new page after successful save
         request.reset()
         pg = Page(request, pagename)
 
