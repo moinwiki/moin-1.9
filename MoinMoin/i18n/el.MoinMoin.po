@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2011-01-06 00:04+0200\n"
 "Last-Translator: Giannis Konstantinidis <gloooabvoe9a@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -1150,6 +1150,14 @@ msgstr "Επιλέξτε"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Εγκατάσταση πακέτων γλώσσας για '%s'"
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Λάθος απάντηση! Πηγαίντε πίσω και ξανά-προσπαθήστε..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"

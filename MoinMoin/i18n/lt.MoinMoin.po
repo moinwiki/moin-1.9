@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -1193,6 +1193,14 @@ msgstr "Pasirinkite:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Įdiekite kalbų paketus '%s'"
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Klaidingas atsakymas! Eikite atgal ir bandykite dar kartą..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"

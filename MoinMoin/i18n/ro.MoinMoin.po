@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2010-12-24 23:47+0300\n"
 "Last-Translator: Nicolae Antonio <anto.nicolae@gmail.com>\n"
 "Language-Team: Romanian\n"
@@ -1216,6 +1216,14 @@ msgstr "Alegeți:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Instalează pachetele de limbă pentru „%s”"
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Răspuns greșit! Duceți-vă înapoi și încercați din nou..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2010-03-27 02:46+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -1205,6 +1205,15 @@ msgstr "Bitte auswählen:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Sprachpakete installieren für '%s'"
+
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr ""
+"TextCha: Falsche Antwort! Probieren Sie es unten nochmal..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
+"Es ist zwingend erforderlich, einen Kommentar einzugeben.  Schreiben Sie unten einen Kommentar und probieren Sie es nochmal..."
 
 #, python-format
 msgid "[%d attachments]"
@@ -3487,9 +3496,8 @@ msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
 "('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
-"Mehr als eine 'needle' und die search_macro_parse_args-Konfigurations-Option ist aktiviert "
-"('%(needle)s' bereits gefunden, '%(arg)s' trat auf)"
-
+"Mehr als eine 'needle' und die search_macro_parse_args-Konfigurations-Option "
+"ist aktiviert ('%(needle)s' bereits gefunden, '%(arg)s' trat auf)"
 
 msgid "Lexer description"
 msgstr "Lexer-Beschreibung"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2012-09-18 22:48+0200\n"
 "Last-Translator: Nico Zanferrari <nicozanf@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1200,6 +1200,14 @@ msgstr "Scegliere:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Installazione pacchetto lingua per «%s»"
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: risposta sbagliata. Torna indietro e riprova..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"

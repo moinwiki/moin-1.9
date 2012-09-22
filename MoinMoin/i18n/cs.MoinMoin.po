@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2011-01-03 20:51+0100\n"
 "Last-Translator: Petr Pecha <nejlepsitextovyeditorjevim@gmail.com>\n"
 "Language-Team: Czech <moin-user@lists.sourceforge.net>\n"
@@ -1168,6 +1168,14 @@ msgstr "Vyber:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Nainstaluj jazykové bylíčky pro '%s'"
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Špatná odpověď! Jdi zpět a zkus to znova..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"

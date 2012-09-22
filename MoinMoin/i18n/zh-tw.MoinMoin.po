@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -1132,6 +1132,14 @@ msgstr ""
 
 #, python-format
 msgid "Install language packs for '%s'"
+msgstr ""
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: 答案錯誤！請再試一次..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
 msgstr ""
 
 #, python-format

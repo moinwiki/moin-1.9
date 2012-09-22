@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: David Pinilla <dpini@caliu.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1206,6 +1206,14 @@ msgstr "Escollir:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Instal·lar paquets de llengua per a '%s'"
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Resposta incorrecte! Torna a intentar-ho"
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"

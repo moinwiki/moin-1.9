@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1177,6 +1177,14 @@ msgstr ""
 
 #, python-format
 msgid "Install language packs for '%s'"
+msgstr ""
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Неправильна відповідь! Поверніться та спробуйте знову..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
 msgstr ""
 
 #, python-format

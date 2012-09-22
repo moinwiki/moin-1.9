@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.8\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2010-02-13 23:15+0200\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -218,7 +218,7 @@ msgid "Save Changes"
 msgstr "Tallenna muutokset"
 
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr "Peru"
 
 #, python-format
 msgid ""
@@ -294,7 +294,7 @@ msgid ""
 msgstr ""
 
 msgid "Switch to non-highlighted view"
-msgstr ""
+msgstr "Vaihda korostamattomaan näkymään"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -595,9 +595,8 @@ msgstr "Päiväys"
 msgid "Comment"
 msgstr "Kuvaus"
 
-#, fuzzy
 msgid "Diff with oldest revision in left pane"
-msgstr "Erot vanhempaan versioon vasemmassa osassa"
+msgstr "Erot vanhimpaan versioon vasemmassa osassa"
 
 msgid "No older revision available for diff"
 msgstr "Vanhempia versioita ei saatavilla erojen näyttämistä varten"
@@ -626,9 +625,8 @@ msgstr "Erot uudempaan versioon oikeassa osassa"
 msgid "No newer revision available for diff"
 msgstr "Uudempaa versiota ei saatavilla erojen näyttämistä varten"
 
-#, fuzzy
 msgid "Diff with newest revision in right pane"
-msgstr "Erot uudempaan versioon oikeassa osassa"
+msgstr "Erot uusimpaan versioon oikeassa osassa"
 
 msgid "No differences found!"
 msgstr "Eroja ei löytynyt!"
@@ -1188,6 +1186,13 @@ msgstr "Valitse:"
 msgid "Install language packs for '%s'"
 msgstr "Asenna kielipaketit \"%s\""
 
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Väärä vastaus! Yritä uudelleen alla..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr "Kommentin antaminen on pakollista. Kirjoita kommentti ja yritä uudelleen..."
+
 #, python-format
 msgid "[%d attachments]"
 msgstr "[%d liitetiedosto(a)]"
@@ -1235,7 +1240,7 @@ msgid "File to upload"
 msgstr "Lähetettävä tiedosto"
 
 msgid "Rename to"
-msgstr "Uudelleennimeä"
+msgstr "Nimeä uudelleen"
 
 msgid "Overwrite existing attachment of same name"
 msgstr "Korvaa aiempi tiedosto uudemmalla, mikäli nimet ovat samat"
@@ -1427,9 +1432,8 @@ msgstr "Sivun nimi"
 msgid "Print"
 msgstr "Tulosta"
 
-#, fuzzy
 msgid "Print slide show"
-msgstr "Muokkaa diaesitystä"
+msgstr "Tulosta diaesitys"
 
 msgid "Edit"
 msgstr "Muokkaa"
@@ -1751,19 +1755,19 @@ msgid "Rename Page"
 msgstr "Uudelleennimeä sivu"
 
 msgid "Create redirect for renamed page(s)?"
-msgstr ""
+msgstr "Luodaanko uudelleenohjaus uudelleen nimetyille sivuille?"
 
 msgid "Rename all /subpages too?"
-msgstr "Uudelleennimetäänkö myös /alasivut?"
+msgstr "Nimetäänkö myös /alasivut uudelleen?"
 
 msgid "Create redirect for renamed page?"
-msgstr ""
+msgstr "Luodaanko uudelleenohjaus uudelleen nimetylle sivulle?"
 
 msgid "Really rename this page?"
 msgstr "Haluatko varmasti uudelleennimetä tämän sivun?"
 
 msgid "Optional reason for the renaming"
-msgstr "Uudelleennimeämisen syy (vapaaehtoinen)"
+msgstr "Uudelleen nimeämisen syy (vapaaehtoinen)"
 
 msgid "You must login to remove a quicklink."
 msgstr "Sinun täytyy olla kirjautunut sisään poistaaksesi pikalinkin."
@@ -2105,9 +2109,9 @@ msgstr ""
 "%(editor)s on nimennyt sivun \"%(oldname)s\" uudelleen, sen uusi nimi on  "
 "\"%(pagename)s\":\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] Wiki-tunnuksesi tiedot"
+msgstr "[%(sitename)s] Uusi käyttäjätunnus luotu"
 
 #, python-format
 msgid ""
@@ -2123,9 +2127,9 @@ msgstr ""
 "    Käyttäjätunnus: %(username)s\n"
 "    Sähköpostiosoite: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "Wikin %(sitename)s sivulle %(pagename)s on lisätty uusi liite"
+msgstr "[%(sitename)s] Uusi liite lisätty sivulle %(pagename)s"
 
 #, python-format
 msgid ""
@@ -2145,9 +2149,9 @@ msgstr ""
 "Liitteen nimi: %(attach_name)s\n"
 "Liitteen koko: %(attach_size)s\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "Wikin %(sitename)s sivulta %(pagename)s on poistettu liitetiedosto"
+msgstr "[%(sitename)s] Sivulta %(pagename)s poistettiin liite"
 
 #, python-format
 msgid ""
@@ -2184,7 +2188,7 @@ msgstr "Kaikki liitetiedostot yhdessä paketissa."
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 "Tiedosto on jo olemassa! Anna tallennettavalle tiedostolle toinen nimi ja "
-"koeta uudelleen."
+"yritä uudelleen."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
@@ -2467,7 +2471,7 @@ msgid "(cached %s)"
 msgstr "(%s välimuistissa)"
 
 msgid "Or try one of these actions:"
-msgstr "Tai koeta yhtä seuraavista toiminnoista:"
+msgstr "Tai yritä yhtä seuraavista toiminnoista:"
 
 msgid "Wiki"
 msgstr "Wiki"
@@ -2616,7 +2620,7 @@ msgid "WikiName"
 msgstr "WikiNimi"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "WikiWikiWeb"
 
 msgid "FrontPage"
 msgstr "EtuSivu"
@@ -2793,9 +2797,8 @@ msgstr "OhjeSisällys"
 msgid "HelpOnFormatting"
 msgstr "OhjeMuotoilusta"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoinWiki"
+msgstr "MoinMoin"
 
 msgid "HelpContents"
 msgstr "OhjeSisältö"
@@ -3483,9 +3486,9 @@ msgstr "Huomioi kirjainten koko (esim. a ja A)"
 msgid "Search Text"
 msgstr "Etsi sivujen sisällöstä"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown macro parameter: %s."
-msgstr "Tuntematon varmistuksen osatoiminto: %s."
+msgstr "Tuntematon makron parametri: %s."
 
 #, python-format
 msgid ""
