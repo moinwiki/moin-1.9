@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -1193,6 +1193,14 @@ msgstr ""
 
 #, python-format
 msgid "Install language packs for '%s'"
+msgstr ""
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Погрешан одговор! Вратите се назад и покушајте поново..."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
 msgstr ""
 
 #, python-format

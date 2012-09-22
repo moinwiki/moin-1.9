@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 11:30+0200\n"
+"POT-Creation-Date: 2012-09-20 23:12+0200\n"
 "PO-Revision-Date: 2011-01-27 16:25+0300\n"
 "Last-Translator: Eugene Syromyatnikov <evgsyr@gmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -293,9 +293,11 @@ msgid ""
 "Text matching regular expression \"%(regex)s\" is highlighted. "
 "%(switch_link)s."
 msgstr ""
+"Подсвечен текст, соответствующий регулярному выражению «%(regex)s». "
+"%(switch_link)s."
 
 msgid "Switch to non-highlighted view"
-msgstr ""
+msgstr "Отключить подсветку"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1189,6 +1191,13 @@ msgstr "Выберите:"
 #, python-format
 msgid "Install language packs for '%s'"
 msgstr "Установить языковые пакеты для '%s'"
+
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "Текстовая капча: ответ неверен. Попробуйте еще раз в поле ниже."
+
+msgid ""
+"Supplying a comment is mandatory.  Write a comment below and try again..."
+msgstr "Указание комментария к изменениям обязательно. Пожалуйста, укажите комментарий в соотвествующем поле и попробуйте ещё раз."
 
 #, python-format
 msgid "[%d attachments]"
@@ -2760,9 +2769,8 @@ msgstr "ПомощьПоКомандамMoin/ExportDump"
 msgid "HelpOnNotification"
 msgstr "ПомощьПоОповещению"
 
-#, fuzzy
 msgid "HelpOnRobots"
-msgstr "ПомощьПоЛиниям"
+msgstr "ПомощьПоПоисковымРоботам"
 
 msgid "HelpOnSessions"
 msgstr "ПомощьПоСеансам"
@@ -3446,15 +3454,17 @@ msgstr "Поиск с учетом регистра"
 msgid "Search Text"
 msgstr "Искать по тексту"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown macro parameter: %s."
-msgstr "Неизвестная команда резервного копирования: %s."
+msgstr "Неизвестный параметр макрокоманды: %s."
 
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
 "('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
+"При включённой опции search_macro_parse_args передано более одной строки для "
+"поиска (аргумент «%(needle)s» уже найден, встречен аргумент «%(arg)s»)"
 
 msgid "Lexer description"
 msgstr "Описание лексера"
