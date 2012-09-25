@@ -48,7 +48,7 @@ Version 1.9.5:
    * wikisync: fix unicode pagename sending for python 2.7 httplib
 
   New features:
-   * add a require_comment config option (default: False) to require a
+   * add a comment_required config option (default: False) to require a
      non-empty comment when saving a page
    * when a save error happens, show the editor again and highlight the error
    * rss_rc: several new options added: lines parameter gives ability to set
