@@ -2266,9 +2266,9 @@ def taintfilename(basename):
     @rtype: string
     @return: (safer) filename
     """
-    for x in (os.pardir, ':', '/', '\\', '<', '>'):
-        basename = basename.replace(x, '_')
-
+    # note: filenames containing ../ (or ..\) are made safe by replacing
+    # the / (or the \). the .. will be kept, but is harmless then.
+    basename = re.sub('[\x00-\x1f:/\\\\<>"*?%|]', '_', basename)
     return basename
 
 
