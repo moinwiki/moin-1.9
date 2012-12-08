@@ -687,7 +687,7 @@ class ThemeBase:
         if theme:
             href = '%s/%s/css/%s.css' % (self.cfg.url_prefix_static, self.name, href)
         attrs = 'type="text/css" charset="%s" media="%s" href="%s"' % (
-                self.stylesheetsCharset, media, href, )
+                self.stylesheetsCharset, media, wikiutil.escape(href, True), )
         if title:
             return '<link rel="alternate stylesheet" %s title="%s">' % (attrs, title)
         else:
