@@ -394,7 +394,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                         links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
                                      fmt.text(label_unzip) +
                                      fmt.url(0))
-            except RuntimeError:
+            except (RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile):
                 # We don't want to crash with a traceback here (an exception
                 # here could be caused by an uploaded defective zip file - and
                 # if we crash here, the user does not get a UI to remove the
@@ -402,6 +402,8 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                 # RuntimeError is raised by zipfile stdlib module in case of
                 # problems (like inconsistent slash and backslash usage in the
                 # archive).
+                # BadZipfile/LargeZipFile are raised when there are some
+                # specific problems with the archive file.
                 logging.exception("An exception within zip file attachment handling occurred:")
 
             html.append(fmt.listitem(1))
@@ -989,7 +991,7 @@ def _do_unzip(pagename, request, overwrite=False):
                         'filelist': ', '.join(not_overwritten), }
             else:
                 msg = _("Attachment '%(filename)s' unzipped.") % {'filename': filename}
-    except RuntimeError, err:
+    except (RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile), err:
         # We don't want to crash with a traceback here (an exception
         # here could be caused by an uploaded defective zip file - and
         # if we crash here, the user does not get a UI to remove the
@@ -997,6 +999,8 @@ def _do_unzip(pagename, request, overwrite=False):
         # RuntimeError is raised by zipfile stdlib module in case of
         # problems (like inconsistent slash and backslash usage in the
         # archive).
+        # BadZipfile/LargeZipFile are raised when there are some
+        # specific problems with the archive file.
         logging.exception("An exception within zip file attachment handling occurred:")
         msg = _("A severe error occurred:") + ' ' + str(err)
 
@@ -1068,7 +1072,7 @@ def send_viewfile(pagename, request):
                 request.write(wikiutil.escape("%-46s %s %12d\n" % (zinfo.filename, date, zinfo.file_size)))
             request.write("</pre>")
             return
-    except RuntimeError:
+    except (RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile):
         # We don't want to crash with a traceback here (an exception
         # here could be caused by an uploaded defective zip file - and
         # if we crash here, the user does not get a UI to remove the
@@ -1076,6 +1080,8 @@ def send_viewfile(pagename, request):
         # RuntimeError is raised by zipfile stdlib module in case of
         # problems (like inconsistent slash and backslash usage in the
         # archive).
+        # BadZipfile/LargeZipFile are raised when there are some
+        # specific problems with the archive file.
         logging.exception("An exception within zip file attachment handling occurred:")
         return
 
