@@ -20,6 +20,8 @@ import urllib
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
+from werkzeug.security import safe_str_cmp as safe_str_equal
+
 from MoinMoin import config
 from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
@@ -2553,7 +2555,7 @@ def checkTicket(request, ticket):
     #       if the ticket was created within a session.
     ourticket = createTicket(request, timestamp_str)
     logging.debug("checkTicket: returning %r, got %r, expected %r" % (ticket == ourticket, ticket, ourticket))
-    return ticket == ourticket
+    return safe_str_equal(ticket, ourticket)
 
 
 def renderText(request, Parser, text):

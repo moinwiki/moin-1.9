@@ -28,6 +28,8 @@ from time import time
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
+from werkzeug.security import safe_str_cmp as safe_str_equal
+
 from MoinMoin import wikiutil
 from MoinMoin.support.python_compatibility import hmac_new
 
@@ -137,7 +139,7 @@ class TextCha(object):
             if not timestamp or timestamp + self.expiry_time < time():
                 success = False
             try:
-                if self._compute_signature(self.question, timestamp) != signature:
+                if not safe_str_equal(self._compute_signature(self.question, timestamp), signature):
                     success = False
             except TypeError:
                 success = False
