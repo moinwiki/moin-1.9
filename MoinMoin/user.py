@@ -28,6 +28,8 @@ try:
 except ImportError:
     crypt = None
 
+from werkzeug.security import safe_str_cmp as safe_str_equal
+
 from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
 from MoinMoin import config, caching, wikiutil, i18n, events
@@ -538,7 +540,7 @@ class User:
                     salt = d[:2]
                     enc = crypt.crypt(password.encode('utf-8'), salt.encode('ascii'))
 
-                if epwd == method + enc:
+                if safe_str_equal(epwd, method + enc):
                     data['enc_password'] = encodePassword(password) # upgrade to SSHA
                     return True, True
                 return False, False
@@ -548,7 +550,7 @@ class User:
             salt = data[20:]
             hash = hash_new('sha1', password.encode('utf-8'))
             hash.update(salt)
-            return hash.digest() == data[:20], False
+            return safe_str_equal(hash.digest(), data[:20]), False
 
         # No encoded password match, this must be wrong password
         return False, False
@@ -1025,7 +1027,7 @@ class User:
         # check hmac
         # key must be of type string
         h = hmac_new(str(self.recoverpass_key), str(stamp)).hexdigest()
-        if h != parts[1]:
+        if not safe_str_equal(h, parts[1]):
             return False
         self.recoverpass_key = ""
         self.enc_password = encodePassword(newpass)
