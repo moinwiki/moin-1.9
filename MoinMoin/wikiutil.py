@@ -20,14 +20,13 @@ import urllib
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from werkzeug.security import safe_str_cmp as safe_str_equal
-
 from MoinMoin import config
 from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
 from MoinMoin import web # needed so that next lines work:
 import werkzeug
+from werkzeug.security import safe_str_cmp as safe_str_equal
 from MoinMoin.util import pysupport, lock
 
 # Exceptions

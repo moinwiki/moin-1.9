@@ -28,9 +28,8 @@ from time import time
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from werkzeug.security import safe_str_cmp as safe_str_equal
-
 from MoinMoin import wikiutil
+from werkzeug.security import safe_str_cmp as safe_str_equal
 from MoinMoin.support.python_compatibility import hmac_new
 
 SHA1_LEN = 40 # length of hexdigest
