@@ -16,13 +16,23 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.5:
+Version 1.9.<current>:
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
   Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
+
+  Fixes:
+  * fix XSS issue, escape page name in rss link
+  * escape user- or admin-defined css url
+  * make taintfilename more secure
+  * use a constant time str comparison function to prevent timing attacks
+  * Attachment handler: catch all Zip-related errors
+
+
+Version 1.9.5:
 
   Fixes:
    * Security fix: fix virtual group bug in ACL evaluation.
