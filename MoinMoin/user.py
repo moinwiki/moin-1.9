@@ -28,11 +28,10 @@ try:
 except ImportError:
     crypt = None
 
-from werkzeug.security import safe_str_cmp as safe_str_equal
-
 from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
 from MoinMoin import config, caching, wikiutil, i18n, events
+from werkzeug.security import safe_str_cmp as safe_str_equal
 from MoinMoin.util import timefuncs, random_string
 from MoinMoin.wikiutil import url_quote_plus
 
