@@ -291,9 +291,11 @@ msgid ""
 "Text matching regular expression \"%(regex)s\" is highlighted. "
 "%(switch_link)s."
 msgstr ""
+"Tekst som tilfredsstiller det regulære uttrykket \"%(regex)s\" er fremhevet. "
+"%(switch_link)s."
 
 msgid "Switch to non-highlighted view"
-msgstr ""
+msgstr "Bytt til en ikke-fremhevet fremvisning"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -1186,6 +1188,8 @@ msgstr "TextCha: Feil svar. Gå tilbake og prøv igjen..."
 msgid ""
 "Supplying a comment is mandatory.  Write a comment below and try again..."
 msgstr ""
+"En kommentar må oppgis. Vennligst skriv en kommentar nedenfor og prøv "
+"igjen..."
 
 #, python-format
 msgid "[%d attachments]"

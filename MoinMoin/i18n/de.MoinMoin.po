@@ -1207,13 +1207,13 @@ msgid "Install language packs for '%s'"
 msgstr "Sprachpakete installieren für '%s'"
 
 msgid "TextCha: Wrong answer! Try again below..."
-msgstr ""
-"TextCha: Falsche Antwort! Probieren Sie es unten nochmal..."
+msgstr "TextCha: Falsche Antwort! Probieren Sie es unten nochmal..."
 
 msgid ""
 "Supplying a comment is mandatory.  Write a comment below and try again..."
 msgstr ""
-"Es ist zwingend erforderlich, einen Kommentar einzugeben.  Schreiben Sie unten einen Kommentar und probieren Sie es nochmal..."
+"Es ist zwingend erforderlich, einen Kommentar einzugeben.  Schreiben Sie "
+"unten einen Kommentar und probieren Sie es nochmal..."
 
 #, python-format
 msgid "[%d attachments]"
