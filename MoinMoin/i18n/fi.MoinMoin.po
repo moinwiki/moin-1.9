@@ -1191,7 +1191,8 @@ msgstr "TextCha: Väärä vastaus! Yritä uudelleen alla..."
 
 msgid ""
 "Supplying a comment is mandatory.  Write a comment below and try again..."
-msgstr "Kommentin antaminen on pakollista. Kirjoita kommentti ja yritä uudelleen..."
+msgstr ""
+"Kommentin antaminen on pakollista. Kirjoita kommentti ja yritä uudelleen..."
 
 #, python-format
 msgid "[%d attachments]"
