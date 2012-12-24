@@ -204,6 +204,7 @@ def execute(pagename, request):
     if (request.method == 'POST' and ok and
         wikiutil.checkTicket(request, request.form.get('ticket', ''))):
         revert_pages(request, editor, timestamp)
+        request.write(show_editors(request, pagename, timestamp))
     elif editor:
         show_pages(request, pagename, editor, timestamp)
     else:
