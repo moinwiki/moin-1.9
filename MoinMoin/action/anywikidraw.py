@@ -197,6 +197,8 @@ class AnyWikiDraw(object):
 
 def execute(pagename, request):
     target = request.values.get('target')
+    target = wikiutil.taintfilename(target)
+
     awd = AnyWikiDraw(request, pagename, target)
 
     do = request.values.get('do')

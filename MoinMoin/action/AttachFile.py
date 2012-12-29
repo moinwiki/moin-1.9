@@ -603,6 +603,14 @@ class ContainerItem:
     """ A storage container (multiple objects in 1 tarfile) """
 
     def __init__(self, request, pagename, containername):
+        """
+        @param pagename: a wiki page name
+        @param containername: the filename of the tar file.
+                              Make sure this is a simple filename, NOT containing any path components.
+                              Use wikiutil.taintfilename() to avoid somebody giving a container
+                              name that starts with e.g. ../../filename or you'll create a
+                              directory traversal and code execution vulnerability.
+        """
         self.request = request
         self.pagename = pagename
         self.containername = containername
