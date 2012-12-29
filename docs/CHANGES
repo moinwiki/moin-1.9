@@ -26,6 +26,7 @@ Version 1.9.6:
 
   Fixes:
   * fix remote code execution vulnerability in twikidraw/anywikidraw action
+  * fix path traversal vulnerability in AttachFile action
   * fix XSS issue, escape page name in rss link
   * escape user- or admin-defined css url
   * make taintfilename more secure
