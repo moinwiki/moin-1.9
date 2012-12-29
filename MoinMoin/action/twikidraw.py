@@ -208,6 +208,8 @@ class TwikiDraw(object):
 
 def execute(pagename, request):
     target = request.values.get('target')
+    target = wikiutil.taintfilename(target)
+
     twd = TwikiDraw(request, pagename, target)
 
     do = request.values.get('do')
