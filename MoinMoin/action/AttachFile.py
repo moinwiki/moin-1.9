@@ -678,6 +678,18 @@ def _do_del(pagename, request):
 
 
 def move_file(request, pagename, new_pagename, attachment, new_attachment):
+    """
+    move a file attachment from pagename:attachment to new_pagename:new_attachment
+
+    @param pagename: original pagename
+    @param new_pagename: new pagename (may be same as original pagename)
+    @param attachment: original attachment filename
+                       note: attachment filename must not contain a path,
+                             use wikiutil.taintfilename() before calling move_file
+    @param new_attachment: new attachment filename (may be same as original filename)
+                       note: attachment filename must not contain a path,
+                             use wikiutil.taintfilename() before calling move_file
+    """
     _ = request.getText
 
     newpage = Page(request, new_pagename)
@@ -740,6 +752,10 @@ def _do_attachment_move(pagename, request):
         upload_form(pagename, request, msg=_("Move aborted because new attachment name is empty."))
 
     attachment = request.form.get('oldattachmentname')
+    if attachment != wikiutil.taintfilename(attachment):
+        upload_form(pagename, request, msg=_("Please use a valid filename for attachment '%(filename)s'.") % {
+                              'filename': attachment})
+        return
     move_file(request, pagename, new_pagename, attachment, new_attachment)
 
 
