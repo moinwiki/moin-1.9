@@ -2,12 +2,14 @@
 """
 MoinMoin - disable a user account
 
-@copyright: 2006 MoinMoin:ThomasWaldmann,
+@copyright: 2006-2013 MoinMoin:ThomasWaldmann,
             2008 MoinMoin:JohannesBerg
 @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.script import MoinScript
+from MoinMoin.script import MoinScript, log
+from MoinMoin.user import getUserList, set_password, Fault
+
 
 class PluginScript(MoinScript):
     """\
@@ -40,14 +42,25 @@ General syntax: moin [options] account resetpw [newpw-options] newpassword
             "--name", metavar="NAME", dest="uname",
             help="Reset password for the user with user name NAME."
         )
+        self.parser.add_option(
+            "-a", "--all-users", dest="all_users", action="store_true",
+            help="Reset password for ALL users."
+        )
+        self.parser.add_option(
+            "--notify", dest="notify", action="store_true",
+            help="Notify user(s), send them an E-Mail with a password reset link."
+        )
+        self.parser.add_option(
+            "-v", "--verbose", dest="verbose", action="store_true",
+            help="Verbose operation."
+        )
 
     def mainloop(self):
-        # we don't expect non-option arguments
         if len(self.args) != 1:
             self.parser.error("no new password given")
         newpass = self.args[0]
 
-        flags_given = self.options.uid or self.options.uname
+        flags_given = self.options.uid or self.options.uname or self.options.all_users
         if not flags_given:
             self.parser.print_help()
             import sys
@@ -56,15 +69,25 @@ General syntax: moin [options] account resetpw [newpw-options] newpassword
         self.init_request()
         request = self.request
 
-        from MoinMoin import user
         if self.options.uid:
-            u = user.User(request, self.options.uid)
+            try:
+                set_password(request, newpass, uid=self.options.uid,
+                             notify=self.options.notify)
+            except Fault, err:
+                print str(err)
         elif self.options.uname:
-            u = user.User(request, None, self.options.uname)
-
-        if not u.exists():
-            print 'This user "%s" does not exists!' % u.name
-            return
-
-        u.enc_password = user.encodePassword(newpass)
-        u.save()
+            try:
+                set_password(request, newpass, uname=self.options.uname,
+                             notify=self.options.notify)
+            except Fault, err:
+                print str(err)
+        elif self.options.all_users:
+            uids = sorted(getUserList(request))
+            total = len(uids)
+            for nr, uid in enumerate(uids, start=1):
+                log("%05d / %05d - processing uid %s" % (nr, total, uid))
+                try:
+                    set_password(request, newpass, uid=uid,
+                                 notify=self.options.notify)
+                except Fault, err:
+                    print str(err)

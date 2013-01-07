@@ -15,7 +15,7 @@
       * storage code
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2003-2007 MoinMoin:ThomasWaldmann,
+                2003-2013 MoinMoin:ThomasWaldmann,
                 2010 Michael Foetsch <foetsch@yahoo.com>
     @license: GNU GPL, see COPYING for details.
 """
@@ -165,6 +165,32 @@ def encodePassword(pwd, salt=None):
     hash.update(salt)
 
     return '{SSHA}' + base64.encodestring(hash.digest() + salt).rstrip()
+
+
+class Fault(Exception):
+    """something went wrong"""
+
+class NoSuchUser(Fault):
+    """raised if no such user exists"""
+
+class MailFailed(Fault):
+    """raised if e-mail sending failed"""
+
+
+def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
+    if uid:
+        u = User(request, uid)
+    elif uname:
+        u = User(request, None, uname)
+    if u and u.exists():
+        u.enc_password = encodePassword(newpass)
+        u.save()
+        if notify and not u.disabled and u.email:
+            mailok, msg = u.mailAccountData()
+            if not mailok:
+                raise MailFailed(msg)
+    else:
+        raise NoSuchUser('User does not exist (name: %r id: %r)!' % (u.name, u.id))
 
 
 def normalizeName(name):
