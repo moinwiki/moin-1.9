@@ -120,7 +120,15 @@ def load_config(conf_fname=None):
     if conf_fname:
         try:
             conf_fname = os.path.abspath(conf_fname)
-            logging.config.fileConfig(conf_fname)
+            # we open the conf file here to be able to give a reasonable
+            # error message in case of failure (if we give the filename to
+            # fileConfig(), it silently ignores unreadable files and gives
+            # unhelpful error msgs like "No section: 'formatters'"):
+            f = open(conf_fname)
+            try:
+                logging.config.fileConfig(f)
+            finally:
+                f.close()
             configured = True
             l = getLogger(__name__)
             l.info('using logging configuration read from "%s"' % conf_fname)
