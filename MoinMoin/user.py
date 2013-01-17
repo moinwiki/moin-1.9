@@ -183,7 +183,11 @@ def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
     elif uname:
         u = User(request, None, uname)
     if u and u.exists():
-        u.enc_password = encodePassword(newpass)
+        if not newpass:
+            # set a invalid password hash
+            u.enc_password = ''
+        else:
+            u.enc_password = encodePassword(newpass)
         u.save()
         if notify and not u.disabled and u.email:
             mailok, msg = u.mailAccountData()

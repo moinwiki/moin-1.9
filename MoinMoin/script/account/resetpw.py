@@ -19,10 +19,15 @@ This tool allows you to change a user password via a command line interface.
 
 Detailed Instructions:
 ======================
-General syntax: moin [options] account resetpw [newpw-options] newpassword
+General syntax: moin [options] account resetpw [newpw-options] [newpassword]
 
 [options] usually should be:
     --config-dir=/path/to/my/cfg/ --wiki-url=http://wiki.example.org/
+
+newpassword:
+    The new password, optional. If newpassword is not given, the password will
+    be invalidated (and the user will not be able to log in with any password,
+    so the user will need to do a password recovery).
 
 [newpw-options] see below:
     1. To change JohnSmith's password:
@@ -30,6 +35,11 @@ General syntax: moin [options] account resetpw [newpw-options] newpassword
 
     2. To change the password for the UID '1198872910.78.56322':
        moin ... account resetpw --uid 1198872910.78.56322 new-password
+
+    3. To invalidate the password of all users and notify them via e-mail,
+       giving verbose progress information:
+       moin ... --verbose account resetpw --all-users --notify
+       (be careful: if you have many users, this will generate many e-mails)
 """
 
     def __init__(self, argv, def_values):
@@ -56,9 +66,13 @@ General syntax: moin [options] account resetpw [newpw-options] newpassword
         )
 
     def mainloop(self):
-        if len(self.args) != 1:
-            self.parser.error("no new password given")
-        newpass = self.args[0]
+        argc = len(self.args)
+        if argc < 1:
+            newpass = None
+        elif argc == 1:
+            newpass = self.args[0]
+        else:
+            self.parser.error("too many arguments given")
 
         flags_given = self.options.uid or self.options.uname or self.options.all_users
         if not flags_given:
