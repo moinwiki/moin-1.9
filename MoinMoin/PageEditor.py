@@ -12,7 +12,7 @@
 
     @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
                 2005-2007 by MoinMoin:ThomasWaldmann,
-                2007 by MoinMoin:ReimarBauer
+                2007-2013 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -88,6 +88,8 @@ class PageEditor(Page):
         @keyword do_revision_backup: if 0, suppress making a page backup per revision
         @keyword do_editor_backup: if 0, suppress saving of draft copies
         @keyword uid_override: override user id and name (default None)
+        @keyword mtime: time for edit-log and event-log (using current time in UTC, if not given)
+                        number of seconds since the epoch, see the time module
         """
         Page.__init__(self, request, page_name, **keywords)
         self._ = request.getText
@@ -95,6 +97,7 @@ class PageEditor(Page):
         self.do_revision_backup = keywords.get('do_revision_backup', 1)
         self.do_editor_backup = keywords.get('do_editor_backup', 1)
         self.uid_override = keywords.get('uid_override', None)
+        self.mtime = keywords.get('mtime')
 
         self.lock = PageLock(self)
 
@@ -996,6 +999,8 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             else:
                 filesys.rename(cltfn, clfn)
 
+            if self.mtime is not None:
+                mtime_usecs = self.mtime
             if not deleted:
                 # save to page file
                 pagefile = os.path.join(revdir, revstr)
@@ -1003,14 +1008,16 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                 # Write the file using text/* mime type
                 f.write(self.encodeTextMimeType(text))
                 f.close()
-                mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
+                if self.mtime is None:
+                    mtime_usecs = os.path.getmtime(pagefile)
                 # set in-memory content
                 self.set_raw_body(text)
             else:
-                mtime_usecs = wikiutil.timestamp2version(time.time())
+                if self.mtime is None:
+                    mtime_usecs = time.time()
                 # set in-memory content
                 self.set_raw_body(None)
-
+            mtime_usecs = wikiutil.timestamp2version(mtime_usecs)
             # reset page object
             self.reset()
 

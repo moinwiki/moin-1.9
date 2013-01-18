@@ -2,13 +2,17 @@
 """
 MoinMoin - import wiki pages from local files into the wiki.
 
-@copyright: 2010 MoinMoin:PascalVolk
+@copyright: 2010 MoinMoin:PascalVolk,
+            2013 MoinMoin:ReimarBauer
+
 @license: GNU GPL, see COPYING for details.
 """
+import calendar
+import time
 
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.script import MoinScript, fatal, log
-from MoinMoin.wikiutil import clean_input, decodeUnknownInput
+from MoinMoin.wikiutil import clean_input, decodeUnknownInput, timestamp2version
 
 
 class IAmRoot(object):
@@ -36,6 +40,9 @@ General syntax: moin [options] import wikipage [wikipage-options]
         self.parser.add_option('--author', dest='author', metavar='AUTHOR',
                 default='PageImporter',
                 help='Use AUTHOR for edit history / RecentChanges')
+        self.parser.add_option('--mtime', dest='mtime', metavar='mtime',
+                default=None,
+                help='Use TIME (YYYY-MM-DD HH:MM:SS) in UTC for edit history / RecentChanges. Default value is the current UTC time')
         self.parser.add_option('--comment', dest='comment', metavar='COMMENT',
                 default='', help='COMMENT for edit history / RecentChanges')
         self.parser.add_option('--file', dest='file', default='',
@@ -69,8 +76,14 @@ General syntax: moin [options] import wikipage [wikipage-options]
             acl = '#acl %s\n' % self.options.acl
         comment = clean_input(self.options.comment)
 
+        if self.options.mtime:
+            mtime = timestamp2version(calendar.timegm(time.strptime(self.options.mtime, "%Y-%m-%d %H:%M:%S")))
+        else:
+            mtime = timestamp2version(time.time())
+
+
         pe = PageEditor(request, self.options.page, do_editor_backup=0,
-                        uid_override=self.options.author,
+                        uid_override=self.options.author, mtime=mtime,
                         do_revision_backup=int(self.options.revision_backup))
         try:
             pe.saveText(acl + page_content, 0, comment=comment)
