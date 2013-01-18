@@ -427,6 +427,23 @@ class ConfigFunctionality(object):
                 raise error.ConfigurationError("You must set a (at least %d chars long) secret string for secrets['%s']!" % (
                     secret_min_length, secret_key_name))
 
+        if self.password_scheme not in config.password_schemes_configurable:
+            raise error.ConfigurationError("not supported: password_scheme = %r" % self.password_scheme)
+
+        if self.passlib_support:
+            try:
+                from passlib.context import CryptContext
+            except ImportError, err:
+                raise error.ConfigurationError("Wiki is configured to use passlib, but importing passlib failed [%s]!" % str(err))
+            try:
+                self.cache.pwd_context = CryptContext(**self.passlib_crypt_context)
+            except (ValueError, KeyError), err:
+                # ValueError: wrong configuration values
+                # KeyError: unsupported hash (seen with passlib 1.3)
+                raise error.ConfigurationError("passlib_crypt_context configuration is invalid [%s]." % str(err))
+        elif self.password_scheme == '{PASSLIB}':
+            raise error.ConfigurationError("passlib_support is switched off, thus you can't use password_scheme = '{PASSLIB}'.")
+
     def calc_secrets(self):
         """ make up some 'secret' using some config values """
         varnames = ['data_dir', 'data_underlay_dir', 'language_default',
@@ -783,6 +800,35 @@ options_no_group_name = {
 
     ('password_checker', DefaultExpression('_default_password_checker'),
      'checks whether a password is acceptable (default check is length >= 6, at least 4 different chars, no keyboard sequence, not username used somehow (you can switch this off by using `None`)'),
+
+    ('password_scheme', '{PASSLIB}',
+     'Either "{PASSLIB}" (default) to use passlib for creating and upgrading password hashes (see also passlib_crypt_context for passlib configuration), '
+     'or "{SSHA}" (or any other of the builtin password schemes) to not use passlib (not recommended).'),
+
+    ('passlib_support', True,
+     'If True (default), import passlib and support password hashes offered by it.'),
+
+    ('passlib_crypt_context', dict(
+        # schemes we want to support (or deprecated schemes for which we still have
+        # hashes in our storage).
+        # note: bcrypt: we did not include it as it needs additional code (that is not pure python
+        #       and thus either needs compiling or installing platform-specific binaries) and
+        #       also there was some bcrypt issue in passlib < 1.5.3.
+        #       pbkdf2_sha512: not included as it needs at least passlib 1.4.0
+        #       sha512_crypt: supported since passlib 1.3.0 (first public release)
+        schemes=["sha512_crypt", ],
+        # default scheme for creating new pw hashes (if not given, passlib uses first from schemes)
+        #default="sha512_crypt",
+        # deprecated schemes get auto-upgraded to the default scheme at login
+        # time or when setting a password (including doing a moin account pwreset).
+        # for passlib >= 1.6, giving ["auto"] means that all schemes except the default are deprecated:
+        #deprecated=["auto"],
+        # to support also older passlib versions, rather give a explicit list:
+        #deprecated=[],
+        # vary rounds parameter randomly when creating new hashes...
+        #all__vary_rounds=0.1,
+    ),
+    "passlib CryptContext arguments, see passlib docs"),
 
   )),
   # ==========================================================================

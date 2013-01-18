@@ -28,14 +28,15 @@ try:
 except ImportError:
     crypt = None
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
 from MoinMoin import config, caching, wikiutil, i18n, events
 from werkzeug.security import safe_str_cmp as safe_str_equal
 from MoinMoin.util import timefuncs, random_string
 from MoinMoin.wikiutil import url_quote_plus
-
-DEFAULT_ALG = '{SSHA}'  # default algorithm for pw hashing
 
 
 def getUserList(request):
@@ -149,23 +150,35 @@ def getUserIdentification(request, username=None):
     return username or (request.cfg.show_hosts and request.remote_addr) or _("<unknown>")
 
 
-def encodePassword(pwd, salt=None):
-    """ Encode a cleartext password using the DEFAULT_ALG algorithm.
+def encodePassword(cfg, pwd, salt=None, scheme=None):
+    """ Encode a cleartext password using the default algorithm.
 
+    @param cfg: the wiki config
     @param pwd: the cleartext password, (unicode)
-    @param salt: the salt for the password (string)
+    @param salt: the salt for the password (string) or None to generate a
+                 random salt.
+    @param scheme: scheme to use (by default will use cfg.password_scheme)
     @rtype: string
     @return: the password hash in apache htpasswd compatible encoding,
     """
-    pwd = pwd.encode('utf-8')
-
-    if salt is None:
-        salt = random_string(20)
-    assert isinstance(salt, str)
-    hash = hash_new('sha1', pwd)
-    hash.update(salt)
-
-    return '{SSHA}' + base64.encodestring(hash.digest() + salt).rstrip()
+    if scheme is None:
+        scheme = cfg.password_scheme
+        configured_scheme = True
+    else:
+        configured_scheme = False
+    if scheme == '{PASSLIB}':
+        return '{PASSLIB}' + cfg.cache.pwd_context.encrypt(pwd, salt=salt)
+    elif scheme == '{SSHA}':
+        pwd = pwd.encode('utf-8')
+        if salt is None:
+            salt = random_string(20)
+        assert isinstance(salt, str)
+        hash = hash_new('sha1', pwd)
+        hash.update(salt)
+        return '{SSHA}' + base64.encodestring(hash.digest() + salt).rstrip()
+    else:
+        # should never happen as we check the value of cfg.password_scheme
+        raise NotImplementedError
 
 
 class Fault(Exception):
@@ -188,7 +201,7 @@ def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
             # set a invalid password hash
             u.enc_password = ''
         else:
-            u.enc_password = encodePassword(newpass)
+            u.enc_password = encodePassword(request.cfg, newpass)
         u.save()
         if notify and not u.disabled and u.email:
             mailok, msg = u.mailAccountData()
@@ -348,7 +361,7 @@ class User:
         self.recoverpass_key = ""
 
         if password:
-            self.enc_password = encodePassword(password)
+            self.enc_password = encodePassword(self._cfg, password)
 
         #self.edit_cols = 80
         self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
@@ -386,7 +399,7 @@ class User:
         if not self.id:
             self.id = self.make_id()
             if password is not None:
-                self.enc_password = encodePassword(password)
+                self.enc_password = encodePassword(self._cfg, password)
 
         # "may" so we can say "if user.may.read(pagename):"
         if self._cfg.SecurityPolicy:
@@ -545,48 +558,76 @@ class User:
         if not password:
             return False, False
 
-        # Check password and upgrade weak hashes to strong DEFAULT_ALG:
-        for method in ['{SSHA}', '{SHA}', '{APR1}', '{MD5}', '{DES}']:
-            if epwd.startswith(method):
-                d = epwd[len(method):]
-                if method == '{SSHA}':
-                    d = base64.decodestring(d)
-                    salt = d[20:]
-                    hash = hash_new('sha1', password.encode('utf-8'))
-                    hash.update(salt)
-                    enc = base64.encodestring(hash.digest() + salt).rstrip()
+        password_correct = recompute_hash = False
+        wanted_scheme = self._cfg.password_scheme
 
-                elif method == '{SHA}':
-                    enc = base64.encodestring(
-                        hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
+        # Check password and upgrade weak hashes to strong default algorithm:
+        for scheme in config.password_schemes_supported:
+            if epwd.startswith(scheme):
+                is_passlib = False
+                d = epwd[len(scheme):]
 
-                elif method == '{APR1}':
-                    # d is of the form "$apr1$<salt>$<hash>"
-                    salt = d.split('$')[2]
-                    enc = md5crypt.apache_md5_crypt(password.encode('utf-8'),
-                                                    salt.encode('ascii'))
-                elif method == '{MD5}':
-                    # d is of the form "$1$<salt>$<hash>"
-                    salt = d.split('$')[2]
-                    enc = md5crypt.unix_md5_crypt(password.encode('utf-8'),
-                                                  salt.encode('ascii'))
-                elif method == '{DES}':
-                    if crypt is None:
-                        return False, False
-                    # d is 2 characters salt + 11 characters hash
-                    salt = d[:2]
-                    enc = crypt.crypt(password.encode('utf-8'), salt.encode('ascii'))
+                if scheme == '{PASSLIB}':
+                    # a password hash to be checked by passlib library code
+                    if not self._cfg.passlib_support:
+                        logging.error('in user profile %r, password hash with {PASSLIB} scheme encountered, but passlib_support is False' % (self.id, ))
+                    else:
+                        pwd_context = self._cfg.cache.pwd_context
+                        try:
+                            password_correct = pwd_context.verify(password, d)
+                        except ValueError, err:
+                            # can happen for unknown scheme
+                            logging.error('in user profile %r, verifying the passlib pw hash crashed [%s]' % (self.id, str(err)))
+                        if password_correct:
+                            # check if we need to recompute the hash. this is needed if either the
+                            # passlib hash scheme / hash params changed or if we shall change to a
+                            # builtin hash scheme (not recommended):
+                            if not hasattr(pwd_context, 'needs_update'):
+                                # older passlib versions (like 1.3.0) didn't have that method
+                                pwd_context.needs_update = pwd_context.hash_needs_update
+                            recompute_hash = pwd_context.needs_update(d) or wanted_scheme != '{PASSLIB}'
 
-                if safe_str_equal(epwd, method + enc):
-                    # hashes match, password is correct
-                    do_upgrade = method != DEFAULT_ALG
-                    if do_upgrade:
-                        # upgrade pw hash to default algorithm
-                        data['enc_password'] = encodePassword(password)
-                    return True, do_upgrade
+                else:
+                    # a password hash to be checked by legacy, builtin code
+                    if scheme == '{SSHA}':
+                        d = base64.decodestring(d)
+                        salt = d[20:]
+                        hash = hash_new('sha1', password.encode('utf-8'))
+                        hash.update(salt)
+                        enc = base64.encodestring(hash.digest() + salt).rstrip()
 
-                # wrong password
-                return False, False
+                    elif scheme == '{SHA}':
+                        enc = base64.encodestring(
+                            hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
+
+                    elif scheme == '{APR1}':
+                        # d is of the form "$apr1$<salt>$<hash>"
+                        salt = d.split('$')[2]
+                        enc = md5crypt.apache_md5_crypt(password.encode('utf-8'),
+                                                        salt.encode('ascii'))
+                    elif scheme == '{MD5}':
+                        # d is of the form "$1$<salt>$<hash>"
+                        salt = d.split('$')[2]
+                        enc = md5crypt.unix_md5_crypt(password.encode('utf-8'),
+                                                      salt.encode('ascii'))
+                    elif scheme == '{DES}':
+                        if crypt is None:
+                            return False, False
+                        # d is 2 characters salt + 11 characters hash
+                        salt = d[:2]
+                        enc = crypt.crypt(password.encode('utf-8'), salt.encode('ascii'))
+
+                    else:
+                        logging.error('in user profile %r, password hash with unknown scheme encountered: %r' % (self.id, scheme))
+                        raise NotImplementedError
+
+                    if safe_str_equal(epwd, scheme + enc):
+                        password_correct = True
+                        recompute_hash = scheme != wanted_scheme
+
+                if recompute_hash:
+                    data['enc_password'] = encodePassword(self._cfg, password)
+                return password_correct, recompute_hash
 
         # unsupported algorithm
         return False, False
@@ -1066,7 +1107,7 @@ class User:
         if not safe_str_equal(h, parts[1]):
             return False
         self.recoverpass_key = ""
-        self.enc_password = encodePassword(newpass)
+        self.enc_password = encodePassword(self._cfg, newpass)
         self.save()
         return True
 
