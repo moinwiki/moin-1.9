@@ -16,13 +16,85 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.6:
-
+Version 1.9.current:
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
   Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
+
+  New features:
+   * passlib support - enhanced password hash security
+
+    Docs for passlib: http://packages.python.org/passlib/
+
+    If cfg.passlib_support is True (default), we try to import passlib and set it
+    up using the configuration given in cfg.passlib_crypt_context (default is to
+    use sha512_crypt with default configuration from passlib).
+
+    The passlib docs recommend 3 hashing schemes that have good security, but
+    some of them have additional requirements:
+    sha512_crypt needs passlib >= 1.3.0, no other requirements.
+    pbkdf2_sha512 needs passlib >= 1.4.0, no other requirements.
+    bcrypt has additional binary/compiled package requirements, please refer to
+    the passlib docs.
+
+    cfg.password_scheme should be '{PASSLIB}' (default) to tell that passlib is
+    wanted for new password hash creation and also for upgrading existing
+    password hashes.
+
+    For the moin code as distributed in our download release archive, passlib
+    support should just work, as we have passlib 1.6.1 bundled with MoinMoin
+    as MoinMoin/support/passlib. If you use some other moin package, please
+    first check if you have moin AND passlib installed (and also find out the
+    passlib version you have installed).
+
+    If you do NOT want to (not recommended!) or can't use (still using python
+    2.4?) passlib, you can disable it your wiki config:
+
+        passlib_support = False  # do not import passlib
+        password_scheme = '{SSHA}'  # use best builtin hash (like moin < 1.9.7)
+
+    Please note that after you have used moin with passlib support and have user
+    profiles with passlib hashes, you can't just switch off passlib support,
+    because if you did, moin would not be able to log in users with passlib
+    password hashes. Password recovery would still work, though.
+
+    password_scheme always gives the password scheme that is wanted for new or
+    recomputed password hashes. The code is able to upgrade and downgrade hashes
+    at login time and also when setting / resetting passwords for one or all
+    users (via the wiki web interface or via moin account resetpw script
+    command).
+
+    So, if you want that everybody uses strong, passlib-created hashes,
+    resetting the passwords for all users is strongly recommended:
+    First have passlib support switched on (it is on by default), use
+    password_scheme = '{PASSLIB}' (also default), then reset all passwords.
+
+    Same procedure can be used to go back to weaker builtin hashes (not
+    recommended): First switch off passlib support, use password_scheme =
+    '{SSHA}', then reset all passwords.
+
+    Wiki farm admins sharing the same user_dir between multiple wikis must use
+    consistent password hashing / passlib configuration settings for all wikis
+    sharing the same user_dir. Using the builtin defaults or doing the
+    configuration in farmconfig.py is recommended.
+
+    Admins are advised to read the passlib docs (especially when experiencing
+    too slow logins or when running old passlib versions which may not have
+    appropriate defaults for nowadays):
+    http://packages.python.org/passlib/new_app_quickstart.html#choosing-a-hash
+    http://packages.python.org/passlib/password_hash_api.html#choosing-the-right-rounds-value
+
+  * Password mass reset support:
+    Resetting the passwords of all wiki users can be done using:
+    moin ... --verbose account resetpw --all-users --notify
+
+    This is useful to make sure everybody sets a new password and moin computes
+    the password hash using the current configuration.
+
+
+Version 1.9.6:
 
   Fixes:
   * fix remote code execution vulnerability in twikidraw/anywikidraw action
