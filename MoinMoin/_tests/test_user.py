@@ -13,8 +13,6 @@ import py
 
 from MoinMoin import user, caching
 
-DEFAULT_ALG = user.DEFAULT_ALG
-
 
 class TestEncodePassword(object):
     """user: encode passwords tests"""
@@ -22,18 +20,27 @@ class TestEncodePassword(object):
     def testAscii(self):
         """user: encode ascii password"""
         # u'MoinMoin' and 'MoinMoin' should be encoded to same result
-        expected = "{SSHA}xkDIIx1I7A4gC98Vt/+UelIkTDYxMjM0NQ=="
-
-        result = user.encodePassword("MoinMoin", salt='12345')
-        assert result == expected
-        result = user.encodePassword(u"MoinMoin", salt='12345')
-        assert result == expected
+        cfg = self.request.cfg
+        tests = [
+            ('{PASSLIB}', '12345', "{PASSLIB}$6$rounds=1001$12345$jrPUCzPJt1yiixDbzIgSBoKED0/DlNDTHZN3lVarCtN6IM/.LoAw5pgUQH112CErU6wS8HXTZNpqb7wVjHLs/0"),
+            ('{SSHA}', '12345', "{SSHA}xkDIIx1I7A4gC98Vt/+UelIkTDYxMjM0NQ=="),
+        ]
+        for scheme, salt, expected in tests:
+            result = user.encodePassword(cfg, "MoinMoin", salt=salt, scheme=scheme)
+            assert result == expected
+            result = user.encodePassword(cfg, u"MoinMoin", salt=salt, scheme=scheme)
+            assert result == expected
 
     def testUnicode(self):
         """ user: encode unicode password """
-        result = user.encodePassword(u'סיסמה סודית בהחלט', salt='12345') # Hebrew
-        expected = "{SSHA}YiwfeVWdVW9luqyVn8t2JivlzmUxMjM0NQ=="
-        assert result == expected
+        cfg = self.request.cfg
+        tests = [
+            ('{PASSLIB}', '12345', "{PASSLIB}$6$rounds=1001$12345$5srFB66ZCu2JgGwPgdfb1lHRmqkjnKC/RxdsFlWn2WzoQh3btIjH6Ai1LJV9iYLDa9kLP/VQYa4DHLkRnaBw8."),
+            ('{SSHA}', '12345', "{SSHA}YiwfeVWdVW9luqyVn8t2JivlzmUxMjM0NQ=="),
+            ]
+        for scheme, salt, expected in tests:
+            result = user.encodePassword(cfg, u'סיסמה סודית בהחלט', salt=salt, scheme=scheme) # Hebrew
+            assert result == expected
 
 
 class TestLoginWithPassword(object):
@@ -49,6 +56,8 @@ class TestLoginWithPassword(object):
         self.request.user = user.User(self.request)
 
         self.user = None
+        self.passlib_support = self.request.cfg.passlib_support
+        self.password_scheme = self.request.cfg.password_scheme
 
     def teardown_method(self, method):
         """ Run after each test
@@ -114,7 +123,7 @@ class TestLoginWithPassword(object):
         assert theuser.valid
         # Check if the stored password was auto-upgraded on login and saved
         theuser = user.User(self.request, name=name, password=password)
-        assert theuser.enc_password.startswith(DEFAULT_ALG)
+        assert theuser.enc_password.startswith(self.password_scheme)
 
     def test_auth_with_md5_stored_password(self):
         """
@@ -132,7 +141,7 @@ class TestLoginWithPassword(object):
         assert theuser.valid
         # Check if the stored password was auto-upgraded on login and saved
         theuser = user.User(self.request, name=name, password=password)
-        assert theuser.enc_password.startswith(DEFAULT_ALG)
+        assert theuser.enc_password.startswith(self.password_scheme)
 
     def test_auth_with_des_stored_password(self):
         """
@@ -153,7 +162,7 @@ class TestLoginWithPassword(object):
             assert theuser.valid
             # Check if the stored password was auto-upgraded on login and saved
             theuser = user.User(self.request, name=name, password=password)
-            assert theuser.enc_password.startswith(DEFAULT_ALG)
+            assert theuser.enc_password.startswith(self.password_scheme)
         except ImportError:
             py.test.skip("Platform does not provide crypt module!")
 
@@ -173,7 +182,7 @@ class TestLoginWithPassword(object):
         assert theuser.valid
         # Check if the stored password was auto-upgraded on login and saved
         theuser = user.User(self.request, name=name, password=password)
-        assert theuser.enc_password.startswith(DEFAULT_ALG)
+        assert theuser.enc_password.startswith(self.password_scheme)
 
     def test_auth_with_ssha_stored_password(self):
         """
@@ -191,7 +200,26 @@ class TestLoginWithPassword(object):
         assert theuser.valid
         # Check if the stored password was auto-upgraded on login and saved
         theuser = user.User(self.request, name=name, password=password)
-        assert theuser.enc_password.startswith(DEFAULT_ALG)
+        assert theuser.enc_password.startswith(self.password_scheme)
+
+    def test_auth_with_passlib_stored_password(self):
+        """
+        Create user with {PASSLIB} password and check that user can login.
+        """
+        if not self.passlib_support:
+            py.test.skip("test requires passlib, but passlib_support is False")
+        # Create test user
+        name = u'Test User'
+        password = '12345'
+        pw_hash = '{PASSLIB}$6$rounds=1001$/AVWSh/RUWpcppfl$8DCRGLaBD3KoV4Ag67sUv6b2QdrUFXk1yWCxqWnBLJ.iHSe4Piv6nqzSQgELeLPIvwTC9APaWv1XCTOHjkLOj/'
+        self.createUser(name, pw_hash, True)
+
+        # Try to "login"
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.valid
+        # Check if the stored password was auto-upgraded on login and saved
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.enc_password.startswith(self.password_scheme)
 
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
@@ -266,7 +294,7 @@ class TestLoginWithPassword(object):
         self.user.name = name
         self.user.email = email
         if not pwencoded:
-            password = user.encodePassword(password)
+            password = user.encodePassword(self.request.cfg, password)
         self.user.enc_password = password
 
         # Validate that we are not modifying existing user data file!

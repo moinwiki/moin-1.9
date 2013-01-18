@@ -31,3 +31,17 @@ class Config(DefaultConfig):
     # used to check if it is really a wiki we may modify
     is_test_wiki = True
 
+    # for runnging tests without passlib support:
+    #passlib_support = False
+    #password_scheme = '{SSHA}'
+
+    # for running tests with passlib support:
+    passlib_crypt_context = dict(
+        schemes=["sha512_crypt", ],
+        # for the tests, we don't want to have varying rounds
+        sha512_crypt__vary_rounds=0,
+        # for the tests, we want to have a rather low rounds count,
+        # so the tests run quickly (do NOT use low counts in production!)
+        sha512_crypt__default_rounds=1001,
+    )
+
