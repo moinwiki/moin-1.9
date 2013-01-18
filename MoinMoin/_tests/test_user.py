@@ -4,6 +4,7 @@
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
                 2009 by ReimarBauer
+                2013 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -11,6 +12,8 @@ import os
 import py
 
 from MoinMoin import user, caching
+
+DEFAULT_ALG = user.DEFAULT_ALG
 
 
 class TestEncodePassword(object):
@@ -97,47 +100,98 @@ class TestLoginWithPassword(object):
     def test_auth_with_apr1_stored_password(self):
         """
         Create user with {APR1} password and check that user can login.
+        Also check if auto-upgrade happens and is saved to disk.
         """
         # Create test user
         name = u'Test User'
+        password = '12345'
         # generated with "htpasswd -nbm blaze 12345"
-        password = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.' # 12345
-        self.createUser(name, password, True)
+        pw_hash = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.'
+        self.createUser(name, pw_hash, True)
 
         # Try to "login"
-        theuser = user.User(self.request, name=name, password='12345')
+        theuser = user.User(self.request, name=name, password=password)
         assert theuser.valid
+        # Check if the stored password was auto-upgraded on login and saved
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.enc_password.startswith(DEFAULT_ALG)
 
     def test_auth_with_md5_stored_password(self):
         """
         Create user with {MD5} password and check that user can login.
+        Also check if auto-upgrade happens and is saved to disk.
         """
         # Create test user
         name = u'Test User'
-        password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
-        self.createUser(name, password, True)
+        password = '12345'
+        pw_hash = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/'
+        self.createUser(name, pw_hash, True)
 
         # Try to "login"
-        theuser = user.User(self.request, name=name, password='12345')
+        theuser = user.User(self.request, name=name, password=password)
         assert theuser.valid
+        # Check if the stored password was auto-upgraded on login and saved
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.enc_password.startswith(DEFAULT_ALG)
 
     def test_auth_with_des_stored_password(self):
         """
         Create user with {DES} password and check that user can login.
+        Also check if auto-upgrade happens and is saved to disk.
         """
         # Create test user
         name = u'Test User'
+        password = '12345'
         # generated with "htpasswd -nbd blaze 12345"
-        password = '{DES}gArsfn7O5Yqfo' # 12345
-        self.createUser(name, password, True)
+        pw_hash = '{DES}gArsfn7O5Yqfo'
+        self.createUser(name, pw_hash, True)
 
         try:
             import crypt
             # Try to "login"
-            theuser = user.User(self.request, name=name, password='12345')
+            theuser = user.User(self.request, name=name, password=password)
             assert theuser.valid
+            # Check if the stored password was auto-upgraded on login and saved
+            theuser = user.User(self.request, name=name, password=password)
+            assert theuser.enc_password.startswith(DEFAULT_ALG)
         except ImportError:
             py.test.skip("Platform does not provide crypt module!")
+
+    def test_auth_with_sha_stored_password(self):
+        """
+        Create user with {SHA} password and check that user can login.
+        Also check if auto-upgrade happens and is saved to disk.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '12345'
+        pw_hash = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ='
+        self.createUser(name, pw_hash, True)
+
+        # Try to "login"
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.valid
+        # Check if the stored password was auto-upgraded on login and saved
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.enc_password.startswith(DEFAULT_ALG)
+
+    def test_auth_with_ssha_stored_password(self):
+        """
+        Create user with {SSHA} password and check that user can login.
+        Also check if auto-upgrade happens and is saved to disk.
+        """
+        # Create test user
+        name = u'Test User'
+        password = '12345'
+        pw_hash = '{SSHA}dbeFtH5EGkOI1jgPADlGZgHWq072TIsKqWfHX7zZbUQa85Ze8774Rg=='
+        self.createUser(name, pw_hash, True)
+
+        # Try to "login"
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.valid
+        # Check if the stored password was auto-upgraded on login and saved
+        theuser = user.User(self.request, name=name, password=password)
+        assert theuser.enc_password.startswith(DEFAULT_ALG)
 
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
@@ -178,63 +232,6 @@ class TestLoginWithPassword(object):
         theUser = user.User(self.request, name=name, password=password)
 
         assert not theUser.exists()
-
-    def test_upgrade_password_from_sha_to_ssha(self):
-        """
-        Create user with {SHA} password and check that logging in
-        upgrades to {SSHA}.
-        """
-        name = u'/no such user/'
-        password = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ=' # 12345
-        self.createUser(name, password, True)
-
-        # User is not required to be valid
-        theuser = user.User(self.request, name=name, password='12345')
-        assert theuser.enc_password[:6] == '{SSHA}'
-
-    def test_upgrade_password_from_apr1_to_ssha(self):
-        """
-        Create user with {APR1} password and check that logging in
-        upgrades to {SSHA}.
-        """
-        # Create test user
-        name = u'Test User'
-        # generated with "htpasswd -nbm blaze 12345"
-        password = '{APR1}$apr1$NG3VoiU5$PSpHT6tV0ZMKkSZ71E3qg.' # 12345
-        self.createUser(name, password, True)
-
-        # User is not required to be valid
-        theuser = user.User(self.request, name=name, password='12345')
-        assert theuser.enc_password[:6] == '{SSHA}'
-
-    def test_upgrade_password_from_md5_to_ssha(self):
-        """
-        Create user with {MD5} password and check that logging in
-        upgrades to {SSHA}.
-        """
-        # Create test user
-        name = u'Test User'
-        password = '{MD5}$1$salt$etVYf53ma13QCiRbQOuRk/' # 12345
-        self.createUser(name, password, True)
-
-        # User is not required to be valid
-        theuser = user.User(self.request, name=name, password='12345')
-        assert theuser.enc_password[:6] == '{SSHA}'
-
-    def test_upgrade_password_from_des_to_ssha(self):
-        """
-        Create user with {DES} password and check that logging in
-        upgrades to {SSHA}.
-        """
-        # Create test user
-        name = u'Test User'
-        # generated with "htpasswd -nbd blaze 12345"
-        password = '{DES}gArsfn7O5Yqfo' # 12345
-        self.createUser(name, password, True)
-
-        # User is not required to be valid
-        theuser = user.User(self.request, name=name, password='12345')
-        assert theuser.enc_password[:6] == '{SSHA}'
 
     def test_for_email_attribute_by_name(self):
         """
