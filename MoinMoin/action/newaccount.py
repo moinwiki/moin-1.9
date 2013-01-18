@@ -64,7 +64,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     # Encode password
     if password and not password.startswith('{SHA}'):
         try:
-            theuser.enc_password = user.encodePassword(password)
+            theuser.enc_password = user.encodePassword(request.cfg, password)
         except UnicodeError, err:
             # Should never happen
             return "Can't encode password: %s" % wikiutil.escape(str(err))

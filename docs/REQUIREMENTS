@@ -19,6 +19,9 @@ MoinMoin/support/werkzeug with werkzeug version 0.7.x and hope the best.
 Python requirements might be different for (linux or other) distribution
 packages, depending on the werkzeug version they use. Usually you do not have
 to care then, because the package maintainer already did it for you.
+You also can't use the stronger password hashes provided by passlib as it
+requires at least python 2.5 and you need to disable it in your wiki config,
+so moin does not try to use it.
 
 Python 3.x won't work for MoinMoin for now.
 
@@ -97,6 +100,17 @@ Thanks to all 3rd party software authors!
 
 
 A) Stuff below MoinMoin/support/:
+
+passlib (password hashing library)
+==================================
+shipped: 1.6.1
+minimum: 1.3(?)
+
+Note: moin could work without passlib also (NOT RECOMMENDED), but would not
+support stronger password hashes then, also would not be able to process such
+hashes from existing user profiles (that were made with passlib) and also
+would be less secure due to the weaker builtin hash methods.
+
 
 flup (cgi/fastcgi/scgi/ajp to WSGI adapter)
 ===========================================

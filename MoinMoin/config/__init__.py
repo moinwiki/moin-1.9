@@ -22,6 +22,16 @@ parser_text_mimetype = ('plain', 'csv', 'rst', 'docbook', 'latex', 'tex', 'html'
 # When creating files, we use e.g. 0666 & config.umask for the mode:
 umask = 0770
 
+# list of acceptable password hashing schemes for cfg.password_scheme,
+# here we only give reasonably good schemes, which is passlib (if we
+# have passlib) and ssha (if we only have builtin stuff):
+password_schemes_configurable = ['{PASSLIB}', '{SSHA}', ]
+
+# ordered list of supported password hashing schemes, best (passlib) should be
+# first, best builtin one should be second. this is what we support if we
+# encounter it in user profiles:
+password_schemes_supported = password_schemes_configurable + ['{SHA}', '{APR1}', '{MD5}', '{DES}', ]
+
 # Default value for the static stuff URL prefix (css, img, js).
 # Caution:
 # * do NOT use this directly, it is only the DEFAULT value to be used by

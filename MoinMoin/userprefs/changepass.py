@@ -62,7 +62,7 @@ class Settings(UserPrefBase):
                 return 'error', _("Password not acceptable: %s") % pw_error
 
         try:
-            self.request.user.enc_password = user.encodePassword(password)
+            self.request.user.enc_password = user.encodePassword(request.cfg, password)
             self.request.user.save()
             return 'info', _("Your password has been changed.")
         except UnicodeError, err:
