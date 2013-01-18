@@ -35,6 +35,8 @@ from werkzeug.security import safe_str_cmp as safe_str_equal
 from MoinMoin.util import timefuncs, random_string
 from MoinMoin.wikiutil import url_quote_plus
 
+DEFAULT_ALG = '{SSHA}'  # default algorithm for pw hashing
+
 
 def getUserList(request):
     """ Get a list of all (numerical) user IDs.
@@ -148,13 +150,12 @@ def getUserIdentification(request, username=None):
 
 
 def encodePassword(pwd, salt=None):
-    """ Encode a cleartext password
+    """ Encode a cleartext password using the DEFAULT_ALG algorithm.
 
     @param pwd: the cleartext password, (unicode)
     @param salt: the salt for the password (string)
     @rtype: string
-    @return: the password in apache htpasswd compatible SHA-encoding,
-        or None
+    @return: the password hash in apache htpasswd compatible encoding,
     """
     pwd = pwd.encode('utf-8')
 
@@ -544,14 +545,21 @@ class User:
         if not password:
             return False, False
 
-        # Check and upgrade passwords from earlier MoinMoin versions and
-        # passwords imported from other wiki systems.
-        for method in ['{SHA}', '{APR1}', '{MD5}', '{DES}']:
+        # Check password and upgrade weak hashes to strong DEFAULT_ALG:
+        for method in ['{SSHA}', '{SHA}', '{APR1}', '{MD5}', '{DES}']:
             if epwd.startswith(method):
                 d = epwd[len(method):]
-                if method == '{SHA}':
+                if method == '{SSHA}':
+                    d = base64.decodestring(d)
+                    salt = d[20:]
+                    hash = hash_new('sha1', password.encode('utf-8'))
+                    hash.update(salt)
+                    enc = base64.encodestring(hash.digest() + salt).rstrip()
+
+                elif method == '{SHA}':
                     enc = base64.encodestring(
                         hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
+
                 elif method == '{APR1}':
                     # d is of the form "$apr1$<salt>$<hash>"
                     salt = d.split('$')[2]
@@ -570,18 +578,17 @@ class User:
                     enc = crypt.crypt(password.encode('utf-8'), salt.encode('ascii'))
 
                 if safe_str_equal(epwd, method + enc):
-                    data['enc_password'] = encodePassword(password) # upgrade to SSHA
-                    return True, True
+                    # hashes match, password is correct
+                    do_upgrade = method != DEFAULT_ALG
+                    if do_upgrade:
+                        # upgrade pw hash to default algorithm
+                        data['enc_password'] = encodePassword(password)
+                    return True, do_upgrade
+
+                # wrong password
                 return False, False
 
-        if epwd[:6] == '{SSHA}':
-            data = base64.decodestring(epwd[6:])
-            salt = data[20:]
-            hash = hash_new('sha1', password.encode('utf-8'))
-            hash.update(salt)
-            return safe_str_equal(hash.digest(), data[:20]), False
-
-        # No encoded password match, this must be wrong password
+        # unsupported algorithm
         return False, False
 
     def persistent_items(self):
