@@ -693,7 +693,8 @@ class DefaultConfig(ConfigFunctionality):
     # the options dictionary.
 
 
-def _default_password_checker(cfg, request, username, password):
+def _default_password_checker(cfg, request, username, password,
+                              min_length=6, min_different=4):
     """ Check if a password is secure enough.
         We use a built-in check to get rid of the worst passwords.
 
@@ -707,9 +708,9 @@ def _default_password_checker(cfg, request, username, password):
     """
     _ = request.getText
     # in any case, do a very simple built-in check to avoid the worst passwords
-    if len(password) < 6:
+    if len(password) < min_length:
         return _("Password is too short.")
-    if len(set(password)) < 4:
+    if len(set(password)) < min_different:
         return _("Password has not enough different characters.")
 
     username_lower = username.lower()

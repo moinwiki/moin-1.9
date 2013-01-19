@@ -93,6 +93,14 @@ Version 1.9.current:
     This is useful to make sure everybody sets a new password and moin computes
     the password hash using the current configuration.
 
+  * Customizable default password checker:
+    Moin's default password checker used and still uses min_length=6 (minimum pw
+    length) and min_different=4 (minimum count of different chars in the password).
+    If you feel that you need to require better passwords from your users, you
+    can customize it now like that in your wiki config:
+
+    password_checker = lambda cfg, request, name, pw: multiconfig._default_password_checker(cfg, request, name, pw, min_length=10, min_different=7)
+
 
 Version 1.9.6:
 
