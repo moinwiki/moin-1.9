@@ -104,17 +104,17 @@ def _create_token_form(request, name=None, token=None):
 
     row = html.TR()
     tbl.append(row)
-    row.append(html.TD().append(html.STRONG().append(html.Text(_("Username")))))
-    value = name or ''
-    row.append(html.TD().append(html.INPUT(type='text', size="36",
-                                           name="name", value=value)))
-
-    row = html.TR()
-    tbl.append(row)
     row.append(html.TD().append(html.STRONG().append(html.Text(_("Recovery token")))))
     value = token or ''
     row.append(html.TD().append(html.INPUT(type='text', size="36",
                                            name="token", value=value)))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(html.Text(_("Username")))))
+    value = name or ''
+    row.append(html.TD().append(html.INPUT(type='text', size="36",
+                                           name="name", value=value)))
 
     row = html.TR()
     tbl.append(row)
