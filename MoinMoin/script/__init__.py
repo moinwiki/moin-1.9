@@ -243,6 +243,11 @@ Specific options:
 """)
 
         cmd_module, cmd_name = args[:2]
+        if cmd_module == '...':
+            # our docs usually tell to use moin ... cmd_module cmd_name
+            # if somebody enters the ... verbatim, tell him how to do it right:
+            fatal("Wrong invokation. Please do not enter ... verbatim, but give --config-dir and --wiki-url options (see help for more details).")
+
         from MoinMoin import wikiutil
         try:
             plugin_class = wikiutil.importBuiltinPlugin('script.%s' % cmd_module, cmd_name, 'PluginScript')
