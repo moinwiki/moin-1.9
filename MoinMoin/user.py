@@ -195,7 +195,7 @@ def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
     if uid:
         u = User(request, uid)
     elif uname:
-        u = User(request, None, uname)
+        u = User(request, auth_username=uname)
     if u and u.exists():
         if not newpass:
             # set a invalid password hash
