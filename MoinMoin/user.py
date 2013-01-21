@@ -203,7 +203,7 @@ def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
         else:
             u.enc_password = encodePassword(request.cfg, newpass)
         u.save()
-        if notify and not u.disabled and u.email:
+        if notify and not u.disabled:
             mailok, msg = u.mailAccountData()
             if not mailok:
                 raise MailFailed(msg)
@@ -1118,6 +1118,9 @@ class User:
         from MoinMoin.mail import sendmail
         from MoinMoin.wikiutil import getLocalizedPage
         _ = self._request.getText
+
+        if not self.email:
+            return False, "user has no E-Mail address in his profile."
 
         tok = self.generate_recovery_token()
 
