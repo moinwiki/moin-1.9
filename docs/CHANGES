@@ -101,6 +101,17 @@ Version 1.9.current:
 
     password_checker = lambda cfg, request, name, pw: multiconfig._default_password_checker(cfg, request, name, pw, min_length=10, min_different=7)
 
+  Fixes:
+  * logging: if the logging config file can't be read, give a helpful error msg
+  * logging: use info loglevel (not warning) for telling about using the builtin
+    default logging config
+  * moin script commands: warn if someone gave ... to the moin script, avoids a
+    strange and unhelpful 'empty module name' error message
+  * reorder html input fields in recoverpass form, to help browsers remember
+    the user name and password (not erroneously the recovery token and password)
+  * don't try to send password recovery email to user if email address in
+    user profile is empty
+
 
 Version 1.9.6:
 
