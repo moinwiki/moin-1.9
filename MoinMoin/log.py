@@ -58,10 +58,11 @@
 # See http://www.python.org/doc/lib/logging-config-fileformat.html
 # We just use stderr output by default, if you want anything else,
 # you will have to configure logging.
-logging_defaults = {
-    'loglevel': 'INFO',
-}
 logging_config = """\
+[DEFAULT]
+# Default loglevel, to adjust verbosity: DEBUG, INFO, WARNING, ERROR, CRITICAL
+loglevel=INFO
+
 [loggers]
 keys=root
 
@@ -138,13 +139,16 @@ def load_config(conf_fname=None):
     if not configured:
         # load builtin fallback logging config
         from StringIO import StringIO
-        config_file = StringIO(logging_config)
-        logging.config.fileConfig(config_file, logging_defaults)
+        f = StringIO(logging_config)
+        try:
+            logging.config.fileConfig(f)
+        finally:
+            f.close()
         configured = True
         l = getLogger(__name__)
         if err_msg:
             l.warning('load_config for "%s" failed with "%s".' % (conf_fname, err_msg))
-        l.warning('using logging configuration read from built-in fallback in MoinMoin.log module!')
+        l.info('using logging configuration read from built-in fallback in MoinMoin.log module')
         warnings.showwarning = _log_warning
 
 
