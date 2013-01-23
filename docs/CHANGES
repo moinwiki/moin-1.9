@@ -24,8 +24,8 @@ Version 1.9.current:
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
   New features:
-   * passlib support - enhanced password hash security. Special thanks go to
-     the Python Software Foundation (PSF) for sponsoring development of this!
+  * passlib support - enhanced password hash security. Special thanks go to
+    the Python Software Foundation (PSF) for sponsoring development of this!
 
     Docs for passlib: http://packages.python.org/passlib/
 
