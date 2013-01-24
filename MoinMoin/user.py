@@ -191,7 +191,9 @@ class MailFailed(Fault):
     """raised if e-mail sending failed"""
 
 
-def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
+def set_password(request, newpass, u=None, uid=None, uname=None,
+                 notify=False, subject=None,
+                 text_intro=None, text_msg=None, text_data=None):
     if uid:
         u = User(request, uid)
     elif uname:
@@ -204,7 +206,8 @@ def set_password(request, newpass, u=None, uid=None, uname=None, notify=False):
             u.enc_password = encodePassword(request.cfg, newpass)
         u.save()
         if notify and not u.disabled:
-            mailok, msg = u.mailAccountData()
+            mailok, msg = u.mailAccountData(subject=subject,
+                                            text_intro=text_intro, text_msg=text_msg, text_data=text_data)
             if not mailok:
                 raise MailFailed(msg)
     else:
@@ -1111,12 +1114,13 @@ class User:
         self.save()
         return True
 
-    def mailAccountData(self, cleartext_passwd=None):
+    def mailAccountData(self, cleartext_passwd=None,
+                        subject=None,
+                        text_intro=None, text_msg=None, text_data=None):
         """ Mail a user who forgot his password a message enabling
             him to login again.
         """
         from MoinMoin.mail import sendmail
-        from MoinMoin.wikiutil import getLocalizedPage
         _ = self._request.getText
 
         if not self.email:
@@ -1124,30 +1128,35 @@ class User:
 
         tok = self.generate_recovery_token()
 
-        text = '\n' + _("""\
+        if subject is None:
+            subject = _('[%(sitename)s] Your wiki account data')
+        subject = subject % dict(sitename=self._cfg.sitename or "Wiki")
+        if text_intro is None:
+            text_intro = ''
+        if text_msg is None:
+            text_msg = """\
+Somebody has requested to email you a password recovery token.
+
+If you lost your password, please go to the password reset URL below or
+go to the password recovery page again and enter your username and the
+recovery token.
+"""
+        if text_data is None:
+            text_data = """\
 Login Name: %s
 
 Password recovery token: %s
 
 Password reset URL: %s?action=recoverpass&name=%s&token=%s
-""") % (
+"""
+        # note: text_intro is for custom stuff, we do not have i18n for it anyway
+        text = text_intro + '\n' + _(text_msg) + '\n' + _(text_data) % (
                         self.name,
                         tok,
                         self._request.url, # use full url, including current page
                         url_quote_plus(self.name),
                         tok, )
 
-        text = _("""\
-Somebody has requested to email you a password recovery token.
-
-If you lost your password, please go to the password reset URL below or
-go to the password recovery page again and enter your username and the
-recovery token.
-""") + text
-
-
-        subject = _('[%(sitename)s] Your wiki account data',
-                ) % {'sitename': self._cfg.sitename or "Wiki"}
         mailok, msg = sendmail.sendmail(self._request, [self.email], subject,
                                     text, mail_from=self._cfg.mail_from)
         return mailok, msg

@@ -1,0 +1,19 @@
+The wiki administrator has invalidated your wiki password and requested
+to send this E-Mail to you, so you can set a wiki password.
+
+Reason for the password invalidation:
+
+...
+
+Please go to the password reset URL below and set a password.
+
+Alternatively, you can go to the password recovery page and manually
+(use copy&paste) enter the recovery token, your login name and the
+password.
+
+Login Name: %s
+
+Password recovery token: %s
+
+Password reset URL: %s?action=recoverpass&name=%s&token=%s
+
