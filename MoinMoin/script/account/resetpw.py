@@ -7,6 +7,8 @@ MoinMoin - change or reset the password of a user account
 @license: GNU GPL, see COPYING for details.
 """
 
+import sys
+
 from MoinMoin.script import MoinScript, log
 from MoinMoin.user import getUserList, set_password, Fault
 
@@ -67,6 +69,26 @@ newpassword:
             help="Notify user(s), send them an E-Mail with a password reset link."
         )
         self.parser.add_option(
+            "--subject", metavar="SUBJECT", dest="subject",
+            help="Subject text for the password reset notification E-Mail."
+        )
+        self.parser.add_option(
+            "--text-intro", metavar="TEXT_INTRO", dest="text_intro",
+            help="Intro text for the password reset notification E-Mail. Default: empty."
+        )
+        self.parser.add_option(
+            "--text-msg", metavar="TEXT_MSG", dest="text_msg",
+            help="Main text for the password reset notification E-Mail. Default: use the builtin standard message"
+        )
+        self.parser.add_option(
+            "--text-data", metavar="TEXT_DATA", dest="text_data",
+            help="Data template text for the password reset notification E-Mail. Default: use the builtin standard data template"
+        )
+        self.parser.add_option(
+            "--text-from-file", metavar="TEXT_DATA", dest="text_file",
+            help="Read full template for the password reset notification E-Mail from the given file, overrides --text-intro/msg/data. Default: None"
+        )
+        self.parser.add_option(
             "-v", "--verbose", dest="verbose", action="store_true",
             help="Verbose operation."
         )
@@ -83,22 +105,40 @@ newpassword:
         flags_given = self.options.uid or self.options.uname or self.options.all_users
         if not flags_given:
             self.parser.print_help()
-            import sys
             sys.exit(1)
 
         self.init_request()
         request = self.request
 
+        notify = self.options.notify
+        if notify and not request.cfg.mail_enabled:
+            print "This wiki is not enabled for mail processing. The --notify option requires this. Aborting..."
+            sys,exit(1)
+
+        subject = self.options.subject
+        text_intro = self.options.text_intro
+        text_msg = self.options.text_msg
+        text_data = self.options.text_data
+        text_file = self.options.text_file
+
+        if text_file:
+            text_intro = ''
+            text_msg = ''
+            with open(text_file) as f:
+                text_data = f.read().decode('utf-8')
+
         if self.options.uid:
             try:
                 set_password(request, newpass, uid=self.options.uid,
-                             notify=self.options.notify)
+                             notify=notify, subject=subject,
+                             text_intro=text_intro, text_msg=text_msg, text_data=text_data)
             except Fault, err:
                 print str(err)
         elif self.options.uname:
             try:
                 set_password(request, newpass, uname=self.options.uname,
-                             notify=self.options.notify)
+                             notify=notify, subject=subject,
+                             text_intro=text_intro, text_msg=text_msg, text_data=text_data)
             except Fault, err:
                 print str(err)
         elif self.options.all_users:
@@ -108,6 +148,7 @@ newpassword:
                 log("%05d / %05d - processing uid %s" % (nr, total, uid))
                 try:
                     set_password(request, newpass, uid=uid,
-                                 notify=self.options.notify)
+                                 notify=notify, subject=subject,
+                                 text_intro=text_intro, text_msg=text_msg, text_data=text_data)
                 except Fault, err:
                     print str(err)

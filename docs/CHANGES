@@ -87,10 +87,7 @@ Version 1.9.current:
     http://packages.python.org/passlib/new_app_quickstart.html#choosing-a-hash
     http://packages.python.org/passlib/password_hash_api.html#choosing-the-right-rounds-value
 
-  * Password mass reset support:
-    Resetting the passwords of all wiki users can be done using:
-    moin ... --verbose account resetpw --all-users --notify
-
+  * Password mass reset/invalidation support, see docs/resetpw/.
     This is useful to make sure everybody sets a new password and moin computes
     the password hash using the current configuration.
 
