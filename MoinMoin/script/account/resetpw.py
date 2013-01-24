@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - disable a user account
+MoinMoin - change or reset the password of a user account
 
 @copyright: 2006-2013 MoinMoin:ThomasWaldmann,
             2008 MoinMoin:JohannesBerg
@@ -31,15 +31,21 @@ newpassword:
 
 [newpw-options] see below:
     1. To change JohnSmith's password:
-       moin ... account resetpw --name JohnSmith new-password
+       moin ... account resetpw --name JohnSmith JohnsNewSuperSecretPassword
 
     2. To change the password for the UID '1198872910.78.56322':
-       moin ... account resetpw --uid 1198872910.78.56322 new-password
+       moin ... account resetpw --uid 1198872910.78.56322 TheNewPassword
 
     3. To invalidate the password of all users and notify them via e-mail,
        giving verbose progress information:
        moin ... --verbose account resetpw --all-users --notify
-       (be careful: if you have many users, this will generate many e-mails)
+
+       Please note:
+       - if you have many users, this will generate many e-mails
+       - if a user does not have an e-mail address in his profile, he can not
+         get notified
+       - disabled user profiles will get the password reset, but won't get
+         notified (they can't be used any more anyway).
 """
 
     def __init__(self, argv, def_values):
