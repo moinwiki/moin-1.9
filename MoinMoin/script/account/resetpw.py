@@ -113,7 +113,7 @@ newpassword:
         notify = self.options.notify
         if notify and not request.cfg.mail_enabled:
             print "This wiki is not enabled for mail processing. The --notify option requires this. Aborting..."
-            sys,exit(1)
+            sys.exit(1)
 
         subject = self.options.subject
         text_intro = self.options.text_intro
