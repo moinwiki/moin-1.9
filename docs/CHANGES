@@ -99,6 +99,10 @@ Version 1.9.current:
 
     password_checker = lambda cfg, request, name, pw: multiconfig._default_password_checker(cfg, request, name, pw, min_length=10, min_different=7)
 
+  * Removing/disabling inactive users (moin ... acount inactive)
+    Many wikis have a lot of inactive users, that never ever made a single edit.
+    See help of the command for more details, be careful.
+
   Fixes:
   * logging: if the logging config file can't be read, give a helpful error msg
   * logging: use info loglevel (not warning) for telling about using the builtin

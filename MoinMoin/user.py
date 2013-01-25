@@ -451,6 +451,10 @@ class User:
         """
         return os.path.exists(self.__filename())
 
+    def remove(self):
+        """ Remove user profile from disk """
+        os.remove(self.__filename())
+
     def load_from_id(self, password=None):
         """ Load user account data from disk.
 
