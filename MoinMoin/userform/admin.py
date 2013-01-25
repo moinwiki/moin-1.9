@@ -31,10 +31,28 @@ def do_user_browser(request):
         Column('action', label=_('Action')),
     ]
 
-    # Iterate over users
-    for uid in user.getUserList(request):
-        account = user.User(request, uid)
+    class UserAccount(object):
+        # namedtuple is >= 2.6 :-(
+        def __init__(self, **kw):
+            for k, v in kw.items():
+                setattr(self, k, v)
+        def __repr__(self):
+            return "<UserAccount %r>" % self.__dict__
 
+    accounts = []
+    for uid in user.getUserList(request):
+        # be careful and just create a list of what we really need,
+        # not sure if we can keep lots of User objects instantiated
+        # in parallel (open files? too big?)
+        u = user.User(request, uid)
+        accounts.append(UserAccount(name=u.name, email=u.email, jid=u.jid, disabled=u.disabled))
+
+    def sortkey(account):
+        # enabled accounts at top, sorted by name
+        return (account.disabled, account.name)
+
+    # Iterate over user accounts
+    for account in sorted(accounts, key=sortkey):
         account_groups = set(groups.groups_with_member(account.name))
         wiki_groups = set([group for group in account_groups if isinstance(groups[group], WikiGroup)])
         other_groups = list(account_groups - wiki_groups)
@@ -105,7 +123,7 @@ def do_user_browser(request):
         from MoinMoin.widget.browser import DataBrowserWidget
 
         browser = DataBrowserWidget(request)
-        browser.setData(data, sort_columns=[0])
+        browser.setData(data)
         return browser.render()
 
     # No data
