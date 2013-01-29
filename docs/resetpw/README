@@ -78,10 +78,15 @@ Please note:
 
 Helping users who can't do the password recovery
 ================================================
-Either they did not get the E-Mail, or deleted it, or ...
+Either they did not get the E-Mail, or deleted it, or never had entered their
+E-Mail address into their user profile, or ...
 
-You can just set an arbitrary password for them (and tell it to them).
-But make sure they change it a minute afterwards:
+You can just set an arbitrary password for them (and tell it to them):
+
+moin ... account resetpw --name JoeDoe uIkV9.-a3
+
+Choose a rather complicated password to make sure they change it a minute
+afterwards (to another, hopefully safe password).
 
 Alternatively, if you are in the superuser list, you can go to YOUR user
 settings, switch to the user having troubles and just fix / add a valid
