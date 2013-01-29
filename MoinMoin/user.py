@@ -187,6 +187,9 @@ class Fault(Exception):
 class NoSuchUser(Fault):
     """raised if no such user exists"""
 
+class UserHasNoEMail(Fault):
+    """raised if user has no e-mail address in his profile"""
+
 class MailFailed(Fault):
     """raised if e-mail sending failed"""
 
@@ -205,6 +208,8 @@ def set_password(request, newpass, u=None, uid=None, uname=None,
         else:
             u.enc_password = encodePassword(request.cfg, newpass)
         u.save()
+        if not u.email:
+            raise UserHasNoEMail('User profile does not have an E-Mail address (name: %r id: %r)!' % (u.name, u.id))
         if notify and not u.disabled:
             mailok, msg = u.mailAccountData(subject=subject,
                                             text_intro=text_intro, text_msg=text_msg, text_data=text_data)
