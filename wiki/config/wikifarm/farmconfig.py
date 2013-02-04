@@ -32,7 +32,8 @@
 # Important:
 #  * the left part is the wikiname enclosed in double quotes
 #  * the left part must be a valid python module name, so better use only
-#    lower letters "a-z" and "_". Do not use blanks or "-" there!!!
+#    lower letters "a-z" and "_". Do not use blanks, dots or minus there!
+#    E.g. use "foo_bar_org", NOT: "foo-bar.org"!
 #  * the right part is the url re, use r"..." for it
 #  * in the right part ".*" means "everything". Just "*" does not work like
 #    for filenames on the shell / commandline, you must use ".*" as it is a RE.
