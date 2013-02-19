@@ -151,6 +151,11 @@ def load_config(conf_fname=None):
         l.info('using logging configuration read from built-in fallback in MoinMoin.log module')
         warnings.showwarning = _log_warning
 
+    import MoinMoin
+    code_path = os.path.dirname(MoinMoin.__file__)
+    from MoinMoin.version import project, release, revision
+    l.info('Running %s %s %s code from %s' % (project, release, revision, code_path))
+
 
 def getLogger(name):
     """ wrapper around logging.getLogger, so we can do some more stuff:
