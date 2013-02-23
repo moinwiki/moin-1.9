@@ -47,14 +47,6 @@ You can use anything that speaks WSGI to moin:
 Requirements needed for some moin features
 ==========================================
 
-RSS feed: python-xml (pyxml) or python >= 2.5.1
-
-GUI editor: python-xml (pyxml) - more precisely, this stuff is needed by the
-            html to wiki markup converter invoked when the gui editor posts
-            html on save. Status for python 2.5.x unknown.
-
-Docbook formatter: python-xml (pyxml).
-
 docbook parser: 4suite 1.0a4 or 1.0b1
 
 xslt parser: 4suite 1.0a4 or 1.0b1
@@ -79,6 +71,13 @@ openidrp auth: openid python module
 stats charts: gdchart python module
 
 jabberbot: pyxmpp SVN revision 665 or release >= 1.0.1
+
+Only if you are using some python < 2.5.1, you likely will need python-xml
+(pyxml) for some features. It should just work with python's standard library
+for more recent python versions. Features needing this:
+ * the RSS feed (action/rss_rc)
+ * GUI editor converter (converter/text_html_text_moin_wiki)
+ * docbook formatter (formatter/text_docbook)
 
 
 Bundled 3rd party code
