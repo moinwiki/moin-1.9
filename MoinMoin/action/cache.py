@@ -27,6 +27,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from datetime import datetime
+
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
@@ -202,7 +204,7 @@ def _get_headers(request, key):
     """ get last_modified and headers cached for key """
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta = meta_cache.content()
-    return meta['httpdate_last_modified'], meta['headers']
+    return meta['last_modified'], meta['headers']
 
 
 def _get_datafile(request, key):
@@ -216,7 +218,7 @@ def _do_get(request, key):
     """ send a complete http response with headers/data cached for key """
     try:
         last_modified, headers = _get_headers(request, key)
-        if request.if_modified_since == last_modified:
+        if datetime.utcfromtimestamp(int(last_modified)) == request.if_modified_since:
             request.status_code = 304
         else:
             for k, v in headers:
