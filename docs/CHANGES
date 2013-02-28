@@ -102,6 +102,10 @@ Version 1.9.current:
   * Removing/disabling inactive users (moin ... acount inactive)
     Many wikis have a lot of inactive users, that never ever made a single edit.
     See help of the command for more details, be careful.
+  * SystemAdmin user browser: show disabled user accounts at the bottom of
+    the list
+  * At startup, announce moin version and code path in log output (makes
+    support and debugging easier).
 
   Fixes:
   * logging: if the logging config file can't be read, give a helpful error msg
@@ -113,6 +117,7 @@ Version 1.9.current:
     the user name and password (not erroneously the recovery token and password)
   * don't try to send password recovery email to user if email address in
     user profile is empty
+  * fix 304 http status for cache action
 
 
 Version 1.9.6:
