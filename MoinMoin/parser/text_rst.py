@@ -75,8 +75,8 @@ except ImportError:
     docutils = html4css1 = dummyUrllib2()
     html4css1.HTMLTranslator = html4css1.Writer = object
 
-def safe_import(name, globals = None, locals = None, fromlist = None):
-    mod = __builtin__.__import__(name, globals, locals, fromlist)
+def safe_import(name, globals = None, locals = None, fromlist = None, level = -1):
+    mod = __builtin__.__import__(name, globals, locals, fromlist, level)
     if mod:
         mod.open = dummyOpen
         mod.urllib2 = dummyUrllib2
