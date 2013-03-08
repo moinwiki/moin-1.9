@@ -22,7 +22,7 @@
                 2001-2004 by Juergen Hermann <jh@web.de>,
                 2005 MoinMoin:AlexanderSchremmer,
                 2005 DiegoOngaro at ETSZONE (diego@etszone.com),
-                2005-2007 MoinMoin:ReimarBauer,
+                2005-2013 MoinMoin:ReimarBauer,
                 2007-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -310,7 +310,7 @@ def _access_file(pagename, request):
     return (pagename, None, None)
 
 
-def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
+def _build_filelist(request, pagename, showheader, readonly, mime_type='*', filterfn=None):
     _ = request.getText
     fmt = request.html_formatter
 
@@ -320,6 +320,8 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
 
     if mime_type != '*':
         files = [fname for fname in files if mime_type == mimetypes.guess_type(fname)[0]]
+    if filterfn is not None:
+        files = [fname for fname in files if filterfn(fname)]
 
     html = []
     if files:
