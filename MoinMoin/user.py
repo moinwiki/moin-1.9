@@ -1143,21 +1143,21 @@ class User:
         if text_intro is None:
             text_intro = ''
         if text_msg is None:
-            text_msg = """\
+            text_msg = _("""\
 Somebody has requested to email you a password recovery token.
 
 If you lost your password, please go to the password reset URL below or
 go to the password recovery page again and enter your username and the
 recovery token.
-"""
+""")
         if text_data is None:
-            text_data = """\
+            text_data = _("""\
 Login Name: %s
 
 Password recovery token: %s
 
 Password reset URL: %s?action=recoverpass&name=%s&token=%s
-"""
+""")
         # note: text_intro is for custom stuff, we do not have i18n for it anyway
         text = text_intro + '\n' + _(text_msg) + '\n' + _(text_data) % (
                         self.name,
