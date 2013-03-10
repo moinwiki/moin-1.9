@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 23:12+0200\n"
+"POT-Creation-Date: 2013-03-10 16:38+0100\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -474,20 +474,9 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<непознато>"
 
-# python-format
-#, fuzzy, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
-msgstr ""
-"Корисничко име: %s\n"
-"\n"
-"Белег за пронаоѓање на лозинка: %s\n"
-"\n"
-"URL за ресетирање на лозинка: %s/?action=recoverpass&name=%s&token=%s\n"
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Потадоци за Вашата корисничка сметка"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -503,9 +492,20 @@ msgstr ""
 "Вашето\n"
 "корисничко име и белегот за пронаоѓање.\n"
 
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Потадоци за Вашата корисничка сметка"
+# python-format
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"Корисничко име: %s\n"
+"\n"
+"Белег за пронаоѓање на лозинка: %s\n"
+"\n"
+"URL за ресетирање на лозинка: %s/?action=recoverpass&name=%s&token=%s\n"
 
 #, python-format
 msgid "You must login to use this action: %(action)s."

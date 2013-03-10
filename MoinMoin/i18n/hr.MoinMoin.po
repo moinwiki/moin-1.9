@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 23:12+0200\n"
+"POT-Creation-Date: 2013-03-10 16:38+0100\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -469,20 +469,9 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<nepoznato>"
 
-# python-format
-#, fuzzy, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
-msgstr ""
-"Korisničko ime: %s\n"
-"\n"
-"Šifra za zahtjev lozinke: %s\n"
-"\n"
-"URL za prijavu: %s/?action=recoverpass&name=%s&token=%s\n"
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Podaci o vašem korisničkom računu"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -497,9 +486,20 @@ msgstr ""
 "ili na stranici za zahtijevanje lozinke upišite svoje korisničko\n"
 "ime i šifru koju ste dobili u ovoj poruci.\n"
 
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Podaci o vašem korisničkom računu"
+# python-format
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"Korisničko ime: %s\n"
+"\n"
+"Šifra za zahtjev lozinke: %s\n"
+"\n"
+"URL za prijavu: %s/?action=recoverpass&name=%s&token=%s\n"
 
 #, fuzzy, python-format
 msgid "You must login to use this action: %(action)s."
