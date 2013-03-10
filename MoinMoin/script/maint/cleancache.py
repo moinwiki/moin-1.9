@@ -71,6 +71,7 @@ General syntax: moin [options] maint cleancache
             caching.CacheEntry(request, 'drafts', key, scope='wiki').remove()
 
         # clean language cache files
+        caching.CacheEntry(request, 'i18n', 'meta', scope='wiki').remove()
         wiki_languages = i18n.wikiLanguages().keys()
         for key in wiki_languages:
             caching.CacheEntry(request, 'i18n', key, scope='wiki').remove()
