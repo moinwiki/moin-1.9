@@ -14,7 +14,7 @@ First make sure E-Mail functionality for your wiki is enabled, something like:
 Optionally, you can also remind your users that having a valid E-Mail address
 in their user settings is essential for getting a password recovery E-Mail.
 If a active user does somehow not get such a mail, you likely will have to
-manually define a password for that user.
+manually define a valid E-Mail address (or even password) for that user.
 
 If you had a security breach on your wiki (password hashes stolen) or you want
 to make sure all password hashes use strong algorithms (which is strongly
@@ -29,6 +29,8 @@ If you edit mailtemplate.txt, please be very careful and follow these rules
 The contents must be utf-8 (or ascii, which is a subset of utf-8).
 In case of doubt, just use plain English.
 
+Some places you likely should edit are marked with XXX.
+
 Never ever change the AMOUNT or ORDER of the %s placeholders in the template.
 They will get replaced by MoinMoin with specific values in a specific order.
 We know this can be done better in Python, but this restriction is for
@@ -40,9 +42,7 @@ Do not use any % character in your text (except for the placeholders).
 That said, feel free to change or add any other text.
 
 It is a very good idea to give some URL (e.g. of a web or wiki page) in
-the text where users can read more information about why you reset the
-password(s), who exactly resetted the password(s) and who (E-Mail) to contact
-if there are any questions or issues.
+the text where users can read more information.
 
 Of course the information at that URL should be readable without requiring
 a wiki login (you just have invalidated his/her password!), so the user can
@@ -52,6 +52,14 @@ Instead of creating a web or wiki page with the information, you could
 also write all the stuff into the mail template directly, but please consider
 that E-Mail delivery to some users might fail for misc. reasons, so having
 some information on the web/wiki is usually better.
+
+We have added a wikitemplate.txt you can use to create such a wiki page.
+
+Editing wikitemplate.txt
+========================
+Just copy & paste it to some public page in your wiki, e.g. "PasswordReset".
+
+Some places you likely should edit are marked with XXX.
 
 Doing the password reset
 ========================
