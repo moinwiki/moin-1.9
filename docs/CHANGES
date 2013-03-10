@@ -106,6 +106,8 @@ Version 1.9.7:
     the list
   * At startup, announce moin version and code path in log output (makes
     support and debugging easier).
+  * AttachList: introduced search_term parameter (optional) for listing attachments
+    filtered by a regular expression on their name
 
   Fixes:
   * logging: if the logging config file can't be read, give a helpful error msg
@@ -117,8 +119,9 @@ Version 1.9.7:
     the user name and password (not erroneously the recovery token and password)
   * don't try to send password recovery email to user if email address in
     user profile is empty
-  * fix 304 http status for cache action
-
+  * cache action: fix 304 http status
+  * rst parser: fix safe_import for level param in __import__ call of docutils 0.10
+  * moin maint cleancache: also kill the i18n cache 'meta' pickle file
 
 Version 1.9.6:
 
