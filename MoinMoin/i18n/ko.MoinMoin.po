@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 23:12+0200\n"
+"POT-Creation-Date: 2013-03-10 16:38+0100\n"
 "PO-Revision-Date: 2010-03-13 11:16+0900\n"
 "Last-Translator: YongjinCho <yongjin.cho@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -457,6 +457,18 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<알 수 없음>"
 
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] 위키 계정 정보"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
@@ -470,18 +482,6 @@ msgstr ""
 "사용자 암호: %s\n"
 "\n"
 "로그인 URL: %s/%s?action=login\n"
-
-msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] 위키 계정 정보"
 
 #, fuzzy, python-format
 msgid "You must login to use this action: %(action)s."

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 23:12+0200\n"
-"PO-Revision-Date: 2010-11-09 22:37+0100\n"
+"POT-Creation-Date: 2013-03-10 16:38+0100\n"
+"PO-Revision-Date: 2013-02-15 00:40+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français <>\n"
 "Language: \n"
@@ -300,10 +300,10 @@ msgstr ""
 msgid ""
 "Text matching regular expression \"%(regex)s\" is highlighted. "
 "%(switch_link)s."
-msgstr ""
+msgstr "Le texte correspondant à \"%(regex)s\" est surligné. %(switch_link)s."
 
 msgid "Switch to non-highlighted view"
-msgstr ""
+msgstr "Passer à la vue non surlignée"
 
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
@@ -496,19 +496,8 @@ msgid "<unknown>"
 msgstr "<inconnu>"
 
 #, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
-msgstr ""
-"Nom d'utilisateur : %s\n"
-"\n"
-"Code de récupération du mot de passe : %s\n"
-"\n"
-"URL de remise à zéro du mot de passe : %s?action=recoverpass&name=%s&token="
-"%s\n"
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Vos identifiants de connexion au wiki"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -526,8 +515,19 @@ msgstr ""
 "code de récupération.\n"
 
 #, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Vos identifiants de connexion au wiki"
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"Nom d'utilisateur : %s\n"
+"\n"
+"Code de récupération du mot de passe : %s\n"
+"\n"
+"URL de remise à zéro du mot de passe : %s?action=recoverpass&name=%s&token="
+"%s\n"
 
 #, python-format
 msgid "You must login to use this action: %(action)s."
@@ -1236,13 +1236,14 @@ msgstr "Sélectionnez :"
 msgid "Install language packs for '%s'"
 msgstr "Installation des paquets pour la langue « %s »"
 
-#, fuzzy
 msgid "TextCha: Wrong answer! Try again below..."
-msgstr "TextCha : mauvaise réponse ! Revenez en arrière et réessayez..."
+msgstr "TextCha : mauvaise réponse ! Réessayez ci-dessous..."
 
 msgid ""
 "Supplying a comment is mandatory.  Write a comment below and try again..."
 msgstr ""
+"Un commentaire est obligatoire. Écrivez un commentaire ci-dessous et "
+"réessayez..."
 
 #, python-format
 msgid "[%d attachments]"
@@ -2837,9 +2838,8 @@ msgstr "AideDesCommandesMoin/ExportDump"
 msgid "HelpOnNotification"
 msgstr "AideDesNotifications"
 
-#, fuzzy
 msgid "HelpOnRobots"
-msgstr "AideDesFiletsHorizontaux"
+msgstr "AideDesRobots"
 
 msgid "HelpOnSessions"
 msgstr "AideDesSessions"
@@ -3525,15 +3525,17 @@ msgstr "Recherche respectant la casse"
 msgid "Search Text"
 msgstr "Recherche de texte"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown macro parameter: %s."
-msgstr "Sous-action de sauvegarde inconnue : %s."
+msgstr "Paramètre de macro inconnu : %s."
 
 #, python-format
 msgid ""
 "More than one needle with search_macro_parse_args config option enabled "
 "('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
+"L'option search_macro_parse_args est activée et il y a plus d'une aiguille "
+"('%(needle)s' déjà trouvé, '%(arg)s' est survenu)"
 
 msgid "Lexer description"
 msgstr "Description de l'analyseur lexical"

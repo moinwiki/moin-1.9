@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 23:12+0200\n"
+"POT-Creation-Date: 2013-03-10 16:38+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -472,12 +472,7 @@ msgid "<unknown>"
 msgstr "<không rõ>"
 
 #, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
 msgid ""
@@ -489,7 +484,12 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "[%(sitename)s] Your wiki account data"
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 
 #, fuzzy, python-format

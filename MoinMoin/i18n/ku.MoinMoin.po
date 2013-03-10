@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 23:12+0200\n"
+"POT-Creation-Date: 2013-03-10 16:38+0100\n"
 "PO-Revision-Date: 2006-12-08 18:50+0000\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -457,6 +457,18 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<nenas>"
 
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Agahiyên hesabê te yê wikiyê"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
@@ -470,18 +482,6 @@ msgstr ""
 "Şîfreya Têketinê: %s\n"
 "\n"
 "Ji Bo Forma Têketinê URL %s/?action=userform&uid=%s\n"
-
-msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Agahiyên hesabê te yê wikiyê"
 
 #, fuzzy, python-format
 msgid "You must login to use this action: %(action)s."
