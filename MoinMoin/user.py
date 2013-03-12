@@ -195,13 +195,15 @@ class MailFailed(Fault):
 
 
 def set_password(request, newpass, u=None, uid=None, uname=None,
-                 notify=False, subject=None,
+                 notify=False, skip_invalid=False, subject=None,
                  text_intro=None, text_msg=None, text_data=None):
     if uid:
         u = User(request, uid)
     elif uname:
         u = User(request, auth_username=uname)
     if u and u.exists():
+        if skip_invalid and u.enc_password == '':
+            return
         if not newpass:
             # set a invalid password hash
             u.enc_password = ''
