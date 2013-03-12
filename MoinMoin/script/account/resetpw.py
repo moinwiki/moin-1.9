@@ -89,6 +89,10 @@ newpassword:
             help="Read full template for the password reset notification E-Mail from the given file, overrides --text-intro/msg/data. Default: None"
         )
         self.parser.add_option(
+            "--skip-invalid", dest="skip_invalid", action="store_true",
+            help="If a user's password hash is already invalid (pw is already reset), skip this user."
+        )
+        self.parser.add_option(
             "-v", "--verbose", dest="verbose", action="store_true",
             help="Verbose operation."
         )
@@ -115,6 +119,7 @@ newpassword:
             print "This wiki is not enabled for mail processing. The --notify option requires this. Aborting..."
             sys.exit(1)
 
+        skip_invalid = self.options.skip_invalid
         subject = self.options.subject
         text_intro = self.options.text_intro
         text_msg = self.options.text_msg
@@ -130,14 +135,16 @@ newpassword:
         if self.options.uid:
             try:
                 set_password(request, newpass, uid=self.options.uid,
-                             notify=notify, subject=subject,
+                             notify=notify, skip_invalid=skip_invalid,
+                             subject=subject,
                              text_intro=text_intro, text_msg=text_msg, text_data=text_data)
             except Fault, err:
                 print str(err)
         elif self.options.uname:
             try:
                 set_password(request, newpass, uname=self.options.uname,
-                             notify=notify, subject=subject,
+                             notify=notify, skip_invalid=skip_invalid,
+                             subject=subject,
                              text_intro=text_intro, text_msg=text_msg, text_data=text_data)
             except Fault, err:
                 print str(err)
@@ -148,7 +155,8 @@ newpassword:
                 log("%05d / %05d - processing uid %s" % (nr, total, uid))
                 try:
                     set_password(request, newpass, uid=uid,
-                                 notify=notify, subject=subject,
+                                 notify=notify, skip_invalid=skip_invalid,
+                                 subject=subject,
                                  text_intro=text_intro, text_msg=text_msg, text_data=text_data)
                 except Fault, err:
                     print str(err)
