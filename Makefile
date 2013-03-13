@@ -62,14 +62,19 @@ pagepacks:
 	@MoinMoin/script/moin.py --config-dir=MoinMoin/_tests --wiki-url=http://localhost/ maint mkpagepacks
 	cd $(share) ; rm -rf underlay
 	cp -a $(testwiki)/underlay $(share)/
-	
-dist:
+
+dist-clean:
 	-rm MANIFEST
 	-rm -rf tests/wiki
 	-rm -rf wiki/data/cache/{__metalock__,__session__,wikiconfig}
 	->wiki/data/event-log
 	->wiki/data/edit-log
+
+dist: dist-clean
 	python setup.py sdist
+
+dist-release: dist-clean
+	python setup.py register sdist upload --identity="Thomas Waldmann" --sign
 
 # Create patchlevel module
 patchlevel:
