@@ -99,7 +99,7 @@ Version 1.9.7:
 
     password_checker = lambda cfg, request, name, pw: multiconfig._default_password_checker(cfg, request, name, pw, min_length=10, min_different=7)
 
-  * Removing/disabling inactive users (moin ... acount inactive)
+  * Removing/disabling inactive users (moin ... account inactive)
     Many wikis have a lot of inactive users, that never ever made a single edit.
     See help of the command for more details, be careful.
   * SystemAdmin user browser: show disabled user accounts at the bottom of
@@ -108,6 +108,8 @@ Version 1.9.7:
     support and debugging easier).
   * AttachList: introduced search_term parameter (optional) for listing attachments
     filtered by a regular expression on their name
+  * sign release archive using GnuPG using key of tw@waldmann-edv.de
+    ID 31A6CB60 (main key ID FAF7B393)
 
   Fixes:
   * logging: if the logging config file can't be read, give a helpful error msg
@@ -122,6 +124,8 @@ Version 1.9.7:
   * cache action: fix 304 http status
   * rst parser: fix safe_import for level param in __import__ call of docutils 0.10
   * moin maint cleancache: also kill the i18n cache 'meta' pickle file
+  * sendmail: catch unicode errors when E-Mail addr has non-ascii chars
+
 
 Version 1.9.6:
 
