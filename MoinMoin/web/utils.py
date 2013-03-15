@@ -137,7 +137,7 @@ def redirect_last_visited(request):
         # Redirect to last page visited
         last_visited = pagetrail[-1]
         wikiname, pagename = wikiutil.split_interwiki(last_visited)
-        if wikiname != 'Self':
+        if wikiname != request.cfg.interwikiname and wikiname != 'Self':
             wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(request, wikiname, pagename)
             url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
         else:
