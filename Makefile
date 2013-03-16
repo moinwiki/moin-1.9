@@ -15,9 +15,9 @@ install-docs:
 	-mkdir build
 	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master19.moinmo.in/InstallDocs?action=print"
 	sed \
-		-e 's|http://master19.moinmo.in/moin_static...|../MoinMoin/web/static/htdocs|g' \
-		-e 's|http://static.moinmo.in/moin_static...|../MoinMoin/web/static/htdocs|g' \
-		-e 's|/moin_static...|../MoinMoin/web/static/htdocs|g' \
+		-e 's|http://master19.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|http://static.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|/moin_static..|../MoinMoin/web/static/htdocs|g' \
 		-e 's|/InstallDocs#|#|g' \
 		-e 's|/InstallDocs/QuickInstall#qdlinux|#InstallDocs.2BAC8-QuickInstall.2BAC8-Linux.Linux:_Detailed_Quick_Installation|g' \
 		-e 's|/InstallDocs/QuickInstall#qdmac|#InstallDocs.2BAC8-QuickInstall.2BAC8-MacOSX.Mac:_Detailed_Quick_Installation|g' \
@@ -27,9 +27,9 @@ install-docs:
 
 	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master19.moinmo.in/HelpOnUpdating?action=print"
 	sed \
-		-e 's|http://master19.moinmo.in/moin_static...|../MoinMoin/web/static/htdocs|g' \
-		-e 's|http://static.moinmo.in/moin_static...|../MoinMoin/web/static/htdocs|g' \
-		-e 's|/moin_static...|../MoinMoin/web/static/htdocs|g' \
+		-e 's|http://master19.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|http://static.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|/moin_static..|../MoinMoin/web/static/htdocs|g' \
 		-e 's|href=./MoinMoin|href=\"http://master19.moinmo.in/MoinMoin|g' \
 		-e 's|href=./EditedSystemPages|href=\"http://master19.moinmo.in/EditedSystemPages|g' \
         build/UPDATE.html >docs/UPDATE.html
