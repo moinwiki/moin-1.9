@@ -433,13 +433,15 @@ class ConfigFunctionality(object):
         if self.passlib_support:
             try:
                 from passlib.context import CryptContext
+                from passlib.exc import UserWarning
             except ImportError, err:
                 raise error.ConfigurationError("Wiki is configured to use passlib, but importing passlib failed [%s]!" % str(err))
             try:
                 self.cache.pwd_context = CryptContext(**self.passlib_crypt_context)
-            except (ValueError, KeyError), err:
+            except (ValueError, KeyError, TypeError, UserWarning), err:
                 # ValueError: wrong configuration values
                 # KeyError: unsupported hash (seen with passlib 1.3)
+                # TypeError: configuration value has wrong type
                 raise error.ConfigurationError("passlib_crypt_context configuration is invalid [%s]." % str(err))
         elif self.password_scheme == '{PASSLIB}':
             raise error.ConfigurationError("passlib_support is switched off, thus you can't use password_scheme = '{PASSLIB}'.")

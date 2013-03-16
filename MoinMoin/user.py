@@ -596,10 +596,7 @@ class User:
                             # check if we need to recompute the hash. this is needed if either the
                             # passlib hash scheme / hash params changed or if we shall change to a
                             # builtin hash scheme (not recommended):
-                            if not hasattr(pwd_context, 'needs_update'):
-                                # older passlib versions (like 1.3.0) didn't have that method
-                                pwd_context.needs_update = pwd_context.hash_needs_update
-                            recompute_hash = pwd_context.needs_update(d) or wanted_scheme != '{PASSLIB}'
+                            recompute_hash = pwd_context.hash_needs_update(d) or wanted_scheme != '{PASSLIB}'
 
                 else:
                     # a password hash to be checked by legacy, builtin code
