@@ -433,7 +433,6 @@ class ConfigFunctionality(object):
         if self.passlib_support:
             try:
                 from passlib.context import CryptContext
-                from passlib.exc import UserWarning
             except ImportError, err:
                 raise error.ConfigurationError("Wiki is configured to use passlib, but importing passlib failed [%s]!" % str(err))
             try:
