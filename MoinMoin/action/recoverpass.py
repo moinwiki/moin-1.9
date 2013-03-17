@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - create account action
+    MoinMoin - password recovery action
 
     @copyright: 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
