@@ -29,7 +29,9 @@ class EventLog(LogFile):
         """ Write an event of type `eventtype, with optional key/value
             pairs appended (i.e. you have to pass a dict).
         """
-        if request.isSpiderAgent:
+        cfg = request.cfg
+        if cfg.log_events_format == 0 or request.isSpiderAgent:
+            # no event logging enabled or user agent is a bot / spider
             return
 
         if mtime_usecs is None:
@@ -37,7 +39,7 @@ class EventLog(LogFile):
 
         if values is None:
             values = {}
-        if request.cfg.log_remote_addr and add_http_info:
+        if cfg.log_remote_addr and add_http_info:
             # if cfg.log_remote_addr is False (usually for privacy reasons),
             # we likely do not want to log user agent and http referer either.
             for key in ['remote_addr', 'http_user_agent', 'http_referer']:
@@ -45,6 +47,12 @@ class EventLog(LogFile):
                 if value:
                     # Save those http headers in UPPERcase
                     values[key.upper()] = value
+
+        if cfg.log_events_format == 2:
+            values['username'] = request.user.name
+            values['wikiname'] = cfg.interwikiname
+            values['url'] = request.url
+
         # Encode values in a query string TODO: use more readable format
         values = wikiutil.makeQueryString(values)
         self._add(u"%d\t%s\t%s\n" % (mtime_usecs, eventtype, values))

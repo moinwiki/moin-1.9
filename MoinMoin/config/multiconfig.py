@@ -1112,6 +1112,8 @@ options_no_group_name = {
      "if True, do a reverse DNS lookup on page SAVE. If your DNS is broken, set this to False to speed up SAVE."),
     ('log_timing', False,
      "if True, add timing infos to the log output to analyse load conditions"),
+    ('log_events_format', 1,
+     "0 = no events logging, 1 = standard format (like <= 1.9.7) [default], 2 = extended format"),
 
     # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
     # downloads such attachments, because the browser might execute e.g. Javascript contained

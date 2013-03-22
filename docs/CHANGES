@@ -16,13 +16,27 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.7:
+Version 1.9.current:
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
   Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
+  New features:
+  * cfg.log_events_format can be used to configure the format of the records
+    written to <data_dir>/event-log:
+    0 = dot not create event-log entries (saves disk space, disk I/O)
+    1 = standard (like in moin <= 1.9.7) [default]
+    2 = extended (add infos about username, wikiname, url)
+  * add a tool to output the contents of the event-log to CSV:
+    moin export eventlog --file=output.csv
+    Output encoding is utf-8, columns are in this order:
+    time, event, username, ip, wikiname, pagename, url, referrer, ua
+    time: UNIX timestamp (float)
+
+
+Version 1.9.7:
   New features:
   * passlib support - enhanced password hash security. Special thanks go to
     the Python Software Foundation (PSF) for sponsoring development of this!
