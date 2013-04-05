@@ -1784,7 +1784,7 @@ var gui_editor_link_text = "%(text)s";
 
         # In standard mode, emit theme.header
         else:
-            exists = pagename and page.exists(includeDeleted=True)
+            exists = pagename and page.exists(includeDeleted=False)
             # prepare dict for theme code:
             d = {
                 'theme': self.name,
