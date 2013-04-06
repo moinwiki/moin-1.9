@@ -12,7 +12,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
-from MoinMoin.web.exceptions import HTTPException
+from MoinMoin.web.exceptions import HTTPException, abort
 from MoinMoin.web.request import Request, MoinMoinFinish, HeaderSet
 from MoinMoin.web.utils import check_forbidden, check_surge_protect, fatal_response, \
     redirect_last_visited
@@ -94,8 +94,12 @@ def run(context):
         context.finish()
         context.clock.stop('run')
 
-def remove_prefix(path, prefix=None):
-    """ Remove an url prefix from the path info and return shortened path. """
+def remove_prefix(path, action_name, prefix, check_prefix):
+    """
+    Remove an url prefix from the path info and return shortened path.
+    
+    If check_prefix is True, we do some consistency checks and 404 invalid URLs.
+    """
     # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
     # this is just for robots.txt being able to forbid them for crawlers
     if prefix is not None:
@@ -105,13 +109,21 @@ def remove_prefix(path, prefix=None):
             path = path[len(prefix):]
             action, path = (path.split('/', 1) + ['', ''])[:2]
             path = '/' + path
+            if check_prefix and action != action_name:
+                # inconsistency found (action in querystr != action in path)
+                abort(404)
+        elif check_prefix and action_name != 'show':
+            # invalid: a non-default (non-show) action, but the prefix is not present
+            abort(404)
     return path
 
 def dispatch(request, context, action_name='show'):
     cfg = context.cfg
 
     # The last component in path_info is the page name, if any
-    path = remove_prefix(request.path, cfg.url_prefix_action)
+    path = remove_prefix(request.path, action_name,
+                         cfg.url_prefix_action,
+                         cfg.url_prefix_action_check)
 
     if path.startswith('/'):
         pagename = wikiutil.normalize_pagename(path, cfg)

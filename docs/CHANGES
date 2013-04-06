@@ -34,6 +34,14 @@ Version 1.9.current:
     Output encoding is utf-8, columns are in this order:
     time, event, username, ip, wikiname, pagename, url, referrer, ua
     time: UNIX timestamp (float)
+  * Added strict checking for action URLs to avoid load caused by bots:
+      url_prefix_action = 'action'
+      url_prefix_action_check = True  # New, default is False
+    Note: action URLs generated without these settings will not work any
+    longer and (with url_prefix_action_check = True) will get rejected by
+    MoinMoin with a 404 "Not Found" response.
+    To disallow actions for the bots, add this to /robots.txt:
+      Disallow: /action/
 
 
 Version 1.9.7:
