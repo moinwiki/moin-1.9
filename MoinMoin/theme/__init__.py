@@ -1708,9 +1708,9 @@ var gui_editor_link_text = "%(text)s";
         output.append('<link rel="Start" href="%s">\n' % request.href(page_front_page))
         if pagename:
             output.append('<link rel="Alternate" title="%s" href="%s">\n' % (
-                    _('Wiki Markup'), request.href(pagename, action='raw')))
+                    _('Wiki Markup'), page.url(request, querystr=dict(action='raw'))))
             output.append('<link rel="Alternate" media="print" title="%s" href="%s">\n' % (
-                    _('Print View'), request.href(pagename, action='print')))
+                    _('Print View'), page.url(request, querystr=dict(action='print'))))
 
             # !!! currently disabled due to Mozilla link prefetching, see
             # http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html
