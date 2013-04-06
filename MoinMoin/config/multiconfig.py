@@ -1032,8 +1032,6 @@ options_no_group_name = {
 
     ('url_prefix_action', None,
      "Use 'action' to enable action URL generation to be compatible with robots.txt. It will generate .../action/info/PageName?action=info then. Recommended for internet wikis."),
-    ('url_prefix_action_check', False,
-     "Do a strict check whether the URL pathes for actions look like we generate them (otherwise do a 404 response)."),
 
     ('notification_bot_uri', None, "URI of the Jabber notification bot."),
 
