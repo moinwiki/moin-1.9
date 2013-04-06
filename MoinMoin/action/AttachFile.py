@@ -865,6 +865,7 @@ def _do_get(pagename, request):
     if not request.user.may.read(pagename):
         return _('You are not allowed to get attachments from this page.')
     if not filename:
+        request.status_code = 404
         return # error msg already sent in _access_file
 
     timestamp = datetime.datetime.fromtimestamp(os.path.getmtime(fpath))
@@ -1139,6 +1140,7 @@ def _do_view(pagename, request):
     if not request.user.may.read(pagename):
         return _('You are not allowed to view attachments of this page.')
     if not filename:
+        request.status_code = 404
         return
 
     request.formatter.page = Page(request, pagename)
