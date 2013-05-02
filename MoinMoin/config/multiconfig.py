@@ -832,6 +832,8 @@ options_no_group_name = {
     ),
     "passlib CryptContext arguments, see passlib docs"),
 
+    ('recovery_token_lifetime', 12,
+     'how long the password recovery token is valid [h]'),
   )),
   # ==========================================================================
   'spam_leech_dos': ('Anti-Spam/Leech/DOS',
