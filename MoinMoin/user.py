@@ -1109,8 +1109,8 @@ class User:
             stamp = int(parts[0])
         except ValueError:
             return False
-        # only allow it to be valid for twelve hours
-        if stamp + 12*60*60 < time.time():
+        lifetime = self._request.cfg.recovery_token_lifetime * 3600
+        if time.time() > stamp + lifetime:
             return False
         # check hmac
         # key must be of type string
