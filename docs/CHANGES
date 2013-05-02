@@ -24,6 +24,10 @@ Version 1.9.current:
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
   New features:
+  * cfg.recovery_token_lifetime to determine how long the password recovery
+    token will be valid, default is 12 [h]. Check this setting to be adequate
+    before doing (global) password resets, so your users have enough time to
+    react before the toke times out!
   * cfg.log_events_format can be used to configure the format of the records
     written to <data_dir>/event-log:
     0 = dot not create event-log entries (saves disk space, disk I/O)
@@ -34,6 +38,13 @@ Version 1.9.current:
     Output encoding is utf-8, columns are in this order:
     time, event, username, ip, wikiname, pagename, url, referrer, ua
     time: UNIX timestamp (float)
+
+  Fixes:
+  * do not create empty pagedirs (with empty edit-log). To clean up all the
+    trash pagedirs, use moin ... maint cleanpage.
+  * AttachFile do=get and do=view: send 404 status if file does not exist
+  * link rel="Alternate" links: rather use page.url than request.href, so
+    url_prefix_action gets used for the (print and raw) action URLs
 
 
 Version 1.9.7:
