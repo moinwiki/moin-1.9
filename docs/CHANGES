@@ -45,6 +45,8 @@ Version 1.9.current:
   * AttachFile do=get and do=view: send 404 status if file does not exist
   * link rel="Alternate" links: rather use page.url than request.href, so
     url_prefix_action gets used for the (print and raw) action URLs
+  * fixed wrong detection of UI language from accept-language header for not
+    logged-in users if the language identifier there was (partially) uppercase.
 
 
 Version 1.9.7:

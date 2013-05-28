@@ -10,7 +10,8 @@
         languages -- dict of languages that MoinMoin knows metadata about
 
     Public functions:
-        requestLanguage(request, usecache=1) -- return the request language
+        requestLanguage(request) -- return the request language
+        userLanguage(request) -- return the language from user profile
         wikiLanguages() -- return the available wiki user languages
         browserLanguages() -- return the browser accepted languages
         getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
@@ -329,31 +330,28 @@ def getText(original, request, lang, **kw):
     return translated
 
 
-def requestLanguage(request, try_user=True):
+def userLanguage(request):
     """
-    Return the user interface language for this request.
+    Return the language from a valid user's profile (or None)
 
-    The user interface language is taken from the user preferences for
-    registered users, or request environment, or the default language of
-    the wiki, or English.
+    This should be called once per request, then you should get the value from
+    request object lang attribute.
+    """
+    if request.user and request.user.valid and request.user.language:
+        return request.user.language
+
+
+def requestLanguage(request):
+    """
+    Return the language from request environment (or a default / fallback).
 
     This should be called once per request, then you should get the value from
     request object lang attribute.
 
-    Unclear what this means: "Until the code for get
-    text is fixed, we are caching the request language locally."
-
     @param request: the request object
-    @param try_user: try getting language from request.user
-    @keyword usecache: whether to get the value form the local cache or
-                       actually look for it. This will update the cache data.
     @rtype: string
     @return: ISO language code, e.g. 'en'
     """
-    # Return the user language preferences for registered users
-    if try_user and request.user.valid and request.user.language:
-        return request.user.language
-
     # Or try to return one of the user browser accepted languages, if it
     # is available on this wiki...
     lang = get_browser_language(request)
