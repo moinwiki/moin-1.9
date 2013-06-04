@@ -252,8 +252,15 @@ class Application(object):
             request = None
             request = self.Request(environ)
             context = init(request)
-            response = run(context)
-            context.clock.stop('total')
+            try:
+                response = run(context)
+            finally:
+                context.clock.stop('total')
+                if context.cfg.log_timing:
+                    dt = context.clock.timings['total']
+                    logging.info("timing: %s %s %s %3.3f %s" % (
+                        request.remote_addr, request.url, request.referrer,
+                        dt, "!" * int(dt) or "."))
         except HTTPException, e:
             response = e
         except error.ConfigurationError, e:

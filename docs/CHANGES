@@ -38,6 +38,11 @@ Version 1.9.current:
     Output encoding is utf-8, columns are in this order:
     time, event, username, ip, wikiname, pagename, url, referrer, ua
     time: UNIX timestamp (float)
+  * reimplement cfg.log_timing - if True, emits INFO level log output like:
+    "timing: <REMOTE_ADDR> <URL> <REFERRER> <TIME> <SLOWNESS-INDICATOR>"
+    TIME is in seconds, the slowness indicator is "." for sub-second requests
+    or N times "!" for requests taking N seconds (so you easily can grep for
+    slow stuff).
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
