@@ -338,7 +338,11 @@ def userLanguage(request):
     request object lang attribute.
     """
     if request.user and request.user.valid and request.user.language:
-        return request.user.language
+        lang = request.user.language
+    else:
+        lang = None
+    logging.debug("userLanguage returns %r" % lang)
+    return lang
 
 
 def requestLanguage(request):
@@ -363,6 +367,7 @@ def requestLanguage(request):
         # If everything else fails, read the manual... or return 'en'
         else:
             lang = 'en'
+    logging.debug("requestLanguage returns %r" % lang)
     return lang
 
 
