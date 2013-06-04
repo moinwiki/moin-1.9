@@ -232,13 +232,11 @@ def setup_i18n_preauth(context):
     if i18n.languages is None:
         i18n.i18n_init(context)
     lang = i18n.requestLanguage(context)
-    logging.debug("setup_i18n_preauth returns %r" % lang)
     return lang
 
 def setup_i18n_postauth(context):
     """ Determine language for the request after user-id is established. """
     lang = i18n.userLanguage(context) or context.lang
-    logging.debug("setup_i18n_postauth returns %r" % lang)
     return lang
 
 class Application(object):
