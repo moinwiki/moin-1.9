@@ -222,6 +222,25 @@ class ThemeBase:
             html = u''
         return html
 
+    def backlink(self, page, page_name, link_text):
+        """ Create html for the "backlink" part of the title.
+
+        This can be a link, but to lighten the server load, we may also
+        give something else to bots, crawlers or not-logged-in users.
+
+        @param page: page object
+        @param page_name: the (full) page name
+        @param link_text: the text shown for the link
+        @return: html fragment
+        """
+        request = self.request
+        _ = request.getText
+        link_title = _('Click to do a full-text search for this title')
+        link_query = dict(action='fullsearch', value='linkto:"%s"' % page_name, context='180')
+        link = page.link_to(request, link_text, querystr=link_query, title=link_title,
+                            css_class='backlink', rel='nofollow')
+        return link
+
     def title(self, d):
         """ Assemble the title (now using breadcrumbs)
 
@@ -238,15 +257,7 @@ class ThemeBase:
                 curpage += s
                 content.append("<li>%s</li>" % Page(self.request, curpage).link_to(self.request, s))
                 curpage += '/'
-            link_text = segments[-1]
-            link_title = _('Click to do a full-text search for this title')
-            link_query = {
-                'action': 'fullsearch',
-                'value': 'linkto:"%s"' % d['page_name'],
-                'context': '180',
-            }
-            # we dont use d['title_link'] any more, but make it ourselves:
-            link = d['page'].link_to(self.request, link_text, querystr=link_query, title=link_title, css_class='backlink', rel='nofollow')
+            link = self.backlink(d['page'], d['page_name'], segments[-1])
             content.append(('<li>%s</li>') % link)
         else:
             content.append('<li>%s</li>' % wikiutil.escape(d['title_text']))
@@ -269,13 +280,7 @@ class ThemeBase:
         if d['title_text'] == d['page'].split_title():
             # just showing a page, no action
             segments = d['page_name'].split('/')
-            link_text = segments[-1]
-            link_title = _('Click to do a full-text search for this title')
-            link_query = {'action': 'fullsearch', 'context': '180',
-                          'value': 'linkto:"%s"' % d['page_name'], }
-            link = d['page'].link_to(self.request, link_text,
-                                     querystr=link_query, title=link_title,
-                                     css_class='backlink', rel='nofollow')
+            link = self.backlink(d['page'], d['page_name'], segments[-1])
             if len(segments) <= 1:
                 html = link
             else:
