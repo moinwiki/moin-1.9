@@ -52,7 +52,7 @@ Version 1.9.current:
     url_prefix_action gets used for the (print and raw) action URLs
   * fixed wrong detection of UI language from accept-language header for not
     logged-in users if the language identifier there was (partially) uppercase.
-  * fix Python 2.7.5 compatibility issue with rss_rc action using handler._out
+  * fix Python 2.7.4/5 compatibility issue with rss_rc action using handler._out
 
 
 Version 1.9.7:
