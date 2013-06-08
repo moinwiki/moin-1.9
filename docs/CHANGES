@@ -54,6 +54,11 @@ Version 1.9.current:
     logged-in users if the language identifier there was (partially) uppercase.
   * fix Python 2.7.4/5 compatibility issue with rss_rc action using handler._out
 
+  Other changes:
+  * rss_rc action (RSS feed) is now much faster / much less resource consuming
+    when requested for a specific single page. As we have a link to this in
+    every page's html output, this likely also lightens the load caused by bots
+    and search engine crawlers.
 
 Version 1.9.7:
   New features:

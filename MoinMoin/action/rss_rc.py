@@ -38,6 +38,17 @@ def match_page(pagename, page_pattern):
     else:
         return pagename == page_pattern
 
+def is_single_page_match(page_pattern):
+    # note: keep this code in sync with match_page()!
+    if not page_pattern:
+        return False
+    elif page_pattern[0] == "^":
+        return False
+    elif page_pattern.endswith("/"):
+        return False
+    else:
+        return True
+
 def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
@@ -92,8 +103,11 @@ def execute(pagename, request):
     except ValueError:
         pass
 
-    # get data
-    log = editlog.EditLog(request)
+    # if we are just interested in a specific page, using the local edit-log
+    # of that page is much faster than the global one - esp. if the page was
+    # NOT recently changed and the global edit-log is rather big.
+    kw = dict(rootpagename=page_pattern) if is_single_page_match(page_pattern) else {}
+    log = editlog.EditLog(request, **kw)
     logdata = []
     counter = 0
     pages = {}
