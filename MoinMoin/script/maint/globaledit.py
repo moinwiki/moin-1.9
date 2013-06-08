@@ -11,6 +11,22 @@ debug = False
 from MoinMoin import PageEditor
 from MoinMoin.script import MoinScript
 
+# there are pages that are rather expensive to render, thus we
+# disallow reading them for anon users / bots / crawlers via ACL:
+SLOWPAGES = set([
+        u"PageHits",
+        u"PageSize",
+        u"WordIndex",  # we keep TitleIndex, though
+        u"EditedSystemPages",
+        u"WantedPages",
+        u"OrphanedPages",
+        u"AbandonedPages",
+        u"EventStats/HitCounts",
+        u"EventStats/Languages",
+        u"EventStats/UserAgents",
+])
+
+
 class PluginScript(MoinScript):
     """\
 Purpose:
@@ -73,13 +89,23 @@ General syntax: moin [options] maint globaledit [globaledit-options]
             language_line = '#language en'
         if not format_line:
             format_line = '#format wiki'
-        aclold = '#acl MoinPagesEditorGroup:read,write,delete,revert All:read'
+        if masterpage is None or masterpage not in SLOWPAGES:
+            aclold = '#acl -All:write Default'
+            aclnew = '#acl -All:write Default'
+        elif masterpage in SLOWPAGES:
+            aclold = '#acl -All:write Default'
+            # the following page acl for slow pages requires a specific acl configuration:
+            # if you want to allow read usually, allow it via the "after" acl, so we
+            # can take it away with -All:read at the end of the page ACL.
+            # do NOT use All:read in the "default" ACL, we can't take that away.
+            # if you don't want to allow read usually, do not allow it in the "after" ACL.
+            aclnew = '#acl -All:write Default -All:read'
         if aclold in acl_lines:
             acl_lines.remove(aclold)
         if not acl_lines and (
             masterpage is None and not pagename.endswith('Template') or
             masterpage not in ['FrontPage', 'WikiSandBox', ] and not (pagename.endswith('Template') or masterpage.endswith('Template'))):
-            acl_lines = ['#acl -All:write Default']
+            acl_lines = [aclnew]
         if not master_lines:
             master_lines = ['##master-page:Unknown-Page', '##master-date:Unknown-Date', ]
 
