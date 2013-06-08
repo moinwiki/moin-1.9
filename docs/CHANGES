@@ -43,6 +43,27 @@ Version 1.9.current:
     TIME is in seconds, the slowness indicator is "." for sub-second requests
     or N times "!" for requests taking N seconds (so you easily can grep for
     slow stuff).
+  * backlinks performance tuning: the pagename in the theme has historically
+    been used to trigger a "linkto:ThisPage" search. While this is a nice
+    feature for human users of the wiki (esp. on category pages), it has one
+    big issue: as it is a normal link, stupid crawlers (ignoring "nofollow")
+    follow it and cause a lot of unneccessary load.
+
+    What moin shows in that "backlinks" place can now be configured in your
+    wiki config:
+
+    # always render the backlink as in moin < 1.9.8 (bad bots causing high load!):
+    backlink_method = lambda cfg, req: 'backlink'
+
+    # always render a simple link to same page, as in moin 2.0:
+    backlink_method = lambda cfg, req: 'pagelink'
+
+    # logged-in users get the backlink, anon users/bots get a pagelink (default):
+    backlink_method = lambda cfg, req: 'backlink' if req.user.valid else 'pagelink'
+
+    # logged-in users get the backlink, anon users/bots get simple text:
+    backlink_method = lambda cfg, req: 'backlink' if req.user.valid else 'text'
+
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
