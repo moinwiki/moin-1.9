@@ -225,8 +225,9 @@ class ThemeBase:
     def backlink(self, page, page_name, link_text):
         """ Create html for the "backlink" part of the title.
 
-        This can be a link, but to lighten the server load, we may also
-        give something else to bots, crawlers or not-logged-in users.
+        What it will be is determined by calling cfg.backlink_method,
+        which can return 'backlink' (render a linkto-fullsearch link),
+        'pagelink' (render a link to same page) or 'text' (render just text).
 
         @param page: page object
         @param page_name: the (full) page name
@@ -235,10 +236,16 @@ class ThemeBase:
         """
         request = self.request
         _ = request.getText
-        link_title = _('Click to do a full-text search for this title')
-        link_query = dict(action='fullsearch', value='linkto:"%s"' % page_name, context='180')
-        link = page.link_to(request, link_text, querystr=link_query, title=link_title,
-                            css_class='backlink', rel='nofollow')
+        method = request.cfg.backlink_method(request)
+        if method == 'backlink':
+            link_title = _('Click to do a full-text search for this title')
+            link_query = dict(action='fullsearch', value='linkto:"%s"' % page_name, context='180')
+            link = page.link_to(request, link_text, querystr=link_query, title=link_title,
+                                css_class='backlink', rel='nofollow')
+        elif method == 'pagelink':
+            link = page.link_to(request, link_text)
+        else:  # == 'text'
+            link = wikiutil.escape(link_text)
         return link
 
     def title(self, d):

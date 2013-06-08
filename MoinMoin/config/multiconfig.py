@@ -694,6 +694,9 @@ class DefaultConfig(ConfigFunctionality):
     # the options dictionary.
 
 
+_default_backlink_method = lambda cfg, req: 'backlink' if req.user.valid else 'pagelink'
+
+
 def _default_password_checker(cfg, request, username, password,
                               min_length=6, min_different=4):
     """ Check if a password is secure enough.
@@ -946,6 +949,9 @@ options_no_group_name = {
     ('show_timings', False, "show some timing values at bottom of a page"),
     ('show_version', False, "show moin's version at the bottom of a page"),
     ('show_rename_redirect', False, "if True, offer creation of redirect pages when renaming wiki pages"),
+
+    ('backlink_method', DefaultExpression('_default_backlink_method'),
+     "function determining how the (last part of the) pagename should be rendered in the title area"),
 
     ('packagepages_actions_excluded',
      ['setthemename',  # related to questionable theme stuff, see below
