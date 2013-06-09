@@ -63,7 +63,7 @@ Version 1.9.current:
 
     # logged-in users get the backlink, anon users/bots get simple text:
     backlink_method = lambda cfg, req: 'backlink' if req.user.valid else 'text'
-
+  * AbandonedPages macro: check user agent to reduce load caused by bots
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the

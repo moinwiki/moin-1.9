@@ -13,5 +13,7 @@
 from MoinMoin.macro import RecentChanges
 
 def macro_AbandonedPages(macro):
+    if macro.request.isSpiderAgent: # reduce bot cpu usage
+        return ''
     return RecentChanges.macro_RecentChanges(macro, abandoned=True)
 
