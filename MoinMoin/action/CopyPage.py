@@ -49,7 +49,7 @@ class CopyPage(ActionBase):
         # Currently we only check TextCha for upload (this is what spammers ususally do),
         # but it could be extended to more/all attachment write access
         if not TextCha(self.request).check_answer_from_form():
-            return status, _('TextCha: Wrong answer! Go back and try again...')
+            return False, _('TextCha: Wrong answer! Go back and try again...')
 
         form = self.form
         newpagename = form.get('newpagename', u'')
