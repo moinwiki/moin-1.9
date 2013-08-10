@@ -56,6 +56,8 @@ def execute(pagename, request):
         request.mimetype = 'text/plain'
         request.write("rss_rc action is not supported because of missing pyxml module.")
         return
+    if request.isSpiderAgent: # reduce bot cpu usage
+        return ''
 
     cfg = request.cfg
     _ = request.getText
