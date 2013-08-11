@@ -243,17 +243,20 @@ class EditLog(LogFile):
         """ What has changed in the edit-log since <oldposition>?
             Returns edit-log final position() and list of changed item names.
         """
+        logsize = self.size()
         if oldposition is None:
-            self.to_end()
-        else:
+            oldposition = logsize  # == end of file
+        newposition, items = oldposition, []
+        if oldposition != logsize:
+            # looks like there is something new since we last looked...
             self.seek(oldposition)
-        items = []
-        for line in self:
-            items.append(line.pagename)
-            if line.action == 'SAVE/RENAME':
-                items.append(line.extra) # == old page name
-
-        newposition = self.position()
-        logging.log(logging.NOTSET, "editlog.news: new pos: %r new items: %r", newposition, items)
+            for line in self:
+                items.append(line.pagename)
+                if line.action == 'SAVE/RENAME':
+                    items.append(line.extra) # == old page name
+            newposition = self.position()
+            logging.log(logging.NOTSET, "editlog.news: new pos: %r new items: %r", newposition, items)
+        else:
+            logging.log(logging.NOTSET, "editlog.news: new pos: %r new items: %r (nothing new)", newposition, items)
         return newposition, items
 
