@@ -74,6 +74,7 @@ Version 1.9.current:
   * fixed wrong detection of UI language from accept-language header for not
     logged-in users if the language identifier there was (partially) uppercase.
   * fix Python 2.7.4/5 compatibility issue with rss_rc action using handler._out
+  * fix "moin import wikipage" timestamp confusion
 
   Other changes:
   * rss_rc action (RSS feed) is now much faster / much less resource consuming
