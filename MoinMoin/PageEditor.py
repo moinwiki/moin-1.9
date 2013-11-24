@@ -916,6 +916,11 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         _ = self._
         was_deprecated = self.pi.get('deprecated', False)
 
+        if self.mtime is None:
+            mtime_usecs = None
+        else:
+            mtime_usecs = wikiutil.timestamp2version(self.mtime)
+
         self.copy_underlay_page()
 
         # remember conflict state
@@ -999,8 +1004,6 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             else:
                 filesys.rename(cltfn, clfn)
 
-            if self.mtime is not None:
-                mtime_usecs = self.mtime
             if not deleted:
                 # save to page file
                 pagefile = os.path.join(revdir, revstr)
@@ -1008,16 +1011,16 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                 # Write the file using text/* mime type
                 f.write(self.encodeTextMimeType(text))
                 f.close()
-                if self.mtime is None:
-                    mtime_usecs = os.path.getmtime(pagefile)
+                if mtime_usecs is None:
+                    mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
                 # set in-memory content
                 self.set_raw_body(text)
             else:
-                if self.mtime is None:
-                    mtime_usecs = time.time()
+                if mtime_usecs is None:
+                    mtime_usecs = wikiutil.timestamp2version(time.time())
                 # set in-memory content
                 self.set_raw_body(None)
-            mtime_usecs = wikiutil.timestamp2version(mtime_usecs)
+
             # reset page object
             self.reset()
 

@@ -12,7 +12,7 @@ import time
 
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.script import MoinScript, fatal, log
-from MoinMoin.wikiutil import clean_input, decodeUnknownInput, timestamp2version
+from MoinMoin.wikiutil import clean_input, decodeUnknownInput
 
 
 class IAmRoot(object):
@@ -77,9 +77,9 @@ General syntax: moin [options] import wikipage [wikipage-options]
         comment = clean_input(self.options.comment)
 
         if self.options.mtime:
-            mtime = timestamp2version(calendar.timegm(time.strptime(self.options.mtime, "%Y-%m-%d %H:%M:%S")))
+            mtime = calendar.timegm(time.strptime(self.options.mtime, "%Y-%m-%d %H:%M:%S"))
         else:
-            mtime = timestamp2version(time.time())
+            mtime = time.time()
 
 
         pe = PageEditor(request, self.options.page, do_editor_backup=0,
