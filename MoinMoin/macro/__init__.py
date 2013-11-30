@@ -101,6 +101,13 @@ class Macro:
         """
         self.name = macro_name
         try:
+            str(macro_name)
+        except UnicodeEncodeError:
+            _ = self._
+            return self.formatter.text(_('<<%(macro_name)s: invalid macro name>>') % {
+                   'macro_name': macro_name,
+                 })
+        try:
             call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
                                          function='macro_%s' % macro_name)
             execute = lambda _self, _args: wikiutil.invoke_extension_function(
