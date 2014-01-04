@@ -75,6 +75,9 @@ Version 1.9.current:
     logged-in users if the language identifier there was (partially) uppercase.
   * fix Python 2.7.4/5 compatibility issue with rss_rc action using handler._out
   * fix "moin import wikipage" timestamp confusion
+  * use 302 http status for #redirect as some clients cache 301 redirects, but
+    the #redirect might get changed or removed later (so it should not be
+    cached and we also can't really say it is permanent)
 
   Other changes:
   * rss_rc action (RSS feed) is now much faster / much less resource consuming
