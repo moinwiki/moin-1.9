@@ -1037,7 +1037,11 @@ class Page(object):
             redirect_url = Page(request, pagename).url(request,
                                                        querystr={'action': 'show', 'redirect': self.page_name, },
                                                        anchor=anchor)
-            request.http_redirect(redirect_url, code=301)
+            # we do NOT use 301 as a page edit may change the redirect to
+            # another target or even remove it again. so we can't really say
+            # it is permanent (301) or we might run into issues with clients
+            # like chrome that cache permanent redirects.
+            request.http_redirect(redirect_url, code=302)
             return
 
         # if necessary, load the formatter
