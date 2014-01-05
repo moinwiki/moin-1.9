@@ -23,6 +23,8 @@
         bind_pw='',
         base_dn='',  # base DN we use for searching
                      #base_dn = 'ou=SOMEUNIT,dc=example,dc=org'
+                     #base_dn = 'uid=%(username)s,ou=people,dc=company,dc=com'
+
         scope=2, # scope of the search we do (2 == ldap.SCOPE_SUBTREE)
         referrals=0, # LDAP REFERRALS (0 needed for AD)
         search_filter='(uid=%(username)s)',  # ldap filter used for searching:
