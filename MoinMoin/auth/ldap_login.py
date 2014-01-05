@@ -168,6 +168,7 @@ class LDAPAuth(BaseAuth):
                 # you can use %(username)s and %(password)s here to get the stuff entered in the form:
                 binddn = self.bind_dn % locals()
                 bindpw = self.bind_pw % locals()
+                basedn = self.base_dn % locals()
                 l.simple_bind_s(binddn.encode(coding), bindpw.encode(coding))
                 logging.debug("Bound with binddn %r" % binddn)
 
@@ -180,7 +181,7 @@ class LDAPAuth(BaseAuth):
                                          'surname_attribute',
                                          'givenname_attribute',
                                          ] if getattr(self, attr) is not None]
-                lusers = l.search_st(self.base_dn, self.scope, filterstr.encode(coding),
+                lusers = l.search_st(basedn, self.scope, filterstr.encode(coding),
                                      attrlist=attrs, timeout=self.timeout)
                 # we remove entries with dn == None to get the real result list:
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
