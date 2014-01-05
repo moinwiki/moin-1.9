@@ -99,14 +99,22 @@ django10_context = LazyCryptContext(
     deprecated=["hex_md5"],
 )
 
+_django14_schemes = ["django_pbkdf2_sha256", "django_pbkdf2_sha1",
+                     "django_bcrypt"] + _django10_schemes
 django14_context = LazyCryptContext(
-    schemes=["django_pbkdf2_sha256", "django_pbkdf2_sha1", "django_bcrypt"] \
-            + _django10_schemes,
+    schemes=_django14_schemes,
+    deprecated=_django10_schemes,
+)
+
+_django16_schemes = _django14_schemes[:]
+_django16_schemes.insert(1, "django_bcrypt_sha256")
+django16_context = LazyCryptContext(
+    schemes=_django16_schemes,
     deprecated=_django10_schemes,
 )
 
 # this will always point to latest version
-django_context = django14_context
+django_context = django16_context
 
 #=============================================================================
 # ldap

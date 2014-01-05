@@ -4,12 +4,14 @@
 #=============================================================================
 # core
 from base64 import b64encode
-from hashlib import md5, sha1
+from binascii import hexlify
+from hashlib import md5, sha1, sha256
 import re
 import logging; log = logging.getLogger(__name__)
 from warnings import warn
 # site
 # pkg
+from passlib.hash import bcrypt, pbkdf2_sha1, pbkdf2_sha256
 from passlib.utils import to_unicode, classproperty
 from passlib.utils.compat import b, bytes, str_to_uascii, uascii_to_str, unicode, u
 from passlib.utils.pbkdf2 import pbkdf2
@@ -28,6 +30,8 @@ __all__ = [
 #=============================================================================
 # lazy imports & constants
 #=============================================================================
+
+# imported by django_des_crypt._calc_checksum()
 des_crypt = None
 
 def _import_des_crypt():
@@ -162,7 +166,7 @@ class django_salted_md5(DjangoSaltedHash):
             secret = secret.encode("utf-8")
         return str_to_uascii(md5(self.salt.encode("ascii") + secret).hexdigest())
 
-django_bcrypt = uh.PrefixWrapper("django_bcrypt", "bcrypt",
+django_bcrypt = uh.PrefixWrapper("django_bcrypt", bcrypt,
     prefix=u('bcrypt$'), ident=u("bcrypt$"),
     # NOTE: this docstring is duplicated in the docs, since sphinx
     # seems to be having trouble reading it via autodata::
@@ -180,6 +184,70 @@ django_bcrypt = uh.PrefixWrapper("django_bcrypt", "bcrypt",
     .. versionadded:: 1.6
     """)
 django_bcrypt.django_name = "bcrypt"
+
+class django_bcrypt_sha256(bcrypt):
+    """This class implements Django 1.6's Bcrypt+SHA256 hash, and follows the :ref:`password-hash-api`.
+
+    It supports a variable-length salt, and a variable number of rounds.
+
+    While the algorithm and format is somewhat different,
+    the api and options for this hash are identical to :class:`!bcrypt` itself,
+    see :doc:`/lib/passlib.hash.bcrypt` for more details.
+
+    .. versionadded:: 1.6.2
+    """
+    name = "django_bcrypt_sha256"
+    django_name = "bcrypt_sha256"
+    _digest = sha256
+
+    # NOTE: django bcrypt ident locked at "$2a$", so omitting 'ident' support.
+    setting_kwds = ("salt", "rounds")
+
+    # sample hash:
+    # bcrypt_sha256$$2a$06$/3OeRpbOf8/l6nPPRdZPp.nRiyYqPobEZGdNRBWihQhiFDh1ws1tu
+
+    # XXX: we can't use .ident attr due to bcrypt code using it.
+    #      working around that via django_prefix
+    django_prefix = u('bcrypt_sha256$')
+
+    @classmethod
+    def identify(cls, hash):
+        hash = uh.to_unicode_for_identify(hash)
+        if not hash:
+            return False
+        return hash.startswith(cls.django_prefix)
+
+    @classmethod
+    def from_string(cls, hash):
+        hash = to_unicode(hash, "ascii", "hash")
+        if not hash.startswith(cls.django_prefix):
+            raise uh.exc.InvalidHashError(cls)
+        bhash = hash[len(cls.django_prefix):]
+        if not bhash.startswith("$2"):
+            raise uh.exc.MalformedHashError(cls)
+        return super(django_bcrypt_sha256, cls).from_string(bhash)
+
+    def __init__(self, **kwds):
+        if 'ident' in kwds and kwds.get("use_defaults"):
+            raise TypeError("%s does not support the ident keyword" %
+                            self.__class__.__name__)
+        return super(django_bcrypt_sha256, self).__init__(**kwds)
+
+    def to_string(self):
+        bhash = super(django_bcrypt_sha256, self).to_string()
+        return uascii_to_str(self.django_prefix) + bhash
+
+    def _calc_checksum(self, secret):
+        if isinstance(secret, unicode):
+            secret = secret.encode("utf-8")
+        secret = hexlify(self._digest(secret).digest())
+        return super(django_bcrypt_sha256, self)._calc_checksum(secret)
+
+    # patch set_backend so it modifies bcrypt class, not this one...
+    # else it would clobber our _calc_checksum() wrapper above.
+    @classmethod
+    def set_backend(cls, *args, **kwds):
+        return bcrypt.set_backend(*args, **kwds)
 
 class django_pbkdf2_sha256(DjangoVariableHash):
     """This class implements Django's PBKDF2-HMAC-SHA256 hash, and follows the :ref:`password-hash-api`.
@@ -202,7 +270,7 @@ class django_pbkdf2_sha256(DjangoVariableHash):
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 10000, but must be within ``range(1,1<<32)``.
+        Defaults to 20000, but must be within ``range(1,1<<32)``.
 
     :type relaxed: bool
     :param relaxed:
@@ -224,7 +292,7 @@ class django_pbkdf2_sha256(DjangoVariableHash):
     max_rounds = 0xffffffff # setting at 32-bit limit for now
     checksum_chars = uh.PADDED_BASE64_CHARS
     checksum_size = 44 # 32 bytes -> base64
-    default_rounds = 10000 # NOTE: using django default here
+    default_rounds = pbkdf2_sha256.default_rounds # NOTE: django 1.6 uses 12000
     _prf = "hmac-sha256"
 
     def _calc_checksum(self, secret):
@@ -255,7 +323,7 @@ class django_pbkdf2_sha1(django_pbkdf2_sha256):
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 10000, but must be within ``range(1,1<<32)``.
+        Defaults to 60000, but must be within ``range(1,1<<32)``.
 
     :type relaxed: bool
     :param relaxed:
@@ -274,6 +342,7 @@ class django_pbkdf2_sha1(django_pbkdf2_sha256):
     django_name = "pbkdf2_sha1"
     ident = u('pbkdf2_sha1$')
     checksum_size = 28 # 20 bytes -> base64
+    default_rounds = pbkdf2_sha1.default_rounds # NOTE: django 1.6 uses 12000
     _prf = "hmac-sha1"
 
 #=============================================================================
@@ -311,6 +380,21 @@ class django_des_crypt(uh.HasSalt, uh.GenericHandler):
     min_salt_size = default_salt_size = 2
     _stub_checksum = u('.')*11
 
+    # NOTE: regarding duplicate salt field:
+    #
+    # django 1.0 had a "crypt$<salt1>$<salt2><digest>" hash format,
+    # used [a-z0-9] to generate a 5 char salt, stored it in salt1,
+    # duplicated the first two chars of salt1 as salt2.
+    # it would throw an error if salt1 was empty.
+    #
+    # django 1.4 started generating 2 char salt using the full alphabet,
+    # left salt1 empty, and only paid attention to salt2.
+    #
+    # in order to be compatible with django 1.0, the hashes generated
+    # by this function will always include salt1, unless the following
+    # class-level field is disabled (mainly used for testing)
+    use_duplicate_salt = True
+
     @classmethod
     def from_string(cls, hash):
         salt, chk = uh.parse_mc2(hash, cls.ident, handler=cls)
@@ -331,11 +415,14 @@ class django_des_crypt(uh.HasSalt, uh.GenericHandler):
         return cls(salt=salt, checksum=chk)
 
     def to_string(self):
-        # NOTE: always filling in salt field, so that we're compatible
-        # with django 1.0 (which requires it)
         salt = self.salt
         chk = salt[:2] + (self.checksum or self._stub_checksum)
-        return uh.render_mc2(self.ident, salt, chk)
+        if self.use_duplicate_salt:
+            # filling in salt field, so that we're compatible with django 1.0
+            return uh.render_mc2(self.ident, salt, chk)
+        else:
+            # django 1.4+ style hash
+            return uh.render_mc2(self.ident, "", chk)
 
     def _calc_checksum(self, secret):
         # NOTE: we lazily import des_crypt,
@@ -352,15 +439,23 @@ class django_disabled(uh.StaticHandler):
     claims the special hash string ``"!"`` which Django uses
     to indicate an account's password has been disabled.
 
-    * newly encrypted passwords will hash to ``!``.
+    * newly encrypted passwords will hash to ``"!"``.
     * it rejects all passwords.
+
+    .. note::
+
+        Django 1.6 prepends a randomly generate 40-char alphanumeric string
+        to each unusuable password. This class recognizes such strings,
+        but for backwards compatibility, still returns ``"!"``.
+
+    .. versionchanged:: 1.6.2 added Django 1.6 support
     """
     name = "django_disabled"
 
     @classmethod
     def identify(cls, hash):
         hash = uh.to_unicode_for_identify(hash)
-        return hash == u("!")
+        return hash.startswith(u("!"))
 
     def _calc_checksum(self, secret):
         return u("!")

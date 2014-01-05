@@ -374,7 +374,7 @@ class sha256_crypt(_SHA2_Common):
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 80000, must be between 1000 and 999999999, inclusive.
+        Defaults to 110000, must be between 1000 and 999999999, inclusive.
 
     :type implicit_rounds: bool
     :param implicit_rounds:
@@ -401,7 +401,8 @@ class sha256_crypt(_SHA2_Common):
     name = "sha256_crypt"
     ident = u("$5$")
     checksum_size = 43
-    default_rounds = 80000 # current passlib default
+    # NOTE: using 25/75 weighting of builtin & os_crypt backends
+    default_rounds = 110000
 
     #===================================================================
     # backends
@@ -434,7 +435,7 @@ class sha512_crypt(_SHA2_Common):
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 60000, must be between 1000 and 999999999, inclusive.
+        Defaults to 100000, must be between 1000 and 999999999, inclusive.
 
     :type implicit_rounds: bool
     :param implicit_rounds:
@@ -463,7 +464,8 @@ class sha512_crypt(_SHA2_Common):
     ident = u("$6$")
     checksum_size = 86
     _cdb_use_512 = True
-    default_rounds = 60000 # current passlib default
+    # NOTE: using 25/75 weighting of builtin & os_crypt backends
+    default_rounds = 100000
 
     #===================================================================
     # backend

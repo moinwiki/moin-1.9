@@ -60,7 +60,7 @@ def _raw_md5_crypt(pwd, salt, use_apr=False):
     # really, apache? you had to invent a whole new "$apr1$" format,
     # when all you did was change the ident incorporated into the hash?
     # would love to find webpage explaining why just using a portable
-    # implementation of $1$ wasn't sufficient. *nothing* else was changed.
+    # implementation of $1$ wasn't sufficient. *nothing else* was changed.
 
     #===================================================================
     # init & validate inputs
@@ -143,8 +143,8 @@ def _raw_md5_crypt(pwd, salt, use_apr=False):
     # of things beforehand. It works off of a couple of observations
     # about the original algorithm:
     #
-    # 1. each round is a combination of 'dc', 'salt', and 'pwd'; determined
-    #    by the whether 'i' a multiple of 2,3, and/or 7.
+    # 1. each round is a combination of 'dc', 'salt', and 'pwd'; and the exact
+    #    combination is determined by whether 'i' a multiple of 2,3, and/or 7.
     # 2. since lcm(2,3,7)==42, the series of combinations will repeat
     #    every 42 rounds.
     # 3. even rounds 0-40 consist of 'hash(dc + round-specific-constant)';
@@ -152,12 +152,12 @@ def _raw_md5_crypt(pwd, salt, use_apr=False):
     #
     # Using these observations, the following code...
     # * calculates the round-specific combination of salt & pwd for each round 0-41
-    # * runs through as many 42-round blocks as possible
-    # * runs through as many pairs of rounds as possible for remaining rounds
-    # * performs once last round if the total rounds should be odd.
+    # * runs through as many 42-round blocks as possible (23)
+    # * runs through as many pairs of rounds as needed for remaining rounds (17)
+    # * this results in the required 42*23+2*17=1000 rounds required by md5_crypt.
     #
     # this cuts out a lot of the control overhead incurred when running the
-    # original loop 40,000+ times in python, resulting in ~20% increase in
+    # original loop 1000 times in python, resulting in ~20% increase in
     # speed under CPython (though still 2x slower than glibc crypt)
 
     # prepare the 6 combinations of pwd & salt which are needed

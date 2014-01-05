@@ -136,8 +136,8 @@ def create_pbkdf2_hash(hash_name, digest_size, rounds=12000, ident=None, module=
 # derived handlers
 #------------------------------------------------------------------------
 pbkdf2_sha1 = create_pbkdf2_hash("sha1", 20, 60000, ident=u("$pbkdf2$"))
-pbkdf2_sha256 = create_pbkdf2_hash("sha256", 32)
-pbkdf2_sha512 = create_pbkdf2_hash("sha512", 64)
+pbkdf2_sha256 = create_pbkdf2_hash("sha256", 32, 20000)
+pbkdf2_sha512 = create_pbkdf2_hash("sha512", 64, 19000)
 
 ldap_pbkdf2_sha1 = uh.PrefixWrapper("ldap_pbkdf2_sha1", pbkdf2_sha1, "{PBKDF2}", "$pbkdf2$", ident=True)
 ldap_pbkdf2_sha256 = uh.PrefixWrapper("ldap_pbkdf2_sha256", pbkdf2_sha256, "{PBKDF2-SHA256}", "$pbkdf2-sha256$", ident=True)
@@ -202,7 +202,7 @@ class cta_pbkdf2_sha1(uh.HasRounds, uh.HasRawSalt, uh.HasRawChecksum, uh.Generic
     max_salt_size = 1024
 
     #--HasRounds--
-    default_rounds = 60000
+    default_rounds = pbkdf2_sha1.default_rounds
     min_rounds = 1
     max_rounds = 0xffffffff # setting at 32-bit limit for now
     rounds_cost = "linear"
@@ -303,7 +303,9 @@ class dlitz_pbkdf2_sha1(uh.HasRounds, uh.HasSalt, uh.GenericHandler):
     salt_chars = uh.HASH64_CHARS
 
     #--HasRounds--
-    default_rounds = 60000
+    # NOTE: for security, the default here is set to match pbkdf2_sha1,
+    #       even though this hash's extra block makes it twice as slow.
+    default_rounds = pbkdf2_sha1.default_rounds
     min_rounds = 1
     max_rounds = 0xffffffff # setting at 32-bit limit for now
     rounds_cost = "linear"
@@ -430,7 +432,7 @@ class grub_pbkdf2_sha512(uh.HasRounds, uh.HasRawSalt, uh.HasRawChecksum, uh.Gene
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 12000, but must be within ``range(1,1<<32)``.
+        Defaults to 19000, but must be within ``range(1,1<<32)``.
 
     :type relaxed: bool
     :param relaxed:
@@ -455,7 +457,7 @@ class grub_pbkdf2_sha512(uh.HasRounds, uh.HasRawSalt, uh.HasRawChecksum, uh.Gene
     min_salt_size = 0
     max_salt_size = 1024
 
-    default_rounds = 12000
+    default_rounds = pbkdf2_sha512.default_rounds
     min_rounds = 1
     max_rounds = 0xffffffff # setting at 32-bit limit for now
     rounds_cost = "linear"

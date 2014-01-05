@@ -1653,7 +1653,7 @@ class CryptContext(object):
             >>> ctx2.default_scheme()
             "md5_crypt"
 
-        .. versionchanged:: 1.6
+        .. versionadded:: 1.6
             This method was previously named :meth:`!replace`. That alias
             has been deprecated, and will be removed in Passlib 1.8.
 
@@ -1767,7 +1767,7 @@ class CryptContext(object):
     def load_path(self, path, update=False, section="passlib", encoding="utf-8"):
         """Load new configuration into CryptContext from a local file.
 
-        This function is a wrapper for :meth:`load`, which
+        This function is a wrapper for :meth:`load` which
         loads a configuration string from the local file *path*,
         instead of an in-memory source. It's behavior and options
         are otherwise identical to :meth:`!load` when provided with
@@ -1842,7 +1842,7 @@ class CryptContext(object):
 
         .. note::
 
-            If an error occurs during a :meth:`!load` call, the :class`!CryptContext`
+            If an error occurs during a :meth:`!load` call, the :class:`!CryptContext`
             instance will be restored to the configuration it was in before
             the :meth:`!load` call was made; this is to ensure it is
             *never* left in an inconsistent state due to a load error.
@@ -2293,25 +2293,37 @@ class CryptContext(object):
 
         :type secret: unicode, bytes, or None
         :param secret:
-            Optionally, the secret associated with the hash.
-            This is not required, or in fact useful for any current purpose,
-            and can be safely omitted. It's mainly present to allow the
-            development of future deprecation checks which might need this information.
+            Optional secret associated with the provided ``hash``.
+            This is not required, or even currently used for anything...
+            it's for forward-compatibility with any future
+            update checks that might need this information.
+            If provided, Passlib assumes the secret has already been
+            verified successfully against the hash.
+
+            .. versionadded:: 1.6
 
         :returns: ``True`` if hash should be replaced, otherwise ``False``.
 
-        .. versionchanged:: 1.6
-            The *secret* argument was added, and this method was renamed
-            from the longer alias ``hash_needs_update``.
+        :raises ValueError:
+            If the hash did not match any of the configured :meth:`schemes`.
+
+        .. versionadded:: 1.6
+            This method was previously named :meth:`hash_needs_update`.
 
         .. seealso:: the :ref:`context-migration-example` example in the tutorial.
         """
         record = self._get_or_identify_record(hash, scheme, category)
         return record.needs_update(hash, secret)
 
-    @deprecated_method(deprecated="1.6", removed="1.8", replacement="CryptContext.needs_update()")
+    @deprecated_method(deprecated="1.6", removed="2.0", replacement="CryptContext.needs_update()")
     def hash_needs_update(self, hash, scheme=None, category=None):
-        """legacy alias for :meth:`needs_update`"""
+        """Legacy alias for :meth:`needs_update`.
+
+        .. deprecated:: 1.6
+            This method was renamed to :meth:`!needs_update` in version 1.6.
+            This alias will be removed in version 2.0, and should only
+            be used for compatibility with Passlib 1.3 - 1.5.
+        """
         return self.needs_update(hash, scheme, category)
 
     def genconfig(self, scheme=None, category=None, **settings):
@@ -2466,16 +2478,16 @@ class CryptContext(object):
 
         :param \*\*kwds:
             All other keyword options are passed to the selected algorithm's
-            :meth:`~passlib.ifc.PasswordHash.encrypt` method.
+            :meth:`PasswordHash.encrypt() <passlib.ifc.PasswordHash.encrypt>` method.
 
         :returns:
             The secret as encoded by the specified algorithm and options.
             The return value will always be a :class:`!str`.
 
         :raises TypeError, ValueError:
-            * if any of the arguments have an invalid type or value.
-            * if the selected algorithm's underlying :meth:`~passlib.ifc.PasswordHash.encrypt`
-              method throws an error based on *secret* or the provided *kwds*.
+            * If any of the arguments have an invalid type or value.
+              This includes any keywords passed to the underlying hash's
+              :meth:`PasswordHash.encrypt() <passlib.ifc.PasswordHash.encrypt>` method.
 
         .. seealso:: the :ref:`context-basic-example` example in the tutorial
         """
@@ -2517,14 +2529,19 @@ class CryptContext(object):
             and should match it's :attr:`~passlib.ifc.PasswordHash.context_kwds`.
 
         :returns:
-            ``True`` if the password matched hash, else ``False``.
+            ``True`` if the password matched the hash, else ``False``.
 
-        :raises TypeError, ValueError:
-            * if any of the arguments have an invalid type or value.
-            * if the selected algorithm's underlying :meth:`~passlib.ifc.PasswordHash.verify`
-              method throws an error based on *secret* or the provided *kwds*.
+        :raises ValueError:
+            * if the hash did not match any of the configured :meth:`schemes`.
 
-        :raises ValueError: if the hash could not be identified.
+            * if any of the arguments have an invalid value (this includes
+              any keywords passed to the underlying hash's
+              :meth:`PasswordHash.verify() <passlib.ifc.PasswordHash.verify>` method).
+
+        :raises TypeError:
+            * if any of the arguments have an invalid type (this includes
+              any keywords passed to the underlying hash's
+              :meth:`PasswordHash.verify() <passlib.ifc.PasswordHash.verify>` method).
 
         .. seealso:: the :ref:`context-basic-example` example in the tutorial
         """
@@ -2569,20 +2586,25 @@ class CryptContext(object):
 
         :param \*\*kwds:
             all additional keywords are passed to the appropriate handler,
-            and should match it's :attr:`context keywords <passlib.hash.PasswordHash.context_kwds>`.
+            and should match that hash's
+            :attr:`PasswordHash.context_kwds <passlib.ifc.PasswordHash.context_kwds>`.
 
         :returns:
             This function returns a tuple containing two elements:
-            the first indicates whether the password verified,
-            and the second whether the existing hash needs to be replaced.
-            The return value will always match one of the following 3 cases:
+            ``(verified, replacement_hash)``. The first is a boolean
+            flag indicating whether the password verified,
+            and the second an optional replacement hash.
+            The tuple will always match one of the following 3 cases:
 
             * ``(False, None)`` indicates the secret failed to verify.
             * ``(True, None)`` indicates the secret verified correctly,
-              and the hash does not need upgrading.
+              and the hash does not need updating.
             * ``(True, str)`` indicates the secret verified correctly,
-              and the existing hash needs to be updated. the :class:`!str`
-              will be the freshly generated hash to replace the old one with.
+              but the current hash needs to be updated. The :class:`!str`
+              will be the freshly generated hash, to replace the old one.
+
+        :raises TypeError, ValueError:
+            For the same reasons as :meth:`verify`.
 
         .. seealso:: the :ref:`context-migration-example` example in the tutorial.
         """
@@ -2643,6 +2665,8 @@ class LazyCryptContext(CryptContext):
     As well, it allows constructing a context at *module-init* time,
     but using :func:`!onload()` to provide dynamic configuration
     at *application-run* time.
+
+    .. versionadded:: 1.4
     """
     _lazy_kwds = None
 

@@ -43,7 +43,8 @@ class PasswordSizeError(ValueError):
 # warnings
 #=============================================================================
 class PasslibWarning(UserWarning):
-    """base class for Passlib's user warnings.
+    """base class for Passlib's user warnings,
+    derives from the builtin :exc:`UserWarning`.
 
     .. versionadded:: 1.6
     """
@@ -61,6 +62,8 @@ class PasslibConfigWarning(PasslibWarning):
 
     In both of these cases, the code will perform correctly & securely;
     but the warning is issued as a sign the configuration may need updating.
+
+    .. versionadded:: 1.6
     """
 
 class PasslibHashWarning(PasslibWarning):
@@ -75,6 +78,8 @@ class PasslibHashWarning(PasslibWarning):
 
     * A malformed hash string was encountered which (while parsable)
       should be re-encoded.
+
+    .. versionadded:: 1.6
     """
 
 class PasslibRuntimeWarning(PasslibWarning):
@@ -83,11 +88,15 @@ class PasslibRuntimeWarning(PasslibWarning):
     The fact that it's a warning instead of an error means Passlib
     was able to correct for the issue, but that it's anonmalous enough
     that the developers would love to hear under what conditions it occurred.
+
+    .. versionadded:: 1.6
     """
 
 class PasslibSecurityWarning(PasslibWarning):
     """Special warning issued when Passlib encounters something
     that might affect security.
+
+    .. versionadded:: 1.6
     """
 
 #=============================================================================

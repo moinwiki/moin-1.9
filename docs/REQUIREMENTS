@@ -102,7 +102,7 @@ A) Stuff below MoinMoin/support/:
 
 passlib (password hashing library)
 ==================================
-shipped: 1.6.1
+shipped: 1.6.2
 minimum: 1.3(?)
 
 Note: moin could work without passlib also (NOT RECOMMENDED), but would not

@@ -49,7 +49,7 @@ class scram(uh.HasRounds, uh.HasRawSalt, uh.HasRawChecksum, uh.GenericHandler):
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 6400, but must be within ``range(1,1<<32)``.
+        Defaults to 20000, but must be within ``range(1,1<<32)``.
 
     :type algs: list of strings
     :param algs:
@@ -102,7 +102,7 @@ class scram(uh.HasRounds, uh.HasRawSalt, uh.HasRawChecksum, uh.GenericHandler):
     max_salt_size = 1024
 
     #--HasRounds--
-    default_rounds = 6400
+    default_rounds = 20000
     min_rounds = 1
     max_rounds = 2**32-1
     rounds_cost = "linear"
