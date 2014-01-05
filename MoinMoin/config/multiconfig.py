@@ -693,7 +693,6 @@ class DefaultConfig(ConfigFunctionality):
     # the WikiConfig macro. Settings must be added below to
     # the options dictionary.
 
-
 _default_backlink_method = lambda cfg, req: 'backlink' if req.user.valid else 'pagelink'
 
 
