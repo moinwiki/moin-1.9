@@ -33,7 +33,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArchitectures: noarch
 BuildRequires:  python-devel
-Requires:       python >= 2.4
+Requires:       python >= 2.5
 
 %description
 
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc  README docs/CHANGES docs/INSTALL.html docs/UPDATE.html docs/licenses/COPYING
 
 %changelog
+* Sun Jan  5 2014 Thomas Waldmann
+- Raised requirement to Python 2.5
+
 * Sun Feb 15 2009 Thomas Waldmann
 - Raised requirement to Python 2.4
 - Removed references to Python 1.5
