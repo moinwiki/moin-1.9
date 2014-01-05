@@ -86,6 +86,7 @@ Version 1.9.current:
     when requested for a specific single page. As we have a link to this in
     every page's html output, this likely also lightens the load caused by bots
     and search engine crawlers.
+  * upgraded bundled werkzeug to 0.8.3
   * upgraded bundled passlib to 1.6.2
   * upgraded bundled pygments to 1.6
 
