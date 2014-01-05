@@ -87,6 +87,7 @@ Version 1.9.current:
     every page's html output, this likely also lightens the load caused by bots
     and search engine crawlers.
   * upgraded bundled passlib to 1.6.2
+  * upgraded bundled pygments to 1.6
 
 
 Version 1.9.7:
