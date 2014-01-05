@@ -28,6 +28,15 @@ __all__ = [
 #=============================================================================
 # default policies
 #=============================================================================
+
+# map preset names -> passlib.app attrs
+_preset_map = {
+    "django-1.0": "django10_context",
+    "django-1.4": "django14_context",
+    "django-1.6": "django16_context",
+    "django-latest": "django_context",
+}
+
 def get_preset_config(name):
     """Returns configuration string for one of the preset strings
     supported by the ``PASSLIB_CONFIG`` setting.
@@ -35,36 +44,41 @@ def get_preset_config(name):
 
     * ``"passlib-default"`` - default config used by this release of passlib.
     * ``"django-default"`` - config matching currently installed django version.
-    * ``"django-latest"`` - config matching newest django version (currently same as ``"django-1.4"``).
+    * ``"django-latest"`` - config matching newest django version (currently same as ``"django-1.6"``).
     * ``"django-1.0"`` - config used by stock Django 1.0 - 1.3 installs
-    * ``"django-1.4"`` -config used by stock Django 1.4 installs
+    * ``"django-1.4"`` - config used by stock Django 1.4 installs
+    * ``"django-1.6"`` - config used by stock Django 1.6 installs
     """
     # TODO: add preset which includes HASHERS + PREFERRED_HASHERS,
-    #       after having imported any custom hashers. "django-current"
+    #       after having imported any custom hashers. e.g. "django-current"
     if name == "django-default":
-        if (0,0) < DJANGO_VERSION < (1,4):
+        if not DJANGO_VERSION:
+            raise ValueError("can't resolve django-default preset, "
+                             "django not installed")
+        if DJANGO_VERSION < (1,4):
             name = "django-1.0"
-        else:
+        elif DJANGO_VERSION < (1,6):
             name = "django-1.4"
-    if name == "django-1.0":
-        from passlib.apps import django10_context
-        return django10_context.to_string()
-    if name == "django-1.4" or name == "django-latest":
-        from passlib.apps import django14_context
-        return django14_context.to_string()
+        else:
+            name = "django-1.6"
     if name == "passlib-default":
         return PASSLIB_DEFAULT
-    raise ValueError("unknown preset config name: %r" % name)
+    try:
+        attr = _preset_map[name]
+    except KeyError:
+        raise ValueError("unknown preset config name: %r" % name)
+    import passlib.apps
+    return getattr(passlib.apps, attr).to_string()
 
 # default context used by passlib 1.6
 PASSLIB_DEFAULT = """
 [passlib]
 
 ; list of schemes supported by configuration
-; currently all django 1.4 hashes, django 1.0 hashes,
+; currently all django 1.6, 1.4, and 1.0 hashes,
 ; and three common modular crypt format hashes.
 schemes =
-    django_pbkdf2_sha256, django_pbkdf2_sha1, django_bcrypt,
+    django_pbkdf2_sha256, django_pbkdf2_sha1, django_bcrypt, django_bcrypt_sha256,
     django_salted_sha1, django_salted_md5, django_des_crypt, hex_md5,
     sha512_crypt, bcrypt, phpass
 
@@ -119,6 +133,10 @@ def hasher_to_passlib_name(hasher_name):
     "convert hasher name -> passlib handler name"
     if hasher_name.startswith(PASSLIB_HASHER_PREFIX):
         return hasher_name[len(PASSLIB_HASHER_PREFIX):]
+    if hasher_name == "unsalted_sha1":
+        # django 1.4.6+ uses a separate hasher for "sha1$$digest" hashes,
+        # but passlib just reuses the "sha1$salt$digest" handler.
+        hasher_name = "sha1"
     for name in list_crypt_handlers():
         if name.startswith(DJANGO_PASSLIB_PREFIX) or name in _other_django_hashes:
             handler = get_crypt_handler(name)
@@ -132,13 +150,14 @@ def hasher_to_passlib_name(hasher_name):
 #=============================================================================
 # wrapping passlib handlers as django hashers
 #=============================================================================
-_FAKE_SALT = "--fake-salt--"
+_GEN_SALT_SIGNAL = "--!!!generate-new-salt!!!--"
 
 class _HasherWrapper(object):
     """helper for wrapping passlib handlers in Hasher-compatible class."""
 
     # filled in by subclass, drives the other methods.
     passlib_handler = None
+    iterations = None
 
     @classproperty
     def algorithm(cls):
@@ -146,19 +165,22 @@ class _HasherWrapper(object):
         return PASSLIB_HASHER_PREFIX + cls.passlib_handler.name
 
     def salt(self):
-        # XXX: our encode wrapper generates a new salt each time it's called,
-        #      so just returning a 'no value' flag here.
-        return _FAKE_SALT
+        # NOTE: passlib's handler.encrypt() should generate new salt each time,
+        #       so this just returns a special constant which tells
+        #       encode() (below) not to pass a salt keyword along.
+        return _GEN_SALT_SIGNAL
 
     def verify(self, password, encoded):
         return self.passlib_handler.verify(password, encoded)
 
     def encode(self, password, salt=None, iterations=None):
         kwds = {}
-        if salt is not None and salt != _FAKE_SALT:
+        if salt is not None and salt != _GEN_SALT_SIGNAL:
             kwds['salt'] = salt
         if iterations is not None:
             kwds['rounds'] = iterations
+        elif self.iterations is not None:
+            kwds['rounds'] = self.iterations
         return self.passlib_handler.encrypt(password, **kwds)
 
     _translate_kwds = dict(checksum="hash", rounds="iterations")
@@ -178,10 +200,17 @@ class _HasherWrapper(object):
                 items.append((_(key), value))
         return SortedDict(items)
 
+    # added in django 1.6
+    def must_update(self, encoded):
+        # TODO: would like to do something useful here,
+        #       but would require access to password context,
+        #       which would mean a serious recoding of this ext.
+        return False
+
 # cache of hasher wrappers generated by get_passlib_hasher()
 _hasher_cache = WeakKeyDictionary()
 
-def get_passlib_hasher(handler):
+def get_passlib_hasher(handler, algorithm=None):
     """create *Hasher*-compatible wrapper for specified passlib hash.
 
     This takes in the name of a passlib hash (or the handler object itself),
@@ -204,8 +233,14 @@ def get_passlib_hasher(handler):
         handler = get_crypt_handler(handler)
     if hasattr(handler, "django_name"):
         # return native hasher instance
-        # XXX: should cache this too.
-        return _get_hasher(handler.django_name)
+        # XXX: should add this to _hasher_cache[]
+        name = handler.django_name
+        if name == "sha1" and algorithm == "unsalted_sha1":
+            # django 1.4.6+ uses a separate hasher for "sha1$$digest" hashes,
+            # but passlib just reuses the "sha1$salt$digest" handler.
+            # we want to resolve to correct django hasher.
+            name = algorithm
+        return _get_hasher(name)
     if handler.name == "django_disabled":
         raise ValueError("can't wrap unusable-password handler")
     try:

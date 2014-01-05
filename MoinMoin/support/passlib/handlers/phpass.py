@@ -42,7 +42,7 @@ class phpass(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.GenericHandler):
     :type rounds: int
     :param rounds:
         Optional number of rounds to use.
-        Defaults to 16, must be between 7 and 30, inclusive.
+        Defaults to 17, must be between 7 and 30, inclusive.
         This value is logarithmic, the actual number of iterations used will be :samp:`2**{rounds}`.
 
     :type ident: str
@@ -75,7 +75,7 @@ class phpass(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.GenericHandler):
     salt_chars = uh.HASH64_CHARS
 
     #--HasRounds--
-    default_rounds = 16
+    default_rounds = 17
     min_rounds = 7
     max_rounds = 30
     rounds_cost = "log2"

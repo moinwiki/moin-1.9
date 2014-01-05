@@ -12,23 +12,25 @@ TODO:
 #=============================================================================
 from __future__ import with_statement, absolute_import
 # core
+from base64 import b64encode
+from hashlib import sha256
 import os
 import re
 import logging; log = logging.getLogger(__name__)
 from warnings import warn
 # site
 try:
-    from bcrypt import hashpw as pybcrypt_hashpw
+    import bcrypt as _bcrypt
 except ImportError: # pragma: no cover
-    pybcrypt_hashpw = None
+    _bcrypt = None
 try:
     from bcryptor.engine import Engine as bcryptor_engine
 except ImportError: # pragma: no cover
     bcryptor_engine = None
 # pkg
 from passlib.exc import PasslibHashWarning
-from passlib.utils import bcrypt64, safe_crypt, repeat_string, \
-                          classproperty, rng, getrandstr, test_crypt
+from passlib.utils import bcrypt64, safe_crypt, repeat_string, to_bytes, \
+                          classproperty, rng, getrandstr, test_crypt, to_unicode
 from passlib.utils.compat import bytes, b, u, uascii_to_str, unicode, str_to_uascii
 import passlib.utils.handlers as uh
 
@@ -117,9 +119,9 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
     checksum_chars = bcrypt64.charmap
 
     #--HasManyIdents--
-    default_ident = u("$2a$")
-    ident_values = (u("$2$"), IDENT_2A, IDENT_2X, IDENT_2Y)
-    ident_aliases = {u("2"): u("$2$"), u("2a"): IDENT_2A,  u("2y"): IDENT_2Y}
+    default_ident = IDENT_2A
+    ident_values = (IDENT_2, IDENT_2A, IDENT_2X, IDENT_2Y)
+    ident_aliases = {u("2"): IDENT_2, u("2a"): IDENT_2A,  u("2y"): IDENT_2Y}
 
     #--HasSalt--
     min_salt_size = max_salt_size = 22
@@ -128,7 +130,7 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
 
     #--HasRounds--
     default_rounds = 12 # current passlib default
-    min_rounds = 4 # bcrypt spec specified minimum
+    min_rounds = 4 # minimum from bcrypt specification
     max_rounds = 31 # 32-bit integer limit (since real_rounds=1<<rounds)
     rounds_cost = "log2"
 
@@ -164,8 +166,13 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
         if ident is None:
             ident = self.ident
         if ident == IDENT_2Y:
+            # none of passlib's backends suffered from crypt_blowfish's
+            # buggy "2a" hash, which means we can safely implement
+            # crypt_blowfish's "2y" hash by passing "2a" to the backends.
             ident = IDENT_2A
         else:
+            # no backends currently support 2x, but that should have
+            # been caught earlier in from_string()
             assert ident != IDENT_2X
         config = u("%s%02d$%s") % (ident, self.rounds, self.salt)
         return uascii_to_str(config)
@@ -197,7 +204,8 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
             return hash
 
     def _generate_salt(self, salt_size):
-        # override to correct generate salt bits
+        # generate random salt as normal,
+        # but repair last char so the padding bits always decode to zero.
         salt = super(bcrypt, self)._generate_salt(salt_size)
         return bcrypt64.repair_unused(salt)
 
@@ -231,11 +239,15 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
     #===================================================================
     # primary interface
     #===================================================================
-    backends = ("pybcrypt", "bcryptor", "os_crypt", "builtin")
+    backends = ("bcrypt", "pybcrypt", "bcryptor", "os_crypt", "builtin")
+
+    @classproperty
+    def _has_backend_bcrypt(cls):
+        return _bcrypt is not None and hasattr(_bcrypt, "_ffi")
 
     @classproperty
     def _has_backend_pybcrypt(cls):
-        return pybcrypt_hashpw is not None
+        return _bcrypt is not None and not hasattr(_bcrypt, "_ffi")
 
     @classproperty
     def _has_backend_bcryptor(cls):
@@ -251,7 +263,8 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
 
     @classproperty
     def _has_backend_os_crypt(cls):
-        # XXX: what to do if only h2 is supported? h1 is *very* rare.
+        # XXX: what to do if "2" isn't supported, but "2a" is?
+        #      "2" is *very* rare, and can fake it using "2a"+repeat_string
         h1 = '$2$04$......................1O4gOrCYaqBG3o/4LnT2ykQUt1wbyju'
         h2 = '$2a$04$......................qiOQjkB8hxU8OzRhS.GhRMa4VUnkPty'
         return test_crypt("test",h1) and test_crypt("test", h2)
@@ -259,6 +272,17 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
     @classmethod
     def _no_backends_msg(cls):
         return "no bcrypt backends available - please install py-bcrypt"
+
+    def _calc_checksum(self, secret):
+        "common backend code"
+        if isinstance(secret, unicode):
+            secret = secret.encode("utf-8")
+        if _BNULL in secret:
+            # NOTE: especially important to forbid NULLs for bcrypt, since many
+            # backends (bcryptor, bcrypt) happily accept them, and then
+            # silently truncate the password at first NULL they encounter!
+            raise uh.exc.NullPasswordError(self)
+        return self._calc_checksum_backend(secret)
 
     def _calc_checksum_os_crypt(self, secret):
         config = self._get_config()
@@ -278,17 +302,35 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
                 "recommend installing py-bcrypt.",
                 )
 
+    def _calc_checksum_bcrypt(self, secret):
+        # bcrypt behavior:
+        #   hash must be ascii bytes
+        #   secret must be bytes
+        #   returns bytes
+        if self.ident == IDENT_2:
+            # bcrypt doesn't support $2$ hashes; but we can fake $2$ behavior
+            # using the $2a$ algorithm, by repeating the password until
+            # it's at least 72 chars in length.
+            if secret:
+                secret = repeat_string(secret, 72)
+            config = self._get_config(IDENT_2A)
+        else:
+            config = self._get_config()
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+        hash = _bcrypt.hashpw(secret, config)
+        assert hash.startswith(config) and len(hash) == len(config)+31
+        assert isinstance(hash, bytes)
+        return hash[-31:].decode("ascii")
+
     def _calc_checksum_pybcrypt(self, secret):
         # py-bcrypt behavior:
         #   py2: unicode secret/hash encoded as ascii bytes before use,
         #        bytes taken as-is; returns ascii bytes.
-        #   py3: not supported (patch submitted)
-        if isinstance(secret, unicode):
-            secret = secret.encode("utf-8")
-        if _BNULL in secret:
-            raise uh.exc.NullPasswordError(self)
+        #   py3: unicode secret encoded as utf-8 bytes,
+        #        hash encoded as ascii bytes, returns ascii unicode.
         config = self._get_config()
-        hash = pybcrypt_hashpw(secret, config)
+        hash = _bcrypt.hashpw(secret, config)
         assert hash.startswith(config) and len(hash) == len(config)+31
         return str_to_uascii(hash[-31:])
 
@@ -297,13 +339,6 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
         #   py2: unicode secret/hash encoded as ascii bytes before use,
         #        bytes taken as-is; returns ascii bytes.
         #   py3: not supported
-        if isinstance(secret, unicode):
-            secret = secret.encode("utf-8")
-        if _BNULL in secret:
-            # NOTE: especially important to forbid NULLs for bcryptor,
-            # since it happily accepts them, and then silently truncates
-            # the password at first one it encounters :(
-            raise uh.exc.NullPasswordError(self)
         if self.ident == IDENT_2:
             # bcryptor doesn't support $2$ hashes; but we can fake $2$ behavior
             # using the $2a$ algorithm, by repeating the password until
@@ -318,10 +353,6 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
         return str_to_uascii(hash[-31:])
 
     def _calc_checksum_builtin(self, secret):
-        if isinstance(secret, unicode):
-            secret = secret.encode("utf-8")
-        if _BNULL in secret:
-            raise uh.exc.NullPasswordError(self)
         chk = _builtin_bcrypt(secret, self.ident.strip("$"),
                               self.salt.encode("ascii"), self.rounds)
         return chk.decode("ascii")
@@ -329,6 +360,97 @@ class bcrypt(uh.HasManyIdents, uh.HasRounds, uh.HasSalt, uh.HasManyBackends, uh.
     #===================================================================
     # eoc
     #===================================================================
+
+_UDOLLAR = u("$")
+
+class bcrypt_sha256(bcrypt):
+    """This class implements a composition of BCrypt+SHA256, and follows the :ref:`password-hash-api`.
+
+    It supports a fixed-length salt, and a variable number of rounds.
+
+    The :meth:`~passlib.ifc.PasswordHash.encrypt` and :meth:`~passlib.ifc.PasswordHash.genconfig` methods accept
+    all the same optional keywords as the base :class:`bcrypt` hash.
+
+    .. versionadded:: 1.6.2
+    """
+    name = "bcrypt_sha256"
+
+    # this is locked at 2a for now.
+    ident_values = (IDENT_2A,)
+
+    # sample hash:
+    # $bcrypt-sha256$2a,6$/3OeRpbOf8/l6nPPRdZPp.$nRiyYqPobEZGdNRBWihQhiFDh1ws1tu
+    # $bcrypt-sha256$           -- prefix/identifier
+    # 2a                        -- bcrypt variant
+    # ,                         -- field separator
+    # 6                         -- bcrypt work factor
+    # $                         -- section separator
+    # /3OeRpbOf8/l6nPPRdZPp.    -- salt
+    # $                         -- section separator
+    # nRiyYqPobEZGdNRBWihQhiFDh1ws1tu  -- digest
+
+    # XXX: we can't use .ident attr due to bcrypt code using it.
+    #      working around that via prefix.
+    prefix = u('$bcrypt-sha256$')
+
+    _hash_re = re.compile(r"""
+        ^
+        [$]bcrypt-sha256
+        [$](?P<variant>[a-z0-9]+)
+        ,(?P<rounds>\d{1,2})
+        [$](?P<salt>[^$]{22})
+        ([$](?P<digest>.{31}))?
+        $
+        """, re.X)
+
+    @classmethod
+    def identify(cls, hash):
+        hash = uh.to_unicode_for_identify(hash)
+        if not hash:
+            return False
+        return hash.startswith(cls.prefix)
+
+    @classmethod
+    def from_string(cls, hash):
+        hash = to_unicode(hash, "ascii", "hash")
+        if not hash.startswith(cls.prefix):
+            raise uh.exc.InvalidHashError(cls)
+        m = cls._hash_re.match(hash)
+        if not m:
+            raise uh.exc.MalformedHashError(cls)
+        rounds = m.group("rounds")
+        if rounds.startswith(uh._UZERO) and rounds != uh._UZERO:
+            raise uh.exc.ZeroPaddedRoundsError(cls)
+        return cls(ident=m.group("variant"),
+                   rounds=int(rounds),
+                   salt=m.group("salt"),
+                   checksum=m.group("digest"),
+                   )
+
+    def to_string(self):
+        hash = u("%s%s,%d$%s") % (self.prefix, self.ident.strip(_UDOLLAR),
+                                  self.rounds, self.salt)
+        if self.checksum:
+            hash = u("%s$%s") % (hash, self.checksum)
+        return uascii_to_str(hash)
+
+    def _calc_checksum(self, secret):
+        # NOTE: this bypasses bcrypt's _calc_checksum,
+        #       so has to take care of all it's issues, such as secret encoding.
+        if isinstance(secret, unicode):
+            secret = secret.encode("utf-8")
+        # NOTE: can't use digest directly, since bcrypt stops at first NULL.
+        # NOTE: bcrypt doesn't fully mix entropy for bytes 55-72 of password
+        #       (XXX: citation needed), so we don't want key to be > 55 bytes.
+        #       thus, have to use base64 (44 bytes) rather than hex (64 bytes).
+        key = b64encode(sha256(secret).digest())
+        return self._calc_checksum_backend(key)
+
+    # patch set_backend so it modifies bcrypt class, not this one...
+    # else it would clobber our _calc_checksum() wrapper above.
+    @classmethod
+    def set_backend(cls, *args, **kwds):
+        return bcrypt.set_backend(*args, **kwds)
 
 #=============================================================================
 # eof

@@ -1443,19 +1443,23 @@ class HasManyBackends(GenericHandler):
         elif not cls.has_backend(name):
             raise exc.MissingBackendError("%s backend not available: %r" %
                                           (cls.name, name))
-        cls._calc_checksum = getattr(cls, "_calc_checksum_" + name)
+        cls._calc_checksum_backend = getattr(cls, "_calc_checksum_" + name)
         cls._backend = name
         return name
 
-    def _calc_checksum(self, secret):
-        "stub for _calc_checksum(), default backend will be selected first time stub is called"
+    def _calc_checksum_backend(self, secret):
+        "stub for _calc_checksum_backend(), default backend will be selected first time stub is called"
         # if we got here, no backend has been loaded; so load default backend
         assert not self._backend, "set_backend() failed to replace lazy loader"
         self.set_backend()
         assert self._backend, "set_backend() failed to load a default backend"
 
         # this should now invoke the backend-specific version, so call it again.
-        return self._calc_checksum(secret)
+        return self._calc_checksum_backend(secret)
+
+    def _calc_checksum(self, secret):
+        "wrapper for backend, for common code"""
+        return self._calc_checksum_backend(secret)
 
 #=============================================================================
 # wrappers

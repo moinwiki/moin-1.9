@@ -72,19 +72,38 @@ def _apply_patch():
             from django.contrib.auth.models import UNUSABLE_PASSWORD
 
         def is_password_usable(encoded):
-            return (encoded is not None and encoded != UNUSABLE_PASSWORD)
+            return encoded is not None and encoded != UNUSABLE_PASSWORD
 
         def is_valid_secret(secret):
             return secret is not None
 
-    else:
+    elif VERSION < (1,6):
         has_hashers = True
         from django.contrib.auth.hashers import UNUSABLE_PASSWORD, \
                                                 is_password_usable
 
+        # NOTE: 1.4 - 1.5 - empty passwords no longer valid.
         def is_valid_secret(secret):
-            # NOTE: changed in 1.4 - empty passwords no longer valid.
             return bool(secret)
+
+    else:
+        has_hashers = True
+        from django.contrib.auth.hashers import is_password_usable
+
+        # 1.6 - empty passwords valid again
+        def is_valid_secret(secret):
+            return secret is not None
+
+    if VERSION < (1,6):
+        def make_unusable_password():
+            return UNUSABLE_PASSWORD
+    else:
+        from django.contrib.auth.hashers import make_password as _make_password
+        def make_unusable_password():
+            return _make_password(None)
+
+    # django 1.4.6+ uses a separate hasher for "sha1$$digest" hashes
+    has_unsalted_sha1 = (VERSION >= (1,4,6))
 
     #
     # backport ``User.set_unusable_password()`` for Django 0.9
@@ -95,7 +114,7 @@ def _apply_patch():
 
         @_manager.monkeypatch(USER_PATH)
         def set_unusable_password(user):
-            user.password = UNUSABLE_PASSWORD
+            user.password = make_unusable_password()
 
         @_manager.monkeypatch(USER_PATH)
         def has_usable_password(user):
@@ -122,6 +141,8 @@ def _apply_patch():
         "passlib replacement for User.check_password()"
         hash = user.password
         if not is_valid_secret(password) or not is_password_usable(hash):
+            return False
+        if not hash and VERSION < (1,4):
             return False
         # NOTE: pulls _get_category from module globals
         cat = _get_category(user)
@@ -159,12 +180,18 @@ def _apply_patch():
         def make_password(password, salt=None, hasher="default"):
             "passlib replacement for make_password()"
             if not is_valid_secret(password):
-                return UNUSABLE_PASSWORD
-            kwds = {}
-            if salt is not None:
+                return make_unusable_password()
+            if hasher == "default":
+                scheme = None
+            else:
+                scheme = hasher_to_passlib_name(hasher)
+            kwds = dict(scheme=scheme)
+            handler = password_context.handler(scheme)
+            # NOTE: django make specify an empty string for the salt,
+            #       even if scheme doesn't accept a salt. we omit keyword
+            #       in that case.
+            if salt is not None and (salt or 'salt' in handler.setting_kwds):
                 kwds['salt'] = salt
-            if hasher != "default":
-                kwds['scheme'] = hasher_to_passlib_name(hasher)
             return password_context.encrypt(password, **kwds)
 
         @_manager.monkeypatch(HASHERS_PATH)
@@ -175,18 +202,29 @@ def _apply_patch():
                 scheme = None
             else:
                 scheme = hasher_to_passlib_name(algorithm)
+            # NOTE: resolving scheme -> handler instead of
+            #       passing scheme into get_passlib_hasher(),
+            #       in case context contains custom handler
+            #       shadowing name of a builtin handler.
             handler = password_context.handler(scheme)
-            return get_passlib_hasher(handler)
+            return get_passlib_hasher(handler, algorithm=algorithm)
 
-        # NOTE: custom helper that doesn't exist in django proper
-        #       (though submitted a patch - https://code.djangoproject.com/ticket/18184)
+        # identify_hasher() was added in django 1.5,
+        # patching it anyways for 1.4, so passlib's version is always available.
         @_manager.monkeypatch(HASHERS_PATH)
         @_manager.monkeypatch(FORMS_PATH)
         def identify_hasher(encoded):
             "passlib helper to identify hasher from encoded password"
             handler = password_context.identify(encoded, resolve=True,
                                                 required=True)
-            return get_passlib_hasher(handler)
+            algorithm = None
+            if (has_unsalted_sha1 and handler.name == "django_salted_sha1" and
+                    encoded.startswith("sha1$$")):
+                # django 1.4.6+ uses a separate hasher for "sha1$$digest" hashes,
+                # but passlib just reuses the "sha1$salt$digest" handler.
+                # we want to resolve to correct django hasher.
+                algorithm = "unsalted_sha1"
+            return get_passlib_hasher(handler, algorithm=algorithm)
 
     _patched = True
     log.debug("... finished monkeypatching django")

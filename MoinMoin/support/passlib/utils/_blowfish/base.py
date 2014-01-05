@@ -378,8 +378,8 @@ class BlowfishEngine(object):
     #===================================================================
     # eks-blowfish routines
     #===================================================================
-    def eks_expand(self, key_words, salt_words):
-        "perform EKS version of Blowfish keyschedule setup"
+    def eks_salted_expand(self, key_words, salt_words):
+        "perform EKS' salted version of Blowfish keyschedule setup"
         # NOTE: this is the same as expand(), except for the addition
         #       of the operations involving *salt_words*.
 
@@ -415,7 +415,7 @@ class BlowfishEngine(object):
                 box[i], box[i+1] = l,r = encipher(l,r) # next()
                 i += 2
 
-    def eks_rounds_expand0(self, key_words, salt_words, rounds):
+    def eks_repeated_expand(self, key_words, salt_words, rounds):
         "perform rounds stage of EKS keyschedule setup"
         expand = self.expand
         n = 0

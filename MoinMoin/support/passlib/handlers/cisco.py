@@ -61,14 +61,14 @@ class cisco_pix(uh.HasUserContext, uh.StaticHandler):
 
         user = self.user
         if user:
-            # NOTE: not *positive* about this, but it looks like per-user
-            # accounts use first 4 chars of user as salt, whereas global
-            # "enable" passwords don't have any salt at all.
+            # not positive about this, but it looks like per-user
+            # accounts use the first 4 chars of the username as the salt,
+            # whereas global "enable" passwords don't have any salt at all.
             if isinstance(user, unicode):
                 user = user.encode("utf-8")
             secret += user[:4]
 
-        # pad/truncate to 16
+        # null-pad or truncate to 16 bytes
         secret = right_pad_string(secret, 16)
 
         # md5 digest
@@ -123,6 +123,8 @@ class cisco_type7(uh.GenericHandler):
     setting_kwds = ("salt",)
     checksum_chars = uh.UPPER_HEX_CHARS
 
+    # NOTE: encoding could handle max_salt_value=99, but since key is only 52
+    #       chars in size, not sure what appropriate behavior is for that edge case.
     min_salt_value = 0
     max_salt_value = 52
 
@@ -154,9 +156,9 @@ class cisco_type7(uh.GenericHandler):
         self.salt = self._norm_salt(salt)
 
     def _norm_salt(self, salt):
-        # NOTE: the "salt" for this algorithm is a small integer.
+        "the salt for this algorithm is an integer 0-52, not a string"
         # XXX: not entirely sure that values >15 are valid, so for
-        # compatibility we don't output those values but we do accept them.
+        # compatibility we don't output those values, but we do accept them.
         if salt is None:
             if self.use_defaults:
                 salt = self._generate_salt()

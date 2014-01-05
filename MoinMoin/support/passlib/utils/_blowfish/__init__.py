@@ -143,18 +143,20 @@ def raw_bcrypt(password, ident, salt, log_rounds):
 
     engine = BlowfishEngine()
 
-    # convert password & salt into list of 18 32-bit integers.
+    # convert password & salt into list of 18 32-bit integers (72 bytes total).
     pass_words = engine.key_to_words(password)
     salt_words = engine.key_to_words(salt)
 
+    # truncate salt_words to original 16 byte salt, or loop won't wrap
+    # correctly when passed to .eks_salted_expand()
+    salt_words16 = salt_words[:4]
+
     # do EKS key schedule setup
-    # NOTE: [:4] is due to salt being 16 bytes originally,
-    #       and the list needs to wrap properly
-    engine.eks_expand(pass_words, salt_words[:4])
+    engine.eks_salted_expand(pass_words, salt_words16)
 
     # apply password & salt keys to key schedule a bunch more times.
     rounds = 1<<log_rounds
-    engine.eks_rounds_expand0(pass_words, salt_words, rounds)
+    engine.eks_repeated_expand(pass_words, salt_words, rounds)
 
     # encipher constant data, and encode to bytes as digest.
     data = list(BCRYPT_CDATA)

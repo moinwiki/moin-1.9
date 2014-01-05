@@ -175,7 +175,8 @@ def deprecated_function(msg=None, deprecated=None, removed=None, updoc=True,
                 warn(text, DeprecationWarning, stacklevel=2)
                 return func(*args, **kwds)
         update_wrapper(wrapper, func)
-        if updoc and (deprecated or removed) and wrapper.__doc__:
+        if updoc and (deprecated or removed) and \
+                   wrapper.__doc__ and ".. deprecated::" not in wrapper.__doc__:
             txt = deprecated or ''
             if removed or replacement:
                 txt += "\n    "
@@ -310,6 +311,7 @@ def consteq(left, right):
         result = 1
 
     # run constant-time string comparision
+    # TODO: use izip instead (but first verify it's faster than zip for this case)
     if is_py3_bytes:
         for l,r in zip(tmp, right):
             result |= l ^ r
@@ -330,14 +332,16 @@ def splitcomma(source, sep=","):
     return [ elem.strip() for elem in source.split(sep) ]
 
 def saslprep(source, param="value"):
-    """Normalizes unicode string using SASLPrep stringprep profile.
+    """Normalizes unicode strings using SASLPrep stringprep profile.
 
     The SASLPrep profile is defined in :rfc:`4013`.
     It provides a uniform scheme for normalizing unicode usernames
     and passwords before performing byte-value sensitive operations
     such as hashing. Among other things, it normalizes diacritic
     representations, removes non-printing characters, and forbids
-    invalid characters such as ``\\n``.
+    invalid characters such as ``\\n``. Properly internationalized
+    applications should run user passwords through this function
+    before hashing.
 
     :arg source:
         unicode string to normalize & validate
@@ -358,6 +362,8 @@ def saslprep(source, param="value"):
         This function is not available under Jython,
         as the Jython stdlib is missing the :mod:`!stringprep` module
         (`Jython issue 1758320 <http://bugs.jython.org/issue1758320>`_).
+
+    .. versionadded:: 1.6
     """
     # saslprep - http://tools.ietf.org/html/rfc4013
     # stringprep - http://tools.ietf.org/html/rfc3454
@@ -414,7 +420,7 @@ def saslprep(source, param="value"):
     in_table_c8 = stringprep.in_table_c8
     in_table_c9 = stringprep.in_table_c9
     for c in data:
-        # check for this mapping stage should have removed
+        # check for chars mapping stage should have removed
         assert not in_table_b1(c), "failed to strip B.1 in mapping stage"
         assert not in_table_c12(c), "failed to replace C.1.2 in mapping stage"
 
@@ -1446,13 +1452,13 @@ except NotImplementedError: # pragma: no cover
 
 def genseed(value=None):
     "generate prng seed value from system resources"
-    # if value is rng, extract a bunch of bits from it's state
     from hashlib import sha512
-    if hasattr(value, "getrandbits"):
-        value = value.getrandbits(1<<15)
-    text = u("%s %s %s %.15f %.15f %s") % (
-        # if caller specified a seed value (e.g. current rng state), mix it in
+    text = u("%s %s %s %s %.15f %.15f %s") % (
+        # if caller specified a seed value, mix it in
         value,
+
+        # if caller's seed value was an RNG, mix in bits from it's state
+        value.getrandbits(1<<15) if hasattr(value, "getrandbits") else None,
 
         # add current process id
         # NOTE: not available in some environments, e.g. GAE
