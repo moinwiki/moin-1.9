@@ -64,6 +64,8 @@ Version 1.9.current:
     # logged-in users get the backlink, anon users/bots get simple text:
     backlink_method = lambda cfg, req: 'backlink' if req.user.valid else 'text'
   * AbandonedPages macro: check user agent to reduce load caused by bots
+  * RSS feed: check for bots and rather give them empty results than waste a
+    lot of time with them
   * ldap_auth: support placeholders for basedn also, e.g. you could use:
     base_dn='uid=%(username)s,ou=people,dc=company,dc=com'
 
@@ -80,12 +82,19 @@ Version 1.9.current:
   * use 302 http status for #redirect as some clients cache 301 redirects, but
     the #redirect might get changed or removed later (so it should not be
     cached and we also can't really say it is permanent)
+  * fix crash when macro names contain non-ascii chars
+  * CopyPage action: fix NameError exception when TextCha was answered wrong
+  * docbook formatter: fix image URL generation, avoid script name duplication
 
   Other changes:
   * rss_rc action (RSS feed) is now much faster / much less resource consuming
     when requested for a specific single page. As we have a link to this in
     every page's html output, this likely also lightens the load caused by bots
     and search engine crawlers.
+  * tuned editlog.news() - only open/read log if there is new stuff in it after
+    last read position
+  * improve python2.5 compatibility (with_statement)
+  * add bingbot to ua_spiders
   * upgraded bundled werkzeug to 0.8.3
   * upgraded bundled passlib to 1.6.2
   * upgraded bundled pygments to 1.6
