@@ -68,6 +68,10 @@ Version 1.9.8:
     lot of time with them
   * ldap_auth: support placeholders for basedn also, e.g. you could use:
     base_dn='uid=%(username)s,ou=people,dc=company,dc=com'
+  * move or delete multiple attachments (see checkboxes and buttons on the
+    AttachFile view). Be careful: in the same way as you could delete a single
+    attachment with one click, you can now delete all attachments of a page
+    with one click (we don't ask for a 2nd confirmation, so think first).
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
