@@ -72,6 +72,8 @@ Version 1.9.8:
     AttachFile view). Be careful: in the same way as you could delete a single
     attachment with one click, you can now delete all attachments of a page
     with one click (we don't ask for a 2nd confirmation, so think first).
+  * mailimport: use relative attachment link markup instead of absolute links,
+    enables some page renaming operations without needing to edit the markup.
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
