@@ -807,9 +807,6 @@ class User:
         The subscription list may contain page names or interwiki page
         names. e.g 'Page Name' or 'WikiName:Page_Name'
 
-        TODO: check if it's fast enough when getting called for many
-              users from page.getSubscribersList()
-
         @param pagelist: list of pages to check for subscription
         @rtype: bool
         @return: if user is subscribed any page in pagelist
@@ -910,7 +907,7 @@ class User:
         page_sub = {}
         cache = caching.CacheEntry(self._request, arena, key, scope='wiki', use_pickle=True, do_locking=False)
         if not cache.exists():
-            return  # if no cache file, just don't do anything
+            return  # if no cache file exists, just don't do anything
 
         cache.lock('w')
         page_sub = cache.content()
@@ -920,7 +917,7 @@ class User:
             page_sub[self.id] = {
                 'name': self.name,
                 'email': self.email,
-                'subscribed_pages': self.subscribed_pages
+                'subscribed_pages': self.subscribed_pages,
             }
         elif page_sub.get(self.id):
             del page_sub[self.id]
