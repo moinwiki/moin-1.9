@@ -811,7 +811,7 @@ class Page(object):
 
         return link
 
-    def getSubscribers(self, request, **kw):
+    def getSubscribersUncached(self, request, **kw):  # original function renamed
         """ Get all subscribers of this page.
 
         @param request: the request object
@@ -833,6 +833,8 @@ class Page(object):
             UserPerms = self.cfg.SecurityPolicy
         else:
             from MoinMoin.security import Default as UserPerms
+
+        request.clock.start("getSubscribersUncached")
 
         # get email addresses of the all wiki user which have a profile stored;
         # add the address only if the user has subscribed to the page and
@@ -872,6 +874,113 @@ class Page(object):
             else:
                 subscriber_list[lang].append(subscriber.email)
 
+        request.clock.stop("getSubscribersUncached")
+
+        return subscriber_list
+
+    # cached version of getSubscribers
+    def getSubscribers(self, request, **kw):
+        """ Get all subscribers of this page.
+
+        @param request: the request object
+        @keyword include_self: if 1, include current user (default: 0)
+        @keyword return_users: if 1, return user instances (default: 0)
+        @rtype: dict
+        @return: lists of subscribed email addresses in a dict by language key
+        """
+        include_self = kw.get('include_self', self.include_self)
+        return_users = kw.get('return_users', 0)
+
+        request.clock.start('getSubscribersCached')
+        # extract categories of this page
+        pageList = self.getCategories(request)
+
+        # add current page name for list matching
+        pageList.append(self.page_name)
+
+        arena = 'user'
+        key = 'page_sub'
+
+        # get or create cache file
+        page_sub = {}
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
+        if cache.exists():
+            page_sub = cache.content()
+        else:
+            #build a cache if it doesn't exist
+            cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True, do_locking=False)
+            # lock to stop anybody else interfering with the data while we're working
+            cache.lock('w')
+            userlist = user.getUserList(request)
+            for uid in userlist:
+                subscriber = user.User(request, uid)
+                # we don't care about storing entries for users without any page subscriptions
+                if subscriber.subscribed_pages:
+                    page_sub[subscriber.id] = {
+                        'name': subscriber.name,
+                        'email': subscriber.email,
+                        'subscribed_pages': subscriber.subscribed_pages
+                    }
+            cache.update(page_sub)
+            cache.unlock()
+            cache.lock('r') # to go back to the same mode as if it had existed all along
+
+        if self.cfg.SecurityPolicy:
+            UserPerms = self.cfg.SecurityPolicy
+        else:
+            from MoinMoin.security import Default as UserPerms
+
+        # get email addresses of the all wiki user which have a profile stored;
+        # add the address only if the user has subscribed to the page and
+        # the user is not the current editor
+        userlist = page_sub
+        subscriber_list = {}
+
+        pages = pageList[:]
+        if request.cfg.interwikiname:
+            pages += ["%s:%s" % (request.cfg.interwikiname, pagename) for pagename in pageList]
+        # Create text for regular expression search
+        text = '\n'.join(pages)
+
+        for uid in userlist.keys():
+            if uid == request.user.id and not include_self:
+                continue # no self notification
+
+            isSubscribed = False
+
+            # This is a bit wrong if return_users=1 (which implies that the caller will process
+            # user attributes and may, for example choose to send an SMS)
+            # So it _should_ be "not (subscriber.email and return_users)" but that breaks at the moment.
+            if not userlist[uid]['email']:
+                continue # skip empty email addresses
+
+            # now check patters for actual match
+            for pattern in userlist[uid]['subscribed_pages']:
+                if pattern in pages:
+                    isSubscribed = True
+                try:
+                    pattern = re.compile(r'^%s$' % pattern, re.M)
+                except re.error:
+                    continue
+                if pattern.search(text):
+                    isSubscribed = True
+
+            # only if subscribed, then read user info from file
+            if isSubscribed:
+                subscriber = user.User(request, uid)
+
+                if not UserPerms(subscriber).read(self.page_name):
+                    continue
+
+                lang = subscriber.language or request.cfg.language_default
+                if not lang in subscriber_list:
+                    subscriber_list[lang] = []
+                if return_users:
+                    subscriber_list[lang].append(subscriber)
+                else:
+                    subscriber_list[lang].append(subscriber.email)
+
+        request.clock.stop('getSubscribersCached')
         return subscriber_list
 
     def parse_processing_instructions(self):
