@@ -32,6 +32,8 @@ def get_arena_dir(request, arena, scope):
         return os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
     elif scope == 'farm':
         return os.path.join(request.cfg.cache_dir, '__common__', arena)
+    elif scope == 'userdir':
+        return os.path.join(request.cfg.user_dir, 'cache', arena)
     elif scope == 'dir':
         # arena is a specific directory, just use it
         return arena
