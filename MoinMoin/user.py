@@ -708,6 +708,9 @@ class User:
             event = events.UserCreatedEvent(self._request, self)
             events.send_event(event)
 
+        # update page subscriber's cache after saving user preferences
+        self.updatePageSubCache()
+
     # -----------------------------------------------------------------
     # Time and date formatting
 
@@ -894,6 +897,36 @@ class User:
         if changed:
             self.save()
         return not self.isSubscribedTo([pagename])
+
+    # update page subscribers cache
+    def updatePageSubCache(self):
+        """ When a user changes his preferences, we update the
+        page subscriber's cache
+        """
+
+        arena = 'user'
+        key = 'page_sub'
+
+        page_sub = {}
+        cache = caching.CacheEntry(self._request, arena, key, scope='wiki', use_pickle=True, do_locking=False)
+        if not cache.exists():
+            return  # if no cache file, just don't do anything
+
+        cache.lock('w')
+        page_sub = cache.content()
+
+        # we don't care about storing entries for users without any page subscriptions
+        if self.subscribed_pages:
+            page_sub[self.id] = {
+                'name': self.name,
+                'email': self.email,
+                'subscribed_pages': self.subscribed_pages
+            }
+        elif page_sub.get(self.id):
+            del page_sub[self.id]
+
+        cache.update(page_sub)
+        cache.unlock()
 
     # -----------------------------------------------------------------
     # Quicklinks
