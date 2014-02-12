@@ -82,12 +82,11 @@ def _getUserIdByKey(request, key, search):
     if not search or not key:
         return None
     cfg = request.cfg
-    cachekey = '%s2id' % key
+    scope, arena, cachekey = 'userdir', 'users', '%s2id' % key
     try:
         _key2id = getattr(cfg.cache, cachekey)
     except AttributeError:
-        arena = 'user'
-        cache = caching.CacheEntry(request, arena, cachekey, scope='wiki', use_pickle=True)
+        cache = caching.CacheEntry(request, arena, cachekey, scope=scope, use_pickle=True)
         try:
             _key2id = cache.content()
         except caching.CacheError:
@@ -104,14 +103,23 @@ def _getUserIdByKey(request, key, search):
                         _key2id[val] = userid
                 else:
                     _key2id[value] = userid
-        arena = 'user'
-        cache = caching.CacheEntry(request, arena, cachekey, scope='wiki', use_pickle=True)
+        cache = caching.CacheEntry(request, arena, cachekey, scope=scope, use_pickle=True)
         try:
             cache.update(_key2id)
         except caching.CacheError:
             pass
         uid = _key2id.get(search, None)
     return uid
+
+
+def clearUserIdLookupCaches(request):
+    scope, arena = 'userdir', 'users'
+    for key in ['name2id', 'openid2id', ]:
+        caching.CacheEntry(request, arena, key, scope=scope).remove()
+        try:
+            delattr(request.cfg.cache, key)
+        except:
+            pass
 
 
 def getUserId(request, searchName):
@@ -686,19 +694,7 @@ class User:
             data.write(line + '\n')
         data.close()
 
-        arena = 'user'
-        key = 'name2id'
-        caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
-        try:
-            del self._request.cfg.cache.name2id
-        except:
-            pass
-        key = 'openid2id'
-        caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
-        try:
-            del self._request.cfg.cache.openid2id
-        except:
-            pass
+        clearUserIdLookupCaches(self._request)
 
         if not self.disabled:
             self.valid = 1
