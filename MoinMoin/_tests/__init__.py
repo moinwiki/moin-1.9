@@ -60,10 +60,7 @@ def nuke_user(request, username):
     # really get rid of the user
     fpath = os.path.join(user_dir, user_id)
     os.remove(fpath)
-    # delete cache
-    arena = 'user'
-    key = 'name2id'
-    caching.CacheEntry(request, arena, key, scope='wiki').remove()
+    user.clearUserIdLookupCaches(request)
 
 # Creating and destroying test pages --------------------------------
 

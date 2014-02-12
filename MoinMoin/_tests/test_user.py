@@ -77,12 +77,8 @@ class TestLoginWithPassword(object):
         self.request.cookies = self.saved_cookie
         self.request.user = self.saved_user
 
-        # Remove user name to id cache, or next test will fail
-        caching.CacheEntry(self.request, 'user', 'name2id', scope='wiki').remove()
-        try:
-            del self.request.cfg.cache.name2id
-        except:
-            pass
+        # Remove user lookup caches, or next test will fail
+        user.clearUserIdLookupCaches(self.request)
 
     def testAsciiPassword(self):
         """ user: login with ascii password """
