@@ -899,16 +899,15 @@ class Page(object):
         # add current page name for list matching
         pageList.append(self.page_name)
 
-        arena = 'user'
-        key = 'page_sub'
+        scope, arena, key = 'userdir', 'users', 'pagesubscriptions'
 
         # get or create cache file
-        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
+        cache = caching.CacheEntry(request, arena, key, scope=scope, use_pickle=True)
         if cache.exists():
             page_sub = cache.content()
         else:
             # build a cache if it doesn't exist
-            cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True, do_locking=False)
+            cache = caching.CacheEntry(request, arena, key, scope=scope, use_pickle=True, do_locking=False)
             # lock to stop anybody else interfering with the data while we're working
             cache.lock('w')
             userlist = user.getUserList(request)
