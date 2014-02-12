@@ -13,7 +13,7 @@ from MoinMoin import user
 from MoinMoin.Page import Page
 from MoinMoin.mail import sendmail
 from MoinMoin.support.python_compatibility import set
-from MoinMoin.user import User, getUserList
+from MoinMoin.user import User, superusers
 from MoinMoin.action.AttachFile import getAttachUrl
 
 import MoinMoin.events as ev
@@ -116,11 +116,8 @@ def handle_user_created(event):
     email = event.user.email or u"NOT SET"
     username = event.user.name
 
-    user_ids = getUserList(request)
-    for usr_id in user_ids:
-        usr = User(request, id=usr_id)
-        # Currently send this only to super users
-        if usr.isSuperUser() and event_name in usr.email_subscribed_events:
+    for usr in superusers(request):
+        if usr.email and event_name in usr.email_subscribed_events:
             _ = lambda text: request.getText(text, lang=usr.language or 'en')
             data = notification.user_created_message(request, _, sitename, username, email)
             send_notification(request, from_address, [usr.email], data)

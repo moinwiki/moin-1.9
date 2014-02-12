@@ -14,7 +14,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.Page import Page
-from MoinMoin.user import User, getUserList
+from MoinMoin.user import User, superusers
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.action.AttachFile import getAttachUrl
 
@@ -143,11 +143,8 @@ def handle_user_created(event):
     email = event.user.email or u"NOT SET"
     username = event.user.name
 
-    user_ids = getUserList(request)
-    for id in user_ids:
-        usr = User(request, id=id)
-        # Currently send this only to super users
-        if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
+    for usr in superusers(request):
+        if usr.jid and event_name in usr.jabber_subscribed_events:
             _ = lambda text: request.getText(text, lang=usr.language or 'en')
             msg = notification.user_created_message(request, _, sitename, username, email)
             data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['text'],

@@ -149,6 +149,16 @@ def getUserIdByOpenId(request, openid):
     return _getUserIdByKey(request, 'openids', openid)
 
 
+def superusers(request):
+    """
+    yields superuser User objects
+    """
+    for name in request.cfg.superuser:
+        u = User(request, auth_username=name)
+        if u.isSuperUser():  # this checks for addtl. criteria
+            yield u
+
+
 def getUserIdentification(request, username=None):
     """ Return user name or IP or '<unknown>' indicator.
 
