@@ -15,8 +15,11 @@ class PluginScript(MoinScript):
     """\
 Purpose:
 ========
-This script allows you to globally delete all the cache files in data/pages/PageName/cache/
-and /data/cache directories
+This script allows you to globally delete all the cache files in the directories:
+
+* <data_dir>/pages/PageName/cache/
+* <data_dir>/cache
+* <user_dir>/cache
 
 You will usually do this after changing MoinMoin code, by either upgrading
 version, installing or removing macros or changing the regex expression for dicts or groups.
@@ -60,6 +63,7 @@ General syntax: moin [options] maint cleancache
         # clean dict and groups related cache
         arena_scope_list =  [('pagedicts', 'wiki'),
                              ('pagegroups', 'wiki'),
+                             ('users', 'userdir'),
         ]
         for arena, scope in arena_scope_list:
             for key in caching.get_cache_list(request, arena, scope):

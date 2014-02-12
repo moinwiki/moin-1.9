@@ -901,11 +901,10 @@ class User:
         page subscriber's cache
         """
 
-        arena = 'user'
-        key = 'page_sub'
+        scope, arena, key = 'userdir', 'users', 'pagesubscriptions'
 
         page_sub = {}
-        cache = caching.CacheEntry(self._request, arena, key, scope='wiki', use_pickle=True, do_locking=False)
+        cache = caching.CacheEntry(self._request, arena=arena, key=key, scope=scope, use_pickle=True, do_locking=False)
         if not cache.exists():
             return  # if no cache file exists, just don't do anything
 
