@@ -38,6 +38,10 @@ from werkzeug.security import safe_str_cmp as safe_str_equal
 from MoinMoin.util import timefuncs, random_string
 from MoinMoin.wikiutil import url_quote_plus
 
+# for efficient lookup <attr> -> userid, we keep an index of this in the cache.
+# the attribute names in here should be uniquely identifying a user.
+CACHED_USER_ATTRS = ['name', 'email', 'jid', 'openids', ]
+
 
 def getUserList(request):
     """ Get a list of all (numerical) user IDs.
@@ -69,6 +73,7 @@ def get_by_jabber_id(request, jabber_id):
     filter_func = lambda user: user.valid and user.jid.lower() == jabber_id.lower()
     return get_by_filter(request, filter_func)
 
+
 def _getUserIdByKey(request, key, search):
     """ Get the user ID for a specified key/value pair.
 
@@ -82,51 +87,104 @@ def _getUserIdByKey(request, key, search):
     if not search or not key:
         return None
     cfg = request.cfg
-    scope, arena, cachekey = 'userdir', 'users', '%s2id' % key
+    cfg_cache_attr = key + "2id"
     try:
-        _key2id = getattr(cfg.cache, cachekey)
+        attr2id = getattr(cfg.cache, cfg_cache_attr)
+        from_disk = False
     except AttributeError:
-        cache = caching.CacheEntry(request, arena, cachekey, scope=scope, use_pickle=True)
-        try:
-            _key2id = cache.content()
-        except caching.CacheError:
-            _key2id = {}
-        setattr(cfg.cache, cachekey, _key2id)
-    uid = _key2id.get(search, None)
+        # no in-memory cache there - initialize it / load it from disk
+        loadLookupCaches(request)
+        attr2id = getattr(cfg.cache, cfg_cache_attr)
+        from_disk = True  # we just loaded the stuff from disk
+    uid = attr2id.get(search, None)
+    if uid is None and not from_disk:
+        # we do not have the entry we searched for.
+        # we didn't find it in some in-memory cache, try refreshing these from disk
+        loadLookupCaches(request)
+        attr2id = getattr(cfg.cache, cfg_cache_attr)
+        from_disk = True  # we just loaded the stuff from disk
+        uid = attr2id.get(search, None)
     if uid is None:
-        # complete cache rebuild on a cache miss! (expensive)
-        # note: we have this code block likely because we were not sure about
-        #       cache consistency. if we can assure cache consistency, this
-        #       block wouldn't be needed.
-        for userid in getUserList(request):
-            u = User(request, id=userid)
-            if hasattr(u, key):
-                value = getattr(u, key)
-                if isinstance(value, list):
-                    for val in value:
-                        _key2id[val] = userid
-                else:
-                    _key2id[value] = userid
-        cache = caching.CacheEntry(request, arena, cachekey, scope=scope, use_pickle=True)
-        try:
-            cache.update(_key2id)
-        except caching.CacheError:
-            pass
-        uid = _key2id.get(search, None)
+        # we do not have the entry we searched for.
+        # we don't have it in the on-disk cache, cache MISS.
+        # could be because:
+        # a) ok: we have no such search value in the profiles
+        # b) fault: the cache is incoherent with the profiles
+        # c) fault: reading the cache from disk failed, due to an error
+        # d) ok: same as c), but just because no ondisk cache has been built yet
+        rebuildLookupCaches(request)  # XXX expensive
+        attr2id = getattr(cfg.cache, cfg_cache_attr)
+        uid = attr2id.get(search, None)
     return uid
 
 
-def clearUserIdLookupCaches(request):
-    """kill the userid lookup caches"""
+def setMemoryLookupCaches(request, cache):
+    """set the in-memory cache from the given cache contents
+
+    @param request: the request object
+    @param cache: either a dict of attrname -> attrcache to set the in-memory cache,
+                  or None to delete the in-memory cache.
+    """
+    for attrname in CACHED_USER_ATTRS:
+        cfg_cache_attr = attrname + "2id"
+        if cache is None:
+            try:
+                delattr(request.cfg.cache, cfg_cache_attr)
+            except:
+                pass
+        else:
+            setattr(request.cfg.cache, cfg_cache_attr, cache[attrname])
+
+
+def loadLookupCaches(request):
+    """load lookup cache contents into memory: cfg.cache.XXX2id"""
+    scope, arena, cachekey = 'userdir', 'users', 'lookup'
+    diskcache = caching.CacheEntry(request, arena, cachekey, scope=scope, use_pickle=True)
+    try:
+        cache = diskcache.content()
+    except caching.CacheError:
+        cache = {}
+        for attrname in CACHED_USER_ATTRS:
+            cache[attrname] = {}
+    setMemoryLookupCaches(request, cache)
+
+
+def rebuildLookupCaches(request):
+    """complete attrs -> userid lookup cache rebuild"""
+    # as there may be thousands of users and reading all profiles is
+    # expensive, we just have 1 lookup cache for all interesting user attrs,
+    # so we only need to read all profiles ONCE to build the cache.
+    scope, arena, key = 'userdir', 'users', 'lookup'
+    diskcache = caching.CacheEntry(request, arena, key, scope=scope, use_pickle=True, do_locking=False)
+    diskcache.lock('w')
+
+    cache = {}
+    for attrname in CACHED_USER_ATTRS:
+        cache[attrname] = {}
+    for userid in getUserList(request):
+        u = User(request, id=userid)
+        for attrname in CACHED_USER_ATTRS:
+            if hasattr(u, attrname):
+                attr2id = cache[attrname]
+                value = getattr(u, attrname)
+                if isinstance(value, list):
+                    for val in value:
+                        attr2id[val] = userid
+                else:
+                    attr2id[value] = userid
+
+    setMemoryLookupCaches(request, cache)
+    diskcache.update(cache)
+    diskcache.unlock()
+    return cache
+
+
+def clearLookupCaches(request):
+    """kill the userid lookup cache"""
     # this triggers a rebuild of the cache.
-    # we maybe could rather update the caches, would be less expensive
-    scope, arena = 'userdir', 'users'
-    for key in ['name2id', 'openid2id', ]:
-        caching.CacheEntry(request, arena, key, scope=scope).remove()
-        try:
-            delattr(request.cfg.cache, key)
-        except:
-            pass
+    setMemoryLookupCaches(request, None)
+    scope, arena, key = 'userdir', 'users', 'lookup'
+    caching.CacheEntry(request, arena, key, scope=scope).remove()
 
 
 def getUserId(request, searchName):
@@ -711,7 +769,7 @@ class User:
             data.write(line + '\n')
         data.close()
 
-        clearUserIdLookupCaches(self._request)
+        self.updateLookupCaches()
 
         if not self.disabled:
             self.valid = 1
@@ -908,15 +966,11 @@ class User:
             self.save()
         return not self.isSubscribedTo([pagename])
 
-    # update page subscribers cache
     def updatePageSubCache(self):
-        """ When a user changes his preferences, we update the
-        page subscriber's cache
-        """
+        """ When a user profile is saved, we update the page subscriber's cache """
 
         scope, arena, key = 'userdir', 'users', 'pagesubscriptions'
 
-        page_sub = {}
         cache = caching.CacheEntry(self._request, arena=arena, key=key, scope=scope, use_pickle=True, do_locking=False)
         if not cache.exists():
             return  # if no cache file exists, just don't do anything
@@ -936,6 +990,45 @@ class User:
 
         cache.update(page_sub)
         cache.unlock()
+
+    def updateLookupCaches(self):
+        """ When a user profile is saved, we update the userid lookup caches """
+
+        scope, arena, key = 'userdir', 'users', 'lookup'
+
+        diskcache = caching.CacheEntry(self._request, arena=arena, key=key, scope=scope, use_pickle=True, do_locking=False)
+        if not diskcache.exists():
+            return  # if no cache file exists, just don't do anything
+
+        diskcache.lock('w')
+        cache = diskcache.content()
+        userid = self.id
+
+        # first remove all old entries mapping to this userid:
+        for attrname in CACHED_USER_ATTRS:
+            attr2id = cache[attrname]
+            for key, value in attr2id.items():
+                if value == userid:
+                    print "deleting old cached attr %s -> %s" % (key, value)
+                    del attr2id[key]
+
+        # then update with the current attr values:
+        for attrname in CACHED_USER_ATTRS:
+            if hasattr(self, attrname):
+                value = getattr(self, attrname)
+                if value:
+                    # we do not store empty values, likely not unique
+                    print "setting new cached attr %s -> %r" % (attrname, value)
+                    attr2id = cache[attrname]
+                    if isinstance(value, list):
+                        for val in value:
+                            attr2id[val] = userid
+                    else:
+                        attr2id[value] = userid
+
+        setMemoryLookupCaches(self._request, cache)
+        diskcache.update(cache)
+        diskcache.unlock()
 
     # -----------------------------------------------------------------
     # Quicklinks

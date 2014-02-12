@@ -78,7 +78,7 @@ class TestLoginWithPassword(object):
         self.request.user = self.saved_user
 
         # Remove user lookup caches, or next test will fail
-        user.clearUserIdLookupCaches(self.request)
+        user.clearLookupCaches(self.request)
 
     def testAsciiPassword(self):
         """ user: login with ascii password """
@@ -241,8 +241,8 @@ class TestLoginWithPassword(object):
         assert not theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
 
     def testRenameUser(self):
-        """ create user and then rename user and check
-        if the old username is removed from the cache name2id
+        """ create user and then rename user and check whether
+        the old username is removed (and the lookup cache behaves well)
         """
         # Create test user
         name = u'__Some Name__'

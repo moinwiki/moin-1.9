@@ -60,7 +60,7 @@ def nuke_user(request, username):
     # really get rid of the user
     fpath = os.path.join(user_dir, user_id)
     os.remove(fpath)
-    user.clearUserIdLookupCaches(request)
+    user.clearLookupCaches(request)
 
 # Creating and destroying test pages --------------------------------
 
