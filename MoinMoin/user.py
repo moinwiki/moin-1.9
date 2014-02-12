@@ -94,6 +94,10 @@ def _getUserIdByKey(request, key, search):
         setattr(cfg.cache, cachekey, _key2id)
     uid = _key2id.get(search, None)
     if uid is None:
+        # complete cache rebuild on a cache miss! (expensive)
+        # note: we have this code block likely because we were not sure about
+        #       cache consistency. if we can assure cache consistency, this
+        #       block wouldn't be needed.
         for userid in getUserList(request):
             u = User(request, id=userid)
             if hasattr(u, key):
@@ -113,6 +117,9 @@ def _getUserIdByKey(request, key, search):
 
 
 def clearUserIdLookupCaches(request):
+    """kill the userid lookup caches"""
+    # this triggers a rebuild of the cache.
+    # we maybe could rather update the caches, would be less expensive
     scope, arena = 'userdir', 'users'
     for key in ['name2id', 'openid2id', ]:
         caching.CacheEntry(request, arena, key, scope=scope).remove()
