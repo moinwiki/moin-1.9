@@ -84,7 +84,9 @@ def _getUserIdByKey(request, key, search):
     @param search: the value to look for
     @return the corresponding user ID or None
     """
-    if not search or not key:
+    if key not in CACHED_USER_ATTRS:
+        raise ValueError("unsupported key, must be in CACHED_USER_ATTRS")
+    if not search:
         return None
     cfg = request.cfg
     cfg_cache_attr = key + "2id"
