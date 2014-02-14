@@ -165,15 +165,16 @@ def rebuildLookupCaches(request):
         cache[attrname] = {}
     for userid in getUserList(request):
         u = User(request, id=userid)
-        for attrname in CACHED_USER_ATTRS:
-            if hasattr(u, attrname):
-                attr2id = cache[attrname]
-                value = getattr(u, attrname)
-                if isinstance(value, list):
-                    for val in value:
-                        attr2id[val] = userid
-                else:
-                    attr2id[value] = userid
+        if u.valid:
+            for attrname in CACHED_USER_ATTRS:
+                if hasattr(u, attrname):
+                    attr2id = cache[attrname]
+                    value = getattr(u, attrname)
+                    if isinstance(value, list):
+                        for val in value:
+                            attr2id[val] = userid
+                    else:
+                        attr2id[value] = userid
 
     setMemoryLookupCaches(request, cache)
     diskcache.update(cache)
@@ -771,10 +772,10 @@ class User:
             data.write(line + '\n')
         data.close()
 
-        self.updateLookupCaches()
-
         if not self.disabled:
             self.valid = 1
+
+        self.updateLookupCaches()
 
         if not self._stored:
             self._stored = True
@@ -980,8 +981,8 @@ class User:
         cache.lock('w')
         page_sub = cache.content()
 
-        # we don't care about storing entries for users without any page subscriptions
-        if self.subscribed_pages:
+        # we only store entries for valid users with some page subscriptions
+        if self.valid and self.subscribed_pages:
             page_sub[self.id] = {
                 'name': self.name,
                 'email': self.email,
@@ -1014,19 +1015,20 @@ class User:
                     print "deleting old cached attr %s -> %s" % (key, value)
                     del attr2id[key]
 
-        # then update with the current attr values:
-        for attrname in CACHED_USER_ATTRS:
-            if hasattr(self, attrname):
-                value = getattr(self, attrname)
-                if value:
-                    # we do not store empty values, likely not unique
-                    print "setting new cached attr %s -> %r" % (attrname, value)
-                    attr2id = cache[attrname]
-                    if isinstance(value, list):
-                        for val in value:
-                            attr2id[val] = userid
-                    else:
-                        attr2id[value] = userid
+        # then, if user is valid, update with the current attr values:
+        if self.valid:
+            for attrname in CACHED_USER_ATTRS:
+                if hasattr(self, attrname):
+                    value = getattr(self, attrname)
+                    if value:
+                        # we do not store empty values, likely not unique
+                        print "setting new cached attr %s -> %r" % (attrname, value)
+                        attr2id = cache[attrname]
+                        if isinstance(value, list):
+                            for val in value:
+                                attr2id[val] = userid
+                        else:
+                            attr2id[value] = userid
 
         setMemoryLookupCaches(self._request, cache)
         diskcache.update(cache)
