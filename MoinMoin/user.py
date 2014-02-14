@@ -21,6 +21,7 @@
 """
 
 import os, time, codecs, base64
+from copy import deepcopy
 import md5crypt
 
 try:
@@ -57,7 +58,10 @@ def getUserList(request):
     return userlist
 
 def get_by_filter(request, filter_func):
-    """ Searches for an user with a given filter function """
+    """ Searches for a user with a given filter function
+
+    Be careful: SLOW for big wikis, rather use _getUserIdByKey & related.
+    """
     for uid in getUserList(request):
         theuser = User(request, uid)
         if filter_func(theuser):
@@ -65,16 +69,13 @@ def get_by_filter(request, filter_func):
 
 def get_by_email_address(request, email_address):
     """ Searches for an user with a particular e-mail address and returns it. """
-    filter_func = lambda user: user.valid and user.email.lower() == email_address.lower()
-    return get_by_filter(request, filter_func)
+    return _getUserIdByKey(request, 'email', email_address, case=False)
 
 def get_by_jabber_id(request, jabber_id):
     """ Searches for an user with a perticular jabber id and returns it. """
-    filter_func = lambda user: user.valid and user.jid.lower() == jabber_id.lower()
-    return get_by_filter(request, filter_func)
+    return _getUserIdByKey(request, 'jid', jabber_id, case=False)
 
-
-def _getUserIdByKey(request, key, search):
+def _getUserIdByKey(request, key, search, case=True):
     """ Get the user ID for a specified key/value pair.
 
     This method must only be called for keys that are
@@ -82,14 +83,18 @@ def _getUserIdByKey(request, key, search):
 
     @param key: the key to look in
     @param search: the value to look for
+    @param case: do a case-sensitive lookup?
     @return the corresponding user ID or None
     """
     if key not in CACHED_USER_ATTRS:
         raise ValueError("unsupported key, must be in CACHED_USER_ATTRS")
     if not search:
         return None
-    cfg = request.cfg
     cfg_cache_attr = key + "2id"
+    if not case:
+        cfg_cache_attr += "_lower"
+        search = search.lower()
+    cfg = request.cfg
     try:
         attr2id = getattr(cfg.cache, cfg_cache_attr)
         from_disk = False
@@ -128,14 +133,18 @@ def setMemoryLookupCaches(request, cache):
                   or None to delete the in-memory cache.
     """
     for attrname in CACHED_USER_ATTRS:
-        cfg_cache_attr = attrname + "2id"
         if cache is None:
             try:
-                delattr(request.cfg.cache, cfg_cache_attr)
+                delattr(request.cfg.cache, attrname + "2id")
+            except:
+                pass
+            try:
+                delattr(request.cfg.cache, attrname + "2id_lower")
             except:
                 pass
         else:
-            setattr(request.cfg.cache, cfg_cache_attr, cache[attrname])
+            setattr(request.cfg.cache, attrname + "2id", cache[attrname])
+            setattr(request.cfg.cache, attrname + "2id_lower", cache[attrname + "_lower"])
 
 
 def loadLookupCaches(request):
@@ -148,7 +157,8 @@ def loadLookupCaches(request):
         cache = {}
         for attrname in CACHED_USER_ATTRS:
             cache[attrname] = {}
-    setMemoryLookupCaches(request, cache)
+    cache_with_lowercase = addLowerCaseKeys(cache)
+    setMemoryLookupCaches(request, cache_with_lowercase)
 
 
 def rebuildLookupCaches(request):
@@ -176,7 +186,8 @@ def rebuildLookupCaches(request):
                     else:
                         attr2id[value] = userid
 
-    setMemoryLookupCaches(request, cache)
+    cache_with_lowercase = addLowerCaseKeys(cache)
+    setMemoryLookupCaches(request, cache_with_lowercase)
     diskcache.update(cache)
     diskcache.unlock()
     return cache
@@ -188,6 +199,17 @@ def clearLookupCaches(request):
     setMemoryLookupCaches(request, None)
     scope, arena, key = 'userdir', 'users', 'lookup'
     caching.CacheEntry(request, arena, key, scope=scope).remove()
+
+
+def addLowerCaseKeys(cache):
+    """add lowercased lookup keys, so we can support case-insensitive lookup"""
+    c = deepcopy(cache)  # we do not want to modify cache itself
+    for attrname in CACHED_USER_ATTRS:
+        attr2id = c[attrname]
+        attr2id_lower = c[attrname + "_lower"] = {}
+        for key, value in attr2id.iteritems():
+            attr2id_lower[key.lower()] = value
+    return c
 
 
 def getUserId(request, searchName):
@@ -1030,7 +1052,8 @@ class User:
                         else:
                             attr2id[value] = userid
 
-        setMemoryLookupCaches(self._request, cache)
+        cache_with_lowercase = addLowerCaseKeys(cache)
+        setMemoryLookupCaches(self._request, cache_with_lowercase)
         diskcache.update(cache)
         diskcache.unlock()
 
