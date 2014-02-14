@@ -74,6 +74,11 @@ Version 1.9.8:
     with one click (we don't ask for a 2nd confirmation, so think first).
   * mailimport: use relative attachment link markup instead of absolute links,
     enables some page renaming operations without needing to edit the markup.
+  * better caching and lookup optimizations for userprofile data:
+    * name, email, jid, openids -> userid lookups
+    * page subscriptions for notifications (as a consequence, determination of
+      subscribers when a page is saved is much faster now, esp. for wikis with
+      many users) - see also MoinMoinBugs/GetSubscribersSlow
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
@@ -94,6 +99,9 @@ Version 1.9.8:
   * fix caching scope of name2id/openid2id caches (was: "wiki", now:
     "userdir"). this is relevant for shared user_dir configurations.
   * moin maint cleancache: cleans up openid2id cache now also
+  * "userdir" caching scope used for userid lookup caches (the previously used
+    name2id cache with "wiki" caching scope could have outdated data if you
+    share the user_dir between multiple wikis)
 
   Other changes:
   * rss_rc action (RSS feed) is now much faster / much less resource consuming
