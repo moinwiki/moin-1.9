@@ -44,7 +44,7 @@ class Success(Result):
 
 
 class UnknownChangeType(Exception):
-    """ Used to signal an invalid page change event """
+    """ Used to signal an invalid change event """
     pass
 
 
@@ -60,60 +60,45 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
     """
     _ = lambda text: request.getText(text, lang=lang)
-    changes = {'page_name': page.page_name, 'revision': str(page.getRevList()[0])}
+    cfg = request.cfg
+    data = {}
+    data['revision'] = str(page.getRevList()[0])
+    data['page_name'] = pagename = page.page_name
+    sitename = page.cfg.sitename or request.url_root
+    data['editor'] = editor = username = page.uid_override or user.getUserIdentification(request)
+
+    trivial = (kwargs.get('trivial') and _("Trivial ")) or ""
+    data['subject'] = _(cfg.mail_notify_page_changed_subject) % locals()
 
     if msgtype == "page_changed":
+        data['text'] = _(cfg.mail_notify_page_changed_intro) % locals()
+
         revisions = kwargs['revisions']
-
-    if msgtype == "page_changed":
-        changes['text'] = _("Dear Wiki user,\n\n"
-        'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
-        'The "%(pagename)s" page has been changed by %(editor)s:\n') % {
-            'pagename': page.page_name,
-            'editor': page.uid_override or user.getUserIdentification(request),
-            'sitename': page.cfg.sitename or request.url_root,
-        }
-
         # append a diff (or append full page text if there is no diff)
         if len(revisions) < 2:
-            changes['diff'] = _("New page:\n") + page.get_raw_body()
+            data['diff'] = _("New page:\n") + page.get_raw_body()
         else:
             lines = wikiutil.pagediff(request, page.page_name, revisions[1],
                                       page.page_name, revisions[0])
             if lines:
-                changes['diff'] = '\n'.join(lines)
+                data['diff'] = '\n'.join(lines)
             else:
-                changes['diff'] = _("No differences found!\n")
+                data['diff'] = _("No differences found!\n")
 
     elif msgtype == "page_deleted":
-        changes['text'] = _("Dear wiki user,\n\n"
-            'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            'The page "%(pagename)s" has been deleted by %(editor)s:\n\n') % {
-                'pagename': page.page_name,
-                'editor': page.uid_override or user.getUserIdentification(request),
-                'sitename': page.cfg.sitename or request.url_root,
-        }
+        data['text'] = _(cfg.mail_notify_page_deleted_intro) % locals()
 
     elif msgtype == "page_renamed":
-        changes['text'] = _("Dear wiki user,\n\n"
-            'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            'The page "%(pagename)s" has been renamed from "%(oldname)s" by %(editor)s:\n') % {
-                'editor': page.uid_override or user.getUserIdentification(request),
-                'pagename': page.page_name,
-                'sitename': page.cfg.sitename or request.url_root,
-                'oldname': kwargs['old_name']
-        }
-
-        changes['old_name'] = kwargs['old_name']
+        data['old_name'] = oldname = kwargs['old_name']
+        data['text'] = _(cfg.mail_notify_page_renamed_intro) % locals()
 
     else:
         raise UnknownChangeType()
 
-    changes['editor'] = page.uid_override or user.getUserIdentification(request)
     if 'comment' in kwargs and kwargs['comment']:
-        changes['comment'] = kwargs['comment']
+        data['comment'] = kwargs['comment']
 
-    return changes
+    return data
 
 
 def user_created_message(request, _, sitename, username, email):
@@ -121,84 +106,47 @@ def user_created_message(request, _, sitename, username, email):
 
     @return: a dict containing message body and subject
     """
-    subject = _("[%(sitename)s] New user account created") % {'sitename': sitename or "Wiki"}
-    text = _("""Dear Superuser, a new user has just been created on "%(sitename)s". Details follow:
+    cfg = request.cfg
+    sitename = sitename or "Wiki"
+    useremail = email
 
-    User name: %(username)s
-    Email address: %(useremail)s""") % {
-         'username': username,
-         'useremail': email,
-         'sitename': sitename or "Wiki",
-         }
-
-    return {'subject': subject, 'text': text}
-
-
-def attachment_added(request, _, page_name, attach_name, attach_size):
-    """Formats a message used to notify about new attachments
-
-    @param _: a gettext function
-    @return: a dict with notification data
-
-    """
     data = {}
-
-    data['subject'] = _("[%(sitename)s] New attachment added to page %(pagename)s") % {
-                'pagename': page_name,
-                'sitename': request.cfg.sitename or request.url_root,
-                }
-
-    data['text'] = _("Dear Wiki user,\n\n"
-    'You have subscribed to a wiki page "%(page_name)s" for change notification. '
-    "An attachment has been added to that page by %(editor)s. "
-    "Following detailed information is available:\n\n"
-    "Attachment name: %(attach_name)s\n"
-    "Attachment size: %(attach_size)s\n") % {
-        'editor': user.getUserIdentification(request),
-        'page_name': page_name,
-        'attach_name': attach_name,
-        'attach_size': attach_size,
-    }
-
-    data['editor'] = user.getUserIdentification(request)
-    data['page_name'] = page_name
-    data['attach_size'] = attach_size
-    data['attach_name'] = attach_name
-
+    data['subject'] = _(cfg.mail_notify_user_created_subject) % locals()
+    data['text'] = _(cfg.mail_notify_user_created_intro) % locals()
     return data
 
 
+def attachment_added(request, _, page_name, attach_name, attach_size):
+    return _attachment_changed(request, _, page_name, attach_name, attach_size, change="added")
+
+
 def attachment_removed(request, _, page_name, attach_name, attach_size):
-    """Formats a message used to notify about removed attachments
+    return _attachment_changed(request, _, page_name, attach_name, attach_size, change="removed")
+
+
+def _attachment_changed(request, _, page_name, attach_name, attach_size, change):
+    """Formats a message used to notify about new / removed attachments
 
     @param _: a gettext function
     @return: a dict with notification data
-
     """
+    cfg = request.cfg
+    pagename = page_name
+    sitename = cfg.sitename or request.url_root
+    editor = user.getUserIdentification(request)
     data = {}
-
-    data['subject'] = _("[%(sitename)s] Removed attachment from page %(pagename)s") % {
-                'pagename': page_name,
-                'sitename': request.cfg.sitename or request.url_root,
-                }
-
-    data['text'] = _("Dear Wiki user,\n\n"
-    'You have subscribed to a wiki page "%(page_name)s" for change notification. '
-    "An attachment has been removed from that page by %(editor)s. "
-    "Following detailed information is available:\n\n"
-    "Attachment name: %(attach_name)s\n"
-    "Attachment size: %(attach_size)s\n") % {
-        'editor': user.getUserIdentification(request),
-        'page_name': page_name,
-        'attach_name': attach_name,
-        'attach_size': attach_size,
-    }
-
-    data['editor'] = user.getUserIdentification(request)
+    data['editor'] = editor
     data['page_name'] = page_name
     data['attach_size'] = attach_size
     data['attach_name'] = attach_name
-
+    if change == "added":
+        data['subject'] = _(cfg.mail_notify_att_added_subject) % locals()
+        data['text'] = _(cfg.mail_notify_att_added_intro) % locals()
+    elif change == "removed":
+        data['subject'] = _(cfg.mail_notify_att_removed_subject) % locals()
+        data['text'] = _(cfg.mail_notify_att_removed_intro) % locals()
+    else:
+        raise UnknownChangeType()
     return data
 
 
@@ -228,4 +176,3 @@ def filter_subscriber_list(event, subscribers, for_jabber):
                     userlist.append(usr)
 
         subscribers[lang] = userlist
-

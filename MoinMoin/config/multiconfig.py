@@ -1327,6 +1327,54 @@ options = {
       ('import_pagename_envelope', u"%s", "Use this to add some fixed prefix/postfix to the generated target pagename."),
       ('import_pagename_regex', r'\[\[([^\]]*)\]\]', "Regular expression used to search for target pagename specification."),
       ('import_wiki_addrs', [], "Target mail addresses to consider when importing mail"),
+
+      ('notify_page_changed_subject', _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s'),
+       "Template for the page changed notification mail subject header"),
+      ('notify_page_changed_text', '%(intro)s%(difflink)s\n\n%(comment)s%(diff)s',
+       "Template for the page change notification mail text body"),
+      ('notify_page_changed_intro',
+       _("Dear Wiki user,\n\n"
+         'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
+         'The "%(pagename)s" page has been changed by %(editor)s:\n'),
+       "Template for the page changed notification mail intro text"),
+      ('notify_page_deleted_intro',
+       _("Dear wiki user,\n\n"
+         'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
+         'The page "%(pagename)s" has been deleted by %(editor)s:\n\n'),
+       "Template for the page deleted notification mail intro text"),
+      ('notify_page_renamed_intro',
+       _("Dear wiki user,\n\n"
+         'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
+         'The page "%(pagename)s" has been renamed from "%(oldname)s" by %(editor)s:\n'),
+       "Template for the page renamed notification mail intro text"),
+      ('notify_att_added_subject', _('[%(sitename)s] New attachment added to page %(pagename)s'),
+       "Template for the attachment added notification mail subject header"),
+      ('notify_att_added_intro',
+       _("Dear Wiki user,\n\n"
+         'You have subscribed to a wiki page "%(page_name)s" for change notification. '
+         "An attachment has been added to that page by %(editor)s. "
+         "Following detailed information is available:\n\n"
+         "Attachment name: %(attach_name)s\n"
+         "Attachment size: %(attach_size)s\n"),
+       "Template for the attachment added notification mail intro text"),
+      ('notify_att_removed_subject', _('[%(sitename)s] Removed attachment from page %(pagename)s'),
+       "Template for the attachment removed notification mail subject header"),
+      ('notify_att_removed_intro',
+       _("Dear Wiki user,\n\n"
+         'You have subscribed to a wiki page "%(page_name)s" for change notification. '
+         "An attachment has been removed from that page by %(editor)s. "
+         "Following detailed information is available:\n\n"
+         "Attachment name: %(attach_name)s\n"
+         "Attachment size: %(attach_size)s\n"),
+       "Template for the attachment removed notification mail intro text"),
+      ('notify_user_created_subject',
+       _("[%(sitename)s] New user account created"),
+       "Template for the user created notification mail subject header"),
+      ('notify_user_created_intro',
+       _('Dear Superuser, a new user has just been created on "%(sitename)s". Details follow:\n\n'
+         '    User name: %(username)s\n'
+         '    Email address: %(useremail)s'),
+       "Template for the user created notification mail intro text"),
     )),
 
     'backup': ('Backup settings',
