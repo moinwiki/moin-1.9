@@ -48,17 +48,6 @@ class UnknownChangeType(Exception):
     pass
 
 
-def page_link(request, page, querystr):
-    """Create an absolute url to a given page with optional action
-
-    @param page: a page to link to
-    @type page: MoinMoin.Page.Page
-    @param querystr: a dict passed to wikiutil.makeQueryString
-
-    """
-    return request.getQualifiedURL(page.url(request, querystr))
-
-
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
 
