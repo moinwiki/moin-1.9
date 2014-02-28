@@ -35,28 +35,35 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
     _ = lambda text: request.getText(text, lang=email_lang)
 
-    if len(revisions) >= 2:
-        querystr = {'action': 'diff',
-                    'rev2': str(revisions[0]),
-                    'rev1': str(revisions[1])}
-    else:
-        querystr = {}
-
-    pagelink = "%(link)s\n\n" % {'link': notification.page_link(request, page, querystr)}
-
-    subject = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s') % {
-            'trivial': (trivial and _("Trivial ")) or "",
-            'sitename': page.cfg.sitename or "Wiki",
-            'pagename': page.page_name,
-            'username': page.uid_override or user.getUserIdentification(request),
-        }
+    intro = change['text']
+    diff = change['diff']
 
     if change.has_key('comment'):
         comment = _("Comment:") + "\n" + change['comment'] + "\n\n"
     else:
         comment = ''
 
-    return {'subject': subject, 'text': change['text'] + pagelink + comment + change['diff']}
+    if len(revisions) >= 2:
+        querystr = {'action': 'diff',
+                    'rev2': str(revisions[0]),
+                    'rev1': str(revisions[1])}
+    else:
+        querystr = {}
+    # links to diff or to page (if only 1 rev):
+    difflink = request.getQualifiedURL(page.url(request, querystr))
+    # always links to page:
+    pagelink = request.getQualifiedURL(page.url(request))
+
+    trivial = (trivial and _("Trivial ")) or ""
+    sitename = page.cfg.sitename or "Wiki"
+    pagename = page.page_name
+    username = page.uid_override or user.getUserIdentification(request)
+
+    subject_template = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s')
+    subject = subject_template % locals()
+    text_template = '%(intro)s%(difflink)s\n\n%(comment)s%(diff)s'
+    text = text_template % locals()
+    return {'subject': subject, 'text': text}
 
 
 def send_notification(request, from_address, emails, data):
