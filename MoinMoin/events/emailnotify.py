@@ -20,7 +20,8 @@ import MoinMoin.events as ev
 import MoinMoin.events.notification as notification
 
 
-def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivial):
+def prep_page_changed_mail(request, page, comment, email_lang, revisions,
+                           trivial=False, change_type="page_changed"):
     """ Prepare information required for email notification about page change
 
     @param page: the modified page instance
@@ -32,7 +33,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     @rtype: dict
 
     """
-    change = notification.page_change_message("page_changed", request, page, email_lang,
+    change = notification.page_change_message(change_type, request, page, email_lang,
                                               comment=comment, revisions=revisions, trivial=trivial)
     _ = lambda text: request.getText(text, lang=email_lang)
     cfg = request.cfg
@@ -45,12 +46,22 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     else:
         comment = ''
 
-    if len(revisions) >= 2:
-        querystr = {'action': 'diff',
-                    'rev2': str(revisions[0]),
-                    'rev1': str(revisions[1])}
+    if change_type == "page_changed":
+        if len(revisions) >= 2:
+            diff_revs = revisions[1], revisions[0]
+        else:
+            diff_revs = None
+    elif change_type == "page_deleted":
+        if len(revisions) >= 1:
+            diff_revs = revisions[0], revisions[0] + 1
+        else:
+            diff_revs = None
+
+    if diff_revs:
+        querystr = {'action': 'diff', 'rev1': str(diff_revs[0]), 'rev2': str(diff_revs[1])}
     else:
         querystr = {}
+
     # links to diff or to page (if only 1 rev):
     difflink = request.getQualifiedURL(page.url(request, querystr))
     # always links to page:
@@ -87,6 +98,10 @@ def handle_page_change(event):
     page = event.page
     request = event.request
     trivial = isinstance(event, ev.TrivialPageChangedEvent)
+    if isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent)):
+        change_type = "page_changed"
+    elif isinstance(event, ev.PageDeletedEvent):
+        change_type = "page_deleted"
     subscribers = page.getSubscribers(request, return_users=1)
     mail_from = page.cfg.mail_from
 
@@ -102,7 +117,8 @@ def handle_page_change(event):
                      if event.name in u.email_subscribed_events]
             emails = [u.email for u in users]
             names = [u.name for u in users]
-            data = prep_page_changed_mail(request, page, comment, lang, revisions, trivial)
+            data = prep_page_changed_mail(request, page, comment, lang, revisions,
+                                          trivial=trivial, change_type=change_type)
 
             if send_notification(request, mail_from, emails, data):
                 recipients.update(names)
@@ -206,7 +222,8 @@ def handle(event):
     if not event.request.cfg.mail_enabled:
         return
 
-    if isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent)):
+    if isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent,
+                          ev.PageDeletedEvent)):
         return handle_page_change(event)
     elif isinstance(event, ev.UserCreatedEvent):
         return handle_user_created(event)

@@ -88,6 +88,15 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     elif msgtype == "page_deleted":
         data['text'] = _(cfg.mail_notify_page_deleted_intro) % locals()
 
+        revisions = kwargs['revisions']
+        latest_existing = revisions[0]
+        lines = wikiutil.pagediff(request, page.page_name, latest_existing,
+                                  page.page_name, latest_existing + 1)
+        if lines:
+            data['diff'] = '\n'.join(lines)
+        else:
+            data['diff'] = _("No differences found!\n")
+
     elif msgtype == "page_renamed":
         data['old_name'] = oldname = kwargs['old_name']
         data['text'] = _(cfg.mail_notify_page_renamed_intro) % locals()
