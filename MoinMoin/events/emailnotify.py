@@ -32,11 +32,13 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     @rtype: dict
 
     """
-    change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
+    change = notification.page_change_message("page_changed", request, page, email_lang,
+                                              comment=comment, revisions=revisions, trivial=trivial)
     _ = lambda text: request.getText(text, lang=email_lang)
-
+    cfg = request.cfg
     intro = change['text']
     diff = change['diff']
+    subject = change['subject']
 
     if change.has_key('comment'):
         comment = _("Comment:") + "\n" + change['comment'] + "\n\n"
@@ -54,15 +56,11 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     # always links to page:
     pagelink = request.getQualifiedURL(page.url(request))
 
-    trivial = (trivial and _("Trivial ")) or ""
     sitename = page.cfg.sitename or "Wiki"
     pagename = page.page_name
     username = page.uid_override or user.getUserIdentification(request)
 
-    subject_template = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s')
-    subject = subject_template % locals()
-    text_template = '%(intro)s%(difflink)s\n\n%(comment)s%(diff)s'
-    text = text_template % locals()
+    text = _(cfg.mail_notify_page_changed_text) % locals()
     return {'subject': subject, 'text': text}
 
 
