@@ -100,6 +100,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     elif msgtype == "page_renamed":
         data['old_name'] = oldname = kwargs['old_name']
         data['text'] = _(cfg.mail_notify_page_renamed_intro) % locals()
+        data['diff'] = ''
 
     else:
         raise UnknownChangeType()
