@@ -69,11 +69,15 @@ def get_by_filter(request, filter_func):
 
 def get_by_email_address(request, email_address):
     """ Searches for an user with a particular e-mail address and returns it. """
-    return _getUserIdByKey(request, 'email', email_address, case=False)
+    uid = _getUserIdByKey(request, 'email', email_address, case=False)
+    if uid is not None:
+        return User(request, uid)
 
 def get_by_jabber_id(request, jabber_id):
     """ Searches for an user with a perticular jabber id and returns it. """
-    return _getUserIdByKey(request, 'jid', jabber_id, case=False)
+    uid = _getUserIdByKey(request, 'jid', jabber_id, case=False)
+    if uid is not None:
+        return User(request, uid)
 
 def _getUserIdByKey(request, key, search, case=True):
     """ Get the user ID for a specified key/value pair.
