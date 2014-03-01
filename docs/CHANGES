@@ -79,10 +79,27 @@ Version 1.9.8:
     * page subscriptions for notifications (as a consequence, determination of
       subscribers when a page is saved is much faster now, esp. for wikis with
       many users) - see also MoinMoinBugs/GetSubscribersSlow
+  * Notification template strings are now configurable via cfg.mail_notify_...
+    * page_changed_subject, page_changed_intro
+    * page_deleted_intro
+    * page_renamed_intro
+    * page_changed_text (this puts together the bigger pieces)
+    * att_added_subject, att_added_intro
+    * att_removed_subject, att_removed_intro
+    * user_created_subject, user_created_intro
+    * Best is to read HelpOnConfiguration and look at MoinMoin.config.multiconfig
+      to see the help text and the defaults.
+    * The defaults are chosen to be the same as the old hardcoded values, so the
+      translations keep working.
+    * If you overwrite the strings in your configuration moin will still try to
+      translate your strings, but it will only find translations if you add them
+      to the gettext catalogs, too.
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
     trash pagedirs, use moin ... maint cleanpage.
+  * page rename/delete, attachment add/remove email notifications work now
+    (somehow we had an event for this, but no code handling it)
   * AttachFile do=get and do=view: send 404 status if file does not exist
   * link rel="Alternate" links: rather use page.url than request.href, so
     url_prefix_action gets used for the (print and raw) action URLs
