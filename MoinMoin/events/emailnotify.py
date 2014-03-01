@@ -69,7 +69,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions,
     pagename = page.page_name
     username = page.uid_override or user.getUserIdentification(request)
 
-    text = _(cfg.mail_notify_page_changed_text) % locals()
+    text = _(cfg.mail_notify_page_text) % locals()
     return {'subject': subject, 'text': text}
 
 

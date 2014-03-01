@@ -68,9 +68,9 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     data['editor'] = editor = username = page.uid_override or user.getUserIdentification(request)
 
     trivial = (kwargs.get('trivial') and _("Trivial ")) or ""
-    data['subject'] = _(cfg.mail_notify_page_changed_subject) % locals()
 
     if msgtype == "page_changed":
+        data['subject'] = _(cfg.mail_notify_page_changed_subject) % locals()
         data['text'] = _(cfg.mail_notify_page_changed_intro) % locals()
 
         revisions = kwargs['revisions']
@@ -86,6 +86,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
                 data['diff'] = _("No differences found!\n")
 
     elif msgtype == "page_deleted":
+        data['subject'] = _(cfg.mail_notify_page_deleted_subject) % locals()
         data['text'] = _(cfg.mail_notify_page_deleted_intro) % locals()
 
         revisions = kwargs['revisions']
@@ -99,6 +100,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
     elif msgtype == "page_renamed":
         data['old_name'] = oldname = kwargs['old_name']
+        data['subject'] = _(cfg.mail_notify_page_renamed_subject) % locals()
         data['text'] = _(cfg.mail_notify_page_renamed_intro) % locals()
         data['diff'] = ''
 
