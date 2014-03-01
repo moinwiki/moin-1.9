@@ -80,10 +80,11 @@ Version 1.9.8:
       subscribers when a page is saved is much faster now, esp. for wikis with
       many users) - see also MoinMoinBugs/GetSubscribersSlow
   * Notification template strings are now configurable via cfg.mail_notify_...
+    * page_text (this puts together the pieces for the mail body, used for all
+      changed / deleted / renamed page mail notifications)
     * page_changed_subject, page_changed_intro
-    * page_deleted_intro
-    * page_renamed_intro
-    * page_changed_text (this puts together the bigger pieces)
+    * page_deleted_subject, page_deleted_intro
+    * page_renamed_subject, page_renamed_intro
     * att_added_subject, att_added_intro
     * att_removed_subject, att_removed_intro
     * user_created_subject, user_created_intro

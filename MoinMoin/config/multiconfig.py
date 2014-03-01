@@ -1328,20 +1328,24 @@ options = {
       ('import_pagename_regex', r'\[\[([^\]]*)\]\]', "Regular expression used to search for target pagename specification."),
       ('import_wiki_addrs', [], "Target mail addresses to consider when importing mail"),
 
+      ('notify_page_text', '%(intro)s%(difflink)s\n\n%(comment)s%(diff)s',
+       "Template for putting together the pieces for the page changed/deleted/renamed notification mail text body"),
       ('notify_page_changed_subject', _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s'),
        "Template for the page changed notification mail subject header"),
-      ('notify_page_changed_text', '%(intro)s%(difflink)s\n\n%(comment)s%(diff)s',
-       "Template for the page change notification mail text body"),
       ('notify_page_changed_intro',
        _("Dear Wiki user,\n\n"
          'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
          'The "%(pagename)s" page has been changed by %(editor)s:\n'),
        "Template for the page changed notification mail intro text"),
+      ('notify_page_deleted_subject', _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s'),
+       "Template for the page deleted notification mail subject header"),
       ('notify_page_deleted_intro',
        _("Dear wiki user,\n\n"
          'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
          'The page "%(pagename)s" has been deleted by %(editor)s:\n\n'),
        "Template for the page deleted notification mail intro text"),
+      ('notify_page_renamed_subject', _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s'),
+       "Template for the page renamed notification mail subject header"),
       ('notify_page_renamed_intro',
        _("Dear wiki user,\n\n"
          'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
