@@ -84,7 +84,7 @@ def send_notification(request, from_address, emails, data):
     return sendmail.sendmail(request, emails, data['subject'], data['text'], mail_from=from_address)
 
 
-def handle_page_change(event):
+def handle_page_changed(event):
     """ Send email to all subscribers of given page.
 
     @param event: event to notify about
@@ -130,6 +130,46 @@ def handle_page_change(event):
             return notification.Success(recipients)
 
 
+def handle_file_changed(event):
+    """Sends an email to users that have subscribed to this event type"""
+
+    names = set()
+    from_address = event.request.cfg.mail_from
+    request = event.request
+    page = Page(request, event.pagename)
+
+    if isinstance(event, ev.FileAttachedEvent):
+        notification_fn = notification.attachment_added
+    elif isinstance(event, ev.FileRemovedEvent):
+        notification_fn = notification.attachment_removed
+
+    subscribers = page.getSubscribers(request, return_users=1)
+    notification.filter_subscriber_list(event, subscribers, False)
+    recipients = []
+
+    for lang in subscribers:
+        recipients.extend(subscribers[lang])
+
+    attachlink = request.getQualifiedURL(getAttachUrl(event.pagename, event.filename, request))
+    pagelink = request.getQualifiedURL(page.url(request, {}))
+
+    for lang in subscribers:
+        _ = lambda text: request.getText(text, lang=lang)
+
+        links = _("Attachment link: %(attach)s\n" \
+                  "Page link: %(page)s\n") % {'attach': attachlink, 'page': pagelink}
+
+        data = notification_fn(request, _, event.pagename, event.filename, event.size)
+        data['text'] = data['text'] + links
+
+        emails = [usr.email for usr in subscribers[lang]]
+
+        if send_notification(request, from_address, emails, data):
+            names.update(recipients)
+
+    return notification.Success(names)
+
+
 def handle_user_created(event):
     """Sends an email to super users that have subscribed to this event type"""
 
@@ -147,78 +187,6 @@ def handle_user_created(event):
             send_notification(request, from_address, [usr.email], data)
 
 
-def handle_file_attached(event):
-    """Sends an email to users that have subscribed to this event type"""
-
-    names = set()
-    from_address = event.request.cfg.mail_from
-    request = event.request
-    page = Page(request, event.pagename)
-
-    subscribers = page.getSubscribers(request, return_users=1)
-    notification.filter_subscriber_list(event, subscribers, False)
-    recipients = []
-
-    for lang in subscribers:
-        recipients.extend(subscribers[lang])
-
-    attachlink = request.getQualifiedURL(getAttachUrl(event.pagename, event.filename, request))
-    pagelink = request.getQualifiedURL(page.url(request, {}))
-
-    for lang in subscribers:
-        emails = []
-        _ = lambda text: request.getText(text, lang=lang)
-
-        links = _("Attachment link: %(attach)s\n" \
-                  "Page link: %(page)s\n") % {'attach': attachlink, 'page': pagelink}
-
-        data = notification.attachment_added(request, _, event.pagename, event.filename, event.size)
-        data['text'] = data['text'] + links
-
-        emails = [usr.email for usr in subscribers[lang]]
-
-        if send_notification(request, from_address, emails, data):
-            names.update(recipients)
-
-    return notification.Success(names)
-
-
-def handle_file_removed(event):
-    """Sends an email to users that have subscribed to this event type"""
-
-    names = set()
-    from_address = event.request.cfg.mail_from
-    request = event.request
-    page = Page(request, event.pagename)
-
-    subscribers = page.getSubscribers(request, return_users=1)
-    notification.filter_subscriber_list(event, subscribers, False)
-    recipients = []
-
-    for lang in subscribers:
-        recipients.extend(subscribers[lang])
-
-    attachlink = request.getQualifiedURL(getAttachUrl(event.pagename, event.filename, request))
-    pagelink = request.getQualifiedURL(page.url(request, {}))
-
-    for lang in subscribers:
-        emails = []
-        _ = lambda text: request.getText(text, lang=lang)
-
-        links = _("Attachment link: %(attach)s\n" \
-                  "Page link: %(page)s\n") % {'attach': attachlink, 'page': pagelink}
-
-        data = notification.attachment_removed(request, _, event.pagename, event.filename, event.size)
-        data['text'] = data['text'] + links
-
-        emails = [usr.email for usr in subscribers[lang]]
-
-        if send_notification(request, from_address, emails, data):
-            names.update(recipients)
-
-    return notification.Success(names)
-
-
 def handle(event):
     """An event handler"""
 
@@ -227,11 +195,8 @@ def handle(event):
 
     if isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent,
                           ev.PageDeletedEvent, ev.PageRenamedEvent)):
-        return handle_page_change(event)
+        return handle_page_changed(event)
+    elif isinstance(event, (ev.FileAttachedEvent, ev.FileRemovedEvent)):
+        return handle_file_changed(event)
     elif isinstance(event, ev.UserCreatedEvent):
         return handle_user_created(event)
-    elif isinstance(event, ev.FileAttachedEvent):
-        return handle_file_attached(event)
-    elif isinstance(event, ev.FileRemovedEvent):
-        return handle_file_removed(event)
-
