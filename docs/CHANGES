@@ -95,6 +95,30 @@ Version 1.9.8:
     * If you overwrite the strings in your configuration moin will still try to
       translate your strings, but it will only find translations if you add them
       to the gettext catalogs, too.
+    * Examples:
+
+      a) notification mail body: you don't want the rendered diff, you don't
+         want to link to the diff, but to the full page view on your wiki.
+
+      # original (default) value
+      mail_notify_page_text = '%(intro)s%(difflink)s\n\n%(comment)s%(diff)s'
+      # put this in your wiki config
+      mail_notify_page_text = '%(intro)s%(pagelink)s\n\n%(comment)s'
+
+      b) notification mail subject:
+      # original (default) value
+      mail_notify_page_changed_subject = '[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s'
+
+      c) notification mail intro:
+      # original (default) value
+      mail_notify_page_changed_intro = \
+          ("Dear Wiki user,\n\n"
+           'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
+           'The "%(pagename)s" page has been changed by %(editor)s:\n')
+
+      Note: if you change "*_page_changed_*", you likely also want to change
+      "*_page_deleted_*" and "*_page_renamed_*", maybe even "*_att_added_*"
+      and "*_att_removed_*".
 
   Fixes:
   * do not create empty pagedirs (with empty edit-log). To clean up all the
