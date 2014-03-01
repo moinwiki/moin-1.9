@@ -11,7 +11,7 @@ import py
 import MoinMoin.events as events
 import MoinMoin.events.notification as notification
 import MoinMoin.events.jabbernotify as jabbernotify
-from MoinMoin.Page import Page
+from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
 
 def test_get_handlers(request):
@@ -42,7 +42,7 @@ def test_subscribable_events(request):
     assert events.get_subscribable_events()
 
 def test_page_change_message(request):
-    page = Page(request, "FrontPage")
+    page = PageEditor(request, "FrontPage")
 
     print "Provided with a dumb change type argument, this should raise an exception!"
     py.test.raises(notification.UnknownChangeType, notification.page_change_message,
