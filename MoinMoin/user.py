@@ -1038,7 +1038,6 @@ class User:
             attr2id = cache[attrname]
             for key, value in attr2id.items():
                 if value == userid:
-                    print "deleting old cached attr %s -> %s" % (key, value)
                     del attr2id[key]
 
         # then, if user is valid, update with the current attr values:
@@ -1048,7 +1047,6 @@ class User:
                     value = getattr(self, attrname)
                     if value:
                         # we do not store empty values, likely not unique
-                        print "setting new cached attr %s -> %r" % (attrname, value)
                         attr2id = cache[attrname]
                         if isinstance(value, list):
                             for val in value:
