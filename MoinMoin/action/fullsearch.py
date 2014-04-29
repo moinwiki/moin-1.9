@@ -212,7 +212,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
             return
     if not results.hits: # no hits?
         f = request.formatter
-        querydict = dict(wikiutil.parseQueryString(request.query_string))
+        querydict = wikiutil.parseQueryString(request.query_string).to_dict()
         querydict.update({'titlesearch': 0})
 
         request.theme.add_msg(_('Your search query {{{"%s"}}} didn\'t return any results. '
@@ -241,7 +241,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     hints = []
 
     if titlesearch:
-        querydict = dict(wikiutil.parseQueryString(request.query_string))
+        querydict = wikiutil.parseQueryString(request.query_string).to_dict()
         querydict.update({'titlesearch': 0})
 
         hints.append(''.join([
