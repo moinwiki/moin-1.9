@@ -1,0 +1,45 @@
+[DEFAULT]
+# Logfile to create.
+# Make sure the running moin process has create/write rights there.
+logfile=/tmp/abuse.log
+
+[loggers]
+keys=root,moin_abuse
+
+[logger_root]
+level=INFO
+handlers=stderr
+
+[logger_moin_abuse]
+level=INFO
+handlers=abuse
+qualname=MoinMoin.util.abuse
+propagate=0
+
+[handlers]
+keys=stderr,abuse
+
+[handler_stderr]
+class=StreamHandler
+formatter=default
+level=DEBUG
+args=(sys.stderr, )
+
+[handler_abuse]
+class=FileHandler
+formatter=abuse
+level=DEBUG
+args=('%(logfile)s', 'at')
+
+[formatters]
+keys=default,abuse
+
+[formatter_default]
+format=%(asctime)s %(levelname)s %(name)s:%(lineno)d %(message)s
+datefmt=
+class=logging.Formatter
+
+[formatter_abuse]
+format=%(asctime)s %(levelname)s %(message)s
+datefmt=
+class=logging.Formatter

@@ -43,6 +43,9 @@ Version 1.9.8:
     TIME is in seconds, the slowness indicator is "." for sub-second requests
     or N times "!" for requests taking N seconds (so you easily can grep for
     slow stuff).
+  * add "abuse" logging. currently this is only used by authentication system
+    (and there only for "moin" and "given" auth). abuse logging is configured
+    via the logging configuration, see example: wiki/config/logging/abuse
   * backlinks performance tuning: the pagename in the theme has historically
     been used to trigger a "linkto:ThisPage" search. While this is a nice
     feature for human users of the wiki (esp. on category pages), it has one
