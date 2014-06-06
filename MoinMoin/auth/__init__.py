@@ -140,6 +140,7 @@ logging = log.getLogger(__name__)
 from werkzeug import redirect, abort, url_quote, url_quote_plus
 
 from MoinMoin import user, wikiutil
+from MoinMoin.util.abuse import log_attempt
 
 
 def get_multistage_continuation_url(request, auth_name, extra_fields={}):
@@ -245,9 +246,11 @@ class MoinAuth(BaseAuth):
         u = user.User(request, name=username, password=password, auth_method=self.name)
         if u.valid:
             logging.debug("%s: successfully authenticated user %r (valid)" % (self.name, u.name))
+            log_attempt("auth: login (moin)", True, request, username)
             return ContinueLogin(u)
         else:
             logging.debug("%s: could not authenticate user %r (not valid)" % (self.name, username))
+            log_attempt("auth: login (moin)", False, request, username)
             return ContinueLogin(user_obj, _("Invalid username or password."))
 
     def login_hint(self, request):
@@ -370,9 +373,12 @@ class GivenAuth(BaseAuth):
             u.create_or_update()
         if u and u.valid:
             logging.debug("returning valid user %r" % u)
+            log_attempt("auth: request (given)", True, request, auth_username)
             return u, True # True to get other methods called, too
         else:
             logging.debug("returning %r" % user_obj)
+            if u and not u.valid:
+                log_attempt("auth: request (given)", False, request, auth_username)
             return user_obj, True
 
 
