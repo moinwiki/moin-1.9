@@ -140,6 +140,7 @@ logging = log.getLogger(__name__)
 from werkzeug import redirect, abort, url_quote, url_quote_plus
 
 from MoinMoin import user, wikiutil
+from MoinMoin.web.utils import check_surge_protect
 from MoinMoin.util.abuse import log_attempt
 
 
@@ -242,6 +243,9 @@ class MoinAuth(BaseAuth):
 
         if username and not password:
             return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.'))
+
+        check_surge_protect(request, action='auth-ip')
+        check_surge_protect(request, action='auth-name', username=username)
 
         u = user.User(request, name=username, password=password, auth_method=self.name)
         if u.valid:
