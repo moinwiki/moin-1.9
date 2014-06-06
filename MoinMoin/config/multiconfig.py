@@ -858,9 +858,11 @@ options_no_group_name = {
         # (like photo galleries) triggering surge protection, we assign rather high limits:
         'AttachFile': (300, 30),
         'cache': (600, 30), # cache action is very cheap/efficient
-        # special stuff to prevent someone trying lots of usernames / passwords to log in:
-        'auth-ip': (10, 3600),  # same remote ip (any name)
-        'auth-name': (10, 3600),  # same name (any remote ip)
+        # special stuff to prevent someone trying lots of usernames / passwords to log in.
+        # we keep this commented / disabled so that this feature does not get activated by default
+        # (if somebody does not override surge_action_limits with own values):
+        #'auth-ip': (10, 3600),  # same remote ip (any name)
+        #'auth-name': (10, 3600),  # same name (any remote ip)
      },
      "Surge protection tries to deny clients causing too much load/traffic, see HelpOnConfiguration/SurgeProtection."),
     ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
