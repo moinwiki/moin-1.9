@@ -42,12 +42,15 @@ def check_forbidden(request):
                 raise Forbidden()
     return False
 
-def check_surge_protect(request, kick=False):
+def check_surge_protect(request, kick=False, action=None, username=None):
     """ Check for excessive requests
 
     Raises a SurgeProtection exception on wiki overuse.
 
     @param request: a moin request object
+    @param kick: immediately ban this user
+    @param action: specify the action explicitly (default: request.action)
+    @param username: give username (for action == 'auth-name')
     """
     limits = request.cfg.surge_action_limits
     if not limits:
@@ -58,8 +61,26 @@ def check_surge_protect(request, kick=False):
         return False
 
     validuser = request.user.valid
-    current_id = validuser and request.user.name or remote_addr
-    current_action = request.action
+    current_action = action or request.action
+    if current_action == 'auth-ip':
+        # for checking if some specific ip tries to authenticate too often,
+        # not considering the username it tries to authenticate as (could
+        # be many different names)
+        if current_action not in limits:
+            # if admin did not add this key to the limits configuration, do nothing
+            return False
+        current_id = remote_addr
+    elif current_action == 'auth-name':
+        # for checking if some username tries to authenticate too often,
+        # not considering the ip the request comes from (could be a distributed
+        # attack on a high-privilege user)
+        if current_action not in limits:
+            # if admin did not add this key to the limits configuration, do nothing
+            return False
+        current_id = username
+    else:
+        # general case
+        current_id = validuser and request.user.name or remote_addr
 
     default_limit = limits.get('default', (30, 60))
 
@@ -97,10 +118,10 @@ def check_surge_protect(request, kick=False):
                 timestamps.append((now + request.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
 
         if current_action not in ('cache', 'AttachFile', ): # don't add cache/AttachFile accesses to all or picture galleries will trigger SP
-            current_action = 'all' # put a total limit on user's requests
-            maxnum, dt = limits.get(current_action, default_limit)
+            action = 'all' # put a total limit on user's requests
+            maxnum, dt = limits.get(action, default_limit)
             events = surgedict.setdefault(current_id, {})
-            timestamps = events.setdefault(current_action, [])
+            timestamps = events.setdefault(action, [])
 
             if kick: # ban this guy, NOW
                 timestamps.extend([(now + request.cfg.surge_lockout_time, "!")] * (2 * maxnum))
@@ -127,6 +148,7 @@ def check_surge_protect(request, kick=False):
         logging.info("Trusted user %s would have triggered surge protection if not trusted.", request.user.name)
         return False
     elif surge_detected:
+        logging.warning("Surge Protection: action=%s id=%s (ip: %s)", current_action, current_id, remote_addr)
         raise SurgeProtection(retry_after=request.cfg.surge_lockout_time)
     else:
         return False

@@ -51,6 +51,39 @@ Version 1.9.8:
       * "moin" auth
       * "given" auth
       * setuid (when superuser switches to another user)
+  * surge protection for authentication (currently only for MoinAuth):
+    a) surge protect by IP
+       This covers the case someone is trying to authenticate way too
+       often - we don't look at the username here, just at the remote IP
+       address. If surge protection kicks in for some specific IP, that IP
+       won't be able to try to authenticate any more until surge_lockout_time
+       is over.
+       Note: be careful with users behind proxies or NAT routers - these are
+             common and legitimate cases with (potentially lots of)
+             authentication requests coming from same IP.
+             if it is a trusted proxy, you can configure moin so it sees the
+             real remote IP address (not just the proxy's address).
+    b) surge protect by name
+       This covers the case someone is trying to authenticate for a
+       specific user name way too often (e.g. when someone tries to attack the
+       wiki admin's account). We don't look at the IP here, just at the user
+       name. If surge protection kicks in for some specific user name, that user
+       name will not be able to try to authenticate any more until
+       surge_lockout_time is over.
+       Note: this even covers widely distributed attacks against a user, but
+             you should only enable this if you are aware that the "real" user
+             also won't be able to authenticate while surge protection is active
+             (at least not using the account for that specific username).
+             Thus, there is some denial-of-service danger with this if the
+             attacker can guess or find your valid user names (which isn't too
+             difficult if your wiki is publicly readable).
+             This is bad, but technically hard to avoid.
+    Configuration (allowing 10 authentication attempts per hour):
+        surge_action_limits = {
+            # ...
+            'auth-ip': (10, 3600),  # same remote ip (any name)
+            'auth-name': (10, 3600),  # same name (any remote ip)
+         }
   * backlinks performance tuning: the pagename in the theme has historically
     been used to trigger a "linkto:ThisPage" search. While this is a nice
     feature for human users of the wiki (esp. on category pages), it has one
