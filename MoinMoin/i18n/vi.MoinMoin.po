@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 16:38+0100\n"
+"POT-Creation-Date: 2014-08-04 22:35+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -26,104 +26,8 @@ msgstr ""
 "X-Language-in-English: Vietnamese\n"
 "X-HasWikiMarkup: True\n"
 
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
-
-msgid "The theme name is not set."
-msgstr ""
-
-#, python-format
-msgid "Theme files not installed! Write rights missing for %s."
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "Bản vẽ '%(filename)s' đã được lưu."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr ""
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr ""
-
-msgid "Invalid package file header."
-msgstr ""
-
-msgid "Package file format unsupported."
-msgstr ""
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr ""
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr ""
-
-msgid "Too many arguments"
-msgstr ""
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "No argument named \"%s\""
-msgstr "Không có trang giống \"%s\"!"
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Dự đoán \"=\" sẽ theo sau \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Dự đoán \"%(token)s\" sẽ chứa giá trị nào đó"
+msgid "Your changes are not saved!"
+msgstr "Thay đổi của bạn không được lưu!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Bạn không được phép sửa trang này."
@@ -138,6 +42,9 @@ msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Thời gian dành riêng cho bạn đã hết. Hãy sẵn sàng đối mặt với xung đột khi "
 "chỉnh sửa trang!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Tên trang quá dài, hãy thử tên ngắn hơn."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -233,9 +140,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Xem thử"
 
-#, fuzzy
-msgid "Text mode"
-msgstr "Nội dung"
+msgid "GUI Mode"
+msgstr "Chế độ GUI"
 
 msgid "Load Draft"
 msgstr "Nạp bản nháp"
@@ -255,81 +161,6 @@ msgstr "Thêm vào: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Xóa khoảng trắng ở cuối mỗi dòng"
-
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Việc không rõ"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Bạn không thể tạo một bản vẽ ở trang này."
-
-#, fuzzy
-msgid "Login and try again."
-msgstr " %s và thử lại."
-
-msgid "The wiki is currently not reachable."
-msgstr "Hiện không thể vào được wiki."
-
-msgid "Invalid username or password."
-msgstr "Tên đăng nhập hoặc mật khẩu bất hợp lệ."
-
-#, python-format
-msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
-msgstr ""
-"Wiki ở xa dùng một tên InterWiki khác (%(remotename)s) với tên mà bạn chỉ "
-"định (%(localname)s)."
-
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"Text matching regular expression \"%(regex)s\" is highlighted. "
-"%(switch_link)s."
-msgstr ""
-
-msgid "Switch to non-highlighted view"
-msgstr ""
-
-#, fuzzy
-msgid ""
-"The backed up content of this page is deprecated and will rank lower in "
-"search results!"
-msgstr ""
-"Nội dung lưu của trang này đã lạc hậu và sẽ không được hiển thị trong kết "
-"quả tìm kiếm!"
-
-#, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr "Phiên bản %(rev)d ngày %(date)s"
-
-#, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "Được chuyển từ trang \"%(page)s\""
-
-#, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Trang này sẽ chuyển tới trang \"%(page)s\""
-
-#, fuzzy
-msgid "Create New Page"
-msgstr "Tạo trang này"
-
-msgid "You are not allowed to view this page."
-msgstr "Bạn không xem trang này được."
-
-msgid "Your changes are not saved!"
-msgstr "Thay đổi của bạn không được lưu!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Tên trang quá dài, hãy thử tên ngắn hơn."
-
-msgid "GUI Mode"
-msgstr "Chế độ GUI"
 
 msgid "Edit was cancelled."
 msgstr "Các chỉnh sửa đã bị hủy bỏ."
@@ -492,352 +323,1033 @@ msgid ""
 "Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Bạn không thể sửa trang này."
-
-#, fuzzy
-msgid "Your subscription to this page has been removed."
-msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Không thể huỷ bỏ đăng ký biểu thức chính quy!"
-
-msgid "Edit the subscription regular expressions in your settings."
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr ""
 
+msgid "The theme name is not set."
+msgstr ""
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Bản vẽ '%(filename)s' đã được lưu."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr ""
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr ""
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr ""
+
+msgid "The wiki is currently not reachable."
+msgstr "Hiện không thể vào được wiki."
+
+msgid "Invalid username or password."
+msgstr "Tên đăng nhập hoặc mật khẩu bất hợp lệ."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+"Wiki ở xa dùng một tên InterWiki khác (%(remotename)s) với tên mà bạn chỉ "
+"định (%(localname)s)."
+
 #, fuzzy
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Bạn vừa đăng ký vào trang này."
+msgid "Text mode"
+msgstr "Nội dung"
 
 #, fuzzy, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Tạo bản vẽ \"%(filename)s\" mới"
+msgid "Unknown action %(action_name)s."
+msgstr "Việc không rõ"
 
 #, fuzzy, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Sửa bản vẽ \"%(filename)s\""
-
-#, fuzzy, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Sửa bản vẽ \"%(filename)s\""
-
-#, fuzzy, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
-
-msgid "You are not allowed to save a drawing on this page."
+msgid "You are not allowed to do %(action_name)s on this page."
 msgstr "Bạn không thể tạo một bản vẽ ở trang này."
 
-msgid "Empty target name given."
+#, fuzzy
+msgid "Login and try again."
+msgstr " %s và thử lại."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
 msgstr ""
 
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr ""
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "No argument named \"%s\""
+msgstr "Không có trang giống \"%s\"!"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Dự đoán \"=\" sẽ theo sau \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Dự đoán \"%(token)s\" sẽ chứa giá trị nào đó"
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
 msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
 msgstr ""
-"Không có nội dung. Xóa các ký tự không nằm trong bảng mã ASCII và thử lại."
 
-msgid "You are not allowed to view attachments of this page."
-msgstr "Bạn không thể xem các file gửi kèm trong trang này."
-
-msgid "Edit drawing"
-msgstr "Sửa bản vẽ"
-
-msgid "No older revisions available!"
-msgstr "Không có phiên bản cũ hơn!"
-
-msgid "No log entries found."
-msgstr "Không tìm thấy mục nào."
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "diff của \"%s\""
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Sự khác nhau giữa phiên bản %d và %d"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(trải qua %d phiên bản)"
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 #, fuzzy
-msgid "Revert to this revision"
-msgstr "Hoàn nguyên phiên bản %(rev)d."
+msgid ""
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
+msgstr ""
+"Nội dung lưu của trang này đã lạc hậu và sẽ không được hiển thị trong kết "
+"quả tìm kiếm!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Phiên bản %(rev)d ngày %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Được chuyển từ trang \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Trang này sẽ chuyển tới trang \"%(page)s\""
 
 #, fuzzy
-msgid "Previous change"
-msgstr "Xem qua"
+msgid "Create New Page"
+msgstr "Tạo trang này"
 
-#, fuzzy
-msgid "Next change"
-msgstr "Lưu các thay đổi"
+msgid "You are not allowed to view this page."
+msgstr "Bạn không xem trang này được."
 
-msgid "Size"
-msgstr "Kích thước"
+msgid "No recipients, nothing to do"
+msgstr ""
 
-msgid "Editor"
-msgstr "Tác giả"
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Kết nối tới mailserver '%(server)s' bị ngắt quảng vì lý do: %(reason)s"
+
+msgid "Mail not sent"
+msgstr ""
+
+msgid "Mail sent OK"
+msgstr "Thư đã được gửi"
 
 msgid "Date"
 msgstr "Ngày"
 
-msgid "Comment"
-msgstr "Chú thích"
-
-#, fuzzy
-msgid "Diff with oldest revision in left pane"
-msgstr "Không có phiên bản cũ hơn!"
-
-#, fuzzy
-msgid "No older revision available for diff"
-msgstr "Không có phiên bản cũ hơn!"
-
-#, fuzzy
-msgid "Diff with older revision in left pane"
-msgstr "Không có phiên bản cũ hơn!"
-
-msgid "Diff with newer revision in left pane"
+msgid "From"
 msgstr ""
 
-msgid "Can't change to revision newer than in right pane"
-msgstr ""
-
-msgid "N/A"
-msgstr "không rõ"
-
-msgid "Diff with older revision in right pane"
-msgstr ""
-
-msgid "Can't change to revision older than revision in left pane"
-msgstr ""
-
-msgid "Diff with newer revision in right pane"
+msgid "To"
 msgstr ""
 
 #, fuzzy
-msgid "No newer revision available for diff"
-msgstr "Không có phiên bản cũ hơn!"
+msgid "Content"
+msgstr "Trang chỉ dẫn"
 
 #, fuzzy
-msgid "Diff with newest revision in right pane"
-msgstr "Không có phiên bản cũ hơn!"
-
-msgid "No differences found!"
-msgstr "Không có sự khác biệt!"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Trang này đã được lưu %(count)d lần!"
-
-msgid "(ignoring whitespace)"
-msgstr ""
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Bỏ qua các thay đổi về số lượng khoảng trắng"
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Danh sách liên kết đầy đủ trong \"%s\""
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(bao gồm cả %(localwords)d %(pagelink)s)"
+msgid "Attachments"
+msgstr "Gửi kèm file mới"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of "
-"%(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"%(badwords)d từ không có trong từ điển (%(totalwords)d từ)%(localwords)s và "
-"được đánh dấu bên dưới:"
-
-msgid "Add checked words to dictionary"
-msgstr "Thêm các từ đã kiểm tra vào từ điển"
-
-msgid "No spelling errors found!"
-msgstr "Không có lỗi chính tả!"
-
-#, fuzzy
-msgid "You can't save spelling words."
-msgstr ""
-"Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-"Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
-
-msgid "Do it."
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
 
-#, python-format
-msgid "Execute action %(actionname)s?"
+msgid "Could not contact botbouncer.com."
 msgstr ""
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Bạn không thể tạo một bản vẽ ở trang này."
 
 msgid "Please log in first."
 msgstr ""
 
-msgid "Please first create a homepage before creating additional pages."
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Password"
+msgstr "Mật khẩu"
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Các chỉnh sửa đã bị huỷ."
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "Các chỉnh sửa đã bị huỷ."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+#, fuzzy
+msgid "Missing user name. Please enter user name and password."
+msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+msgid "HelpOnParsers"
 msgstr ""
 
 #, python-format
 msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
-"[[%(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
-"%(username)s only||\n"
-"\n"
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
 msgstr ""
 
-msgid "MyPages management"
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
+" Nhấn mạnh:: <<Verbatim('')>>''nghiêng''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''đậm'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''nghiêng "
+"đậm'''''<<Verbatim(''''')>>; <<Verbatim('')>>''lẫn "
+"''<<Verbatim(''')>>'''''đậm'''<<Verbatim(''')>> và "
+"nghiêng''<<Verbatim('')>>; <<Verbatim(----)>> thước ngang.\n"
+" Đầu đề:: <<Verbatim(=)>> Tiêu đề 1 <<Verbatim(=)>>; <<Verbatim(==)>> Tiêu "
+"đề 2 <<Verbatim(==>>; <<Verbatim(===)>> Tiêu đề 3 <<Verbatim(===)>>; "
+"<<Verbatim(====)>> Tiêu đề 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Tiêu đề "
+"5 <<Verbatim(=====)>>.\n"
+" Danh sách:: khoảng trắng và: * cho điểm tròn; 1. hay a. hay A. hay i. hay "
+"I. cho các mục được đánh dấu; 1.#n để đánh số từ n; khoảng trắng để thụt "
+"vào.\n"
+" Liên kết:: <<Verbatim(CácChữHoaLiềnNhau)>>; <<Verbatim([\"ngoặc vuông và "
+"nháy kép\"])>>; URL; [URL]; [URL nhãn].\n"
+" Bảng:: || nội dung ô |||| nội dung ô trải qua 2 cột ||;    không được có "
+"khoảng trắng sau bảng hoặc tiêu đề.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr ""
+
+#, fuzzy
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT không thể được thực hiện!"
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "lỗi xử lý %(errortype)s"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Nhấn mạnh:: <<Verbatim('')>>''nghiêng''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''đậm'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''nghiêng "
+"đậm'''''<<Verbatim(''''')>>; <<Verbatim('')>>''lẫn "
+"''<<Verbatim(''')>>'''''đậm'''<<Verbatim(''')>> và "
+"nghiêng''<<Verbatim('')>>; <<Verbatim(----)>> thước ngang.\n"
+" Đầu đề:: <<Verbatim(=)>> Tiêu đề 1 <<Verbatim(=)>>; <<Verbatim(==)>> Tiêu "
+"đề 2 <<Verbatim(==>>; <<Verbatim(===)>> Tiêu đề 3 <<Verbatim(===)>>; "
+"<<Verbatim(====)>> Tiêu đề 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Tiêu đề "
+"5 <<Verbatim(=====)>>.\n"
+" Danh sách:: khoảng trắng và: * cho điểm tròn; 1. hay a. hay A. hay i. hay "
+"I. cho các mục được đánh dấu; 1.#n để đánh số từ n; khoảng trắng để thụt "
+"vào.\n"
+" Liên kết:: <<Verbatim(CácChữHoaLiềnNhau)>>; <<Verbatim([\"ngoặc vuông và "
+"nháy kép\"])>>; URL; [URL]; [URL nhãn].\n"
+" Bảng:: || nội dung ô |||| nội dung ô trải qua 2 cột ||;    không được có "
+"khoảng trắng sau bảng hoặc tiêu đề.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+"Dự đoán \"%(wanted)s\" theo sau \"%(key)s\", nhưng lại là \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Dự đoán một số nguyên \"%(key)s\" đứng trước \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Dự đoán một số nguyên \"%(arg)s\" đứng sau \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Dự đoán một giá trị màu \"%(arg)s\" đứng sau \"%(key)s\""
+
+#, fuzzy
+msgid "Password is too short."
+msgstr "Lập lại mật khẩu"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
+msgid "Diffs"
+msgstr "Các bản diff"
+
+msgid "Info"
+msgstr "Thông tin"
+
+msgid "Edit"
+msgstr "Sửa"
+
+msgid "UnSubscribe"
+msgstr "Huỷ đăng ký"
+
+msgid "Subscribe"
+msgstr "Đăng ký"
+
+msgid "Raw"
+msgstr "Thô"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "In"
+
+msgid "View"
+msgstr "Xem"
+
+msgid "Up"
+msgstr "Trên"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Mở khung soạn thảo khi nhấp chuột 2 lần"
+
+msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
+msgstr ""
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Hiện dấu chấm hỏi cho các trang không tồn tại"
+
+msgid "Show page trail"
+msgstr "Hiện vệt trang (page trail)"
+
+msgid "Show icon toolbar"
+msgstr "Hiện thanh công cụ"
+
+msgid "Show top/bottom links in headings"
+msgstr "Hiện các liên kết về đầu và về cuối trang ở các tiêu đề"
+
+msgid "Show fancy diffs"
+msgstr "Hiện diff đẹp"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Thêm khoảng trống để hiển thị các tên wiki (Wiki Names)"
+
+msgid "Remember login information"
+msgstr "Nhớ thông tin đăng nhập"
+
+msgid "Disable this account forever"
+msgstr "Huỷ bỏ account này"
+
+#, fuzzy
+msgid "(Use FirstnameLastname)"
+msgstr ""
+"(Dùng HọĐệmTên, và khong bo dau, hoặc dùng Firstname''''''Lastname với tên "
+"tiếng Anh)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Email"
+msgstr "Thư điện tử"
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr "CSS URL riêng"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(để trống nếu không dùng CSS)"
+
+msgid "Editor size"
+msgstr "Kích thước khung soạn thảo"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr "[%(sitename)s] Cập nhật %(trivial)scủa \"%(pagename)s\""
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Chào bạn,\n"
+"\n"
+"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
+"nhận các thông báo thay đổi.\n"
+"\n"
+"Trang sau đã được thay đổi bởi %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Chào bạn,\n"
+"\n"
+"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
+"nhận các thông báo thay đổi.\n"
+"\n"
+"Trang sau đã được thay đổi bởi %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
+msgstr ""
+"Chào bạn,\n"
+"\n"
+"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
+"nhận các thông báo thay đổi.\n"
+"\n"
+"Trang sau đã được thay đổi bởi %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "<<Verbatim(attachment:)>>%(filename)s trong trang %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "<<Verbatim(attachment:)>>%(filename)s trong trang %(pagename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Chào bạn,\n"
+"\n"
+"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
+"nhận các thông báo thay đổi.\n"
+"\n"
+"Trang sau đã được thay đổi bởi %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+msgid "anonymous"
+msgstr ""
+
+msgid "Line"
+msgstr "Dòng"
+
+msgid "No differences found!"
+msgstr "Không có sự khác biệt!"
+
+msgid "Deletions are marked like this."
+msgstr "Các phần bị xoá được đánh dấu như thế này."
+
+msgid "Additions are marked like this."
+msgstr "Các phần thêm vào được đánh dấu như thế này."
+
+msgid "DeleteCache"
+msgstr ""
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(lưu %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Hoặc chọn các hành động sau:"
+
+msgid "Unsubscribe"
+msgstr "Huỷ đăng ký"
+
+msgid "Home"
+msgstr "Trang nhà"
+
+msgid "[RSS]"
+msgstr ""
+
+msgid "[DELETED]"
+msgstr ""
+
+msgid "[UPDATED]"
+msgstr ""
+
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
+msgid "[NEW]"
+msgstr ""
+
+msgid "[DIFF]"
+msgstr ""
+
+msgid "[BOTTOM]"
+msgstr ""
+
+msgid "[TOP]"
+msgstr ""
+
+msgid "Click to do a full-text search for this title"
+msgstr "Nhấn vào đây để thực hiện tìm kiếm theo nội dung với tiêu đề này"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Logout"
+msgstr "Thoát"
 
 msgid "Login"
 msgstr "Đăng nhập"
 
-msgid "General Information"
-msgstr "Thông tin chung"
+msgid "Clear message"
+msgstr "Xoá thông báo"
 
 #, python-format
-msgid "Page size: %d"
-msgstr "Kích thước trang: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "Mã SHA của trang này là:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Những người dùng sau đã đăng ký vào trang này:"
-
-msgid "This page links to the following pages:"
-msgstr "Trang này liên kết tới các trang sau:"
+msgid "last edited %(time)s by %(editor)s"
+msgstr "thay đổi lần cuối lúc %(time)s bởi %(editor)s"
 
 #, python-format
-msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to "
-"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgid "last modified %(time)s"
+msgstr "thay đổi cuối lúc %(time)s"
+
+msgid "Search:"
+msgstr "Tìm:"
+
+msgid "Text"
+msgstr "Nội dung"
+
+msgid "Titles"
+msgstr "Tiêu đề"
+
+#, fuzzy
+msgid "Search"
+msgstr "Tìm:"
+
+msgid "More Actions:"
+msgstr "Các hành động khác:"
+
+msgid "------------------------"
 msgstr ""
 
 #, fuzzy
-msgid "Newer"
-msgstr "Tên mới"
+msgid "Raw Text"
+msgstr "Hiện trang nguồn"
 
-msgid "Older"
-msgstr ""
-
-#, python-format
-msgid "%s items per page"
-msgstr ""
-
-msgid "Diff"
-msgstr "diff"
-
-msgid "Action"
-msgstr "Công việc"
-
-msgid "view"
-msgstr "xem"
+msgid "Print View"
+msgstr "Xem bản in"
 
 #, fuzzy
-msgid "to previous"
-msgstr "Xem qua"
+msgid "Delete Cache"
+msgstr "Xóa trang"
 
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Hoàn nguyên phiên bản %(rev)d."
-
-#, fuzzy, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "File gửi kèm trong trang \"%(pagename)s\""
-
-msgid "get"
-msgstr "lấy"
-
-msgid "del"
-msgstr "xoá"
-
-msgid "edit"
-msgstr "sửa"
-
-msgid "Revision History"
-msgstr "Danh sách các thay đổi"
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Thông tin về \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "Hiển thị \"%(title)s\""
-
-msgid "General Page Infos"
-msgstr "Thông tin chung"
-
-msgid "Page hits and edits"
-msgstr "Số lần xem và sửa"
+msgid "Rename Page"
+msgstr "Đổi tên trang"
 
 #, fuzzy
 msgid "Copy Page"
 msgstr "Tới trang"
 
+msgid "Delete Page"
+msgstr "Xóa trang"
+
+msgid "Like Pages"
+msgstr ""
+
+msgid "Local Site Map"
+msgstr ""
+
+msgid "My Pages"
+msgstr ""
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Đăng ký"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Các liên kết thường dùng"
+
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Hoàn nguyên phiên bản %(rev)d."
+
+msgid "Package Pages"
+msgstr ""
+
+msgid "Render as Docbook"
+msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Trang"
+
+msgid "Do"
+msgstr "Làm"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Chú thích"
+
+msgid "Edit (Text)"
+msgstr ""
+
+msgid "Edit (GUI)"
+msgstr ""
+
+msgid "Immutable Page"
+msgstr "Trang không thể được thay đổi"
+
+msgid "Remove Link"
+msgstr ""
+
+msgid "Add Link"
+msgstr ""
+
+#, python-format
+msgid "Show %s days."
+msgstr "Hiện %s ngày."
+
+msgid "Wiki Markup"
+msgstr "Đánh dấu kiểu wiki"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Page"
+msgstr "Trang"
+
+msgid "User"
+msgstr "Người dùng"
+
+msgid "[ATTACH]"
+msgstr ""
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "All attachments included into the package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "Gửi kèm file mới"
+
+#, fuzzy
+msgid "Page link"
+msgstr "Trang giống \"%s\""
+
+msgid "Changed page"
+msgstr ""
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Lưu các thay đổi"
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Số lần xem và sửa"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "Trang \"%s\" đã được xoá!"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Số lần xem và sửa"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Gửi kèm file mới"
+
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Gửi kèm file mới"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Bạn vừa đăng ký vào trang này."
+
+msgid "A new account has been created"
+msgstr ""
+
+msgid "Trivial "
+msgstr "nhỏ nhặt "
+
+msgid "New page:\n"
+msgstr "Trang mới:\n"
+
+msgid "No differences found!\n"
+msgstr "Không có sự khác biệt!\n"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+#, fuzzy
+msgid "seconds"
+msgstr "%.2f giây"
+
+#, fuzzy
+msgid "Previous"
+msgstr "Xem qua"
+
+#, fuzzy
+msgid "Next"
+msgstr "Nội dung"
+
+#, fuzzy
+msgid "rev"
+msgstr "hoàn nguyên"
+
+msgid "current"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "thay đổi cuối lúc %(time)s"
+
+msgid "match"
+msgstr "phù hợp"
+
+msgid "matches"
+msgstr "phù hợp"
+
+msgid "about"
+msgstr ""
+
 msgid "This page is already deleted or was never created!"
 msgstr "Trang này đã bị xoá hoặc chưa bao giờ tồn tại!"
 
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr ""
-
-msgid "Copy all /subpages too?"
-msgstr ""
-
-msgid "New name"
-msgstr "Tên mới"
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Không hiểu tham số \"%s\"!"
 
 #, fuzzy
-msgid "Optional reason for the copying"
-msgstr "Lý do đổi tên (nếu có)"
+msgid "Include all attachments?"
+msgstr "[%d attachments]"
 
-#, fuzzy
-msgid "Really copy this page?"
-msgstr "Thật sự xoá trang này?"
-
-msgid "Delete"
-msgstr "Xóa"
-
-msgid "Delete all /subpages too?"
+msgid "Package pages"
 msgstr ""
 
-msgid "Optional reason for the deletion"
-msgstr "Lý do xoá trang (nếu có)"
+msgid "Package name"
+msgstr ""
 
-msgid "Really delete this page?"
-msgstr "Thật sự xoá trang này?"
+msgid "List of page names - separated by a comma"
+msgstr ""
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Không có trang giống \"%s\"!"
 
 #, fuzzy, python-format
 msgid "Rolled back changes to the page %s."
@@ -852,15 +1364,13 @@ msgid ""
 "by the particular administrators."
 msgstr ""
 
-msgid "Name"
-msgstr "Tên"
-
-msgid "Password"
-msgstr "Mật khẩu"
-
 #, fuzzy
 msgid "Operation was canceled."
 msgstr "Các chỉnh sửa đã bị huỷ."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
 
 msgid "The only supported directions are BOTH and DOWN."
 msgstr ""
@@ -978,171 +1488,116 @@ msgid "Page %s merged with conflicts."
 msgstr ""
 
 #, fuzzy
-msgid "Pages"
-msgstr "Trang"
-
-msgid "Select Author"
-msgstr ""
-
-msgid "Revert all!"
-msgstr ""
+msgid "Attachment location"
+msgstr "Gửi kèm file mới"
 
 #, fuzzy
-msgid "You are not allowed to use this action."
+msgid "Page name"
+msgstr "Tên mới"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Gửi kèm file mới"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Gửi kèm file mới"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "Gửi kèm file mới"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "File gửi kèm trong trang \"%(pagename)s\""
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Tìm thấy chính xác một trang tương tự \"%s\", đang tự chuyển tới."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Trang giống \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s ở trang \"%(title)s\""
+
+#, fuzzy
+msgid "You must login to remove a quicklink."
 msgstr "Bạn không thể sửa trang này."
 
 #, fuzzy
-msgid "Wiki Backup"
-msgstr "Đánh dấu kiểu wiki"
+msgid "Your quicklink to this page has been removed."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+msgid "Please choose:"
 msgstr ""
-
-#, fuzzy
-msgid "Backup"
-msgstr "Đánh dấu"
-
-#, fuzzy
-msgid "You are not allowed to do remote backup."
-msgstr "Bạn không thể %s vào trang này."
 
 #, fuzzy, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Việc không rõ"
-
-#, fuzzy
-msgid "You are not allowed to create the supplementation page."
-msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Tên người dùng trống. Vui lòng nhập vào tên người dùng."
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Tên người dùng không hợp lệ {{{'%s'}}}.\n"
-"Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng không bắt buộc ở "
-"giữa. Bạn không thể dùng tên cho nhóm."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Tên người dùng này đã được đăng ký."
-
-msgid "Passwords don't match!"
-msgstr "Mật khẩu không đúng!"
-
-msgid "Please specify a password!"
-msgstr "Vui lòng cho biết mật khẩu!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Vui lòng cho biết địa chỉ thư điện tử. Nếu bạn mất thông tin đăng nhập, bạn "
-"có thể lấy lại nó qua thư điện tử."
-
-msgid "This email already belongs to somebody else."
-msgstr "Địa chỉ thư điện tử này đã được đăng ký."
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-
-#, fuzzy
-msgid "(Use FirstnameLastname)"
-msgstr ""
-"(Dùng HọĐệmTên, và khong bo dau, hoặc dùng Firstname''''''Lastname với tên "
-"tiếng Anh)"
-
-msgid "Password repeat"
-msgstr "Lập lại mật khẩu"
-
-msgid "Email"
-msgstr "Thư điện tử"
-
-msgid "TextCha (required)"
-msgstr ""
-
-msgid "Create Profile"
-msgstr "Tạo Profile"
-
-msgid "Create Account"
-msgstr ""
-
-msgid "Revert"
-msgstr ""
-
-msgid "You are not allowed to revert this page!"
-msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-
-#, fuzzy
-msgid "Optional reason for reverting this page"
-msgstr "Lý do đổi tên (nếu có)"
-
-#, fuzzy
-msgid "Really revert this page?"
-msgstr "Thật sự xoá trang này?"
+msgid "You must login to use this action: %(action)s."
+msgstr "Bạn không thể sửa trang này."
 
 #, fuzzy
 msgid "Only superuser is allowed to use this action."
 msgstr "Bạn không thể sửa trang này."
 
-#, fuzzy
-msgid "No page packages found."
-msgstr "Không tìm thấy trang trên!"
-
-#, fuzzy, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr "File gửi kèm '%(filename)s' đã được xoá."
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Bạn không thể đăng ký vào trang mà bạn không thể xem."
 
 #, fuzzy
-msgid "page package"
-msgstr "Lưu các thay đổi"
-
-msgid "install"
+msgid "This wiki is not enabled for mail/Jabber processing."
 msgstr ""
+"Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người "
+"có thể kích hoạt chức năng này."
 
-msgid "Choose:"
-msgstr ""
-
-#, python-format
-msgid "Install language packs for '%s'"
-msgstr ""
-
-msgid "TextCha: Wrong answer! Try again below..."
-msgstr ""
+#, fuzzy
+msgid "You must log in to use subscriptions."
+msgstr "Bạn không thể sửa trang này."
 
 msgid ""
-"Supplying a comment is mandatory.  Write a comment below and try again..."
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
 msgstr ""
+
+#, fuzzy
+msgid "You are already subscribed to this page."
+msgstr "Bạn vừa đăng ký vào trang này."
+
+msgid "You have been subscribed to this page."
+msgstr "Bạn vừa đăng ký vào trang này."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
+msgstr "Bạn vừa đăng ký vào trang này."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Tải lên file '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "File gửi kèm '%(filename)s' đã được xoá."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Bản vẽ '%(filename)s' đã được lưu."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Hoàn nguyên phiên bản %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "File gửi kèm trong trang \"%(pagename)s\""
 
 #, python-format
 msgid "[%d attachments]"
@@ -1173,15 +1628,64 @@ msgstr ""
 "Vui lòng '''KHÔNG''' sử dụng URL của liên kết {{{[get]}}}, \n"
 "vì rất có thể URL đó sẽ bị thay đổi."
 
+msgid "del"
+msgstr "xoá"
+
 msgid "move"
 msgstr ""
 
+msgid "get"
+msgstr "lấy"
+
+msgid "edit"
+msgstr "sửa"
+
+msgid "view"
+msgstr "xem"
+
 msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
+msgid "All files"
+msgstr ""
+
+#, fuzzy
+msgid "Selected Files:"
+msgstr "File gửi kèm"
+
+#, fuzzy
+msgid "delete"
+msgstr "Xóa"
+
+#, fuzzy
+msgid "move to page"
+msgstr "Tổng số trang"
+
+msgid "Do it."
 msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Không có file gửi kèm trong trang %(pagename)s"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Bạn không thể xoá file gửi kèm."
+
+#, fuzzy
+msgid "You are not allowed to move attachments from this page."
+msgstr "Bạn không thể lấy file gửi kèm từ trang này."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Bạn không thể kèm file vào trang này."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr "File gửi kèm '%(filename)s' không tồn tại!"
 
 msgid "New Attachment"
 msgstr "Gửi kèm file mới"
@@ -1202,9 +1706,6 @@ msgstr "Tải lên"
 msgid "Attached Files"
 msgstr "File gửi kèm"
 
-msgid "You are not allowed to attach a file to this page."
-msgstr "Bạn không thể kèm file vào trang này."
-
 #, fuzzy, python-format
 msgid "Unsupported AttachFile sub-action: %s"
 msgstr "Không thể thực hiện việc tải lên: %s"
@@ -1212,6 +1713,15 @@ msgstr "Không thể thực hiện việc tải lên: %s"
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
 msgstr "File gửi kèm trong trang \"%(pagename)s\""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr ""
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Không có nội dung. Xóa các ký tự không nằm trong bảng mã ASCII và thử lại."
 
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
@@ -1229,22 +1739,9 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "File gửi kèm '%(target)s' (tên ở máy chủ '%(filename)s') đã tồn tại."
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Bạn không thể xoá file gửi kèm."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "File gửi kèm '%(filename)s' đã được xoá."
-
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
 msgstr "File gửi kèm '%(filename)s' đã được xoá."
-
-#, fuzzy, python-format
-msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
-"%(new_filename)s'."
-msgstr "File gửi kèm '%(filename)s' không tồn tại!"
 
 msgid "Nothing changed"
 msgstr ""
@@ -1255,10 +1752,6 @@ msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to move attachments from this page."
-msgstr "Bạn không thể lấy file gửi kèm từ trang này."
 
 #, fuzzy
 msgid "Move aborted because new page name is empty."
@@ -1288,6 +1781,10 @@ msgstr "Bạn không thể lấy file gửi kèm từ trang này."
 
 msgid "You are not allowed to install files."
 msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "File gửi kèm '%(filename)s' đã được xoá."
 
 msgid "You are not allowed to unzip attachments of this page."
 msgstr ""
@@ -1342,97 +1839,248 @@ msgstr "Tên file"
 msgid "Modified"
 msgstr ""
 
+msgid "Size"
+msgstr "Kích thước"
+
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Không hiểu kiểu file, không thể hiện file gửi kèm này trong văn bản."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Bạn không thể xem các file gửi kèm trong trang này."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "attachment:%(filename)s trong trang %(pagename)s"
 
-#, fuzzy
-msgid "Load"
-msgstr "Tải lên"
+msgid "General Information"
+msgstr "Thông tin chung"
 
-#, fuzzy
-msgid "Pagename not specified!"
-msgstr "Tên file gửi kèm không được định rõ!"
+#, python-format
+msgid "Page size: %d"
+msgstr "Kích thước trang: %d"
 
-msgid "Upload page content"
-msgstr ""
+msgid "SHA digest of this page's content is:"
+msgstr "Mã SHA của trang này là:"
 
+msgid "The following users subscribed to this page:"
+msgstr "Những người dùng sau đã đăng ký vào trang này:"
+
+msgid "This page links to the following pages:"
+msgstr "Trang này liên kết tới các trang sau:"
+
+#, python-format
 msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-
-msgid "File to load page content from"
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
 msgstr ""
 
 #, fuzzy
-msgid "Page name"
+msgid "Newer"
 msgstr "Tên mới"
 
-msgid "Print"
-msgstr "In"
-
-#, fuzzy
-msgid "Print slide show"
-msgstr "Slideshow"
-
-msgid "Edit"
-msgstr "Sửa"
-
-#, fuzzy
-msgid "Edit slide show"
-msgstr "Slideshow"
-
-msgid "Quit"
-msgstr ""
-
-#, fuzzy
-msgid "Quit slide show"
-msgstr "Slideshow"
-
-msgid "Show first slide (up arrow)"
-msgstr ""
-
-msgid "Show last slide (down arrow)"
-msgstr ""
-
-msgid "Show previous slide (left arrow)"
-msgstr ""
-
-msgid "Show next slide (right arrow)"
+msgid "Older"
 msgstr ""
 
 #, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Bản đồ liên kết nội bộ cho \"%s\""
-
-msgid "Please choose:"
+msgid "%s items per page"
 msgstr ""
 
-msgid "Settings"
+msgid "Diff"
+msgstr "diff"
+
+msgid "Editor"
+msgstr "Tác giả"
+
+msgid "Comment"
+msgstr "Chú thích"
+
+msgid "Action"
+msgstr "Công việc"
+
+#, fuzzy
+msgid "to previous"
+msgstr "Xem qua"
+
+msgid "N/A"
+msgstr "không rõ"
+
+msgid "Revision History"
+msgstr "Danh sách các thay đổi"
+
+msgid "No log entries found."
+msgstr "Không tìm thấy mục nào."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Thông tin về \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Hiển thị \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Thông tin chung"
+
+msgid "Page hits and edits"
+msgstr "Số lần xem và sửa"
+
+msgid "Delete"
+msgstr "Xóa"
+
+msgid "Delete all /subpages too?"
 msgstr ""
 
-msgid "You are now logged out."
-msgstr "Bạn đã thoát ra khỏi hệ thống."
+msgid "Optional reason for the deletion"
+msgstr "Lý do xoá trang (nếu có)"
 
-msgid "You must login to add a quicklink."
+msgid "Really delete this page?"
+msgstr "Thật sự xoá trang này?"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(bao gồm cả %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"%(badwords)d từ không có trong từ điển (%(totalwords)d từ)%(localwords)s và "
+"được đánh dấu bên dưới:"
+
+msgid "Add checked words to dictionary"
+msgstr "Thêm các từ đã kiểm tra vào từ điển"
+
+msgid "No spelling errors found!"
+msgstr "Không có lỗi chính tả!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr ""
+"Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
+
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr "Bạn không thể sửa trang này."
+
+msgid "If this account exists an email was sent."
+msgstr ""
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người "
+"có thể kích hoạt chức năng này."
+
+#, fuzzy
+msgid "Please provide a valid email address or a username!"
+msgstr "Vui lòng cho biết địa chỉ thư điện tử hợp lệ!"
+
+#, fuzzy
+msgid "Username"
+msgstr "Người dùng"
+
+msgid "Mail me my account data"
+msgstr "Gửi cho tôi thông tin về account cá nhân"
+
+msgid "Recovery token"
 msgstr ""
 
 #, fuzzy
-msgid "A quicklink to this page has been added for you."
-msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+msgid "New password"
+msgstr "Mật khẩu"
 
 #, fuzzy
-msgid "A quicklink to this page could not be added for you."
-msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+msgid "New password (repeat)"
+msgstr "Lập lại mật khẩu"
 
 #, fuzzy
-msgid "You already have a quicklink to this page."
-msgstr "Bạn đã đăng ký vào trang này rồi."
+msgid "Reset my password"
+msgstr "Mật khẩu"
+
+msgid "Passwords don't match!"
+msgstr "Mật khẩu không đúng!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
+
+msgid "Your password has been changed, you can log in now."
+msgstr ""
+
+msgid "Your token is invalid!"
+msgstr ""
+
+#, fuzzy
+msgid "Password reset"
+msgstr "Lập lại mật khẩu"
+
+#, fuzzy
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+#, fuzzy
+msgid "Lost password"
+msgstr "Mật khẩu"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -1489,118 +2137,48 @@ msgid ""
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Không hiểu tham số \"%s\"!"
+msgid "Subscribe users to the page %s"
+msgstr "Đăng ký vào các thay đổi nhỏ nhặt"
 
-#, fuzzy
-msgid "Include all attachments?"
-msgstr "[%d attachments]"
-
-msgid "Package pages"
+msgid "Enter user names (comma separated):"
 msgstr ""
 
-msgid "Package name"
-msgstr ""
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Đăng ký"
 
-msgid "List of page names - separated by a comma"
-msgstr ""
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Không có trang giống \"%s\"!"
-
-#, fuzzy
-msgid "Attachment location"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "Attachment name"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "Refresh attachment list"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "List of attachments"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "Available attachments for page"
-msgstr "File gửi kèm trong trang \"%(pagename)s\""
-
-msgid "If this account exists an email was sent."
-msgstr ""
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người "
-"có thể kích hoạt chức năng này."
-
-#, fuzzy
-msgid "Please provide a valid email address or a username!"
-msgstr "Vui lòng cho biết địa chỉ thư điện tử hợp lệ!"
-
-#, fuzzy
-msgid "Username"
-msgstr "Người dùng"
-
-msgid "Mail me my account data"
-msgstr "Gửi cho tôi thông tin về account cá nhân"
-
-msgid "Recovery token"
+msgid "Not a user:"
 msgstr ""
 
 #, fuzzy
-msgid "New password"
-msgstr "Mật khẩu"
+msgid "You are not allowed to perform this action."
+msgstr "Bạn không thể sửa trang này."
 
 #, fuzzy
-msgid "New password (repeat)"
-msgstr "Lập lại mật khẩu"
+msgid "Print slide show"
+msgstr "Slideshow"
 
 #, fuzzy
-msgid "Reset my password"
-msgstr "Mật khẩu"
+msgid "Edit slide show"
+msgstr "Slideshow"
 
-msgid "Your password has been changed, you can log in now."
-msgstr ""
-
-msgid "Your token is invalid!"
+msgid "Quit"
 msgstr ""
 
 #, fuzzy
-msgid "Password reset"
-msgstr "Lập lại mật khẩu"
+msgid "Quit slide show"
+msgstr "Slideshow"
 
-#, fuzzy
-msgid ""
-"\n"
-"== Password reset ==\n"
-"Enter a new password below."
-msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
-
-#, fuzzy
-msgid "Lost password"
-msgstr "Mật khẩu"
-
-msgid ""
-"\n"
-"== Recovering a lost password ==\n"
-"If you have forgotten your password, provide your email address or\n"
-"username and click on '''Mail me my account data'''.\n"
-"You will receive an email containing a recovery token that can be\n"
-"used to change your password. The email will also contain further\n"
-"instructions."
+msgid "Show first slide (up arrow)"
 msgstr ""
 
-msgid ""
-"\n"
-"=== Password reset ===\n"
-"If you already have received the email with the recovery token, enter your\n"
-"username, the recovery token and a new password (twice) below."
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
 msgstr ""
 
 msgid "Charts are not available!"
@@ -1613,16 +2191,25 @@ msgstr "Bạn cần nhập vào loại biểu đồ!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Không hiểu loại biểu đồ \"%s\"!"
 
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Tải lên file '%(filename)s'."
+#, fuzzy
+msgid "Load"
+msgstr "Tải lên"
 
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Bản vẽ '%(filename)s' đã được lưu."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Tên file gửi kèm không được định rõ!"
 
-msgid "New page:\n"
-msgstr "Trang mới:\n"
+msgid "Upload page content"
+msgstr ""
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
+msgstr ""
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -1676,8 +2263,245 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Nhấn vào đây để thực hiện tìm kiếm theo nội dung với tiêu đề này"
 
-msgid "Rename Page"
-msgstr "Đổi tên trang"
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+
+#, fuzzy
+msgid "Your subscription to this page has been removed."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Không thể huỷ bỏ đăng ký biểu thức chính quy!"
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr ""
+
+#, fuzzy
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Bạn vừa đăng ký vào trang này."
+
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr ""
+
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Tạo bản vẽ \"%(filename)s\" mới"
+
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Sửa bản vẽ \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Sửa bản vẽ \"%(filename)s\""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Bạn không thể tạo một bản vẽ ở trang này."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Sửa bản vẽ"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Bạn không thể tạo một bản vẽ ở trang này."
+
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
+
+#, fuzzy
+msgid "Pages"
+msgstr "Trang"
+
+msgid "Select Author"
+msgstr ""
+
+msgid "Revert all!"
+msgstr ""
+
+msgid "Copy all /subpages too?"
+msgstr ""
+
+msgid "New name"
+msgstr "Tên mới"
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Lý do đổi tên (nếu có)"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Thật sự xoá trang này?"
+
+msgid "You are now logged out."
+msgstr "Bạn đã thoát ra khỏi hệ thống."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Không tìm thấy trang trên!"
+
+#, fuzzy
+msgid "page package"
+msgstr "Lưu các thay đổi"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Bản đồ liên kết nội bộ cho \"%s\""
+
+msgid "No older revisions available!"
+msgstr "Không có phiên bản cũ hơn!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "diff của \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Sự khác nhau giữa phiên bản %d và %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(trải qua %d phiên bản)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "Xem qua"
+
+#, fuzzy
+msgid "Next change"
+msgstr "Lưu các thay đổi"
+
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
+msgstr "Không có phiên bản cũ hơn!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Không có phiên bản cũ hơn!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Không có phiên bản cũ hơn!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Không có phiên bản cũ hơn!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "Không có phiên bản cũ hơn!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Trang này đã được lưu %(count)d lần!"
+
+msgid "(ignoring whitespace)"
+msgstr ""
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Bỏ qua các thay đổi về số lượng khoảng trắng"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Tên người dùng trống. Vui lòng nhập vào tên người dùng."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Tên người dùng không hợp lệ {{{'%s'}}}.\n"
+"Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng không bắt buộc ở "
+"giữa. Bạn không thể dùng tên cho nhóm."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Tên người dùng này đã được đăng ký."
+
+msgid "Please specify a password!"
+msgstr "Vui lòng cho biết mật khẩu!"
+
+#, fuzzy
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Vui lòng cho biết địa chỉ thư điện tử. Nếu bạn mất thông tin đăng nhập, bạn "
+"có thể lấy lại nó qua thư điện tử."
+
+msgid "This email already belongs to somebody else."
+msgstr "Địa chỉ thư điện tử này đã được đăng ký."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+
+msgid "Password repeat"
+msgstr "Lập lại mật khẩu"
+
+msgid "TextCha (required)"
+msgstr ""
+
+msgid "Create Profile"
+msgstr "Tạo Profile"
+
+msgid "Create Account"
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Danh sách liên kết đầy đủ trong \"%s\""
+
+msgid "You must login to add a quicklink."
+msgstr ""
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+#, fuzzy
+msgid "You already have a quicklink to this page."
+msgstr "Bạn đã đăng ký vào trang này rồi."
 
 msgid "Create redirect for renamed page(s)?"
 msgstr ""
@@ -1696,821 +2520,78 @@ msgid "Optional reason for the renaming"
 msgstr "Lý do đổi tên (nếu có)"
 
 #, fuzzy
-msgid "You must login to remove a quicklink."
-msgstr "Bạn không thể sửa trang này."
-
-#, fuzzy
-msgid "Your quicklink to this page has been removed."
-msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
-
-#, fuzzy
-msgid "Your quicklink to this page could not be removed."
-msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
-
-#, fuzzy
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Bạn không thể đăng ký vào trang mà bạn không thể xem."
-
-#, fuzzy
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr ""
-"Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người "
-"có thể kích hoạt chức năng này."
-
-#, fuzzy
-msgid "You must log in to use subscriptions."
-msgstr "Bạn không thể sửa trang này."
-
-msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
-msgstr ""
-
-#, fuzzy
-msgid "You are already subscribed to this page."
-msgstr "Bạn vừa đăng ký vào trang này."
-
-msgid "You have been subscribed to this page."
-msgstr "Bạn vừa đăng ký vào trang này."
-
-#, fuzzy
-msgid "You could not get subscribed to this page."
-msgstr "Bạn vừa đăng ký vào trang này."
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Tìm thấy chính xác một trang tương tự \"%s\", đang tự chuyển tới."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Trang giống \"%s\""
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s ở trang \"%(title)s\""
-
-msgid "match"
-msgstr "phù hợp"
-
-msgid "matches"
-msgstr "phù hợp"
-
-#, fuzzy, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Đăng ký vào các thay đổi nhỏ nhặt"
-
-msgid "Enter user names (comma separated):"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Subscribed for %s:"
-msgstr "Đăng ký"
-
-msgid "Not a user:"
-msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to perform this action."
-msgstr "Bạn không thể sửa trang này."
-
-msgid "HelpOnParsers"
-msgstr ""
-
-#, python-format
-msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see "
-"%(highlight_help_page)s."
-msgstr ""
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-" Nhấn mạnh:: <<Verbatim('')>>''nghiêng''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''đậm'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''nghiêng "
-"đậm'''''<<Verbatim(''''')>>; <<Verbatim('')>>''lẫn ''<<Verbatim(''')"
-">>'''''đậm'''<<Verbatim(''')>> và nghiêng''<<Verbatim('')>>; <<Verbatim(----)"
-">> thước ngang.\n"
-" Đầu đề:: <<Verbatim(=)>> Tiêu đề 1 <<Verbatim(=)>>; <<Verbatim(==)>> Tiêu "
-"đề 2 <<Verbatim(==>>; <<Verbatim(===)>> Tiêu đề 3 <<Verbatim(===)>>; "
-"<<Verbatim(====)>> Tiêu đề 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Tiêu đề "
-"5 <<Verbatim(=====)>>.\n"
-" Danh sách:: khoảng trắng và: * cho điểm tròn; 1. hay a. hay A. hay i. hay "
-"I. cho các mục được đánh dấu; 1.#n để đánh số từ n; khoảng trắng để thụt "
-"vào.\n"
-" Liên kết:: <<Verbatim(CácChữHoaLiềnNhau)>>; <<Verbatim([\"ngoặc vuông và "
-"nháy kép\"])>>; URL; [URL]; [URL nhãn].\n"
-" Bảng:: || nội dung ô |||| nội dung ô trải qua 2 cột ||;    không được có "
-"khoảng trắng sau bảng hoặc tiêu đề.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr ""
-
-#, fuzzy
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT không thể được thực hiện!"
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "lỗi xử lý %(errortype)s"
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
-msgstr ""
-" Nhấn mạnh:: <<Verbatim('')>>''nghiêng''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''đậm'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''nghiêng "
-"đậm'''''<<Verbatim(''''')>>; <<Verbatim('')>>''lẫn ''<<Verbatim(''')"
-">>'''''đậm'''<<Verbatim(''')>> và nghiêng''<<Verbatim('')>>; <<Verbatim(----)"
-">> thước ngang.\n"
-" Đầu đề:: <<Verbatim(=)>> Tiêu đề 1 <<Verbatim(=)>>; <<Verbatim(==)>> Tiêu "
-"đề 2 <<Verbatim(==>>; <<Verbatim(===)>> Tiêu đề 3 <<Verbatim(===)>>; "
-"<<Verbatim(====)>> Tiêu đề 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Tiêu đề "
-"5 <<Verbatim(=====)>>.\n"
-" Danh sách:: khoảng trắng và: * cho điểm tròn; 1. hay a. hay A. hay i. hay "
-"I. cho các mục được đánh dấu; 1.#n để đánh số từ n; khoảng trắng để thụt "
-"vào.\n"
-" Liên kết:: <<Verbatim(CácChữHoaLiềnNhau)>>; <<Verbatim([\"ngoặc vuông và "
-"nháy kép\"])>>; URL; [URL]; [URL nhãn].\n"
-" Bảng:: || nội dung ô |||| nội dung ô trải qua 2 cột ||;    không được có "
-"khoảng trắng sau bảng hoặc tiêu đề.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr ""
-"Dự đoán \"%(wanted)s\" theo sau \"%(key)s\", nhưng lại là \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Dự đoán một số nguyên \"%(key)s\" đứng trước \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Dự đoán một số nguyên \"%(arg)s\" đứng sau \"%(key)s\""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Dự đoán một giá trị màu \"%(arg)s\" đứng sau \"%(key)s\""
-
-msgid "Page has been modified"
-msgstr ""
-
-msgid "Page has been modified in a trivial fashion"
-msgstr ""
-
-#, fuzzy
-msgid "Page has been renamed"
-msgstr "Số lần xem và sửa"
-
-#, fuzzy
-msgid "Page has been deleted"
-msgstr "Trang \"%s\" đã được xoá!"
-
-#, fuzzy
-msgid "Page has been copied"
-msgstr "Số lần xem và sửa"
-
-#, fuzzy
-msgid "A new attachment has been added"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "An attachment has been removed"
-msgstr "Gửi kèm file mới"
-
-msgid "A page has been reverted to a previous state"
-msgstr ""
-
-#, fuzzy
-msgid "A user has subscribed to a page"
-msgstr "Bạn vừa đăng ký vào trang này."
-
-msgid "A new account has been created"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] Cập nhật %(trivial)scủa \"%(pagename)s\""
-
-msgid "Trivial "
-msgstr "nhỏ nhặt "
-
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
-
-#, fuzzy
-msgid "Attachment link"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "Page link"
-msgstr "Trang giống \"%s\""
-
-msgid "Changed page"
-msgstr ""
-
-#, fuzzy
-msgid "Page changed"
-msgstr "Lưu các thay đổi"
-
-#, fuzzy, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-"Chào bạn,\n"
-"\n"
-"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
-"nhận các thông báo thay đổi.\n"
-"\n"
-"Trang sau đã được thay đổi bởi %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-msgid "No differences found!\n"
-msgstr "Không có sự khác biệt!\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"Chào bạn,\n"
-"\n"
-"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
-"nhận các thông báo thay đổi.\n"
-"\n"
-"Trang sau đã được thay đổi bởi %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
-"%(editor)s:\n"
-msgstr ""
-"Chào bạn,\n"
-"\n"
-"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
-"nhận các thông báo thay đổi.\n"
-"\n"
-"Trang sau đã được thay đổi bởi %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, python-format
-msgid "[%(sitename)s] New user account created"
-msgstr ""
-
-#, python-format
-msgid ""
-"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
-"Details follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "<<Verbatim(attachment:)>>%(filename)s trong trang %(pagename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "<<Verbatim(attachment:)>>%(filename)s trong trang %(pagename)s"
-
-#, fuzzy, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been removed from that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-"Chào bạn,\n"
-"\n"
-"Bạn đã đãng ký vào một trang hoặc một nhóm trang tại \"%(sitename)s\" để "
-"nhận các thông báo thay đổi.\n"
-"\n"
-"Trang sau đã được thay đổi bởi %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr ""
-
-msgid "You must specify an output file!"
-msgstr ""
-
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-
-msgid "All attachments included into the package."
-msgstr ""
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr ""
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. "
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-msgid "Could not contact botbouncer.com."
-msgstr ""
-
-msgid "Failed to connect to database."
-msgstr ""
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-
-msgid "Choose this name"
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
-msgstr ""
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-
-msgid "Associate this name"
-msgstr ""
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr ""
-
-#, fuzzy
-msgid "OpenID verification canceled."
-msgstr "Các chỉnh sửa đã bị huỷ."
-
-#, fuzzy
-msgid "Verification canceled."
-msgstr "Các chỉnh sửa đã bị huỷ."
-
-#, python-format
-msgid "OpenID success. id: %s"
-msgstr ""
-
-msgid "OpenID failure"
-msgstr ""
-
-msgid "OpenID failure."
-msgstr ""
-
-msgid "No OpenID found in session."
-msgstr ""
-
-msgid "Your account is now associated to your OpenID."
-msgstr ""
-
-msgid "The password you entered is not valid."
-msgstr ""
-
-msgid "OpenID error: unknown continuation stage"
-msgstr ""
-
-msgid "OpenID verification requires that you click this button:"
-msgstr ""
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
-
-msgid "Failed to resolve OpenID."
-msgstr ""
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
-
-msgid "No OpenID."
-msgstr ""
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr ""
-
-msgid "Line"
-msgstr "Dòng"
-
-msgid "Deletions are marked like this."
-msgstr "Các phần bị xoá được đánh dấu như thế này."
-
-msgid "Additions are marked like this."
-msgstr "Các phần thêm vào được đánh dấu như thế này."
-
-msgid "Diffs"
-msgstr "Các bản diff"
-
-msgid "Info"
-msgstr "Thông tin"
-
-msgid "Unsubscribe"
-msgstr "Huỷ đăng ký"
-
-msgid "Subscribe"
-msgstr "Đăng ký"
-
-msgid "Raw"
-msgstr "Thô"
-
-msgid "XML"
-msgstr "XML"
-
-msgid "View"
-msgstr "Xem"
-
-msgid "Home"
-msgstr "Trang nhà"
-
-msgid "Up"
-msgstr "Trên"
-
-msgid "[RSS]"
-msgstr ""
-
-msgid "[DELETED]"
-msgstr ""
-
-msgid "[UPDATED]"
-msgstr ""
-
-msgid "[RENAMED]"
-msgstr ""
-
-msgid "[CONFLICT]"
-msgstr ""
-
-msgid "[NEW]"
-msgstr ""
-
-msgid "[DIFF]"
-msgstr ""
-
-msgid "[BOTTOM]"
-msgstr ""
-
-msgid "[TOP]"
-msgstr ""
-
-msgid "Click to do a full-text search for this title"
-msgstr "Nhấn vào đây để thực hiện tìm kiếm theo nội dung với tiêu đề này"
-
-msgid "Logout"
-msgstr "Thoát"
-
-msgid "Clear message"
-msgstr "Xoá thông báo"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "thay đổi lần cuối lúc %(time)s bởi %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "thay đổi cuối lúc %(time)s"
-
-msgid "Search:"
-msgstr "Tìm:"
-
-msgid "Text"
-msgstr "Nội dung"
-
-msgid "Titles"
-msgstr "Tiêu đề"
-
-#, fuzzy
-msgid "Search"
-msgstr "Tìm:"
-
-msgid "More Actions:"
-msgstr "Các hành động khác:"
-
-msgid "------------------------"
-msgstr ""
-
-#, fuzzy
-msgid "Raw Text"
-msgstr "Hiện trang nguồn"
-
-msgid "Print View"
-msgstr "Xem bản in"
-
-#, fuzzy
-msgid "Delete Cache"
-msgstr "Xóa trang"
-
-msgid "Delete Page"
-msgstr "Xóa trang"
-
-msgid "Like Pages"
-msgstr ""
-
-msgid "Local Site Map"
-msgstr ""
-
-msgid "My Pages"
-msgstr ""
-
-#, fuzzy
-msgid "Subscribe User"
-msgstr "Đăng ký"
-
-#, fuzzy
-msgid "Remove Spam"
-msgstr "Các liên kết thường dùng"
-
-msgid "Package Pages"
-msgstr ""
-
-msgid "Render as Docbook"
-msgstr ""
-
-#, fuzzy
-msgid "Sync Pages"
-msgstr "Trang"
-
-msgid "Do"
-msgstr "Làm"
-
-#, fuzzy
-msgid "Comments"
-msgstr "Chú thích"
-
-msgid "Edit (Text)"
-msgstr ""
-
-msgid "Edit (GUI)"
-msgstr ""
-
-msgid "Immutable Page"
-msgstr "Trang không thể được thay đổi"
-
-msgid "Remove Link"
-msgstr ""
-
-msgid "Add Link"
-msgstr ""
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Gửi kèm file mới"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Hiện %s ngày."
-
-msgid "Wiki Markup"
+msgid "Wiki Backup"
 msgstr "Đánh dấu kiểu wiki"
 
-msgid "DeleteCache"
-msgstr ""
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(lưu %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Hoặc chọn các hành động sau:"
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Page"
-msgstr "Trang"
-
-msgid "User"
-msgstr "Người dùng"
-
-msgid "[ATTACH]"
-msgstr ""
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Lập lại mật khẩu"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
 msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
-
-msgid "UnSubscribe"
-msgstr "Huỷ đăng ký"
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-
-msgid "Open editor on double click"
-msgstr "Mở khung soạn thảo khi nhấp chuột 2 lần"
-
-msgid "After login, jump to last visited page"
-msgstr ""
-
-msgid "Show comment sections"
-msgstr ""
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Hiện dấu chấm hỏi cho các trang không tồn tại"
-
-msgid "Show page trail"
-msgstr "Hiện vệt trang (page trail)"
-
-msgid "Show icon toolbar"
-msgstr "Hiện thanh công cụ"
-
-msgid "Show top/bottom links in headings"
-msgstr "Hiện các liên kết về đầu và về cuối trang ở các tiêu đề"
-
-msgid "Show fancy diffs"
-msgstr "Hiện diff đẹp"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Thêm khoảng trống để hiển thị các tên wiki (Wiki Names)"
-
-msgid "Remember login information"
-msgstr "Nhớ thông tin đăng nhập"
-
-msgid "Disable this account forever"
-msgstr "Huỷ bỏ account này"
-
-msgid "Alias-Name"
-msgstr ""
-
-msgid "Jabber ID"
-msgstr ""
-
-msgid "User CSS URL"
-msgstr "CSS URL riêng"
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(để trống nếu không dùng CSS)"
-
-msgid "Editor size"
-msgstr "Kích thước khung soạn thảo"
-
-msgid "anonymous"
-msgstr ""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Tải lên file \"%(filename)s\""
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr ""
-
-msgid "Toggle line numbers"
-msgstr ""
-
-msgid "From"
-msgstr ""
-
-msgid "To"
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
 msgstr ""
 
 #, fuzzy
-msgid "Content"
-msgstr "Trang chỉ dẫn"
+msgid "Backup"
+msgstr "Đánh dấu"
 
-msgid "No recipients, nothing to do"
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Bạn không thể %s vào trang này."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Việc không rõ"
+
+msgid "Revert"
 msgstr ""
 
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Kết nối tới mailserver '%(server)s' bị ngắt quảng vì lý do: %(reason)s"
+msgid "You are not allowed to revert this page!"
+msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
 
-msgid "Mail not sent"
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
 msgstr ""
 
-msgid "Mail sent OK"
-msgstr "Thư đã được gửi"
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Lý do đổi tên (nếu có)"
+
+#, fuzzy
+msgid "Really revert this page?"
+msgstr "Thật sự xoá trang này?"
+
+msgid "OpenID"
+msgstr ""
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "Tổng số trang"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Disable user"
+msgstr ""
+
+msgid "Enable user"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "Gửi cho tôi thông tin về account cá nhân"
 
 msgid "RecentChanges"
 msgstr "Các thay đổi gần đây"
@@ -3040,169 +3121,23 @@ msgstr "SpellCheck"
 msgid "Discussion"
 msgstr ""
 
-msgid "Switch user"
+msgid "User agent"
 msgstr ""
 
-msgid "No user selected"
-msgstr ""
+msgid "Others"
+msgstr "Các thứ khác"
 
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
+msgid "Distribution of User-Agent Types"
+msgstr "Thống kê theo User-Agent"
 
-msgid "You are the only user."
-msgstr ""
+msgid "Page Size Distribution"
+msgstr "Thống kê theo kích thước trang"
 
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
+msgid "page size upper bound [bytes]"
+msgstr "kích thước giới hạn của trang [bytes]"
 
-msgid "Select User"
-msgstr ""
-
-msgid "Notification"
-msgstr ""
-
-msgid "Notification settings saved!"
-msgstr ""
-
-#, fuzzy
-msgid "'''Email'''"
-msgstr "Thư điện tử"
-
-msgid "'''Jabber'''"
-msgstr ""
-
-msgid "'''Event type'''"
-msgstr ""
-
-msgid "Select the events you want to be notified about."
-msgstr ""
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr ""
-
-#, fuzzy
-msgid "Subscribed events"
-msgstr "Đăng ký"
-
-#, fuzzy
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Các trang đã đăng ký (một regex trong một dòng)"
-
-msgid "Save"
-msgstr "Lưu"
-
-msgid "OpenID server"
-msgstr ""
-
-msgid "The selected websites have been removed."
-msgstr ""
-
-msgid "Trusted websites"
-msgstr ""
-
-msgid "Remove selected"
-msgstr ""
-
-#, fuzzy
-msgid "Change password"
-msgstr "Mật khẩu"
-
-msgid "Your password has been changed."
-msgstr ""
-
-msgid "To change your password, enter a new password twice."
-msgstr ""
-
-#, fuzzy
-msgid "Preferences"
-msgstr "Sở thích cá nhân"
-
-#, fuzzy
-msgid "This jabber id already belongs to somebody else."
-msgstr "Địa chỉ thư điện tử này đã được đăng ký."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Kiểu '%(theme_name)s' không thể đuợc nạp!"
-
-msgid "User preferences saved!"
-msgstr "Sở thích của bạn đã được lưu!"
-
-msgid "Default"
-msgstr "Mặc định"
-
-msgid "<Browser setting>"
-msgstr "<Theo trình duyệt>"
-
-msgid "the one preferred"
-msgstr ""
-
-msgid "free choice"
-msgstr ""
-
-msgid "Preferred theme"
-msgstr "Theme mặc định"
-
-#, fuzzy
-msgid "Editor Preference"
-msgstr "Sở thích cá nhân"
-
-msgid "Editor shown on UI"
-msgstr ""
-
-msgid "Time zone"
-msgstr "Múi giờ"
-
-msgid "Your time is"
-msgstr "Giờ hiện tại"
-
-msgid "Server time is"
-msgstr "Giờ ở máy chủ"
-
-msgid "Date format"
-msgstr "Định dạng ngày"
-
-msgid "Preferred language"
-msgstr "Ngôn ngữ mặc định"
-
-msgid "General options"
-msgstr "Các lựa chọn chung"
-
-msgid "Quick links"
-msgstr "Các liên kết thường dùng"
-
-msgid "OpenID settings"
-msgstr ""
-
-msgid "Cannot remove all OpenIDs."
-msgstr ""
-
-msgid "The selected OpenIDs have been removed."
-msgstr ""
-
-msgid "No OpenID given."
-msgstr ""
-
-msgid "OpenID is already present."
-msgstr ""
-
-#, fuzzy
-msgid "This OpenID is already used for another account."
-msgstr "Trang này đã bị xoá hoặc chưa bao giờ tồn tại!"
-
-msgid "OpenID added successfully."
-msgstr ""
-
-msgid "Current OpenIDs"
-msgstr ""
-
-msgid "Add OpenID"
-msgstr ""
+msgid "# of pages of this size"
+msgstr "số trang cùng dung lượng"
 
 #, fuzzy
 msgid "Views/day"
@@ -3232,67 +3167,11 @@ msgstr "số lần xem"
 msgid "Language"
 msgstr ""
 
-msgid "Others"
-msgstr "Các thứ khác"
+msgid "<Browser setting>"
+msgstr "<Theo trình duyệt>"
 
-msgid "User agent"
-msgstr ""
-
-msgid "Distribution of User-Agent Types"
-msgstr "Thống kê theo User-Agent"
-
-msgid "Page Size Distribution"
-msgstr "Thống kê theo kích thước trang"
-
-msgid "page size upper bound [bytes]"
-msgstr "kích thước giới hạn của trang [bytes]"
-
-msgid "# of pages of this size"
-msgstr "số trang cùng dung lượng"
-
-msgid "[all]"
-msgstr ""
-
-msgid "[not empty]"
-msgstr ""
-
-msgid "[empty]"
-msgstr ""
-
-msgid "filter"
-msgstr ""
-
-msgid "OpenID"
-msgstr ""
-
-#, fuzzy
-msgid "Member of Groups"
-msgstr "Tổng số trang"
-
-msgid "Jabber"
-msgstr ""
-
-msgid "Disable user"
-msgstr ""
-
-msgid "Enable user"
-msgstr ""
-
-msgid "disabled"
-msgstr ""
-
-#, fuzzy
-msgid "Mail account data"
-msgstr "Gửi cho tôi thông tin về account cá nhân"
-
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-
-#, python-format
-msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
+msgid "No orphaned pages in this wiki."
+msgstr "Không có trang lẻ trong wiki này."
 
 msgid "Include system pages"
 msgstr "Bao gồm các trang hệ thống"
@@ -3300,152 +3179,8 @@ msgstr "Bao gồm các trang hệ thống"
 msgid "Exclude system pages"
 msgstr "Bỏ các trang hệ thống"
 
-msgid "Go To Page"
-msgstr "Tới trang"
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
-"%(argument_value)s!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-
-msgid "Embedded"
-msgstr ""
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Không hiểu tham số \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Không tìm thấy \"%s\""
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Không hiểu cách hoạt động '%(scheme)s'!"
-
-msgid "No parent page found!"
-msgstr "Không tìm thấy trang trên!"
-
-msgid "Slideshow"
-msgstr "Slideshow"
-
-msgid "Start"
-msgstr "Bắt đầu"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Slide %(pos)d kích thước %(size)d"
-
-msgid "Markup"
-msgstr "Đánh dấu"
-
-msgid "Display"
-msgstr "Hiển thị"
-
-#, fuzzy
-msgid "Variable name"
-msgstr "Tên file"
-
-msgid "Description"
-msgstr ""
-
-msgid "Wiki configuration"
-msgstr ""
-
-msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
-msgstr ""
-
-msgid "Setting"
-msgstr ""
-
-msgid "No orphaned pages in this wiki."
-msgstr "Không có trang lẻ trong wiki này."
-
-#, fuzzy
-msgid "File attachment browser"
-msgstr "Gửi kèm file mới"
-
-msgid "User account browser"
-msgstr ""
-
-msgid "Search Titles"
-msgstr "Tìm tiêu đề"
-
-msgid "Display context of search results"
-msgstr "Hiển thị kết quả tìm kiếm"
-
-msgid "Case-sensitive searching"
-msgstr "Tìm kiếm phân biệt chữ hoa và chữ thường"
-
-msgid "Search Text"
-msgstr "Tìm nội dung"
-
-#, fuzzy, python-format
-msgid "Unknown macro parameter: %s."
-msgstr "Việc không rõ"
-
-#, python-format
-msgid ""
-"More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occurred)"
-msgstr ""
-
-#, fuzzy
-msgid "Lexer description"
-msgstr "Phiên bản Python"
-
-#, fuzzy
-msgid "Lexer names"
-msgstr "Người dùng"
-
-#, fuzzy
-msgid "File patterns"
-msgstr "Tên file"
-
-msgid "Mimetypes"
-msgstr ""
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Không có lời trích trong trang %(pagename)s."
-
-#, fuzzy, python-format
-msgid "%(mins)dm ago"
-msgstr "cách nay %(mins)d phút"
-
-msgid "(no bookmark set)"
-msgstr "(không có bookmark)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(hiện tại đang là %s)"
-
-#, fuzzy
-msgid "Delete bookmark"
-msgstr "Xoá Bookmark"
-
-msgid "Set bookmark"
-msgstr "Đưa vào bookmark"
-
-msgid "[Bookmark reached]"
-msgstr "[Đã tới bookmark]"
+msgid "No wanted pages in this wiki."
+msgstr "Không có trang cần tạo trong wiki này."
 
 msgid "Python Version"
 msgstr "Phiên bản Python"
@@ -3518,10 +3253,6 @@ msgstr ""
 msgid "index available"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "thay đổi cuối lúc %(time)s"
-
 msgid "Xapian search"
 msgstr ""
 
@@ -3530,9 +3261,6 @@ msgstr ""
 
 msgid "Active threads"
 msgstr ""
-
-msgid "No wanted pages in this wiki."
-msgstr "Không có trang cần tạo trong wiki này."
 
 #, fuzzy
 msgid "Search for items"
@@ -3588,36 +3316,332 @@ msgstr ""
 msgid "Go get it!"
 msgstr ""
 
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Không có lời trích trong trang %(pagename)s."
+
 #, fuzzy
 msgid "Contents"
 msgstr "Trang chỉ dẫn"
 
+#, fuzzy
+msgid "Variable name"
+msgstr "Tên file"
+
+msgid "Default"
+msgstr "Mặc định"
+
+msgid "Description"
+msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "Phiên bản Python"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Người dùng"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "Tên file"
+
+msgid "Mimetypes"
+msgstr ""
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Không hiểu cách hoạt động '%(scheme)s'!"
+
+msgid "No parent page found!"
+msgstr "Không tìm thấy trang trên!"
+
+msgid "Slideshow"
+msgstr "Slideshow"
+
+msgid "Start"
+msgstr "Bắt đầu"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Slide %(pos)d kích thước %(size)d"
+
+#, fuzzy
+msgid "File attachment browser"
+msgstr "Gửi kèm file mới"
+
+msgid "User account browser"
+msgstr ""
+
+msgid "Search Titles"
+msgstr "Tìm tiêu đề"
+
+msgid "Display context of search results"
+msgstr "Hiển thị kết quả tìm kiếm"
+
+msgid "Case-sensitive searching"
+msgstr "Tìm kiếm phân biệt chữ hoa và chữ thường"
+
+msgid "Search Text"
+msgstr "Tìm nội dung"
+
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Việc không rõ"
+
 #, python-format
 msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Tới trang"
+
+msgid "Wiki configuration"
+msgstr ""
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+msgid "Setting"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
+msgstr "cách nay %(mins)d phút"
+
+msgid "(no bookmark set)"
+msgstr "(không có bookmark)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(hiện tại đang là %s)"
+
+#, fuzzy
+msgid "Delete bookmark"
+msgstr "Xoá Bookmark"
+
+msgid "Set bookmark"
+msgstr "Đưa vào bookmark"
+
+msgid "[Bookmark reached]"
+msgstr "[Đã tới bookmark]"
+
+msgid "Markup"
+msgstr "Đánh dấu"
+
+msgid "Display"
+msgstr "Hiển thị"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Tải lên file \"%(filename)s\""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Không hiểu tham số \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Không tìm thấy \"%s\""
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
 msgstr ""
 
 #, fuzzy
-msgid "seconds"
-msgstr "%.2f giây"
+msgid "Preferences"
+msgstr "Sở thích cá nhân"
 
 #, fuzzy
-msgid "Previous"
-msgstr "Xem qua"
+msgid "This jabber id already belongs to somebody else."
+msgstr "Địa chỉ thư điện tử này đã được đăng ký."
 
-#, fuzzy
-msgid "Next"
-msgstr "Nội dung"
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Kiểu '%(theme_name)s' không thể đuợc nạp!"
 
-#, fuzzy
-msgid "rev"
-msgstr "hoàn nguyên"
+msgid "User preferences saved!"
+msgstr "Sở thích của bạn đã được lưu!"
 
-msgid "current"
+msgid "the one preferred"
 msgstr ""
 
-msgid "about"
+msgid "free choice"
+msgstr ""
+
+msgid "Save"
+msgstr "Lưu"
+
+msgid "Preferred theme"
+msgstr "Theme mặc định"
+
+#, fuzzy
+msgid "Editor Preference"
+msgstr "Sở thích cá nhân"
+
+msgid "Editor shown on UI"
+msgstr ""
+
+msgid "Time zone"
+msgstr "Múi giờ"
+
+msgid "Your time is"
+msgstr "Giờ hiện tại"
+
+msgid "Server time is"
+msgstr "Giờ ở máy chủ"
+
+msgid "Date format"
+msgstr "Định dạng ngày"
+
+msgid "Preferred language"
+msgstr "Ngôn ngữ mặc định"
+
+msgid "General options"
+msgstr "Các lựa chọn chung"
+
+msgid "Quick links"
+msgstr "Các liên kết thường dùng"
+
+#, fuzzy
+msgid "Change password"
+msgstr "Mật khẩu"
+
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Trang này đã bị xoá hoặc chưa bao giờ tồn tại!"
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Thư điện tử"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Đăng ký"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Các trang đã đăng ký (một regex trong một dòng)"
+
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+msgid "Toggle line numbers"
 msgstr ""
 
 #, fuzzy
