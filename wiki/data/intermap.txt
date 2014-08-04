@@ -12,12 +12,6 @@
 # if you do not want to modify the file directly.
 
 
-# MoinMoin additions
-MoinMaster http://master.moinmo.in/
-MoinCVS http://hg.moinmo.in/moin/1.9?f=-1;file=
-MoinSrc http://hg.moinmo.in/moin/1.9?f=-1;file=
-MoinDoc http://hg.moinmo.in/moin/1.9/
-
 # for Germany: bookzilla.de instead of amazon == supporting GNU/Linux and 5% for FSF Europe
 # ISBN http://bookzilla.de/shop/action/advancedSearch?action=search&isbn=
 RFC http://www.ietf.org/rfc/rfc$PAGE.txt
@@ -91,6 +85,7 @@ LyricWiki http://lyricwiki.org/
 MeatBall http://www.usemod.com/cgi-bin/mb.pl?
 MetaWiki http://sunir.org/apps/meta.pl?
 MetaWikiPedia http://meta.wikipedia.org/wiki/
+MoinMaster http://master.moinmo.in/
 MoinMoin http://moinmo.in/
 OddMuse http://www.oddmuse.org/
 OpenWiki http://openwiki.com/ow.asp?
