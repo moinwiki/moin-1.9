@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 16:38+0100\n"
+"POT-Creation-Date: 2014-08-04 22:35+0200\n"
 "PO-Revision-Date: 2012-06-12 10:41+0200\n"
 "Last-Translator: Rachid BM <rachidbm@ubuntu.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -27,106 +27,8 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
-"Het pakket heeft een nieuwere versie van MoinMoin nodig (tenminste %s)."
-
-msgid "The theme name is not set."
-msgstr "De naam van het thema is niet ingesteld."
-
-#, python-format
-msgid "Theme files not installed! Write rights missing for %s."
-msgstr "Themabestanden niet geïnstalleerd! Geen schrijfrechten voor %s."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "De installatie van '%(filename)s' is mislukt."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "Het bestand %s is geen pakketbestand van MoinMoin."
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "De pagina %s bestaat niet."
-
-msgid "Invalid package file header."
-msgstr "Ongeldige header van pakketbestand."
-
-msgid "Package file format unsupported."
-msgstr "Formaat van pakketbestand wordt niet ondersteund."
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Onbekende functie %(func)s op regel %(lineno)i."
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr "Het bestand %s kon niet gevonden worden in het pakket."
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Het argument \"%s\" moet een booleanse waarde zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Het argument moet een booleanse waarde zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Het argument \"%s\" moet een geheel getal zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Het argument moet een geheel getal zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "Het argument \"%s\"moet een reëel getal zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Het argument moet een reëel getal zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Het argument \"%s\" moet een complexe waarde zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Het argument moet een complexe waarde zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Het argument \"%s\" moet één van \"%s\" zijn, niet \"%s\""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Het argument moet één van \"%s\" zijn, niet \"%s\""
-
-msgid "Too many arguments"
-msgstr "Te veel argumenten"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr ""
-"Er kunnen geen argumenten zonder naam door argumenten met naam gevolgd worden"
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Argument \"%s\" is vereist"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Er bestaat geen argument met de naam \"%s\""
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Verwacht \"=\" volgend op \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Verwacht een waarde voor sleutel \"%(token)s\""
+msgid "Your changes are not saved!"
+msgstr "Uw veranderingen zijn niet opgeslagen!"
 
 msgid "You are not allowed to edit this page."
 msgstr "U hebt geen toestemming deze pagina te bewerken."
@@ -139,6 +41,9 @@ msgstr "Bewerken van oude versies is niet mogelijk!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Uw vergrendeling is verlopen. Houd rekening met bewerkingsconflicten!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "De pagina naam is te lang, probeer een kortere naam."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -239,8 +144,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Voorbeeld"
 
-msgid "Text mode"
-msgstr "Tekstmodus"
+msgid "GUI Mode"
+msgstr "GUI modus"
 
 msgid "Load Draft"
 msgstr "Ontwerp laden"
@@ -260,79 +165,6 @@ msgstr "Toevoegen aan: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Witruimte verwijderen aan het einde van elke regel"
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Onbekende actie %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
-
-msgid "Login and try again."
-msgstr "Log in en probeer opnieuw."
-
-msgid "The wiki is currently not reachable."
-msgstr "De wiki is op dit moment niet bereikbaar."
-
-msgid "Invalid username or password."
-msgstr "Ongeldige gebruikersnaam of wachtwoord."
-
-#, python-format
-msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
-msgstr ""
-"De externe wiki gebruikt intern een andere InterWiki naam (%(remotename)s) "
-"dan degene die u opgegeven heeft (%(localname)s)."
-
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
-"Ongeldige reguliere expressie voor het markeren \"%(regex)s\":%(error)s"
-
-#, python-format
-msgid ""
-"Text matching regular expression \"%(regex)s\" is highlighted. "
-"%(switch_link)s."
-msgstr ""
-
-msgid "Switch to non-highlighted view"
-msgstr ""
-
-msgid ""
-"The backed up content of this page is deprecated and will rank lower in "
-"search results!"
-msgstr ""
-"De reservekopie van de inhoud van deze pagina is achterhaald en zal lager "
-"gerangschikt worden in zoekresultaten!"
-
-#, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr "Versie %(rev)d sinds %(date)s"
-
-#, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "Omgeleid vanaf pagina \"%(page)s\""
-
-#, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Deze pagina verwijst naar \"%(page)s\""
-
-msgid "Create New Page"
-msgstr "Nieuwe pagina aanmaken"
-
-msgid "You are not allowed to view this page."
-msgstr "U hebt geen toestemming deze pagina te bekijken."
-
-msgid "Your changes are not saved!"
-msgstr "Uw veranderingen zijn niet opgeslagen!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "De pagina naam is te lang, probeer een kortere naam."
-
-msgid "GUI Mode"
-msgstr "GUI modus"
 
 msgid "Edit was cancelled."
 msgstr "De bewerking werd geannuleerd."
@@ -514,369 +346,1042 @@ msgstr ""
 "URL voor wachtwoordherstel: %s?action=recoverpass&name=%s&token=%s\n"
 
 #, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "U moet ingelogd zijn om deze actie te gebruiken: %(action)s."
-
-msgid "Your subscription to this page has been removed."
-msgstr "Uw abonnement op deze pagina is opgezegd."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Kan geen reguliere expressie-abonnement verwijderen!"
-
-msgid "Edit the subscription regular expressions in your settings."
-msgstr "Bewerk de reguliere expressie abonnementen in uw instellingen."
-
-msgid "You need to be subscribed to unsubscribe."
-msgstr "U moet geabonneerd zijn om uit te schrijven."
-
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Nieuwe tekening maken \"%(filename)s\" (opent in een nieuw venster)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Tekening bewerken \"%(filename)s\" (opent in een nieuw venster)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikbare tekening: %(filename)s"
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr ""
-"Gebruik de interactieve gebruikersinterface om de actie %(actionname)s te "
-"gebruiken!"
+"Het pakket heeft een nieuwere versie van MoinMoin nodig (tenminste %s)."
 
-msgid "You are not allowed to save a drawing on this page."
-msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
+msgid "The theme name is not set."
+msgstr "De naam van het thema is niet ingesteld."
 
-msgid "Empty target name given."
-msgstr "Lege naam voor het doel opgegeven."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "Themabestanden niet geïnstalleerd! Geen schrijfrechten voor %s."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "De installatie van '%(filename)s' is mislukt."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Het bestand %s is geen pakketbestand van MoinMoin."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "De pagina %s bestaat niet."
+
+msgid "Invalid package file header."
+msgstr "Ongeldige header van pakketbestand."
+
+msgid "Package file format unsupported."
+msgstr "Formaat van pakketbestand wordt niet ondersteund."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Onbekende functie %(func)s op regel %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Het bestand %s kon niet gevonden worden in het pakket."
+
+msgid "The wiki is currently not reachable."
+msgstr "De wiki is op dit moment niet bereikbaar."
+
+msgid "Invalid username or password."
+msgstr "Ongeldige gebruikersnaam of wachtwoord."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+"De externe wiki gebruikt intern een andere InterWiki naam (%(remotename)s) "
+"dan degene die u opgegeven heeft (%(localname)s)."
+
+msgid "Text mode"
+msgstr "Tekstmodus"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Onbekende actie %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
+
+msgid "Login and try again."
+msgstr "Log in en probeer opnieuw."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Het argument \"%s\" moet een booleanse waarde zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Het argument moet een booleanse waarde zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Het argument \"%s\" moet een geheel getal zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Het argument moet een geheel getal zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Het argument \"%s\"moet een reëel getal zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Het argument moet een reëel getal zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Het argument \"%s\" moet een complexe waarde zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Het argument moet een complexe waarde zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Het argument \"%s\" moet één van \"%s\" zijn, niet \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Het argument moet één van \"%s\" zijn, niet \"%s\""
+
+msgid "Too many arguments"
+msgstr "Te veel argumenten"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+"Er kunnen geen argumenten zonder naam door argumenten met naam gevolgd worden"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Argument \"%s\" is vereist"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Er bestaat geen argument met de naam \"%s\""
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Verwacht \"=\" volgend op \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Verwacht een waarde voor sleutel \"%(token)s\""
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+"Ongeldige reguliere expressie voor het markeren \"%(regex)s\":%(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
 
 msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
 msgstr ""
-"Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
-"probeer opnieuw."
-
-msgid "You are not allowed to view attachments of this page."
-msgstr "U hebt geen toestemming om bijlagen van deze pagina te bekijken."
-
-msgid "Edit drawing"
-msgstr "Tekening bewerken"
-
-msgid "No older revisions available!"
-msgstr "Geen oudere versies beschikbaar!"
-
-msgid "No log entries found."
-msgstr "Geen logboekaantekeningen gevonden."
+"De reservekopie van de inhoud van deze pagina is achterhaald en zal lager "
+"gerangschikt worden in zoekresultaten!"
 
 #, python-format
-msgid "Diff for \"%s\""
-msgstr "Verschillen voor \"%s\""
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Versie %(rev)d sinds %(date)s"
 
 #, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Verschillen tussen versies %d en %d"
+msgid "Redirected from page \"%(page)s\""
+msgstr "Omgeleid vanaf pagina \"%(page)s\""
 
 #, python-format
-msgid "(spanning %d versions)"
-msgstr "(omvat %d versies)"
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Deze pagina verwijst naar \"%(page)s\""
 
-msgid "Revert to this revision"
-msgstr "Terugzetten naar deze versie"
+msgid "Create New Page"
+msgstr "Nieuwe pagina aanmaken"
 
-msgid "Previous change"
-msgstr "Vorige wijziging"
+msgid "You are not allowed to view this page."
+msgstr "U hebt geen toestemming deze pagina te bekijken."
 
-msgid "Next change"
-msgstr "Volgende wijziging"
+msgid "No recipients, nothing to do"
+msgstr "Geen ontvangers, niets om uit te voeren"
 
-msgid "Size"
-msgstr "Grootte"
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Verbinding met de mailserver '%(server)s' mislukt: %(reason)s"
 
-msgid "Editor"
-msgstr "Auteur"
+msgid "Mail not sent"
+msgstr "E-mail niet verzonden"
+
+msgid "Mail sent OK"
+msgstr "E-mail correct verzonden"
 
 msgid "Date"
 msgstr "Datum"
 
-msgid "Comment"
-msgstr "Commentaar"
+msgid "From"
+msgstr "Van"
 
-msgid "Diff with oldest revision in left pane"
-msgstr "Toon verschillen met oudere versie in linkerpaneel"
+msgid "To"
+msgstr "Naar"
 
-msgid "No older revision available for diff"
-msgstr "Geen oudere versie beschikbaar om mee te vergelijken"
+msgid "Content"
+msgstr "Inhoud"
 
-msgid "Diff with older revision in left pane"
-msgstr "Toon verschillen met oudere versie in linkerpaneel"
-
-msgid "Diff with newer revision in left pane"
-msgstr "Toon verschillen met nieuwere versie in linkerpaneel"
-
-msgid "Can't change to revision newer than in right pane"
-msgstr "Kan geen nieuwere versie vinden dan die in het rechterpaneel"
-
-msgid "N/A"
-msgstr "n.v.t."
-
-msgid "Diff with older revision in right pane"
-msgstr "Toon verschillen met oudere versie in rechterpaneel"
-
-msgid "Can't change to revision older than revision in left pane"
-msgstr "Kan geen oudere versie vinden dan die in het linkerpaneel"
-
-msgid "Diff with newer revision in right pane"
-msgstr "Toon verschillen met nieuwere versie in rechterpaneel"
-
-msgid "No newer revision available for diff"
-msgstr "Geen nieuwere versie beschikbaar om mee te vergelijken"
-
-msgid "Diff with newest revision in right pane"
-msgstr "Toon verschillen met nieuwere versie in rechterpaneel"
-
-msgid "No differences found!"
-msgstr "Geen verschillen gevonden!"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "De pagina is weliswaar %(count)d keer opgeslagen!"
-
-msgid "(ignoring whitespace)"
-msgstr "(witruimte negeren)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Wijzigingen in de hoeveelheid witruimte negeren"
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Volledige verwijzingenlijst voor \"%s\""
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(inclusief %(localwords)d %(pagelink)s)"
+msgid "Attachments"
+msgstr "Bijlages"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of "
-"%(totalwords)d words%(localwords)s and are highlighted below:"
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"De volgende %(badwords)d woorden konden niet gevonden worden in het "
-"woordenboek van %(totalwords)d woorden%(localwords)s en zijn hieronder "
-"gemarkeerd:"
+"Sorry, kan de pagina niet opslaan omdat \"%(content)s\" in deze wiki niet is "
+"toegestaan."
 
-msgid "Add checked words to dictionary"
-msgstr "Gecontroleerde woorden toevoegen aan het woordenboek"
-
-msgid "No spelling errors found!"
-msgstr "Geen spelfouten gevonden!"
-
-msgid "You can't save spelling words."
-msgstr "U kunt geen spellingwoorden opslaan."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-"U kunt de spelling van een pagina die u niet kan lezen niet controleren."
-
-msgid "Do it."
-msgstr "Doe het."
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Actie %(actionname)s uitvoeren?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "Actie %(actionname)s is op deze wiki uitgesloten!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-"U hebt geen toestemming om de actie %(actionname)s op deze pagina uit te "
-"voeren!"
+msgid "Could not contact botbouncer.com."
+msgstr "Kon geen contact maken met botbouncer.com."
 
 msgid "Please log in first."
 msgstr "Eerst inloggen alstublieft."
 
-msgid "Please first create a homepage before creating additional pages."
-msgstr "Maak eerst een thuispagina voor u extra pagina's aanmaakt alstublieft."
+msgid "Failed to connect to database."
+msgstr "Fout bij het verbinden met de database."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "LDAP-server %(server)s storing."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+"Kies nu een gebruikersnaam.\n"
+"Als u een bestaande gebruikersnaam kies zal u gevraagd worden naar\n"
+"het wachtwoord en zal u het account kunnen koppelen met uw OpenID."
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Choose this name"
+msgstr "Kies deze naam"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "Dit is geen geldige gebruikersnaam, kies een andere."
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+"De gebruikersnaam die u heeft gekozen is al\n"
+"in gebruik. Als dit uw gebruikersnaam is, voer hieronder uw wachtwoord in "
+"om\n"
+"uw gebruikersnaam met uw OpenID te koppelen. Indien dit niet het geval is, "
+"kies een andere\n"
+"gebruikersnaam en laat het wachtwoord veld leeg."
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Associate this name"
+msgstr "Koppel deze naam"
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr "OpenID-fout: %s."
+
+msgid "OpenID verification canceled."
+msgstr "OpenID-verificatie geannuleerd."
+
+msgid "Verification canceled."
+msgstr "Verificatie geannuleerd."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID succesvol. id: %s"
+
+msgid "OpenID failure"
+msgstr "OpenID-storing"
+
+msgid "OpenID failure."
+msgstr "OpenID-storing."
+
+msgid "No OpenID found in session."
+msgstr "Geen OpenID gevonden in deze sessie."
+
+msgid "Your account is now associated to your OpenID."
+msgstr "Uw account is nu gekoppeld met uw OpenID."
+
+msgid "The password you entered is not valid."
+msgstr "Het wachtwoord dat u opgaf is ongeldig."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr "OpenID-fout: onbekende configuratiefase"
+
+msgid "OpenID verification requires that you click this button:"
+msgstr "OpenID-verificatie vereist dat u op deze knop drukt:"
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr "Anonieme sessies moeten geactiveerd zijn voor OpenID login."
+
+msgid "Failed to resolve OpenID."
+msgstr "Opzoeken OpenID mislukt."
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr "Probleem met het herkennen van OpenID, geen geldige OpenID."
+
+msgid "No OpenID."
+msgstr "Geen OpenID."
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+"Indien u nog geen account hebt kan u nog steeds inloggen met uw OpenID en "
+"een account aanmaken tijdens het inloggen."
+
+#, fuzzy
+msgid "Missing user name. Please enter user name and password."
+msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
 
 #, python-format
 msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
+msgstr ""
+"Als u geen account hebt, <a href=\"%(userprefslink)s\">kan u er nu een "
+"aanmaken</a>."
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr "<a href=\"%(sendmypasswordlink)s\">Uw wachtwoord vergeten?</a>"
+
+msgid "HelpOnParsers"
+msgstr "HelpOverParsers"
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
+msgstr ""
+"Syntaxismarkering niet ondersteund voor '%(syntax)s', zie "
+"%(highlight_help_page)s."
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
 "\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Nadruk:: <<Verbatim(//)>>''cursief''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''vet'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''vet "
+"cursief'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''gemengd "
+"''<<Verbatim(**)>>'''''vet'''<<Verbatim(**)>> en cursief''<<Verbatim(//)>>;\n"
+" Horizontale lijn:: <<Verbatim(----)>>\n"
+" Geforceerd regeleinde:: <<Verbatim(\\\\)>>\n"
+" Koppen:: = Titel 1 =; == Titel 2 ==; === Titel 3 ===; ==== Titel 4 ====; "
+"===== Titel 5 =====.\n"
+" Lijsten:: * tekens; ** subtekens; # genummerde items; ## genummerde "
+"subitems.\n"
+"Verwijzingen:: <<Verbatim([[doel]])>>; <<Verbatim([[doel|tekst]])>>.\n"
+" Tabellen:: |= hoofdingtekst | celtekst| meer celtekst |;\n"
 "\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
+"(!) Kijk voor meer informatie naar HelpOverBewerken of "
+"HelpOverCreoleSyntaxis.\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT optie uitgeschakeld, bekijk de HelpOverConfiguratie pagina."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT verwerking is niet beschikbaar, installeer de 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "Verwerkingsfout %(errortype)s"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Renderen van een reStructured tekst is onmogelijk, installeer Docutils."
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
 "\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
 "\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
-"[[%(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
-"%(username)s only||\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"{{{\n"
+"Nadruk: *cursief* **vet** ``vaste letterbreedte``\n"
+"\n"
+"Koppen: Kop 1  Kop 2  Kop 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontale lijn: ----\n"
+"\n"
+"Verwijzingen: LiggendeStreepEinde_ `meerdere woorden binnen schuine "
+"aanhalingstekens`_ extern_\n"
+"\n"
+".. _extern: http://externe-site.voorbeeld.org/test/\n"
+"\n"
+"Lijsten: * opsommingstekens; 1., a. genummerde items.\n"
+"}}}\n"
+"(!) Kijk voor meer informatie naar de \n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|korte "
+"handleiding over reStructuredText]].\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maximum aantal toegestane includes overschreden**"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**U hebt geen toestemming om deze pagina te lezen: %s**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Nadruk:: <<Verbatim('')>>''cursief''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''vet'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''vet "
+"cursief'''''<<Verbatim(''''')>>; <<Verbatim('')>>''gemengd "
+"''<<Verbatim(''')>>'''''vet'''<<Verbatim(''')>> en "
+"cursief''<<Verbatim('')>>; <<Verbatim(----)>> horizontale lijn.\n"
+" Koppen:: = Titel 1 =; == Titel 2 ==; === Titel 3 ===; ==== Titel 4 ====; "
+"===== Titel 5 =====.\n"
+" Lijsten:: een spatie gevolgd door één van: * opsommingstekens; 1., a., A., "
+"i., I. genummerde items; 1.#n begin te nummeren vanaf n; enkel inspringing "
+"met spaties.\n"
+"Verwijzingen:: <<Verbatim(WoordenMetHoofdlettersSamenvoegen)>>; "
+"<<Verbatim([[doel|tekst]])>>.\n"
+" Tabellen:: || celtekst |||| celtekst over twee kolommen ||;   er zijn geen "
+"spaties op dezelfde regel toegestaan na tabellen of titels.\n"
+"\n"
+"(!) Kijk voor meer informatie naar HelpOverBewerken of SyntaxisNaslagwerk.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Er werd \"%(wanted)s\" na \"%(key)s\" verwacht, er kwam \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Er werd een geheel getal \"%(key)s\" voor \"%(token)s\" verwacht"
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Er werd een geheel getal \"%(arg)s\" na \"%(key)s\" verwacht"
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Er werd een kleurwaarde \"%(arg)s\" na \"%(key)s\" verwacht"
+
+msgid "Password is too short."
+msgstr "Wachtwoord is te kort."
+
+msgid "Password has not enough different characters."
+msgstr "Wachtwoord heeft niet genoeg verschillende karakters."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Wachtwoord is te eenvoudig (wachtwoord bevat naam of omgekeerd)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Wachtwoord is te eenvoudig (opeenvolging van toetsen)."
+
+msgid "Diffs"
+msgstr "Verschillen"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "UnSubscribe"
+msgstr "Uitschrijven"
+
+msgid "Subscribe"
+msgstr "Abonneren"
+
+msgid "Raw"
+msgstr "Brontekst"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Afdrukken"
+
+msgid "View"
+msgstr "Bekijken"
+
+msgid "Up"
+msgstr "Omhoog"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"Mijn e-mailadres (niet mijn wiki thuispagina) in de auteur info pagina "
+"publiceren"
+
+msgid "Open editor on double click"
+msgstr "Tekstbewerker openen bij dubbelklik"
+
+msgid "After login, jump to last visited page"
+msgstr "Na login, ga meteen naar de laatst bezochte pagina"
+
+msgid "Show comment sections"
+msgstr "Laat commentaar secties zien"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Vraagteken tonen voor verwijzingen naar niet-bestaande pagina's"
+
+msgid "Show page trail"
+msgstr "Paginaspoor tonen"
+
+msgid "Show icon toolbar"
+msgstr "Pictogrammenwerkbalk tonen"
+
+msgid "Show top/bottom links in headings"
+msgstr "Verwijzingen naar begin/einde in koppen tonen"
+
+msgid "Show fancy diffs"
+msgstr "Mooie verschillen tonen"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Spaties toevoegen aan getoonde wikinamen"
+
+msgid "Remember login information"
+msgstr "Aanmeldinformatie onthouden"
+
+msgid "Disable this account forever"
+msgstr "Dit account permanent uitschakelen"
+
+msgid "(Use FirstnameLastname)"
+msgstr "(Gebruik VoornaamAchternaam)"
+
+msgid "Alias-Name"
+msgstr "Alias-naam"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Jabber ID"
+msgstr "Jabber ID"
+
+msgid "User CSS URL"
+msgstr "URL van CSS van de gebruiker"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Leeglaten om geen CSS van gebruiker toe te laten)"
+
+msgid "Editor size"
+msgstr "Grootte van de tekstbewerker"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)sBijwerking van \"%(pagename)s\" door %(username)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Beste wikigebruiker,\n"
+"\n"
+"U bent geabonneerd op een wikipagina of wikicategorie op \"%(sitename)s\" "
+"voor updatemeldingen.\n"
+"\n"
+"De pagina \"%(pagename)s\" is door %(editor)s gewijzigd:\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
 "\n"
 msgstr ""
-"U kunt hier enkele bijkomende subpagina's aan uw reeds bestaande thuispagina "
-"toevoegen.\n"
+"Beste wikigebruiker,\n"
 "\n"
-"U kunt kiezen hoe open deze pagina's zullen zijn voor andere lezers en "
-"schrijvers,\n"
-"de toegang wordt bepaald door lidmaatschap van de groep overeenstemmende met "
-"de groepspagina.\n"
+"U bent geabonneerd op een wikipagina \"%(sitename)s\" voor updatemeldingen.\n"
 "\n"
-"Voer een naam in voor de subpagina en druk op de knop om een nieuwe pagina "
-"aan te maken.\n"
-"\n"
-"Zorg ervoor dat de overeenstemmende groepspagina bestaat en de juiste leden "
-"bevat\n"
-"vooraleer toegangsgecontroleerde pagina's aan te maken. Gebruikt "
-"HomepageGroupsTemplate om de\n"
-"groepspagina's aan te maken.\n"
-"\n"
-"||'''Een nieuwe persoonlijke pagina toevoegen:'''||'''Gerelateerde "
-"toegangscontrolegroep:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,lezen-schrijven pagina,"
-"%(username)s)>>||[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,alleen-lezen pagina,%(username)s)>>||"
-"[[%(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private pagina,%(username)s)>>||"
-"Enkel %(username)s||\n"
+"De pagina \"%(pagename)s\" is door %(editor)s verwijderd:\n"
 "\n"
 
-msgid "MyPages management"
-msgstr "MijnPagina's beheer"
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
+msgstr ""
+"Beste wikigebruiker,\n"
+"\n"
+"U bent geabonneerd op een wikipagina \"%(sitename)s\" voor updatemeldingen.\n"
+"\n"
+"De pagina \"%(oldname)s\" is door %(editor)s hernoemd naar \"%(pagename)s"
+"\":\n"
+
+#, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "[%(sitename)s] Nieuwe bijlage toegevoegd aan pagina %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Beste wikigebruiker,\n"
+"\n"
+"U bent geabonneerd op een wikipagina \"%(page_name)s\" voor updatemeldingen. "
+"Er werd op die pagina een bijlage toegevoegd door %(editor)s. De volgende "
+"gedetailleerde informatie is beschikbaar:\n"
+"\n"
+"Naam van de bijlage: %(attach_name)s\n"
+"Grootte: %(attach_size)s\n"
+
+#, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "[%(sitename)s] Bijlage verwijderd van pagina %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Beste wikigebruiker,\n"
+"\n"
+"U bent geabonneerd op een wikipagina \"%(page_name)s\" voor updatemeldingen. "
+"Er werd op die pagina een bijlage verwijderd door %(editor)s. De volgende "
+"gedetailleerde informatie is beschikbaar:\n"
+"\n"
+"Naam van de bijlage: %(attach_name)s\n"
+"Grootte: %(attach_size)s\n"
+
+#, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Nieuw gebruikersaccount aangemaakt"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+"Beste beheerder, er is zojuist een nieuwe gebruiker aangemaakt op "
+"\"%(sitename)s\". Details:\n"
+"\n"
+"    Gebruikersnaam: %(username)s\n"
+"    E-mailadres: %(useremail)s"
+
+msgid "anonymous"
+msgstr "anoniem"
+
+msgid "Line"
+msgstr "Regel"
+
+msgid "No differences found!"
+msgstr "Geen verschillen gevonden!"
+
+msgid "Deletions are marked like this."
+msgstr "Verwijderingen worden op deze manier gemarkeerd."
+
+msgid "Additions are marked like this."
+msgstr "Toevoegingen worden op deze manier gemarkeerd."
+
+msgid "DeleteCache"
+msgstr "BufferLegen"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s gebufferd)"
+
+msgid "Or try one of these actions:"
+msgstr "Of probeer één van deze acties:"
+
+msgid "Unsubscribe"
+msgstr "Uitschrijven"
+
+msgid "Home"
+msgstr "Start"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[GEWIST]"
+
+msgid "[UPDATED]"
+msgstr "[HERZIEN]"
+
+msgid "[RENAMED]"
+msgstr "[HERNOEMD]"
+
+msgid "[CONFLICT]"
+msgstr "[CONFLICT]"
+
+msgid "[NEW]"
+msgstr "[NIEUW]"
+
+msgid "[DIFF]"
+msgstr "[VERSCHIL]"
+
+msgid "[BOTTOM]"
+msgstr "[ONDER]"
+
+msgid "[TOP]"
+msgstr "[BOVEN]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Logout"
+msgstr "Uitloggen"
 
 msgid "Login"
 msgstr "Inloggen"
 
-msgid "General Information"
-msgstr "Algemene informatie"
+msgid "Clear message"
+msgstr "Bericht wissen"
 
 #, python-format
-msgid "Page size: %d"
-msgstr "Paginagrootte: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "SHA-waarde van de inhoud van deze pagina is:"
-
-msgid "The following users subscribed to this page:"
-msgstr "De volgende gebruikers zijn op deze pagina geabonneerd:"
-
-msgid "This page links to the following pages:"
-msgstr "Deze pagina verwijst naar de volgende pagina's:"
+msgid "last edited %(time)s by %(editor)s"
+msgstr "laatst bewerkt op %(time)s door %(editor)s"
 
 #, python-format
-msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to "
-"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
-msgstr ""
-"Nu getoond: revisiegeschiedenis voor deze pagina van '''%(start_offset)d''' "
-"tot '''%(end_offset)d''' uit een totaal van '''%(total_count)d''' "
-"bewerkingen."
+msgid "last modified %(time)s"
+msgstr "laatst gewijzigd %(time)s"
 
-msgid "Newer"
-msgstr "Nieuwer"
+msgid "Search:"
+msgstr "Zoeken:"
 
-msgid "Older"
-msgstr "Ouder"
+msgid "Text"
+msgstr "Tekst"
 
-#, python-format
-msgid "%s items per page"
-msgstr "%s items per pagina"
+msgid "Titles"
+msgstr "Titels"
 
-msgid "Diff"
-msgstr "Verschil"
+msgid "Search"
+msgstr "Zoeken"
 
-msgid "Action"
-msgstr "Actie"
+msgid "More Actions:"
+msgstr "Meer acties:"
 
-msgid "view"
-msgstr "bekijken"
+msgid "------------------------"
+msgstr "------------------------"
 
-msgid "to previous"
-msgstr "naar vorige"
+msgid "Raw Text"
+msgstr "Brontekst"
 
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Terugzetten naar versie %(rev)d."
+msgid "Print View"
+msgstr "Afdrukvoorbeeld"
 
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Hernoemd van '%(oldpagename)s'."
+msgid "Delete Cache"
+msgstr "Buffer legen"
 
-msgid "get"
-msgstr "ophalen"
-
-msgid "del"
-msgstr "verwijderen"
-
-msgid "edit"
-msgstr "bewerken"
-
-msgid "Revision History"
-msgstr "Versiegeschiedenis"
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Informatie voor \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "Toon \"%(title)s\""
-
-msgid "General Page Infos"
-msgstr "Algemene pagina-informatie"
-
-msgid "Page hits and edits"
-msgstr "Aantal raadplegingen en bewerkingen"
+msgid "Rename Page"
+msgstr "Pagina hernoemen"
 
 msgid "Copy Page"
 msgstr "Pagina kopiëren"
 
+msgid "Delete Page"
+msgstr "Pagina verwijderen"
+
+msgid "Like Pages"
+msgstr "Gelijke pagina's"
+
+msgid "Local Site Map"
+msgstr "Lokaal site overzicht"
+
+msgid "My Pages"
+msgstr "Mijn pagina's"
+
+msgid "Subscribe User"
+msgstr "Abonneer een gebruiker"
+
+msgid "Remove Spam"
+msgstr "Spam verwijderen"
+
+msgid "Revert to this revision"
+msgstr "Terugzetten naar deze versie"
+
+msgid "Package Pages"
+msgstr "Pakket pagina's"
+
+msgid "Render as Docbook"
+msgstr "Als een docbook renderen"
+
+msgid "Sync Pages"
+msgstr "Pagina synchroniseren"
+
+msgid "Do"
+msgstr "Uitvoeren"
+
+msgid "Comments"
+msgstr "Commentaar"
+
+msgid "Edit (Text)"
+msgstr "Bewerk (Tekst)"
+
+msgid "Edit (GUI)"
+msgstr "Bewerk (GUI)"
+
+msgid "Immutable Page"
+msgstr "Vastliggende pagina"
+
+msgid "Remove Link"
+msgstr "Link verwijderen"
+
+msgid "Add Link"
+msgstr "Link toevoegen"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Laat %s dagen zien."
+
+msgid "Wiki Markup"
+msgstr "Wiki-opmaak"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Page"
+msgstr "Pagina"
+
+msgid "User"
+msgstr "Gebruiker"
+
+msgid "[ATTACH]"
+msgstr "[BIJVOEGEN]"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "De opties --pages en --search sluiten elkaar uit!"
+
+msgid "You must specify an output file!"
+msgstr "U moet een uitvoerbestand opgeven!"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"Er werden geen pagina's gespecificeerd met --pages of --search, er wordt "
+"uitgegaan van het volledige pakket."
+
+msgid "All attachments included into the package."
+msgstr "Alle bijlagen werden in het pakket opgenomen."
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Uitvoerbestand bestaat reeds! Ik weiger angstig om verder te gaan!"
+
+msgid "Attachment link"
+msgstr "Verwijzing naar bijlage"
+
+msgid "Page link"
+msgstr "Verwijzing naar pagina"
+
+msgid "Changed page"
+msgstr "Pagina gewijzigd"
+
+msgid "Page changed"
+msgstr "Pagina gewijzigd"
+
+msgid "Page has been modified"
+msgstr "Pagina is gewijzigd"
+
+msgid "Page has been modified in a trivial fashion"
+msgstr "Pagina is licht gewijzigd"
+
+msgid "Page has been renamed"
+msgstr "Een pagina is hernoemd"
+
+msgid "Page has been deleted"
+msgstr "Een pagina is verwijderd"
+
+msgid "Page has been copied"
+msgstr "Een pagina is gekopieerd."
+
+msgid "A new attachment has been added"
+msgstr "Er is een nieuwe bijlage toegevoegd"
+
+msgid "An attachment has been removed"
+msgstr "Er is een bijlage verwijderd"
+
+msgid "A page has been reverted to a previous state"
+msgstr "Een pagina is teruggezet naar een vorige staat"
+
+msgid "A user has subscribed to a page"
+msgstr "Een gebruikers heeft zich geabonneerd op een pagina"
+
+msgid "A new account has been created"
+msgstr "Er werd een nieuw account aangemaakt"
+
+msgid "Trivial "
+msgstr "Triviaal "
+
+msgid "New page:\n"
+msgstr "Nieuwe pagina:\n"
+
+msgid "No differences found!\n"
+msgstr "Geen verschillen gevonden!\n"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+"Verwijzing naar bijlage: %(attach)s\n"
+"Verwijzing naar pagina: %(page)s\n"
+
+msgid "[all]"
+msgstr "[allemaal]"
+
+msgid "[not empty]"
+msgstr "[niet leeg]"
+
+msgid "[empty]"
+msgstr "[leeg]"
+
+msgid "filter"
+msgstr "filter"
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+"Resultaten %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s van %(aboutHits)s %(bs)s"
+"%(hits)d%(be)s resultaten van ongeveer %(pages)d pagina's."
+
+msgid "seconds"
+msgstr "seconden"
+
+msgid "Previous"
+msgstr "Vorige"
+
+msgid "Next"
+msgstr "Volgende"
+
+msgid "rev"
+msgstr "revisie"
+
+msgid "current"
+msgstr "huidige"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "laatst gewijzigd: %s"
+
+msgid "match"
+msgstr "overeenkomst"
+
+msgid "matches"
+msgstr "overeenkomsten"
+
+msgid "about"
+msgstr "over"
+
 msgid "This page is already deleted or was never created!"
 msgstr "Deze pagina is al verwijderd of heeft nooit bestaan!"
 
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "TextCha: Verkeerd antwoord! Ga terug en probeer opnieuw..."
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Ongeldig bestandsnaam \"%s\"!"
 
-msgid "Copy all /subpages too?"
-msgstr "Kopieer alle /subpagina's ook?"
+msgid "Include all attachments?"
+msgstr "Inclusief alle bijlagen?"
 
-msgid "New name"
-msgstr "Nieuwe naam"
+msgid "Package pages"
+msgstr "Pakket pagina's"
 
-msgid "Optional reason for the copying"
-msgstr "Eventueel de reden voor het kopiëren"
+msgid "Package name"
+msgstr "Pakketnaam"
 
-msgid "Really copy this page?"
-msgstr "Bent u zeker dat u deze pagina wil kopiëren?"
+msgid "List of page names - separated by a comma"
+msgstr "Lijst van de pagina namen - gescheiden door een komma"
 
-msgid "Delete"
-msgstr "Verwijderen"
-
-msgid "Delete all /subpages too?"
-msgstr "Verwijder ook alle /subpagina's?"
-
-msgid "Optional reason for the deletion"
-msgstr "Eventueel de reden voor deze verwijdering"
-
-msgid "Really delete this page?"
-msgstr "Bent u zeker dat u deze pagina wil verwijderen?"
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Geen pagina's lijken op \"%s\"!"
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -894,14 +1399,14 @@ msgstr ""
 "zou beide wiki's moeten vertrouwen omdat uw wachtwoord door beide beheerders "
 "gelezen kan worden."
 
-msgid "Name"
-msgstr "Naam"
-
-msgid "Password"
-msgstr "Wachtwoord"
-
 msgid "Operation was canceled."
 msgstr "Bewerking werd geannuleerd."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Gebruik de interactieve gebruikersinterface om de actie %(actionname)s te "
+"gebruiken!"
 
 msgid "The only supported directions are BOTH and DOWN."
 msgstr "De enige ondersteunde richtingen zijn BEIDE en ONDER."
@@ -1043,179 +1548,104 @@ msgstr "Pagina %s bevat conflicten die aan de externe kant ontstaan zijn."
 msgid "Page %s merged with conflicts."
 msgstr "Pagina %s samengevoegd met conflicten."
 
-msgid "Pages"
-msgstr "Pagina's"
+msgid "Attachment location"
+msgstr "Locatie van bijlage"
 
-msgid "Select Author"
-msgstr "Auteur selecteren"
+msgid "Page name"
+msgstr "Paginanaam"
 
-msgid "Revert all!"
-msgstr "Alles terugzetten!"
+msgid "Attachment name"
+msgstr "Bijlagenaam"
 
-msgid "You are not allowed to use this action."
-msgstr "U hebt geen toestemming om deze actie te gebruiken."
+msgid "Refresh attachment list"
+msgstr "Lijst met bijlagen vernieuwen"
 
-msgid "Wiki Backup"
-msgstr "Wiki backup"
+msgid "List of attachments"
+msgstr "Lijst met bijlagen"
 
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-"= Een reservekopie downloaden =\n"
-"\n"
-"Merk op:\n"
-" * Bewaar reservekopieën op een veilige plaats - ze bevatten gevoelige "
-"informatie.\n"
-" * Controleer of de backup_* waarden in de wikiconfiguratie juist en "
-"volledig zijn.\n"
-" * Controleer of de reservekopie alle gegevens bevat die u nodig kan hebben "
-"in geval van problemen.\n"
-" * Controleer of het downloaden correct is verlopen.\n"
-"\n"
-"Om een reservekopie te verkrijgen, klik hier:"
-
-msgid "Backup"
-msgstr "Backup"
-
-msgid "You are not allowed to do remote backup."
-msgstr "U hebt geen toestemming om een externe backup te maken."
+msgid "Available attachments for page"
+msgstr "Beschikbare bijlagen voor deze pagina"
 
 #, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Onbekende backup subactie: %s."
-
-msgid "You are not allowed to create the supplementation page."
-msgstr "U hebt geen toestemming om de aanvullende pagina aan te maken."
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
+msgid "Exactly one page like \"%s\" found, redirecting to page."
 msgstr ""
-"Kan geen nieuwe pagina aanmaken zonder een paginanaam. Geef een paginanaam "
-"op."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Geen gebruikersnaam ingevuld. Voer een gebruikersnaam in."
+"Zoeken op \"%s\" gaf precies één resultaat, u wordt er nu naar doorgestuurd."
 
 #, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Foutieve gebruikersnaam {{{'%s'}}}.\n"
-"Gebruikersnaam mag ieder Unicode alfanumeriek karakter bevatten, met "
-"optioneel een\n"
-"spatie tussen woorden. Groepspaginanaam is niet toegestaan."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Deze gebruikersnaam is al in gebruik."
-
-msgid "Passwords don't match!"
-msgstr "De wachtwoorden komen niet overeen!"
-
-msgid "Please specify a password!"
-msgstr "Voer een wachtwoord in!"
+msgid "Pages like \"%s\""
+msgstr "Pagina's zoals \"%s\""
 
 #, python-format
-msgid "Password not acceptable: %s"
-msgstr "Het wachtwoord is niet aanvaardbaar: %s"
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s voor \"%(title)s\""
 
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Voer uw e-mailadres in. Als u uw aanmeldingsgegevens verliest kunt u deze "
-"per e-mail weer ontvangen."
+msgid "You must login to remove a quicklink."
+msgstr "U moet inloggen om een snelkoppeling te verwijderen."
 
-msgid "This email already belongs to somebody else."
-msgstr "Dit e-mailadres is al in gebruik."
+msgid "Your quicklink to this page has been removed."
+msgstr "Uw snelkoppeling naar deze pagina is verwijderd."
 
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"Gebruikersaccount aangemaakt! U kan dit account nu gebruiken om in te "
-"loggen..."
+msgid "Your quicklink to this page could not be removed."
+msgstr "Uw snelkoppeling naar deze pagina kon niet verwijderd worden."
 
-msgid "(Use FirstnameLastname)"
-msgstr "(Gebruik VoornaamAchternaam)"
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "U moet een snelkoppeling naar deze pagina hebben om ze te verwijderen."
 
-msgid "Password repeat"
-msgstr "Wachtwoord herhalen"
+msgid "Please choose:"
+msgstr "Kies:"
 
-msgid "Email"
-msgstr "E-mail"
-
-msgid "TextCha (required)"
-msgstr "TextCha (vereist)"
-
-msgid "Create Profile"
-msgstr "Profiel aanmaken"
-
-msgid "Create Account"
-msgstr "Account aanmaken"
-
-msgid "Revert"
-msgstr "Terugzetten"
-
-msgid "You are not allowed to revert this page!"
-msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-"U was de huidige versie van deze pagina aan het bekijken toen u de "
-"'terugzetten' actie opriep. Als u naar een oudere versie wilt teruggaan, "
-"open eerst die oudere versie en gebruik dan de 'terugzetten' actie bij deze "
-"(oudere) versie."
-
-msgid "Optional reason for reverting this page"
-msgstr "Eventueel de reden voor het terugzetten"
-
-msgid "Really revert this page?"
-msgstr "Bent u zeker dat u deze pagina wil terugzetten?"
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "U moet ingelogd zijn om deze actie te gebruiken: %(action)s."
 
 msgid "Only superuser is allowed to use this action."
 msgstr "Enkel de beheerder mag deze actie gebruiken."
 
-msgid "No page packages found."
-msgstr "Geen paginapakketten gevonden."
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr ""
+"U hebt geen toestemming om u te abonneren op een pagina die u niet kan lezen."
 
-#, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr "Bijlage '%(filename)s' geïnstalleerd."
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "Deze wiki ondersteunt geen e-mail/Jabber."
 
-msgid "page package"
-msgstr "paginapakket"
-
-msgid "install"
-msgstr "installeren"
-
-msgid "Choose:"
-msgstr "Kies:"
-
-#, python-format
-msgid "Install language packs for '%s'"
-msgstr "Installeer taalpakketten voor '%s'"
-
-#, fuzzy
-msgid "TextCha: Wrong answer! Try again below..."
-msgstr "TextCha: Verkeerd antwoord! Ga terug en probeer opnieuw..."
+msgid "You must log in to use subscriptions."
+msgstr "U moet ingelogd zijn om abonnementen te gebruiken."
 
 msgid ""
-"Supplying a comment is mandatory.  Write a comment below and try again..."
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
 msgstr ""
+"Voeg uw e-mailadres of Jabber ID  toe aan uw gebruikersinstellingen om "
+"abonnementen te gebruiken."
+
+msgid "You are already subscribed to this page."
+msgstr "U bent al geabonneerd op deze pagina."
+
+msgid "You have been subscribed to this page."
+msgstr "U bent geabonneerd op deze pagina."
+
+msgid "You could not get subscribed to this page."
+msgstr "U kon niet op deze pagina geabonneerd worden."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Versturen van bijlage '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Bijlage '%(filename)s' verwijderd."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Tekening '%(filename)s' opgeslagen."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Terugzetten naar versie %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Hernoemd van '%(oldpagename)s'."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1249,15 +1679,65 @@ msgstr ""
 "omdat deze aan veranderingen onderhevig is en gemakkelijk onbruikbaar kan "
 "raken."
 
+msgid "del"
+msgstr "verwijderen"
+
 msgid "move"
 msgstr "verplaatsen"
+
+msgid "get"
+msgstr "ophalen"
+
+msgid "edit"
+msgstr "bewerken"
+
+msgid "view"
+msgstr "bekijken"
 
 msgid "unzip"
 msgstr "uitpakken"
 
+msgid "install"
+msgstr "installeren"
+
+msgid "All files"
+msgstr ""
+
+#, fuzzy
+msgid "Selected Files:"
+msgstr "Bijlagen"
+
+#, fuzzy
+msgid "delete"
+msgstr "Verwijderen"
+
+#, fuzzy
+msgid "move to page"
+msgstr "Aantal pagina's"
+
+msgid "Do it."
+msgstr "Doe het."
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Geen bijlagen opgeslagen voor %(pagename)s"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "U hebt geen toestemming bijlagen van deze pagina te verwijderen."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "U hebt geen toestemming om bijlagen van deze pagina te verplaatsen."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "U hebt geen toestemming om een bijlage aan deze pagina toe te voegen."
+
+#, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr ""
+"Bijlage '%(pagename)s/%(filename)s' is verplaatst naar '%(new_pagename)s/"
+"%(new_filename)s'."
 
 msgid "New Attachment"
 msgstr "Nieuwe bijlage"
@@ -1277,9 +1757,6 @@ msgstr "Opsturen"
 msgid "Attached Files"
 msgstr "Bijlagen"
 
-msgid "You are not allowed to attach a file to this page."
-msgstr "U hebt geen toestemming om een bijlage aan deze pagina toe te voegen."
-
 #, python-format
 msgid "Unsupported AttachFile sub-action: %s"
 msgstr "Niet ondersteunde AttachFile subactie: %s"
@@ -1287,6 +1764,16 @@ msgstr "Niet ondersteunde AttachFile subactie: %s"
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bijlagen voor \"%(pagename)s\""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Verkeerd antwoord! Ga terug en probeer opnieuw..."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
+"probeer opnieuw."
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr ""
@@ -1304,24 +1791,9 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Bijlage '%(target)s' bestaat al (externe naam '%(filename)s')."
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "U hebt geen toestemming bijlagen van deze pagina te verwijderen."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Bijlage '%(filename)s' verwijderd."
-
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
 msgstr "Bijlage '%(new_pagename)s/%(new_filename)s' bestaat al."
-
-#, python-format
-msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
-"%(new_filename)s'."
-msgstr ""
-"Bijlage '%(pagename)s/%(filename)s' is verplaatst naar '%(new_pagename)s/"
-"%(new_filename)s'."
 
 msgid "Nothing changed"
 msgstr "Niets veranderd"
@@ -1332,9 +1804,6 @@ msgstr "Pagina '%(new_pagename)s' bestaat niet of u hebt niet genoeg rechten."
 
 msgid "Move aborted!"
 msgstr "Verplaatsing geannuleerd!"
-
-msgid "You are not allowed to move attachments from this page."
-msgstr "U hebt geen toestemming om bijlagen van deze pagina te verplaatsen."
 
 msgid "Move aborted because new page name is empty."
 msgstr "Verplaatsen geannuleerd omdat de nieuwe paginanaam leeg is."
@@ -1360,6 +1829,10 @@ msgstr "U hebt geen toestemming om bijlagen van deze pagina op te vragen."
 
 msgid "You are not allowed to install files."
 msgstr "U hebt geen toestemming om bestanden te installeren."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Bijlage '%(filename)s' geïnstalleerd."
 
 msgid "You are not allowed to unzip attachments of this page."
 msgstr "U hebt geen toestemming om bijlagen van deze pagina uit te pakken."
@@ -1422,92 +1895,282 @@ msgstr "Bestandsnaam"
 msgid "Modified"
 msgstr "Gewijzigd"
 
+msgid "Size"
+msgstr "Grootte"
+
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
 "Onbekend bestandstype, deze bijlage kan niet in de tekst worden getoond."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "U hebt geen toestemming om bijlagen van deze pagina te bekijken."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "bijlage:%(filename)s van %(pagename)s"
 
-msgid "Load"
-msgstr "Laad"
-
-msgid "Pagename not specified!"
-msgstr "Paginanaam ontbreekt!"
-
-msgid "Upload page content"
-msgstr "Pagina-inhoud opsturen"
-
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-"U kan inhoud voor de pagina hieronder opsturen. Als u de paginanaam aanpast "
-"kan u ook inhoud voor een andere pagina opsturen. Als de paginanaam leeg is "
-"leiden we deze af van de bestandsnaam."
-
-msgid "File to load page content from"
-msgstr "Bestand met pagina-inhoud"
-
-msgid "Page name"
-msgstr "Paginanaam"
-
-msgid "Print"
-msgstr "Afdrukken"
-
-msgid "Print slide show"
-msgstr "Diavoorstelling afdrukken"
-
-msgid "Edit"
-msgstr "Bewerken"
-
-msgid "Edit slide show"
-msgstr "Diavoorstelling bewerken"
-
-msgid "Quit"
-msgstr "Afsluiten"
-
-msgid "Quit slide show"
-msgstr "Diavoorstelling afsluiten"
-
-msgid "Show first slide (up arrow)"
-msgstr "Toon de eerste dia (pijl omhoog)"
-
-msgid "Show last slide (down arrow)"
-msgstr "Toon de laatste dia (pijl omlaag)"
-
-msgid "Show previous slide (left arrow)"
-msgstr "Toon de vorige dia (pijl naar links)"
-
-msgid "Show next slide (right arrow)"
-msgstr "Toon de volgende dia (pijl naar rechts)"
+msgid "General Information"
+msgstr "Algemene informatie"
 
 #, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Lokaal site-overzicht voor \"%s\""
+msgid "Page size: %d"
+msgstr "Paginagrootte: %d"
 
-msgid "Please choose:"
-msgstr "Kies:"
+msgid "SHA digest of this page's content is:"
+msgstr "SHA-waarde van de inhoud van deze pagina is:"
 
-msgid "Settings"
-msgstr "Instellingen"
+msgid "The following users subscribed to this page:"
+msgstr "De volgende gebruikers zijn op deze pagina geabonneerd:"
 
-msgid "You are now logged out."
-msgstr "U bent nu uitgelogd."
+msgid "This page links to the following pages:"
+msgstr "Deze pagina verwijst naar de volgende pagina's:"
 
-msgid "You must login to add a quicklink."
-msgstr "U moet inloggen om een snelkoppeling toe te voegen."
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+"Nu getoond: revisiegeschiedenis voor deze pagina van '''%(start_offset)d''' "
+"tot '''%(end_offset)d''' uit een totaal van '''%(total_count)d''' "
+"bewerkingen."
 
-msgid "A quicklink to this page has been added for you."
-msgstr "Een snelkoppeling naar deze pagina is voor u toegevoegd."
+msgid "Newer"
+msgstr "Nieuwer"
 
-msgid "A quicklink to this page could not be added for you."
-msgstr "Een snelkoppeling naar deze pagina kon voor u niet toegevoegd worden."
+msgid "Older"
+msgstr "Ouder"
 
-msgid "You already have a quicklink to this page."
-msgstr "U heeft al een snelkoppeling naar deze pagina."
+#, python-format
+msgid "%s items per page"
+msgstr "%s items per pagina"
+
+msgid "Diff"
+msgstr "Verschil"
+
+msgid "Editor"
+msgstr "Auteur"
+
+msgid "Comment"
+msgstr "Commentaar"
+
+msgid "Action"
+msgstr "Actie"
+
+msgid "to previous"
+msgstr "naar vorige"
+
+msgid "N/A"
+msgstr "n.v.t."
+
+msgid "Revision History"
+msgstr "Versiegeschiedenis"
+
+msgid "No log entries found."
+msgstr "Geen logboekaantekeningen gevonden."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Informatie voor \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Toon \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Algemene pagina-informatie"
+
+msgid "Page hits and edits"
+msgstr "Aantal raadplegingen en bewerkingen"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Delete all /subpages too?"
+msgstr "Verwijder ook alle /subpagina's?"
+
+msgid "Optional reason for the deletion"
+msgstr "Eventueel de reden voor deze verwijdering"
+
+msgid "Really delete this page?"
+msgstr "Bent u zeker dat u deze pagina wil verwijderen?"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Maak eerst een thuispagina voor u extra pagina's aanmaakt alstublieft."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+"U kunt hier enkele bijkomende subpagina's aan uw reeds bestaande thuispagina "
+"toevoegen.\n"
+"\n"
+"U kunt kiezen hoe open deze pagina's zullen zijn voor andere lezers en "
+"schrijvers,\n"
+"de toegang wordt bepaald door lidmaatschap van de groep overeenstemmende met "
+"de groepspagina.\n"
+"\n"
+"Voer een naam in voor de subpagina en druk op de knop om een nieuwe pagina "
+"aan te maken.\n"
+"\n"
+"Zorg ervoor dat de overeenstemmende groepspagina bestaat en de juiste leden "
+"bevat\n"
+"vooraleer toegangsgecontroleerde pagina's aan te maken. Gebruikt "
+"HomepageGroupsTemplate om de\n"
+"groepspagina's aan te maken.\n"
+"\n"
+"||'''Een nieuwe persoonlijke pagina toevoegen:'''||'''Gerelateerde "
+"toegangscontrolegroep:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,lezen-schrijven pagina,"
+"%(username)s)>>||[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,alleen-lezen pagina,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private pagina,%(username)s)>>||"
+"Enkel %(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "MijnPagina's beheer"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(inclusief %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"De volgende %(badwords)d woorden konden niet gevonden worden in het "
+"woordenboek van %(totalwords)d woorden%(localwords)s en zijn hieronder "
+"gemarkeerd:"
+
+msgid "Add checked words to dictionary"
+msgstr "Gecontroleerde woorden toevoegen aan het woordenboek"
+
+msgid "No spelling errors found!"
+msgstr "Geen spelfouten gevonden!"
+
+msgid "You can't save spelling words."
+msgstr "U kunt geen spellingwoorden opslaan."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"U kunt de spelling van een pagina die u niet kan lezen niet controleren."
+
+msgid "You are not allowed to use this action."
+msgstr "U hebt geen toestemming om deze actie te gebruiken."
+
+msgid "If this account exists an email was sent."
+msgstr "Als deze account bestaat werd er een e-mail verstuurd."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Deze wiki is niet ingesteld op het afhandelen van e-mail.\n"
+"Neem contact op met de eigenaar van de wiki, die e-mailondersteuning kan "
+"aanzetten."
+
+msgid "Please provide a valid email address or a username!"
+msgstr "Geef een geldig e-mailadres of gebruikersnaam op!"
+
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+msgid "Mail me my account data"
+msgstr "Stuur me mijn accountgegevens per e-mail"
+
+msgid "Recovery token"
+msgstr "Herstelcode"
+
+msgid "New password"
+msgstr "Nieuw wachtwoord"
+
+msgid "New password (repeat)"
+msgstr "Nieuw wachtwoord (herhalen)"
+
+msgid "Reset my password"
+msgstr "Mijn wachtwoord opnieuw instellen"
+
+msgid "Passwords don't match!"
+msgstr "De wachtwoorden komen niet overeen!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Het wachtwoord is niet aanvaardbaar: %s"
+
+msgid "Your password has been changed, you can log in now."
+msgstr "Uw wachtwoord werd gewijzigd, u kan nu inloggen."
+
+msgid "Your token is invalid!"
+msgstr "Uw herstelcode is ongeldig!"
+
+msgid "Password reset"
+msgstr "Wachtwoord herstellen"
+
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr ""
+"\n"
+"== Wachtwoord herstellen ==\n"
+"Voer hieronder een nieuw wachtwoord in."
+
+msgid "Lost password"
+msgstr "Wachtwoord vergeten"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+"\n"
+"== Een vergeten wachtwoord herstellen ==\n"
+"Indien u uw wachtwoord vergeten bent, geef dan uw e-mailadres of\n"
+"gebruikersnaam op en klik op '''Stuur me mijn accountgegevens per e-"
+"mail'''.\n"
+"U zal een e-mail ontvangen met daarin een herstelcode die u kan\n"
+"gebruiken om uw wachtwoord te herstellen. De e-mail bevat ook verdere\n"
+"aanwijzingen."
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
+"\n"
+"=== Wachtwoordherstel ===\n"
+"Als u de e-mail met de herstelcode reeds ontving, voer dan hieronder uw\n"
+"gebruikersnaam, de herstelcode en een nieuw wachtwoord (tweemaal) in."
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -1579,121 +2242,45 @@ msgstr ""
 "hieronder om deze verificatie af te breken."
 
 #, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Ongeldig bestandsnaam \"%s\"!"
+msgid "Subscribe users to the page %s"
+msgstr "Abonneer gebruikers op de pagina %s"
 
-msgid "Include all attachments?"
-msgstr "Inclusief alle bijlagen?"
-
-msgid "Package pages"
-msgstr "Pakket pagina's"
-
-msgid "Package name"
-msgstr "Pakketnaam"
-
-msgid "List of page names - separated by a comma"
-msgstr "Lijst van de pagina namen - gescheiden door een komma"
+msgid "Enter user names (comma separated):"
+msgstr "Voer gebruikersnamen in (door een komma gescheiden):"
 
 #, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Geen pagina's lijken op \"%s\"!"
+msgid "Subscribed for %s:"
+msgstr "Geabonneerd op %s:"
 
-msgid "Attachment location"
-msgstr "Locatie van bijlage"
+msgid "Not a user:"
+msgstr "Geen gebruiker:"
 
-msgid "Attachment name"
-msgstr "Bijlagenaam"
+msgid "You are not allowed to perform this action."
+msgstr "U hebt geen toestemming om deze actie uit te voeren."
 
-msgid "Refresh attachment list"
-msgstr "Lijst met bijlagen vernieuwen"
+msgid "Print slide show"
+msgstr "Diavoorstelling afdrukken"
 
-msgid "List of attachments"
-msgstr "Lijst met bijlagen"
+msgid "Edit slide show"
+msgstr "Diavoorstelling bewerken"
 
-msgid "Available attachments for page"
-msgstr "Beschikbare bijlagen voor deze pagina"
+msgid "Quit"
+msgstr "Afsluiten"
 
-msgid "If this account exists an email was sent."
-msgstr "Als deze account bestaat werd er een e-mail verstuurd."
+msgid "Quit slide show"
+msgstr "Diavoorstelling afsluiten"
 
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Deze wiki is niet ingesteld op het afhandelen van e-mail.\n"
-"Neem contact op met de eigenaar van de wiki, die e-mailondersteuning kan "
-"aanzetten."
+msgid "Show first slide (up arrow)"
+msgstr "Toon de eerste dia (pijl omhoog)"
 
-msgid "Please provide a valid email address or a username!"
-msgstr "Geef een geldig e-mailadres of gebruikersnaam op!"
+msgid "Show last slide (down arrow)"
+msgstr "Toon de laatste dia (pijl omlaag)"
 
-msgid "Username"
-msgstr "Gebruikersnaam"
+msgid "Show previous slide (left arrow)"
+msgstr "Toon de vorige dia (pijl naar links)"
 
-msgid "Mail me my account data"
-msgstr "Stuur me mijn accountgegevens per e-mail"
-
-msgid "Recovery token"
-msgstr "Herstelcode"
-
-msgid "New password"
-msgstr "Nieuw wachtwoord"
-
-msgid "New password (repeat)"
-msgstr "Nieuw wachtwoord (herhalen)"
-
-msgid "Reset my password"
-msgstr "Mijn wachtwoord opnieuw instellen"
-
-msgid "Your password has been changed, you can log in now."
-msgstr "Uw wachtwoord werd gewijzigd, u kan nu inloggen."
-
-msgid "Your token is invalid!"
-msgstr "Uw herstelcode is ongeldig!"
-
-msgid "Password reset"
-msgstr "Wachtwoord herstellen"
-
-msgid ""
-"\n"
-"== Password reset ==\n"
-"Enter a new password below."
-msgstr ""
-"\n"
-"== Wachtwoord herstellen ==\n"
-"Voer hieronder een nieuw wachtwoord in."
-
-msgid "Lost password"
-msgstr "Wachtwoord vergeten"
-
-msgid ""
-"\n"
-"== Recovering a lost password ==\n"
-"If you have forgotten your password, provide your email address or\n"
-"username and click on '''Mail me my account data'''.\n"
-"You will receive an email containing a recovery token that can be\n"
-"used to change your password. The email will also contain further\n"
-"instructions."
-msgstr ""
-"\n"
-"== Een vergeten wachtwoord herstellen ==\n"
-"Indien u uw wachtwoord vergeten bent, geef dan uw e-mailadres of\n"
-"gebruikersnaam op en klik op '''Stuur me mijn accountgegevens per e-"
-"mail'''.\n"
-"U zal een e-mail ontvangen met daarin een herstelcode die u kan\n"
-"gebruiken om uw wachtwoord te herstellen. De e-mail bevat ook verdere\n"
-"aanwijzingen."
-
-msgid ""
-"\n"
-"=== Password reset ===\n"
-"If you already have received the email with the recovery token, enter your\n"
-"username, the recovery token and a new password (twice) below."
-msgstr ""
-"\n"
-"=== Wachtwoordherstel ===\n"
-"Als u de e-mail met de herstelcode reeds ontving, voer dan hieronder uw\n"
-"gebruikersnaam, de herstelcode en een nieuw wachtwoord (tweemaal) in."
+msgid "Show next slide (right arrow)"
+msgstr "Toon de volgende dia (pijl naar rechts)"
 
 msgid "Charts are not available!"
 msgstr "Diagrammen zijn niet beschikbaar!"
@@ -1705,16 +2292,26 @@ msgstr "U dient een grafiektype op te geven!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Ongeldig grafiektype \"%s\"!"
 
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Versturen van bijlage '%(filename)s'."
+msgid "Load"
+msgstr "Laad"
 
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Tekening '%(filename)s' opgeslagen."
+msgid "Pagename not specified!"
+msgstr "Paginanaam ontbreekt!"
 
-msgid "New page:\n"
-msgstr "Nieuwe pagina:\n"
+msgid "Upload page content"
+msgstr "Pagina-inhoud opsturen"
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+"U kan inhoud voor de pagina hieronder opsturen. Als u de paginanaam aanpast "
+"kan u ook inhoud voor een andere pagina opsturen. Als de paginanaam leeg is "
+"leiden we deze af van de bestandsnaam."
+
+msgid "File to load page content from"
+msgstr "Bestand met pagina-inhoud"
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -1775,8 +2372,234 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Klik hier om in de hele tekst te zoeken met deze zoektermen!"
 
-msgid "Rename Page"
-msgstr "Pagina hernoemen"
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Kan geen nieuwe pagina aanmaken zonder een paginanaam. Geef een paginanaam "
+"op."
+
+msgid "Your subscription to this page has been removed."
+msgstr "Uw abonnement op deze pagina is opgezegd."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Kan geen reguliere expressie-abonnement verwijderen!"
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "Bewerk de reguliere expressie abonnementen in uw instellingen."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "U moet geabonneerd zijn om uit te schrijven."
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Verkeerd antwoord! Ga terug en probeer opnieuw..."
+
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr ""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Nieuwe tekening maken \"%(filename)s\" (opent in een nieuw venster)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Tekening bewerken \"%(filename)s\" (opent in een nieuw venster)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikbare tekening: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
+
+msgid "Empty target name given."
+msgstr "Lege naam voor het doel opgegeven."
+
+msgid "Edit drawing"
+msgstr "Tekening bewerken"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Actie %(actionname)s uitvoeren?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Actie %(actionname)s is op deze wiki uitgesloten!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr ""
+"U hebt geen toestemming om de actie %(actionname)s op deze pagina uit te "
+"voeren!"
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "U hebt geen toestemming om de aanvullende pagina aan te maken."
+
+msgid "Pages"
+msgstr "Pagina's"
+
+msgid "Select Author"
+msgstr "Auteur selecteren"
+
+msgid "Revert all!"
+msgstr "Alles terugzetten!"
+
+msgid "Copy all /subpages too?"
+msgstr "Kopieer alle /subpagina's ook?"
+
+msgid "New name"
+msgstr "Nieuwe naam"
+
+msgid "Optional reason for the copying"
+msgstr "Eventueel de reden voor het kopiëren"
+
+msgid "Really copy this page?"
+msgstr "Bent u zeker dat u deze pagina wil kopiëren?"
+
+msgid "You are now logged out."
+msgstr "U bent nu uitgelogd."
+
+msgid "No page packages found."
+msgstr "Geen paginapakketten gevonden."
+
+msgid "page package"
+msgstr "paginapakket"
+
+msgid "Choose:"
+msgstr "Kies:"
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr "Installeer taalpakketten voor '%s'"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Lokaal site-overzicht voor \"%s\""
+
+msgid "No older revisions available!"
+msgstr "Geen oudere versies beschikbaar!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Verschillen voor \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Verschillen tussen versies %d en %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(omvat %d versies)"
+
+msgid "Previous change"
+msgstr "Vorige wijziging"
+
+msgid "Next change"
+msgstr "Volgende wijziging"
+
+msgid "Diff with oldest revision in left pane"
+msgstr "Toon verschillen met oudere versie in linkerpaneel"
+
+msgid "No older revision available for diff"
+msgstr "Geen oudere versie beschikbaar om mee te vergelijken"
+
+msgid "Diff with older revision in left pane"
+msgstr "Toon verschillen met oudere versie in linkerpaneel"
+
+msgid "Diff with newer revision in left pane"
+msgstr "Toon verschillen met nieuwere versie in linkerpaneel"
+
+msgid "Can't change to revision newer than in right pane"
+msgstr "Kan geen nieuwere versie vinden dan die in het rechterpaneel"
+
+msgid "Diff with older revision in right pane"
+msgstr "Toon verschillen met oudere versie in rechterpaneel"
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr "Kan geen oudere versie vinden dan die in het linkerpaneel"
+
+msgid "Diff with newer revision in right pane"
+msgstr "Toon verschillen met nieuwere versie in rechterpaneel"
+
+msgid "No newer revision available for diff"
+msgstr "Geen nieuwere versie beschikbaar om mee te vergelijken"
+
+msgid "Diff with newest revision in right pane"
+msgstr "Toon verschillen met nieuwere versie in rechterpaneel"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "De pagina is weliswaar %(count)d keer opgeslagen!"
+
+msgid "(ignoring whitespace)"
+msgstr "(witruimte negeren)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Wijzigingen in de hoeveelheid witruimte negeren"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Geen gebruikersnaam ingevuld. Voer een gebruikersnaam in."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Foutieve gebruikersnaam {{{'%s'}}}.\n"
+"Gebruikersnaam mag ieder Unicode alfanumeriek karakter bevatten, met "
+"optioneel een\n"
+"spatie tussen woorden. Groepspaginanaam is niet toegestaan."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Deze gebruikersnaam is al in gebruik."
+
+msgid "Please specify a password!"
+msgstr "Voer een wachtwoord in!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Voer uw e-mailadres in. Als u uw aanmeldingsgegevens verliest kunt u deze "
+"per e-mail weer ontvangen."
+
+msgid "This email already belongs to somebody else."
+msgstr "Dit e-mailadres is al in gebruik."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Gebruikersaccount aangemaakt! U kan dit account nu gebruiken om in te "
+"loggen..."
+
+msgid "Password repeat"
+msgstr "Wachtwoord herhalen"
+
+msgid "TextCha (required)"
+msgstr "TextCha (vereist)"
+
+msgid "Create Profile"
+msgstr "Profiel aanmaken"
+
+msgid "Create Account"
+msgstr "Account aanmaken"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Volledige verwijzingenlijst voor \"%s\""
+
+msgid "You must login to add a quicklink."
+msgstr "U moet inloggen om een snelkoppeling toe te voegen."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Een snelkoppeling naar deze pagina is voor u toegevoegd."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "Een snelkoppeling naar deze pagina kon voor u niet toegevoegd worden."
+
+msgid "You already have a quicklink to this page."
+msgstr "U heeft al een snelkoppeling naar deze pagina."
 
 msgid "Create redirect for renamed page(s)?"
 msgstr "Omleiding aanmaken voor de hernoemde pagina(s)?"
@@ -1793,832 +2616,88 @@ msgstr "Bent u zeker dat u deze pagina wil hernoemen?"
 msgid "Optional reason for the renaming"
 msgstr "Eventueel de reden voor deze hernoeming"
 
-msgid "You must login to remove a quicklink."
-msgstr "U moet inloggen om een snelkoppeling te verwijderen."
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Uw snelkoppeling naar deze pagina is verwijderd."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Uw snelkoppeling naar deze pagina kon niet verwijderd worden."
-
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "U moet een snelkoppeling naar deze pagina hebben om ze te verwijderen."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr ""
-"U hebt geen toestemming om u te abonneren op een pagina die u niet kan lezen."
-
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "Deze wiki ondersteunt geen e-mail/Jabber."
-
-msgid "You must log in to use subscriptions."
-msgstr "U moet ingelogd zijn om abonnementen te gebruiken."
+msgid "Wiki Backup"
+msgstr "Wiki backup"
 
 msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
 msgstr ""
-"Voeg uw e-mailadres of Jabber ID  toe aan uw gebruikersinstellingen om "
-"abonnementen te gebruiken."
+"= Een reservekopie downloaden =\n"
+"\n"
+"Merk op:\n"
+" * Bewaar reservekopieën op een veilige plaats - ze bevatten gevoelige "
+"informatie.\n"
+" * Controleer of de backup_* waarden in de wikiconfiguratie juist en "
+"volledig zijn.\n"
+" * Controleer of de reservekopie alle gegevens bevat die u nodig kan hebben "
+"in geval van problemen.\n"
+" * Controleer of het downloaden correct is verlopen.\n"
+"\n"
+"Om een reservekopie te verkrijgen, klik hier:"
 
-msgid "You are already subscribed to this page."
-msgstr "U bent al geabonneerd op deze pagina."
+msgid "Backup"
+msgstr "Backup"
 
-msgid "You have been subscribed to this page."
-msgstr "U bent geabonneerd op deze pagina."
-
-msgid "You could not get subscribed to this page."
-msgstr "U kon niet op deze pagina geabonneerd worden."
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr ""
-"Zoeken op \"%s\" gaf precies één resultaat, u wordt er nu naar doorgestuurd."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Pagina's zoals \"%s\""
+msgid "You are not allowed to do remote backup."
+msgstr "U hebt geen toestemming om een externe backup te maken."
 
 #, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s voor \"%(title)s\""
+msgid "Unknown backup subaction: %s."
+msgstr "Onbekende backup subactie: %s."
 
-msgid "match"
-msgstr "overeenkomst"
+msgid "Revert"
+msgstr "Terugzetten"
 
-msgid "matches"
-msgstr "overeenkomsten"
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Abonneer gebruikers op de pagina %s"
-
-msgid "Enter user names (comma separated):"
-msgstr "Voer gebruikersnamen in (door een komma gescheiden):"
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Geabonneerd op %s:"
-
-msgid "Not a user:"
-msgstr "Geen gebruiker:"
-
-msgid "You are not allowed to perform this action."
-msgstr "U hebt geen toestemming om deze actie uit te voeren."
-
-msgid "HelpOnParsers"
-msgstr "HelpOverParsers"
-
-#, python-format
-msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see "
-"%(highlight_help_page)s."
-msgstr ""
-"Syntaxismarkering niet ondersteund voor '%(syntax)s', zie "
-"%(highlight_help_page)s."
+msgid "You are not allowed to revert this page!"
+msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
 
 msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
 msgstr ""
-" Nadruk:: <<Verbatim(//)>>''cursief''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''vet'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''vet "
-"cursief'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''gemengd ''<<Verbatim(**)"
-">>'''''vet'''<<Verbatim(**)>> en cursief''<<Verbatim(//)>>;\n"
-" Horizontale lijn:: <<Verbatim(----)>>\n"
-" Geforceerd regeleinde:: <<Verbatim(\\\\)>>\n"
-" Koppen:: = Titel 1 =; == Titel 2 ==; === Titel 3 ===; ==== Titel 4 ====; "
-"===== Titel 5 =====.\n"
-" Lijsten:: * tekens; ** subtekens; # genummerde items; ## genummerde "
-"subitems.\n"
-"Verwijzingen:: <<Verbatim([[doel]])>>; <<Verbatim([[doel|tekst]])>>.\n"
-" Tabellen:: |= hoofdingtekst | celtekst| meer celtekst |;\n"
-"\n"
-"(!) Kijk voor meer informatie naar HelpOverBewerken of "
-"HelpOverCreoleSyntaxis.\n"
+"U was de huidige versie van deze pagina aan het bekijken toen u de "
+"'terugzetten' actie opriep. Als u naar een oudere versie wilt teruggaan, "
+"open eerst die oudere versie en gebruik dan de 'terugzetten' actie bij deze "
+"(oudere) versie."
 
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Renderen van een reStructured tekst is onmogelijk, installeer Docutils."
+msgid "Optional reason for reverting this page"
+msgstr "Eventueel de reden voor het terugzetten"
 
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-"{{{\n"
-"Nadruk: *cursief* **vet** ``vaste letterbreedte``\n"
-"\n"
-"Koppen: Kop 1  Kop 2  Kop 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontale lijn: ----\n"
-"\n"
-"Verwijzingen: LiggendeStreepEinde_ `meerdere woorden binnen schuine "
-"aanhalingstekens`_ extern_\n"
-"\n"
-".. _extern: http://externe-site.voorbeeld.org/test/\n"
-"\n"
-"Lijsten: * opsommingstekens; 1., a. genummerde items.\n"
-"}}}\n"
-"(!) Kijk voor meer informatie naar de \n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|korte "
-"handleiding over reStructuredText]].\n"
+msgid "Really revert this page?"
+msgstr "Bent u zeker dat u deze pagina wil terugzetten?"
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maximum aantal toegestane includes overschreden**"
+msgid "OpenID"
+msgstr "OpenID"
 
-#, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "**U hebt geen toestemming om deze pagina te lezen: %s**"
+msgid "Member of Groups"
+msgstr "Lid van groepen"
 
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
+msgid "Jabber"
+msgstr "Jabber"
 
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT optie uitgeschakeld, bekijk de HelpOverConfiguratie pagina."
+msgid "Disable user"
+msgstr "Gebruiker deactiveren"
 
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT verwerking is niet beschikbaar, installeer de 4suite 1.x."
+msgid "Enable user"
+msgstr "Gebruiker activeren"
 
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "Verwerkingsfout %(errortype)s"
+msgid "disabled"
+msgstr "geblokkeerd"
 
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
-msgstr ""
-" Nadruk:: <<Verbatim('')>>''cursief''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''vet'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''vet "
-"cursief'''''<<Verbatim(''''')>>; <<Verbatim('')>>''gemengd ''<<Verbatim(''')"
-">>'''''vet'''<<Verbatim(''')>> en cursief''<<Verbatim('')>>; <<Verbatim(----)"
-">> horizontale lijn.\n"
-" Koppen:: = Titel 1 =; == Titel 2 ==; === Titel 3 ===; ==== Titel 4 ====; "
-"===== Titel 5 =====.\n"
-" Lijsten:: een spatie gevolgd door één van: * opsommingstekens; 1., a., A., "
-"i., I. genummerde items; 1.#n begin te nummeren vanaf n; enkel inspringing "
-"met spaties.\n"
-"Verwijzingen:: <<Verbatim(WoordenMetHoofdlettersSamenvoegen)>>; <<Verbatim"
-"([[doel|tekst]])>>.\n"
-" Tabellen:: || celtekst |||| celtekst over twee kolommen ||;   er zijn geen "
-"spaties op dezelfde regel toegestaan na tabellen of titels.\n"
-"\n"
-"(!) Kijk voor meer informatie naar HelpOverBewerken of SyntaxisNaslagwerk.\n"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Er werd \"%(wanted)s\" na \"%(key)s\" verwacht, er kwam \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Er werd een geheel getal \"%(key)s\" voor \"%(token)s\" verwacht"
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Er werd een geheel getal \"%(arg)s\" na \"%(key)s\" verwacht"
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Er werd een kleurwaarde \"%(arg)s\" na \"%(key)s\" verwacht"
-
-msgid "Page has been modified"
-msgstr "Pagina is gewijzigd"
-
-msgid "Page has been modified in a trivial fashion"
-msgstr "Pagina is licht gewijzigd"
-
-msgid "Page has been renamed"
-msgstr "Een pagina is hernoemd"
-
-msgid "Page has been deleted"
-msgstr "Een pagina is verwijderd"
-
-msgid "Page has been copied"
-msgstr "Een pagina is gekopieerd."
-
-msgid "A new attachment has been added"
-msgstr "Er is een nieuwe bijlage toegevoegd"
-
-msgid "An attachment has been removed"
-msgstr "Er is een bijlage verwijderd"
-
-msgid "A page has been reverted to a previous state"
-msgstr "Een pagina is teruggezet naar een vorige staat"
-
-msgid "A user has subscribed to a page"
-msgstr "Een gebruikers heeft zich geabonneerd op een pagina"
-
-msgid "A new account has been created"
-msgstr "Er werd een nieuw account aangemaakt"
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-"[%(sitename)s] %(trivial)sBijwerking van \"%(pagename)s\" door %(username)s"
-
-msgid "Trivial "
-msgstr "Triviaal "
-
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
-"Verwijzing naar bijlage: %(attach)s\n"
-"Verwijzing naar pagina: %(page)s\n"
-
-msgid "Attachment link"
-msgstr "Verwijzing naar bijlage"
-
-msgid "Page link"
-msgstr "Verwijzing naar pagina"
-
-msgid "Changed page"
-msgstr "Pagina gewijzigd"
-
-msgid "Page changed"
-msgstr "Pagina gewijzigd"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-"Beste wikigebruiker,\n"
-"\n"
-"U bent geabonneerd op een wikipagina of wikicategorie op \"%(sitename)s\" "
-"voor updatemeldingen.\n"
-"\n"
-"De pagina \"%(pagename)s\" is door %(editor)s gewijzigd:\n"
-
-msgid "No differences found!\n"
-msgstr "Geen verschillen gevonden!\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"Beste wikigebruiker,\n"
-"\n"
-"U bent geabonneerd op een wikipagina \"%(sitename)s\" voor updatemeldingen.\n"
-"\n"
-"De pagina \"%(pagename)s\" is door %(editor)s verwijderd:\n"
-"\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
-"%(editor)s:\n"
-msgstr ""
-"Beste wikigebruiker,\n"
-"\n"
-"U bent geabonneerd op een wikipagina \"%(sitename)s\" voor updatemeldingen.\n"
-"\n"
-"De pagina \"%(oldname)s\" is door %(editor)s hernoemd naar \"%(pagename)s"
-"\":\n"
-
-#, python-format
-msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] Nieuw gebruikersaccount aangemaakt"
-
-#, python-format
-msgid ""
-"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
-"Details follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
-msgstr ""
-"Beste beheerder, er is zojuist een nieuwe gebruiker aangemaakt op "
-"\"%(sitename)s\". Details:\n"
-"\n"
-"    Gebruikersnaam: %(username)s\n"
-"    E-mailadres: %(useremail)s"
-
-#, python-format
-msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "[%(sitename)s] Nieuwe bijlage toegevoegd aan pagina %(pagename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-"Beste wikigebruiker,\n"
-"\n"
-"U bent geabonneerd op een wikipagina \"%(page_name)s\" voor updatemeldingen. "
-"Er werd op die pagina een bijlage toegevoegd door %(editor)s. De volgende "
-"gedetailleerde informatie is beschikbaar:\n"
-"\n"
-"Naam van de bijlage: %(attach_name)s\n"
-"Grootte: %(attach_size)s\n"
-
-#, python-format
-msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "[%(sitename)s] Bijlage verwijderd van pagina %(pagename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been removed from that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-"Beste wikigebruiker,\n"
-"\n"
-"U bent geabonneerd op een wikipagina \"%(page_name)s\" voor updatemeldingen. "
-"Er werd op die pagina een bijlage verwijderd door %(editor)s. De volgende "
-"gedetailleerde informatie is beschikbaar:\n"
-"\n"
-"Naam van de bijlage: %(attach_name)s\n"
-"Grootte: %(attach_size)s\n"
-
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr "De opties --pages en --search sluiten elkaar uit!"
-
-msgid "You must specify an output file!"
-msgstr "U moet een uitvoerbestand opgeven!"
-
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-"Er werden geen pagina's gespecificeerd met --pages of --search, er wordt "
-"uitgegaan van het volledige pakket."
-
-msgid "All attachments included into the package."
-msgstr "Alle bijlagen werden in het pakket opgenomen."
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr "Uitvoerbestand bestaat reeds! Ik weiger angstig om verder te gaan!"
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. "
-msgstr ""
-"Als u geen account hebt, <a href=\"%(userprefslink)s\">kan u er nu een "
-"aanmaken</a>."
-
-#, python-format
-msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr "<a href=\"%(sendmypasswordlink)s\">Uw wachtwoord vergeten?</a>"
-
-msgid "Could not contact botbouncer.com."
-msgstr "Kon geen contact maken met botbouncer.com."
-
-msgid "Failed to connect to database."
-msgstr "Fout bij het verbinden met de database."
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-"Kies nu een gebruikersnaam.\n"
-"Als u een bestaande gebruikersnaam kies zal u gevraagd worden naar\n"
-"het wachtwoord en zal u het account kunnen koppelen met uw OpenID."
-
-msgid "Choose this name"
-msgstr "Kies deze naam"
-
-msgid "This is not a valid username, choose a different one."
-msgstr "Dit is geen geldige gebruikersnaam, kies een andere."
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-"De gebruikersnaam die u heeft gekozen is al\n"
-"in gebruik. Als dit uw gebruikersnaam is, voer hieronder uw wachtwoord in "
-"om\n"
-"uw gebruikersnaam met uw OpenID te koppelen. Indien dit niet het geval is, "
-"kies een andere\n"
-"gebruikersnaam en laat het wachtwoord veld leeg."
-
-msgid "Associate this name"
-msgstr "Koppel deze naam"
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr "OpenID-fout: %s."
-
-msgid "OpenID verification canceled."
-msgstr "OpenID-verificatie geannuleerd."
-
-msgid "Verification canceled."
-msgstr "Verificatie geannuleerd."
-
-#, python-format
-msgid "OpenID success. id: %s"
-msgstr "OpenID succesvol. id: %s"
-
-msgid "OpenID failure"
-msgstr "OpenID-storing"
-
-msgid "OpenID failure."
-msgstr "OpenID-storing."
-
-msgid "No OpenID found in session."
-msgstr "Geen OpenID gevonden in deze sessie."
-
-msgid "Your account is now associated to your OpenID."
-msgstr "Uw account is nu gekoppeld met uw OpenID."
-
-msgid "The password you entered is not valid."
-msgstr "Het wachtwoord dat u opgaf is ongeldig."
-
-msgid "OpenID error: unknown continuation stage"
-msgstr "OpenID-fout: onbekende configuratiefase"
-
-msgid "OpenID verification requires that you click this button:"
-msgstr "OpenID-verificatie vereist dat u op deze knop drukt:"
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr "Anonieme sessies moeten geactiveerd zijn voor OpenID login."
-
-msgid "Failed to resolve OpenID."
-msgstr "Opzoeken OpenID mislukt."
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr "Probleem met het herkennen van OpenID, geen geldige OpenID."
-
-msgid "No OpenID."
-msgstr "Geen OpenID."
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-"Indien u nog geen account hebt kan u nog steeds inloggen met uw OpenID en "
-"een account aanmaken tijdens het inloggen."
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr "LDAP-server %(server)s storing."
-
-msgid "Line"
-msgstr "Regel"
-
-msgid "Deletions are marked like this."
-msgstr "Verwijderingen worden op deze manier gemarkeerd."
-
-msgid "Additions are marked like this."
-msgstr "Toevoegingen worden op deze manier gemarkeerd."
-
-msgid "Diffs"
-msgstr "Verschillen"
-
-msgid "Info"
-msgstr "Info"
-
-msgid "Unsubscribe"
-msgstr "Uitschrijven"
-
-msgid "Subscribe"
-msgstr "Abonneren"
-
-msgid "Raw"
-msgstr "Brontekst"
-
-msgid "XML"
-msgstr "XML"
-
-msgid "View"
-msgstr "Bekijken"
-
-msgid "Home"
-msgstr "Start"
-
-msgid "Up"
-msgstr "Omhoog"
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[GEWIST]"
-
-msgid "[UPDATED]"
-msgstr "[HERZIEN]"
-
-msgid "[RENAMED]"
-msgstr "[HERNOEMD]"
-
-msgid "[CONFLICT]"
-msgstr "[CONFLICT]"
-
-msgid "[NEW]"
-msgstr "[NIEUW]"
-
-msgid "[DIFF]"
-msgstr "[VERSCHIL]"
-
-msgid "[BOTTOM]"
-msgstr "[ONDER]"
-
-msgid "[TOP]"
-msgstr "[BOVEN]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
-
-msgid "Logout"
-msgstr "Uitloggen"
-
-msgid "Clear message"
-msgstr "Bericht wissen"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "laatst bewerkt op %(time)s door %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "laatst gewijzigd %(time)s"
-
-msgid "Search:"
-msgstr "Zoeken:"
-
-msgid "Text"
-msgstr "Tekst"
-
-msgid "Titles"
-msgstr "Titels"
-
-msgid "Search"
-msgstr "Zoeken"
-
-msgid "More Actions:"
-msgstr "Meer acties:"
-
-msgid "------------------------"
-msgstr "------------------------"
-
-msgid "Raw Text"
-msgstr "Brontekst"
-
-msgid "Print View"
-msgstr "Afdrukvoorbeeld"
-
-msgid "Delete Cache"
-msgstr "Buffer legen"
-
-msgid "Delete Page"
-msgstr "Pagina verwijderen"
-
-msgid "Like Pages"
-msgstr "Gelijke pagina's"
-
-msgid "Local Site Map"
-msgstr "Lokaal site overzicht"
-
-msgid "My Pages"
-msgstr "Mijn pagina's"
-
-msgid "Subscribe User"
-msgstr "Abonneer een gebruiker"
-
-msgid "Remove Spam"
-msgstr "Spam verwijderen"
-
-msgid "Package Pages"
-msgstr "Pakket pagina's"
-
-msgid "Render as Docbook"
-msgstr "Als een docbook renderen"
-
-msgid "Sync Pages"
-msgstr "Pagina synchroniseren"
-
-msgid "Do"
-msgstr "Uitvoeren"
-
-msgid "Comments"
-msgstr "Commentaar"
-
-msgid "Edit (Text)"
-msgstr "Bewerk (Tekst)"
-
-msgid "Edit (GUI)"
-msgstr "Bewerk (GUI)"
-
-msgid "Immutable Page"
-msgstr "Vastliggende pagina"
-
-msgid "Remove Link"
-msgstr "Link verwijderen"
-
-msgid "Add Link"
-msgstr "Link toevoegen"
-
-msgid "Attachments"
-msgstr "Bijlages"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Laat %s dagen zien."
-
-msgid "Wiki Markup"
-msgstr "Wiki-opmaak"
-
-msgid "DeleteCache"
-msgstr "BufferLegen"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(%s gebufferd)"
-
-msgid "Or try one of these actions:"
-msgstr "Of probeer één van deze acties:"
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Page"
-msgstr "Pagina"
-
-msgid "User"
-msgstr "Gebruiker"
-
-msgid "[ATTACH]"
-msgstr "[BIJVOEGEN]"
-
-msgid "Password is too short."
-msgstr "Wachtwoord is te kort."
-
-msgid "Password has not enough different characters."
-msgstr "Wachtwoord heeft niet genoeg verschillende karakters."
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Wachtwoord is te eenvoudig (wachtwoord bevat naam of omgekeerd)."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "Wachtwoord is te eenvoudig (opeenvolging van toetsen)."
-
-msgid "UnSubscribe"
-msgstr "Uitschrijven"
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-"Mijn e-mailadres (niet mijn wiki thuispagina) in de auteur info pagina "
-"publiceren"
-
-msgid "Open editor on double click"
-msgstr "Tekstbewerker openen bij dubbelklik"
-
-msgid "After login, jump to last visited page"
-msgstr "Na login, ga meteen naar de laatst bezochte pagina"
-
-msgid "Show comment sections"
-msgstr "Laat commentaar secties zien"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Vraagteken tonen voor verwijzingen naar niet-bestaande pagina's"
-
-msgid "Show page trail"
-msgstr "Paginaspoor tonen"
-
-msgid "Show icon toolbar"
-msgstr "Pictogrammenwerkbalk tonen"
-
-msgid "Show top/bottom links in headings"
-msgstr "Verwijzingen naar begin/einde in koppen tonen"
-
-msgid "Show fancy diffs"
-msgstr "Mooie verschillen tonen"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Spaties toevoegen aan getoonde wikinamen"
-
-msgid "Remember login information"
-msgstr "Aanmeldinformatie onthouden"
-
-msgid "Disable this account forever"
-msgstr "Dit account permanent uitschakelen"
-
-msgid "Alias-Name"
-msgstr "Alias-naam"
-
-msgid "Jabber ID"
-msgstr "Jabber ID"
-
-msgid "User CSS URL"
-msgstr "URL van CSS van de gebruiker"
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Leeglaten om geen CSS van gebruiker toe te laten)"
-
-msgid "Editor size"
-msgstr "Grootte van de tekstbewerker"
-
-msgid "anonymous"
-msgstr "anoniem"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Nieuwe bijlage uploaden \"%(filename)s\""
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr "Afbeelding in de tekst: %(url)s"
-
-msgid "Toggle line numbers"
-msgstr "Regelnummers aan/uit"
-
-msgid "From"
-msgstr "Van"
-
-msgid "To"
-msgstr "Naar"
-
-msgid "Content"
-msgstr "Inhoud"
-
-msgid "No recipients, nothing to do"
-msgstr "Geen ontvangers, niets om uit te voeren"
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Verbinding met de mailserver '%(server)s' mislukt: %(reason)s"
-
-msgid "Mail not sent"
-msgstr "E-mail niet verzonden"
-
-msgid "Mail sent OK"
-msgstr "E-mail correct verzonden"
+msgid "Mail account data"
+msgstr "E-mail accountgegevens"
 
 msgid "RecentChanges"
 msgstr "RecenteWijzigingen"
@@ -3106,167 +3185,23 @@ msgstr "Spellingscontrole"
 msgid "Discussion"
 msgstr "Overleg"
 
-msgid "Switch user"
-msgstr "Gebruiker wisselen"
+msgid "User agent"
+msgstr "User-Agent"
 
-msgid "No user selected"
-msgstr "Geen gebruiker geselecteerd"
+msgid "Others"
+msgstr "Anderen"
 
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-"U kan nu de instellingen van de geselecteerde gebruikersaccount aanpassen; "
-"log uit om terug te keren naar uw eigen account."
+msgid "Distribution of User-Agent Types"
+msgstr "Verdeling van User-Agent types"
 
-msgid "You are the only user."
-msgstr "U bent de enige gebruiker."
+msgid "Page Size Distribution"
+msgstr "Verdeling van de paginagroottes"
 
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-"Als beheerder kan u tijdelijk de identiteit van een andere gebruiker "
-"aannemen."
+msgid "page size upper bound [bytes]"
+msgstr "bovengrens van paginagrootte [bytes]"
 
-msgid "Select User"
-msgstr "Kies een gebruiker"
-
-msgid "Notification"
-msgstr "Melding"
-
-msgid "Notification settings saved!"
-msgstr "Meldingsinstellingen opgeslagen!"
-
-msgid "'''Email'''"
-msgstr "'''E-mail'''"
-
-msgid "'''Jabber'''"
-msgstr "'''Jabber'''"
-
-msgid "'''Event type'''"
-msgstr "'''Type gebeurtenis'''"
-
-msgid "Select the events you want to be notified about."
-msgstr "Selecteer de gebeurtenissen die u gemeld moeten worden."
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr ""
-"Vooraleer u meldingen kan ontvangen moet u uw contactgegevens opgeven in de "
-"algemene instellingen."
-
-msgid "Subscribed events"
-msgstr "Geabonneerde gebeurtenissen"
-
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Geabonneerde wikipagina's<<BR>>(één reguliere expressie per regel)"
-
-msgid "Save"
-msgstr "Opslaan"
-
-msgid "OpenID server"
-msgstr "OpenID server"
-
-msgid "The selected websites have been removed."
-msgstr "De geselecteerde websites zijn verwijderd."
-
-msgid "Trusted websites"
-msgstr "Vertrouwde websites"
-
-msgid "Remove selected"
-msgstr "Geselecteerden verwijderen"
-
-msgid "Change password"
-msgstr "Wachtwoord wijzigen"
-
-msgid "Your password has been changed."
-msgstr "Uw wachtwoord is gewijzigd."
-
-msgid "To change your password, enter a new password twice."
-msgstr "Om uw wachtwoord te wijzigen: voer tweemaal een nieuw wachtwoord in."
-
-msgid "Preferences"
-msgstr "Voorkeuren"
-
-msgid "This jabber id already belongs to somebody else."
-msgstr "Deze Jabber ID is al in gebruik."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Het thema '%(theme_name)s' kon niet worden geladen!"
-
-msgid "User preferences saved!"
-msgstr "Gebruikersvoorkeuren bewaard!"
-
-msgid "Default"
-msgstr "Standaard"
-
-msgid "<Browser setting>"
-msgstr "<Browserinstelling>"
-
-msgid "the one preferred"
-msgstr "degene met de voorkeur"
-
-msgid "free choice"
-msgstr "vrije keuze"
-
-msgid "Preferred theme"
-msgstr "Voorkeursthema"
-
-msgid "Editor Preference"
-msgstr "Voorkeuren van de tekstbewerker"
-
-msgid "Editor shown on UI"
-msgstr "De tekstbewerker op de UI weergeven"
-
-msgid "Time zone"
-msgstr "Tijdzone"
-
-msgid "Your time is"
-msgstr "Uw tijd is"
-
-msgid "Server time is"
-msgstr "Tijd op de server is"
-
-msgid "Date format"
-msgstr "Datumformaat"
-
-msgid "Preferred language"
-msgstr "Voorkeurstaal"
-
-msgid "General options"
-msgstr "Algemene opties"
-
-msgid "Quick links"
-msgstr "Snelkoppelingen"
-
-msgid "OpenID settings"
-msgstr "OpenID-instellingen"
-
-msgid "Cannot remove all OpenIDs."
-msgstr "Niet alle OpenID's kunnen verwijderd worden."
-
-msgid "The selected OpenIDs have been removed."
-msgstr "De geselecteerde OpenID's zijn verwijderd."
-
-msgid "No OpenID given."
-msgstr "Geen OpenID opgegeven."
-
-msgid "OpenID is already present."
-msgstr "OpenID is reeds aanwezig."
-
-msgid "This OpenID is already used for another account."
-msgstr "Deze OpenID is al in gebruik voor een ander account."
-
-msgid "OpenID added successfully."
-msgstr "OpenID met succes toegevoegd."
-
-msgid "Current OpenIDs"
-msgstr "Huidige OpenIDs"
-
-msgid "Add OpenID"
-msgstr "OpenID toevoegen"
+msgid "# of pages of this size"
+msgstr "# pagina's van deze grootte"
 
 msgid "Views/day"
 msgstr "Weergaven/dag"
@@ -3294,69 +3229,11 @@ msgstr "# treffers"
 msgid "Language"
 msgstr "Taal"
 
-msgid "Others"
-msgstr "Anderen"
+msgid "<Browser setting>"
+msgstr "<Browserinstelling>"
 
-msgid "User agent"
-msgstr "User-Agent"
-
-msgid "Distribution of User-Agent Types"
-msgstr "Verdeling van User-Agent types"
-
-msgid "Page Size Distribution"
-msgstr "Verdeling van de paginagroottes"
-
-msgid "page size upper bound [bytes]"
-msgstr "bovengrens van paginagrootte [bytes]"
-
-msgid "# of pages of this size"
-msgstr "# pagina's van deze grootte"
-
-msgid "[all]"
-msgstr "[allemaal]"
-
-msgid "[not empty]"
-msgstr "[niet leeg]"
-
-msgid "[empty]"
-msgstr "[leeg]"
-
-msgid "filter"
-msgstr "filter"
-
-msgid "OpenID"
-msgstr "OpenID"
-
-msgid "Member of Groups"
-msgstr "Lid van groepen"
-
-msgid "Jabber"
-msgstr "Jabber"
-
-msgid "Disable user"
-msgstr "Gebruiker deactiveren"
-
-msgid "Enable user"
-msgstr "Gebruiker activeren"
-
-msgid "disabled"
-msgstr "geblokkeerd"
-
-msgid "Mail account data"
-msgstr "E-mail accountgegevens"
-
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Sorry, kan de pagina niet opslaan omdat \"%(content)s\" in deze wiki niet is "
-"toegestaan."
-
-#, python-format
-msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
-"<<%(macro_name)s: uitvoering mislukt [%(error_msg)s] (bekijk ook het logboek)"
-">>"
+msgid "No orphaned pages in this wiki."
+msgstr "Geen weespagina's in deze wiki."
 
 msgid "Include system pages"
 msgstr "Inclusief systeempagina's"
@@ -3364,157 +3241,8 @@ msgstr "Inclusief systeempagina's"
 msgid "Exclude system pages"
 msgstr "Exclusief systeempagina's"
 
-msgid "Go To Page"
-msgstr "Ga naar Pagina"
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-"%(extension_name)s %(extension_type)s: Vereist argument %(argument_name)s "
-"ontbreekt."
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
-"%(argument_value)s!"
-msgstr ""
-"%(extension_name)s %(extension_type)s: Ongeldig %(argument_name)s="
-"%(argument_value)s!"
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-"De huidige configuratie staat niet toe om het bestand %(file)s in te voegen "
-"wegens zijn mimetype %(mimetype)s."
-
-msgid "Embedded"
-msgstr "Geïntegreerd"
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Ongeldige argumenten voor invoegen (include) \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Niets gevonden voor \"%s\"!"
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Navigitiemethode '%(scheme)s' niet ondersteund!"
-
-msgid "No parent page found!"
-msgstr "Geen bovenliggende pagina gevonden!"
-
-msgid "Slideshow"
-msgstr "Diavoorstelling"
-
-msgid "Start"
-msgstr "Start"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Dia %(pos)d van %(size)d"
-
-msgid "Markup"
-msgstr "Opmaak"
-
-msgid "Display"
-msgstr "Uiterlijk"
-
-msgid "Variable name"
-msgstr "Naam van variabele"
-
-msgid "Description"
-msgstr "Beschrijving"
-
-msgid "Wiki configuration"
-msgstr "Wiki configuratie"
-
-msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
-msgstr ""
-"Deze tabel toont alle instellingen van deze wiki die niet de "
-"standaardwaarden hebben. Instellingen die niet bekend zijn door het "
-"configuratiesysteem worden ''cursief'' weergegeven, zij zijn mogelijk de "
-"oorzaak van uitbreidingen van derden of van een verwijdering van een "
-"instelling uit Moin."
-
-msgid "Setting"
-msgstr "Instelling"
-
-msgid "No orphaned pages in this wiki."
-msgstr "Geen weespagina's in deze wiki."
-
-msgid "File attachment browser"
-msgstr "Bijlagen verkenner"
-
-msgid "User account browser"
-msgstr "Gebruikersaccountbeheer"
-
-msgid "Search Titles"
-msgstr "Titels doorzoeken"
-
-msgid "Display context of search results"
-msgstr "Context van de zoekresultaten tonen"
-
-msgid "Case-sensitive searching"
-msgstr "Hoofdlettergevoelig zoeken"
-
-msgid "Search Text"
-msgstr "Tekst doorzoeken"
-
-#, fuzzy, python-format
-msgid "Unknown macro parameter: %s."
-msgstr "Onbekende backup subactie: %s."
-
-#, python-format
-msgid ""
-"More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occurred)"
-msgstr ""
-
-msgid "Lexer description"
-msgstr "Lexer beschrijving"
-
-msgid "Lexer names"
-msgstr "Lexer namen"
-
-msgid "File patterns"
-msgstr "Bestandspatronen"
-
-msgid "Mimetypes"
-msgstr "Mimetypen"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Geen citaten op %(pagename)s."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "%(mins)dm geleden"
-
-msgid "(no bookmark set)"
-msgstr "(geen bladwijzer ingesteld)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(staat op dit moment op %s)"
-
-msgid "Delete bookmark"
-msgstr "Bladwijzer verwijderen"
-
-msgid "Set bookmark"
-msgstr "Bladwijzer instellen"
-
-msgid "[Bookmark reached]"
-msgstr "[Bladwijzer bereikt]"
+msgid "No wanted pages in this wiki."
+msgstr "Geen gewenste pagina's in deze wiki."
 
 msgid "Python Version"
 msgstr "Python versie"
@@ -3585,10 +3313,6 @@ msgstr "index niet beschikbaar"
 msgid "index available"
 msgstr "index beschikbaar"
 
-#, python-format
-msgid "last modified: %s"
-msgstr "laatst gewijzigd: %s"
-
 msgid "Xapian search"
 msgstr "Xapian zoeken"
 
@@ -3597,9 +3321,6 @@ msgstr "Herleiden tot stam voor Xapian"
 
 msgid "Active threads"
 msgstr "Actieve threads"
-
-msgid "No wanted pages in this wiki."
-msgstr "Geen gewenste pagina's in deze wiki."
 
 msgid "Search for items"
 msgstr "Objecten zoeken"
@@ -3649,34 +3370,337 @@ msgstr "Doorzoek alle paginaversies"
 msgid "Go get it!"
 msgstr "Ga het halen!"
 
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Geen citaten op %(pagename)s."
+
 msgid "Contents"
 msgstr "Inhoud"
 
+msgid "Variable name"
+msgstr "Naam van variabele"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+msgid "Lexer description"
+msgstr "Lexer beschrijving"
+
+msgid "Lexer names"
+msgstr "Lexer namen"
+
+msgid "File patterns"
+msgstr "Bestandspatronen"
+
+msgid "Mimetypes"
+msgstr "Mimetypen"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Navigitiemethode '%(scheme)s' niet ondersteund!"
+
+msgid "No parent page found!"
+msgstr "Geen bovenliggende pagina gevonden!"
+
+msgid "Slideshow"
+msgstr "Diavoorstelling"
+
+msgid "Start"
+msgstr "Start"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Dia %(pos)d van %(size)d"
+
+msgid "File attachment browser"
+msgstr "Bijlagen verkenner"
+
+msgid "User account browser"
+msgstr "Gebruikersaccountbeheer"
+
+msgid "Search Titles"
+msgstr "Titels doorzoeken"
+
+msgid "Display context of search results"
+msgstr "Context van de zoekresultaten tonen"
+
+msgid "Case-sensitive searching"
+msgstr "Hoofdlettergevoelig zoeken"
+
+msgid "Search Text"
+msgstr "Tekst doorzoeken"
+
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Onbekende backup subactie: %s."
+
 #, python-format
 msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
-"Resultaten %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s van %(aboutHits)s %(bs)s"
-"%(hits)d%(be)s resultaten van ongeveer %(pages)d pagina's."
 
-msgid "seconds"
-msgstr "seconden"
+#, python-format
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr ""
 
-msgid "Previous"
-msgstr "Vorige"
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+"<<%(macro_name)s: uitvoering mislukt [%(error_msg)s] (bekijk ook het "
+"logboek)>>"
 
-msgid "Next"
-msgstr "Volgende"
+msgid "Go To Page"
+msgstr "Ga naar Pagina"
 
-msgid "rev"
-msgstr "revisie"
+msgid "Wiki configuration"
+msgstr "Wiki configuratie"
 
-msgid "current"
-msgstr "huidige"
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+"Deze tabel toont alle instellingen van deze wiki die niet de "
+"standaardwaarden hebben. Instellingen die niet bekend zijn door het "
+"configuratiesysteem worden ''cursief'' weergegeven, zij zijn mogelijk de "
+"oorzaak van uitbreidingen van derden of van een verwijdering van een "
+"instelling uit Moin."
 
-msgid "about"
-msgstr "over"
+msgid "Setting"
+msgstr "Instelling"
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm geleden"
+
+msgid "(no bookmark set)"
+msgstr "(geen bladwijzer ingesteld)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(staat op dit moment op %s)"
+
+msgid "Delete bookmark"
+msgstr "Bladwijzer verwijderen"
+
+msgid "Set bookmark"
+msgstr "Bladwijzer instellen"
+
+msgid "[Bookmark reached]"
+msgstr "[Bladwijzer bereikt]"
+
+msgid "Markup"
+msgstr "Opmaak"
+
+msgid "Display"
+msgstr "Uiterlijk"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Nieuwe bijlage uploaden \"%(filename)s\""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+"%(extension_name)s %(extension_type)s: Vereist argument %(argument_name)s "
+"ontbreekt."
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+"%(extension_name)s %(extension_type)s: Ongeldig %(argument_name)s="
+"%(argument_value)s!"
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+"De huidige configuratie staat niet toe om het bestand %(file)s in te voegen "
+"wegens zijn mimetype %(mimetype)s."
+
+msgid "Embedded"
+msgstr "Geïntegreerd"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Ongeldige argumenten voor invoegen (include) \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Niets gevonden voor \"%s\"!"
+
+msgid "Switch user"
+msgstr "Gebruiker wisselen"
+
+msgid "No user selected"
+msgstr "Geen gebruiker geselecteerd"
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+"U kan nu de instellingen van de geselecteerde gebruikersaccount aanpassen; "
+"log uit om terug te keren naar uw eigen account."
+
+msgid "You are the only user."
+msgstr "U bent de enige gebruiker."
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+"Als beheerder kan u tijdelijk de identiteit van een andere gebruiker "
+"aannemen."
+
+msgid "Select User"
+msgstr "Kies een gebruiker"
+
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+msgid "This jabber id already belongs to somebody else."
+msgstr "Deze Jabber ID is al in gebruik."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Het thema '%(theme_name)s' kon niet worden geladen!"
+
+msgid "User preferences saved!"
+msgstr "Gebruikersvoorkeuren bewaard!"
+
+msgid "the one preferred"
+msgstr "degene met de voorkeur"
+
+msgid "free choice"
+msgstr "vrije keuze"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Preferred theme"
+msgstr "Voorkeursthema"
+
+msgid "Editor Preference"
+msgstr "Voorkeuren van de tekstbewerker"
+
+msgid "Editor shown on UI"
+msgstr "De tekstbewerker op de UI weergeven"
+
+msgid "Time zone"
+msgstr "Tijdzone"
+
+msgid "Your time is"
+msgstr "Uw tijd is"
+
+msgid "Server time is"
+msgstr "Tijd op de server is"
+
+msgid "Date format"
+msgstr "Datumformaat"
+
+msgid "Preferred language"
+msgstr "Voorkeurstaal"
+
+msgid "General options"
+msgstr "Algemene opties"
+
+msgid "Quick links"
+msgstr "Snelkoppelingen"
+
+msgid "Change password"
+msgstr "Wachtwoord wijzigen"
+
+msgid "Your password has been changed."
+msgstr "Uw wachtwoord is gewijzigd."
+
+msgid "To change your password, enter a new password twice."
+msgstr "Om uw wachtwoord te wijzigen: voer tweemaal een nieuw wachtwoord in."
+
+msgid "OpenID settings"
+msgstr "OpenID-instellingen"
+
+msgid "Cannot remove all OpenIDs."
+msgstr "Niet alle OpenID's kunnen verwijderd worden."
+
+msgid "The selected OpenIDs have been removed."
+msgstr "De geselecteerde OpenID's zijn verwijderd."
+
+msgid "No OpenID given."
+msgstr "Geen OpenID opgegeven."
+
+msgid "OpenID is already present."
+msgstr "OpenID is reeds aanwezig."
+
+msgid "This OpenID is already used for another account."
+msgstr "Deze OpenID is al in gebruik voor een ander account."
+
+msgid "OpenID added successfully."
+msgstr "OpenID met succes toegevoegd."
+
+msgid "Current OpenIDs"
+msgstr "Huidige OpenIDs"
+
+msgid "Remove selected"
+msgstr "Geselecteerden verwijderen"
+
+msgid "Add OpenID"
+msgstr "OpenID toevoegen"
+
+msgid "Notification"
+msgstr "Melding"
+
+msgid "Notification settings saved!"
+msgstr "Meldingsinstellingen opgeslagen!"
+
+msgid "'''Email'''"
+msgstr "'''E-mail'''"
+
+msgid "'''Jabber'''"
+msgstr "'''Jabber'''"
+
+msgid "'''Event type'''"
+msgstr "'''Type gebeurtenis'''"
+
+msgid "Select the events you want to be notified about."
+msgstr "Selecteer de gebeurtenissen die u gemeld moeten worden."
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+"Vooraleer u meldingen kan ontvangen moet u uw contactgegevens opgeven in de "
+"algemene instellingen."
+
+msgid "Subscribed events"
+msgstr "Geabonneerde gebeurtenissen"
+
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Geabonneerde wikipagina's<<BR>>(één reguliere expressie per regel)"
+
+msgid "OpenID server"
+msgstr "OpenID server"
+
+msgid "The selected websites have been removed."
+msgstr "De geselecteerde websites zijn verwijderd."
+
+msgid "Trusted websites"
+msgstr "Vertrouwde websites"
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "Afbeelding in de tekst: %(url)s"
+
+msgid "Toggle line numbers"
+msgstr "Regelnummers aan/uit"
 
 #~ msgid "New user account created on %(sitename)s"
 #~ msgstr "Nieuwe gebruikersaccount aangemaakt op %(sitename)s"
@@ -3926,8 +3950,9 @@ msgstr "over"
 #~ msgstr "Het objekt integreren door de gekozen formateerder is onmogleijk."
 
 #~ msgid ""
-#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
-#~ "(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
+#~ "Not enough arguments given to EmbedObject macro! Try "
+#~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
+#~ "Text])>>"
 #~ msgstr ""
 #~ "Niet genoeg argumenten gegeven door de EmbedObject macro! Probeer "
 #~ "<<EmbedObject(bijlage [,width=breedte] [,height=hoogte] [,"

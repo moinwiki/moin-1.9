@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 16:38+0100\n"
+"POT-Creation-Date: 2014-08-04 22:35+0200\n"
 "PO-Revision-Date: 2008-12-03 14:24+0100\n"
 "Last-Translator: Jörg Cassens <moinmoin-nb@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -25,104 +25,8 @@ msgstr ""
 "X-Language-in-English: Norwegian Bokmal\n"
 "X-Direction: ltr\n"
 
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Pakken trenger en nyere versjon av MoinMoin (minst %s)."
-
-msgid "The theme name is not set."
-msgstr "Temanavnet er ikke satt."
-
-#, python-format
-msgid "Theme files not installed! Write rights missing for %s."
-msgstr "Temafiler er ikke installert! Skrivetilgang mangler for %s"
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "Installasjonen av '%(filename)s' mislyktes."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "Filen %s er ingen MoinMoin arkivfil."
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "Nettsiden %s eksisterer ikke!"
-
-msgid "Invalid package file header."
-msgstr "Ugyldig arkivfil header."
-
-msgid "Package file format unsupported."
-msgstr "Formatet av arkivfilen støttes ikke."
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Ukjent funksjon %(func)s på linje %(lineno)i."
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr "Filen %s var ikke funnet i arkivfilen."
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Argument \"%s\" må være boolean verdi, ikke \"%s\""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Argumentet må være boolean verdi, ikke \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Argument \"%s\" må være heltall, ikke \"%s\""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Argumentet må være heltall, ikke \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "Argument \"%s\" må være desimaltall, ikke \"%s\""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Argumentet må være desimaltall, ikke \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Argument \"%s\" må være kompleks, ikke \"%s\""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Argumentet må være kompleks, ikke \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Argument \"%s\" må være et av \"%s\", ikke \"%s\""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Argumentet må være et av \"%s\", ikke \"%s\""
-
-msgid "Too many arguments"
-msgstr "Altfor mange argumenter"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr "Kan ikke ha argumenter uten navn som følger argumenter med navn"
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Argumentet \"%s\" er påkrevd"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Ingen argumenter som heter \"%s\""
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Forventet et \"=\" etter \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Forventet en verdi for variablen \"%(token)s\""
+msgid "Your changes are not saved!"
+msgstr "Dine endringer er ikke lagret!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Du har ikke tillatelse til å redigere denne siden."
@@ -137,6 +41,9 @@ msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Din låsing av siden er gått ut på tid, så vær forberedt på "
 "redigeringskonflikter!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Sidenavnet er for langt, prøv igjen med et kortere navn."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -233,8 +140,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-msgid "Text mode"
-msgstr "Tekstmodus"
+msgid "GUI Mode"
+msgstr "GUI-modus"
 
 msgid "Load Draft"
 msgstr "Last inn skisse."
@@ -254,82 +161,6 @@ msgstr "Legg til i: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Fjern ekstra mellomrom på slutten av hver linje"
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Ukjent operasjon %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-"Du har ikke tillatelse til å gjennomføre %(action_name)s på denne siden!"
-
-msgid "Login and try again."
-msgstr "Logg på og prøv igjen."
-
-msgid "The wiki is currently not reachable."
-msgstr "Wikien er for øyeblikket ikke tilgjengelig."
-
-msgid "Invalid username or password."
-msgstr "Ugyldig brukernavn eller passord."
-
-#, python-format
-msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
-msgstr ""
-"Den andre wiki-en bruker et annet InterWiki navn (%(remotename)s) internt "
-"enn du har angitt (%(localname)s)."
-
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
-"Ugyldig regulært uttrykk for fremheving av tekst \"%(regex)s\": %(error)s"
-
-#, python-format
-msgid ""
-"Text matching regular expression \"%(regex)s\" is highlighted. "
-"%(switch_link)s."
-msgstr ""
-"Tekst som tilfredsstiller det regulære uttrykket \"%(regex)s\" er fremhevet. "
-"%(switch_link)s."
-
-msgid "Switch to non-highlighted view"
-msgstr "Bytt til en ikke-fremhevet fremvisning"
-
-msgid ""
-"The backed up content of this page is deprecated and will rank lower in "
-"search results!"
-msgstr ""
-"Det tidligere innholdet av denne siden er foreldet og blir ikke tatt med i "
-"søkeresultater!"
-
-#, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr "Versjon %(rev)d per %(date)s"
-
-#, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "Henvist fra siden \"%(page)s\""
-
-#, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Denne siden henviser til \"%(page)s\""
-
-msgid "Create New Page"
-msgstr "Opprett ny side"
-
-msgid "You are not allowed to view this page."
-msgstr "Du har ikke tillatelse til å se denne siden."
-
-msgid "Your changes are not saved!"
-msgstr "Dine endringer er ikke lagret!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Sidenavnet er for langt, prøv igjen med et kortere navn."
-
-msgid "GUI Mode"
-msgstr "GUI-modus"
 
 msgid "Edit was cancelled."
 msgstr "Redigeringen ble avbrutt."
@@ -505,362 +336,1041 @@ msgstr ""
 "Passord-tilbakestillings-URL: %s/?action=recoverpass&name=%s&token=%s\n"
 
 #, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Du må logge på for å utføre denne operasjonen: %(action)s."
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Pakken trenger en nyere versjon av MoinMoin (minst %s)."
 
-msgid "Your subscription to this page has been removed."
-msgstr "Din abonnement av denne siden er avbestilt."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Abonnement med regulært uttrykk kan ikke avbestilles."
-
-msgid "Edit the subscription regular expressions in your settings."
-msgstr "Endre regulære uttrykk for abonnement i dine innstillinger."
-
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Du må først har abonnert for å kunne avbestille."
+msgid "The theme name is not set."
+msgstr "Temanavnet er ikke satt."
 
 #, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Opprett ny tegning \"%(filename)s (åpnes i nytt vindu)\""
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "Temafiler er ikke installert! Skrivetilgang mangler for %s"
 
 #, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Endre tegningen \"%(filename)s (åpnes i nytt vindu)\""
+msgid "Installation of '%(filename)s' failed."
+msgstr "Installasjonen av '%(filename)s' mislyktes."
 
 #, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikkbart tegning \"%(filename)s\""
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Filen %s er ingen MoinMoin arkivfil."
 
 #, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgid "The page %s does not exist."
+msgstr "Nettsiden %s eksisterer ikke!"
+
+msgid "Invalid package file header."
+msgstr "Ugyldig arkivfil header."
+
+msgid "Package file format unsupported."
+msgstr "Formatet av arkivfilen støttes ikke."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Ukjent funksjon %(func)s på linje %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Filen %s var ikke funnet i arkivfilen."
+
+msgid "The wiki is currently not reachable."
+msgstr "Wikien er for øyeblikket ikke tilgjengelig."
+
+msgid "Invalid username or password."
+msgstr "Ugyldig brukernavn eller passord."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
-"Vennligst bruk det interaktive brukergrensesnitt for operasjonen "
-"%(actionname)s."
+"Den andre wiki-en bruker et annet InterWiki navn (%(remotename)s) internt "
+"enn du har angitt (%(localname)s)."
 
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Du har ikke tillatelse til å lagre en tegning på denne siden."
+msgid "Text mode"
+msgstr "Tekstmodus"
 
-msgid "Empty target name given."
-msgstr "Den angitte målnavnet er tomt."
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Ukjent operasjon %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Du har ikke tillatelse til å gjennomføre %(action_name)s på denne siden!"
+
+msgid "Login and try again."
+msgstr "Logg på og prøv igjen."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Argument \"%s\" må være boolean verdi, ikke \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Argumentet må være boolean verdi, ikke \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Argument \"%s\" må være heltall, ikke \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Argumentet må være heltall, ikke \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Argument \"%s\" må være desimaltall, ikke \"%s\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Argumentet må være desimaltall, ikke \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Argument \"%s\" må være kompleks, ikke \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Argumentet må være kompleks, ikke \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Argument \"%s\" må være et av \"%s\", ikke \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Argumentet må være et av \"%s\", ikke \"%s\""
+
+msgid "Too many arguments"
+msgstr "Altfor mange argumenter"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "Kan ikke ha argumenter uten navn som følger argumenter med navn"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Argumentet \"%s\" er påkrevd"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Ingen argumenter som heter \"%s\""
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Forventet et \"=\" etter \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Forventet en verdi for variablen \"%(token)s\""
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+"Ugyldig regulært uttrykk for fremheving av tekst \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+"Tekst som tilfredsstiller det regulære uttrykket \"%(regex)s\" er fremhevet. "
+"%(switch_link)s."
+
+msgid "Switch to non-highlighted view"
+msgstr "Bytt til en ikke-fremhevet fremvisning"
 
 msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
 msgstr ""
-"Filen er tom. Slett tegn som ikke er ASCII fra filnavnet og prøv igjen."
-
-msgid "You are not allowed to view attachments of this page."
-msgstr "Du har ikke tillatelse til å se vedlegg til denne siden."
-
-msgid "Edit drawing"
-msgstr "Endre tegning"
-
-msgid "No older revisions available!"
-msgstr "Ingen eldre utgaver tilgjengelig!"
-
-msgid "No log entries found."
-msgstr "Intet funnet i loggen."
+"Det tidligere innholdet av denne siden er foreldet og blir ikke tatt med i "
+"søkeresultater!"
 
 #, python-format
-msgid "Diff for \"%s\""
-msgstr "Forskjeller (diff) for \"%s\""
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Versjon %(rev)d per %(date)s"
 
 #, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Forskjeller mellom versjonene %d og %d"
+msgid "Redirected from page \"%(page)s\""
+msgstr "Henvist fra siden \"%(page)s\""
 
 #, python-format
-msgid "(spanning %d versions)"
-msgstr "(over %d versjoner)"
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Denne siden henviser til \"%(page)s\""
 
-msgid "Revert to this revision"
-msgstr "Tilbakestill til denne versjonen"
+msgid "Create New Page"
+msgstr "Opprett ny side"
 
-msgid "Previous change"
-msgstr "Forrige endring"
+msgid "You are not allowed to view this page."
+msgstr "Du har ikke tillatelse til å se denne siden."
 
-msgid "Next change"
-msgstr "Neste endring"
+msgid "No recipients, nothing to do"
+msgstr "Ingen mottakere, har ikke noe å gjøre"
 
-msgid "Size"
-msgstr "Størrelse"
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Forbindelse til e-posttjener '%(server)s' mislykket: %(reason)s"
 
-msgid "Editor"
-msgstr "Forfatter"
+msgid "Mail not sent"
+msgstr "E-post ikke sendt"
+
+msgid "Mail sent OK"
+msgstr "E-post sendt OK"
 
 msgid "Date"
 msgstr "Dato"
 
-msgid "Comment"
-msgstr "Kommentar"
+msgid "From"
+msgstr "Fra"
 
-msgid "Diff with oldest revision in left pane"
-msgstr "Diff med den eldste utgaven på venstre side"
+msgid "To"
+msgstr "Til"
 
-msgid "No older revision available for diff"
-msgstr "Ingen eldre utgaver tilgjengelig!"
+msgid "Content"
+msgstr "Innhold"
 
-msgid "Diff with older revision in left pane"
-msgstr "Diff med en eldre utgave på venstre side"
+msgid "Attachments"
+msgstr "Vedlegg"
 
-msgid "Diff with newer revision in left pane"
-msgstr "Diff med en nyere utgave på venstre side"
-
-msgid "Can't change to revision newer than in right pane"
-msgstr "Kan ikke endre til en utgave som er nyere enn den som er på høyre side"
-
-msgid "N/A"
-msgstr "Ikke tilgjengelig"
-
-msgid "Diff with older revision in right pane"
-msgstr "Diff med en eldre utgave på høyre side"
-
-msgid "Can't change to revision older than revision in left pane"
-msgstr ""
-"Kan ikke endre til en utgave som er eldre enn den som er på venstre side"
-
-msgid "Diff with newer revision in right pane"
-msgstr "Diff med en nyere utgave på høyre side"
-
-msgid "No newer revision available for diff"
-msgstr "Ingen nyere utgaver tilgjengelig!"
-
-msgid "Diff with newest revision in right pane"
-msgstr "Diff med den siste utgaven på høyre side"
-
-msgid "No differences found!"
-msgstr "Ingen forskjeller funnet!"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Selv om siden er lagret %(count)d ganger!"
-
-msgid "(ignoring whitespace)"
-msgstr "(ser bort fra mellomrom)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Ignorer endringer i antall mellomrom"
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Fullstendig liste over lenker for \"%s\""
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(inkludert %(localwords)d %(pagelink)s)"
-
+# jmt quickfixes
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of "
-"%(totalwords)d words%(localwords)s and are highlighted below:"
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"Følgende %(badwords)d ord ble ikke funnet i den %(totalwords)d ord store "
-"ordliste %(localwords)s og er uthevet nedenfor:"
+"Siden kan ikke lagres fordi \"%(content)s\" ikke er tillatt i denne wikien."
 
-msgid "Add checked words to dictionary"
-msgstr "Tilføy de merkede ordene til ordlisten"
-
-msgid "No spelling errors found!"
-msgstr "Ingen stavefeil funnet."
-
-msgid "You can't save spelling words."
-msgstr "Du kan ikke lagre staving av ord."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "Du kan ikke bruke stavekontrollen på en side du ikke kan lese."
-
-msgid "Do it."
-msgstr "Gjør det."
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Utfør operasjon %(actionname)s?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "Operasjonen %(actionname)s kan ikke brukes i denne wiki-en."
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Du har ikke lov til å bruke operasjon %(actionname)s på denne siden."
+msgid "Could not contact botbouncer.com."
+msgstr "Får ikke kontakt med botbouncer.com."
 
 msgid "Please log in first."
 msgstr "Vær vennlig å logge på først."
 
-msgid "Please first create a homepage before creating additional pages."
-msgstr "Vennligst opprett en startside før du oppretter andre sider."
+msgid "Failed to connect to database."
+msgstr "Mislyktes med databasetilkobling."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Passordet mangler. Vær vennlig å oppgi brukernavn og passord."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "Feil med LDAP sørver %(server)s."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+"Vennligst velg et brukernavn nå.\n"
+"Hvis du skulle velge et navn som finnes allerede vil du bli\n"
+"spurt etter passord. Da kan du koble brukerkontoet med din\n"
+"OpenID"
+
+msgid "Name"
+msgstr "Navn"
+
+msgid "Choose this name"
+msgstr "Velg dette navnet"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "Dette er ikke et gyldig brukernavn, velg et annet."
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+"Dette brukernavnet finnes allerede.\n"
+"Hvis det er ditt navn kan du skrive inn ditt passord for å koble sammen\n"
+"brukerkontoet med din OpenID. Vennligst velg et annet brukernavn ellers\n"
+"og la passordfeltet stå tom."
+
+msgid "Password"
+msgstr "Passord"
+
+msgid "Associate this name"
+msgstr "Forbind dette navnet"
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr "OpenID feil: %s."
+
+msgid "OpenID verification canceled."
+msgstr "Verifiseringen ble avbrutt."
+
+msgid "Verification canceled."
+msgstr "Verifiseringen ble avbrutt."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID suksess id: %s."
+
+msgid "OpenID failure"
+msgstr "OpenID feil"
+
+msgid "OpenID failure."
+msgstr "OpenID feil."
+
+msgid "No OpenID found in session."
+msgstr "Ingen OpenID funnet i sesjonen."
+
+msgid "Your account is now associated to your OpenID."
+msgstr "Din brukerkonto er nå koblet med OpenID."
+
+msgid "The password you entered is not valid."
+msgstr "Passordet du oppga er ikke gyldig."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr "OpenID feil: unkjent fortsettelse fase"
+
+msgid "OpenID verification requires that you click this button:"
+msgstr "For OpenID verifisering må denne knappen klikkes."
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr "Anonyme sesjoner må være satt opp for OpenID pålogging."
+
+msgid "Failed to resolve OpenID."
+msgstr "Feil å finne OpenID."
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr "Finner ikker OpenID, ugyldig OpenID."
+
+msgid "No OpenID."
+msgstr "Ingen OpenID"
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+"Hvis du ikke ha en brukerkonto kan du fortsatt logge deg på med dinOpenID og "
+"opprette en konto ved pålogging."
+
+#, fuzzy
+msgid "Missing user name. Please enter user name and password."
+msgstr "Passordet mangler. Vær vennlig å oppgi brukernavn og passord."
 
 #, python-format
 msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
-"[[%(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
-"%(username)s only||\n"
-"\n"
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
 msgstr ""
-"Du kan her legge til undersider til din brukerside som allerede finnes.\n"
+"Hvis ikke du har en konto <a href=\"%(userprefslink)s\">kan du opprette den "
+"nå</a>. "
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr "<a href=\"%(sendmypasswordlink)s\">Glemte passordet?</a>"
+
+msgid "HelpOnParsers"
+msgstr "HjelpOmParsers"
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
+msgstr ""
+"Syntaks highlighting ikke tilgjengelig for '%(syntax)s' se "
+"%(highlight_help_page)s."
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
 "\n"
-"Du kan velge hvor tilgjengelig for andre lesere eller forfattere disse\n"
-"sidene skal bli. Adgang blir kontrollert via gruppemedlemskap i den\n"
-"respektive gruppesiden.\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Utheving:: <<Verbatim(//)>>''kursiv''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''fet'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''kursiv "
+"fet'''''<<Verbatim(//**>>; <<Verbatim(//)>>''blandet "
+"''<<Verbatim(**)>>'''''fet'''<<Verbatim(**)>> og kursiv''<<Verbatim(//)>>;\n"
+" Vannrett strek:: <<Verbatim(----)>>\n"
+" Tvunget linjeskift:: <<Verbatim(\\\\)>>\n"
+" Overskrifter:: = Tittel 1 =; == Tittel 2 ==; === Tittel 3 ===; ==== Tittel "
+"4 ====; ===== Tittel 5 =====.\n"
+" Lister:: * punkt; ** underpunkt; # nummerert emne; ## nummerert "
+"underpunkt.\n"
+" Lenker:: <<Verbatim([[mål]])>>; <<Verbatim([[mål|lenketekst]])>>.\n"
+" Tabeller:: |= overskrift tekst | tekst | mer text |;\n"
 "\n"
-"Bare skriv in navnet til den nye undersiden og klikk på knappen for å legge "
-"til en ny side.\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT opsjon slått av, vennligst se HelpOnConfiguration."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT-håndtering er ikke tilgjengelig, vennligst installer 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s programfeil"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Fremvisning av reStructured tekst ikke mulig, vennligst installere Docutils."
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
 "\n"
-"Før du legger til en adgangsbegrensede side skulle du se på at en "
-"tilhørende\n"
-"gruppeside finnes og at den har de ønskede medlemmer. Bruk gjerne et "
-"sidemålet\n"
-"BrukersideGruppeSidemal for å generere gruppesiden.\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
 "\n"
-"||'''Legg til ny personlig side:'''||'''Tilhørende adgangsbegrensende "
-"gruppe:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
-"[[%(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
-"%(username)s only||\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"{{{\n"
+"Utheving: *kursiv* **fet** ``skrivemaskin``\n"
+"\n"
+"Titler: Tittel 1  Tittel 2  Tittel 3\n"
+"        ========  --------  ~~~~~~~~\n"
+"\n"
+"Vannrett linje: ----\n"
+"\n"
+"Lenker: TrailingUnderscore_ `Flere ord med backticks`_ eksterne_\n"
+"\n"
+".. _eksterne: http://external-site.example.org/foo/\n"
+"\n"
+"Lister: * bullets; 1., a. nummererte lister.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maks antall inkluderinger overskredet**"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**Du har ikke tillatelse til å lese siden: %s**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Kan ikke finne den refererte siden: %s**"
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Utheving:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''fet'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kursiv "
+"fet'''''<<Verbatim(''''')>>; <<Verbatim('')>>''blandet "
+"''<<Verbatim(''')>>'''''fet'''<<Verbatim(''')>> og kursiv''<<Verbatim('')>>; "
+"<<Verbatim(----)>> vannrett strek.\n"
+" Overskrifter:: = Tittel 1 =; == Tittel 2 ==; === Tittel 3 ===; ==== Tittel "
+"4 ====; ===== Tittel 5 =====.\n"
+" Lister:: mellomrom og: * asterisk; 1., a., A., i., I. nummererte emner; 1."
+"#n begynn nummerering ved n; kun mellomrom gir innrykk.\n"
+" Lenker:: <<Verbatim(SammenSatteOrd)>>; <<Verbatim([[mål|lenketekst]])>>.\n"
+" Tabeller:: || celletekst |||| celletekst over to kolonner ||;    "
+"etterfølgende mellomrom er ikke tillatt etter tabeller eller titler.\n"
+"\n"
+"(!) For mere hjelp, se HelpOnEditing eller SyntaxReference (engelsk).\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Forventet \"%(wanted)s\" etter \"%(key)s\", fikk \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Forventet et heltall \"%(key)s\" før \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Forventet et heltall \"%(arg)s\" etter \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Forventet en fargekode \"%(arg)s\" etter \"%(key)s\""
+
+msgid "Password is too short."
+msgstr "Passord for kort."
+
+msgid "Password has not enough different characters."
+msgstr "Passord har ikke nok forskjellige tegn."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Passordet er for enkelt (passordet inneholder navn eller navn inneholder "
+"passord."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Passordet er for enkelt (tastatursekvens)"
+
+msgid "Diffs"
+msgstr "Endringer"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "UnSubscribe"
+msgstr "Avbestill"
+
+msgid "Subscribe"
+msgstr "Abonner"
+
+msgid "Raw"
+msgstr "Kilde"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Skriv ut"
+
+msgid "View"
+msgstr "Vis"
+
+msgid "Up"
+msgstr "Opp"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"Publiser min e-postadresse (ikke min wiki brukerside) i "
+"forfatterinformasjonen."
+
+msgid "Open editor on double click"
+msgstr "Dobbeltklikk åpner redigeringsvindu"
+
+msgid "After login, jump to last visited page"
+msgstr "Etter pålogging, gå til min sist besøkte siden."
+
+msgid "Show comment sections"
+msgstr "Vis kommentaravsnitt."
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Vis spørsmålstegn ved lenker til ikke-eksisterende sider"
+
+msgid "Show page trail"
+msgstr "Vis sist besøkte sider"
+
+msgid "Show icon toolbar"
+msgstr "Vis ikon-panel"
+
+msgid "Show top/bottom links in headings"
+msgstr "Vis topp-/bunnlenker i overskrifter"
+
+msgid "Show fancy diffs"
+msgstr "Vis endringer detaljert"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Legg til mellomrom ved visning av wiki-navn"
+
+msgid "Remember login information"
+msgstr "Husk påloggingsinformasjon"
+
+msgid "Disable this account forever"
+msgstr "Slett denne brukerprofilen permanent"
+
+msgid "(Use FirstnameLastname)"
+msgstr "(Bruk Fornavn''''''Etternavn)"
+
+msgid "Alias-Name"
+msgstr "Alias navn"
+
+msgid "Email"
+msgstr "E-postadresse"
+
+msgid "Jabber ID"
+msgstr "Jabber ID"
+
+msgid "User CSS URL"
+msgstr "URL til bruker-CSS"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(La det stå tomt for å slå av bruker-CSS)"
+
+msgid "Editor size"
+msgstr "Størrelse på redigeringsvindu"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)soppdatering av \"%(pagename)s\" av %(username)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Kjære wiki-bruker.\n"
+"\n"
+"Du har abonnert på meldinger om endringer av wiki-siden eller wiki klassen "
+"\"%(sitename)s\".\n"
+"\n"
+"Siden \"%(pagename)s\" har blitt endret av %(editor)s:\n"
 "\n"
 
-msgid "MyPages management"
-msgstr "Administrer mine sider"
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Kjære wiki-bruker.\n"
+"\n"
+"Du har abonnert på meldinger om endringer av wiki-siden \"%(sitename)s\".\n"
+"\n"
+"Siden \"%(pagename)s\" har blitt slettet av %(editor)s:\n"
+"\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
+msgstr ""
+"Kjære wiki-bruker.\n"
+"\n"
+"Du har abonnert på meldinger om endringer av wiki-siden \"%(sitename)s\".\n"
+"\n"
+"Siden \"%(pagename)s\" fikk endret navn fra \"%(oldname)s\" av %(editor)s:\n"
+"\n"
+
+#, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "Ny vedlegg lagt til side %(pagename)s på %(sitename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Kjære wiki-bruker.\n"
+"\n"
+"Du har abonnert på meldinger om endringer av wiki-siden \"%(page_name)s\". "
+"%(editor)s har lagt et nytt vedlegg til denne siden. Vi kan gi følgende "
+"informasjon om det nye vedlegget: \n"
+"\n"
+"Navn:  %(attach_name)s\n"
+"Størrelse:  %(attach_size)s\n"
+
+#, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "[%(sitename)s] Vedlegg slettet fra siden %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Kjære wiki-bruker.\n"
+"\n"
+"Du har abonnert på meldinger om endringer av wiki-siden \"%(page_name)s\". "
+"%(editor)s har slettet et vedlegg fra denne siden. Vi kan gi følgende "
+"informasjon om det nye vedlegget: \n"
+"\n"
+"Navn:  %(attach_name)s\n"
+"Størrelse:  %(attach_size)s\n"
+
+#, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] En ny brukerkonto ble opprettet"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+"Kjære Superuser, en ny bruker har blitt opprettet på %(sitename)s\". "
+"Detailjer som følger:\n"
+"\n"
+"    Brukernavn: %(username)s\n"
+"    E-postadresse: %(useremail)s"
+
+msgid "anonymous"
+msgstr "ukjent bruker"
+
+msgid "Line"
+msgstr "Linje"
+
+msgid "No differences found!"
+msgstr "Ingen forskjeller funnet!"
+
+msgid "Deletions are marked like this."
+msgstr "Slettet tekst er avmerket på denne måten."
+
+msgid "Additions are marked like this."
+msgstr "Tilføyelser er avmerket på denne måten."
+
+msgid "DeleteCache"
+msgstr "SlettCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(cachet %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Eller prøv en av følgende operasjoner:"
+
+msgid "Unsubscribe"
+msgstr "Avbestill"
+
+msgid "Home"
+msgstr "Hjem"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[Sletted]"
+
+msgid "[UPDATED]"
+msgstr "[OPPDATERT]"
+
+msgid "[RENAMED]"
+msgstr "[NYTT NAVN]"
+
+msgid "[CONFLICT]"
+msgstr "[KONFLIKT]"
+
+msgid "[NEW]"
+msgstr "[NY]"
+
+msgid "[DIFF]"
+msgstr "[DIFF]"
+
+msgid "[BOTTOM]"
+msgstr "[NEDERST]"
+
+msgid "[TOP]"
+msgstr "[ØVERST]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klikk her for å kjøre et fritekstsøk etter denne tittelen"
+
+msgid "Settings"
+msgstr "Innstillinger"
+
+msgid "Logout"
+msgstr "Logg ut"
 
 msgid "Login"
 msgstr "Logg inn"
 
-msgid "General Information"
-msgstr "Generell informasjon"
+msgid "Clear message"
+msgstr "Fjern beskjed"
 
 #, python-format
-msgid "Page size: %d"
-msgstr "Sidestørrelse: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "SHA-signatur for innholdet på denne siden:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Følgende brukere abonnerer på denne siden:"
-
-msgid "This page links to the following pages:"
-msgstr "Denne siden har lenker til følgende sider:"
+msgid "last edited %(time)s by %(editor)s"
+msgstr "sist endret %(time)s av %(editor)s"
 
 #, python-format
-msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to "
-"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
-msgstr ""
-"Viser side redigerings historie oppføringer fra '''%(start_offset)d''' to "
-"'''%(end_offset)d''' out of '''%(total_count)d''' oppføringer."
+msgid "last modified %(time)s"
+msgstr "sist endret %(time)s"
 
-msgid "Newer"
-msgstr "Nyere"
+msgid "Search:"
+msgstr "Søk:"
 
-msgid "Older"
-msgstr "Eldre"
+msgid "Text"
+msgstr "Tekst"
 
-#, python-format
-msgid "%s items per page"
-msgstr "%s elementer per side"
+msgid "Titles"
+msgstr "Titler"
 
-msgid "Diff"
-msgstr "Endringer"
+msgid "Search"
+msgstr "Søk"
 
-msgid "Action"
-msgstr "Operasjon"
+msgid "More Actions:"
+msgstr "Flere operasjoner:"
 
-msgid "view"
-msgstr "vis"
+msgid "------------------------"
+msgstr "------------------------"
 
-msgid "to previous"
-msgstr "til forrige"
+msgid "Raw Text"
+msgstr "Kildetekst"
 
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Tilbakestill til versjon %(rev)d."
+msgid "Print View"
+msgstr "Utskriftsvisning"
 
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Nytt navn fra '%(oldpagename)s'."
+msgid "Delete Cache"
+msgstr "Slett cache"
 
-msgid "get"
-msgstr "hent"
-
-msgid "del"
-msgstr "slett"
-
-msgid "edit"
-msgstr "rediger"
-
-msgid "Revision History"
-msgstr "Endringshistorikk"
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Info om \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "Vis \"%(title)s\""
-
-msgid "General Page Infos"
-msgstr "Generell sideinformasjon"
-
-msgid "Page hits and edits"
-msgstr "Sidebesøk og -endringer"
+msgid "Rename Page"
+msgstr "Endre sidenavn"
 
 msgid "Copy Page"
 msgstr "Kopier side"
 
+msgid "Delete Page"
+msgstr "Slett side"
+
+msgid "Like Pages"
+msgstr "LignendeSider"
+
+msgid "Local Site Map"
+msgstr "LokalOversikt"
+
+msgid "My Pages"
+msgstr "Mine sider"
+
+msgid "Subscribe User"
+msgstr "Abonner bruker"
+
+msgid "Remove Spam"
+msgstr "Fjern spam"
+
+msgid "Revert to this revision"
+msgstr "Tilbakestill til denne versjonen"
+
+msgid "Package Pages"
+msgstr "Arkiverte sider"
+
+msgid "Render as Docbook"
+msgstr "Vis som Docbook"
+
+msgid "Sync Pages"
+msgstr "Synkroniser sider"
+
+msgid "Do"
+msgstr "Utfør"
+
+msgid "Comments"
+msgstr "Kommentarer"
+
+msgid "Edit (Text)"
+msgstr "Rediger (Tekst)"
+
+msgid "Edit (GUI)"
+msgstr "Rediger (GUI)"
+
+msgid "Immutable Page"
+msgstr "Siden kan ikke endres"
+
+msgid "Remove Link"
+msgstr "Fjern lenke"
+
+msgid "Add Link"
+msgstr "Legg til lenke"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Vis %s dager."
+
+msgid "Wiki Markup"
+msgstr "Wiki-markering"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Page"
+msgstr "Side"
+
+msgid "User"
+msgstr "Bruker"
+
+msgid "[ATTACH]"
+msgstr "[LEGG VED]"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "Opsjonene --pages og --search kan ikke brukes samtidig."
+
+msgid "You must specify an output file!"
+msgstr "Du må spesifisere en fil for å skrive informasjonen til."
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"Ingen sider spesifisert med opsjonene --pages eller --search, antar hele "
+"arkivet."
+
+msgid "All attachments included into the package."
+msgstr "Alle vedlegg inkludert i arkivet."
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Spesifisert fil finnes allerede. Våger ikke å fortsette."
+
+msgid "Attachment link"
+msgstr "Vedleggslenke"
+
+msgid "Page link"
+msgstr "Sidelenke"
+
+msgid "Changed page"
+msgstr "Endret side"
+
+msgid "Page changed"
+msgstr "Siden ble endret"
+
+msgid "Page has been modified"
+msgstr "Siden har blitt endret"
+
+msgid "Page has been modified in a trivial fashion"
+msgstr "Siden har gjennomgått mindre endringer"
+
+msgid "Page has been renamed"
+msgstr "Siden har fått nytt navn"
+
+msgid "Page has been deleted"
+msgstr "Siden har blitt slettet"
+
+msgid "Page has been copied"
+msgstr "Siden har blitt kopiert"
+
+msgid "A new attachment has been added"
+msgstr "En nytt vedlegg har blitt lagt til"
+
+msgid "An attachment has been removed"
+msgstr "En nytt vedlegg har blitt lagt til"
+
+msgid "A page has been reverted to a previous state"
+msgstr "En side har gått tilbake til sin forrige tilstand"
+
+msgid "A user has subscribed to a page"
+msgstr "En bruker har abonnert på en side"
+
+msgid "A new account has been created"
+msgstr "En ny konto har blitt opprettet"
+
+msgid "Trivial "
+msgstr "Mindre "
+
+msgid "New page:\n"
+msgstr "Ny side:\n"
+
+msgid "No differences found!\n"
+msgstr "Fant ingen endringer!\n"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+"Lenke til vedlegg: %(attach)s\n"
+"Lenke til siden: %(page)s\n"
+
+msgid "[all]"
+msgstr "[alle]"
+
+msgid "[not empty]"
+msgstr "[ikke tom]"
+
+msgid "[empty]"
+msgstr "[tom]"
+
+msgid "filter"
+msgstr "filter"
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+"Resultater %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s av %(aboutHits)s %(bs)s"
+"%(hits)d%(be)s resultater ut av ca. %(pages)d sider."
+
+msgid "seconds"
+msgstr "sekunder"
+
+msgid "Previous"
+msgstr "Forrige"
+
+msgid "Next"
+msgstr "Neste"
+
+msgid "rev"
+msgstr "rev"
+
+msgid "current"
+msgstr "nåværende"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "sist endret: %s"
+
+msgid "match"
+msgstr "resultat"
+
+msgid "matches"
+msgstr "resultater"
+
+msgid "about"
+msgstr "om"
+
 msgid "This page is already deleted or was never created!"
 msgstr "Denne siden er allerede slettet eller har aldri eksistert!"
 
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "TextCha: Feil svar. Gå tilbake og prøv igjen..."
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Ugyldig filnavn \"%s\"."
 
-msgid "Copy all /subpages too?"
-msgstr "Kopiere også alle /undersider?"
+msgid "Include all attachments?"
+msgstr "Inkluderer alle vedlegg?"
 
-msgid "New name"
-msgstr "Nytt navn"
+msgid "Package pages"
+msgstr "Arkiver sidene"
 
-msgid "Optional reason for the copying"
-msgstr "Årsak til kopiering (valgfritt)"
+msgid "Package name"
+msgstr "Arkivnavn"
 
-msgid "Really copy this page?"
-msgstr "Er du sikker på at denne siden skal kopieres?"
+msgid "List of page names - separated by a comma"
+msgstr "Liste over sidenavn, del med komma"
 
-msgid "Delete"
-msgstr "Slett"
-
-msgid "Delete all /subpages too?"
-msgstr "Slette også alle /undersider?"
-
-msgid "Optional reason for the deletion"
-msgstr "Årsak til slettingen (valgfri)"
-
-msgid "Really delete this page?"
-msgstr "Er du sikker på at denne siden skal slettes?"
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Ingen sider matcher \"%s\"!"
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -878,14 +1388,14 @@ msgstr ""
 "<>BR>> /!\\ Du skulle stole på begge wiki-er siden passordet kan bli lest av "
 "de vedkommende superbrukere."
 
-msgid "Name"
-msgstr "Navn"
-
-msgid "Password"
-msgstr "Passord"
-
 msgid "Operation was canceled."
 msgstr "Operasjonen ble avbrutt."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Vennligst bruk det interaktive brukergrensesnitt for operasjonen "
+"%(actionname)s."
 
 msgid "The only supported directions are BOTH and DOWN."
 msgstr "Kun BEGGE og NEDE er støttede retninger."
@@ -1020,176 +1530,102 @@ msgstr "Side %s har konflikter som kommer fra den fjerne wiki-en."
 msgid "Page %s merged with conflicts."
 msgstr "Side %s sammenført med konflikter."
 
-msgid "Pages"
-msgstr "Sider"
+msgid "Attachment location"
+msgstr "Vedleggslenke"
 
-msgid "Select Author"
-msgstr "Velg forfatter"
+msgid "Page name"
+msgstr "Sidenavn"
 
-msgid "Revert all!"
-msgstr "Tilbakestill alt!"
+msgid "Attachment name"
+msgstr "Vedleggsnavn"
 
-msgid "You are not allowed to use this action."
-msgstr "Du har ikke tillatelse til å bruke denne operasjonen."
+msgid "Refresh attachment list"
+msgstr "Refresh vedlleggelseslisten"
 
-msgid "Wiki Backup"
-msgstr "Wiki-sikkerhetskopi"
+msgid "List of attachments"
+msgstr "Vedleggsliste"
 
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-"= Nedlasting av backup =\n"
-"\n"
-"Vær obs på:\n"
-" * Lagre dine backup på et sikkert sted - dem inneholder sensitive data.\n"
-" * Vær sikkert at dine backup_* verdier i konfigurasjonen er korrekt og "
-"komplett.\n"
-" * Vær sikker på at dine backup inneholder alt du trenger.\n"
-" * Vær obs på at det ikke oppstår problemer i nedlastingen.\n"
-"\n"
-"For å få en backup, vennligst klikk her:"
-
-msgid "Backup"
-msgstr "Sikkerhetskopi"
-
-msgid "You are not allowed to do remote backup."
-msgstr ""
-"Du har ikke tillatelse til å utføre en sikkerhetskopi til et annet sted."
+msgid "Available attachments for page"
+msgstr "Tilgjengelig vedlegg for \"%(pagename)s\""
 
 #, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Ukjent aksjon ved sikkerhetskopiering: %s."
-
-msgid "You are not allowed to create the supplementation page."
-msgstr "Du har ikke tillatelse til å lage denne tilleggssiden!"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Kan ikke opprette en ny side uten navn. Oppgi navn på siden."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Tomt brukernavn. Vær vennlig å oppgi et gyldig brukernavn."
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Nøyaktig ett resultat funnet for \"%s\", henviser dit."
 
 #, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Ugyldig brukernavn  {{{'%s'}}}.\n"
-"Navn kan kun inneholde alfanumeriske Unicode-tegn, eventuelt med et "
-"mellomrom\n"
-"mellom ordene. Gruppenavn er ikke tillatt."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Dette brukernavnet er allerede i bruk."
-
-msgid "Passwords don't match!"
-msgstr "Passordene er ikke like!"
-
-msgid "Please specify a password!"
-msgstr "Vær vennlig å oppgi et passord!"
+msgid "Pages like \"%s\""
+msgstr "Sider som \"%s\"!"
 
 #, python-format
-msgid "Password not acceptable: %s"
-msgstr "Passordet er ikke godkjent: %s"
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
 
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Vennligst oppgi din e-postadresse. Hvis du mister din påloggingsinformasjon, "
-"kan du få den tilsendt på e-post."
+msgid "You must login to remove a quicklink."
+msgstr "Du må logge på for å tar bort en hurtiglenke."
 
-msgid "This email already belongs to somebody else."
-msgstr "Denne e-postadressen tilhører en annen bruker."
+msgid "Your quicklink to this page has been removed."
+msgstr "Din hurtiglenke til denne siden har blitt fjernet."
 
-msgid "User account created! You can use this account to login now..."
-msgstr "Brukerkonto opprettet! Du kan nå bruke kontoet for å logge deg på..."
+msgid "Your quicklink to this page could not be removed."
+msgstr "Din hurtiglenke til denne siden kunne ikke fjernes."
 
-msgid "(Use FirstnameLastname)"
-msgstr "(Bruk Fornavn''''''Etternavn)"
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Du må ha en hurtiglenke til denne siden før du kan ta det bort."
 
-msgid "Password repeat"
-msgstr "Gjenta passord"
+msgid "Please choose:"
+msgstr "Vennligst velg:"
 
-msgid "Email"
-msgstr "E-postadresse"
-
-msgid "TextCha (required)"
-msgstr "TextCha (påkrevd)"
-
-msgid "Create Profile"
-msgstr "Opprett brukerprofil"
-
-msgid "Create Account"
-msgstr "Opprett brukerkonto"
-
-msgid "Revert"
-msgstr "Tilbakestill"
-
-msgid "You are not allowed to revert this page!"
-msgstr "Du har ikke tillatelse til å tilbakestille denne siden!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-"Du sa på den aktuelle versjonen av denne siden når du brukte "
-"tilbakestillingsoperasjonen. Hvis du vil tilbakestill til en eldre versjon, "
-"vennligst se den eldre versjonen og bruk tilbakestillingsoperasjonen til den "
-"(eldre) versjonen en gang til."
-
-msgid "Optional reason for reverting this page"
-msgstr "Årsak til tilbakestilling (valgfritt)"
-
-msgid "Really revert this page?"
-msgstr "Er du sikker på at denne siden skal tilbakestilles?"
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Du må logge på for å utføre denne operasjonen: %(action)s."
 
 msgid "Only superuser is allowed to use this action."
 msgstr "Kun superbrukeren har tillatelse til å gjennomføre operasjonen."
 
-msgid "No page packages found."
-msgstr "Ingen foreldreside funnet!"
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Du får ikke lov til å abonnere på en side du ikke kan lese."
 
-#, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr "Vedlegg '%(filename)s' installert."
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "Denne wikien har ikke aktivert e-post/Jabber-håndtering."
 
-msgid "page package"
-msgstr "Endret side"
-
-msgid "install"
-msgstr "installer"
-
-msgid "Choose:"
-msgstr "Velg: "
-
-#, python-format
-msgid "Install language packs for '%s'"
-msgstr "Installer språk pakker for '%s'"
-
-#, fuzzy
-msgid "TextCha: Wrong answer! Try again below..."
-msgstr "TextCha: Feil svar. Gå tilbake og prøv igjen..."
+msgid "You must log in to use subscriptions."
+msgstr "Du må logge på for å bruke abonnementer."
 
 msgid ""
-"Supplying a comment is mandatory.  Write a comment below and try again..."
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
 msgstr ""
-"En kommentar må oppgis. Vennligst skriv en kommentar nedenfor og prøv "
-"igjen..."
+"For å håndtere abonnementer, vennligst legg til e-postadresse eller Jabber "
+"ID i dine preferanser."
+
+msgid "You are already subscribed to this page."
+msgstr "Du abonnerer allerede på denne siden."
+
+msgid "You have been subscribed to this page."
+msgstr "Du abonnerer nå på denne siden."
+
+msgid "You could not get subscribed to this page."
+msgstr "Du fikk ikke abonnere denne siden."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Opplasting av vedlegg '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Vedlegg '%(filename)s' slettet."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Tegningen '%(filename)s' er lagret."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Tilbakestill til versjon %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Nytt navn fra '%(oldpagename)s'."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1219,15 +1655,65 @@ msgstr ""
 "'''IKKE''' bruk URL-en under {{{[get]}}}, da den lenken kun er\n"
 "midlertidig og kan bli endret."
 
+msgid "del"
+msgstr "slett"
+
 msgid "move"
 msgstr "flytt"
+
+msgid "get"
+msgstr "hent"
+
+msgid "edit"
+msgstr "rediger"
+
+msgid "view"
+msgstr "vis"
 
 msgid "unzip"
 msgstr "pakk ut"
 
+msgid "install"
+msgstr "installer"
+
+msgid "All files"
+msgstr ""
+
+#, fuzzy
+msgid "Selected Files:"
+msgstr "Vedlagte filer"
+
+#, fuzzy
+msgid "delete"
+msgstr "Slett"
+
+#, fuzzy
+msgid "move to page"
+msgstr "Antall sider"
+
+msgid "Do it."
+msgstr "Gjør det."
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Ingen vedlegg for %(pagename)s"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Du har ikke tillatelse til å slette vedlegg på denne siden."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "Du har ikke tillatelse til å flytte vedlegg fra denne siden."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Du har ikke tillatelse til å legge ved filer til denne siden."
+
+#, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr ""
+"Vedlegg '%(pagename)s/%(filename)s' ble flyttet til '%(new_pagename)s/"
+"%(new_filename)s'."
 
 msgid "New Attachment"
 msgstr "Nytt vedlegg"
@@ -1247,9 +1733,6 @@ msgstr "Last opp"
 msgid "Attached Files"
 msgstr "Vedlagte filer"
 
-msgid "You are not allowed to attach a file to this page."
-msgstr "Du har ikke tillatelse til å legge ved filer til denne siden."
-
 #, python-format
 msgid "Unsupported AttachFile sub-action: %s"
 msgstr "VedleggFil underoperasjonen er ikke støttet: %s"
@@ -1257,6 +1740,15 @@ msgstr "VedleggFil underoperasjonen er ikke støttet: %s"
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Vedlegg for \"%(pagename)s\""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Feil svar. Gå tilbake og prøv igjen..."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Filen er tom. Slett tegn som ikke er ASCII fra filnavnet og prøv igjen."
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Du har ikke tillatelse til å overskrive et vedlegg til denne siden."
@@ -1272,24 +1764,9 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Vedlegg '%(target)s' (eksternt navn '%(filename)s') finnes allerede."
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Du har ikke tillatelse til å slette vedlegg på denne siden."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Vedlegg '%(filename)s' slettet."
-
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
 msgstr "Vedlegg '%(new_pagename)s/%(new_filename)s' finnes allerede."
-
-#, python-format
-msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
-"%(new_filename)s'."
-msgstr ""
-"Vedlegg '%(pagename)s/%(filename)s' ble flyttet til '%(new_pagename)s/"
-"%(new_filename)s'."
 
 msgid "Nothing changed"
 msgstr "Ingenting ble endret"
@@ -1300,9 +1777,6 @@ msgstr "Siden '%(new_pagename)s' finnes ikke eller du har ikke tillatelse."
 
 msgid "Move aborted!"
 msgstr "Flyttingen avbrutt."
-
-msgid "You are not allowed to move attachments from this page."
-msgstr "Du har ikke tillatelse til å flytte vedlegg fra denne siden."
 
 msgid "Move aborted because new page name is empty."
 msgstr "Flyttingen avbrutt siden den nye siden er tom."
@@ -1329,6 +1803,10 @@ msgstr "Du har ikke tillatelse til å hente vedlegg fra denne siden."
 msgid "You are not allowed to install files."
 msgstr "Du har ikke tillatelse til å installere filer."
 
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Vedlegg '%(filename)s' installert."
+
 msgid "You are not allowed to unzip attachments of this page."
 msgstr "Du har ikke tillatelse til å pakke ut vedlegg til denne siden."
 
@@ -1343,8 +1821,8 @@ msgid ""
 "(%(maxsize_file)d kB)."
 msgstr ""
 "Vedlegg '%(filename)s' ble ikke pakket ut siden noen filer i zip arkivet er "
-"enten ikke i samme katalog eller var større en grensen for et enkelt fil"
-"(%(maxsize_file)d kB)."
+"enten ikke i samme katalog eller var større en grensen for et enkelt "
+"fil(%(maxsize_file)d kB)."
 
 #, python-format
 msgid ""
@@ -1389,91 +1867,275 @@ msgstr "Filnavn"
 msgid "Modified"
 msgstr "Endret"
 
+msgid "Size"
+msgstr "Størrelse"
+
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Ukjent filtype. Kan ikke vise dette vedlegget direkte."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Du har ikke tillatelse til å se vedlegg til denne siden."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "vedlegg:%(filename)s til %(pagename)s"
 
-msgid "Load"
-msgstr "Last opp"
-
-msgid "Pagename not specified!"
-msgstr "Sidenavn mangler!"
-
-msgid "Upload page content"
-msgstr "Last opp sideinnhold"
-
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-"Du kan laste opp innhold for siden nevnt nedenfor. Hvis du endrer navnet på "
-"siden kan du også laste opp innhold for en annen side. Hvis sidenavn er tomt "
-"ser vi i file etter et navn."
-
-msgid "File to load page content from"
-msgstr "Fil for å laste innhold fra"
-
-msgid "Page name"
-msgstr "Sidenavn"
-
-msgid "Print"
-msgstr "Skriv ut"
-
-msgid "Print slide show"
-msgstr "Skrive ut slide show"
-
-msgid "Edit"
-msgstr "Rediger"
-
-msgid "Edit slide show"
-msgstr "Rediger slide show"
-
-msgid "Quit"
-msgstr "Avslutt"
-
-msgid "Quit slide show"
-msgstr "Avslutt slide show"
-
-msgid "Show first slide (up arrow)"
-msgstr "Vis første slide (oppknappen)"
-
-msgid "Show last slide (down arrow)"
-msgstr "Vis siste slide (nedknappen)"
-
-msgid "Show previous slide (left arrow)"
-msgstr "Vis forrige slide (venstreknappen)"
-
-msgid "Show next slide (right arrow)"
-msgstr "Vis neste slide (høyreknappen)"
+msgid "General Information"
+msgstr "Generell informasjon"
 
 #, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Lokal oversikt for \"%s\""
+msgid "Page size: %d"
+msgstr "Sidestørrelse: %d"
 
-msgid "Please choose:"
-msgstr "Vennligst velg:"
+msgid "SHA digest of this page's content is:"
+msgstr "SHA-signatur for innholdet på denne siden:"
 
-msgid "Settings"
-msgstr "Innstillinger"
+msgid "The following users subscribed to this page:"
+msgstr "Følgende brukere abonnerer på denne siden:"
 
-msgid "You are now logged out."
-msgstr "Du er nå logget ut."
+msgid "This page links to the following pages:"
+msgstr "Denne siden har lenker til følgende sider:"
 
-msgid "You must login to add a quicklink."
-msgstr "Du må logge på for å opprette en hurtiglenke."
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+"Viser side redigerings historie oppføringer fra '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' oppføringer."
 
-msgid "A quicklink to this page has been added for you."
-msgstr "En hurtiglenke til denne siden har blitt opprettet for deg."
+msgid "Newer"
+msgstr "Nyere"
 
-msgid "A quicklink to this page could not be added for you."
-msgstr "En hurtiglenke til denne siden kunne ikke opprettes for deg."
+msgid "Older"
+msgstr "Eldre"
 
-msgid "You already have a quicklink to this page."
-msgstr "Du har allerede en hurtiglenke til denne siden!"
+#, python-format
+msgid "%s items per page"
+msgstr "%s elementer per side"
+
+msgid "Diff"
+msgstr "Endringer"
+
+msgid "Editor"
+msgstr "Forfatter"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Action"
+msgstr "Operasjon"
+
+msgid "to previous"
+msgstr "til forrige"
+
+msgid "N/A"
+msgstr "Ikke tilgjengelig"
+
+msgid "Revision History"
+msgstr "Endringshistorikk"
+
+msgid "No log entries found."
+msgstr "Intet funnet i loggen."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Info om \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Vis \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Generell sideinformasjon"
+
+msgid "Page hits and edits"
+msgstr "Sidebesøk og -endringer"
+
+msgid "Delete"
+msgstr "Slett"
+
+msgid "Delete all /subpages too?"
+msgstr "Slette også alle /undersider?"
+
+msgid "Optional reason for the deletion"
+msgstr "Årsak til slettingen (valgfri)"
+
+msgid "Really delete this page?"
+msgstr "Er du sikker på at denne siden skal slettes?"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Vennligst opprett en startside før du oppretter andre sider."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+"Du kan her legge til undersider til din brukerside som allerede finnes.\n"
+"\n"
+"Du kan velge hvor tilgjengelig for andre lesere eller forfattere disse\n"
+"sidene skal bli. Adgang blir kontrollert via gruppemedlemskap i den\n"
+"respektive gruppesiden.\n"
+"\n"
+"Bare skriv in navnet til den nye undersiden og klikk på knappen for å legge "
+"til en ny side.\n"
+"\n"
+"Før du legger til en adgangsbegrensede side skulle du se på at en "
+"tilhørende\n"
+"gruppeside finnes og at den har de ønskede medlemmer. Bruk gjerne et "
+"sidemålet\n"
+"BrukersideGruppeSidemal for å generere gruppesiden.\n"
+"\n"
+"||'''Legg til ny personlig side:'''||'''Tilhørende adgangsbegrensende "
+"gruppe:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Administrer mine sider"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(inkludert %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Følgende %(badwords)d ord ble ikke funnet i den %(totalwords)d ord store "
+"ordliste %(localwords)s og er uthevet nedenfor:"
+
+msgid "Add checked words to dictionary"
+msgstr "Tilføy de merkede ordene til ordlisten"
+
+msgid "No spelling errors found!"
+msgstr "Ingen stavefeil funnet."
+
+msgid "You can't save spelling words."
+msgstr "Du kan ikke lagre staving av ord."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Du kan ikke bruke stavekontrollen på en side du ikke kan lese."
+
+msgid "You are not allowed to use this action."
+msgstr "Du har ikke tillatelse til å bruke denne operasjonen."
+
+msgid "If this account exists an email was sent."
+msgstr "Hvis brukerkonto finnes er en melding sent."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Denne wikien har ikke aktivert e-posthåndtering.\n"
+"Kontakt eieren av wikien, som enten kan aktivere\n"
+"e-post eller fjerne Abonner-knappen."
+
+msgid "Please provide a valid email address or a username!"
+msgstr "Oppgi en gyldig e-postadresse eller brukernavn."
+
+msgid "Username"
+msgstr "Brukernavn"
+
+msgid "Mail me my account data"
+msgstr "Send meg påloggingsinformasjonen"
+
+msgid "Recovery token"
+msgstr "Passord gjenopprettingsord"
+
+msgid "New password"
+msgstr "Ny passord"
+
+msgid "New password (repeat)"
+msgstr "Ny passord (gjenta)"
+
+msgid "Reset my password"
+msgstr "Nullstill mitt passord"
+
+msgid "Passwords don't match!"
+msgstr "Passordene er ikke like!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Passordet er ikke godkjent: %s"
+
+msgid "Your password has been changed, you can log in now."
+msgstr "Ditt passord har blitt endret, du kan nå logge på."
+
+msgid "Your token is invalid!"
+msgstr "Gjenopprettingsord er ikke gyldig"
+
+msgid "Password reset"
+msgstr "Nullstill passord"
+
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr ""
+"\n"
+"== Nullstilling av passord ==\n"
+"Oppgi et nytt passord nedenfor."
+
+msgid "Lost password"
+msgstr "Glemt passord"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+"\n"
+"== Gjenfinne glemt passord ==\n"
+"Hvis du har glemt ditt passord, vennligst oppgi din e-postadresse eller\n"
+"brukernavn og klikk på '''Send meg påloggingsinformasjonen'''.\n"
+"Du vil få en e-post med et gjenopprettingsord som du kan bruke for å endre\n"
+"ditt passord. E-posten vil også inneholde mer informasjon."
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
+"\n"
+"=== Nullstill Passord ===\n"
+"Hvis du allerede har fått en e-post med gjenopprettingsordet, skriv inn "
+"ditt\n"
+"brukernavn, gjenopprettingsordet og et nytt passord (to ganger) nedenfor."
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -1545,120 +2207,45 @@ msgstr ""
 "for å avbryte verifiseringen."
 
 #, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Ugyldig filnavn \"%s\"."
+msgid "Subscribe users to the page %s"
+msgstr "Abonner brukere på siden %s"
 
-msgid "Include all attachments?"
-msgstr "Inkluderer alle vedlegg?"
-
-msgid "Package pages"
-msgstr "Arkiver sidene"
-
-msgid "Package name"
-msgstr "Arkivnavn"
-
-msgid "List of page names - separated by a comma"
-msgstr "Liste over sidenavn, del med komma"
+msgid "Enter user names (comma separated):"
+msgstr "Skrev inn brukernavn (delt med komma)"
 
 #, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Ingen sider matcher \"%s\"!"
+msgid "Subscribed for %s:"
+msgstr "Abonnert på %s"
 
-msgid "Attachment location"
-msgstr "Vedleggslenke"
+msgid "Not a user:"
+msgstr "Ikke en bruker:"
 
-msgid "Attachment name"
-msgstr "Vedleggsnavn"
+msgid "You are not allowed to perform this action."
+msgstr "Du har ikke tillatelse til å gjøre denne operasjonen."
 
-msgid "Refresh attachment list"
-msgstr "Refresh vedlleggelseslisten"
+msgid "Print slide show"
+msgstr "Skrive ut slide show"
 
-msgid "List of attachments"
-msgstr "Vedleggsliste"
+msgid "Edit slide show"
+msgstr "Rediger slide show"
 
-msgid "Available attachments for page"
-msgstr "Tilgjengelig vedlegg for \"%(pagename)s\""
+msgid "Quit"
+msgstr "Avslutt"
 
-msgid "If this account exists an email was sent."
-msgstr "Hvis brukerkonto finnes er en melding sent."
+msgid "Quit slide show"
+msgstr "Avslutt slide show"
 
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Denne wikien har ikke aktivert e-posthåndtering.\n"
-"Kontakt eieren av wikien, som enten kan aktivere\n"
-"e-post eller fjerne Abonner-knappen."
+msgid "Show first slide (up arrow)"
+msgstr "Vis første slide (oppknappen)"
 
-msgid "Please provide a valid email address or a username!"
-msgstr "Oppgi en gyldig e-postadresse eller brukernavn."
+msgid "Show last slide (down arrow)"
+msgstr "Vis siste slide (nedknappen)"
 
-msgid "Username"
-msgstr "Brukernavn"
+msgid "Show previous slide (left arrow)"
+msgstr "Vis forrige slide (venstreknappen)"
 
-msgid "Mail me my account data"
-msgstr "Send meg påloggingsinformasjonen"
-
-msgid "Recovery token"
-msgstr "Passord gjenopprettingsord"
-
-msgid "New password"
-msgstr "Ny passord"
-
-msgid "New password (repeat)"
-msgstr "Ny passord (gjenta)"
-
-msgid "Reset my password"
-msgstr "Nullstill mitt passord"
-
-msgid "Your password has been changed, you can log in now."
-msgstr "Ditt passord har blitt endret, du kan nå logge på."
-
-msgid "Your token is invalid!"
-msgstr "Gjenopprettingsord er ikke gyldig"
-
-msgid "Password reset"
-msgstr "Nullstill passord"
-
-msgid ""
-"\n"
-"== Password reset ==\n"
-"Enter a new password below."
-msgstr ""
-"\n"
-"== Nullstilling av passord ==\n"
-"Oppgi et nytt passord nedenfor."
-
-msgid "Lost password"
-msgstr "Glemt passord"
-
-msgid ""
-"\n"
-"== Recovering a lost password ==\n"
-"If you have forgotten your password, provide your email address or\n"
-"username and click on '''Mail me my account data'''.\n"
-"You will receive an email containing a recovery token that can be\n"
-"used to change your password. The email will also contain further\n"
-"instructions."
-msgstr ""
-"\n"
-"== Gjenfinne glemt passord ==\n"
-"Hvis du har glemt ditt passord, vennligst oppgi din e-postadresse eller\n"
-"brukernavn og klikk på '''Send meg påloggingsinformasjonen'''.\n"
-"Du vil få en e-post med et gjenopprettingsord som du kan bruke for å endre\n"
-"ditt passord. E-posten vil også inneholde mer informasjon."
-
-msgid ""
-"\n"
-"=== Password reset ===\n"
-"If you already have received the email with the recovery token, enter your\n"
-"username, the recovery token and a new password (twice) below."
-msgstr ""
-"\n"
-"=== Nullstill Passord ===\n"
-"Hvis du allerede har fått en e-post med gjenopprettingsordet, skriv inn "
-"ditt\n"
-"brukernavn, gjenopprettingsordet og et nytt passord (to ganger) nedenfor."
+msgid "Show next slide (right arrow)"
+msgstr "Vis neste slide (høyreknappen)"
 
 msgid "Charts are not available!"
 msgstr "Grafer er ikke tilgjengelige!"
@@ -1670,16 +2257,26 @@ msgstr "Graftypen skal angis!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Feil graftype \"%s\"!"
 
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Opplasting av vedlegg '%(filename)s'."
+msgid "Load"
+msgstr "Last opp"
 
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Tegningen '%(filename)s' er lagret."
+msgid "Pagename not specified!"
+msgstr "Sidenavn mangler!"
 
-msgid "New page:\n"
-msgstr "Ny side:\n"
+msgid "Upload page content"
+msgstr "Last opp sideinnhold"
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+"Du kan laste opp innhold for siden nevnt nedenfor. Hvis du endrer navnet på "
+"siden kan du også laste opp innhold for en annen side. Hvis sidenavn er tomt "
+"ser vi i file etter et navn."
+
+msgid "File to load page content from"
+msgstr "Fil for å laste innhold fra"
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
@@ -1740,8 +2337,232 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Klikk her for å kjøre et fritekstsøk etter denne søketeksten"
 
-msgid "Rename Page"
-msgstr "Endre sidenavn"
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Kan ikke opprette en ny side uten navn. Oppgi navn på siden."
+
+msgid "Your subscription to this page has been removed."
+msgstr "Din abonnement av denne siden er avbestilt."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Abonnement med regulært uttrykk kan ikke avbestilles."
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "Endre regulære uttrykk for abonnement i dine innstillinger."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Du må først har abonnert for å kunne avbestille."
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Feil svar. Gå tilbake og prøv igjen..."
+
+#, fuzzy
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr ""
+"En kommentar må oppgis. Vennligst skriv en kommentar nedenfor og prøv "
+"igjen..."
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Opprett ny tegning \"%(filename)s (åpnes i nytt vindu)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Endre tegningen \"%(filename)s (åpnes i nytt vindu)\""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikkbart tegning \"%(filename)s\""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Du har ikke tillatelse til å lagre en tegning på denne siden."
+
+msgid "Empty target name given."
+msgstr "Den angitte målnavnet er tomt."
+
+msgid "Edit drawing"
+msgstr "Endre tegning"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Utfør operasjon %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Operasjonen %(actionname)s kan ikke brukes i denne wiki-en."
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Du har ikke lov til å bruke operasjon %(actionname)s på denne siden."
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "Du har ikke tillatelse til å lage denne tilleggssiden!"
+
+msgid "Pages"
+msgstr "Sider"
+
+msgid "Select Author"
+msgstr "Velg forfatter"
+
+msgid "Revert all!"
+msgstr "Tilbakestill alt!"
+
+msgid "Copy all /subpages too?"
+msgstr "Kopiere også alle /undersider?"
+
+msgid "New name"
+msgstr "Nytt navn"
+
+msgid "Optional reason for the copying"
+msgstr "Årsak til kopiering (valgfritt)"
+
+msgid "Really copy this page?"
+msgstr "Er du sikker på at denne siden skal kopieres?"
+
+msgid "You are now logged out."
+msgstr "Du er nå logget ut."
+
+msgid "No page packages found."
+msgstr "Ingen foreldreside funnet!"
+
+msgid "page package"
+msgstr "Endret side"
+
+msgid "Choose:"
+msgstr "Velg: "
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr "Installer språk pakker for '%s'"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Lokal oversikt for \"%s\""
+
+msgid "No older revisions available!"
+msgstr "Ingen eldre utgaver tilgjengelig!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Forskjeller (diff) for \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Forskjeller mellom versjonene %d og %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(over %d versjoner)"
+
+msgid "Previous change"
+msgstr "Forrige endring"
+
+msgid "Next change"
+msgstr "Neste endring"
+
+msgid "Diff with oldest revision in left pane"
+msgstr "Diff med den eldste utgaven på venstre side"
+
+msgid "No older revision available for diff"
+msgstr "Ingen eldre utgaver tilgjengelig!"
+
+msgid "Diff with older revision in left pane"
+msgstr "Diff med en eldre utgave på venstre side"
+
+msgid "Diff with newer revision in left pane"
+msgstr "Diff med en nyere utgave på venstre side"
+
+msgid "Can't change to revision newer than in right pane"
+msgstr "Kan ikke endre til en utgave som er nyere enn den som er på høyre side"
+
+msgid "Diff with older revision in right pane"
+msgstr "Diff med en eldre utgave på høyre side"
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+"Kan ikke endre til en utgave som er eldre enn den som er på venstre side"
+
+msgid "Diff with newer revision in right pane"
+msgstr "Diff med en nyere utgave på høyre side"
+
+msgid "No newer revision available for diff"
+msgstr "Ingen nyere utgaver tilgjengelig!"
+
+msgid "Diff with newest revision in right pane"
+msgstr "Diff med den siste utgaven på høyre side"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Selv om siden er lagret %(count)d ganger!"
+
+msgid "(ignoring whitespace)"
+msgstr "(ser bort fra mellomrom)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ignorer endringer i antall mellomrom"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Tomt brukernavn. Vær vennlig å oppgi et gyldig brukernavn."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Ugyldig brukernavn  {{{'%s'}}}.\n"
+"Navn kan kun inneholde alfanumeriske Unicode-tegn, eventuelt med et "
+"mellomrom\n"
+"mellom ordene. Gruppenavn er ikke tillatt."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Dette brukernavnet er allerede i bruk."
+
+msgid "Please specify a password!"
+msgstr "Vær vennlig å oppgi et passord!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Vennligst oppgi din e-postadresse. Hvis du mister din påloggingsinformasjon, "
+"kan du få den tilsendt på e-post."
+
+msgid "This email already belongs to somebody else."
+msgstr "Denne e-postadressen tilhører en annen bruker."
+
+msgid "User account created! You can use this account to login now..."
+msgstr "Brukerkonto opprettet! Du kan nå bruke kontoet for å logge deg på..."
+
+msgid "Password repeat"
+msgstr "Gjenta passord"
+
+msgid "TextCha (required)"
+msgstr "TextCha (påkrevd)"
+
+msgid "Create Profile"
+msgstr "Opprett brukerprofil"
+
+msgid "Create Account"
+msgstr "Opprett brukerkonto"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Fullstendig liste over lenker for \"%s\""
+
+msgid "You must login to add a quicklink."
+msgstr "Du må logge på for å opprette en hurtiglenke."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "En hurtiglenke til denne siden har blitt opprettet for deg."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "En hurtiglenke til denne siden kunne ikke opprettes for deg."
+
+msgid "You already have a quicklink to this page."
+msgstr "Du har allerede en hurtiglenke til denne siden!"
 
 msgid "Create redirect for renamed page(s)?"
 msgstr "Skap et redirect til side(r) med endret navn?"
@@ -1758,828 +2579,87 @@ msgstr "Er du sikker på at denne siden skal få nytt navn?"
 msgid "Optional reason for the renaming"
 msgstr "Årsak til nytt navn (valgfritt)"
 
-msgid "You must login to remove a quicklink."
-msgstr "Du må logge på for å tar bort en hurtiglenke."
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Din hurtiglenke til denne siden har blitt fjernet."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Din hurtiglenke til denne siden kunne ikke fjernes."
-
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "Du må ha en hurtiglenke til denne siden før du kan ta det bort."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Du får ikke lov til å abonnere på en side du ikke kan lese."
-
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "Denne wikien har ikke aktivert e-post/Jabber-håndtering."
-
-msgid "You must log in to use subscriptions."
-msgstr "Du må logge på for å bruke abonnementer."
+msgid "Wiki Backup"
+msgstr "Wiki-sikkerhetskopi"
 
 msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
 msgstr ""
-"For å håndtere abonnementer, vennligst legg til e-postadresse eller Jabber "
-"ID i dine preferanser."
+"= Nedlasting av backup =\n"
+"\n"
+"Vær obs på:\n"
+" * Lagre dine backup på et sikkert sted - dem inneholder sensitive data.\n"
+" * Vær sikkert at dine backup_* verdier i konfigurasjonen er korrekt og "
+"komplett.\n"
+" * Vær sikker på at dine backup inneholder alt du trenger.\n"
+" * Vær obs på at det ikke oppstår problemer i nedlastingen.\n"
+"\n"
+"For å få en backup, vennligst klikk her:"
 
-msgid "You are already subscribed to this page."
-msgstr "Du abonnerer allerede på denne siden."
+msgid "Backup"
+msgstr "Sikkerhetskopi"
 
-msgid "You have been subscribed to this page."
-msgstr "Du abonnerer nå på denne siden."
-
-msgid "You could not get subscribed to this page."
-msgstr "Du fikk ikke abonnere denne siden."
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Nøyaktig ett resultat funnet for \"%s\", henviser dit."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Sider som \"%s\"!"
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
-
-msgid "match"
-msgstr "resultat"
-
-msgid "matches"
-msgstr "resultater"
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Abonner brukere på siden %s"
-
-msgid "Enter user names (comma separated):"
-msgstr "Skrev inn brukernavn (delt med komma)"
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Abonnert på %s"
-
-msgid "Not a user:"
-msgstr "Ikke en bruker:"
-
-msgid "You are not allowed to perform this action."
-msgstr "Du har ikke tillatelse til å gjøre denne operasjonen."
-
-msgid "HelpOnParsers"
-msgstr "HjelpOmParsers"
-
-#, python-format
-msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see "
-"%(highlight_help_page)s."
+msgid "You are not allowed to do remote backup."
 msgstr ""
-"Syntaks highlighting ikke tilgjengelig for '%(syntax)s' se "
-"%(highlight_help_page)s."
+"Du har ikke tillatelse til å utføre en sikkerhetskopi til et annet sted."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Ukjent aksjon ved sikkerhetskopiering: %s."
+
+msgid "Revert"
+msgstr "Tilbakestill"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Du har ikke tillatelse til å tilbakestille denne siden!"
 
 msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
 msgstr ""
-" Utheving:: <<Verbatim(//)>>''kursiv''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''fet'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''kursiv fet'''''<<Verbatim"
-"(//**>>; <<Verbatim(//)>>''blandet ''<<Verbatim(**)>>'''''fet'''<<Verbatim"
-"(**)>> og kursiv''<<Verbatim(//)>>;\n"
-" Vannrett strek:: <<Verbatim(----)>>\n"
-" Tvunget linjeskift:: <<Verbatim(\\\\)>>\n"
-" Overskrifter:: = Tittel 1 =; == Tittel 2 ==; === Tittel 3 ===; ==== Tittel "
-"4 ====; ===== Tittel 5 =====.\n"
-" Lister:: * punkt; ** underpunkt; # nummerert emne; ## nummerert "
-"underpunkt.\n"
-" Lenker:: <<Verbatim([[mål]])>>; <<Verbatim([[mål|lenketekst]])>>.\n"
-" Tabeller:: |= overskrift tekst | tekst | mer text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+"Du sa på den aktuelle versjonen av denne siden når du brukte "
+"tilbakestillingsoperasjonen. Hvis du vil tilbakestill til en eldre versjon, "
+"vennligst se den eldre versjonen og bruk tilbakestillingsoperasjonen til den "
+"(eldre) versjonen en gang til."
 
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Fremvisning av reStructured tekst ikke mulig, vennligst installere Docutils."
+msgid "Optional reason for reverting this page"
+msgstr "Årsak til tilbakestilling (valgfritt)"
 
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-"{{{\n"
-"Utheving: *kursiv* **fet** ``skrivemaskin``\n"
-"\n"
-"Titler: Tittel 1  Tittel 2  Tittel 3\n"
-"        ========  --------  ~~~~~~~~\n"
-"\n"
-"Vannrett linje: ----\n"
-"\n"
-"Lenker: TrailingUnderscore_ `Flere ord med backticks`_ eksterne_\n"
-"\n"
-".. _eksterne: http://external-site.example.org/foo/\n"
-"\n"
-"Lister: * bullets; 1., a. nummererte lister.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
+msgid "Really revert this page?"
+msgstr "Er du sikker på at denne siden skal tilbakestilles?"
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maks antall inkluderinger overskredet**"
+msgid "OpenID"
+msgstr "OpenID"
 
-#, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "**Du har ikke tillatelse til å lese siden: %s**"
+msgid "Member of Groups"
+msgstr "Medlem av grupper"
 
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Kan ikke finne den refererte siden: %s**"
+msgid "Jabber"
+msgstr "Jabber"
 
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT opsjon slått av, vennligst se HelpOnConfiguration."
+msgid "Disable user"
+msgstr "Deaktiver konto"
 
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT-håndtering er ikke tilgjengelig, vennligst installer 4suite 1.x."
+msgid "Enable user"
+msgstr "Aktiver konto"
 
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "%(errortype)s programfeil"
+msgid "disabled"
+msgstr "deaktivert"
 
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
-msgstr ""
-" Utheving:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''fet'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kursiv "
-"fet'''''<<Verbatim(''''')>>; <<Verbatim('')>>''blandet ''<<Verbatim(''')"
-">>'''''fet'''<<Verbatim(''')>> og kursiv''<<Verbatim('')>>; <<Verbatim(----)"
-">> vannrett strek.\n"
-" Overskrifter:: = Tittel 1 =; == Tittel 2 ==; === Tittel 3 ===; ==== Tittel "
-"4 ====; ===== Tittel 5 =====.\n"
-" Lister:: mellomrom og: * asterisk; 1., a., A., i., I. nummererte emner; 1."
-"#n begynn nummerering ved n; kun mellomrom gir innrykk.\n"
-" Lenker:: <<Verbatim(SammenSatteOrd)>>; <<Verbatim([[mål|lenketekst]])>>.\n"
-" Tabeller:: || celletekst |||| celletekst over to kolonner ||;    "
-"etterfølgende mellomrom er ikke tillatt etter tabeller eller titler.\n"
-"\n"
-"(!) For mere hjelp, se HelpOnEditing eller SyntaxReference (engelsk).\n"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Forventet \"%(wanted)s\" etter \"%(key)s\", fikk \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Forventet et heltall \"%(key)s\" før \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Forventet et heltall \"%(arg)s\" etter \"%(key)s\""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Forventet en fargekode \"%(arg)s\" etter \"%(key)s\""
-
-msgid "Page has been modified"
-msgstr "Siden har blitt endret"
-
-msgid "Page has been modified in a trivial fashion"
-msgstr "Siden har gjennomgått mindre endringer"
-
-msgid "Page has been renamed"
-msgstr "Siden har fått nytt navn"
-
-msgid "Page has been deleted"
-msgstr "Siden har blitt slettet"
-
-msgid "Page has been copied"
-msgstr "Siden har blitt kopiert"
-
-msgid "A new attachment has been added"
-msgstr "En nytt vedlegg har blitt lagt til"
-
-msgid "An attachment has been removed"
-msgstr "En nytt vedlegg har blitt lagt til"
-
-msgid "A page has been reverted to a previous state"
-msgstr "En side har gått tilbake til sin forrige tilstand"
-
-msgid "A user has subscribed to a page"
-msgstr "En bruker har abonnert på en side"
-
-msgid "A new account has been created"
-msgstr "En ny konto har blitt opprettet"
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-"[%(sitename)s] %(trivial)soppdatering av \"%(pagename)s\" av %(username)s"
-
-msgid "Trivial "
-msgstr "Mindre "
-
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
-"Lenke til vedlegg: %(attach)s\n"
-"Lenke til siden: %(page)s\n"
-
-msgid "Attachment link"
-msgstr "Vedleggslenke"
-
-msgid "Page link"
-msgstr "Sidelenke"
-
-msgid "Changed page"
-msgstr "Endret side"
-
-msgid "Page changed"
-msgstr "Siden ble endret"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-"Kjære wiki-bruker.\n"
-"\n"
-"Du har abonnert på meldinger om endringer av wiki-siden eller wiki klassen "
-"\"%(sitename)s\".\n"
-"\n"
-"Siden \"%(pagename)s\" har blitt endret av %(editor)s:\n"
-"\n"
-
-msgid "No differences found!\n"
-msgstr "Fant ingen endringer!\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"Kjære wiki-bruker.\n"
-"\n"
-"Du har abonnert på meldinger om endringer av wiki-siden \"%(sitename)s\".\n"
-"\n"
-"Siden \"%(pagename)s\" har blitt slettet av %(editor)s:\n"
-"\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
-"%(editor)s:\n"
-msgstr ""
-"Kjære wiki-bruker.\n"
-"\n"
-"Du har abonnert på meldinger om endringer av wiki-siden \"%(sitename)s\".\n"
-"\n"
-"Siden \"%(pagename)s\" fikk endret navn fra \"%(oldname)s\" av %(editor)s:\n"
-"\n"
-
-#, python-format
-msgid "[%(sitename)s] New user account created"
-msgstr "[%(sitename)s] En ny brukerkonto ble opprettet"
-
-#, python-format
-msgid ""
-"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
-"Details follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
-msgstr ""
-"Kjære Superuser, en ny bruker har blitt opprettet på %(sitename)s\". "
-"Detailjer som følger:\n"
-"\n"
-"    Brukernavn: %(username)s\n"
-"    E-postadresse: %(useremail)s"
-
-#, python-format
-msgid "[%(sitename)s] New attachment added to page %(pagename)s"
-msgstr "Ny vedlegg lagt til side %(pagename)s på %(sitename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-"Kjære wiki-bruker.\n"
-"\n"
-"Du har abonnert på meldinger om endringer av wiki-siden \"%(page_name)s\". "
-"%(editor)s har lagt et nytt vedlegg til denne siden. Vi kan gi følgende "
-"informasjon om det nye vedlegget: \n"
-"\n"
-"Navn:  %(attach_name)s\n"
-"Størrelse:  %(attach_size)s\n"
-
-#, python-format
-msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
-msgstr "[%(sitename)s] Vedlegg slettet fra siden %(pagename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been removed from that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-"Kjære wiki-bruker.\n"
-"\n"
-"Du har abonnert på meldinger om endringer av wiki-siden \"%(page_name)s\". "
-"%(editor)s har slettet et vedlegg fra denne siden. Vi kan gi følgende "
-"informasjon om det nye vedlegget: \n"
-"\n"
-"Navn:  %(attach_name)s\n"
-"Størrelse:  %(attach_size)s\n"
-
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr "Opsjonene --pages og --search kan ikke brukes samtidig."
-
-msgid "You must specify an output file!"
-msgstr "Du må spesifisere en fil for å skrive informasjonen til."
-
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-"Ingen sider spesifisert med opsjonene --pages eller --search, antar hele "
-"arkivet."
-
-msgid "All attachments included into the package."
-msgstr "Alle vedlegg inkludert i arkivet."
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr "Spesifisert fil finnes allerede. Våger ikke å fortsette."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Passordet mangler. Vær vennlig å oppgi brukernavn og passord."
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. "
-msgstr ""
-"Hvis ikke du har en konto <a href=\"%(userprefslink)s\">kan du opprette den "
-"nå</a>. "
-
-#, python-format
-msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr "<a href=\"%(sendmypasswordlink)s\">Glemte passordet?</a>"
-
-msgid "Could not contact botbouncer.com."
-msgstr "Får ikke kontakt med botbouncer.com."
-
-msgid "Failed to connect to database."
-msgstr "Mislyktes med databasetilkobling."
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-"Vennligst velg et brukernavn nå.\n"
-"Hvis du skulle velge et navn som finnes allerede vil du bli\n"
-"spurt etter passord. Da kan du koble brukerkontoet med din\n"
-"OpenID"
-
-msgid "Choose this name"
-msgstr "Velg dette navnet"
-
-msgid "This is not a valid username, choose a different one."
-msgstr "Dette er ikke et gyldig brukernavn, velg et annet."
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-"Dette brukernavnet finnes allerede.\n"
-"Hvis det er ditt navn kan du skrive inn ditt passord for å koble sammen\n"
-"brukerkontoet med din OpenID. Vennligst velg et annet brukernavn ellers\n"
-"og la passordfeltet stå tom."
-
-msgid "Associate this name"
-msgstr "Forbind dette navnet"
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr "OpenID feil: %s."
-
-msgid "OpenID verification canceled."
-msgstr "Verifiseringen ble avbrutt."
-
-msgid "Verification canceled."
-msgstr "Verifiseringen ble avbrutt."
-
-#, python-format
-msgid "OpenID success. id: %s"
-msgstr "OpenID suksess id: %s."
-
-msgid "OpenID failure"
-msgstr "OpenID feil"
-
-msgid "OpenID failure."
-msgstr "OpenID feil."
-
-msgid "No OpenID found in session."
-msgstr "Ingen OpenID funnet i sesjonen."
-
-msgid "Your account is now associated to your OpenID."
-msgstr "Din brukerkonto er nå koblet med OpenID."
-
-msgid "The password you entered is not valid."
-msgstr "Passordet du oppga er ikke gyldig."
-
-msgid "OpenID error: unknown continuation stage"
-msgstr "OpenID feil: unkjent fortsettelse fase"
-
-msgid "OpenID verification requires that you click this button:"
-msgstr "For OpenID verifisering må denne knappen klikkes."
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr "Anonyme sesjoner må være satt opp for OpenID pålogging."
-
-msgid "Failed to resolve OpenID."
-msgstr "Feil å finne OpenID."
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr "Finner ikker OpenID, ugyldig OpenID."
-
-msgid "No OpenID."
-msgstr "Ingen OpenID"
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-"Hvis du ikke ha en brukerkonto kan du fortsatt logge deg på med dinOpenID og "
-"opprette en konto ved pålogging."
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr "Feil med LDAP sørver %(server)s."
-
-msgid "Line"
-msgstr "Linje"
-
-msgid "Deletions are marked like this."
-msgstr "Slettet tekst er avmerket på denne måten."
-
-msgid "Additions are marked like this."
-msgstr "Tilføyelser er avmerket på denne måten."
-
-msgid "Diffs"
-msgstr "Endringer"
-
-msgid "Info"
-msgstr "Info"
-
-msgid "Unsubscribe"
-msgstr "Avbestill"
-
-msgid "Subscribe"
-msgstr "Abonner"
-
-msgid "Raw"
-msgstr "Kilde"
-
-msgid "XML"
-msgstr "XML"
-
-msgid "View"
-msgstr "Vis"
-
-msgid "Home"
-msgstr "Hjem"
-
-msgid "Up"
-msgstr "Opp"
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[Sletted]"
-
-msgid "[UPDATED]"
-msgstr "[OPPDATERT]"
-
-msgid "[RENAMED]"
-msgstr "[NYTT NAVN]"
-
-msgid "[CONFLICT]"
-msgstr "[KONFLIKT]"
-
-msgid "[NEW]"
-msgstr "[NY]"
-
-msgid "[DIFF]"
-msgstr "[DIFF]"
-
-msgid "[BOTTOM]"
-msgstr "[NEDERST]"
-
-msgid "[TOP]"
-msgstr "[ØVERST]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Klikk her for å kjøre et fritekstsøk etter denne tittelen"
-
-msgid "Logout"
-msgstr "Logg ut"
-
-msgid "Clear message"
-msgstr "Fjern beskjed"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "sist endret %(time)s av %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "sist endret %(time)s"
-
-msgid "Search:"
-msgstr "Søk:"
-
-msgid "Text"
-msgstr "Tekst"
-
-msgid "Titles"
-msgstr "Titler"
-
-msgid "Search"
-msgstr "Søk"
-
-msgid "More Actions:"
-msgstr "Flere operasjoner:"
-
-msgid "------------------------"
-msgstr "------------------------"
-
-msgid "Raw Text"
-msgstr "Kildetekst"
-
-msgid "Print View"
-msgstr "Utskriftsvisning"
-
-msgid "Delete Cache"
-msgstr "Slett cache"
-
-msgid "Delete Page"
-msgstr "Slett side"
-
-msgid "Like Pages"
-msgstr "LignendeSider"
-
-msgid "Local Site Map"
-msgstr "LokalOversikt"
-
-msgid "My Pages"
-msgstr "Mine sider"
-
-msgid "Subscribe User"
-msgstr "Abonner bruker"
-
-msgid "Remove Spam"
-msgstr "Fjern spam"
-
-msgid "Package Pages"
-msgstr "Arkiverte sider"
-
-msgid "Render as Docbook"
-msgstr "Vis som Docbook"
-
-msgid "Sync Pages"
-msgstr "Synkroniser sider"
-
-msgid "Do"
-msgstr "Utfør"
-
-msgid "Comments"
-msgstr "Kommentarer"
-
-msgid "Edit (Text)"
-msgstr "Rediger (Tekst)"
-
-msgid "Edit (GUI)"
-msgstr "Rediger (GUI)"
-
-msgid "Immutable Page"
-msgstr "Siden kan ikke endres"
-
-msgid "Remove Link"
-msgstr "Fjern lenke"
-
-msgid "Add Link"
-msgstr "Legg til lenke"
-
-msgid "Attachments"
-msgstr "Vedlegg"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Vis %s dager."
-
-msgid "Wiki Markup"
-msgstr "Wiki-markering"
-
-msgid "DeleteCache"
-msgstr "SlettCache"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(cachet %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Eller prøv en av følgende operasjoner:"
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Page"
-msgstr "Side"
-
-msgid "User"
-msgstr "Bruker"
-
-msgid "[ATTACH]"
-msgstr "[LEGG VED]"
-
-msgid "Password is too short."
-msgstr "Passord for kort."
-
-msgid "Password has not enough different characters."
-msgstr "Passord har ikke nok forskjellige tegn."
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-"Passordet er for enkelt (passordet inneholder navn eller navn inneholder "
-"passord."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "Passordet er for enkelt (tastatursekvens)"
-
-msgid "UnSubscribe"
-msgstr "Avbestill"
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-"Publiser min e-postadresse (ikke min wiki brukerside) i "
-"forfatterinformasjonen."
-
-msgid "Open editor on double click"
-msgstr "Dobbeltklikk åpner redigeringsvindu"
-
-msgid "After login, jump to last visited page"
-msgstr "Etter pålogging, gå til min sist besøkte siden."
-
-msgid "Show comment sections"
-msgstr "Vis kommentaravsnitt."
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Vis spørsmålstegn ved lenker til ikke-eksisterende sider"
-
-msgid "Show page trail"
-msgstr "Vis sist besøkte sider"
-
-msgid "Show icon toolbar"
-msgstr "Vis ikon-panel"
-
-msgid "Show top/bottom links in headings"
-msgstr "Vis topp-/bunnlenker i overskrifter"
-
-msgid "Show fancy diffs"
-msgstr "Vis endringer detaljert"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Legg til mellomrom ved visning av wiki-navn"
-
-msgid "Remember login information"
-msgstr "Husk påloggingsinformasjon"
-
-msgid "Disable this account forever"
-msgstr "Slett denne brukerprofilen permanent"
-
-msgid "Alias-Name"
-msgstr "Alias navn"
-
-msgid "Jabber ID"
-msgstr "Jabber ID"
-
-msgid "User CSS URL"
-msgstr "URL til bruker-CSS"
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(La det stå tomt for å slå av bruker-CSS)"
-
-msgid "Editor size"
-msgstr "Størrelse på redigeringsvindu"
-
-msgid "anonymous"
-msgstr "ukjent bruker"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Last opp nytt vedlegg \"%(filename)s\""
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr "Direkte vist bilde: %(url)s"
-
-msgid "Toggle line numbers"
-msgstr "Slå av/på linjenummer"
-
-msgid "From"
-msgstr "Fra"
-
-msgid "To"
-msgstr "Til"
-
-msgid "Content"
-msgstr "Innhold"
-
-msgid "No recipients, nothing to do"
-msgstr "Ingen mottakere, har ikke noe å gjøre"
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Forbindelse til e-posttjener '%(server)s' mislykket: %(reason)s"
-
-msgid "Mail not sent"
-msgstr "E-post ikke sendt"
-
-msgid "Mail sent OK"
-msgstr "E-post sendt OK"
+msgid "Mail account data"
+msgstr "Send meg e-post med min informasjon om min brukerkonto"
 
 msgid "RecentChanges"
 msgstr "SisteEndringer"
@@ -3066,166 +3146,23 @@ msgstr "StaveKontroll"
 msgid "Discussion"
 msgstr "Diskusjon"
 
-msgid "Switch user"
-msgstr "Bytt bruker"
+msgid "User agent"
+msgstr "Brukeragent"
 
-msgid "No user selected"
-msgstr "Ingen bruker er valgt"
+msgid "Others"
+msgstr "Andre"
 
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-"Du kan nå endre innstillingene for det utvalgte brukerkonto; log av og på "
-"igjen for å komme tilbake til din egen konto."
+msgid "Distribution of User-Agent Types"
+msgstr "Fordeling av brukeragent-typer"
 
-msgid "You are the only user."
-msgstr "Du er den eneste brukeren."
+msgid "Page Size Distribution"
+msgstr "Fordeling av sidestørrelser"
 
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-"Som superbruker kan du overgangsvis har identiteten til en annen bruker."
+msgid "page size upper bound [bytes]"
+msgstr "øvre grense for sidestørrelse [byte]"
 
-msgid "Select User"
-msgstr "Velg bruker"
-
-msgid "Notification"
-msgstr "Melding"
-
-msgid "Notification settings saved!"
-msgstr "Meldingsinnstillinger lagret!"
-
-msgid "'''Email'''"
-msgstr "'''E-post'''"
-
-msgid "'''Jabber'''"
-msgstr "'''Jabber'''"
-
-msgid "'''Event type'''"
-msgstr "'''Typ av hendelsen'''"
-
-msgid "Select the events you want to be notified about."
-msgstr "Velg hendelser du vil ha en melding om."
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr ""
-"Du må fortelle oss om en veg å kontakte deg før vi kan sende meldinger. "
-"Dette kan du gjøre i preferansene til din brukerkonto."
-
-msgid "Subscribed events"
-msgstr "Abonnerte hendelser"
-
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Abonnerte wiki-sider<<BR>>(et regulært uttrykk (regex) pr. linje)"
-
-msgid "Save"
-msgstr "Lagre"
-
-msgid "OpenID server"
-msgstr "OpenID sørver"
-
-msgid "The selected websites have been removed."
-msgstr "Utvalgte websidene ble fjernet."
-
-msgid "Trusted websites"
-msgstr "Websider du stoler på."
-
-msgid "Remove selected"
-msgstr "Fjern utvalgte"
-
-msgid "Change password"
-msgstr "Endre passord"
-
-msgid "Your password has been changed."
-msgstr "Passordet ditt er blitt endret."
-
-msgid "To change your password, enter a new password twice."
-msgstr "For å endre passordet, tast inn ditt nye passord to ganger."
-
-msgid "Preferences"
-msgstr "Preferanser"
-
-msgid "This jabber id already belongs to somebody else."
-msgstr "Denne jabber-id'en tilhører allerede en annen bruker."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Utseendet '%(theme_name)s' kunne ikke lastes!"
-
-msgid "User preferences saved!"
-msgstr "Brukerprofil lagret!"
-
-msgid "Default"
-msgstr "Standard"
-
-msgid "<Browser setting>"
-msgstr "<Nettleseroppsett>"
-
-msgid "the one preferred"
-msgstr "den foretrukne"
-
-msgid "free choice"
-msgstr "fritt valg"
-
-msgid "Preferred theme"
-msgstr "Ønsket utseende"
-
-msgid "Editor Preference"
-msgstr "Fortrukket redigeringsverktøy"
-
-msgid "Editor shown on UI"
-msgstr "Vis grafisk redigeringsverktøy"
-
-msgid "Time zone"
-msgstr "Tidssone"
-
-msgid "Your time is"
-msgstr "Din tid er"
-
-msgid "Server time is"
-msgstr "Tid på tjeneren er"
-
-msgid "Date format"
-msgstr "Datoformat"
-
-msgid "Preferred language"
-msgstr "Språkinnstilling"
-
-msgid "General options"
-msgstr "Generelle valg"
-
-msgid "Quick links"
-msgstr "Hurtiglenker"
-
-msgid "OpenID settings"
-msgstr "OpenID preferanser"
-
-msgid "Cannot remove all OpenIDs."
-msgstr "Kan ikke jerne alle OpenIDs."
-
-msgid "The selected OpenIDs have been removed."
-msgstr "Utvalgte OpenID har blitt fjernet."
-
-msgid "No OpenID given."
-msgstr "Ingen OpenID gitt."
-
-msgid "OpenID is already present."
-msgstr "OpenID allerede gitt."
-
-msgid "This OpenID is already used for another account."
-msgstr "Denne OpenID er allerede i bruk for en annen bruker."
-
-msgid "OpenID added successfully."
-msgstr "OpenID ble lagt til."
-
-msgid "Current OpenIDs"
-msgstr "Brukte OpenIDs."
-
-msgid "Add OpenID"
-msgstr "Legg til OpenID"
+msgid "# of pages of this size"
+msgstr "Antall sider av denne størrelsen"
 
 msgid "Views/day"
 msgstr "Visninger/dag"
@@ -3253,68 +3190,11 @@ msgstr "Antall besøk"
 msgid "Language"
 msgstr "Språk"
 
-msgid "Others"
-msgstr "Andre"
+msgid "<Browser setting>"
+msgstr "<Nettleseroppsett>"
 
-msgid "User agent"
-msgstr "Brukeragent"
-
-msgid "Distribution of User-Agent Types"
-msgstr "Fordeling av brukeragent-typer"
-
-msgid "Page Size Distribution"
-msgstr "Fordeling av sidestørrelser"
-
-msgid "page size upper bound [bytes]"
-msgstr "øvre grense for sidestørrelse [byte]"
-
-msgid "# of pages of this size"
-msgstr "Antall sider av denne størrelsen"
-
-msgid "[all]"
-msgstr "[alle]"
-
-msgid "[not empty]"
-msgstr "[ikke tom]"
-
-msgid "[empty]"
-msgstr "[tom]"
-
-msgid "filter"
-msgstr "filter"
-
-msgid "OpenID"
-msgstr "OpenID"
-
-msgid "Member of Groups"
-msgstr "Medlem av grupper"
-
-msgid "Jabber"
-msgstr "Jabber"
-
-msgid "Disable user"
-msgstr "Deaktiver konto"
-
-msgid "Enable user"
-msgstr "Aktiver konto"
-
-msgid "disabled"
-msgstr "deaktivert"
-
-msgid "Mail account data"
-msgstr "Send meg e-post med min informasjon om min brukerkonto"
-
-# jmt quickfixes
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Siden kan ikke lagres fordi \"%(content)s\" ikke er tillatt i denne wikien."
-
-#, python-format
-msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
-"<<%(macro_name)s: gjennomføring mislyktes [%(error_msg)s] (se loggen også)"
+msgid "No orphaned pages in this wiki."
+msgstr "Ingen foreldreløse sider i denne wikien."
 
 msgid "Include system pages"
 msgstr "Ta med systemsider"
@@ -3322,157 +3202,8 @@ msgstr "Ta med systemsider"
 msgid "Exclude system pages"
 msgstr "Utelat systemsider"
 
-msgid "Go To Page"
-msgstr "Gå til siden"
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-"%(extension_name)s %(extension_type)s: Obligatorisk argument "
-"%(argument_name)s mangler."
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
-"%(argument_value)s!"
-msgstr ""
-"%(extension_name)s %(extension_type)s: Ugyldig %(argument_name)s="
-"%(argument_value)s!"
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-"Konfigurasjonen tillater for tiden ikke innlemming av filen %(file)s pga "
-"dens mime type %(mimetype)s."
-
-msgid "Embedded"
-msgstr "Innlemmet"
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Feil include-argumenter \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Ingenting funnet for \"%s\""
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Navigeringsskjemaet '%(scheme)s' er ikke støttet!"
-
-msgid "No parent page found!"
-msgstr "Ingen foreldreside funnet!"
-
-msgid "Slideshow"
-msgstr "Slideshow"
-
-msgid "Start"
-msgstr "Start"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Slide %(pos)d av %(size)d"
-
-msgid "Markup"
-msgstr "Oppmerking"
-
-msgid "Display"
-msgstr "Vis"
-
-msgid "Variable name"
-msgstr "Variabelnavn"
-
-msgid "Description"
-msgstr "Beskrivelse"
-
-msgid "Wiki configuration"
-msgstr "Wikikonfigurasjon"
-
-msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
-msgstr ""
-"Denne tabellen viser alle opsjoner i denne wiki-en som ikke har standard "
-"verdier. Preferanser som konfigurasjonsystemet har ikke noe kunnskap til er "
-"vis i '''kursiv''', det kan være for eksempel tredje parts tillegg som "
-"trenger konfigurasjon eller det er preferanser som har blitt fjernet fra "
-"Moin."
-
-msgid "Setting"
-msgstr "Innstilling"
-
-msgid "No orphaned pages in this wiki."
-msgstr "Ingen foreldreløse sider i denne wikien."
-
-msgid "File attachment browser"
-msgstr "Filvedleggsutforsker"
-
-msgid "User account browser"
-msgstr "Brukerkontoutforsker"
-
-msgid "Search Titles"
-msgstr "Søk blant titler"
-
-msgid "Display context of search results"
-msgstr "Vis søketekst i søkeresultater"
-
-msgid "Case-sensitive searching"
-msgstr "Skill mellom STORE og små bokstaver ved søking"
-
-msgid "Search Text"
-msgstr "Søk i teksten"
-
-#, fuzzy, python-format
-msgid "Unknown macro parameter: %s."
-msgstr "Ukjent aksjon ved sikkerhetskopiering: %s."
-
-#, python-format
-msgid ""
-"More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occurred)"
-msgstr ""
-
-msgid "Lexer description"
-msgstr "Lexer beskrivelse"
-
-msgid "Lexer names"
-msgstr "Lexer navn"
-
-msgid "File patterns"
-msgstr "Filmønstrer"
-
-msgid "Mimetypes"
-msgstr "Mimetyper"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Ingen sitater i %(pagename)s."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "for %(mins)dm siden"
-
-msgid "(no bookmark set)"
-msgstr "(intet bokmerke satt)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(nå satt til %s)"
-
-msgid "Delete bookmark"
-msgstr "Slett bokmerke"
-
-msgid "Set bookmark"
-msgstr "Sett bokmerke"
-
-msgid "[Bookmark reached]"
-msgstr "[Bokmerke nådd]"
+msgid "No wanted pages in this wiki."
+msgstr "Ingen ønskede sider i denne wikien."
 
 msgid "Python Version"
 msgstr "Python-versjon"
@@ -3543,10 +3274,6 @@ msgstr "Indeks ikke tilgjengelig"
 msgid "index available"
 msgstr "Indeks tilgjengelig"
 
-#, python-format
-msgid "last modified: %s"
-msgstr "sist endret: %s"
-
 msgid "Xapian search"
 msgstr "Xapian søk"
 
@@ -3555,9 +3282,6 @@ msgstr "Stemming for Xapian"
 
 msgid "Active threads"
 msgstr "Aktive tråder"
-
-msgid "No wanted pages in this wiki."
-msgstr "Ingen ønskede sider i denne wikien."
 
 msgid "Search for items"
 msgstr "Søk etter elementer"
@@ -3607,31 +3331,332 @@ msgstr "Søk gjennom sidehistorikken"
 msgid "Go get it!"
 msgstr "Få det."
 
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Ingen sitater i %(pagename)s."
+
 msgid "Contents"
 msgstr "Innhold"
 
+msgid "Variable name"
+msgstr "Variabelnavn"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Description"
+msgstr "Beskrivelse"
+
+msgid "Lexer description"
+msgstr "Lexer beskrivelse"
+
+msgid "Lexer names"
+msgstr "Lexer navn"
+
+msgid "File patterns"
+msgstr "Filmønstrer"
+
+msgid "Mimetypes"
+msgstr "Mimetyper"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Navigeringsskjemaet '%(scheme)s' er ikke støttet!"
+
+msgid "No parent page found!"
+msgstr "Ingen foreldreside funnet!"
+
+msgid "Slideshow"
+msgstr "Slideshow"
+
+msgid "Start"
+msgstr "Start"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Slide %(pos)d av %(size)d"
+
+msgid "File attachment browser"
+msgstr "Filvedleggsutforsker"
+
+msgid "User account browser"
+msgstr "Brukerkontoutforsker"
+
+msgid "Search Titles"
+msgstr "Søk blant titler"
+
+msgid "Display context of search results"
+msgstr "Vis søketekst i søkeresultater"
+
+msgid "Case-sensitive searching"
+msgstr "Skill mellom STORE og små bokstaver ved søking"
+
+msgid "Search Text"
+msgstr "Søk i teksten"
+
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Ukjent aksjon ved sikkerhetskopiering: %s."
+
 #, python-format
 msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
 msgstr ""
-"Resultater %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s av %(aboutHits)s %(bs)s"
-"%(hits)d%(be)s resultater ut av ca. %(pages)d sider."
 
-msgid "seconds"
-msgstr "sekunder"
+#, python-format
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr ""
 
-msgid "Previous"
-msgstr "Forrige"
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+"<<%(macro_name)s: gjennomføring mislyktes [%(error_msg)s] (se loggen også)"
 
-msgid "Next"
-msgstr "Neste"
+msgid "Go To Page"
+msgstr "Gå til siden"
 
-msgid "rev"
-msgstr "rev"
+msgid "Wiki configuration"
+msgstr "Wikikonfigurasjon"
 
-msgid "current"
-msgstr "nåværende"
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+"Denne tabellen viser alle opsjoner i denne wiki-en som ikke har standard "
+"verdier. Preferanser som konfigurasjonsystemet har ikke noe kunnskap til er "
+"vis i '''kursiv''', det kan være for eksempel tredje parts tillegg som "
+"trenger konfigurasjon eller det er preferanser som har blitt fjernet fra "
+"Moin."
 
-msgid "about"
-msgstr "om"
+msgid "Setting"
+msgstr "Innstilling"
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "for %(mins)dm siden"
+
+msgid "(no bookmark set)"
+msgstr "(intet bokmerke satt)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(nå satt til %s)"
+
+msgid "Delete bookmark"
+msgstr "Slett bokmerke"
+
+msgid "Set bookmark"
+msgstr "Sett bokmerke"
+
+msgid "[Bookmark reached]"
+msgstr "[Bokmerke nådd]"
+
+msgid "Markup"
+msgstr "Oppmerking"
+
+msgid "Display"
+msgstr "Vis"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Last opp nytt vedlegg \"%(filename)s\""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+"%(extension_name)s %(extension_type)s: Obligatorisk argument "
+"%(argument_name)s mangler."
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+"%(extension_name)s %(extension_type)s: Ugyldig %(argument_name)s="
+"%(argument_value)s!"
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+"Konfigurasjonen tillater for tiden ikke innlemming av filen %(file)s pga "
+"dens mime type %(mimetype)s."
+
+msgid "Embedded"
+msgstr "Innlemmet"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Feil include-argumenter \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Ingenting funnet for \"%s\""
+
+msgid "Switch user"
+msgstr "Bytt bruker"
+
+msgid "No user selected"
+msgstr "Ingen bruker er valgt"
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+"Du kan nå endre innstillingene for det utvalgte brukerkonto; log av og på "
+"igjen for å komme tilbake til din egen konto."
+
+msgid "You are the only user."
+msgstr "Du er den eneste brukeren."
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+"Som superbruker kan du overgangsvis har identiteten til en annen bruker."
+
+msgid "Select User"
+msgstr "Velg bruker"
+
+msgid "Preferences"
+msgstr "Preferanser"
+
+msgid "This jabber id already belongs to somebody else."
+msgstr "Denne jabber-id'en tilhører allerede en annen bruker."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Utseendet '%(theme_name)s' kunne ikke lastes!"
+
+msgid "User preferences saved!"
+msgstr "Brukerprofil lagret!"
+
+msgid "the one preferred"
+msgstr "den foretrukne"
+
+msgid "free choice"
+msgstr "fritt valg"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Preferred theme"
+msgstr "Ønsket utseende"
+
+msgid "Editor Preference"
+msgstr "Fortrukket redigeringsverktøy"
+
+msgid "Editor shown on UI"
+msgstr "Vis grafisk redigeringsverktøy"
+
+msgid "Time zone"
+msgstr "Tidssone"
+
+msgid "Your time is"
+msgstr "Din tid er"
+
+msgid "Server time is"
+msgstr "Tid på tjeneren er"
+
+msgid "Date format"
+msgstr "Datoformat"
+
+msgid "Preferred language"
+msgstr "Språkinnstilling"
+
+msgid "General options"
+msgstr "Generelle valg"
+
+msgid "Quick links"
+msgstr "Hurtiglenker"
+
+msgid "Change password"
+msgstr "Endre passord"
+
+msgid "Your password has been changed."
+msgstr "Passordet ditt er blitt endret."
+
+msgid "To change your password, enter a new password twice."
+msgstr "For å endre passordet, tast inn ditt nye passord to ganger."
+
+msgid "OpenID settings"
+msgstr "OpenID preferanser"
+
+msgid "Cannot remove all OpenIDs."
+msgstr "Kan ikke jerne alle OpenIDs."
+
+msgid "The selected OpenIDs have been removed."
+msgstr "Utvalgte OpenID har blitt fjernet."
+
+msgid "No OpenID given."
+msgstr "Ingen OpenID gitt."
+
+msgid "OpenID is already present."
+msgstr "OpenID allerede gitt."
+
+msgid "This OpenID is already used for another account."
+msgstr "Denne OpenID er allerede i bruk for en annen bruker."
+
+msgid "OpenID added successfully."
+msgstr "OpenID ble lagt til."
+
+msgid "Current OpenIDs"
+msgstr "Brukte OpenIDs."
+
+msgid "Remove selected"
+msgstr "Fjern utvalgte"
+
+msgid "Add OpenID"
+msgstr "Legg til OpenID"
+
+msgid "Notification"
+msgstr "Melding"
+
+msgid "Notification settings saved!"
+msgstr "Meldingsinnstillinger lagret!"
+
+msgid "'''Email'''"
+msgstr "'''E-post'''"
+
+msgid "'''Jabber'''"
+msgstr "'''Jabber'''"
+
+msgid "'''Event type'''"
+msgstr "'''Typ av hendelsen'''"
+
+msgid "Select the events you want to be notified about."
+msgstr "Velg hendelser du vil ha en melding om."
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+"Du må fortelle oss om en veg å kontakte deg før vi kan sende meldinger. "
+"Dette kan du gjøre i preferansene til din brukerkonto."
+
+msgid "Subscribed events"
+msgstr "Abonnerte hendelser"
+
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Abonnerte wiki-sider<<BR>>(et regulært uttrykk (regex) pr. linje)"
+
+msgid "OpenID server"
+msgstr "OpenID sørver"
+
+msgid "The selected websites have been removed."
+msgstr "Utvalgte websidene ble fjernet."
+
+msgid "Trusted websites"
+msgstr "Websider du stoler på."
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "Direkte vist bilde: %(url)s"
+
+msgid "Toggle line numbers"
+msgstr "Slå av/på linjenummer"
