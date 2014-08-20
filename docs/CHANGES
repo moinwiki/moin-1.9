@@ -162,6 +162,7 @@ Version 1.9.8:
       and "*_att_removed_*".
 
   Fixes:
+  * security fix: XSS in useragents stats
   * do not create empty pagedirs (with empty edit-log). To clean up all the
     trash pagedirs, use moin ... maint cleanpage.
   * page rename/delete, attachment add/remove email notifications work now
