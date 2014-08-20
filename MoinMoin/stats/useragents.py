@@ -106,7 +106,7 @@ def text(pagename, request):
     if total:
         for cnt, ua in data:
             try:
-                ua = unicode(ua)
+                ua = wikiutil.escape(unicode(ua))
                 agents.addRow((ua, "%.2f" % (100.0 * cnt / total)))
                 cnt_printed += cnt
             except UnicodeError:
