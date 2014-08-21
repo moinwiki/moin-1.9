@@ -647,9 +647,8 @@ msgstr ""
 "Se você ainda não tem uma conta, você ainda assim pode realizar o login com "
 "uma OpenID e criar uma durante o login."
 
-#, fuzzy
 msgid "Missing user name. Please enter user name and password."
-msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha."
+msgstr "Usuário não informado. Por favor entre com o usuário e senha."
 
 #, python-format
 msgid ""
@@ -1691,22 +1690,19 @@ msgid "install"
 msgstr "instalar"
 
 msgid "All files"
-msgstr ""
+msgstr "Todos os arquivos"
 
-#, fuzzy
 msgid "Selected Files:"
-msgstr "Arquivos Anexados"
+msgstr "Arquivos Selecionados:"
 
-#, fuzzy
 msgid "delete"
-msgstr "Excluir"
+msgstr "excluir"
 
-#, fuzzy
 msgid "move to page"
-msgstr "Número de páginas"
+msgstr "mover para página"
 
 msgid "Do it."
-msgstr "Faça-o"
+msgstr "Faça isso."
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"

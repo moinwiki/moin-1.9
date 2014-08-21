@@ -656,9 +656,8 @@ msgstr ""
 "Если у Вас до сих пор не заведена учетная запись, Вы всё равно можете войти "
 "по Вашему OpenID и создать учетную запись во время входа."
 
-#, fuzzy
 msgid "Missing user name. Please enter user name and password."
-msgstr "Отсутствует пароль. Пожалуйста, введите имя пользователя и пароль"
+msgstr "Отсутствует имя пользователя. Пожалуйста, введите имя пользователя и пароль"
 
 #, python-format
 msgid ""
@@ -702,14 +701,14 @@ msgid ""
 msgstr ""
 " Выделение:: <<Verbatim(//)>>''курсивом''<<Verbatim(//)>>; "
 "<<Verbatim(**)>>'''жирным'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''жирным "
-"курсивом'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''смешаным "
+"курсивом'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''смешанным "
 "''<<Verbatim(**)>>'''''жирным'''<<Verbatim(**)>> и "
 "курсивом''<<Verbatim(//)>>; Горизонтальная черта:: <<Verbatim(----)>> .\n"
 "Перевод строки:: <<Verbatim(\\\\)>>\n"
 " Заголовки:: = Уровня 1 =; == Уровня 2 ==; === Уровня 3 ===; ==== Уровня 4 "
 "====; ===== Уровня 5 =====.\n"
 " Списки:: пробел и одно из: * ненумерованный список; ** ненумерованный "
-"подсписок; # нумерованный список ## нумерованный подсписок;\n"
+"вложенный список; # нумерованный список ## нумерованный вложенный список;\n"
 " Ссылки:: <<Verbatim(ЗаглавныеСловаСлитно)>>;<<Verbatim([[название страницы|"
 "описание ссылки]])>>.\n"
 " Таблицы:: |= текст заголовка ячейки |ячейка|ещё ячейка|;\n"
@@ -798,7 +797,7 @@ msgstr ""
 " Выделение:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; "
 "<<Verbatim(''')>>'''жирным'''<<Verbatim(''')>>; "
 "<<Verbatim(''''')>>'''''жирным курсивом'''''<<Verbatim(''''')>>; "
-"<<Verbatim('')>>''смешаным "
+"<<Verbatim('')>>''смешанным "
 "''<<Verbatim(''')>>'''''жирным'''<<Verbatim(''')>> и "
 "курсивом''<<Verbatim('')>>; <<Verbatim(----)>> горизонтальная черта.\n"
 " Заголовки:: = Уровня 1 =; == Уровня 2 ==; === Уровня 3 ===; ==== Уровня 4 "
@@ -1079,10 +1078,10 @@ msgstr "ОчиститьКэш"
 
 #, python-format
 msgid "(cached %s)"
-msgstr "(закэширован %s)"
+msgstr "(сохранено %s)"
 
 msgid "Or try one of these actions:"
-msgstr "Или попробуйте сделать:"
+msgstr "Или попробуйте:"
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
@@ -1198,7 +1197,7 @@ msgid "Package Pages"
 msgstr "Страницы пакета"
 
 msgid "Render as Docbook"
-msgstr "Сформатировать как Docbook"
+msgstr "Показать как Docbook"
 
 msgid "Sync Pages"
 msgstr "Синхронизировать страницы"
@@ -1264,7 +1263,7 @@ msgid "Attachment link"
 msgstr "Ссылка на прикреплённый файл"
 
 msgid "Page link"
-msgstr "Ссылка на странцу"
+msgstr "Ссылка на страницу"
 
 msgid "Changed page"
 msgstr "Изменённая страница"
@@ -1300,7 +1299,7 @@ msgid "A user has subscribed to a page"
 msgstr "Пользователь подписался на страницу"
 
 msgid "A new account has been created"
-msgstr "Созадана новая учетная запись"
+msgstr "Создана новая учетная запись"
 
 msgid "Trivial "
 msgstr "слегка "
@@ -1411,7 +1410,7 @@ msgstr "Операция отменена."
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
-"Пожалуйста, воспользуйтесь интерактивным пользовательски интерфейсом для "
+"Пожалуйста, воспользуйтесь интерактивным пользовательским интерфейсом для "
 "действия %(actionname)s!"
 
 msgid "The only supported directions are BOTH and DOWN."
@@ -1421,7 +1420,7 @@ msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
-"Пожалуйста, установите имя интервики в конфигурационном файле вики (см. "
+"Пожалуйста, установите имя ИнтерВики в конфигурационном файле вики (см. "
 "КакНастраивать), чтобы у Вас была возможность использовать это действие."
 
 msgid ""
@@ -1502,7 +1501,7 @@ msgstr ""
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
-msgstr "Синхронизирую страницу %s с удаленной страницкей %s ..."
+msgstr "Синхронизирую страницу %s с удаленной страницей %s ..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
@@ -1549,7 +1548,7 @@ msgstr ""
 
 #, python-format
 msgid "Page %s merged with conflicts."
-msgstr "Страница %s совмещена с конфликами."
+msgstr "Объединение правок страницы «%s» выполнено с конфликтами."
 
 msgid "Attachment location"
 msgstr "Месторасположение прикреплённого файла"
@@ -1599,7 +1598,7 @@ msgstr "Пожалуйста, выберите:"
 
 #, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "Вам необходимо войти, чтобы использовать действие %(action)s."
+msgstr "Вам необходимо войти, чтобы использовать действие «%(action)s»."
 
 msgid "Only superuser is allowed to use this action."
 msgstr "Только суперпользователю разрешено активировать это действие"
@@ -1701,19 +1700,16 @@ msgid "install"
 msgstr "установить"
 
 msgid "All files"
-msgstr ""
+msgstr "Все файлы"
 
-#, fuzzy
 msgid "Selected Files:"
-msgstr "Прикреплённые файлы"
+msgstr "Выбранные файлы:"
 
-#, fuzzy
 msgid "delete"
-msgstr "Удалить"
+msgstr "удалить"
 
-#, fuzzy
 msgid "move to page"
-msgstr "Всего страниц"
+msgstr "переместить на страницу"
 
 msgid "Do it."
 msgstr "Выполнить."
@@ -2024,7 +2020,7 @@ msgstr ""
 "Здесь Вы можете добавить вложенные страницы к Вашей домашней странице.\n"
 "\n"
 "Вы решаете, могут ли другие читать или писать на этих страницах,\n"
-"доступ определяется членством в соотвествующей странице группы.\n"
+"доступ определяется членством в соответствующей странице группы.\n"
 "\n"
 "Просто введите имя страницы и нажмите кнопку для ее создания.\n"
 "\n"
@@ -2291,7 +2287,7 @@ msgid "Load"
 msgstr "Загрузить"
 
 msgid "Pagename not specified!"
-msgstr "Имя странцы не указано."
+msgstr "Имя страницы не указано."
 
 msgid "Upload page content"
 msgstr "Загрузить содержание страницы"
@@ -2316,7 +2312,7 @@ msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
 msgstr ""
-"/!\\ Дата измения, которую Вы ввели, не опознаётся, и, поэтому не "
+"/!\\ Дата изменения, которую Вы ввели, не опознаётся, и, поэтому не "
 "использована в поиске."
 
 #, python-format
@@ -2387,12 +2383,11 @@ msgstr "Вы должны быть подписаны, чтобы отписат
 msgid "TextCha: Wrong answer! Try again below..."
 msgstr "Текстовая капча: ответ неверен. Попробуйте еще раз в поле ниже."
 
-#, fuzzy
 msgid ""
 "Supplying a comment is mandatory. Write a comment below and try again..."
 msgstr ""
 "Указание комментария к изменениям обязательно. Пожалуйста, укажите "
-"комментарий в соотвествующем поле и попробуйте ещё раз."
+"комментарий в соответствующем поле и попробуйте ещё раз."
 
 #, python-format
 msgid "Create new drawing \"%(filename)s (opens in new window)\""
@@ -2626,7 +2621,7 @@ msgid ""
 msgstr ""
 "= Получение резервной копии =\n"
 "\n"
-"Засечания:\n"
+"Замечания:\n"
 " * Резервные копии должны храниться в надёжном месте — они содержат важную "
 "информацию.\n"
 " * Убедитесь, что настройки backup_* в конфигурации Вашей вики заполнены "
@@ -3435,7 +3430,7 @@ msgstr ""
 
 #, python-format
 msgid "<<%(macro_name)s: invalid macro name>>"
-msgstr ""
+msgstr "<<%(macro_name)s: неверное имя макрокоманды>>"
 
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
@@ -3561,7 +3556,7 @@ msgstr "Этот Jabber ID уже кем-то используется."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Не могу загрузать тему «%(theme_name)s»!"
+msgstr "Не могу загрузить тему «%(theme_name)s»!"
 
 msgid "User preferences saved!"
 msgstr "Настройки сохранены."
@@ -3920,7 +3915,7 @@ msgstr "Переключить отображение номеров строк"
 #~ msgstr "Проверьте аргумент %s"
 
 #~ msgid "ERROR in regex '%s'"
-#~ msgstr "ОШИБКА в регулярном выржении '%s'"
+#~ msgstr "ОШИБКА в регулярном выражении '%s'"
 
 #~ msgid "Bad timestamp '%s'"
 #~ msgstr "Неверная отметка времени '%s'"
@@ -3929,14 +3924,14 @@ msgstr "Переключить отображение номеров строк"
 #~ msgstr "Тип файла не поддерживается: %s"
 
 #~ msgid "Embedding of object by chosen formatter not possible"
-#~ msgstr "Вставка объекста выбранным форматировщиком невозможна"
+#~ msgstr "Вставка объекта выбранным модулем форматирования невозможна"
 
 #~ msgid ""
 #~ "Not enough arguments given to EmbedObject macro! Try "
 #~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
 #~ "Text])>>"
 #~ msgstr ""
-#~ "Не хватает агрументов, даных макрокоманде EmbedObject! Попробуйте "
+#~ "Не хватает аргументов, данных макрокоманде EmbedObject! Попробуйте "
 #~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
 #~ "Text])>>"
 
@@ -3944,7 +3939,7 @@ msgstr "Переключить отображение номеров строк"
 #~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
 #~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
 #~ msgstr ""
-#~ "Не хватает агрументов, даных макроманде EmbedObject! Попробуйте "
+#~ "Не хватает аргументов, данных макрокоманде EmbedObject! Попробуйте "
 #~ "<<EmbedObjecturl_mimetype [,width=width] [,height=height] [,alt=alternate "
 #~ "Text])>>"
 
