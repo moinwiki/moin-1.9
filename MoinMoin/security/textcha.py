@@ -130,26 +130,34 @@ class TextCha(object):
     def check_answer(self, given_answer, timestamp, signature):
         """ check if the given answer to the question is correct and within the correct timeframe"""
         if self.is_enabled():
+            reason = 'ok'
             if self.answer_re is not None:
                 success = self.answer_re.match(given_answer.strip()) is not None
+                if not success:
+                    reason = 'answer_re did not match'
             else:
                 # someone trying to cheat!?
                 success = False
+                reason = 'answer_re is None'
             if not timestamp or timestamp + self.expiry_time < time():
                 success = False
+                reason = 'textcha expired'
             try:
                 if not safe_str_equal(self._compute_signature(self.question, timestamp), signature):
                     success = False
+                    reason = 'signature mismatch'
             except TypeError:
                 success = False
+                reason = 'TypeError during signature check'
 
             success_status = success and u"success" or u"failure"
-            logging.info(u"TextCha: %s (u='%s', a='%s', re='%s', q='%s')" % (
+            logging.info(u"TextCha: %s (u='%s', a='%s', re='%s', q='%s', rsn='%s')" % (
                              success_status,
                              self.user_info,
                              given_answer,
                              self.answer_regex,
                              self.question,
+                             reason,
                              ))
             return success
         else:
