@@ -25,7 +25,7 @@ def log_attempt(system, success, request=None, username=None):
     @param username: user's name (optional, if None: determined from request)
     """
     if username is None:
-        if request and request.user.valid:
+        if request and hasattr(request, 'user') and request.user.valid:
             username = request.user.name
         else:
             username = u'anonymous'
