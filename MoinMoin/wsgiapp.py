@@ -171,10 +171,13 @@ def handle_action(request, context, pagename, action_name='show'):
     # Disallow non available actions
     elif action_name[0].isupper() and not action_name in \
             get_available_actions(cfg, context.page, context.user):
-        log_attempt(action_name, False, request, page=pagename)
         msg = _("You are not allowed to do %(action_name)s on this page.") % {
                 'action_name': wikiutil.escape(action_name), }
-        if not context.user.valid:
+        if context.user.valid:
+            log_attempt(action_name, False, request,
+                        context.user.name, page=pagename)
+        else:
+            log_attempt(action_name, False, request, page=pagename)
             # Suggest non valid user to login
             msg += " " + _("Login and try again.")
 
@@ -186,10 +189,13 @@ def handle_action(request, context, pagename, action_name='show'):
         from MoinMoin import action
         handler = action.getHandler(context, action_name)
         if handler is None:
-            log_attempt(action_name, False, request, page=pagename)
             msg = _("You are not allowed to do %(action_name)s on this page.") % {
                     'action_name': wikiutil.escape(action_name), }
-            if not context.user.valid:
+            if context.user.valid:
+                log_attempt(action_name, False, request,
+                            context.user.name, page=pagename)
+            else:
+                log_attempt(action_name, False, request, page=pagename)
                 # Suggest non valid user to login
                 msg += " " + _("Login and try again.")
             context.theme.add_msg(msg, "error")
