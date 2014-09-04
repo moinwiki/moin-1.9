@@ -169,8 +169,10 @@ class PageEditor(Page):
 
         # check edit permissions
         if not request.user.may.write(self.page_name):
+            log_attempt('edit: edit', False, request)
             msg = _('You are not allowed to edit this page.')
         elif not self.isWritable():
+            log_attempt('edit: immutable', False, request)
             msg = _('Page is immutable!')
         elif self.rev:
             # Trying to edit an old version, this is not possible via
@@ -552,6 +554,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             return False, _("You can't copy to an empty pagename.")
 
         if not self.request.user.may.write(newpagename):
+            log_attempt('edit: copy', False, request)
             return False, _('You are not allowed to copy this page!')
 
         newpage = PageEditor(request, newpagename)
