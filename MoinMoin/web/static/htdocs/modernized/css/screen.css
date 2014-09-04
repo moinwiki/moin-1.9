@@ -1,0 +1,479 @@
+/*  screen.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+/* debug 
+* {border: 1px dotted blue;}
+*/
+
+body {
+    padding: 0;
+    border: 0;
+}
+
+a:link { color: #47f; text-decoration: none; }
+a:link:hover, a:link:active { text-decoration: underline; color: green; }
+a:visited { text-decoration: none; color: #04a;}
+a:visited:hover { text-decoration: none; color: red; }
+a.nonexistent:link { color: #666 }
+a.nonexistent:hover { color: black; text-decoration: underline }
+
+a.download {
+    font-size: 120%; 
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    background: #E7E7E7;
+    border: 1px solid #9C9C9C;
+    padding: 0.5em;
+    text-align: center;
+}
+
+input {
+    /* does strange effect to button (text size becomes bigger when clicking)
+    font-size: 1em;
+    font-family: Arial, Lucida Grande, sans-serif;
+    */
+}
+
+textarea {
+    font-size: 1em;
+    font-family: monospace;
+}
+
+.disabled {
+    /* IE ignore disabled attribute, but at least show items in gray */
+    color: gray;
+}
+
+/* user interface styles */
+
+#header {
+    margin: 1px;
+    padding: 1px;
+    background: #e6eaf0;
+    line-height: 1.1em;
+}
+
+#logo {
+    float: left;
+    margin: 5px 10px;
+    padding: 0;
+    /* For text only logo */
+    font-size: 1.4em;
+    line-height: 1em;
+    font-weight: bold;
+}
+
+*[dir="rtl"] #logo {
+    float: right;
+}
+
+#logo img {
+    vertical-align: middle;
+}
+
+#logo a {
+    color: black;
+    text-decoration: none;
+}
+
+
+#username {
+    display: block;
+    margin: 8px 12px 4px 12px;
+    padding: 0;
+    font-size: 0.82em;
+}
+
+#username form {
+    display: inline;
+}
+
+#username input {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    color: blue;
+    font-size: 0.82em;
+    cursor: pointer;
+}
+
+#username input:hover {
+    color: red;
+}
+
+#searchform {
+    margin: 4px 0.5em 8px 0.5em;
+    padding: 0;
+    font-size: 0.82em;
+    float: right;
+    clear: right;
+    text-align: right;
+}
+*[dir="rtl"] #searchform {
+    float: left;
+    clear: left;
+    text-align: left;
+}
+#searchform input {
+    font-size: 100%;
+    vertical-align: middle;
+}
+#pagetrail {
+    clear: right;
+    display: inline;
+    margin: 0 0.88em 0.25em 0.88em;
+    padding: 0;
+    font-size: 0.88em;
+}
+
+*[dir="rtl"] #pagetrail {
+    clear: left;
+}
+
+#interwiki {
+    font-size: 1em;
+}
+
+#locationline {
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+    margin: 0.25em 12px 5px 12px;
+    clear: right;
+}
+*[dir="rtl"] #locationline {
+    clear: left;
+}
+
+#pagelocation {
+    font-size: 1.5em;
+    letter-spacing: 0.05em;
+}
+
+
+*[dir="rtl"] #pagetrail span.sep {
+    visibility: hidden;
+}
+*[dir="rtl"] #pagetrail span.sep:after {
+    content: " « ";
+}
+
+#navibar {
+    clear: both;  /* problem: clear: right; aligns nicely right of logo,
+                    but lets it float high in the header, disconnected from ground */
+    display: block;
+    margin: 0;
+    padding: 0 10px;
+    font-size: 0.82em;
+    zoom: 1; /* for avoiding a gap between navibar and pageline on IE */
+}
+
+#navibar li {
+    float: left;
+    display: inline;
+    margin: 0 2px;
+    padding: 2px 5px;
+    border: 1px solid #acd;
+    border-bottom: none;
+    white-space: nowrap;
+}
+
+*[dir="rtl"] #navibar li {
+    float: right;
+}
+
+#navibar li.wikilink {
+    background: white; /*url(../img/tab-wiki.png) repeat-x;*/
+}
+
+#navibar li.userlink {
+    background: #E6EAF0; /*url(../img/tab-user.png) repeat-x;*/
+}
+
+#navibar a, #navibar a:visited {
+    color: black;
+    text-decoration: none;    
+}
+
+#navibar li.current a {
+    font-weight: bold;
+}
+
+#navibar li:hover {
+    background: #d6e4f9;
+}
+
+#navibar li.current, #navibar li.current:hover {
+    background: #81BBF2; /* url(../img/tab-selected.png) repeat-x; */
+    border: 1px solid #4d7da9;
+    border-bottom: 1px solid #81bbf2;
+    margin-bottom: -1px;
+}
+
+#pageline {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* sync these values, line-height is needed for IE */
+    height: 4px;
+    line-height: 4px;
+    border-bottom: 1px solid #4d7da9;
+    border-top: 1px solid #4d7da9;
+    background: #81BBF2;
+}
+
+.editbar {
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 2px 8px;
+    background: #d6e4f9;
+    font-size: 0.8em;
+    border-bottom: 1px solid #4d7da9;
+    border-top: 1px solid #4d7da9;
+    margin-top: -1px;
+}
+
+.editbar form, .editbar form div {
+    display: inline;
+    margin: 0;
+}
+
+.editbar select {
+    font-size: 100%;
+    vertical-align: middle;
+}
+
+.editbar li {
+    display: inline;
+    padding: 0;
+    margin: 4px 6px;
+}
+
+.editbar a, .editbar a:visited { color: #0044B3; }
+
+#message {
+    clear: both;
+    margin: 0;
+    padding: 5px 10px;
+    border-bottom: 1px solid #c9c9c9;
+    background: #E6EAF0;
+}
+
+#message p {
+    margin: 5px 0;
+    padding: 0;
+    /* font-weight: bold; */
+}
+
+#message div.buttons {
+    font-weight: normal;
+}
+
+.dialog form {
+    margin: 0 15px;
+}
+
+.dialog td {
+    border: none;
+    padding: 5px;
+}
+
+.dialog td.label {
+    text-align: right;
+    font-weight: bold;
+    width: 25%;
+}
+
+*[dir="rtl"] .dialog td.label {
+    text-align: left;
+}
+
+.dialog td.content input {
+    width: 100%;
+}
+
+#page {
+    background-color: white;
+    margin: 0;
+    padding: 2px 20px 20px 20px;
+
+    /* theses are some Firefox 1.5b1 specific extensions, see also the CSS3 draft.
+    -moz-column-width: 25em;
+    -moz-column-gap: 2em;
+    -moz-column-rule: solid black 0.3em;     --   doesn't work yet with 1.5b1!
+
+    TODO: make text/gui editor NOT use #page css, we don't want columns there!
+    */
+}
+
+/* We use here dumb css1 ids because of IE suckiness */
+#editor-textarea, #editor-help {
+    font-family: monospace;
+    border: 1px solid #8cacbb;  
+    color: black;
+    background-color: white;
+    padding: 3px;
+    width: 100%;
+    margin-top: 0.5em;
+}
+
+#editor-help {
+    font-size: small;
+    background-color: #EEEEFF;
+}
+
+#editor-comment {
+    font-size: 100%;
+    border: 1px solid #8cacbb;
+    color: black;
+    background-color: white;
+    vertical-align: middle;
+    padding: 1px;
+    display: inline;
+    width: 70%;
+}
+
+#preview, #previewbelow {
+    border: 1px solid #6C7680;
+    padding: 3px;
+    width: 100%;
+    background: url(../img/draft.png);
+    margin-top: 0.5em;
+}
+
+#textcha {
+    font-size: 100%;
+    margin-top: 0.5em;
+    border: 2px solid #FF8888;
+    color: black;
+    vertical-align: middle;
+    padding: 3px 2px;
+}
+
+#textcha-answer {
+    border: 2px solid #000000;
+    padding: 3px 2px;
+}
+
+input.button {
+    /*
+    border: 1px solid #8cacbb;  
+    color: black;
+    background-color: #CCCCCC;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 100%;
+    cursor: pointer;
+    margin: 2px;
+    padding: 1px;
+    display: inline;
+    */
+}
+
+#footer {
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+
+#credits, #version, #timings{
+    margin: 5px 10px;
+    padding: 0;
+    text-align: center;
+    font-size: 0.88em;
+    color: #6C7680;
+}
+
+#credits li, #timings li {
+    display: inline;
+    padding: 0 2px;
+    margin: 0 4px;
+}
+
+#credits img {
+    vertical-align: middle;
+}
+
+.diff {
+    width:99%;
+    table-layout: fixed;
+}
+
+.diff-header {
+    font-weight: bold;
+}
+
+.diff-title {
+    background-color: #C0C0C0;
+}
+
+.diff-added {
+    background-color: #E0FFE0;
+    vertical-align: top;
+    width: 50%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: courier, monospace;
+}
+
+.diff-removed {
+    background-color: #FFFFE0;
+    vertical-align: top;
+    width: 50%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: courier, monospace;
+}
+
+.diff-added span {
+    background-color: #80FF80;
+}
+
+.diff-removed span {
+    background-color: #FFFF80;
+}
+
+td.diff-info {
+    vertical-align: top;
+}
+
+div.diff-info {
+    white-space: nowrap;
+}
+
+div.diff-info-rev-comment span.diff-info-value {
+    white-space: normal;
+}
+
+div.diff-info-header {
+    background-color: #E8E8E8;
+    width: 100%;
+    padding: 0.25em 0.5em;
+    margin: -0.25em -0.5em;
+    margin-bottom: 0.25em;
+    text-align: center;
+}
+
+td.diff-same {
+    text-align: center;
+    border: 0;
+}
+
+table.navigation {
+    float: right;
+    margin: 2px;
+}
+
+#openididentifier {
+    background: url(../../common/openid.png) no-repeat;
+    background-position: 0 50%;
+    padding-left: 18px;
+}

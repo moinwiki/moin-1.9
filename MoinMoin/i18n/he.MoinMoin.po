@@ -1,0 +1,3677 @@
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
+##master-page:None
+##master-date:None
+#acl -All:write Default
+#format gettext
+#language he
+
+#
+# MoinMoin he system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-04 22:35+0200\n"
+"PO-Revision-Date: 2008-08-22 02:05+0300\n"
+"Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
+"Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Translator: Nir Soffer <nirs@freeshell.org>\n"
+"X-Direction: rtl\n"
+"X-Language: עברית\n"
+"X-HasWikiMarkup: True\n"
+"X-Language-in-English: Hebrew\n"
+"X-Generator: KBabel 1.11.4\n"
+
+msgid "Your changes are not saved!"
+msgstr "השינויים שלך לא נשמרו!"
+
+msgid "You are not allowed to edit this page."
+msgstr "אין לך הרשאות לערוך את הדף"
+
+msgid "Page is immutable!"
+msgstr "הדף נעול"
+
+msgid "Cannot edit old revisions!"
+msgstr "אין אפשרות לערוך גרסאות קודמות"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr "הנעילה שביצעת פגה. הייה מוכן להתנגשויות עריכה!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "שם הדף ארוך מדי, נסה שם קצר יותר."
+
+#, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr "טיוטה של \"%(pagename)s\""
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "ערוך \"%(pagename)s\""
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "תצוגה מקדימה של \"%(pagename)s\""
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "נעילת העריכה שלך ל–%(lock_page)s הסתיימה"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr "נעילת העריכה שלך לדף %(lock_page)s תסתיים בעוד # דקות"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr "נעילת העריכה שלך לדף %(lock_page)s תסתיים בעוד # שניות"
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "מישהו מחק את הדף בשעה שערכת אותו"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "מישהו שינה את הדף בשעה שערכת אותו"
+
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+"מישהו שמר את הדף בשעה שערכת אותו!\n"
+"אנא בדוק את הדף ולאחר מכן שמור אותו מחדש. אל תשמור אותו כפי שהוא!"
+
+msgid "[Content loaded from draft]"
+msgstr "[תוכן נטען מטיוטה]"
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[תוכן הדף החדש נלקח מ–%s]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[תבנית %s לא נמצאה]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[אין לך הרשאות לקרוא את %s]"
+
+#, python-format
+msgid ""
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
+msgstr ""
+"'''<<BR>>ניתן לטעון את הטיוטה שלך שמבוססת על גרסה %(draft_rev)d (נשמרה ב-"
+"%(draft_timestamp_str)s) במקום הגרסה הנוכחית %(page_rev)d על ידי שימוש "
+"בכפתור טעינת הטיוטה - במקרה שאיבדת בטעות את העריכה האחרונה מבלי לשמור "
+"אותה.''' טיוטה נשמרת בשבילך בעת ביצוע תצוגה מקדימה, ביטול עריכה או שמירה "
+"שנכשלה."
+
+#, python-format
+msgid "Describe %s here."
+msgstr "תארו את %s כאן."
+
+msgid "Check Spelling"
+msgstr "בדוק איות"
+
+msgid "Save Changes"
+msgstr "שמור שינויים"
+
+msgid "Cancel"
+msgstr "בטל"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"לחיצה על %(save_button_text)s תשמור את השינויים שלך תחת %(license_link)s.\n"
+"אם אתה לא מסכים לכך, לחץ על %(cancel_button_text)s."
+
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+msgid "GUI Mode"
+msgstr "מצב ממשק משתמש גרפי"
+
+msgid "Load Draft"
+msgstr "טען טיוטה"
+
+msgid "Trivial change"
+msgstr "שינוי פעוט"
+
+msgid "Comment:"
+msgstr "הערה:"
+
+msgid "<No addition>"
+msgstr "<ללא תוספת>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "הוסף לקטגוריה: %(category)s"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "הסר רווחים מסופי שורות"
+
+msgid "Edit was cancelled."
+msgstr "עריכה בוטלה."
+
+msgid "You can't copy to an empty pagename."
+msgstr "אין באפשרותך להעתיק לשם דף ריק."
+
+msgid "You are not allowed to copy this page!"
+msgstr "אינך מורשה להעתיק את הדף הזה!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''דף בשם {{{'%s'}}} כבר קיים.'''\n"
+"\n"
+"נסה שם אחר."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "העתקת הדף נכשלה בגלל שגיאת במערכת הקבצים: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "אין באפשרותך לשנות את השם של דף זה!"
+
+msgid "You can't rename to an empty pagename."
+msgstr "אין באפשרותך לשנות שם לשם ריק."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "שינוי שם הדף נכשל בגלל שגיאת במערכת הקבצים: %s."
+
+msgid "You are not allowed to delete this page!"
+msgstr "אין באפשרותך למחוק את הדף!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "תודה על השינויים. תשומת ליבך לפרטים מוערכת."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "דף \"%s\" נמחק בהצלחה."
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "נעילת הדף נכשלה. טעות בלתי צפויה (%d)."
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "נעילת הדף נכשלה. יתכן שקובץ 'current' לא קיים?"
+
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
+msgstr ""
+"לא ניתן לקבוע את גרסת הדף הנוכחית מהקובץ 'current'. הדף %s הינו פגום ולא "
+"ניתן לעריכה ברגע זה."
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr "לא ניתן לשמור את דף %s, לא נשאר שטח אחסון."
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr "שגיאת קלט\\פלט התרחשה בעת שמירת הדף %s (קוד שגיאה=%d)"
+
+msgid "You are not allowed to edit this page!"
+msgstr "אין לכם הרשאות לערוך את הדף."
+
+msgid "You cannot save empty pages."
+msgstr "אי אפשר לשמור דף ריק, הוסיפו תוכן ושימרו שוב."
+
+msgid "You already saved this page!"
+msgstr "כבר שמרת את הדף!"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr "כבר ערכת את העמוד! נא לא להשתמש בכפתור \"הקודם\"."
+
+msgid "You did not change the page content, not saved!"
+msgstr "תוכן הדף לא השתנה."
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr "אין לכם אפשרות לשנות הרשאות בדף כי אין לכם הרשאת מנהל לדף."
+
+msgid "Notifications sent to:"
+msgstr "הודעה נשלחה ל:"
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"הנעילה של %(owner)s הסתיימה לפני %(mins_ago)d דקות, וקבלתם את נעילת העריכה"
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr "משתמשים אחרים לא יוכלו לערוך את הדף עד %(bumptime)s."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr "משתמשים אחרים יקבלו אזהרה שאתם עורכים את הדף עד %(bumptime)s."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "לחצו על כפתור \"תצוגה מקדימה\" כדי להאריך את נעילת העריכה."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"הדף נעול לעריכה על ידי %(owner)s עד ל–%(timestamp)s במשך %(mins_valid)d דקות."
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''<<BR>>\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"הדף נפתח לעריכה לאחרונה ב–%(timestamp)s על ידי %(owner)s.<<BR>>\n"
+"יש להמנע מעריכה של הדף לפחות עוד %(mins_valid)d דקות על מנת למנוע התנגשויות "
+"עריכה.<<BR>>\n"
+"בכדי לעזוב את העורך, לחץ על הכפתור בטל."
+
+msgid "<unknown>"
+msgstr "<לא ידוע>"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] פרטי המשתמש שלך"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+"מישהו ביקש לשלוח לך מפתח לאיפוס ססמה.\n"
+"\n"
+"אם אכן שכחת את ססמתך לחץ על הקישור המופיע בהמשך (או הכנס לדף איפוס הססמה), "
+"והכנס את שם המשתמש שלך ואת מפתח האיפוס.\n"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"שם משתמש: %s\n"
+"\n"
+"מפתח לאיפוס ססמה: %s\n"
+"\n"
+"כתובת לאיפוס ססמה: %s/action=recoverpass&name=%s&token=%s\n"
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "החבילה זקוקה לגרסה חדשה יותר של MoinMoin (לפחות %s)."
+
+msgid "The theme name is not set."
+msgstr "שם ערכת הנושא לא נקבע."
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "קבצי נושא לא מותקנים! זכויות כתיבה חסרים ל %s."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "ההתקנה של '%(filename)s' נכשלה."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "הקובץ %s אינו קובץ חבילה של MoinMoin."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "הדף %s לא קיים."
+
+msgid "Invalid package file header."
+msgstr "כותר קובץ חבילה בלתי חוקי."
+
+msgid "Package file format unsupported."
+msgstr "סוג קובץ חבילה אינו נתמך."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "פונקציה לא ידועה %(func)s בשורה %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "הקובץ %s לא נמצא בחבילה."
+
+msgid "The wiki is currently not reachable."
+msgstr "המערכת אינה זמינה כרגע."
+
+msgid "Invalid username or password."
+msgstr "שם משתמש או סיסמה בלתי חוקיים."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+"המערכת המרוחקת משתמש בשם InterWiki פנימי שונה (%(remotename)s) מהשם שציינת "
+"(%(localname)s)."
+
+msgid "Text mode"
+msgstr "מצב מלל"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "פעולה לא ידועה %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "אינך מורשה לבצע %(action_name)s בדף זה."
+
+msgid "Login and try again."
+msgstr "התחבר ונסה שוב."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "הפרמטר \"%s\" חייב להיות ערך בוליאני, לא \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "הפרמטר חייב להיות ערך בוליאני, לא \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "הפרמטר \"%s\" חייב להיות ערך מספרי שלם, לא \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "הפרמטר חייב להיות ערך מספרי שלם, לא \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "הפרמטר \"%s\" חייב להיות ערך נקודה צפה, לא \"%s\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "הפרמטר חייב להיות ערך נקודה צפה, לא \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "הפרמטר \"%s\" חייב להיות ערך מרוכב, לא \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "הפרמטר חייב להיות ערך מרוכב, לא \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "הפרמטר \"%s\" חייב להיות בין \"%s\", לא \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "הפרמטר חייב להיות בין \"%s\", לא \"%s\""
+
+msgid "Too many arguments"
+msgstr "יותר מדי פרמטרים"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "לא ניתן לקבל פרמטרים ללא שם אחרי פרמטרים עם שם"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "הפרמטר \"%s\" נדרש"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "אין פרמטר בשם \"%s\""
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "ציפיתי ל \"=\" אחרי \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "ציפיתי לערך למפתח \"%(token)s\""
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr "הביטוי הרגולרי \"%(regex)s\" שנבחר להדגשה שגוי: %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
+
+msgid ""
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
+msgstr "גרסאות הגיבוי של הדף מיושנים וימצאו בסוף תוצאות החיפושים"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "גרסא %(rev)d מתאריך %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "הפנייה מדף \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "דף זה מפנה לדף \"%(page)s\""
+
+msgid "Create New Page"
+msgstr "צור דף חדש"
+
+msgid "You are not allowed to view this page."
+msgstr "אין לכם הרשאות לצפות בדף"
+
+msgid "No recipients, nothing to do"
+msgstr "אין לקוחות, אין מה לעשות"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "החיבור לשרת הדואר \"%(server)s\" נכשל: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "דואר לא נשלח."
+
+msgid "Mail sent OK"
+msgstr "דואר נשלח בהצלחה."
+
+msgid "Date"
+msgstr "תאריך"
+
+msgid "From"
+msgstr "מאת"
+
+msgid "To"
+msgstr "אל"
+
+msgid "Content"
+msgstr "תוכן"
+
+msgid "Attachments"
+msgstr "קבצים מצורפים"
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)s\" לא מורשה בוויקי הזה."
+
+msgid "Could not contact botbouncer.com."
+msgstr "לא יכל להתחבר ל-botbouncer.com"
+
+msgid "Please log in first."
+msgstr "אנא התחבר ראשית."
+
+msgid "Failed to connect to database."
+msgstr "נכשל להתחבר לבסיס נתונים."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "סיסמה חסרה. אנא הכנס שם משתמש וסיסמה."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "שרת LDAP %(server)s נכשל."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+"אנא בחר שם לחשבון עכשיו.\n"
+"אם תבחר בשם שכבר קיים תתבקש לתת את \n"
+"הסיסמה ותוכל לשייך את החשבון ל-OpenID שלך."
+
+msgid "Name"
+msgstr "שם"
+
+msgid "Choose this name"
+msgstr "בחר בשם הזה"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "זה לא שם תקין, בחר באחד אחר."
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+"השם שבחרת כבר\n"
+"תפוס. אם זה השם משתמש שלך, הכנס את הסיסמה שלך למטה כדי לשייך\n"
+"את השם ל-OpenID שלך. אחרת, בבקשה תבחר שם משתמש\n"
+"שונה והשאר את שדה הסיסמה ריקה."
+
+msgid "Password"
+msgstr "סיסמא"
+
+msgid "Associate this name"
+msgstr "שייך את השם הזה"
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr "שגיאה ב-OpenID: %s."
+
+msgid "OpenID verification canceled."
+msgstr "אימות ה-OpenID בוטלה."
+
+msgid "Verification canceled."
+msgstr "אימות בוטלה."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr "הצלחה ב-OpenID. מ\"ז: %s"
+
+msgid "OpenID failure"
+msgstr "כישלון ב-OpenID"
+
+msgid "OpenID failure."
+msgstr "כישלון OpenID."
+
+msgid "No OpenID found in session."
+msgstr "OpenID לא נמצאה בהפעלה הזאת."
+
+msgid "Your account is now associated to your OpenID."
+msgstr "החשבון שלך עכשיו משוייך ל-OpenID שלך."
+
+msgid "The password you entered is not valid."
+msgstr "הסיסמה שהכנסת לא תקינה."
+
+msgid "OpenID error: unknown continuation stage"
+msgstr "שגיאת OpenID: שלב המשכה לא ידועה"
+
+msgid "OpenID verification requires that you click this button:"
+msgstr "אימות OpenID מצריך שתלחץ על הכפתור הזה:"
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr "דרושה הפעלה אנונומית כדי לאפשר כניסה של OpenID."
+
+msgid "Failed to resolve OpenID."
+msgstr "לא יכל לפתור OpenID."
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr "גילוי כשלון ב-OpenID, לא OpenID תקין."
+
+msgid "No OpenID."
+msgstr "חסר OpenID."
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+"אם אין לך עדין חשבון, אתה עדין יכול להתחבר עם ה-OpenID שלךוליצור אחד "
+"בהתחברות."
+
+#, fuzzy
+msgid "Missing user name. Please enter user name and password."
+msgstr "סיסמה חסרה. אנא הכנס שם משתמש וסיסמה."
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
+msgstr ""
+"אם אין לך חשבון במערכת, ניתן לפתוח <a href=\"%(userprefslink)s\">חשבון חדש</"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr "<a href=\"%(sendmypasswordlink)s\">שחכת סיסמה?</a>"
+
+msgid "HelpOnParsers"
+msgstr "HelpOnParsers"
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
+msgstr "הדגשת תחביר לא תומכת ב-'%(syntax)s', ראה %(highlight_help_page)s."
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" הדגשה:: {{{//}}}''נטוי''{{{//}}}, {{{**}}}'''מודגש'''{{{**}}}, "
+"{{{**//}}}'''''מודגש ונטוי'''''{{{//**}}}, {{{//}}}''נטוי "
+"ו{{{**}}}'''מודגש'''{{{**}}} מעורבים{{{//}}}\n"
+" קו אפקי:: {{{----}}}\n"
+" שבור שורה:: {{{\\\\}}}\n"
+" כותרות:: = כותרת 1 =, == כותרת 2 ==, === כותרת 3 ===, ==== כותרת 4 ====, "
+"===== כותרת 5 =====\n"
+" רשימות:: * פריט, ** תת פריט, # ממוספר, ## תת-פריט ממוספר\n"
+" קישורים:: {{{[[}}}שם דף{{{]]}}}, {{{[[}}}שם דף|טקסט בקישור{{{]]}}}\n"
+" טבלאות:: |= תא כותרת | תא רגיל | עוד תא רגיל\n"
+"\n"
+"(!) לעזרה נוספת, ראה HelpOnEditing או HelpOnCreoleSyntax\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT מבוטל, להפעלה הסתכל ב–HelpOnConfiguration."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "עיבוד XSLT לא זמין."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s טעות בעיבוד"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr "עיבוד טקסט reStructed בלתי אפשרי, אנא התקן את Docutils."
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"{{{\n"
+"הדגשה: *נטוי* **מודגש** ``רווח קבוע``\n"
+"\n"
+"כותרות: כותרת 1  כותרת 2  כותרת 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"קו מאוזן: ---- \n"
+"קישורים: קו-תחתי-עוקב_ `מספר מילים עם מרכאות בודדות אחוריות`_ חיצוני_ \n"
+"\n"
+".. _חיצוני: http://external-site.net/foo/\n"
+"\n"
+"רשימות: * תבליטים; 1., a. פריטים ממוספרים.\n"
+"}}}\n"
+"(!) לעזרה נוספת, ראה את \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**מספר גדול מידי של קבצים מוכללים**"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**אין באפשרותך לקרוא את העמוד \"%s\"**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**אין אפשרות למצוא את הדף המוכלל: %s**"
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" הדגשה:: <<Verbatim('')>>''נטוי''<<Verbatim(''(<<;"
+"<<Verbatim('''(>>'''מודגש'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''מודגש "
+"נטוי'''''<<Verbatim(''''')>>; <<Verbatim('')>>''מעורב "
+"''<<Verbatim(''')>>'''''מודגש'''<<Verbatim(''')>> ונטוי ''<<Verbatim('')>>; "
+"<<Verbatim(----)>> קו אופקי.\n"
+" כותרות:: = כותרת ראשית =, ==  כותרת משנה ==, === כותרת 3 ===, ==== כותרת 4 "
+"====, ===== כותרת 5 =====\n"
+" רשימות:: רווח וכוכבית (*) \" * פריט ברשימה לא ממוספרת\", רווח מספר ונקודה "
+"\" 1. פריט ברשימה ממוספרת\", סולמית ומספר \" מתחיל מהמספר \", רווח בלבד מזיח "
+"את הפסקה.\n"
+" קישורים:: {{{[[}}}שם דף{{{]]}}}, {{{[[}}}שם דף|טקסט בקישור{{{]]}}} \n"
+" טבלאות:: {{{||}}} תא {{{||||}}} תא ברוחב כפול {{{||}}};    אין להשאיר "
+"רווחים אחרי כותרות וטבלאות.\n"
+"\n"
+"(!) לעזרה נוספת, ראה HelpOnEditing או SyntaxReference.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "ציפיתי ל–\"%(wanted)s\" לאחר \"%(key)s\", קיבלתי \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "ציפיתי למספר שלם \"%(key)s\" לפני \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "ציפיתי למספר שלם \"%(arg)s\" אחרי \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "ציפיתי לערך של צבע \"%(arg)s\" אחרי \"%(key)s\""
+
+msgid "Password is too short."
+msgstr "הססמה קצרה מידי"
+
+msgid "Password has not enough different characters."
+msgstr "אין מספיק תווים שונים בסיסמה."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "סיסמה קלה מידי (סיסמה מכילה שם או שם מכיל סיסמה)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "סיסמה קלה מידי (רצף במקלדת)"
+
+msgid "Diffs"
+msgstr "הבדלים"
+
+msgid "Info"
+msgstr "מידע"
+
+msgid "Edit"
+msgstr "ערוך"
+
+msgid "UnSubscribe"
+msgstr "בטל מינוי"
+
+msgid "Subscribe"
+msgstr "עשה מינוי"
+
+msgid "Raw"
+msgstr "גולמי"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "הדפסה"
+
+msgid "View"
+msgstr "תצוגה"
+
+msgid "Up"
+msgstr "למעלה"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "פרסם את הדוא\"ל (לא את עמוד הויקי שלי) במידע היוצר."
+
+msgid "Open editor on double click"
+msgstr "ערוך דף בלחיצה כפולה"
+
+msgid "After login, jump to last visited page"
+msgstr "אחרי התחברות, קפוץ לעמוד האחרון שביקרתי בו"
+
+msgid "Show comment sections"
+msgstr "הצג איזורי תגובות"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "הצג סימני שאלה בקישורים לדפים לא קיימים"
+
+msgid "Show page trail"
+msgstr "הצג דפים אחרונים שביקרתי בהם"
+
+msgid "Show icon toolbar"
+msgstr "הצג שורת כלים"
+
+msgid "Show top/bottom links in headings"
+msgstr "הצג קישורים למעלה ולמטה בכותרות"
+
+msgid "Show fancy diffs"
+msgstr "הצג הבדלים יפים"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "הוסף רווחים לשמות וויקי"
+
+msgid "Remember login information"
+msgstr "זכור אותי (מחייב קוקיות מאופשרות בדפדפן)"
+
+msgid "Disable this account forever"
+msgstr "בטל הרשמה"
+
+msgid "(Use FirstnameLastname)"
+msgstr " (השתמש במבנה שם של FirstnameLastname)"
+
+msgid "Alias-Name"
+msgstr "שם-נרדף"
+
+msgid "Email"
+msgstr "דוא\"ל"
+
+msgid "Jabber ID"
+msgstr "כתובת Jabber"
+
+msgid "User CSS URL"
+msgstr "קובץ CSS אישי"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "השאר ריק לברירת מחדל"
+
+msgid "Editor size"
+msgstr "גודל תיבת עריכה"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] עידכון%(trivial)s של \"%(pagename)s\" על ידי %(username)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"לבקשתך, הודעה על שינויים בדפים או קטגוריות ב–\"%(sitename)s\".\n"
+"\n"
+"%(pagename)s\n"
+"שונה על ידי %(editor)s:\n"
+"\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"לבקשתך, הודעה על שינויים בדפים או קטגוריות ב–\"%(sitename)s\".\n"
+"\n"
+"%(pagename)s\n"
+"נמחק על ידי %(editor)s:\n"
+"\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
+msgstr ""
+"לבקשתך, הודעה על שינויים בדפים או קטגוריות ב–\"%(sitename)s\".\n"
+"\n"
+"שם הדף\n"
+"%(oldname)s\n"
+"שונה על ידי %(editor)s:\n"
+"\n"
+"והוא נקרא כעת\n"
+"%(pagename)s\n"
+
+#, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "קובץ חדש צורף לדף \"%(pagename)s\" באתר \"%(sitename)s\""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"משתמש יקר,\n"
+"\n"
+"ביצעת מינוי לשינויים בעמוד \"%(page_name)s\". לעמוד זה צורף קובץ על ידי "
+"%(editor)s.להלן פרטי הקובץ המצורף:\n"
+"\n"
+"שם הקובץ: %(attach_name)s\n"
+"גודל הקובץ: %(attach_size)s\n"
+
+#, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "נספח הוסר מדף \"%(pagename)s\" באתר \"%(sitename)s\""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"משתמש יקר,\n"
+"\n"
+"ביצעת מינוי לשינויים בעמוד \"%(page_name)s\". לעמוד זה הוסר נספח על ידי "
+"%(editor)s.להלן פרטי הקובץ המצורף:\n"
+"\n"
+"שם הקובץ: %(attach_name)s\n"
+"גודל הקובץ: %(attach_size)s\n"
+
+#, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] חשבון משתמש חדש נוצר"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+"מנהל יקר, משתמש חדש נוצר ב-\"%(sitename)s\".להלן פרטי המשתמש:\n"
+"\n"
+"    שם משתמש: %(username)s\n"
+"    כתובת דוא\"ל: %(useremail)s"
+
+msgid "anonymous"
+msgstr "ללא שם"
+
+msgid "Line"
+msgstr "שורה"
+
+msgid "No differences found!"
+msgstr "לא נמצאו הבדלים!"
+
+msgid "Deletions are marked like this."
+msgstr "מחיקות מסומנות כך."
+
+msgid "Additions are marked like this."
+msgstr "הוספות מסומנות כך."
+
+msgid "DeleteCache"
+msgstr "נקה מטמון"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(מטמון %s)"
+
+msgid "Or try one of these actions:"
+msgstr "או נסה אחת מהפעולות הבאות:"
+
+msgid "Unsubscribe"
+msgstr "בטל מינוי"
+
+msgid "Home"
+msgstr "דף בית"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[נמחק]"
+
+msgid "[UPDATED]"
+msgstr "[עודכן]"
+
+msgid "[RENAMED]"
+msgstr "[שם שונה]"
+
+msgid "[CONFLICT]"
+msgstr "[התנגשות]"
+
+msgid "[NEW]"
+msgstr "[חדש]"
+
+msgid "[DIFF]"
+msgstr "[הבדלים]"
+
+msgid "[BOTTOM]"
+msgstr "[למטה]"
+
+msgid "[TOP]"
+msgstr "[למעלה]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "לחץ לביצוע חיפוש מלל מלא עבור כותרת זאת"
+
+msgid "Settings"
+msgstr "הגדרות"
+
+msgid "Logout"
+msgstr "התנתק"
+
+msgid "Login"
+msgstr "התחבר"
+
+msgid "Clear message"
+msgstr "סגור הודעה"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "נערך לאחרונה ב–%(time)s על ידי %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "השתנה לאחרונה ב–%(time)s"
+
+msgid "Search:"
+msgstr "חפש:"
+
+msgid "Text"
+msgstr "מלל"
+
+msgid "Titles"
+msgstr "כותרות"
+
+msgid "Search"
+msgstr "חיפוש"
+
+msgid "More Actions:"
+msgstr "פעולות נוספות:"
+
+msgid "------------------------"
+msgstr "------------------------"
+
+msgid "Raw Text"
+msgstr "מלל גולמי"
+
+msgid "Print View"
+msgstr "תצוגת הדפסה"
+
+msgid "Delete Cache"
+msgstr "נקה מטמון"
+
+msgid "Rename Page"
+msgstr "שנה שם דף"
+
+msgid "Copy Page"
+msgstr "העתק דף"
+
+msgid "Delete Page"
+msgstr "מחק דף"
+
+msgid "Like Pages"
+msgstr "דומה לדפים"
+
+msgid "Local Site Map"
+msgstr "מפת אתר מקומית"
+
+msgid "My Pages"
+msgstr "הדפים שלי"
+
+msgid "Subscribe User"
+msgstr "בצע מינוי למשתמש"
+
+msgid "Remove Spam"
+msgstr "הסר זבל"
+
+msgid "Revert to this revision"
+msgstr "שחזר לגרסה זאת"
+
+msgid "Package Pages"
+msgstr "דפי חבילה"
+
+msgid "Render as Docbook"
+msgstr "עבד כ-Docbook"
+
+msgid "Sync Pages"
+msgstr "סנכרן דפים"
+
+msgid "Do"
+msgstr "בצע"
+
+msgid "Comments"
+msgstr "תגובות"
+
+msgid "Edit (Text)"
+msgstr "ערוך (מלל)"
+
+msgid "Edit (GUI)"
+msgstr "ערוך (GUI)"
+
+msgid "Immutable Page"
+msgstr "דף נעול"
+
+msgid "Remove Link"
+msgstr "הסר קישור"
+
+msgid "Add Link"
+msgstr "הוסף קישור"
+
+#, python-format
+msgid "Show %s days."
+msgstr "הצג %s ימים."
+
+msgid "Wiki Markup"
+msgstr "סימון ויקי"
+
+msgid "Wiki"
+msgstr "וויקי"
+
+msgid "Page"
+msgstr "דף"
+
+msgid "User"
+msgstr "משתמש"
+
+msgid "[ATTACH]"
+msgstr "[הוסף]"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "אפשרויות --דפים ו--חיפוש שוללות זו את זו!"
+
+msgid "You must specify an output file!"
+msgstr "אתה חייב לציין קובץ לפלט!"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr "שום דף נבחר בעזרת --דפים או --חיפוש, מניחים חבילה מלאה."
+
+msgid "All attachments included into the package."
+msgstr "כל הנספחים נכללו אל תוך החבילה."
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "קובץ פלט כבר קיים! מסרב בפחדנות מלהמשיך!"
+
+msgid "Attachment link"
+msgstr "קישור לקובץ מצורף"
+
+msgid "Page link"
+msgstr "דפים דומים קישור לדף"
+
+msgid "Changed page"
+msgstr "הדף ששונה"
+
+msgid "Page changed"
+msgstr "הדף שונה"
+
+msgid "Page has been modified"
+msgstr "הדף שונה"
+
+msgid "Page has been modified in a trivial fashion"
+msgstr "הדף עבר שינוי פעוט"
+
+msgid "Page has been renamed"
+msgstr "שם הדף שונה"
+
+msgid "Page has been deleted"
+msgstr "הדף נמחק"
+
+msgid "Page has been copied"
+msgstr "הדף הועתק"
+
+msgid "A new attachment has been added"
+msgstr "צורף קובץ חדש"
+
+msgid "An attachment has been removed"
+msgstr "נספח הוסר"
+
+msgid "A page has been reverted to a previous state"
+msgstr "הדף שוחזר למצב קודם"
+
+msgid "A user has subscribed to a page"
+msgstr "משתמש ביצע מינוי לדף זה."
+
+msgid "A new account has been created"
+msgstr "נוצר חשבון משתמש חדש"
+
+msgid "Trivial "
+msgstr " פעוט"
+
+msgid "New page:\n"
+msgstr "דף חדש:\n"
+
+msgid "No differences found!\n"
+msgstr "לא נמצאו הבדלים.\n"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+"קישור לקובץ מצורף: %(attach)s\n"
+"קישור לדף: %(page)s\n"
+
+msgid "[all]"
+msgstr "[כולם]"
+
+msgid "[not empty]"
+msgstr "[לא ריק]"
+
+msgid "[empty]"
+msgstr "[ריק]"
+
+msgid "filter"
+msgstr "מסנן"
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+"תוצאות %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s מתוך %(aboutHits)s %(bs)s"
+"%(hits)d%(be)s תוצאות מתוך %(pages)d עמודים."
+
+msgid "seconds"
+msgstr "שניות"
+
+msgid "Previous"
+msgstr "הקודם"
+
+msgid "Next"
+msgstr "הבא"
+
+msgid "rev"
+msgstr "גרסה"
+
+msgid "current"
+msgstr "נוכחי"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "שונה לאחרונה: %s"
+
+msgid "match"
+msgstr "התאמה"
+
+msgid "matches"
+msgstr "התאמות"
+
+msgid "about"
+msgstr "אודות"
+
+msgid "This page is already deleted or was never created!"
+msgstr "דף זה כבר נמחק או שמעולם לא נוצר."
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "שם קובץ בלתי חוקי \"%s\"!"
+
+msgid "Include all attachments?"
+msgstr "לכלול את כל הנספחים?"
+
+msgid "Package pages"
+msgstr "דפי חבילה"
+
+msgid "Package name"
+msgstr "שם חבילה"
+
+msgid "List of page names - separated by a comma"
+msgstr "רשימה של שמות דפים - מופרדת בפסיק"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "אין דפים דומים ל–\"%s\"."
+
+#, python-format
+msgid "Rolled back changes to the page %s."
+msgstr "הוחזרו אחורה שינויים לעמוד %s."
+
+msgid "Exception while calling rollback function:"
+msgstr "מקרה חריג בעת קריאה לפונקצית חזרה לאחור:"
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+"אנא הכנס סיסמה לחשבון במערכת המרוחקת למטה. <<BR>> /!\\ אתה אמור לסמוך על שתי "
+"המערכת מכיוון שהסיסמה עלולה להקרא על ידי מנהלי המערכות."
+
+msgid "Operation was canceled."
+msgstr "פעולה בוטלה."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "אנא השתמש במנשק המשתמש האינטראקטיבי בכדי להשתמש בפעולה %(actionname)s!"
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr "הכיוונים הנתמכים היחידים הינם BOTH ו-DOWN."
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+"אנא קבע שם מערכת פנימי ב-wikiconfig שלך (ראה HelpOnConfiguration) בכדי "
+"להשתמש בפעולה זאת."
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+"פרמטרים שגויים. אנא ספק לפחות את פרמטר ה-\"remoteWiki\". עיין ב-"
+"HelpOnSynchronisation לעזרה."
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr "ה-\"remoteWiki\" אינה ידועה."
+
+msgid "A severe error occurred:"
+msgstr "שגיאה חמורה התרחשה:"
+
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr "סנכרוניזציה הסתיימה. חפש הודעות מצב במידע שלהלן."
+
+msgid "Synchronisation started -"
+msgstr "סנכרון החל -"
+
+#, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
+msgstr ""
+"התקבלה רשימה של %s דפים מקומיים ו %s דפים מרוחקים. בסה\"כ יש לעבד %s דפים."
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr "לאחר סינון: %s דפים"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr "הדף %s נפסח בגלל חוסר הרשאות כתיבה לדף המקומי."
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr "נמחק מקומית הדף %s."
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr "שגיאה בעת מחיקה מקומית של דף %s:"
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr "נמחק מרחוק הדף %s."
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr "שגיאה בעת מחיקה מרוחקת של דף %s:"
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+"הפריט %s לא ניתן למיזוד אוטומטי אבל שונה בשתי המערכות. אנא מחק אותו באחת "
+"מהמערכות ונסה שוב."
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+"לפריט %s יש סוגי MIME שונים בשתי המערכות ואינו ניתן למיזוג. אנא מחק אותו "
+"באחת מהמערכות או אחד את סוגי ה-MIME, ונסה שוב."
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+"שמו של הפריט %s שונה מקומית. אפשרות זו לא מיושמת כעת. לכן, היסטורית הסינכרון "
+"המלאה עבור דף זה אבדה."
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr "מסנכרן דף %s עם דף מרוחק %s ..."
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr "הדף %s נמחק מרחוק אבל השתנה מקומית."
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+"הדף %s לא ניתן לסינכרון. שמו של הדף המרוחק שונה. זה לא נתמך כעת. ייתכן ותרצה "
+"למחוק אחד מהדפים בכדי לסנכרן אותו."
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr "הדף %s נפסח בגלל סתירה מקומית או מרוחקת."
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr "זה הסנכרון הראשון בין הויקי המקומית והמרוחקת עבור הדף %s."
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr "הדף %s לא ניתן למיזוג משום שאינך מורשה לערוך את הדף במערכת המרוחקת."
+
+#, python-format
+msgid "Page %s successfully merged."
+msgstr "דף %s מוזג בהצלחה."
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr "הדף %s מכיל סתירות שנוצרו בצד המרוחק."
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr "דף %s מוזג עם התנגשויות."
+
+msgid "Attachment location"
+msgstr "מיקום של הנספח"
+
+msgid "Page name"
+msgstr "שם הדף"
+
+msgid "Attachment name"
+msgstr "שם נספח"
+
+msgid "Refresh attachment list"
+msgstr "רענן רשימת נספחים"
+
+msgid "List of attachments"
+msgstr "רשימת נספחים"
+
+msgid "Available attachments for page"
+msgstr "נספחים זמינים לדף"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "בדיוק דף אחד דומה ל–\"%s\", מעביר לדף."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "דפים דומים ל–\"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s ל-\"%(title)s\""
+
+msgid "You must login to remove a quicklink."
+msgstr "יש להתחבר בכדי להסיר קישור מהיר."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "הקישור המהיר שלך לדף זה הוסר."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "לא ניתן להסיר את הקישור המהיר שלך לדף זה."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "חובה להוסיף קישור מהיר לדף זה בכדי להסירו."
+
+msgid "Please choose:"
+msgstr "אפשרויות לבחירה:"
+
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "חובה להתחבר בכדי לבצע את הפעולה \"%(action)s\"."
+
+msgid "Only superuser is allowed to use this action."
+msgstr "רק מנהל רשאי לבצע פעולה זו"
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "אין לכם הרשאות לעשות מנוי לדף."
+
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "עיבוד דואר/Jabber אינו מאופשר במערכת זאת."
+
+msgid "You must log in to use subscriptions."
+msgstr "חובה להתחבר בכדי להשתמש במינויים."
+
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"הוסף את כתובת הדוא\"ל (או Jabber) שלך בהעדפות המשתמש שלך בכדי להשתמש "
+"במינויים."
+
+msgid "You are already subscribed to this page."
+msgstr "כבר ביצעת מינוי לדף זה."
+
+msgid "You have been subscribed to this page."
+msgstr "ביצעת מינוי לדף זה."
+
+msgid "You could not get subscribed to this page."
+msgstr "אין באפשרותך לבצע מינוי לדף זה."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "צירוף קובץ \"%(filename)s\"."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "קובץ מצורף \"%(filename)s\" נמחק."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "איור \"%(filename)s\" נשמר."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "שחזר לגרסה %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "השם שונה מ-'%(oldpagename)s'."
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d קבצים מצורפים]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr "<a href=\"%(link)s\">%(count)s קבצים מצורפים</a> לדף"
+
+msgid "Filename of attachment not specified!"
+msgstr "לא בחרתם שם לקובץ מצורף."
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "קובץ מצורף '%(filename)s' לא קיים!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"כדי לקשר לקובץ מצורף בדף, השתמשו בפקודה {{{attachment:filename}}}\n"
+"כפי שאפשר לראות למטה ברשימת הקבצים.\n"
+"'''אל תשתמשו''' בכתובת של הקובץ, היא עלולה להשתנות\n"
+"והקישור ישבר."
+
+msgid "del"
+msgstr "מחק"
+
+msgid "move"
+msgstr "הזז"
+
+msgid "get"
+msgstr "קבל"
+
+msgid "edit"
+msgstr "ערוך"
+
+msgid "view"
+msgstr "הצג"
+
+msgid "unzip"
+msgstr "חלץ"
+
+msgid "install"
+msgstr "התקן"
+
+msgid "All files"
+msgstr ""
+
+#, fuzzy
+msgid "Selected Files:"
+msgstr "קבצים מצורפים"
+
+#, fuzzy
+msgid "delete"
+msgstr "מחק"
+
+#, fuzzy
+msgid "move to page"
+msgstr "מספר דפים"
+
+msgid "Do it."
+msgstr "בצע."
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "אין קבצים מצורפים ל–%(pagename)s"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "אין לכם הרשאות למחוק קבצים מצורפים לדף."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "אינך מורשה להזיז קבצים מצורפים מדף זה."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "אין לכם הרשאות לצרף קבצים לדף."
+
+#, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr ""
+"הקובץ המצורף '%(pagename)s/%(filename)s' הוזז ל '%(new_pagename)s/"
+"%(new_filename)s'"
+
+msgid "New Attachment"
+msgstr "קובץ מצורף חדש"
+
+msgid "File to upload"
+msgstr "קובץ לשליחה"
+
+msgid "Rename to"
+msgstr "שנה שם"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "לדרוס קובץ מצורף קיים בעל אותו שם"
+
+msgid "Upload"
+msgstr "שלח"
+
+msgid "Attached Files"
+msgstr "קבצים מצורפים"
+
+#, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "תת פעולה של צירוף קובץ לא נתמכת: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "קבצים מצורפים ל–\"%(pagename)s\""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: תשובה שגויה! חזור אחורה ונסה שוב..."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr "קובץ חסר. נסה למחוק תווים שהם לא תווי אסקי מתוך שם הקובץ."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "אין לכם הרשאות לדרוס קבצים מצורפים בדף זה"
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"קובץ מצורף \"%(target)s\" (שם מרוחק \"%(filename)s\") בגודל %(bytes)d בתים "
+"נשמר."
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "קובץ מצורף \"%(target)s\" (שם מרוחק \"%(filename)s\") כבר קיים."
+
+#, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr "הקובץ המצורף '%(new_pagename)s/%(new_filename)s'"
+
+msgid "Nothing changed"
+msgstr "שום דבר לא שונה"
+
+#, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr "הדף %(new_pagename)s לא קיים או שאין ברשותך מספיק הרשאות."
+
+msgid "Move aborted!"
+msgstr "הזזה בוטלה!"
+
+msgid "Move aborted because new page name is empty."
+msgstr "הזזה בוטלה בגלל שם דף ריק"
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "אנא השתמש בשם קובץ תקין עבור הקובץ המצורף '%(filename)s'."
+
+msgid "Move aborted because new attachment name is empty."
+msgstr "הזזה בוטלה כתוצאה משם קובץ מצורף ריק"
+
+msgid "Move"
+msgstr "הזז"
+
+msgid "New page name"
+msgstr "שם דף חדש"
+
+msgid "New attachment name"
+msgstr "שם קובץ מצורף חדש"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "אין לכם הרשאות לקבל קבצים מצורפים מהדף"
+
+msgid "You are not allowed to install files."
+msgstr "אינך מורשה להתקין קבצים."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "קובץ מצורף '%(filename)s הותקן."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "אינך מורשה לחלץ קבצים מצורפים בדף זה."
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr "הקובץ %(filename)s אינו קובץ .zip."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
+msgstr ""
+"קובץ מצורף '%(filename)s' לא חולץ כי חלק מהקבצים בבארכיון נמצאים בספריות "
+"שונות, או שעוברים את הגבול המותר לגודל קובץ יחיד (%(maxsize_file)d ק\"ב)"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"קובץ מצורף '%(filename)s' לא ניתן חולץ מאחר והיה גורם לגודל הקבצים המצורפים "
+"לעמוד לעבור את הגבול המותר (%(size)d ק\"ב)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"קובץ מצורף '%(filename)s' לא חולץ מאחר והיה גורם למספר הקבצים המצורפים לעמוד "
+"לעבור את הגבול המותר (%(count)d קבצים)"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
+msgstr ""
+"קובץ מצורף '%(filename)s' חולץ באופן חלקי מארכיון ZIP (לא נדרסו: "
+"%(filelist)s)."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "קובץ מצורף '%(filename)s' חולץ מארכיון ZIP."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "קובץ מצורף \"%(filename)s\"."
+
+msgid "Download"
+msgstr "הורד"
+
+msgid "Package script:"
+msgstr "תסריט חבילה:"
+
+msgid "File Name"
+msgstr "שם קובץ"
+
+msgid "Modified"
+msgstr "שונה"
+
+msgid "Size"
+msgstr "גודל"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "סוג קובץ לא ידוע, אי אפשר להציג אותו בתוך הדף."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "אין לכם הרשאות לצפות בקבצים מצורפים בדף"
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "קובץ מצורף: %(filename)s של %(pagename)s"
+
+msgid "General Information"
+msgstr "מידע כללי"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "גודל דף: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "חתימת SHA של תוכן דף זה:"
+
+msgid "The following users subscribed to this page:"
+msgstr "משתמשים אלו מנויים לדף:"
+
+msgid "This page links to the following pages:"
+msgstr "הדף מקושר לדפים הבאים:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+"מראה היסטוריית עריכת דף מ'''%(start_offset)d''' עד '''%(end_offset)d''' מתוך "
+"'''%(total_count)d''' ערכים."
+
+msgid "Newer"
+msgstr "חדש יותר"
+
+msgid "Older"
+msgstr "ישן יותר"
+
+#, python-format
+msgid "%s items per page"
+msgstr "%s פריטים לדף"
+
+msgid "Diff"
+msgstr "הבדלים"
+
+msgid "Editor"
+msgstr "עורך"
+
+msgid "Comment"
+msgstr "הערה"
+
+msgid "Action"
+msgstr "פעולה"
+
+msgid "to previous"
+msgstr "לגרסה הקודמת"
+
+msgid "N/A"
+msgstr "לא זמין"
+
+msgid "Revision History"
+msgstr "הסטוריה של שינויים"
+
+msgid "No log entries found."
+msgstr "לא נמצאו כניסות בלוג."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "מידע על \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "הצג \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "מידע כללי"
+
+msgid "Page hits and edits"
+msgstr "כניסות ופעולות עריכה"
+
+msgid "Delete"
+msgstr "מחק"
+
+msgid "Delete all /subpages too?"
+msgstr "למחוק גם את כל תת הדפים?"
+
+msgid "Optional reason for the deletion"
+msgstr "סיבה אפשרית למחיקה"
+
+msgid "Really delete this page?"
+msgstr "באמת למחוק את הדף?"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "אנא צור דף בית ראשית ליצירת דפים נוספים."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+"באפשרותך להוסיף תת דפים נוספים לדף הבית הקיים כאן.\n"
+"\n"
+"באפשרותך לבחור כמה פתוח הדף יהיה לקוראים או כותבים אחרים,\n"
+"הגישה נשלטת על ידי חברות בקבוצה של דף הקבוצה המתאים.\n"
+"\n"
+"פשוט הכנס את שמו של תת הדף ולחץ על הכפתור בכדי ליצור דף חדש.\n"
+"\n"
+"לפני יצירת דפים עם גישה מוגבלת, וודא שדף הקבוצה המתאימה\n"
+"קיים וקיימים בתוכו החברים המתאימים. השתמש בHomepageGroupsTemplate ליצירת\n"
+"דפי הקבוצה.\n"
+"\n"
+"||'''הוסף דף אישי חדש:'''||'''רשימת בקרת גישה קשורה:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[\"%(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||רק "
+"%(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "ניהול העמודים שלי"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr " (כולל %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"%(badwords)d מילים אלו לא נמצאו במילון הכולל %(totalwords)d מילים "
+"%(localwords)s:"
+
+msgid "Add checked words to dictionary"
+msgstr "הוסף למילון"
+
+msgid "No spelling errors found!"
+msgstr "לא נמצאו טעויות איות."
+
+msgid "You can't save spelling words."
+msgstr "אין באפשרותך לשמור איותי מילים."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "אתה לא יכול לבדוק איות בדף שאין לך הרשאות קריאה."
+
+msgid "You are not allowed to use this action."
+msgstr "הינך לא מורשה להשתמש בפעולה זאת."
+
+msgid "If this account exists an email was sent."
+msgstr "אם משתמש בשם זה קיים, נשלחה הודעת דוא\"ל"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"דואר לא מאופשר בוויקי הזה\n"
+".פנה למנהל המערכת."
+
+msgid "Please provide a valid email address or a username!"
+msgstr "אנא רשום כתובת דוא\"ל אמיתית, או שם משתמש"
+
+msgid "Username"
+msgstr "שם משתמש"
+
+msgid "Mail me my account data"
+msgstr "שלח לי את פרטי המשתמש"
+
+msgid "Recovery token"
+msgstr "מפתח לאיפוס ססמה"
+
+msgid "New password"
+msgstr "ססמה חדשה"
+
+msgid "New password (repeat)"
+msgstr "ססמה חדשה (שוב)"
+
+msgid "Reset my password"
+msgstr "אפס את הססמה"
+
+msgid "Passwords don't match!"
+msgstr "הסיסמאות לא תואמות."
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "סיסמה בלתי קבילה: %s"
+
+msgid "Your password has been changed, you can log in now."
+msgstr "ססמתך שונתה, ובאפשרותך להתחבר עכשיו למערכת."
+
+msgid "Your token is invalid!"
+msgstr "המפתח לאיפוס ססמה שגוי"
+
+msgid "Password reset"
+msgstr "איפוס ססמה"
+
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr ""
+"\n"
+"== איפוס ססמה ==\n"
+"הקלד ססמה חדשה"
+
+msgid "Lost password"
+msgstr "הססמה אבדה"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+"\n"
+"== איפוס ססמה שאבדה ==\n"
+"אם שכחת את הססמה, הקלד את שם המשתמש (או כתובת דואר אלקטרוני) ולחץ על '''שלח "
+"לי את פרטי המשתמש'''.\n"
+"מוינמוין ישלח לך דוא\"ל עם מפתח לאיפוס הססמה והוראות נוספות."
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
+"\n"
+"=== איפוס ססמה ===\n"
+"אם קיבלת הודעת דוא\"ל המכילה מפתח לאיפוס ססמה, הקלד את שם המשתמש, את המפתח "
+"וססמה חדשה (פעמיים)"
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+"אתה צריך להכנס לחשבון הויקי של מספק ה-OpenID שלך\n"
+" ליפני שאתה יכול להשתמש בו. מוין מוין לא\n"
+" יאשפר לך להכנים את הסיסמה פה.\n"
+"\n"
+"אחרי שנכנסת, שחזר את הדף הזה."
+
+msgid "OpenID Trust verification"
+msgstr "אימות ביטוח OpenID"
+
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr "האתר %s ביקש את הזהות שלך."
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+"\n"
+"אם תאשר, יאמר לאתר מיוצג על ידי הביטוח למטה\n"
+" שאתה שולט על הזיהוי הURL %s. (אם אתה משתמש בזיהוי\n"
+" משולח, האתר ידאג לתפל על הפיכת\n"
+" המשלחת לבדו.)"
+
+msgid "Trust root"
+msgstr "בטח ב-root"
+
+msgid "Identity URL"
+msgstr "זיהוי URL"
+
+msgid "Remember decision"
+msgstr "זכור החלטה"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr "זכור את החלטת האמינות הזאת ואל תשאל שוב"
+
+msgid "Approve"
+msgstr "אשר"
+
+msgid "Don't approve"
+msgstr "אל תאשר"
+
+msgid "OpenID not served"
+msgstr "OpenID לא משורת"
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+"\n"
+"למרבה הצער עוד לא יצרת את דף הבית שלך. לכן, \n"
+" אנחנו לא יכולים לשרת OpenID לך. אנא צור את דף הבית שלך, \n"
+"ואז שחזר את הדף הזה או לחץ על הכפתור למטה לבטל את \n"
+"האימות הזה."
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "צור מינוי לעמוד %s עבור משתמשים"
+
+msgid "Enter user names (comma separated):"
+msgstr "הכנס שמות משתמש (מופרדים בפסיקים):"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "מנוי ל-%s:"
+
+msgid "Not a user:"
+msgstr "לא משתמש:"
+
+msgid "You are not allowed to perform this action."
+msgstr "אינך מורשה לבצע פעולה זאת."
+
+msgid "Print slide show"
+msgstr "הדפס מצגת שקפים"
+
+msgid "Edit slide show"
+msgstr "ערוך מצגת שקפים"
+
+msgid "Quit"
+msgstr "יציאה"
+
+msgid "Quit slide show"
+msgstr "צא ממצגת שקפים"
+
+msgid "Show first slide (up arrow)"
+msgstr "הראה שקף ראשונה (חץ למעלה)"
+
+msgid "Show last slide (down arrow)"
+msgstr "הראה שקף אחרונה (חץ למטה)"
+
+msgid "Show previous slide (left arrow)"
+msgstr "עבור לשקף הקודם (חץ שמואל)"
+
+msgid "Show next slide (right arrow)"
+msgstr "עבור לשקף הבא (חץ ימין)"
+
+msgid "Charts are not available!"
+msgstr "גרפים אינם זמינים."
+
+msgid "You need to provide a chart type!"
+msgstr "בחרו בסוג גרף."
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "סוג גרף שגוי \"%s\""
+
+msgid "Load"
+msgstr "טען"
+
+msgid "Pagename not specified!"
+msgstr "לא צוין שם דף"
+
+msgid "Upload page content"
+msgstr "טעינת תוכן דף"
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+"ניתן לטעון תוכן עבור הדף ששמו מצוין בהמשך. ניתן לטעון תוכן לדף אחר באמצעות "
+"שינוי ערך השדה \"שם הדף\". אם לא צוין שם דף, שם הדף יוסק משם הקובץ."
+
+msgid "File to load page content from"
+msgstr "תוכן הדף"
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr "רק דפים שהשתנו מאז '''%s''' מוצגים (!)"
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr "/!\\ תאריך השינוי שהכנסת לא זוהה ולכן לא ייחשב בתוצאות החיפוש!"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "השתמשו במונח חיפוש בררני יותר מאשר {{{\"%s\"}}}."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "חיפוש כותרות: \"%s\""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "חיפוש מתקדם: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "חיפוש מלל מלא: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr "מונח החיפוש {{{\"%s\"}}} אינו חוקי. ראה HelpOnSearching למידע נוסף."
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+"מונח החיפוש {{{\"%s\"}}} לא החזיר תוצאות. אנא שנה חלק מהמונחים וראה "
+"HelpOnSearching למידע נוסף. %s"
+
+msgid "(!) Consider performing a"
+msgstr "שקול ביצוע (!)"
+
+msgid "full-text search with your search terms"
+msgstr "חיפוש מלל מלא עם מונחי החיפוש שלך"
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+"(!) הינך מבצע חיפוש כותרות שעלול לא לכלול את כל התוצאות הקשורות במערכת זאת. "
+"<<BR>>"
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr "לחץ כאן בכדי לבצע חיפוש טקסט מלא עם מונח החיפוש שלך!"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף."
+
+msgid "Your subscription to this page has been removed."
+msgstr "המינוי שלך לדף זה הוסר."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "אין אפשרות להסיר מינוי שבוצע על ידי ביטוי רגולרי!"
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "ערוך את הביטויים הרגולריים של המינויים בהעדפות המשתמש שלך."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "חובה לבצע מינוי לדף בכדי להסיר את המינוי."
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: תשובה שגויה! חזור אחורה ונסה שוב..."
+
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr ""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "צור איור חדש \"%(filename)s (נפתח בחלון חדש)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "ערוך איור %(filename)s (נפתח בחלון חדש)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "איור לחיץ: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "אין לכם הרשאות לשמור איור בדף."
+
+msgid "Empty target name given."
+msgstr "ניתן שם יעד ריק."
+
+msgid "Edit drawing"
+msgstr "ערוך איור"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "לבצע פעולה %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "פעולה %(actionname)s בוטלה במערכת זאת!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "אינך מורשה להשתמש בפעולה %(actionname)s בדף זה!"
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "אין לך הרשאה ליצור את דף הדיון"
+
+msgid "Pages"
+msgstr "דפים"
+
+msgid "Select Author"
+msgstr "בחר יוצר"
+
+msgid "Revert all!"
+msgstr "בטל את כל השינויים!"
+
+msgid "Copy all /subpages too?"
+msgstr "להעתיק גם את כל תת הדפים?"
+
+msgid "New name"
+msgstr "שם חדש"
+
+msgid "Optional reason for the copying"
+msgstr "סיבה אפשרית להעתקה"
+
+msgid "Really copy this page?"
+msgstr "באמת להעתיק את הדף?"
+
+msgid "You are now logged out."
+msgstr "נותקת מהמערכת."
+
+msgid "No page packages found."
+msgstr "לא נמצא חבילות דף."
+
+msgid "page package"
+msgstr "חבילת דף"
+
+msgid "Choose:"
+msgstr "בחר:"
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr "התקן חבילת שפה ל'%s'"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "מפת אתר מקומית של \"%s\""
+
+msgid "No older revisions available!"
+msgstr "אין גרסאות ישנות יותר זמינות!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "הבדלים: \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "הבדלים בין גרסה %d לבין גרסה %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(מקיף %d גרסאות)"
+
+msgid "Previous change"
+msgstr "השינוי הקודם"
+
+msgid "Next change"
+msgstr "השינוי הבא"
+
+msgid "Diff with oldest revision in left pane"
+msgstr "הבדל עם העדכון הכי ישן בחלונית השמאלית"
+
+msgid "No older revision available for diff"
+msgstr "אין גרסאות ישנות יותר זמינות"
+
+msgid "Diff with older revision in left pane"
+msgstr "הבדל עם עדכון ישן יותר בחלונית השמאלית"
+
+msgid "Diff with newer revision in left pane"
+msgstr "הבדל עם עדכון חדש יותר בחלונית השמאלית"
+
+msgid "Can't change to revision newer than in right pane"
+msgstr "אי אפשר לשנות לעדכון יותר חדש מאשר בחלונית הימינית"
+
+msgid "Diff with older revision in right pane"
+msgstr "הבדל עם העדכון הכי ישן בחלונית הימינית"
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr "אי אפשר לשנות לעדכון יותר ישן מאשר בחלונית השמאלית"
+
+msgid "Diff with newer revision in right pane"
+msgstr "הבדל עם העדכון הכי ישן בחלונית השמאלית"
+
+msgid "No newer revision available for diff"
+msgstr "אין גרסאות חדשות יותר זמינות"
+
+msgid "Diff with newest revision in right pane"
+msgstr "הבדל עם העדכון הכי חדש בחלונית הימינית"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "הדף נשמר %(count)d פעמים."
+
+msgid "(ignoring whitespace)"
+msgstr "(מתעלם מרווחים)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "התעלם משינויים בכמות הרווחים"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "שם משתמש ריק. אנא הכנס שם משתמש."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"שם משתמש לא חוקי {{{'%s'}}}. שם יכול להכיל כל תו יוניקוד אלפא נומרי, עם רווח "
+"אופציונלי אחד בין מילים. שם קבוצה אסור."
+
+msgid "This user name already belongs to somebody else."
+msgstr "שם המשתמש שייך למישהו אחר."
+
+msgid "Please specify a password!"
+msgstr "אנא הכנס סיסמה."
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"אנא ספק את כתובת הדוא\"ל שלך. אם תאבד את מידע ההתחברות שלך, תוכל לקבלו "
+"באמצעות כתובת זאת."
+
+msgid "This email already belongs to somebody else."
+msgstr "כתובת הדוא\"ל הזאת שייכת למישהו אחר."
+
+msgid "User account created! You can use this account to login now..."
+msgstr "חשבון משתמש נוצר! כעת באפשרותך להשתמש בחשבון זה בכדי להתחבר..."
+
+msgid "Password repeat"
+msgstr "הסיסמא שוב"
+
+msgid "TextCha (required)"
+msgstr "TextCha (נדרש)"
+
+msgid "Create Profile"
+msgstr "הרשם"
+
+msgid "Create Account"
+msgstr "יצירת חשבון"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "רשימת קישורים מלאה של \"%s\""
+
+msgid "You must login to add a quicklink."
+msgstr "יש להתחבר בכדי להוסיף קישור מהיר."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "קישור מהיר לדף זה הוסף עבורך."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "לא ניתן להוסיף עבורך קישור מהיר לדף זה."
+
+msgid "You already have a quicklink to this page."
+msgstr "כבר יש לך קישור מהיר לדף זה."
+
+msgid "Create redirect for renamed page(s)?"
+msgstr "ליצור הפניה לדפים עם שמות חדשים?"
+
+msgid "Rename all /subpages too?"
+msgstr "לשנות גם את השם של כל תת הדפים?"
+
+msgid "Create redirect for renamed page?"
+msgstr "ליצור הפניה לדף עם שם חדש?"
+
+msgid "Really rename this page?"
+msgstr "באמת לשנות את שם הדף?"
+
+msgid "Optional reason for the renaming"
+msgstr "סיבה לשינוי שם"
+
+msgid "Wiki Backup"
+msgstr "גיבוי ויקי"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+"= מוריד גיבוי =\n"
+"\n"
+"לצומת ליבך:\n"
+" * שמור גיביוים במקום מאובטחת - הם מכילים מידע רגיש\n"
+" * ודא שערכי תצורת הגיבוי של הויקי שלך נכונים ושלמים.\n"
+" * ודא שקובץ הגיבוי שאת(ה) מקבל(ת) מכיל את כל מה שתהיה צריך במקרה של בעיה\n"
+" * ודא שזה ידר בלי בעיות.\n"
+"\n"
+"לקבל גיבוי, פשוט תלחצו פה:"
+
+msgid "Backup"
+msgstr "גיבוי"
+
+msgid "You are not allowed to do remote backup."
+msgstr "הינך לא מורשה לבצע גיבוי מרחוק."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "תת פעולת גיבוי בלתי ידועה: %s"
+
+msgid "Revert"
+msgstr "בטל את כל השינויים"
+
+msgid "You are not allowed to revert this page!"
+msgstr "אין לכם הרשאות לשחזר את הדף."
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"צפית בגרסה הנוכחית של הדף כשביצעת פעולת שחזור. אם ברצונך לשחזר לגרסה ישנה "
+"יותר, אנא עיין באותה גרסה ולאחר מכן בצע את פעולת השחזור לאותה גרסה בשנית."
+
+msgid "Optional reason for reverting this page"
+msgstr "סיבת שחזור הדף"
+
+msgid "Really revert this page?"
+msgstr "האם ברצונך לבטל את השינויים בדף?"
+
+msgid "OpenID"
+msgstr "OpenID"
+
+msgid "Member of Groups"
+msgstr "חבר בקבוצות"
+
+msgid "Jabber"
+msgstr "Jabber"
+
+msgid "Disable user"
+msgstr "משתמש מבוטל"
+
+msgid "Enable user"
+msgstr "אפשר משתמש"
+
+msgid "disabled"
+msgstr "מבוטל"
+
+msgid "Mail account data"
+msgstr "שלח את פרטי החשבון בדואר"
+
+msgid "RecentChanges"
+msgstr "שינויים אחרונים"
+
+msgid "WikiTipOfTheDay"
+msgstr "טיפ הויקי היומי"
+
+msgid "TitleIndex"
+msgstr "מפתח כותרות"
+
+msgid "WordIndex"
+msgstr "מפתח מילים"
+
+msgid "FindPage"
+msgstr "מצא דף"
+
+msgid "MissingPage"
+msgstr "דף חסר"
+
+msgid "MissingHomePage"
+msgstr "דף בית חסר"
+
+msgid "WikiHomePage"
+msgstr "WikiHomePage"
+
+msgid "WikiName"
+msgstr "שם ויקי"
+
+msgid "WikiWikiWeb"
+msgstr "אנטרנט ויקי ויקי"
+
+msgid "FrontPage"
+msgstr "דף חזית"
+
+msgid "WikiSandBox"
+msgstr "ויקי קופסת חול"
+
+msgid "InterWiki"
+msgstr "בין ויקי"
+
+msgid "AbandonedPages"
+msgstr "דפים נטושים"
+
+msgid "OrphanedPages"
+msgstr "דפים יתומים"
+
+msgid "WantedPages"
+msgstr "דפים מבוקשים"
+
+msgid "EventStats"
+msgstr "EventStats"
+
+msgid "EventStats/HitCounts"
+msgstr "EventStats/HitCounts"
+
+msgid "EventStats/Languages"
+msgstr "EventStats/Languages"
+
+msgid "EventStats/UserAgents"
+msgstr "EventStats/UserAgents"
+
+msgid "PageSize"
+msgstr "PageSize"
+
+msgid "PageHits"
+msgstr "PageHits"
+
+msgid "RandomPage"
+msgstr "RandomPage"
+
+msgid "XsltVersion"
+msgstr "XsltVersion"
+
+msgid "FortuneCookies"
+msgstr "FortuneCookies"
+
+msgid "WikiLicense"
+msgstr "WikiLicense"
+
+msgid "CategoryCategory"
+msgstr "CategoryCategory"
+
+msgid "CategoryHomepage"
+msgstr "CategoryHomepage"
+
+msgid "CategoryTemplate"
+msgstr "CategoryTemplate"
+
+msgid "HomepageTemplate"
+msgstr "HomepageTemplate"
+
+msgid "HelpTemplate"
+msgstr "HelpTemplate"
+
+msgid "HomepageReadWritePageTemplate"
+msgstr "HomepageReadWritePageTemplate"
+
+msgid "HomepageReadPageTemplate"
+msgstr "HomepageReadPageTemplate"
+
+msgid "HomepagePrivatePageTemplate"
+msgstr "HomepagePrivatePageTemplate"
+
+msgid "HomepageGroupsTemplate"
+msgstr "HomepageGroupsTemplate"
+
+msgid "SlideShowHandOutTemplate"
+msgstr "SlideShowHandOutTemplate"
+
+msgid "SlideShowTemplate"
+msgstr "SlideShowTemplate"
+
+msgid "SlideTemplate"
+msgstr "SlideTemplate"
+
+msgid "SyncJobTemplate"
+msgstr "SyncJobTemplate"
+
+msgid "HelpOnConfiguration"
+msgstr "HelpOnConfiguration"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr "HelpOnConfiguration/EmailSupport"
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr "HelpOnConfiguration/SecurityPolicy"
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr "HelpOnConfiguration/FileAttachments"
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr "HelpOnConfiguration/SupplementationPage"
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr "HelpOnConfiguration/SurgeProtection"
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "HelpOnConfiguration/UserPreferences"
+
+msgid "HelpOnPackageInstaller"
+msgstr "HelpOnPackageInstaller"
+
+msgid "HelpOnUpdatingPython"
+msgstr "HelpOnUpdatingPython"
+
+msgid "HelpOnAdministration"
+msgstr "HelpOnAdministration"
+
+msgid "HelpOnAuthentication"
+msgstr "HelpOnAuthentication"
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr "HelpOnAuthentication/ExternalCookie"
+
+msgid "HelpOnMoinCommand"
+msgstr "HelpOnMoinCommand"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr "HelpOnMoinCommand/ExportDump"
+
+msgid "HelpOnNotification"
+msgstr "HelpOnNotification"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "HelpOnRules"
+
+msgid "HelpOnSessions"
+msgstr "HelpOnSessions"
+
+msgid "HelpOnUserHandling"
+msgstr "HelpOnUserHandling"
+
+msgid "HelpOnXapian"
+msgstr "HelpOnXapian"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr "HelpOnMoinWikiSyntax"
+
+msgid "HelpOnCreoleSyntax"
+msgstr "HelpOnCreoleSyntax"
+
+msgid "HelpOnFormatting"
+msgstr "HelpOnFormatting"
+
+msgid "MoinMoin"
+msgstr "MoinMoin"
+
+msgid "HelpContents"
+msgstr "HelpContents"
+
+msgid "HelpForBeginners"
+msgstr "HelpForBeginners"
+
+msgid "HelpForUsers"
+msgstr "HelpForUsers"
+
+msgid "HelpIndex"
+msgstr "HelpIndex"
+
+msgid "HelpOnAccessControlLists"
+msgstr "HelpOnAccessControlLists"
+
+msgid "HelpOnActions"
+msgstr "HelpOnActions"
+
+msgid "HelpOnActions/AttachFile"
+msgstr "HelpOnActions/AttachFile"
+
+msgid "HelpOnAdmonitions"
+msgstr "HelpOnAdmonitions"
+
+msgid "HelpOnAutoAdmin"
+msgstr "HelpOnAutoAdmin"
+
+msgid "HelpOnCategories"
+msgstr "HelpOnCategories"
+
+msgid "HelpOnDictionaries"
+msgstr "HelpOnDictionaries"
+
+msgid "HelpOnDrawings"
+msgstr "HelpOnDrawings"
+
+msgid "HelpOnEditLocks"
+msgstr "HelpOnEditLocks"
+
+msgid "HelpOnEditing"
+msgstr "HelpOnEditing"
+
+msgid "HelpOnEditing/SubPages"
+msgstr "HelpOnEditing/SubPages"
+
+msgid "HelpOnGraphicalEditor"
+msgstr "HelpOnGraphicalEditor"
+
+msgid "HelpOnGroups"
+msgstr "HelpOnGroups"
+
+msgid "HelpOnHeadlines"
+msgstr "HelpOnHeadlines"
+
+msgid "HelpOnImages"
+msgstr "HelpOnImages"
+
+msgid "HelpOnLanguages"
+msgstr "HelpOnLanguages"
+
+msgid "HelpOnLinking"
+msgstr "HelpOnLinking"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr "HelpOnLinking/NotesLinks"
+
+msgid "HelpOnLists"
+msgstr "HelpOnLists"
+
+msgid "HelpOnLogin"
+msgstr "HelpOnLogin"
+
+msgid "HelpOnMacros"
+msgstr "HelpOnMacros"
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr "HelpOnMacros/EmbedObject"
+
+msgid "HelpOnMacros/Include"
+msgstr "HelpOnMacros/Include"
+
+msgid "HelpOnMacros/MailTo"
+msgstr "HelpOnMacros/MailTo"
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr "HelpOnMacros/MonthCalendar"
+
+msgid "HelpOnNavigation"
+msgstr "HelpOnNavigation"
+
+msgid "HelpOnOpenIDProvider"
+msgstr "HelpOnOpenIDProvider"
+
+msgid "HelpOnPageCreation"
+msgstr "HelpOnPageCreation"
+
+msgid "HelpOnPageDeletion"
+msgstr "HelpOnPageDeletion"
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr "HelpOnParsers/ReStructuredText"
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr "HelpOnParsers/ReStructuredText/RstPrimer"
+
+msgid "HelpOnProcessingInstructions"
+msgstr "HelpOnProcessingInstructions"
+
+msgid "HelpOnRules"
+msgstr "HelpOnRules"
+
+msgid "HelpOnSearching"
+msgstr "HelpOnSearching"
+
+msgid "HelpOnSlideShows"
+msgstr "HelpOnSlideShows"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr "HelpOnSlideShows/000 הקדמה"
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr "HelpOnSlideShows/100 ליצור את השקפים"
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr "HelpOnSlideShows/900 אחרון אחרון חביב: להריץ את המצגת שלך"
+
+msgid "HelpOnSmileys"
+msgstr "HelpOnSmileys"
+
+msgid "HelpOnSpam"
+msgstr "HelpOnSpam"
+
+msgid "HelpOnSpellCheck"
+msgstr "HelpOnSpellCheck"
+
+msgid "HelpOnSuperUser"
+msgstr "HelpOnSuperUser"
+
+msgid "HelpOnSynchronisation"
+msgstr "HelpOnSynchronisation"
+
+msgid "HelpOnTables"
+msgstr "HelpOnTables"
+
+msgid "HelpOnTemplates"
+msgstr "HelpOnTemplates"
+
+msgid "HelpOnThemes"
+msgstr "HelpOnThemes"
+
+msgid "HelpOnUserPreferences"
+msgstr "HelpOnUserPreferences"
+
+msgid "HelpOnVariables"
+msgstr "HelpOnVariables"
+
+msgid "HelpOnXmlPages"
+msgstr "HelpOnXmlPages"
+
+msgid "HelpOnComments"
+msgstr "HelpOnComments"
+
+msgid "HelpOnSubscribing"
+msgstr "HelpOnSubscribing"
+
+msgid "CamelCase"
+msgstr "CamelCase"
+
+msgid "WikiCourse"
+msgstr "WikiCourse"
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr "WikiCourse/01 מהו ויקי מוין מוין?"
+
+msgid "WikiCourse/02 Finding information"
+msgstr "WikiCourse/02 למצוא מידע"
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr "WikiCourse/03 להישאר מעודכן"
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr "WikiCourse/04 יצירת חשבון ויקי"
+
+msgid "WikiCourse/05 User preferences"
+msgstr "WikiCourse/05 הגדרות משתמשים"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr "WikiCourse/06 דף הבית האישי שלך בויקי"
+
+msgid "WikiCourse/07 The text editor"
+msgstr "WikiCourse/07 העורך טקסט"
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr "WikiCourse/08 \"מקשים חמים\""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr "WikiCourse/10 תסדיר טקסט עם סימון ויקי"
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr "WikiCourse/11 פסקאות"
+
+msgid "WikiCourse/12 Headlines"
+msgstr "WikiCourse/12 כותרות"
+
+msgid "WikiCourse/13 Lists"
+msgstr "WikiCourse/13 רשימות"
+
+msgid "WikiCourse/14 Text styles"
+msgstr "WikiCourse/14 סיגנוני טקסט"
+
+msgid "WikiCourse/15 Tables"
+msgstr "WikiCourse/15 טבלאות"
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr "WikiCourse/16 קישורים פנימיים בויקי"
+
+msgid "WikiCourse/17 External links"
+msgstr "WikiCourse/17 קישורים חיצוניים"
+
+msgid "WikiCourse/18 Attachments"
+msgstr "WikiCourse/18 נספחים"
+
+msgid "WikiCourse/19 Symbols"
+msgstr "WikiCourse/19 סמלים"
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr "WikiCourse/20 תוכן דינמי"
+
+msgid "WikiCourse/21 Macros"
+msgstr "WikiCourse/21 פקודות מאקרו"
+
+msgid "WikiCourse/22 Parsers"
+msgstr "WikiCourse/22 מנתחים"
+
+msgid "WikiCourse/23 Actions"
+msgstr "WikiCourse/23 פעולות"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr "WikiCourse/30 העורך הגרפי"
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr "WikiCourse/40 יצירת עוד דפים"
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr "WikiCourse/50 כללי התנהגות בויקי"
+
+msgid "WikiCourse/51 Applications"
+msgstr "WikiCourse/51 ישומים"
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr "WikiCourse/52 מבנה בויקי"
+
+msgid "WikiCourseHandOut"
+msgstr "WikiCourseHandOut"
+
+msgid "Sun"
+msgstr "ראשון"
+
+msgid "Mon"
+msgstr "שני"
+
+msgid "Tue"
+msgstr "שלישי"
+
+msgid "Wed"
+msgstr "רביעי"
+
+msgid "Thu"
+msgstr "חמישי"
+
+msgid "Fri"
+msgstr "שישי"
+
+msgid "Sat"
+msgstr "שבת"
+
+msgid "AttachFile"
+msgstr "קבצים מצורפים"
+
+msgid "DeletePage"
+msgstr "מחק דף"
+
+msgid "LikePages"
+msgstr "דפים דומים"
+
+msgid "LocalSiteMap"
+msgstr "מפת אתר מקומית"
+
+msgid "RenamePage"
+msgstr "שנה שם דף"
+
+msgid "SpellCheck"
+msgstr "בדוק איות"
+
+msgid "Discussion"
+msgstr "דיון"
+
+msgid "User agent"
+msgstr "דפדפן"
+
+msgid "Others"
+msgstr "אחרים"
+
+msgid "Distribution of User-Agent Types"
+msgstr "התפלגות סוגי דפדפנים"
+
+msgid "Page Size Distribution"
+msgstr "פיזור גודל דפים"
+
+msgid "page size upper bound [bytes]"
+msgstr "גודל דף מקסימלי [בתים]"
+
+msgid "# of pages of this size"
+msgstr "# דפים בגודל זה"
+
+msgid "Views/day"
+msgstr "צפיות ליום"
+
+msgid "Edits/day"
+msgstr "עריכות ליום"
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s של %(filterpage)s"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"ירוק=הצג\n"
+"אדום=ערוך"
+
+msgid "date"
+msgstr "תאריך"
+
+msgid "# of hits"
+msgstr "# כניסות"
+
+msgid "Language"
+msgstr "שפה"
+
+msgid "<Browser setting>"
+msgstr "הגדרת דפדפן"
+
+msgid "No orphaned pages in this wiki."
+msgstr "אין דפים יתומים בוויקי הזה."
+
+msgid "Include system pages"
+msgstr "הצג דפי מערכת"
+
+msgid "Exclude system pages"
+msgstr "הסתר דפי מערכת"
+
+msgid "No wanted pages in this wiki."
+msgstr "אין בוויקי הזה קישורים לדפים חסרים."
+
+msgid "Python Version"
+msgstr "גרסת פייתון"
+
+msgid "MoinMoin Version"
+msgstr "גרסת מוין מוין"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "גרסה %s [תת גרסה %s]"
+
+msgid "4Suite Version"
+msgstr "גרסת 4Suite"
+
+msgid "Number of pages"
+msgstr "מספר דפים"
+
+msgid "Number of system pages"
+msgstr "מספר דפי מערכת"
+
+msgid "Accumulated page sizes"
+msgstr "גודל דפים מצטבר"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "שימוש דיסק של %(data_dir)s לעמוד"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "שימוש בדיסק של %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "רשומות בדו\"ח העריכה"
+
+msgid "NONE"
+msgstr "אין"
+
+msgid "Global extension macros"
+msgstr "פקודות מקרו כלליות"
+
+msgid "Local extension macros"
+msgstr "פקודות מקרו מקומיות"
+
+msgid "Global extension actions"
+msgstr "פעולות כלליות"
+
+msgid "Local extension actions"
+msgstr "פעולות מקומיות"
+
+msgid "Global parsers"
+msgstr "מפענחים גלובליים"
+
+msgid "Local extension parsers"
+msgstr "מפענחי הרחבות מקומיים"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian ו/או הרחבת Xapian ל-Python לא מותקנים."
+
+msgid "Disabled"
+msgstr "מבוטל"
+
+msgid "Enabled"
+msgstr "מאופשר"
+
+msgid "index unavailable"
+msgstr "מפתח ערכים לא זמין"
+
+msgid "index available"
+msgstr "מפתח ערכים זמין"
+
+msgid "Xapian search"
+msgstr "חיפוש Xapian"
+
+msgid "Stemming for Xapian"
+msgstr "משכתב את הערך Xapian"
+
+msgid "Active threads"
+msgstr "אשכולות פעילים"
+
+msgid "Search for items"
+msgstr "חפש אחר פריטים"
+
+msgid "containing all the following terms"
+msgstr "מכיל את כל המונחים הבאים"
+
+msgid "containing one or more of the following terms"
+msgstr "מכיל אחד או יותר מהמונחים הבאים"
+
+msgid "not containing the following terms"
+msgstr "לא מכיל את המונחים הבאים"
+
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "שונה לאחרונה מאז (לדוגמה: בשבועיים האחרונים)"
+
+msgid "any category"
+msgstr "כל קטגוריה"
+
+msgid "any language"
+msgstr "כל שפה"
+
+msgid "any mimetype"
+msgstr "כל סוג MIME"
+
+msgid "Categories"
+msgstr "קטגוריות"
+
+msgid "File Type"
+msgstr "סוג קובץ"
+
+msgid "Search only in titles"
+msgstr "חפש רק בכותרות"
+
+msgid "Case-sensitive search"
+msgstr "חיפוש תלוי רישיות"
+
+msgid "Exclude underlay"
+msgstr "בטל שכבה תחתונה"
+
+msgid "No system items"
+msgstr "אין פריטי מערכת"
+
+msgid "Search in all page revisions"
+msgstr "חפש בכל גרסאות הדף"
+
+msgid "Go get it!"
+msgstr "לך קח את זה!"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "אין ציטוטים ב–%(pagename)s."
+
+msgid "Contents"
+msgstr "תכנים"
+
+msgid "Variable name"
+msgstr "שם משתנה"
+
+msgid "Default"
+msgstr "ברירת מחדל"
+
+msgid "Description"
+msgstr "תאור"
+
+msgid "Lexer description"
+msgstr "תאור Lexer"
+
+msgid "Lexer names"
+msgstr "שם Lexer"
+
+msgid "File patterns"
+msgstr "תבניות קבצים"
+
+msgid "Mimetypes"
+msgstr "Mimetypes"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "סכימת ניווט לא נתמכת \"%(scheme)s\"."
+
+msgid "No parent page found!"
+msgstr "לא נמצא דף אב."
+
+msgid "Slideshow"
+msgstr "מצגת שקפים"
+
+msgid "Start"
+msgstr "התחל"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "שקף %(pos)d מתוך %(size)d"
+
+msgid "File attachment browser"
+msgstr "ניהול קבצים מצורפים"
+
+msgid "User account browser"
+msgstr "ניהול משתמשים רשומים"
+
+msgid "Search Titles"
+msgstr "חפש כותרות"
+
+msgid "Display context of search results"
+msgstr "הצג את ההקשר של תוצאות חיפוש"
+
+msgid "Case-sensitive searching"
+msgstr "הבדל בין אותיות גדולות וקטנות"
+
+msgid "Search Text"
+msgstr "חפש מלל"
+
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "תת פעולת גיבוי בלתי ידועה: %s"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr "<<%(macro_name)s: ההרצה נכשלה [%(error_msg)s] (גם ראה את היומן)>>"
+
+msgid "Go To Page"
+msgstr "בקר בדף"
+
+msgid "Wiki configuration"
+msgstr "קונפיגורציית ויקי"
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+"הטבלה הזאת מראה את כל ההגדרות בויקי הזה שאין להם ערכים לברירת מחדל. הגדרות "
+"שמערכת התצורה לא יודעת עליהם מוצגים ב''נטוי'', אפשרי שזה בגלל הרחבות צד "
+"שלישי שצריכים תצורה אוהגדרות שהוסרו מ-Moin."
+
+msgid "Setting"
+msgstr "הגדרה"
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "לפני %(mins)d דקות"
+
+msgid "(no bookmark set)"
+msgstr "(לא נקבעה סימניה)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(כרגע מכוון ל–%s)"
+
+msgid "Delete bookmark"
+msgstr "מחק סימניה"
+
+msgid "Set bookmark"
+msgstr "קבע סימניה"
+
+msgid "[Bookmark reached]"
+msgstr "[סימניה הושגה]"
+
+msgid "Markup"
+msgstr "תיוג"
+
+msgid "Display"
+msgstr "תצוגה"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "שליחת קובץ מצורף חדש \"%(filename)s\""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+"%(extension_name)s %(extension_type)s: פרמטרים דרושים %(argument_name)s "
+"חסרים."
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+"%(extension_name)s %(extension_type)s: %(argument_name)s פסול ="
+"%(argument_value)s!"
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+"ההגדרות הקיימות לא מאפשרות הטמעה של הקובץ %(file)s מכיוון שסוג הקובץ הוא "
+"%(mimetype)s."
+
+msgid "Embedded"
+msgstr "משובץ"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "ארגומנטים לא חוקיים \"%s\"."
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "לא נמצא \"%s\"."
+
+msgid "Switch user"
+msgstr "החלף משתמש"
+
+msgid "No user selected"
+msgstr "לא נבחר משתמש"
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+"כעת ניתן לשנות את ההעדפות של המשתמש שנברר; עליך להתנתק על מנת לחזור לחשבון "
+"שלך."
+
+msgid "You are the only user."
+msgstr "אתה המשתמש היחיד"
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr "כמנהל, ביכולתך לפעול זמנית כמשתמש אחר."
+
+msgid "Select User"
+msgstr "בחר משתמש"
+
+msgid "Preferences"
+msgstr "העדפות"
+
+msgid "This jabber id already belongs to somebody else."
+msgstr "כתובת ה-Jabber הזאת שייכת למישהו אחר."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "אין אפשרות להשתמש בעיצוב '%(theme_name)s'."
+
+msgid "User preferences saved!"
+msgstr "העדפות משתמש נשמרו."
+
+msgid "the one preferred"
+msgstr "המועדף"
+
+msgid "free choice"
+msgstr "בחירה חופשית"
+
+msgid "Save"
+msgstr "שמור"
+
+msgid "Preferred theme"
+msgstr "ערכת נושא מועדפת"
+
+msgid "Editor Preference"
+msgstr "העדפת עורך"
+
+msgid "Editor shown on UI"
+msgstr "העורך המוצג בממשק המשתמש"
+
+msgid "Time zone"
+msgstr "איזור זמן"
+
+msgid "Your time is"
+msgstr "הזמן שלך הוא"
+
+msgid "Server time is"
+msgstr "זמן השרת הוא"
+
+msgid "Date format"
+msgstr "מבנה תאריך"
+
+msgid "Preferred language"
+msgstr "שפה מועדפת"
+
+msgid "General options"
+msgstr "אפשרויות כלליות"
+
+msgid "Quick links"
+msgstr "קישורים מהירים"
+
+msgid "Change password"
+msgstr "שינוי ססמה"
+
+msgid "Your password has been changed."
+msgstr "ססמתך שונתה"
+
+msgid "To change your password, enter a new password twice."
+msgstr "על מנת לשנות את ססמתך, עליך להקליד את הססמה החדשה פעמיים."
+
+msgid "OpenID settings"
+msgstr "הגדרות OpenID"
+
+msgid "Cannot remove all OpenIDs."
+msgstr "לא יכול להסיר את כל ה-OpenID-ים"
+
+msgid "The selected OpenIDs have been removed."
+msgstr "ה-OpenID-ים שנבחרו הוסרו."
+
+msgid "No OpenID given."
+msgstr "שום OpenID לא ניתנה."
+
+msgid "OpenID is already present."
+msgstr "כבר יש OpenID נוחכי."
+
+msgid "This OpenID is already used for another account."
+msgstr "ה-OpenID הזה כבר בשימוש לחשבון אחר."
+
+msgid "OpenID added successfully."
+msgstr "OpenID הצתרף בהצלחה."
+
+msgid "Current OpenIDs"
+msgstr "OpenID-ים נוחכים."
+
+msgid "Remove selected"
+msgstr "הסר מובחרים"
+
+msgid "Add OpenID"
+msgstr "הוסף OpenID"
+
+msgid "Notification"
+msgstr "הודעות"
+
+msgid "Notification settings saved!"
+msgstr "ההגדרות לגבי הודעות נשמרו"
+
+msgid "'''Email'''"
+msgstr "'''דוא\"ל'''"
+
+msgid "'''Jabber'''"
+msgstr "'''Jabber'''"
+
+msgid "'''Event type'''"
+msgstr "'''סוג אירוע'''"
+
+msgid "Select the events you want to be notified about."
+msgstr "סוגי האירועים לגביהם ברצוני לקבל הודעה"
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+"על-מנת שיהיה באפשרותך לקבל הודעות, עליך להגדיר דרך ליצירת קשר בהגדרות "
+"הכלליות."
+
+msgid "Subscribed events"
+msgstr "מנוי לאירועים"
+
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "מנוי לדפים (ביטוי רגולרי אחד לשורה)"
+
+msgid "OpenID server"
+msgstr "שרת OpenID"
+
+msgid "The selected websites have been removed."
+msgstr "האתרים שנבחרו הוסרו."
+
+msgid "Trusted websites"
+msgstr "אתרים בטוחים"
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "תמונות משולבות: %(url)s"
+
+msgid "Toggle line numbers"
+msgstr "סמן מספרי שורות"
+
+#~ msgid "New user account created on %(sitename)s"
+#~ msgstr "משתמש חדש נוצר ב %(sitename)s"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "אנא השתמשו במנשק המשתמש האינטראקטיבי להעברת קבצים מצורפים!"
+
+#~ msgid "Page Name"
+#~ msgstr "שם הדף"
+
+#~ msgid "InstallDocs"
+#~ msgstr "InstallDocs"
+
+#~ msgid "HelpOnUpdating"
+#~ msgstr "HelpOnUpdating"
+
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "ייתכן שתצטרך להיכנס לחשבון כדי לערוך דף זה"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "התקנת קבצי ערכות נושא נתמכת רק לשרתי standalone."
+
+#~ msgid "InterWikiMap"
+#~ msgstr "InterWikiMap"
+
+#~ msgid "BadContent"
+#~ msgstr "BadContent"
+
+#~ msgid "LocalBadContent"
+#~ msgstr "LocalBadContent"
+
+#~ msgid "EditedSystemPages"
+#~ msgstr "EditedSystemPages"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "נוצרה חבילה %s המכילה את הדפים %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "נדרשת הזדהות בפני המערכת."
+
+#~ msgid ""
+#~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+#~ "Files: %(filecount)d, Directories: %(dircount)d"
+#~ msgstr ""
+#~ "שוחזר גיבוי: %(filename)s לתיקית היעד: %(targetdir)s.\n"
+#~ "קבצים: %(filecount)d, תיקיות: %(dircount)d"
+
+#~ msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+#~ msgstr "שיחזור גיבוי של %(filename)s לתיקית המטרה %(targetdir)s: נכשל"
+
+#~ msgid "Wiki Backup / Restore"
+#~ msgstr "גיבוי ויקי \\ שחזור"
+
+#~ msgid ""
+#~ "Some hints:\n"
+#~ " * To restore a backup:\n"
+#~ "  * Restoring a backup will overwrite existing data, so be careful.\n"
+#~ "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+#~ "stuff).\n"
+#~ "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+#~ "  * Hit the <<GetText(Restore)>> button below.\n"
+#~ "\n"
+#~ " * To make a backup, just hit the <<GetText(Backup)>> button and save the "
+#~ "file\n"
+#~ "   you get to a secure place.\n"
+#~ "\n"
+#~ "Please make sure your wiki configuration backup_* values are correct and "
+#~ "complete.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "כמה רמזים:\n"
+#~ " * בכדי לשחזר מגיבוי:\n"
+#~ "  * שחזור מגיבוי ידרוס מידע קיים, אז נא להזהר.\n"
+#~ "  * שנה את השם ל-<siteid>.tar.<compression> (הסר את כל המידע \"--date--"
+#~ "time--UTC\").\n"
+#~ "  * העבר את קובץ הגיבוי לתיקית backup_storage_dir (השתמש ב-scp, ftp, "
+#~ "וכו').\n"
+#~ "  * לחץ על כפתור [[GetText(Restore)]] שלהלן.\n"
+#~ "\n"
+#~ " * בכדי לבצע גיבוי, לחץ על כפתור <<GetText(Backup)>> ושמור את הקובץ\n"
+#~ "   שקיבלת במקום בטוח.\n"
+#~ "\n"
+#~ "אנא וודא שהגדרות הויקי לערכי backup_* הינן נכונות ומדוייקות.\n"
+#~ "\n"
+
+#~ msgid "Restore"
+#~ msgstr "שחזר"

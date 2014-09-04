@@ -1,0 +1,4078 @@
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
+##master-page:None
+##master-date:None
+#acl -All:write Default
+#format gettext
+#language id
+
+#
+# MoinMoin id system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-04 22:35+0200\n"
+"PO-Revision-Date: 2006-10-07 23:19+0700\n"
+"Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
+"Language-Team: Indonesian <id@ll.com>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language: Bahasa Indonesia\n"
+"X-Language-in-English: Indonesian\n"
+"X-HasWikiMarkup: True\n"
+"X-Direction: ltr\n"
+
+msgid "Your changes are not saved!"
+msgstr "Perubahan Anda tidak disimpan!"
+
+msgid "You are not allowed to edit this page."
+msgstr "Anda tidak diizinkan menyunting halaman ini."
+
+msgid "Page is immutable!"
+msgstr "Halaman tak bisa diubah!"
+
+msgid "Cannot edit old revisions!"
+msgstr "Tidak dapat menyunting revisi lama!"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr ""
+"Waktu penguncian yang Anda lakukan telah berakhir. Siap-siap untuk konflik "
+"penyuntingan!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Nama halaman terlalu panjang, coba yang lebih singkat."
+
+#, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr "Draft dari \"%(pagename)s\""
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "Sunting \"%(pagename)s\""
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "Pratilik dari \"%(pagename)s\""
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "Waktu penguncian penyuntingan pada %(lock_page)s telah berakhir!"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr ""
+"Waktu penguncian penyuntingan pada %(lock_page)s akan berakhir dalam # menit."
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr ""
+"Waktu penguncian penyuntingan pada %(lock_page)s akan berakhir dalam # detik."
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "Seseorang telah menghapus halaman ini saat Anda sedang menyuntingnya!"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "Seseorang telah mengubah halaman ini saat Anda sedang menyuntingnya!"
+
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+"Seseorang telah menyimpan halaman ini saat Anda sedang menyunting!\n"
+"Silakan tinjau ulang halaman dan simpan kemudian. Jangan simpan halaman ini "
+"dulu!\n"
+"Coba lihat perbedaan dari %(difflink)s untuk melihat apa yang telah diubah."
+
+msgid "[Content loaded from draft]"
+msgstr "[Isi halaman baru telah dimuat dari draft]"
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[Isi halaman baru telah dimuat dari %s]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[Templat %s tidak ditemukan]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[Anda tidak boleh membaca %s]"
+
+#, python-format
+msgid ""
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
+msgstr ""
+"'''<<BR>>Draft Anda yang berdasarkan pada revisi %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) dapat dimuat sebagai pengganti dari revisi yang "
+"sedang berjalan %(page_rev)d dengan menggunakan tombol memuat draft - "
+"sekiranya anda kehilangan editan terakhir bagaimanapun juga tanpa "
+"menyimpannya.''' Draft menyimpan untuk Anda ketika Anda melakukan pratilik, "
+"pembatalan pengeditan, atau penyimpanan yang tidak sukses."
+
+#, python-format
+msgid "Describe %s here."
+msgstr "Silakan tulis isi dari %s disini."
+
+msgid "Check Spelling"
+msgstr "Periksa Ejaan"
+
+msgid "Save Changes"
+msgstr "Simpan Perubahan"
+
+msgid "Cancel"
+msgstr "Batal"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"Dengan menekan '''%(save_button_text)s''' artinya Anda menaruh perubahan "
+"yang Anda lakukan ke dalam %(license_link)s.\n"
+"Jika tidak menginginkan hal ini, silakan tekan '''%(cancel_button_text)s''' "
+"untuk membatalkan perubahan."
+
+msgid "Preview"
+msgstr "Pratilik"
+
+msgid "GUI Mode"
+msgstr "Mode GUI"
+
+msgid "Load Draft"
+msgstr "Muat Draft"
+
+msgid "Trivial change"
+msgstr "Perubahan remeh-temeh"
+
+msgid "Comment:"
+msgstr "Komentar:"
+
+msgid "<No addition>"
+msgstr "<Tak ada kategori>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "Kategori: %(category)s"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "Hapus jejak spasi kosong dari setiap baris"
+
+msgid "Edit was cancelled."
+msgstr "Penyuntingan dibatalkan."
+
+msgid "You can't copy to an empty pagename."
+msgstr "Anda tidak dapat mengganti nama pada halaman kosong."
+
+msgid "You are not allowed to copy this page!"
+msgstr "Anda tidak diizinkan mengkopi halaman ini!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Halaman dengan nama {{{'%s'}}} sudah ada.'''\n"
+"\n"
+"Coba nama yang lain."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Tidak dapat mengkopi halaman karena error pada sistem berkas: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "Anda tidak diizinkan mengganti nama halaman ini!"
+
+msgid "You can't rename to an empty pagename."
+msgstr "Anda tidak dapat mengganti nama pada halaman kosong."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"Tidak dapat mengganti nama halaman karena error pada sistem berkas: %s."
+
+msgid "You are not allowed to delete this page!"
+msgstr "Anda tidak diizinkan menghapus halaman ini!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr ""
+"Terima kasih atas perubahannya. Perhatian Anda pada dokumen ini sangat "
+"dihargai."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Halaman \"%s\" berhasil dihapus!"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "Halaman tidak dapat dikunci. Kesalahan yang tak diduga (errno=%d)."
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "Halaman tidak dapat dikunci. Tidak ada berkas 'current'?'"
+
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
+msgstr ""
+"Tidak dapat menentukan revisi halaman yang sedang berjalan dari berkas 'yang "
+"sedang berjalan'. halaman %s sedang rusak dan tidak dapat diedit sekarang "
+"ini."
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr ""
+"Tidak dapat menyimpan halaman %s, tidak ada lagi ruang penyimpanan yang "
+"tersedia."
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr "Kesalahan I/O terjadi ketika menyimpan halaman %s (errno=%d)"
+
+msgid "You are not allowed to edit this page!"
+msgstr "Anda tidak diizinkan menyunting halaman ini!"
+
+msgid "You cannot save empty pages."
+msgstr "Anda tidak dapat menyimpan halaman kosong."
+
+msgid "You already saved this page!"
+msgstr "Anda telah menyimpan halaman ini!"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr ""
+"Anda telah mengedit halaman ini! Harap tidak menggunakan tombol kembali."
+
+msgid "You did not change the page content, not saved!"
+msgstr "Anda tidak mengubah isi halaman, tidak akan disimpan!"
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr ""
+"Anda tidak dapat mengubah ACL pada halaman ini karena tidak punya hak akses "
+"admin!"
+
+msgid "Notifications sent to:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"Penguncian oleh %(owner)s berakhir %(mins_ago)d menit lalu, dan Anda "
+"sekarang dapat mengunci halaman ini."
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr ""
+"Pengguna lain akan ''diblokir'' dari penyuntingan halaman ini sampai "
+"%(bumptime)s."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+"Pengguna lain akan ''diperingatkan'' sampai %(bumptime)s bahwa Anda sedang "
+"menyunting halaman ini."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "Gunakan tombol Pratilik untuk memperpanjang waktu penguncian."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"Halaman ini sedang ''dikunci'' untuk penyuntingan oleh %(owner)s sampai "
+"%(timestamp)s, contoh: selama %(mins_valid)d menit."
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''<<BR>>\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"Halaman ini terbuka untuk penyuntingan atau pratilik terakhir pada "
+"%(timestamp)s oleh %(owner)s.<<BR>>\n"
+"'''Anda harus ''tunda dulu penyuntingan'' halaman ini setidaknya sampai "
+"%(mins_valid)d menit lagi,\n"
+"untuk menghindari konflik penyuntingan.'''<<BR>>\n"
+"Untuk meninggalkan editor, tekan tombol Batal."
+
+msgid "<unknown>"
+msgstr "<tak diketahui>"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Data akun wiki Anda"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"Nama Login: %s\n"
+"\n"
+"Kata Sandi: %s\n"
+"\n"
+"URL untuk Login: %s/%s?action=login\n"
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Paket ini membutuhkan MoinMoin versi terbaru (sekurangnya %s)."
+
+msgid "The theme name is not set."
+msgstr "Nama tema tidak di set."
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Instalasi dari '%(filename)s' gagal."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Berkas %s bukan berkas paket MoinMoin."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "Halaman %s tidak ada."
+
+msgid "Invalid package file header."
+msgstr "Header berkas paket tidak benar."
+
+msgid "Package file format unsupported."
+msgstr "Format berkas paket tidak di-support."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Fungsi yang tak dikenal %(func)s di baris %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Berkas %s tidak ditemukan di dalam paket."
+
+msgid "The wiki is currently not reachable."
+msgstr "Wiki sedang tidak dapat dijangkau."
+
+msgid "Invalid username or password."
+msgstr "Nama pengguna atau kata sandi tidak valid."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+"Wiki remote menggunakan nama WikiInter yang beda (%(remotename)s) yang lebih "
+"internal dari yang Anda tentukan (%(localname)s)."
+
+msgid "Text mode"
+msgstr "Mode Teks"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Aksi tak dikenal %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Anda tidak diizinkan untuk menggunakan aksi %(action_name)s di halaman ini."
+
+msgid "Login and try again."
+msgstr "Login dan coba lagi."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Argumen \"%s\" harus merupakan harga boolean, bukan \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Argumen harus merupakan harga boolean, bukan \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Argumen \"%s\" harus merupakan harga integer, bukan \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Argumen harus merupakan harga integer, bukan \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Argumen \"%s\" harus merupakan harga floating point, bukan \"%s\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Argumen harus merupakan harga floating point, bukan \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Argumen \"%s\" harus merupakan harga kompleks, bukan \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Argumen harus merupakan harga kompleks, bukan \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Argumen \"%s\" harus merupakan salah satu dari \"%s\", bukan \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Argumen harus merupakan salah satu dari \"%s\", bukan \"%s\""
+
+msgid "Too many arguments"
+msgstr "Terlalu banyak argumen"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "Tidak dapat berargumentasi tanpa mengikutkan nama argumen yang dinamai"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Argumen \"%s\" dibutuhkan"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Tak ada argumen bernama \"%s\"!"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Diharapkan \"=\" mengikuti \"%(token)s\"\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Diharapkan nilai untuk kunci \"%(token)s\""
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
+msgstr ""
+"Backup isi halaman ini sudah usang dan tidak akan disertakan dalam hasil "
+"pencarian!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Revisi %(rev)d pada %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Dialihkan dari halaman \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Halaman ini dialihkan ke halaman \"%(page)s\""
+
+msgid "Create New Page"
+msgstr "Buat Halaman Baru"
+
+msgid "You are not allowed to view this page."
+msgstr "Anda tidak diizinkan menilik halaman ini."
+
+msgid "No recipients, nothing to do"
+msgstr ""
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Koneksi ke server surat '%(server)s' gagal: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "Surat tak dikirim"
+
+msgid "Mail sent OK"
+msgstr "Pengiriman surat Oke"
+
+msgid "Date"
+msgstr "Tanggal"
+
+msgid "From"
+msgstr "Dari"
+
+msgid "To"
+msgstr "Kepada"
+
+msgid "Content"
+msgstr "Daftar Isi"
+
+msgid "Attachments"
+msgstr "Lampiran"
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Maaf, tidak dapat menyimpan halaman karena \"%(content)s\" tidak diizinkan "
+"di wiki ini."
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Please log in first."
+msgstr "Silakan login dahulu."
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Name"
+msgstr "Nama"
+
+msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Password"
+msgstr "Kata sandi"
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Operasi dibatalkan."
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "Operasi dibatalkan."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+#, fuzzy
+msgid "Missing user name. Please enter user name and password."
+msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
+msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Penekanan:: <<Verbatim('')>>''teks miring''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''teks tebal'''<<Verbatim(''')>>; "
+"<<Verbatim(''''')>>'''''tebal miring'''''<<Verbatim(''''')>>; "
+"<<Verbatim('')>>''gabungan ''<<Verbatim(''')>>'''''teks "
+"tebal'''<<Verbatim(''')>> dan teks miring''<<Verbatim('')>>; "
+"<<Verbatim(----)>> garis horisontal.\n"
+" Heading:: <<Verbatim(=)>> Judul 1 <<Verbatim(=)>>; <<Verbatim(==)>> Judul 2 "
+"<<Verbatim(==)>>; <<Verbatim(===)>> Judul 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Judul 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Judul 5 "
+"<<Verbatim(=====)>>.\n"
+" Senarai:: Gunakan spasi dan satu dari tanda: * bulet; 1., a., A., i., I. "
+"butir bernomor; 1.#n mulai penomoran pada n; spasi saja akan menjadi "
+"indent.\n"
+" Taut:: <<Verbatim(KataGabungan)>>; <<Verbatim([\"tanda kurung kotak dan "
+"tanda kutip ganda\"])>>; url; [url]; [url label].\n"
+" Tabel:: || teks sel |||| teks sel merentang 2 kolom ||;    tidak boleh ada "
+"jejak spasi kosong setelah tabel atau judul.\n"
+"\n"
+"(!) Untuk bantuan lebih lanjut, lihat BantuanPenyuntingan atau "
+"ReferensiSintaksis.\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "Opsi XSLT dinonaktifkan, silakan lihat pada BantuanPadaKonfigurasi."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "Pengolah XSLT tidak tersedia, silakan instal 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s kesalahan pengolahan"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr "Tidak bisa me-render teks reStructured, silakan instal Docutils."
+
+#, fuzzy
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"Penekanan: <i>*teks miring*</i> <b>**teks tebal**</b> ``huruf monospace``<br/"
+">\n"
+"<br/><pre>\n"
+"Heading: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Mistar horisontal: ---- \n"
+"Taut: MengekorGarisbawah_ `banyak kata dengan kutip kebelakang`_ keluar_ \n"
+"\n"
+".. _keluar: http://external-site.net/foo/\n"
+"\n"
+"Senarai: * bulet; 1., a. butir bernomor.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Untuk bantuan lebih banyak, lihat \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"Referensi Cepat reStructuredText\n"
+"</a>.\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Jumlah maksimum dari penyertaan yang diizinkan terlampaui**"
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "Anda tidak diizinkan mengganti nama halaman ini!"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Tidak dapat menemukan halaman referensi: %s**"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Penekanan:: <<Verbatim('')>>''teks miring''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''teks tebal'''<<Verbatim(''')>>; "
+"<<Verbatim(''''')>>'''''tebal miring'''''<<Verbatim(''''')>>; "
+"<<Verbatim('')>>''gabungan ''<<Verbatim(''')>>'''''teks "
+"tebal'''<<Verbatim(''')>> dan teks miring''<<Verbatim('')>>; "
+"<<Verbatim(----)>> garis horisontal.\n"
+" Heading:: <<Verbatim(=)>> Judul 1 <<Verbatim(=)>>; <<Verbatim(==)>> Judul 2 "
+"<<Verbatim(==)>>; <<Verbatim(===)>> Judul 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Judul 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Judul 5 "
+"<<Verbatim(=====)>>.\n"
+" Senarai:: Gunakan spasi dan satu dari tanda: * bulet; 1., a., A., i., I. "
+"butir bernomor; 1.#n mulai penomoran pada n; spasi saja akan menjadi "
+"indent.\n"
+" Taut:: <<Verbatim(KataGabungan)>>; <<Verbatim([\"tanda kurung kotak dan "
+"tanda kutip ganda\"])>>; url; [url]; [url label].\n"
+" Tabel:: || teks sel |||| teks sel merentang 2 kolom ||;    tidak boleh ada "
+"jejak spasi kosong setelah tabel atau judul.\n"
+"\n"
+"(!) Untuk bantuan lebih lanjut, lihat BantuanPenyuntingan atau "
+"ReferensiSintaksis.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Diharapkan \"%(wanted)s\" setelah \"%(key)s\", didapat \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Diharapkan integer \"%(key)s\" sebelum \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Diharapkan integer \"%(arg)s\" setelah \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Diharapkan nilai warna \"%(arg)s\" setelah \"%(key)s\""
+
+#, fuzzy
+msgid "Password is too short."
+msgstr "Ulangi kata sandi"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
+msgid "Diffs"
+msgstr "Perbedaan"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Edit"
+msgstr "Sunting"
+
+msgid "UnSubscribe"
+msgstr "BatalBerlangganan"
+
+msgid "Subscribe"
+msgstr "Berlangganan"
+
+msgid "Raw"
+msgstr "Mentah"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Cetak"
+
+msgid "View"
+msgstr "Tilik"
+
+msgid "Up"
+msgstr "Atas"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "Tampilkan email saya di info pengarang"
+
+msgid "Open editor on double click"
+msgstr "Buka editor dengan klik dua kali"
+
+msgid "After login, jump to last visited page"
+msgstr "Setelah login, lompat ke halaman yang terakhir dikunjungi"
+
+msgid "Show comment sections"
+msgstr "Perlihatkan seksi komentar"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Tampilkan tanda tanya untuk taut ke halaman kosong"
+
+msgid "Show page trail"
+msgstr "Tampilkan jejak halaman"
+
+msgid "Show icon toolbar"
+msgstr "Tampilkan ikon toolbar"
+
+msgid "Show top/bottom links in headings"
+msgstr "Tampilkan taut atas/bawah di heading"
+
+msgid "Show fancy diffs"
+msgstr "Menampilkan perbedaan dengan cantik"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Tambah spasi untuk menayangkan nama wiki"
+
+msgid "Remember login information"
+msgstr "Ingat informasi login"
+
+msgid "Disable this account forever"
+msgstr "Tutup akun ini selamanya"
+
+msgid "(Use FirstnameLastname)"
+msgstr "(Gunakan nama: DepanBelakang)"
+
+msgid "Alias-Name"
+msgstr "Nama Alias"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr "URL untuk CSS pribadi"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Kosongkan jika tak ingin memakai CSS pribadi)"
+
+msgid "Editor size"
+msgstr "Ukuran editor"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)sPemutakhiran dari \"%(pagename)s\" oleh "
+"%(username)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Pengguna Wiki YTH,\n"
+"\n"
+"Anda berlangganan ke halaman wiki atau kategori wiki pada \"%(sitename)s\" "
+"untuk pemberitahuan perubahan.\n"
+"\n"
+"Halaman berikut telah diubah oleh %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Pengguna Wiki YTH,\n"
+"\n"
+"Anda berlangganan ke halaman wiki atau kategori wiki pada \"%(sitename)s\" "
+"untuk pemberitahuan perubahan.\n"
+"\n"
+"Halaman berikut telah diubah oleh %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
+msgstr ""
+"Pengguna Wiki YTH,\n"
+"\n"
+"Anda berlangganan ke halaman wiki atau kategori wiki pada \"%(sitename)s\" "
+"untuk pemberitahuan perubahan.\n"
+"\n"
+"Halaman berikut telah diubah oleh %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "lampiran:%(filename)s dari %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "lampiran:%(filename)s dari %(pagename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"Pengguna Wiki YTH,\n"
+"\n"
+"Anda berlangganan ke halaman wiki atau kategori wiki pada \"%(sitename)s\" "
+"untuk pemberitahuan perubahan.\n"
+"\n"
+"Halaman berikut telah diubah oleh %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] Data akun wiki Anda"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+msgid "anonymous"
+msgstr ""
+
+msgid "Line"
+msgstr "Baris"
+
+msgid "No differences found!"
+msgstr "Tidak ditemukan perbedaan!"
+
+msgid "Deletions are marked like this."
+msgstr "Penghapusan ditandai seperti ini."
+
+msgid "Additions are marked like this."
+msgstr "Penambahan ditandai seperti ini."
+
+msgid "DeleteCache"
+msgstr "HapusCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(cache %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Atau coba salah satu aksi ini:"
+
+msgid "Unsubscribe"
+msgstr "Batal berlangganan"
+
+msgid "Home"
+msgstr "Pangkal"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[HAPUS]"
+
+msgid "[UPDATED]"
+msgstr "[MUTAKHIR]"
+
+msgid "[RENAMED]"
+msgstr "[UBAH NAMA]"
+
+msgid "[CONFLICT]"
+msgstr "[KONFLIK]"
+
+msgid "[NEW]"
+msgstr "[BARU]"
+
+msgid "[DIFF]"
+msgstr "[PERBEDAAN]"
+
+msgid "[BOTTOM]"
+msgstr "[DASAR]"
+
+msgid "[TOP]"
+msgstr "[ATAS]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klik untuk melakukan pencarian teks penuh untuk judul ini"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Logout"
+msgstr "Keluar"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Clear message"
+msgstr "Bersihkan pesan"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "terakhir disunting %(time)s oleh %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "terakhir diubah %(time)s"
+
+msgid "Search:"
+msgstr "Cari:"
+
+msgid "Text"
+msgstr "Teks"
+
+msgid "Titles"
+msgstr "Judul"
+
+msgid "Search"
+msgstr "Cari"
+
+msgid "More Actions:"
+msgstr "Lebih Banyak Aksi:"
+
+msgid "------------------------"
+msgstr "------------------------"
+
+msgid "Raw Text"
+msgstr "Teks Mentah"
+
+msgid "Print View"
+msgstr "Tilik Cetakan"
+
+msgid "Delete Cache"
+msgstr "Hapus Cache"
+
+msgid "Rename Page"
+msgstr "Ganti Nama Halaman"
+
+msgid "Copy Page"
+msgstr "Kopi Halaman"
+
+msgid "Delete Page"
+msgstr "Hapus Halaman"
+
+msgid "Like Pages"
+msgstr "Halaman Serupa"
+
+msgid "Local Site Map"
+msgstr "Site Map Lokal"
+
+msgid "My Pages"
+msgstr "Halaman Saya"
+
+msgid "Subscribe User"
+msgstr "Daftar Pelanggan"
+
+msgid "Remove Spam"
+msgstr "Hapus Spam"
+
+msgid "Revert to this revision"
+msgstr "Putar balik ke revisi ini"
+
+msgid "Package Pages"
+msgstr "Halaman Paket"
+
+msgid "Render as Docbook"
+msgstr "Buat Docbook"
+
+msgid "Sync Pages"
+msgstr "Halaman Sync"
+
+msgid "Do"
+msgstr "Lakukan"
+
+msgid "Comments"
+msgstr "Komentar"
+
+msgid "Edit (Text)"
+msgstr "Sunting (Teks)"
+
+msgid "Edit (GUI)"
+msgstr "Sunting (GUI)"
+
+msgid "Immutable Page"
+msgstr "Halaman Kekal"
+
+msgid "Remove Link"
+msgstr "Hapus Taut"
+
+msgid "Add Link"
+msgstr "Tambah Taut"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Tampilkan %s hari."
+
+msgid "Wiki Markup"
+msgstr "Markup Wiki"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Page"
+msgstr "Halaman"
+
+msgid "User"
+msgstr "Pengguna"
+
+msgid "[ATTACH]"
+msgstr ""
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "Opsi --halaman dan --cari bermutu eksklusiv!"
+
+msgid "You must specify an output file!"
+msgstr "Anda harus merincikan berkas output!"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"Tidak ada halaman yang dirincikan menggunakan --halaman atau --cari, menduga "
+"paket penuh."
+
+msgid "All attachments included into the package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Berkas output sudah ada! Menolak untuk lanjut!"
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "Lampiran"
+
+#, fuzzy
+msgid "Page link"
+msgstr "Halaman seperti \"%s\""
+
+#, fuzzy
+msgid "Changed page"
+msgstr "Halaman paket"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Simpan Perubahan"
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Jumlah pengunjung dan penyuntingan"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "Halaman \"%s\" berhasil dihapus!"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Jumlah pengunjung dan penyuntingan"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Nama lampiran baru"
+
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "Nama lampiran baru"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Anda berlangganan ke halaman ini."
+
+msgid "A new account has been created"
+msgstr ""
+
+msgid "Trivial "
+msgstr "Remeh-temeh "
+
+msgid "New page:\n"
+msgstr "Halaman baru:\n"
+
+msgid "No differences found!\n"
+msgstr "Tidak ditemukan perbedaan!\n"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "[all]"
+msgstr "[semua]"
+
+msgid "[not empty]"
+msgstr "[tidak kosong]"
+
+msgid "[empty]"
+msgstr "[kosong]"
+
+msgid "filter"
+msgstr "saring"
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+"Hasil %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s dari %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s hasil keluar tentang %(pages)d halaman."
+
+msgid "seconds"
+msgstr "detik"
+
+msgid "Previous"
+msgstr "Sebelumnya"
+
+msgid "Next"
+msgstr "Selanjutnya"
+
+msgid "rev"
+msgstr "putar balik"
+
+msgid "current"
+msgstr "sekarang"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "terakhir diubah %s"
+
+msgid "match"
+msgstr "cocok"
+
+msgid "matches"
+msgstr "cocok"
+
+msgid "about"
+msgstr ""
+
+msgid "This page is already deleted or was never created!"
+msgstr "Halaman ini telah dihapus atau belum pernah dibuat!"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Nama berkas tidak benar: \"%s\"!"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d lampiran]"
+
+msgid "Package pages"
+msgstr "Halaman paket"
+
+msgid "Package name"
+msgstr "Nama paket"
+
+msgid "List of page names - separated by a comma"
+msgstr "Daftar nama halaman - pisahkan dengan koma"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Tak ada halaman seperti \"%s\"!"
+
+#, python-format
+msgid "Rolled back changes to the page %s."
+msgstr "Memutar mundur berubah ke halaman %s"
+
+msgid "Exception while calling rollback function:"
+msgstr "Eksepsi ketika memanggil fungsi rollback:"
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+"Mohon masukkan kata sandi dari akun Anda pada wiki remote di bawah ini. "
+"<<BR>> /!\\ Anda sebaiknya percaya pada kedua wiki karena kata sandi dapat "
+"dibaca oleh administrator yang teliti."
+
+msgid "Operation was canceled."
+msgstr "Operasi dibatalkan."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Silakan gunakan antarmuka pengguna interaktif untuk menggunakan aksi "
+"%(actionname)s!"
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr "Direksi yang didukung hanya KEDUANYA dan BAWAH."
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+"Harap atur namawikiinter dalam konfigurasiwiki (lihat HelpOnConfiguration) "
+"untuk dapat menggunakan aksi ini."
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+"Parameter salah. Harap sediakan sekurangnya parameter ''remoteWiki''. Untuk "
+"bantuan lihat HelpOnSynchronisation."
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr "''remoteWiki'' tidak dikenal."
+
+#, fuzzy
+msgid "A severe error occurred:"
+msgstr "Terdapat kesalahan fatal:"
+
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr "Sinkronisasi selesai. Lihat di bawah ini untuk pesan status."
+
+msgid "Synchronisation started -"
+msgstr "Sinkronisasi dimulai -"
+
+#, fuzzy, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
+msgstr ""
+"Mendapat daftar dari %s halaman lokal dan %s halaman jauh. Hasil ini terdiri "
+"dari %s halaman berbeda dari keseluruhan."
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr "Setelah penyaringan: %s halaman"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr "Lewati halaman %s karena tiadanya akses untuk mengubah halaman lokal."
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr "Menghapus halaman %s setempat."
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr "Kesalahan ketika menghapus halaman %s secara setempat:"
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr "Menghapus halaman %s secara setempat."
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr "Kesalahan ketika menghapus halaman %s secara jauh:"
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+"Item %s tidak dapat digabung secara otomatis tetapi diubah di kedua wiki."
+"Harap menghapusnya di salah satu atau kedua wiki dan coba lagi."
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+"Item %s memiliki tipe mime yang berbeda di kedua wiki dan tidak dapat "
+"digabung. Harap menghapusnya di salah satu atau kedua wiki, atau samakan "
+"tipe mime-nya, dan coba lagi."
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+"Item %s telah diubah namanya secara setempat. Ini belum diimplementasikan. "
+"Oleh sebab itu sejarah sinkronisasi penuh hilang untuk halaman ini."
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr "Sinkronisasi halaman %s dengan halaman remote %s ..."
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr "Halaman %s telah dihapus secara jauh tetapi diubah secara setempat."
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+"Halaman %s tidak dapat di-sync. Halaman remote telah diubah namanya. Ini "
+"tidak lagi terdukung. Anda sebaiknya menghapus salah satu dari halaman itu "
+"agar dapat di-sync."
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+"Lewati halaman %s karena adanya konflik yang tidak terselesaikan baik "
+"setempat maupun secara jauh."
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+"Ini adalah sinkronisasi pertama antara wiki lokal dan remote untuk halaman "
+"%s."
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+"Halaman %s tidak dapat digabung sebab Anda tidak dibolehkan untuk mengubah "
+"halaman tersebut dengan wiki remote."
+
+#, python-format
+msgid "Page %s successfully merged."
+msgstr "Halaman \"%s\" berhasil digabung."
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr "Halaman %s berisi konfik yang diperkenalkan pada sisi remote."
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr "Halaman %s digabungkan dengan konflik."
+
+#, fuzzy
+msgid "Attachment location"
+msgstr "Lampiran"
+
+#, fuzzy
+msgid "Page name"
+msgstr "Nama paket"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "Nama lampiran baru"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "Lampiran"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "lampiran"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "Lampiran untuk \"%(pagename)s\""
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Ditemukan tepat satu halaman seperti \"%s\", dialihkan ke halaman."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Halaman seperti \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s untuk \"%(title)s\""
+
+msgid "You must login to remove a quicklink."
+msgstr "Anda harus login untuk menghapus taut cepat."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Taut cepat Anda ke halaman ini telah dihapus."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "Taut cepat Anda ke halaman ini tidak dapat dihapus."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+"Anda harus mempunyai taut cepat Anda ke halaman ini untuk menghapusnya."
+
+msgid "Please choose:"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Anda harus log in untuk dapat berlangganan."
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Anda tidak diizinkan menggunakan aksi ini."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Anda tidak diizinkan berlangganan ke halaman yang tak dapat Anda baca"
+
+#, fuzzy
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "Wiki ini tidak diaktifkan untuk pengelolaan surat."
+
+msgid "You must log in to use subscriptions."
+msgstr "Anda harus log in untuk dapat berlangganan."
+
+#, fuzzy
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"Tambah alamat email Anda dalam PreferensiPengguna untuk dapat berlangganan."
+
+msgid "You are already subscribed to this page."
+msgstr "Anda berlangganan ke halaman ini."
+
+msgid "You have been subscribed to this page."
+msgstr "Anda berlangganan ke halaman ini."
+
+msgid "You could not get subscribed to this page."
+msgstr "Anda tidak dapat berlangganan ke halaman ini."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Upload lampiran '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Lampiran '%(filename)s' dihapus."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Penggambaran '%(filename)s' disimpan."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Putar balik ke revisi %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Diubah namanya dari \"%(oldpagename)s\""
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d lampiran]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr ""
+"Ada <a href=\"%(link)s\">%(count)s lampiran</a> yang disimpan di halaman ini."
+
+msgid "Filename of attachment not specified!"
+msgstr "Nama berkas dari lampiran tidak ditetapkan!"
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "Lampiran '%(filename)s' tidak ada!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"Untuk menggunakan lampiran pada halaman, gunakan '''{{{attachment:"
+"filename}}}''', \n"
+"seperti yang ditampilkan di dalam senarai berkas. \n"
+"'''JANGAN''' menggunakan URL dari taut {{{[get]}}}, \n"
+"karena hal ini akan dan bisa berubah setiap saat."
+
+msgid "del"
+msgstr "hapus"
+
+msgid "move"
+msgstr "pindah"
+
+msgid "get"
+msgstr "ambil"
+
+msgid "edit"
+msgstr "sunting"
+
+msgid "view"
+msgstr "tilik"
+
+msgid "unzip"
+msgstr "unzip"
+
+msgid "install"
+msgstr "instal"
+
+msgid "All files"
+msgstr ""
+
+#, fuzzy
+msgid "Selected Files:"
+msgstr "Lampirkan Berkas"
+
+#, fuzzy
+msgid "delete"
+msgstr "Hapus"
+
+#, fuzzy
+msgid "move to page"
+msgstr "Jumlah halaman"
+
+msgid "Do it."
+msgstr "Lakukan."
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "Tak ada lampiran tersimpan di %(pagename)s"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Anda tidak diizinkan menghapus lampiran pada halaman ini."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "Anda tidak diizinkan memindahkan lampiran dari halaman ini."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Anda tidak diizinkan untuk melampirkan berkas ke halaman ini."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr "Lampiran '%(filename)s' pindah ke %(page)s."
+
+msgid "New Attachment"
+msgstr "Lampiran Baru"
+
+msgid "File to upload"
+msgstr "Berkas untuk di-upload"
+
+msgid "Rename to"
+msgstr "Ganti nama ke"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Timpa lampiran yang sudah ada dengan nama yang sama"
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "Attached Files"
+msgstr "Lampirkan Berkas"
+
+#, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "Sub-aksi TaruhBerkas yang tidak di-support: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "Lampiran untuk \"%(pagename)s\""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Jawaban salah! Harap kembali dan coba lagi..."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Tak ada isi berkas. Hapus karakter bukan ASCII dari nama berkas dan coba "
+"lagi."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Anda tidak diizinkan menilik lampiran dari halaman ini."
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Lampiran '%(target)s' (nama jauh '%(filename)s') dengan %(bytes)d bita "
+"disimpan."
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "Lampiran '%(target)s' (nama remote '%(filename)s') sudah ada."
+
+#, fuzzy, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr "'Lampiran '%(filename)s' sudah ada."
+
+msgid "Nothing changed"
+msgstr "Tidak ada yang berubah"
+
+#, fuzzy, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr ""
+"Halaman %(newpagename)s tidak ada atau Anda tidak memiliki hak yang cukup."
+
+msgid "Move aborted!"
+msgstr "Perpindahan dibatalkan!"
+
+#, fuzzy
+msgid "Move aborted because new page name is empty."
+msgstr "Perpindahan dibatalkan kerena nama halaman kosong."
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "Harap gunakan nama berkas yang valid untuk lampiran '%(filename)s'."
+
+#, fuzzy
+msgid "Move aborted because new attachment name is empty."
+msgstr "Perpindahan dibatalkan kerena nama lampiran kosong."
+
+msgid "Move"
+msgstr "Pindah"
+
+msgid "New page name"
+msgstr "Nama halaman baru"
+
+msgid "New attachment name"
+msgstr "Nama lampiran baru"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "Anda tidak diizinkan mengambil lampiran dari halaman ini."
+
+msgid "You are not allowed to install files."
+msgstr "Anda tidak diizinkan menginstal berkas."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "'Lampiran '%(filename)s' diinstal."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Anda tidak diizinkan untuk meng-unzip lampiran dari halaman ini."
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Berkas %(filename)s bukan berkas .zip."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
+msgstr ""
+"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas terlalu besar, "
+"berkas .zip saja, sudah ada atau terletak di dalam pelipat."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas yang dihasilkan "
+"terlalu besar (hilang %(space)d kB)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas yang dihasilkan "
+"terlalu banyak (hilang %(count)d)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
+msgstr "Meng-unzip lampiran '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Meng-unzip lampiran '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Lampiran '%(filename)s'"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Package script:"
+msgstr "Skrip paket:"
+
+msgid "File Name"
+msgstr "Nama Berkas"
+
+msgid "Modified"
+msgstr "Diubah"
+
+msgid "Size"
+msgstr "Ukuran"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "Jenis berkas tak dikenal, tak dapat menayangkan lampiran ini."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Anda tidak diizinkan menilik lampiran dari halaman ini."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "lampiran:%(filename)s dari %(pagename)s"
+
+msgid "General Information"
+msgstr "Informasi Umum"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Besar halaman: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "Digest SHA dari isi halaman ini adalah:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Pengguna yang berlangganan ke halaman ini:"
+
+msgid "This page links to the following pages:"
+msgstr "Halaman ini bertaut ke halaman berikut:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "Nama baru"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
+
+msgid "Diff"
+msgstr "Beda"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Comment"
+msgstr "Komentar"
+
+msgid "Action"
+msgstr "Aksi"
+
+#, fuzzy
+msgid "to previous"
+msgstr "Sebelumnya"
+
+msgid "N/A"
+msgstr "T/A"
+
+msgid "Revision History"
+msgstr "Riwayat Revisi"
+
+msgid "No log entries found."
+msgstr "Tidak ditemukan entri log."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Info untuk \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Tampilkan \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Info Halaman Umum"
+
+msgid "Page hits and edits"
+msgstr "Jumlah pengunjung dan penyuntingan"
+
+msgid "Delete"
+msgstr "Hapus"
+
+msgid "Delete all /subpages too?"
+msgstr "Hapus semua /subhalaman?"
+
+msgid "Optional reason for the deletion"
+msgstr "Alasan dari penghapusan"
+
+msgid "Really delete this page?"
+msgstr "Yakin menghapus halaman ini?"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Silakan buat laman dulu sebelum membuat halaman tambahan."
+
+#, fuzzy, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+"Anda dapat menambah beberapa sub halaman ke laman Anda yang sudah ada "
+"disini.\n"
+"\n"
+"Anda dapat memilih askes halaman tersebut untuk pembaca atau penulis lain ,\n"
+"akses di kontrol oleh keanggotaan grup dari grup halaman yang bersangkutan.\n"
+"\n"
+"Cukup masukkan nama sub halaman dan klik pada tombol buat halaman baru.\n"
+"\n"
+"Sebelum membuat akses proteksi halaman, pastikan grup halaman yang "
+"bersangkutan\n"
+"ada dan punya anggota yang tepat di dalamnya. Gunakan TemplatLamanGrup untuk "
+"membuat\n"
+"halaman grup.\n"
+"\n"
+"||'''Tambah halaman pribadi baru:'''||'''Daftar grup kontrol akses:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,halaman baca-tulis,"
+"%(username)s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,halaman baca saja,%(username)s)>>||"
+"[\"%(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,halaman pribadi,%(username)s)>>||"
+"%(username)s saja||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Manajemen HalamanSaya"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(menyertakan %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"%(badwords)d kata berikut ini tidak dapat ditemukan di kamus yang mempunyai "
+"%(totalwords)d kata%(localwords)s dan kata tersebut dapat dilihat dibawah:"
+
+msgid "Add checked words to dictionary"
+msgstr "Tambah kata terpilih ke dalam kamus"
+
+msgid "No spelling errors found!"
+msgstr "Tak ditemukan kesalahan ejaan!"
+
+msgid "You can't save spelling words."
+msgstr "Anda tidak dapat menyimpan kata ejaan."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"Anda tidak dapat memeriksa ejaan pada halaman yang tidak dapat Anda baca."
+
+msgid "You are not allowed to use this action."
+msgstr "Anda tidak diizinkan menggunakan aksi ini."
+
+#, fuzzy
+msgid "If this account exists an email was sent."
+msgstr "Jika ada akun dengan nama pengguna ini, sebuah email akan dikirim."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Wiki ini tidak diaktifkan untuk pengolahan surat.\n"
+"Hubungi pengelola wiki, yang dapat mengaktifkan email."
+
+#, fuzzy
+msgid "Please provide a valid email address or a username!"
+msgstr "Silakan menyediakan alamat email yang benar!"
+
+#, fuzzy
+msgid "Username"
+msgstr "Pengguna"
+
+msgid "Mail me my account data"
+msgstr "Kirim data akun saya"
+
+#, fuzzy
+msgid "Recovery token"
+msgstr "Putar balik semua!"
+
+#, fuzzy
+msgid "New password"
+msgstr "Kata sandi"
+
+#, fuzzy
+msgid "New password (repeat)"
+msgstr "Ulangi kata sandi"
+
+#, fuzzy
+msgid "Reset my password"
+msgstr "Kata sandi"
+
+msgid "Passwords don't match!"
+msgstr "Kata sandi tidak cocok!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Password tidak dapat diterima: %s"
+
+msgid "Your password has been changed, you can log in now."
+msgstr ""
+
+msgid "Your token is invalid!"
+msgstr ""
+
+#, fuzzy
+msgid "Password reset"
+msgstr "Ulangi kata sandi"
+
+#, fuzzy
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
+
+#, fuzzy
+msgid "Lost password"
+msgstr "Kata sandi"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
+
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "Versi PyStemmer"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Pengguna yang berlangganan ke halaman %s"
+
+msgid "Enter user names (comma separated):"
+msgstr "Masukkan nama pengguna (koma untuk memisahkan):"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Berlanggananan untuk %s:"
+
+msgid "Not a user:"
+msgstr "Bukan pengguna:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Anda tidak diizinkan melakukan aksi ini."
+
+#, fuzzy
+msgid "Print slide show"
+msgstr "Slideshow"
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "Slideshow"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "Slideshow"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
+msgid "Charts are not available!"
+msgstr "Bagan tidak tersedia!"
+
+msgid "You need to provide a chart type!"
+msgstr "Anda harus menyediakan jenis bagan!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Jenis bagan tidak benar \"%s\"!"
+
+msgid "Load"
+msgstr "Load"
+
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Nama berkas dari lampiran tidak ditetapkan!"
+
+msgid "Upload page content"
+msgstr ""
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
+msgstr ""
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr "(!) Hanya halaman yang diubah sejak '''%s''' sedang ditampilkan!"
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+"/!\\ Tanggal modifikasi yang Anda masukkan tidak dikenali dan oleh sebab itu "
+"tidak dipertimbangkan dalam hasil pencarian!"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr ""
+"Silakan menggunakan istilah pencarian yang lebih selektif daripada {{{\"%s"
+"\"}}}"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Cari Judul: \"%s\""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Cari Lebih Lanjut: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Cari Teks Penuh: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Pertanyaan pencarian Anda {{{\"%s\"}}} invalid. Silakan lihat "
+"HelpOnSearching untuk informasi lebih lanjut."
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+"Pertanyaan pencarian Anda {{{\"%s\"}}} tidak menghasilkan hasil apa-apa. "
+"Silakan ubah beberapa istilah dan lihat HelpOnSearching untuk informasi "
+"lebih lanjut.%s"
+
+msgid "(!) Consider performing a"
+msgstr "(!) Mempertimbangkan menampilkan sebuah"
+
+msgid "full-text search with your search terms"
+msgstr "pencarian teks-penuh dengan artikel pencarian Anda"
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+"Anda melakukan pencarian judul yang tidak mengikutsertakan semua hasil yang "
+"berhubungan dengan pertanyaan pencarian Anda dalama wiki ini. <<BR>>"
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr ""
+"Klik untuk melakukan pencarian teks penuh untuk istilah pencarian Anda!"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Tidak dapat membuat halaman baru tanpa nama. Silakan tetapkan nama halaman."
+
+msgid "Your subscription to this page has been removed."
+msgstr "Langganan Anda ke halaman ini telah dihapus."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Tidak dapat menghapus ekspresi regular pada langganan!"
+
+#, fuzzy
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "Sunting ekspresi regular pada langganan dalam PreferensiPengguna Anda."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Anda butuh menjadi berlangganan ke tidak berlangganan."
+
+#, fuzzy
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Jawaban salah! Harap kembali dan coba lagi..."
+
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr ""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Buat penggambaran baru \"%(filename)s (buka dalam jendela baru)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Sunting penggambaran %(filename)s (buka dalam jendela baru)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Penggambaran yang dapat di-klik: %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Anda tidak diizinkan menyimpan penggambaran pada halaman ini"
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "Sunting penggambaran"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Menjalankan aksi %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Aksi %(actionname)s tidak disertakan dalam wiki ini!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr ""
+"Anda tidak diizinkan untuk menggunakan aksi %(actionname)s di halaman ini!"
+
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "Anda tidak diizinkan mengganti nama halaman ini!"
+
+msgid "Pages"
+msgstr "Halaman"
+
+msgid "Select Author"
+msgstr "Pilih Penulis"
+
+msgid "Revert all!"
+msgstr "Putar balik semua!"
+
+msgid "Copy all /subpages too?"
+msgstr "Salin semua /subhalaman?"
+
+msgid "New name"
+msgstr "Nama baru"
+
+msgid "Optional reason for the copying"
+msgstr "Alasan dari mengkopi"
+
+msgid "Really copy this page?"
+msgstr "Yakin mengkopi halaman ini?"
+
+msgid "You are now logged out."
+msgstr "Sekarang Anda telah logout."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "Tidak ditemukan halaman induk!"
+
+#, fuzzy
+msgid "page package"
+msgstr "Halaman paket"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Site Map Lokal untuk \"%s\""
+
+msgid "No older revisions available!"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Perbedaan untuk \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Perbedaan antara revisi %d dan %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(memutar %d versi)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "Sebelumnya"
+
+#, fuzzy
+msgid "Next change"
+msgstr "Tidak ada yang berubah"
+
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "Revisi terdahulu tak tersedia!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "Revisi terdahulu tak tersedia!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Halaman tersimpan sebanyak %(count)d kali!"
+
+msgid "(ignoring whitespace)"
+msgstr "(mengabaikan spasi kosong)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Abaikan perubahan hanya karena beda di spasi kosong"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Nama pengguna kosong. Silakan masukkan nama pengguna."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Nama pengguna tidak benar {{{'%s'}}}.\n"
+"Nama mungkin mengandung beberapa karakter alfanumerik Unicode, dengan satu "
+"spasi \n"
+"opsional diantara kata. Nama halaman grup tidak diizinkan."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Nama pengguna sudah dimiliki oleh orang lain."
+
+msgid "Please specify a password!"
+msgstr "Silakan tetapkan kata sandi!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Silakan sediakan alamat email Anda. Jika Anda kehilangan informasi login, "
+"Anda bisa mendapatkannya kembali melalui email."
+
+msgid "This email already belongs to somebody else."
+msgstr "Email ini sudah dimiliki oleh orang lain."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Akun pengguna telah dibuat! Anda dapat menggunakan akun ini untuk login "
+"sekarang..."
+
+msgid "Password repeat"
+msgstr "Ulangi kata sandi"
+
+msgid "TextCha (required)"
+msgstr "TextCha (dibutuhkan)"
+
+msgid "Create Profile"
+msgstr "Buat Profil"
+
+msgid "Create Account"
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Daftar Taut Penuh untuk \"%s\""
+
+msgid "You must login to add a quicklink."
+msgstr "Anda harus login untuk menambah taut cepat."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Taut cepat ke halaman ini telah ditambahkan untuk Anda."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "Taut cepat ke halaman ini tidak dapat ditambahkan untuk Anda."
+
+msgid "You already have a quicklink to this page."
+msgstr "Anda telah mempunyai taut cepat ke halaman ini"
+
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
+msgid "Rename all /subpages too?"
+msgstr "Ganti nama semua /subhalaman?"
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "Yakin mengubah nama halaman ini?"
+
+msgid "Optional reason for the renaming"
+msgstr "Alasan dari penggantian nama"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Markup Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Anda tidak diizinkan mem-backup dari jauh."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Sub aksi untuk backup tidak diketahui: %s."
+
+#, fuzzy
+msgid "Revert"
+msgstr "Putar balik semua!"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Anda tidak diizinkan memutar balik halaman ini!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Anda sedang melihat revisi sekarang dari halaman ini ketika Anda memanggil "
+"aksi memutar balik. Jika anda mau memutar balik ke versi sebelumnya, pertama "
+"lihat revisi sebelumnya lalu panggil untuk memutar balik ke versi ini lagi."
+
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Alasan dari mengkopi"
+
+#, fuzzy
+msgid "Really revert this page?"
+msgstr "Yakin mengubah nama halaman ini?"
+
+msgid "OpenID"
+msgstr ""
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "Jumlah halaman"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Disable user"
+msgstr "Nonaktifkan pengguna"
+
+msgid "Enable user"
+msgstr "Aktifkan pengguna"
+
+msgid "disabled"
+msgstr "nonaktifkan"
+
+msgid "Mail account data"
+msgstr "Kirim data akun saya lewat email"
+
+msgid "RecentChanges"
+msgstr "PerubahanTerakhir"
+
+msgid "WikiTipOfTheDay"
+msgstr "TipWikiHariIni"
+
+msgid "TitleIndex"
+msgstr "IndeksJudul"
+
+msgid "WordIndex"
+msgstr "IndeksKata"
+
+msgid "FindPage"
+msgstr "CariHalaman"
+
+msgid "MissingPage"
+msgstr "HalamanYangHilang"
+
+msgid "MissingHomePage"
+msgstr "LamanYangHilang"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "HomePageWiki"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "NamaWiki"
+
+msgid "WikiWikiWeb"
+msgstr "SitusWikiWiki"
+
+msgid "FrontPage"
+msgstr "HalamanDepan"
+
+msgid "WikiSandBox"
+msgstr "KotakPasirWiki"
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "WikiInter"
+
+msgid "AbandonedPages"
+msgstr "HalamanYangTerlantar"
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "HalamanYatim"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "HalamanYangDicari"
+
+msgid "EventStats"
+msgstr "StatistikPeristiwa"
+
+msgid "EventStats/HitCounts"
+msgstr "StatistikPeristiwa/JumlahYangMasuk"
+
+msgid "EventStats/Languages"
+msgstr "StatistikPeristiwa/Bahasa"
+
+msgid "EventStats/UserAgents"
+msgstr "StatistikPeristiwa/AgenPengguna"
+
+#, fuzzy
+msgid "PageSize"
+msgstr "UkuranHalaman"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "PukulanHalaman"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "HalamanAcak"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Versi Python"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "LisensiWiki"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Slideshow"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "PreferensiPengguna"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "DaftarBantuan"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "DaftarBantuan"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "DaftarBantuan"
+
+msgid "HelpOnFormatting"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "TentangMoinMoin"
+
+msgid "HelpContents"
+msgstr "KontenBantuan"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "IndeksJudul"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "DaftarBantuan"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "DaftarBantuan"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "DaftarBantuan"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Bahasa"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "DaftarBantuan"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "NavigasiSitus"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "BantuanPemformatan"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "DaftarBantuan"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Slideshow"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "CekEjaan"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Sinkronisasi dimulai -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "PreferensiPengguna"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "BantuanPemformatan"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "DaftarBantuan"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "BatalBerlangganan"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "PreferensiPengguna"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Lampiran Baru"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Lebih Banyak Aksi:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Min"
+
+msgid "Mon"
+msgstr "Sen"
+
+msgid "Tue"
+msgstr "Sel"
+
+msgid "Wed"
+msgstr "Rab"
+
+msgid "Thu"
+msgstr "Kam"
+
+msgid "Fri"
+msgstr "Jum"
+
+msgid "Sat"
+msgstr "Sab"
+
+msgid "AttachFile"
+msgstr "LampirkanBerkas"
+
+msgid "DeletePage"
+msgstr "HapusHalaman"
+
+msgid "LikePages"
+msgstr "HalamanSerupa"
+
+msgid "LocalSiteMap"
+msgstr "SiteMapLokal"
+
+msgid "RenamePage"
+msgstr "GantiNamaHalaman"
+
+msgid "SpellCheck"
+msgstr "CekEjaan"
+
+msgid "Discussion"
+msgstr ""
+
+msgid "User agent"
+msgstr "Perantara pengguna"
+
+msgid "Others"
+msgstr "Lain-lain"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Distribusi dari Jenis Perantara-Pengguna"
+
+msgid "Page Size Distribution"
+msgstr "Distribusi Besar Halaman"
+
+msgid "page size upper bound [bytes]"
+msgstr "batas atas besar halaman [bita]"
+
+msgid "# of pages of this size"
+msgstr "# halaman dengan ukuran ini"
+
+msgid "Views/day"
+msgstr "Tilik/hari"
+
+msgid "Edits/day"
+msgstr "Sunting/hari"
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s untuk %(filterpage)s"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"hijau=tilik\n"
+"merah=sunting"
+
+msgid "date"
+msgstr "tanggal"
+
+msgid "# of hits"
+msgstr "# pengunjung"
+
+msgid "Language"
+msgstr "Bahasa"
+
+msgid "<Browser setting>"
+msgstr "<Setting browser>"
+
+msgid "No orphaned pages in this wiki."
+msgstr "Tidak ada halaman yatim di wiki ini."
+
+msgid "Include system pages"
+msgstr "Menyertakan halaman sistem"
+
+msgid "Exclude system pages"
+msgstr "Meniadakan halaman sistem"
+
+msgid "No wanted pages in this wiki."
+msgstr "Tidak ada halaman yang diminta dalam wiki ini."
+
+msgid "Python Version"
+msgstr "Versi Python"
+
+msgid "MoinMoin Version"
+msgstr "Versi MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Rilis %s [Revisi %s]"
+
+msgid "4Suite Version"
+msgstr "Versi 4Suite"
+
+msgid "Number of pages"
+msgstr "Jumlah halaman"
+
+msgid "Number of system pages"
+msgstr "Jumlah halaman sistem"
+
+msgid "Accumulated page sizes"
+msgstr "Akumulasi besar halaman"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Besar pemakaian cakram dari %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Besar pemakaian cakram dari %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Entri di log sunting"
+
+msgid "NONE"
+msgstr "TAK ADA"
+
+msgid "Global extension macros"
+msgstr "Ekstensi makro global"
+
+msgid "Local extension macros"
+msgstr "Ekstensi makro lokal"
+
+msgid "Global extension actions"
+msgstr "Ekstensi aksi global"
+
+msgid "Local extension actions"
+msgstr "Ekstensi aksi lokal"
+
+msgid "Global parsers"
+msgstr "Pengurai global"
+
+msgid "Local extension parsers"
+msgstr "Ekstensi pengurai lokal"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Jilidan Xapian dan/atau Python Xapian tidak ter-install"
+
+msgid "Disabled"
+msgstr "Nonaktifkan"
+
+msgid "Enabled"
+msgstr "Aktifkan"
+
+msgid "index unavailable"
+msgstr "indeks tidak tersedia"
+
+msgid "index available"
+msgstr "indeks tersedia"
+
+msgid "Xapian search"
+msgstr "Pencarian xapian"
+
+msgid "Stemming for Xapian"
+msgstr "Stemming untuk Xapian"
+
+msgid "Active threads"
+msgstr "Thread aktif"
+
+msgid "Search for items"
+msgstr "Cari item"
+
+msgid "containing all the following terms"
+msgstr "berisi semua istilah berikut"
+
+msgid "containing one or more of the following terms"
+msgstr "berisi satu atau lebih dari istilah berikut"
+
+msgid "not containing the following terms"
+msgstr "tidak berisi dari istilah berikut"
+
+#, fuzzy
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "perubahan terakhir sejak (contoh: 2 minggu terakhir)"
+
+msgid "any category"
+msgstr ""
+
+msgid "any language"
+msgstr "bahasa yang diinginkan"
+
+msgid "any mimetype"
+msgstr "tipemime yang diinginkan"
+
+msgid "Categories"
+msgstr ""
+
+msgid "File Type"
+msgstr "Tipe Berkas"
+
+msgid "Search only in titles"
+msgstr "Cari hanya dari judul"
+
+msgid "Case-sensitive search"
+msgstr "Pencarian yang peka huruf besar-kecil"
+
+msgid "Exclude underlay"
+msgstr "Meniadakan halaman dasar"
+
+msgid "No system items"
+msgstr "Tidak item sistem"
+
+msgid "Search in all page revisions"
+msgstr "Cari dalam semua revisi halaman"
+
+msgid "Go get it!"
+msgstr "Ambil!"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Tidak ada kutipan pada %(pagename)s."
+
+msgid "Contents"
+msgstr "Daftar Isi"
+
+#, fuzzy
+msgid "Variable name"
+msgstr "Nama berkas"
+
+msgid "Default"
+msgstr "Baku"
+
+msgid "Description"
+msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "Versi PyStemmer"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "Pengguna"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "Tipe Berkas"
+
+#, fuzzy
+msgid "Mimetypes"
+msgstr "tipemime yang diinginkan"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Skema navigasi tidak didukung '%(scheme)s'!"
+
+msgid "No parent page found!"
+msgstr "Tidak ditemukan halaman induk!"
+
+msgid "Slideshow"
+msgstr "Slideshow"
+
+msgid "Start"
+msgstr "Mulai"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Slide %(pos)d dari %(size)d"
+
+#, fuzzy
+msgid "File attachment browser"
+msgstr "Nama lampiran baru"
+
+msgid "User account browser"
+msgstr ""
+
+msgid "Search Titles"
+msgstr "Cari Judul"
+
+msgid "Display context of search results"
+msgstr "Tayangkan konteks dari hasil pencarian"
+
+msgid "Case-sensitive searching"
+msgstr "Pencarian yang peka huruf besar-kecil"
+
+msgid "Search Text"
+msgstr "Cari Teks"
+
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Sub aksi untuk backup tidak diketahui: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Ke Halaman"
+
+msgid "Wiki configuration"
+msgstr ""
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+msgid "Setting"
+msgstr ""
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm yang lalu"
+
+msgid "(no bookmark set)"
+msgstr "(tak ada bookmark yang ditata)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(saat ini ditata ke %s)"
+
+msgid "Delete bookmark"
+msgstr "Hapus bookmark"
+
+msgid "Set bookmark"
+msgstr "Tata bookmark"
+
+msgid "[Bookmark reached]"
+msgstr "[Batas bookmark]"
+
+msgid "Markup"
+msgstr "Markup"
+
+msgid "Display"
+msgstr "Tampilan"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Upload lampiran baru \"%(filename)s\""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr "Ditempatkan"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Argumen penyertaan tidak benar \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Tak ditemukan apapun untuk \"%s\"!"
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Pilih Pengguna"
+
+msgid "Preferences"
+msgstr "Preferensi"
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "Email ini sudah dimiliki oleh orang lain."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Tema '%(theme_name)s' tidak dapat dimuat!"
+
+msgid "User preferences saved!"
+msgstr "Menyimpan preferensi pengguna!"
+
+msgid "the one preferred"
+msgstr "yang diinginkan"
+
+msgid "free choice"
+msgstr "pilihan bebas"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Preferred theme"
+msgstr "Tema yang diinginkan"
+
+msgid "Editor Preference"
+msgstr "Preferensi Editor"
+
+msgid "Editor shown on UI"
+msgstr "Antarmuka untuk Editor"
+
+msgid "Time zone"
+msgstr "Zona waktu"
+
+msgid "Your time is"
+msgstr "Waktu Anda adalah"
+
+msgid "Server time is"
+msgstr "Waktu server adalah"
+
+msgid "Date format"
+msgstr "Format tanggal"
+
+msgid "Preferred language"
+msgstr "Bahasa yang diinginkan"
+
+msgid "General options"
+msgstr "Opsi umum"
+
+msgid "Quick links"
+msgstr "Taut cepat"
+
+#, fuzzy
+msgid "Change password"
+msgstr "Kata sandi"
+
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Halaman ini telah dihapus atau belum pernah dibuat!"
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Email"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Daftar Pelanggan"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Langganan halaman wiki (satu regex per baris)"
+
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "Gambar segaris: %(url)s"
+
+msgid "Toggle line numbers"
+msgstr "On/Off nomor baris"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr ""
+#~ "Silakan gunakan antarmuka pengguna interaktif untuk memindahkan lampiran!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "Nama paket"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "instal"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "BantuanPemformatan"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "Anda tidak diizinkan menyunting halaman ini."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Menginstal berkas tema hanya didukung untuk server jenis standalone."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Markup Wiki"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Daftar Isi"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Daftar Isi"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Meniadakan halaman sistem"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Membuat paket %s yang memuat halaman %s."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Sekarang Anda telah logout."
+
+#~ msgid ""
+#~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+#~ "Files: %(filecount)d, Directories: %(dircount)d"
+#~ msgstr ""
+#~ "Me-restore backup: %(filename)s ke direktori tujuan: %(targetdir)s.\n"
+#~ "Berkas: %(filecount)d, Direktori: %(dircount)d"
+
+#~ msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+#~ msgstr ""
+#~ "Me-restore backup: %(filename)s ke direktori tujuan: %(targetdir)s gagal."
+
+#~ msgid "Wiki Backup / Restore"
+#~ msgstr "Backup / Restore Wiki"
+
+#~ msgid ""
+#~ "Some hints:\n"
+#~ " * To restore a backup:\n"
+#~ "  * Restoring a backup will overwrite existing data, so be careful.\n"
+#~ "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+#~ "stuff).\n"
+#~ "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+#~ "  * Hit the <<GetText(Restore)>> button below.\n"
+#~ "\n"
+#~ " * To make a backup, just hit the <<GetText(Backup)>> button and save the "
+#~ "file\n"
+#~ "   you get to a secure place.\n"
+#~ "\n"
+#~ "Please make sure your wiki configuration backup_* values are correct and "
+#~ "complete.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Beberapa petunjuk:\n"
+#~ " * Untuk memulihkan backup:\n"
+#~ "  * Memulihkan backup akan menimpa data yang ada, jadi hati-hati.\n"
+#~ "  * Ganti nama ke <id_situs>.tar.<kompresi> (hapus bagian --tanggal--jam--"
+#~ "UTC).\n"
+#~ "  * Taruh berkas backup ke backup_storage_dir (gunakan scp, ftp, ...).\n"
+#~ "  * Tekan tombol <<GetText(Restore)>> dibawah.\n"
+#~ "\n"
+#~ " * Untuk membuat backup, cukup tekan tombol <<GetText(Backup)>> dan "
+#~ "simpan berkas backup ditempat yang aman.\n"
+#~ "\n"
+#~ "Tolong pastikan nilai konfigurasi backup_* wiki Anda benar dan lengkap.\n"
+#~ "\n"
+
+#~ msgid "Restore"
+#~ msgstr "Restore"
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versi Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer tidek ter-install"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versi PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Stem PyStemmer"
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Halaman Baru atau Lampiran Baru"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Anda dapat meng-upload sebuah berkas ke halaman baru dengan memilih meng-"
+#~ "upload file sebagai lampiranpada halaman yang sedang berjalan"
+
+#~ msgid "New Name"
+#~ msgstr "Nama Baru"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Lampiran '%(target)s' sudah ada."
+
+#~ msgid ""
+#~ "An upload will never overwrite an existing file. If there is a name\n"
+#~ "conflict, you have to rename the file that you want to upload.\n"
+#~ "Otherwise, if \"Rename to\" is left blank, the original filename will be "
+#~ "used."
+#~ msgstr ""
+#~ "Setiap berkas yang di-upload tidak akan menimpa berkas yang sudah ada. "
+#~ "Jika terjadi\n"
+#~ "konflik nama, Anda harus mengganti nama berkas yang ingin Anda upload.\n"
+#~ "Sebaliknya, jika \"Ganti Nama ke\" dikosongkan, nama berkas semula yang "
+#~ "dipakai."
+
+#~ msgid "overwrite"
+#~ msgstr "timpa"
+
+#~ msgid ""
+#~ "Somebody has requested to submit your account data to this email "
+#~ "address.\n"
+#~ "\n"
+#~ "If you lost your password, please use the data below and just enter the\n"
+#~ "password AS SHOWN into the wiki's password form field (use copy and "
+#~ "paste\n"
+#~ "for that).\n"
+#~ "\n"
+#~ "After successfully logging in, it is of course a good idea to set a new "
+#~ "and known password.\n"
+#~ msgstr ""
+#~ "Seseorang telah meminta informasi data akun Anda ke alamat email ini.\n"
+#~ "\n"
+#~ "Jika Anda kehilangan kata sandi, silakan gunakan data di bawah dan "
+#~ "masukkan\n"
+#~ "kata sandi SEPERTI TERLIHAT ke dalam ruas kolom kata sandi wiki (gunakan "
+#~ "copy dan paste\n"
+#~ "untuk melakukannya).\n"
+#~ "\n"
+#~ "Setelah login, silakan ganti kata sandi ini dengan yang Anda inginkan.\n"
+
+#~ msgid "Found no account matching the given email address '%(email)s'!"
+#~ msgstr ""
+#~ "Tidak ditemukan akun yang cocok dengan alamat email ini '%(email)s'!"
+
+#~ msgid "File attachments are not allowed in this wiki!"
+#~ msgstr "Tidak diizinkan melampirkan berkas di wiki ini!"
+
+#~ msgid "SendMyPassword"
+#~ msgstr "KirimKataSandiSaya"
+
+#~ msgid "Use UserPreferences to change your settings or create an account."
+#~ msgstr ""
+#~ "Gunakan PreferensiPengguna untuk mengubah setting atau untuk registrasi."
+
+#~ msgid "Use UserPreferences to change settings of the selected user account"
+#~ msgstr ""
+#~ "Gunakan PreferensiPengguna untuk mengubah setting akun pengguna terpilih"
+
+#~ msgid ""
+#~ "This list does not work, unless you have entered a valid email address!"
+#~ msgstr ""
+#~ "Daftar ini tidak akan bekerja, kecuali Anda memasukkan alamat email yang "
+#~ "benar!"
+
+#~ msgid ""
+#~ "To create an account, see the %(userprefslink)s page. To recover a lost "
+#~ "password, go to %(sendmypasswordlink)s."
+#~ msgstr ""
+#~ "Gunakan halaman %(userprefslink)s untuk registrasi. Untuk memulihkan kata "
+#~ "sandi yang hilang, gunakan %(sendmypasswordlink)s."
+
+#~ msgid ""
+#~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
+#~ "Try a different name."
+#~ msgstr ""
+#~ "'''Halaman dengan nama {{{'%s'}}} sudah ada.'''\n"
+#~ "Coba nama yang lain."
+
+#~ msgid ""
+#~ "The comment on the change is:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Komentar pada perubahan ini:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+
+#~ msgid "Status of sending notification mails:"
+#~ msgstr "Status pengiriman surat pemberitahuan:"
+
+#~ msgid "[%(lang)s] %(recipients)s: %(status)s"
+#~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#~ msgid "Subscribe to trivial changes"
+#~ msgstr "Berlangganan ke perubahan remeh-temeh"
+
+#~ msgid "(Only for password change or new account)"
+#~ msgstr "(Hanya untuk perubahan kata sandi atau akun baru)"
+
+#~ msgid "Check your argument %s"
+#~ msgstr "Periksa argumen anda %s"
+
+#~ msgid "ERROR in regex '%s'"
+#~ msgstr "ERROR dalam regex '%s'"
+
+#~ msgid "Bad timestamp '%s'"
+#~ msgstr "Stempel waktu buruk '%s'"
+
+#~ msgid "Not supported mimetype of file: %s"
+#~ msgstr "Tipemime yang tidak didukung dari berkas: %s"
+
+#~ msgid "Embedding of object by chosen formatter not possible"
+#~ msgstr ""
+#~ "Menempatkan objek sesuai dengan formatter yang dipilih tidak memungkinkan"
+
+#~ msgid ""
+#~ "Not enough arguments given to EmbedObject macro! Try "
+#~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
+#~ "Text])>>"
+#~ msgstr ""
+#~ "Argumen yang tidak cukup diberikan ke makro EmbedObject! Coba "
+#~ "<<EmbedObject(lampiran [,width=width] [,height=height] [,alt=alternate "
+#~ "Text])>>"
+
+#~ msgid ""
+#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+#~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+#~ msgstr ""
+#~ "Argumen yang tidak cukup diberikan ke makro EmbedObject! Coba "
+#~ "<<EmbedObject(tipemime_url [,width=width] [,height=height] [,"
+#~ "alt=alternate Text])>>"
+
+#~ msgid "Invalid MonthCalendar calparms \"%s\"!"
+#~ msgstr "Calparms KalendarBulanan tidak benar \"%s\"!"
+
+#~ msgid "Invalid MonthCalendar arguments \"%s\"!"
+#~ msgstr "Argumen KalendarBulanan tidak benar \"%s\"!"
+
+#~ msgid "Sorry, login failed."
+#~ msgstr "Maaf, login gagal."
+
+#~ msgid ""
+#~ "The remote version of MoinMoin is too old, version 1.6 is required at "
+#~ "least."
+#~ msgstr ""
+#~ "Versi remote dari MoinMoin terlalu tua, minimal dibutuhkan versi 1.6."
+
+#~ msgid "belonging to one of the following categories"
+#~ msgstr "tergolong satu dari kategori berikut"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Jika Anda men-submit isian ini, maka isi yang di-submit akan "
+#~ "ditayangkan.\n"
+#~ "Untuk menggunakan isian ini pada halaman lain, masukkan\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
+#~ "menggunakan makro.-~\n"
+
+#~ msgid "You are not allowed to do %s on this page."
+#~ msgstr "Anda tidak diizinkan melakukan %s di halaman ini."
+
+#~ msgid "%(hits)d results out of about %(pages)d pages."
+#~ msgstr "%(hits)d hasil yang keluar mengenai halaman %(pages)d."
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Atribut \"%(attrname)s\" yang dibutuhkan hilang"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Data isian yang di-submit:"
+
+#~ msgid "Plain title index"
+#~ msgstr "Indeks judul biasa"
+
+#~ msgid "XML title index"
+#~ msgstr "Indeks judul XML"
+
+#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+#~ msgstr "Pemroses yang diinstal (USANG -- gunakan saja Pengurai)"
+
+#~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
+#~ msgstr "## backup dari halaman \"%(pagename)s\" di-submit pada %(date)s"
+
+#~ msgid ""
+#~ "Sorry, someone else saved the page while you edited it.\n"
+#~ "\n"
+#~ "Please do the following: Use the back button of your browser, and "
+#~ "cut&paste\n"
+#~ "your changes from there. Then go forward to here, and click EditText "
+#~ "again.\n"
+#~ "Now re-add your changes to the current page contents.\n"
+#~ "\n"
+#~ "''Do not just replace\n"
+#~ "the content editbox with your version of the page, because that would\n"
+#~ "delete the changes of the other person, which is excessively rude!''\n"
+#~ msgstr ""
+#~ "Maaf, sesorang telah menyimpan halaman ini saat Anda menyuntingnya.\n"
+#~ "\n"
+#~ "Silakan lakukan ini: Gunakan tombol ke belakang dari browser Anda, dan "
+#~ "cut&paste\n"
+#~ "perubahan Anda dari sana. Kemudian balik kembali, dan klik SuntingTeks "
+#~ "lagi.\n"
+#~ "Sekarang tambah ulang perubahan Anda pada isi halaman sekarang.\n"
+#~ "\n"
+#~ "''Jangan langsung mengganti\n"
+#~ "isi dalam kotak sunting dengan versi halaman Anda, karena itu akan\n"
+#~ "menghapus perubahan dari orang lain, dan ini sangat tidak sopan!''\n"
+
+#~ msgid "A backup of your changes is [%(backup_url)s here]."
+#~ msgstr "Backup dari perubahan Anda ada [%(backup_url)s disini]."
+
+#~ msgid "Jump to last visited page instead of frontpage"
+#~ msgstr "Loncat ke halaman terakhir dikunjungi daripada ke halaman muka"
+
+#~ msgid "(Only when changing passwords)"
+#~ msgstr "(Hanya saat membuat kata sandi baru)"
+
+#~ msgid "raw"
+#~ msgstr "mentah"
+
+#~ msgid "print"
+#~ msgstr "cetak"
+
+#~ msgid "Show chart \"%(title)s\""
+#~ msgstr "Tampilkan bagan \"%(title)s\""
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nama pengguna tak diketahui: {{{\"%s\"}}}. Silakan masukkan nama pengguna "
+#~ "dan kata sandi."
+
+#~ msgid "set bookmark"
+#~ msgstr "tata bookmark"

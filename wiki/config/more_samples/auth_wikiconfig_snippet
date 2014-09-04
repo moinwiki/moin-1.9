@@ -1,0 +1,19 @@
+    # This is a sample configuration snippet that shows moin's auth configuration.
+    # See HelpOnSessions, HelpOnAuthentication and HelpOnConfiguration for more infos.
+
+    # authentication methods used (default shown, see also other snippets):
+    # if autocreate is True user profiles are created automatically
+
+    # With HTTPAuthMoin moin does http basic auth all by itself:
+    #from MoinMoin.auth.http import HTTPAuthMoin
+    #auth = [HTTPAuthMoin(autocreate=True)]
+
+    # With GivenAuth moin relies on the webserver doing the authentication:
+    #from MoinMoin.auth import GivenAuth
+    #auth = [GivenAuth(autocreate=True)]
+
+    # a list of form field names to be disabled in the UserPreferences.
+    #user_form_disable = ['name', ]
+ 
+    # a list of form field names to be removed from the UserPreferences.
+    #user_form_remove = ['password', 'password2', ]

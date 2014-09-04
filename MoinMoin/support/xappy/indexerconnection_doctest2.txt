@@ -1,0 +1,435 @@
+
+>>> from datastructures import *
+>>> from fieldactions import *
+>>> from searchconnection import *
+
+
+Open a connection for indexing:
+>>> iconn = IndexerConnection('foo')
+
+We should have no documents in the database yet:
+>>> iconn.get_doccount()
+0
+
+We have to wipe out any old actions on the field to change the actions:
+>>> iconn.add_field_action('author', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('title', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('title', FieldActions.INDEX_FREETEXT, weight=5, language='en')
+>>> iconn.add_field_action('category', FieldActions.INDEX_EXACT)
+>>> iconn.add_field_action('category', FieldActions.SORTABLE)
+>>> iconn.add_field_action('category', FieldActions.COLLAPSE)
+>>> iconn.add_field_action('text', FieldActions.INDEX_FREETEXT, language='en')
+>>> iconn.add_field_action('other', FieldActions.INDEX_FREETEXT)
+
+Build up a document:
+>>> doc = UnprocessedDocument()
+
+We can add field instances.  Multiple instances of a field are valid.
+>>> doc.fields.append(Field('author', 'Richard Boulton'))
+>>> doc.fields.append(Field('category', 'Test document'))
+>>> doc.fields.append(Field('title', 'Test document 1'))
+>>> doc.fields.append(Field('text', 'This document is a basic test document.'))
+
+We can process a document explicitly, if we want to.
+>>> pdoc = iconn.process(doc)
+
+>>> pdoc.data
+{'title': ['Test document 1'], 'author': ['Richard Boulton']}
+
+We can access the Xapian document representation of the processed document to
+double check that this document has been indexed as we wanted:
+>>> xdoc = pdoc.prepare()
+>>> import cPickle
+>>> cPickle.loads(xdoc.get_data()) == pdoc.data
+True
+>>> [(term.term, term.wdf, [pos for pos in term.positer]) for term in xdoc.termlist()]
+[('1', 5, [3]), ('XA1', 5, [3]), ('XAdocument', 5, [2]), ('XAtest', 5, [1]), ('XB:Test document', 0, []), ('XCa', 1, [17]), ('XCbasic', 1, [18]), ('XCdocument', 2, [15, 20]), ('XCis', 1, [16]), ('XCtest', 1, [19]), ('XCthis', 1, [14]), ('ZXAdocument', 5, []), ('ZXAtest', 5, []), ('ZXCa', 1, []), ('ZXCbasic', 1, []), ('ZXCdocument', 2, []), ('ZXCis', 1, []), ('ZXCtest', 1, []), ('ZXCthis', 1, []), ('Za', 1, []), ('Zbasic', 1, []), ('Zdocument', 7, []), ('Zis', 1, []), ('Ztest', 6, []), ('Zthis', 1, []), ('a', 1, [17]), ('basic', 1, [18]), ('document', 7, [2, 15, 20]), ('is', 1, [16]), ('test', 6, [1, 19]), ('this', 1, [14])]
+
+>>> [(value.num, value.value) for value in xdoc.values()]
+[(0, 'Test document')]
+
+>>> ','.join(iconn.iterids())
+''
+>>> iconn.add(pdoc)
+'0'
+>>> sconn1 = SearchConnection('foo')
+>>> ','.join(iconn.iterids())
+'0'
+
+Regression test: if we called add with a ProcessedDocument which didn't have a
+unique ID, the generated ID used to get assigned to the ProcessedDocument.
+This shouldn't happen.
+>>> print pdoc.id
+None
+>>> iconn.add(pdoc)
+'1'
+>>> pdoc.id = 'B'
+>>> iconn.add(pdoc)
+'B'
+>>> iconn.get_doccount()
+3
+
+
+Add some more documents:
+
+>>> doc = UnprocessedDocument(fields=(Field('author', 'Charlie Hull'),
+...                                   Field('category', 'Silly Document'),
+...                                   Field('text', 'Charlie is a juggler'),
+...                                   Field('other', 'Some other content.'),
+...                                   ))
+>>> iconn.add(doc)
+'2'
+
+>>> doc = UnprocessedDocument(fields=(Field('author', 'Charlie Hull'),
+...                                   Field('category', 'Juggling'),
+...                                   Field('text', '5 clubs is quite hard.'),
+...                                   ))
+>>> iconn.add(doc)
+'3'
+
+>>> doc = UnprocessedDocument(fields=(Field('author', 'Charlie Hull'),
+...                                   Field('category', 'Juggling'),
+...                                   Field('text', 'Good toilets are important at juggling festivals'),
+...                                   ))
+>>> iconn.add(doc)
+'4'
+>>> iconn.get_doccount()
+6
+
+
+Now, try searching it:
+
+There's nothing in the database, because the changes haven't been flushed.
+>>> sconn1.get_doccount()
+0
+
+The iconn can access the same documents before and after a flush:
+>>> ','.join(iconn.iterids())
+'0,1,2,3,4,B'
+>>> iconn.flush()
+>>> ','.join(iconn.iterids())
+'0,1,2,3,4,B'
+
+
+The open connection still accesses the same revision, so there are still no
+documents visible:
+>>> sconn1.get_doccount()
+0
+
+A new connection can see the documents, though:
+>>> sconn2 = SearchConnection('foo')
+>>> sconn2.get_doccount()
+6
+
+
+>>> doc = UnprocessedDocument(fields=(Field('author', 'Richard Boulton'),
+...                                   Field('category', 'Gardening'),
+...                                   Field('text', 'Clematis grows very fast, and may smother other plants'),
+...                                   ))
+>>> iconn.add(doc)
+'5'
+>>> iconn.get_doccount()
+7
+
+The current search connection can't see the new document:
+>>> sconn2.get_doccount()
+6
+
+After a flush, the old connections still can't see the new document:
+>>> iconn.flush()
+>>> sconn1.get_doccount()
+0
+>>> sconn2.get_doccount()
+6
+
+A new connection can see the new document:
+>>> sconn3 = SearchConnection('foo')
+>>> sconn3.get_doccount()
+7
+
+Let's try deleting a document:
+>>> iconn.delete('5')
+>>> iconn.get_doccount()
+6
+
+After a flush, a new connection can see the change:
+>>> iconn.flush()
+>>> sconn4 = SearchConnection('foo')
+>>> sconn1.get_doccount()
+0
+>>> sconn2.get_doccount()
+6
+>>> sconn3.get_doccount()
+7
+>>> sconn4.get_doccount()
+6
+
+If we reopen the connection, we can see the latest changes:
+>>> sconn1.reopen()
+>>> sconn1.get_doccount()
+6
+
+
+We can parse some
+>>> str(sconn4.query_parse('test'))
+'Xapian::Query((Ztest:(pos=1) AND_MAYBE test:(pos=1)))'
+>>> str(sconn4.query_parse('title:test'))
+'Xapian::Query((ZXAtest:(pos=1) AND_MAYBE XAtest:(pos=1)))'
+>>> str(sconn4.query_parse('title:Test'))
+'Xapian::Query((XAtest:(pos=1) AND_MAYBE XAtest:(pos=1)))'
+
+Xapian needs a patch to support exact prefixes.  When this is applied, the
+following test will pass.
+>> str(sconn4.query_parse('title:Test category:Te/st'))
+'Xapian::Query((XAtest:(pos=1) AND XB:Te/st:(pos=2)))'
+
+For now, the output is approximately right, and good enough to be going on
+with:
+>>> str(sconn4.query_parse('title:Test category:Te/st'))
+'Xapian::Query(((XAtest:(pos=1) AND (XBte:(pos=2) PHRASE 2 XBst:(pos=3))) AND_MAYBE (XAtest:(pos=1) AND (XBte:(pos=2) PHRASE 2 XBst:(pos=3)))))'
+
+>>> q1 = sconn4.query_parse('text:(clematis)')
+>>> q2 = sconn4.query_parse('title:Test')
+>>> str(sconn4.query_filter(q1, q2))
+'Xapian::Query(((ZXCclemati:(pos=1) AND_MAYBE XCclematis:(pos=1)) FILTER (XAtest:(pos=1) AND_MAYBE XAtest:(pos=1))))'
+
+>>> str(sconn4.query_filter(q1, "filter"))
+Traceback (most recent call last):
+...
+SearchError: Filter must be a Xapian Query object
+
+If we only allow a limited set of fields, other field specifications will be
+considered as plain text:
+>>> str(sconn4.query_parse("text:clematis title:Test"))
+'Xapian::Query(((ZXCclemati:(pos=1) AND XAtest:(pos=2)) AND_MAYBE (XCclematis:(pos=1) AND XAtest:(pos=2))))'
+>>> str(sconn4.query_parse("text:clematis title:Test", allow=("text",)))
+'Xapian::Query(((ZXCclemati:(pos=1) AND (title:(pos=2) PHRASE 2 test:(pos=3))) AND_MAYBE (XCclematis:(pos=1) AND (title:(pos=2) PHRASE 2 test:(pos=3)))))'
+>>> str(sconn4.query_parse("text:clematis title:Test", deny=("title",)))
+'Xapian::Query(((ZXCclemati:(pos=1) AND (title:(pos=2) PHRASE 2 test:(pos=3))) AND_MAYBE (XCclematis:(pos=1) AND (title:(pos=2) PHRASE 2 test:(pos=3)))))'
+>>> str(sconn4.query_parse("text:clematis title:Test", allow=("text",), deny=("title",)))
+Traceback (most recent call last):
+...
+SearchError: Cannot specify both `allow` and `deny` (got ('text',) and ('title',))
+
+
+We can parse queries which don't specify a field explicitly, too:
+>>> str(sconn4.query_parse("clematis Test"))
+'Xapian::Query(((Zclemati:(pos=1) AND test:(pos=2)) AND_MAYBE (clematis:(pos=1) AND test:(pos=2))))'
+
+We can generate a query for an individual field:
+>>> str(sconn4.query_field('text', "clematis Test"))
+'Xapian::Query(((ZXCclemati:(pos=1) AND XCtest:(pos=2)) AND_MAYBE (XCclematis:(pos=1) AND XCtest:(pos=2))))'
+
+If we generate a query for a field with no language set, it won't be stemmed:
+>>> str(sconn4.query_field('other', "clematis Test"))
+'Xapian::Query(((XDclematis:(pos=1) AND XDtest:(pos=2)) AND_MAYBE (XDclematis:(pos=1) AND XDtest:(pos=2))))'
+
+If the field is an exact text field, the query will contain a single term:
+>>> str(sconn4.query_field('category', "Clematis Test"))
+'Xapian::Query(XB:Clematis Test)'
+
+If the field isn't known, we get an empty query:
+>>> q2 = sconn4.query_field('unknown', "clematis Test")
+>>> str(q2)
+'Xapian::Query()'
+
+If we filter a query with an empty query, we get another empty query:
+>>> str(sconn4.query_filter(q1, q2))
+'Xapian::Query()'
+
+
+>>> q = sconn4.query_parse('title:Test')
+>>> str(q)
+'Xapian::Query((XAtest:(pos=1) AND_MAYBE XAtest:(pos=1)))'
+>>> res = sconn4.search(q, 0, 10)
+>>> res.matches_lower_bound
+3
+>>> res.matches_upper_bound
+3
+>>> res.matches_estimated
+3
+>>> res.estimate_is_exact
+True
+>>> res.more_matches
+False
+>>> str(res)
+'<SearchResults(startrank=0, endrank=3, more_matches=False, matches_lower_bound=3, matches_upper_bound=3, matches_estimated=3, estimate_is_exact=True)>'
+
+If we ask for fewer results, we get them:
+>>> res = sconn4.search(q, 0, 2)
+>>> str(res)
+'<SearchResults(startrank=0, endrank=2, more_matches=True, matches_lower_bound=3, matches_upper_bound=3, matches_estimated=3, estimate_is_exact=True)>'
+>>> res = sconn4.search(q, 0, 3)
+>>> str(res)
+'<SearchResults(startrank=0, endrank=3, more_matches=False, matches_lower_bound=3, matches_upper_bound=3, matches_estimated=3, estimate_is_exact=True)>'
+
+Multiword queries use AND to combine terms, by default:
+>>> q1 = sconn4.query_parse('text:(important plants)')
+>>> str(q1)
+'Xapian::Query(((ZXCimport:(pos=1) AND ZXCplant:(pos=2)) AND_MAYBE (XCimportant:(pos=1) AND XCplants:(pos=2))))'
+
+But we can set the default operator to OR if we want:
+>>> q1 = sconn4.query_parse('text:(important plants)', default_op=sconn4.OP_OR)
+>>> str(q1)
+'Xapian::Query(((ZXCimport:(pos=1) OR ZXCplant:(pos=2)) AND_MAYBE (XCimportant:(pos=1) OR XCplants:(pos=2))))'
+
+We can combine queries:
+>>> q2 = sconn4.query_parse('title:test')
+>>> q = sconn4.query_composite(sconn4.OP_OR, (q1, q2))
+>>> str(q)
+'Xapian::Query((((ZXCimport:(pos=1) OR ZXCplant:(pos=2)) AND_MAYBE (XCimportant:(pos=1) OR XCplants:(pos=2))) OR (ZXAtest:(pos=1) AND_MAYBE XAtest:(pos=1))))'
+
+
+>>> doc = UnprocessedDocument(fields=(Field('author', 'Richard Boulton'),
+...                                   Field('category', 'Gardening'),
+...                                   Field('text', 'Clematis grows very fast, and may smother other plants'),
+...                                   ))
+>>> for i in xrange(100):
+...     id = iconn.add(doc)
+>>> iconn.flush()
+>>> sconn1.reopen()
+>>> sconn2.reopen()
+>>> sconn1.search(q, 0, 3)
+<SearchResults(startrank=0, endrank=3, more_matches=True, matches_lower_bound=100, matches_upper_bound=104, matches_estimated=100, estimate_is_exact=False)>
+
+We can perform the same search again after more modifications have been made,
+and we get the same result:
+>>> for i in xrange(100):
+...     id = iconn.add(doc)
+>>> iconn.flush()
+>>> results1 = sconn1.search(q, 0, 3)
+>>> results1
+<SearchResults(startrank=0, endrank=3, more_matches=True, matches_lower_bound=100, matches_upper_bound=104, matches_estimated=100, estimate_is_exact=False)>
+
+But if further modifications have been made, the searcher has to be reopened,
+so a different result set is returned.
+>>> for i in xrange(100):
+...     id = iconn.add(doc)
+>>> iconn.flush()
+>>> results2 = sconn1.search(q, 0, 50)
+>>> results2
+<SearchResults(startrank=0, endrank=50, more_matches=True, matches_lower_bound=304, matches_upper_bound=304, matches_estimated=304, estimate_is_exact=True)>
+
+We can get the details of the hit at a given rank:
+>>> hit = results1.get_hit(2)
+>>> hit.rank
+2
+>>> hit.id
+'B'
+>>> hit.data
+{'title': ['Test document 1'], 'author': ['Richard Boulton']}
+>>> str(hit)
+"<SearchResult(rank=2, id='B', data={'title': ['Test document 1'], 'author': ['Richard Boulton']})>"
+>>> str(results2.get_hit(2))
+"<SearchResult(rank=2, id='B', data={'title': ['Test document 1'], 'author': ['Richard Boulton']})>"
+>>> str(results2.get_hit(49))
+"<SearchResult(rank=49, id='33', data={'author': ['Richard Boulton']})>"
+
+We can change a document in the index, and the old result is still available:
+>>> newdoc = UnprocessedDocument(fields=(Field('author', 'Fred Bloggs'),
+...                                      Field('category', 'Sleeping'),
+...                                      Field('text', 'This is different text to before'),),
+...                              id=results2.get_hit(49).id)
+>>> iconn.replace(newdoc)
+
+(If we don't set an ID, we get an error.
+>>> newdoc = UnprocessedDocument(fields=(Field('author', 'Freda Bloggs'),
+...                                      Field('category', 'Sleeping'),
+...                                      Field('text', 'This is different text to before'),))
+>>> iconn.replace(newdoc)
+Traceback (most recent call last):
+...
+IndexerError: No document ID set for document supplied to replace().
+
+>>> iconn.flush()
+>>> str(results2.get_hit(49))
+"<SearchResult(rank=49, id='33', data={'author': ['Richard Boulton']})>"
+
+But on a newly reopened connection, the result is gone (note the different id):
+>>> sconn2.reopen()
+>>> results3 = sconn2.search(q, 0, 50)
+>>> str(results3.get_hit(49))
+"<SearchResult(rank=49, id='34', data={'author': ['Richard Boulton']})>"
+
+We can get a list of the current document IDs
+>>> print [id for id in iconn.iterids()][:10]
+['0', '1', '10', '100', '101', '102', '103', '104', '105', '106']
+>>> pdoc = iconn.get_document('0')
+>>> print pdoc.data
+{'title': ['Test document 1'], 'author': ['Richard Boulton']}
+
+If we perform major changes on the database, the results of a search might
+become unavailable:
+>>> sconn1.reopen()
+>>> results4 = sconn1.search(q, 0, 100)
+>>> for id in iconn.iterids():
+...     iconn.delete(id)
+>>> iconn.get_doccount()
+0
+>>> iconn.flush()
+>>> iconn.get_doccount()
+0
+>>> for i in xrange(100):
+...     id = iconn.add(doc)
+>>> iconn.flush()
+>>> for i in xrange(100):
+...     id = iconn.add(doc)
+>>> iconn.flush()
+>>> for hit in results4: pass
+Traceback (most recent call last):
+...
+DatabaseModifiedError: The revision being read has been discarded - you should call Xapian::Database::reopen() and retry the operation
+
+
+When we're finished with the connection, we can close it to release the
+resources:
+>>> sconn1.close()
+
+Repeated closing is okay:
+>>> sconn1.close()
+
+After closing, no other methods should be called:
+>>> sconn1.reopen()
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.get_doccount()
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.query_composite(sconn1.OP_AND, 'foo')
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.query_filter(q, q)
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.query_range('date', '19991212', '20000101')
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.query_parse('hello')
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.query_field('author', 'richard')
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.query_facet('author', 'richard')
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.search(q, 0, 10)
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+>>> sconn1.get_document('1')
+Traceback (most recent call last):
+...
+SearchError: SearchConnection has been closed
+
+
+But calling close() multiple times is okay:
+>>> sconn1.close()
