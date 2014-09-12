@@ -1,0 +1,3964 @@
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
+##master-page:None
+##master-date:None
+#acl -All:write Default
+#format gettext
+#language ko
+
+#
+# MoinMoin ko system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-04 22:35+0200\n"
+"PO-Revision-Date: 2010-03-13 11:16+0900\n"
+"Last-Translator: YongjinCho <yongjin.cho@gmail.com>\n"
+"Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Direction: ltr\n"
+"X-Language: 한국어\n"
+"X-Language-in-English: Korean\n"
+"X-HasWikiMarkup: True\n"
+
+msgid "Your changes are not saved!"
+msgstr "변경 사항이 저장되지 않았습니다!"
+
+msgid "You are not allowed to edit this page."
+msgstr "이 문서를 고칠 수 있는 권한이 없습니다."
+
+msgid "Page is immutable!"
+msgstr "이 문서는 고칠 수 없습니다."
+
+msgid "Cannot edit old revisions!"
+msgstr "옛 문서는 고칠 수 없습니다."
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr ""
+"문서 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "문서 이름이 너무 깁니다. 짧은 이름을 사용하세요."
+
+#, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr "\"%(pagename)s\"의 초안"
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "\"%(pagename)s\" 수정"
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "\"%(pagename)s\"의 미리보기"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "%(lock_page)s에 대한 잠금이 풀렸습니다!"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr "%(lock_page)s에 대한 문서 잠금이 # 분 후에 풀릴 예정입니다."
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr "%(lock_page)s에 대한 문서 잠금이 # 초 뒤에 풀릴 예정입니다."
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "이 문서를 수정하는 동안에 다른 사람이 이 문서를 지워버렸습니다."
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "이 문서를 수정하는 동안에 다른 사람이 같은 문서를 수정했습니다."
+
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+"이 문서를 수정하는 동안에 다른 사람이 먼저 이 문서를 저장했습니다!\n"
+"문서 내용을 다시 검토한 뒤에 저장하시고, 절대로 지금 그대로 저장하지 마세요!"
+
+msgid "[Content loaded from draft]"
+msgstr "[초안 문서 내용]"
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[%s에서 옮겨온 새 문서 내용]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[양식 %s를(을) 찾을 수 없음]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[%s를(을) 읽을 수 없음]"
+
+#, python-format
+msgid ""
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved "
+"%(draft_timestamp_str)s) can be loaded instead of the current revision "
+"%(page_rev)d by using the load draft button - in case you lost your last "
+"edit somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
+msgstr ""
+
+#, python-format
+msgid "Describe %s here."
+msgstr "%s에 대해 써주세요."
+
+msgid "Check Spelling"
+msgstr "철자 검사"
+
+msgid "Save Changes"
+msgstr "변경 사항 저장"
+
+msgid "Cancel"
+msgstr "취소"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the "
+"%(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"'''%(save_button_text)s'''를(을) 누르면 지금의 변경사항에 %(license_link)s가"
+"(이)적용된다는 것을 확인해 주세요.\n"
+"동의하지 않는 경우에는 '''%(cancel_button_text)s'''를(을) 눌러서 변경사항을 "
+"취소할 수 있습니다."
+
+msgid "Preview"
+msgstr "미리보기"
+
+msgid "GUI Mode"
+msgstr "GUI 모드"
+
+msgid "Load Draft"
+msgstr ""
+
+msgid "Trivial change"
+msgstr "사소한 변경"
+
+msgid "Comment:"
+msgstr "설명:"
+
+msgid "<No addition>"
+msgstr "<추가 않음>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "분류 추가: %(category)s"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "줄 끝에 붙은 공백을 지움"
+
+msgid "Edit was cancelled."
+msgstr "문서 수정을 취소했습니다."
+
+msgid "You can't copy to an empty pagename."
+msgstr "빈 문서 이름으로 복사할 수 없습니다."
+
+msgid "You are not allowed to copy this page!"
+msgstr "이 문서를 복사할 수 있는 권한이 없습니다!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''문서 {{{\"%s\"}}}가(이) 이미 있습니다.'''\n"
+"\n"
+"다른 이름으로 다시 만들어 보세요."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "다음 파일 시스템 에러로 인해 문서를 복사할 수 없었습니다: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "이 문서 이름을 바꿀 수 있는 권한이 없습니다!"
+
+msgid "You can't rename to an empty pagename."
+msgstr "문서 이름을 지정하셔야 합니다."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s."
+
+msgid "You are not allowed to delete this page!"
+msgstr "이 문서를 삭제할 수 있는 권한이 없습니다!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "문서가 저장되었습니다."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "문서 \"%s\"가(이) 지워졌습니다!"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "예기치 않은 에러 때문에 문서를 잠글 수 없었습니다. (에러번호=%d)"
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "문서를 잠글 수 없었습니다. 'current' 파일이 없는 것 같습니다."
+
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page "
+"%s is damaged and cannot be edited right now."
+msgstr ""
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr ""
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr ""
+
+msgid "You are not allowed to edit this page!"
+msgstr "이 문서를 고칠 수 있는 권한이 없습니다!"
+
+msgid "You cannot save empty pages."
+msgstr "빈 문서는 저장할 수 없습니다."
+
+msgid "You already saved this page!"
+msgstr "이 문서는 이미 저장했습니다!"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr ""
+"이 문서를 수정하는 중입니다. 브라우저의 뒤로가기 버튼을 누르지 마십시오."
+
+msgid "You did not change the page content, not saved!"
+msgstr "문서 내용을 고치지 않았으므로 저장되지 않았습니다."
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr "관리자만 접근 허용 설정(ACL) 을 고칠 수 있습니다!"
+
+msgid "Notifications sent to:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"%(owner)s의 문서 잠금이 %(mins_ago)d분 전에 풀렸습니다. 이제 이 문서를 잠그"
+"고 고칠 수 있습니다."
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr "%(bumptime)s 까지 다른 사람들은 이 문서를 ''고칠 수 없습니다''."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+"%(bumptime)s 까지 다른 사람들이 문서를 고치려고 시도하면 ''경고''가 뜹니다."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "잠금 기간을 연장하려면 '미리보기' 버튼을 누르세요."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until "
+"%(timestamp)s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"이 문서는 현재 %(owner)s가 %(timestamp)s (%(mins_valid)d 분 남음)까지 고칠 "
+"수 있도록 ''잠겨''있습니다."
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by "
+"%(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another "
+"%(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''<<BR>>\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"%(owner)s가 %(timestamp)s에 문서 수정을 위한 잠시 잠금을 요청하였습니다."
+"<<BR>>\n"
+"'''가급적이면 최소한 %(mins_valid)d 분 동안은 수정 충돌을 막기 위해서 문서를 "
+"''고치치 않는'' 것이 좋습니다.'''<<BR>>\n"
+"편집을 중단하려면 취소 버튼을 누르세요."
+
+msgid "<unknown>"
+msgstr "<알 수 없음>"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] 위키 계정 정보"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"사용자 이름: %s\n"
+"\n"
+"사용자 암호: %s\n"
+"\n"
+"로그인 URL: %s/%s?action=login\n"
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
+"해당 패키지는 더 최근 버전의 MoinMoin (적어도 %s) 에서 사용 가능합니다."
+
+msgid "The theme name is not set."
+msgstr "테마의 이름이 지정되지 않았습니다."
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "'%(filename)s'를(을) 설치하는데 실패했습니다."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "파일 %s 는(은) 모인모인 패키지 파일이 아닙니다."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "문서 '%s'가(이) 존재하지 않습니다."
+
+msgid "Invalid package file header."
+msgstr "잘못된 패키지 파일 헤더입니다."
+
+msgid "Package file format unsupported."
+msgstr "지원되지 않는 패키지 파일 형식입니다."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "라인 %(lineno)i: 알 수 없는 함수 '%(func)s'"
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "파일 %s 를(을) 패키지에서 찾을 수 없었습니다."
+
+msgid "The wiki is currently not reachable."
+msgstr ""
+
+msgid "Invalid username or password."
+msgstr ""
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+
+msgid "Text mode"
+msgstr "Text 모드"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "알 수 없는 액션: %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 없습니다!"
+
+msgid "Login and try again."
+msgstr "로그인 후 다시 시도하세요."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "\"%s\" 인수는 \"%s\"이 아닌 논리값(boolean)이어야 합니다."
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "인수는 \"%s\"이 아닌 논리값(boolean)이어야 합니다."
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "\"%s\" 인수는 \"%s\"이 아닌 정수값(integer)이어야 합니다."
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "인수는 \"%s\"이 아닌 정수값(integer)이어야 합니다."
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "\"%s\" 인수는 \"%s\"이 아닌 실수값(floating point value)이어야 합니다."
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "인수는 \"%s\"이 아닌 실수값(floating point value)이어야 합니다."
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "\"%s\" 인수는 \"%s\"이 아닌 복소수값(complex value)이어야 합니다."
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "인수는 \"%s\"이 아닌 복소수값(complex value)이어야 합니다."
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "\"%s\" 인수는 \"%s\" 중 하나이어야 합니다. (현재값: \"%s\")"
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "인수는 \"%s\" 중 하나이어야 합니다. (현재값: \"%s\")"
+
+msgid "Too many arguments"
+msgstr "인수가 너무 많습니다."
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "이름을 가진 인수 뒤에 이름이 없는 인수를 가질 수 없습니다."
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "\"%s\" 인수가 필요합니다."
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "\"%s\" 이름을 가진 인수가 없습니다."
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "\"%(token)s\" 뒤에는 \"=\"이 와야 합니다"
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "\"%(token)s\" 뒤에는 값이 필요합니다."
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+
+msgid "Switch to non-highlighted view"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
+msgstr ""
+"이 문서의 백업된 본문은 더 이상 사용되지 않으며 검색 결과에 포함되지 않습니"
+"다!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "%(date)s에 수정된 %(rev)d번째 판"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "\"%(page)s\"(으)로부터 옮겨 옴"
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "\"%(page)s\"(으)로 이동합니다."
+
+msgid "Create New Page"
+msgstr "새 문서 작성"
+
+msgid "You are not allowed to view this page."
+msgstr "이 문서를 볼 수 있는 권한이 없습니다."
+
+msgid "No recipients, nothing to do"
+msgstr ""
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "메일 서버 '%(server)s'에 접속 실패: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "메일 전송 실패"
+
+msgid "Mail sent OK"
+msgstr "메일 전송 성공"
+
+msgid "Date"
+msgstr "날짜"
+
+msgid "From"
+msgstr "발신"
+
+msgid "To"
+msgstr "수신"
+
+msgid "Content"
+msgstr "내용"
+
+msgid "Attachments"
+msgstr "첨부"
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"죄송합니다. \"%(content)s\"의 사용은 이 위키에서 허락되지 않았으므로 이 문서"
+"를 저장할 수 없습니다."
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Please log in first."
+msgstr "먼저 로그인해주세요."
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Name"
+msgstr "이름"
+
+msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Password"
+msgstr "암호"
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "작업이 취소되었습니다."
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "작업이 취소되었습니다."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+#, fuzzy
+msgid "Missing user name. Please enter user name and password."
+msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+#, python-format
+msgid ""
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
+msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" 강조:: <<Verbatim('')>>''뉘여쓰기''<<Verbatim('')>>; <<Verbatim(''')>>'''굵"
+"게'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''굵게 뉘여쓰"
+"기'''''<<Verbatim(''''')>>; <<Verbatim('')>>''혼합 ''<<Verbatim(''')>>'''''굵"
+"게'''<<Verbatim(''')>> 뉘여쓰기''<<Verbatim('')>>; <<Verbatim(----)>> 가로 "
+"줄.\n"
+" 표제:: <<Verbatim(=)>> 표제 1 <<Verbatim(=)>>; <<Verbatim(==)>> 표제 2 "
+"<<Verbatim(==)>>; <<Verbatim(===)>> 표제 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> 표제 4 <<Verbatim(====)>>; <<Verbatim(=====)>> 표제 5 "
+"<<Verbatim(=====)>>.\n"
+" 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자"
+"표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.\n"
+" 링크:: 대소문자 섞어 쓰기(<<Verbatim(JoinCapitalizedWords)>>); "
+"<<Verbatim([[링크|링크될 텍스트]])>>.\n"
+" 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으"
+"면 안 됩니다.\n"
+"\n"
+"(!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT 옵션이 설정되어 있지 않습니다. HelpOnConfiguration을 참고하세요."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT 처리가 지원되지 않습니다. 4suite 1.x를 설치해주세요."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "처리중 에러: \"%(errortype)s\""
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr "ReStructured text를 처리할 수 없습니다. docutils를 설치해주세요."
+
+#, fuzzy
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"강조: <i>*뉘여쓰기*</i> <b>**굵게**</b> ``타자체``<br/>\n"
+"<br/><pre>\n"
+"표제: 표제 1  표제 2  표제 3\n"
+"     =====  ------  ~~~~~\n"
+"\n"
+"가로 줄: ---- \n"
+"링크: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"목록: * 글머리표; 1., a. 번호매기기.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) 더 많은 정보를 원하시면 아래 링크를 참고하세요. \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**허용된 포함(include) 갯수를 초과했습니다**"
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "이 문서 이름을 바꿀 수 있는 권한이 없습니다!"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**다음 참조문서를 찾을 수 없었습니다: %s**"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" 강조:: <<Verbatim('')>>''뉘여쓰기''<<Verbatim('')>>; <<Verbatim(''')>>'''굵"
+"게'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''굵게 뉘여쓰"
+"기'''''<<Verbatim(''''')>>; <<Verbatim('')>>''혼합 ''<<Verbatim(''')>>'''''굵"
+"게'''<<Verbatim(''')>> 뉘여쓰기''<<Verbatim('')>>; <<Verbatim(----)>> 가로 "
+"줄.\n"
+" 표제:: <<Verbatim(=)>> 표제 1 <<Verbatim(=)>>; <<Verbatim(==)>> 표제 2 "
+"<<Verbatim(==)>>; <<Verbatim(===)>> 표제 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> 표제 4 <<Verbatim(====)>>; <<Verbatim(=====)>> 표제 5 "
+"<<Verbatim(=====)>>.\n"
+" 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자"
+"표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.\n"
+" 링크:: 대소문자 섞어 쓰기(<<Verbatim(JoinCapitalizedWords)>>); "
+"<<Verbatim([[링크|링크될 텍스트]])>>.\n"
+" 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으"
+"면 안 됩니다.\n"
+"\n"
+"(!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+"\"%(key)s\"뒤에는 \"%(wanted)s\"가(이) 필요하지만 \"%(token)s\"가(이) 발견되"
+"었습니다."
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "\"%(token)s\"앞에는 숫자 \"%(key)s\"가(이) 와야 합니다."
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "\"%(key)s\"뒤에는 숫자 \"%(arg)s\"가(이) 필요합니다."
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "\"%(key)s\"뒤에는 색상 값 \"%(arg)s\"가(이) 필요합니다."
+
+#, fuzzy
+msgid "Password is too short."
+msgstr "암호 (확인)"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
+msgid "Diffs"
+msgstr "차이점 비교"
+
+msgid "Info"
+msgstr "정보"
+
+msgid "Edit"
+msgstr "수정"
+
+msgid "UnSubscribe"
+msgstr "구독 취소"
+
+msgid "Subscribe"
+msgstr "구독"
+
+msgid "Raw"
+msgstr "원문"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "인쇄용 화면"
+
+msgid "View"
+msgstr "보기"
+
+msgid "Up"
+msgstr "위로"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "작성자 정보에 내 위키 홈페이지 대신 E-mail 주소를 사용함"
+
+msgid "Open editor on double click"
+msgstr "더블 클릭해서 문서를 수정함"
+
+msgid "After login, jump to last visited page"
+msgstr "로그인 후 마지막으로 방문한 문서로 바로 가기"
+
+msgid "Show comment sections"
+msgstr ""
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "존재하지 않는 문서 링크 옆에 물음표 표시"
+
+msgid "Show page trail"
+msgstr "열어본 문서 목록 표시"
+
+msgid "Show icon toolbar"
+msgstr "아이콘 툴바 표시"
+
+msgid "Show top/bottom links in headings"
+msgstr "표제 옆에 처음/끝 링크 표시"
+
+msgid "Show fancy diffs"
+msgstr "꾸며진 변경사항 표시"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "위키네임에 공백을 넣어서 표시"
+
+msgid "Remember login information"
+msgstr "로그인 정보를 기억함"
+
+msgid "Disable this account forever"
+msgstr "이 계정을 더 이상 사용하지 않음"
+
+msgid "(Use FirstnameLastname)"
+msgstr "(Hong''''''Gildong 식)"
+
+msgid "Alias-Name"
+msgstr "별명"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr "사용자 CSS URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(사용자 CSS를 사용하지 않으려면 비워두세요)"
+
+msgid "Editor size"
+msgstr "편집기 크기"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(username)s님이 \"%(pagename)s\"를(을) %(trivial)s수정함"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"위키사용자님,\n"
+"\n"
+"\"%(sitename)s\" 사이트의 위키 문서나 위키 카테고리의 변경사항 메일 알림을 구"
+"독하고 계십니다.\n"
+"\n"
+"%(editor)s님께서 다음 문서를 고치셨습니다:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"위키사용자님,\n"
+"\n"
+"\"%(sitename)s\" 사이트의 위키 문서나 위키 카테고리의 변경사항 메일 알림을 구"
+"독하고 계십니다.\n"
+"\n"
+"%(editor)s님께서 다음 문서를 고치셨습니다:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by "
+"%(editor)s:\n"
+msgstr ""
+"위키사용자님,\n"
+"\n"
+"\"%(sitename)s\" 사이트의 위키 문서나 위키 카테고리의 변경사항 메일 알림을 구"
+"독하고 계십니다.\n"
+"\n"
+"%(editor)s님께서 다음 문서를 고치셨습니다:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] New attachment added to page %(pagename)s"
+msgstr "%(pagename)s의 <<Verbatim(attachment:)>>%(filename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] Removed attachment from page %(pagename)s"
+msgstr "%(pagename)s의 <<Verbatim(attachment:)>>%(filename)s"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been removed from that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"위키사용자님,\n"
+"\n"
+"\"%(sitename)s\" 사이트의 위키 문서나 위키 카테고리의 변경사항 메일 알림을 구"
+"독하고 계십니다.\n"
+"\n"
+"%(editor)s님께서 다음 문서를 고치셨습니다:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "[%(sitename)s] New user account created"
+msgstr "[%(sitename)s] 위키 계정 정보"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on \"%(sitename)s\". "
+"Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+msgid "anonymous"
+msgstr ""
+
+msgid "Line"
+msgstr "줄"
+
+msgid "No differences found!"
+msgstr "차이점이 없습니다!"
+
+msgid "Deletions are marked like this."
+msgstr "지워진 줄은 이렇게 표시됩니다."
+
+msgid "Additions are marked like this."
+msgstr "추가된 줄은 이렇게 표시됩니다."
+
+msgid "DeleteCache"
+msgstr "캐시삭제"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s에 캐시)"
+
+msgid "Or try one of these actions:"
+msgstr "다른 작업을 할 수도 있습니다 : "
+
+msgid "Unsubscribe"
+msgstr "구독 취소"
+
+msgid "Home"
+msgstr "대문"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[삭제됨]"
+
+msgid "[UPDATED]"
+msgstr "[변경됨]"
+
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr "[충돌]"
+
+msgid "[NEW]"
+msgstr "[새 문서]"
+
+msgid "[DIFF]"
+msgstr "[비교]"
+
+msgid "[BOTTOM]"
+msgstr "[끝]"
+
+msgid "[TOP]"
+msgstr "[처음]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "이 문서 제목이 포함된 다른 문서를 찾으시려면 여기를 누르세요"
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Logout"
+msgstr "로그아웃"
+
+msgid "Login"
+msgstr "로그인"
+
+msgid "Clear message"
+msgstr "메시지 지움"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "%(time)s에 %(editor)s가(이) 마지막으로 수정"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "%(time)s에 마지막으로 수정"
+
+msgid "Search:"
+msgstr "검색:"
+
+msgid "Text"
+msgstr "내용"
+
+msgid "Titles"
+msgstr "제목"
+
+msgid "Search"
+msgstr "찾기"
+
+msgid "More Actions:"
+msgstr "다른 작업:"
+
+msgid "------------------------"
+msgstr "------------------"
+
+msgid "Raw Text"
+msgstr "원문 보기"
+
+msgid "Print View"
+msgstr "인쇄용 화면"
+
+msgid "Delete Cache"
+msgstr "캐시 삭제"
+
+msgid "Rename Page"
+msgstr "문서 이름 바꾸기"
+
+msgid "Copy Page"
+msgstr "문서 복사"
+
+msgid "Delete Page"
+msgstr "문서 삭제"
+
+msgid "Like Pages"
+msgstr "비슷한 페이지"
+
+msgid "Local Site Map"
+msgstr "사이트맵"
+
+msgid "My Pages"
+msgstr "내문서"
+
+msgid "Subscribe User"
+msgstr "구독 중인 사용자"
+
+msgid "Remove Spam"
+msgstr "스팸 제거"
+
+msgid "Revert to this revision"
+msgstr "이 버젼으로 되돌리기"
+
+msgid "Package Pages"
+msgstr "문서 묶기"
+
+msgid "Render as Docbook"
+msgstr "Dockbook 보기"
+
+msgid "Sync Pages"
+msgstr "문서 동기화"
+
+msgid "Do"
+msgstr "확인"
+
+msgid "Comments"
+msgstr "설명"
+
+msgid "Edit (Text)"
+msgstr "수정 (Text)"
+
+msgid "Edit (GUI)"
+msgstr "수정 (GUI)"
+
+msgid "Immutable Page"
+msgstr "못 고치는 문서"
+
+msgid "Remove Link"
+msgstr "즐겨찾기 제거"
+
+msgid "Add Link"
+msgstr "즐겨찾기 추가"
+
+#, python-format
+msgid "Show %s days."
+msgstr "변경사항 표시 (일): %s"
+
+msgid "Wiki Markup"
+msgstr "위키 부호"
+
+msgid "Wiki"
+msgstr "위키"
+
+msgid "Page"
+msgstr "문서"
+
+msgid "User"
+msgstr "사용자"
+
+msgid "[ATTACH]"
+msgstr "[첨부]"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr "output 파일을 명시해야 합니다."
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "All attachments included into the package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "첨부"
+
+#, fuzzy
+msgid "Page link"
+msgstr "\"%s\"와 비슷한 문서"
+
+#, fuzzy
+msgid "Changed page"
+msgstr "문서 묶기"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "변경 사항 저장"
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "문서 조회/수정 정보"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "문서 \"%s\"가(이) 지워졌습니다!"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "문서 조회/수정 정보"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "새 첨부 이름"
+
+#, fuzzy
+msgid "An attachment has been removed"
+msgstr "새 첨부 이름"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
+
+msgid "A new account has been created"
+msgstr ""
+
+msgid "Trivial "
+msgstr "약간 "
+
+msgid "New page:\n"
+msgstr "새 문서:\n"
+
+msgid "No differences found!\n"
+msgstr "차이점이 없습니다!\n"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+msgid "seconds"
+msgstr "초"
+
+msgid "Previous"
+msgstr "이전"
+
+msgid "Next"
+msgstr "다음"
+
+#, fuzzy
+msgid "rev"
+msgstr "버젼"
+
+msgid "current"
+msgstr "현재"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "마지막 수정: %s"
+
+msgid "match"
+msgstr "개 포함"
+
+msgid "matches"
+msgstr " 개 포함"
+
+msgid "about"
+msgstr ""
+
+msgid "This page is already deleted or was never created!"
+msgstr "이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "\"%s\"는(은) 잘못된 파일 이름입니다!"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[첨부 %d개]"
+
+msgid "Package pages"
+msgstr "문서 묶기"
+
+msgid "Package name"
+msgstr "패키지 이름"
+
+msgid "List of page names - separated by a comma"
+msgstr "문서 리스트 - 쉼표로 구분됨"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "\"%s\"가(이) 들어간 문서가 없습니다."
+
+#, python-format
+msgid "Rolled back changes to the page %s."
+msgstr "문서 %s 의 변경 사항이 취소되었습니다."
+
+msgid "Exception while calling rollback function:"
+msgstr "Rollback 함수를 호출할 때 에러가 발생했습니다."
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+"원격 위키의 계정에 대한 암호를 입력해주세요. <<BR>> /!\\ 해당 암호는 특정 관"
+"리자에게 알려질 수 있으므로 양쪽 위키는 서로 신뢰 관계에 있어야 합니다."
+
+msgid "Operation was canceled."
+msgstr "작업이 취소되었습니다."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"%(actionname)s 작업을 수행하기 위해서는 명령행 프로그램을 사용해 주세요!"
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr "허용된 방향은 BOTH와 DOWN입니다."
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+"해당 액션을 사용하기 위해서는 wikiconfig에 인터위키 이름을 지정해주세요. (설"
+"정과 관련한 자세한 사항은 HelpOnConfiguration 를 참고하세요.)"
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr "알 수 없는 ''원격위키''"
+
+#, fuzzy
+msgid "A severe error occurred:"
+msgstr "중대한 에러 발생:"
+
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr "동기화에 실패했습니다. 아래의 상태 메시지를 확인하십시오."
+
+msgid "Synchronisation started -"
+msgstr "동기화 시작 -"
+
+#, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
+msgstr ""
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr ""
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+
+#, python-format
+msgid "Page %s successfully merged."
+msgstr "문서 %s가(이) 성공적으로 통합되었습니다."
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr ""
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr ""
+
+#, fuzzy
+msgid "Attachment location"
+msgstr "첨부"
+
+#, fuzzy
+msgid "Page name"
+msgstr "패키지 이름"
+
+#, fuzzy
+msgid "Attachment name"
+msgstr "새 첨부 이름"
+
+#, fuzzy
+msgid "Refresh attachment list"
+msgstr "첨부"
+
+#, fuzzy
+msgid "List of attachments"
+msgstr "첨부"
+
+#, fuzzy
+msgid "Available attachments for page"
+msgstr "\"%(pagename)s\"의 첨부파일들"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr ""
+"\"%s\"가(이) 들어간 문서가 딱 하나 발견되었습니다. 해당 문서로 이동합니다."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "\"%s\"와 비슷한 문서"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr ""
+"문서 제목에 \"%(title)s\"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발"
+"견되었습니다."
+
+msgid "You must login to remove a quicklink."
+msgstr "즐겨찾기를 삭제하시려면 로그인을 하셔야 합니다."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "이 문서를 즐겨찾기에서 삭제했습니다."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "이 문서를 즐겨찾기에서 삭제할 수 없었습니다."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "이 문서는 즐겨찾기에 없으므로 삭제할 수 없었습니다."
+
+msgid "Please choose:"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "문서의 변경 사항을 구독하기 위해서는 로그인을 하셔야 합니다."
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "문서의 변경 사항을 구독하기 위해서는 읽기 권한이 필요합니다."
+
+#, fuzzy
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "이 위키는 메일 처리를 할 수 없도록 설정되어 있습니다."
+
+msgid "You must log in to use subscriptions."
+msgstr "문서의 변경 사항을 구독하기 위해서는 로그인을 하셔야 합니다."
+
+#, fuzzy
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"문서의 변경 사항을 구독하기 위해서는 UserPreferences에 이메일 주소를 입력하세"
+"요."
+
+msgid "You are already subscribed to this page."
+msgstr "이 문서를 이미 구독하고 있습니다."
+
+msgid "You have been subscribed to this page."
+msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
+
+msgid "You could not get subscribed to this page."
+msgstr "이 문서를 구독할 수 없었습니다."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "첨부 '%(filename)s'를(을) 업로드"
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "첨부 파일 '%(filename)s'를(을) 지움"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "그림 '%(filename)s'가(이) 저장되었습니다."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "%(rev)d번째 판으로 돌아감."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "'%(oldpagename)s'의 이름이 변경되었습니다."
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[첨부 %d개]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr "이 문서에 <a href=\"%(link)s\">%(count)s개의 첨부 파일</a>이 있습니다."
+
+msgid "Filename of attachment not specified!"
+msgstr "첨부 파일 이름이 지정되지 않았습니다!"
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "첨부 파일 '%(filename)s'가 존재하지 않습니다!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"이 문서에서 첨부를 링크하려면, 아래의 파일 목록 옆에 있는 것 처럼 "
+"'''{{{attachment:파일이름}}}''' 형식으로 쓰십시오.\n"
+"URL은 자주 바뀔 수 있으므로 {{{[받기]}}} 링크의 URL을 직접 사용하지 마세요."
+
+msgid "del"
+msgstr "삭제"
+
+msgid "move"
+msgstr ""
+
+msgid "get"
+msgstr "받기"
+
+msgid "edit"
+msgstr "수정"
+
+msgid "view"
+msgstr "보기"
+
+msgid "unzip"
+msgstr "압축해제"
+
+msgid "install"
+msgstr "설치"
+
+msgid "All files"
+msgstr ""
+
+#, fuzzy
+msgid "Selected Files:"
+msgstr "첨부 파일"
+
+#, fuzzy
+msgid "delete"
+msgstr "삭제"
+
+#, fuzzy
+msgid "move to page"
+msgstr "문서 개수"
+
+msgid "Do it."
+msgstr "실행"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "%(pagename)s 에는 첨부 파일이 없음."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "이 문서의 첨부 파일을 옮길 수 있는 권한이 없습니다."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "이 문서에 파일을 첨부할 수 있는 권한이 없습니다."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr "첨부 파일 '%(filename)s'이(가) %(page)s (으)로 옮겨졌습니다."
+
+msgid "New Attachment"
+msgstr "새 첨부"
+
+msgid "File to upload"
+msgstr "업로드할 파일"
+
+msgid "Rename to"
+msgstr "새 이름:"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "업로드"
+
+msgid "Attached Files"
+msgstr "첨부 파일"
+
+#, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "지원되지 않는 업로드 액션: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "\"%(pagename)s\"의 첨부파일들"
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr ""
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"파일 내용이 전송되지 않았습니다. ASCII 문자만으로 이루어진 파일 이름을 사용해"
+"보세요."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "이 문서에 첨부된 파일을 볼 수 있는 권한이 없습니다."
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"첨부 파일 '%(target)s' (하드디스크에서의 이름 '%(filename)s', 크기 %(bytes)d "
+"바이트) 가(이) 저장되었습니다."
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+"첨부 파일 '%(target)s' (하드디스크에서의 이름 '%(filename)s') 가(이) 이미 있"
+"습니다."
+
+#, fuzzy, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr "첨부 파일 '%(filename)s'이(가) 이미 존재함."
+
+msgid "Nothing changed"
+msgstr "변경사항 없음"
+
+#, fuzzy, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr "문서 %(newpagename)s 가 존재하지 않거나 권한이 없습니다."
+
+msgid "Move aborted!"
+msgstr "파일 이동이 취소되었습니다!"
+
+#, fuzzy
+msgid "Move aborted because new page name is empty."
+msgstr "문서 이름이 없어서 파일 이동이 취소되었습니다."
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "첨부 '%(filename)s'에 대한 유효한 파일 이름을 사용해주세요."
+
+#, fuzzy
+msgid "Move aborted because new attachment name is empty."
+msgstr "파일 이름이 없어서 파일 이동이 취소되었습니다."
+
+msgid "Move"
+msgstr "이동"
+
+msgid "New page name"
+msgstr "새 문서 이름"
+
+msgid "New attachment name"
+msgstr "새 첨부 이름"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "이 문서의 첨부 파일을 받을 수 있는 권한이 없습니다."
+
+msgid "You are not allowed to install files."
+msgstr "이 파일을 설치할 수 있는 권한이 없습니다."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "첨부 파일 '%(filename)s'(이)가 설치되었음"
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "이 문서에 첨부된 파일의 압축을 해제할 수 있는 권한이 없습니다."
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr "파일 %(filename)s 는(은) .zip 파일이 아닙니다."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
+msgstr ""
+"첨부 파일 '%(filename)s'의 압축을 해제할 수 없었습니다. 파일이 너무 크거나 ."
+"zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"첨부 파일 '%(filename)s'의 압축을 해제하지 못했습니다. 디스크의 용량이 부족"
+"한 것 같습니다. (%(space)d kB 모자람)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"첨부 파일 '%(filename)s'의 압축을 해제하지 못했습니다. 압축 해제될 파일의 갯"
+"수가 너무 많은 것 같습니다. (%(count)d개 빠짐)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
+msgstr "첨부 파일 '%(filename)s'의 압축을 해제함"
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "첨부 파일 '%(filename)s'의 압축을 해제함"
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "첨부 파일 '%(filename)s'"
+
+msgid "Download"
+msgstr ""
+
+msgid "Package script:"
+msgstr "패키지 스크립트:"
+
+msgid "File Name"
+msgstr "파일이름"
+
+msgid "Modified"
+msgstr "수정됨"
+
+msgid "Size"
+msgstr "크기"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr ""
+"알 수 없는 파일 형식입니다. 이 첨부 파일을 내용 안에 같이 보여줄 수 없습니다."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "이 문서에 첨부된 파일을 볼 수 있는 권한이 없습니다."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "%(pagename)s의 attachment:%(filename)s"
+
+msgid "General Information"
+msgstr "일반 정보"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "문서 크기: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "이 문서 내용의 SHA 해쉬 다이제스트:"
+
+msgid "The following users subscribed to this page:"
+msgstr "다음 사용자들이 이 문서를 구독하고 있습니다:"
+
+msgid "This page links to the following pages:"
+msgstr "이 문서는 다음 링크들을 포함하고 있습니다:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+
+#, fuzzy
+msgid "Newer"
+msgstr "새 이름"
+
+msgid "Older"
+msgstr ""
+
+#, python-format
+msgid "%s items per page"
+msgstr ""
+
+msgid "Diff"
+msgstr "차이점 비교"
+
+msgid "Editor"
+msgstr "수정한 사람"
+
+msgid "Comment"
+msgstr "설명"
+
+msgid "Action"
+msgstr "액션"
+
+#, fuzzy
+msgid "to previous"
+msgstr "이전"
+
+msgid "N/A"
+msgstr "없음"
+
+msgid "Revision History"
+msgstr "수정 기록"
+
+msgid "No log entries found."
+msgstr "기록이 없습니다!"
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "문서 \"%s\"에 대한 정보"
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "\"%(title)s\" 보기"
+
+msgid "General Page Infos"
+msgstr "일반 문서 정보"
+
+msgid "Page hits and edits"
+msgstr "문서 조회/수정 정보"
+
+msgid "Delete"
+msgstr "삭제"
+
+msgid "Delete all /subpages too?"
+msgstr "모든 하위 문서도 같이 지우시겠습니까?"
+
+msgid "Optional reason for the deletion"
+msgstr "삭제하는 이유"
+
+msgid "Really delete this page?"
+msgstr "정말로 이 문서를 지우시겠습니까?"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "다른 문서를 만들기 전에 홈페이지부터 만들어주세요."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr "MyPages 관리"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr " (%(pagelink)s를 %(localwords)d개 포함)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"다음 %(badwords)d 개의 단어는 사전에 있는 전체 %(totalwords)d 개의 단어 "
+"%(localwords)s 중에서 찾을 수 없었으며, 본문에도 표시되었습니다.:"
+
+msgid "Add checked words to dictionary"
+msgstr "사전에 체크된 단어들을 추가"
+
+msgid "No spelling errors found!"
+msgstr "철자 오류가 발견되지 않았습니다!"
+
+msgid "You can't save spelling words."
+msgstr "단어의 철자를 저장할 수 없습니다."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "읽을 수 없는 문서의 철자를 검사할 수 없습니다."
+
+msgid "You are not allowed to use this action."
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
+
+msgid "If this account exists an email was sent."
+msgstr ""
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"이 위키는 메일 처리를 할 수 없도록 되어 있습니다. \n"
+"위키 관리자에게 연락하여 메일을 쓸 수 있도록 요청하세요."
+
+#, fuzzy
+msgid "Please provide a valid email address or a username!"
+msgstr "올바른 메일 주소를 써주세요!"
+
+#, fuzzy
+msgid "Username"
+msgstr "사용자"
+
+msgid "Mail me my account data"
+msgstr "계정 정보를 메일로 발송"
+
+#, fuzzy
+msgid "Recovery token"
+msgstr "모두 되돌리기!"
+
+#, fuzzy
+msgid "New password"
+msgstr "암호"
+
+#, fuzzy
+msgid "New password (repeat)"
+msgstr "암호 (확인)"
+
+#, fuzzy
+msgid "Reset my password"
+msgstr "암호"
+
+msgid "Passwords don't match!"
+msgstr "확인 암호가 일치하지 않습니다!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
+
+msgid "Your password has been changed, you can log in now."
+msgstr ""
+
+msgid "Your token is invalid!"
+msgstr ""
+
+#, fuzzy
+msgid "Password reset"
+msgstr "암호 (확인)"
+
+#, fuzzy
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
+
+#, fuzzy
+msgid "Lost password"
+msgstr "암호"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
+
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "PyStemmer 버전"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "문서 %s 를(을) 구독하는 사용자"
+
+msgid "Enter user names (comma separated):"
+msgstr ""
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "%s 를(을) 구독:"
+
+msgid "Not a user:"
+msgstr "사용자가 아님:"
+
+msgid "You are not allowed to perform this action."
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
+
+#, fuzzy
+msgid "Print slide show"
+msgstr "슬라이드 쇼 편집"
+
+#, fuzzy
+msgid "Edit slide show"
+msgstr "슬라이드 쇼 편집"
+
+msgid "Quit"
+msgstr ""
+
+#, fuzzy
+msgid "Quit slide show"
+msgstr "슬라이드 쇼 종료"
+
+msgid "Show first slide (up arrow)"
+msgstr ""
+
+msgid "Show last slide (down arrow)"
+msgstr ""
+
+msgid "Show previous slide (left arrow)"
+msgstr ""
+
+msgid "Show next slide (right arrow)"
+msgstr ""
+
+msgid "Charts are not available!"
+msgstr "이 위키에서는 차트 그리기가 지원되지 않습니다."
+
+msgid "You need to provide a chart type!"
+msgstr "차트 타입을 지정하여야 합니다!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "잘못된 차트 종류 입니다: \"%s\""
+
+msgid "Load"
+msgstr "로드"
+
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "첨부 파일 이름이 지정되지 않았습니다!"
+
+msgid "Upload page content"
+msgstr ""
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
+msgstr ""
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr ""
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "{{{\"%s\"}}} 대신 좀 더 구체적인 단어를 이용해서 검색해주세요!"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "제목에서 검색: \"%s\""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "고급 검색: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "내용 전체에서 검색: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+
+msgid "(!) Consider performing a"
+msgstr ""
+
+msgid "full-text search with your search terms"
+msgstr ""
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr "검색 단어로 문서의 내용을 검색하시려면 여기를 누르세요!"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요."
+
+msgid "Your subscription to this page has been removed."
+msgstr "이 문서의 변경 사항을 더 이상 구독하지 않습니다."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "정규표현식으로 된 구독 목록은 지울 수 없습니다!"
+
+#, fuzzy
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "UserPreferences에서 정규표현식으로 된 구독 목록을 수정하세요."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "구독하고 있지 않으므로 구독 취소할 수 없습니다."
+
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr ""
+
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr ""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "새 그림 \"%(filename)s\" 그리기 (새 창)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "그림 \"%(filename)s\" 수정하기 (새 창)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "클릭 가능 그림 \"%(filename)s\""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
+
+msgid "Empty target name given."
+msgstr ""
+
+msgid "Edit drawing"
+msgstr "그림 수정"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "%(actionname)s 액션을 수행할까요?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "%(actionname)s 액션은 이 위키에서 제외되었습니다."
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "이 문서에 %(actionname)s 작업을 수행할 수 있는 권한이 없습니다!"
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "이 보충 문서를 만들 수 있는 권한이 없습니다."
+
+msgid "Pages"
+msgstr "문서"
+
+msgid "Select Author"
+msgstr "저자 선택"
+
+msgid "Revert all!"
+msgstr "모두 되돌리기!"
+
+msgid "Copy all /subpages too?"
+msgstr ""
+
+msgid "New name"
+msgstr "새 이름"
+
+msgid "Optional reason for the copying"
+msgstr "복사를 하는 이유"
+
+msgid "Really copy this page?"
+msgstr "정말로 이 문서를 복사하시겠습니까?"
+
+msgid "You are now logged out."
+msgstr "로그아웃 되었습니다."
+
+#, fuzzy
+msgid "No page packages found."
+msgstr "상위 문서가 없습니다!"
+
+#, fuzzy
+msgid "page package"
+msgstr "문서 묶기"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "\"%s\"의 사이트 맵"
+
+msgid "No older revisions available!"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "\"%s\" 문서 변경사항"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "개정판 %d과 %d 사이의 차이점"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(%d번의 변경사항을 펼침)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "이전"
+
+#, fuzzy
+msgid "Next change"
+msgstr "변경사항 없음"
+
+#, fuzzy
+msgid "Diff with oldest revision in left pane"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, fuzzy
+msgid "No older revision available for diff"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, fuzzy
+msgid "Diff with older revision in left pane"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+msgid "Diff with newer revision in left pane"
+msgstr ""
+
+msgid "Can't change to revision newer than in right pane"
+msgstr ""
+
+msgid "Diff with older revision in right pane"
+msgstr ""
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr ""
+
+msgid "Diff with newer revision in right pane"
+msgstr ""
+
+#, fuzzy
+msgid "No newer revision available for diff"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, fuzzy
+msgid "Diff with newest revision in right pane"
+msgstr "옛 버전이 저장되어 있지 않습니다!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "이 문서는 %(count)d번 변경되었습니다!"
+
+msgid "(ignoring whitespace)"
+msgstr "(공백 무시)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "비교할 때 공백은 무시"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "이름을 입력하세요."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"{{{'%s'}}}는(은) 잘못된 사용자 이름입니다.\n"
+"이름에는 유니코드 알파벳 또는 숫자가 포함될 수 있고, 필요하다면 1번\n"
+"띄어 쓸 수 있습니다. 묶음 문서 이름도 또한 사용할 수 없습니다."
+
+msgid "This user name already belongs to somebody else."
+msgstr "이 이름은 이미 다른 사람이 사용 중입니다."
+
+msgid "Please specify a password!"
+msgstr "암호를 입력하세요!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"이메일 주소를 입력해주세요. 계정 정보를 잊었을 때 해당 계정 정보를 이메일로 "
+"전송받을 수 있습니다."
+
+msgid "This email already belongs to somebody else."
+msgstr "이 메일 주소는 이미 다른 사람이 사용 중입니다."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"사용자 계정이 만들어졌습니다! 이 계정을 사용해서 로그인하실 수 있습니다..."
+
+msgid "Password repeat"
+msgstr "암호 (확인)"
+
+msgid "TextCha (required)"
+msgstr ""
+
+msgid "Create Profile"
+msgstr "사용자 등록"
+
+msgid "Create Account"
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "\"%s\"에 연결된 모든 문서 목록"
+
+msgid "You must login to add a quicklink."
+msgstr "즐겨찾기를 추가하시려면 로그인을 하셔야 합니다."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "이 문서를 즐겨찾기에 추가했습니다."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "이 문서를 즐겨찾기에 추가할 수 없었습니다."
+
+msgid "You already have a quicklink to this page."
+msgstr "이 문서는 이미 즐겨찾기에 있습니다."
+
+msgid "Create redirect for renamed page(s)?"
+msgstr ""
+
+msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "Create redirect for renamed page?"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr "정말로 이 문서 이름을 바꾸시겠습니까?"
+
+msgid "Optional reason for the renaming"
+msgstr "이름을 바꾸는 이유"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "위키 부호"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "백업"
+
+msgid "You are not allowed to do remote backup."
+msgstr "원격 백업을 할 수 있는 권한이 없습니다."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "알 수 없는 백업 하위 작업: %s"
+
+#, fuzzy
+msgid "Revert"
+msgstr "모두 되돌리기!"
+
+msgid "You are not allowed to revert this page!"
+msgstr "이 문서를 되돌릴 수 있는 권한이 없습니다!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "복사를 하는 이유"
+
+#, fuzzy
+msgid "Really revert this page?"
+msgstr "정말로 이 문서 이름을 바꾸시겠습니까?"
+
+msgid "OpenID"
+msgstr ""
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "문서 개수"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Disable user"
+msgstr "사용 차단"
+
+msgid "Enable user"
+msgstr "사용 허가"
+
+msgid "disabled"
+msgstr "사용 불가"
+
+msgid "Mail account data"
+msgstr "계정 정보를 메일로 발송"
+
+msgid "RecentChanges"
+msgstr "최근바뀜"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
+
+msgid "TitleIndex"
+msgstr "제목색인"
+
+msgid "WordIndex"
+msgstr "단어색인"
+
+msgid "FindPage"
+msgstr "문서찾기"
+
+msgid "MissingPage"
+msgstr "없는 문서"
+
+msgid "MissingHomePage"
+msgstr "없는 홈페이지"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "없는 홈페이지"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "이름"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "대문"
+
+msgid "WikiSandBox"
+msgstr "연습장"
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "인터위키"
+
+msgid "AbandonedPages"
+msgstr "오래된문서"
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "미참조문서"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "문서찾기"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "문서크기"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "문서"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "이름 변경"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "파이썬 버전"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "위키 라이센스"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "슬라이드 쇼"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "사용자 설정"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnRobots"
+msgstr "도움말"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "도움말"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "도움말"
+
+msgid "HelpOnFormatting"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "모인모인 버전"
+
+msgid "HelpContents"
+msgstr "도움말"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "제목색인"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "도움말"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "도움말"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnDrawings"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "도움말"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnImages"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "언어"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "도움말"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "사이트맵"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "문서형식 도움말"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "도움말"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "슬라이드 쇼"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "철자 검사"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "동기화 시작 -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "사용자 설정"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "문서형식 도움말"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "도움말"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "구독 취소"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "사용자 설정"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "새 첨부"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "다른 작업:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "일요일"
+
+msgid "Mon"
+msgstr "월요일"
+
+msgid "Tue"
+msgstr "화요일"
+
+msgid "Wed"
+msgstr "수요일"
+
+msgid "Thu"
+msgstr "목요일"
+
+msgid "Fri"
+msgstr "금요일"
+
+msgid "Sat"
+msgstr "토요일"
+
+msgid "AttachFile"
+msgstr "파일 첨부"
+
+msgid "DeletePage"
+msgstr "문서 삭제"
+
+msgid "LikePages"
+msgstr "비슷한 페이지"
+
+msgid "LocalSiteMap"
+msgstr "사이트맵"
+
+msgid "RenamePage"
+msgstr "이름 변경"
+
+msgid "SpellCheck"
+msgstr "철자 검사"
+
+msgid "Discussion"
+msgstr "토론"
+
+msgid "User agent"
+msgstr "User agent"
+
+msgid "Others"
+msgstr "Others"
+
+# until this message
+msgid "Distribution of User-Agent Types"
+msgstr "Distribution of User-Agent Types"
+
+msgid "Page Size Distribution"
+msgstr "Page Size Distribution"
+
+msgid "page size upper bound [bytes]"
+msgstr "page size upper bound [bytes]"
+
+msgid "# of pages of this size"
+msgstr "# of pages of this size"
+
+msgid "Views/day"
+msgstr "조회/일"
+
+msgid "Edits/day"
+msgstr "수정/일"
+
+# Don't translate some messages from here, they will be used in
+# gdcharts graphs and Hangul characters will not be shown properly.
+# 
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s for %(filterpage)s"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"green=view\n"
+"red=edit"
+
+msgid "date"
+msgstr "date"
+
+msgid "# of hits"
+msgstr "# of hits"
+
+msgid "Language"
+msgstr "언어"
+
+msgid "<Browser setting>"
+msgstr "<브라우저 설정>"
+
+msgid "No orphaned pages in this wiki."
+msgstr "이 위키에는 외톨이 문서가 없습니다."
+
+msgid "Include system pages"
+msgstr "시스템 문서 포함"
+
+msgid "Exclude system pages"
+msgstr "시스템 문서 제외"
+
+msgid "No wanted pages in this wiki."
+msgstr ""
+"이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다."
+
+msgid "Python Version"
+msgstr "파이썬 버전"
+
+msgid "MoinMoin Version"
+msgstr "모인모인 버전"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "버전 %s [리비젼 %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite 버전"
+
+msgid "Number of pages"
+msgstr "문서 개수"
+
+msgid "Number of system pages"
+msgstr "시스템 문서 개수"
+
+msgid "Accumulated page sizes"
+msgstr "문서 크기 총합"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "%(data_dir)s/pages/ 의 디스크 사용량"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "%(data_dir)s/ 의 디스크 사용량"
+
+msgid "Entries in edit log"
+msgstr "수정사항 로그 길이"
+
+msgid "NONE"
+msgstr "없음"
+
+msgid "Global extension macros"
+msgstr "기본 확장 매크로"
+
+msgid "Local extension macros"
+msgstr "로컬 확장 매크로"
+
+msgid "Global extension actions"
+msgstr "기본 확장 액션"
+
+msgid "Local extension actions"
+msgstr "로컬 확장 액션"
+
+msgid "Global parsers"
+msgstr "기본 파서"
+
+msgid "Local extension parsers"
+msgstr "로컬 확장 파서"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian 이나 Python Xapian bindings 가 설치되지 않았습니다"
+
+msgid "Disabled"
+msgstr "사용 불가"
+
+msgid "Enabled"
+msgstr "사용 가능"
+
+msgid "index unavailable"
+msgstr ""
+
+msgid "index available"
+msgstr ""
+
+msgid "Xapian search"
+msgstr "Xapian 검색"
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "Active threads"
+msgstr "사용 중인 쓰레드 개수"
+
+msgid "Search for items"
+msgstr "항목 검색"
+
+msgid "containing all the following terms"
+msgstr "다음 단어를 포함하는"
+
+msgid "containing one or more of the following terms"
+msgstr "다음 단어를 하나 이상 포함하는"
+
+msgid "not containing the following terms"
+msgstr "다음 단어를 포함하지 않는"
+
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr ""
+
+msgid "any category"
+msgstr ""
+
+msgid "any language"
+msgstr "아무 언어"
+
+msgid "any mimetype"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "File Type"
+msgstr "파일형식"
+
+msgid "Search only in titles"
+msgstr "제목에서만 찾기"
+
+msgid "Case-sensitive search"
+msgstr "대소문자 구별 검색"
+
+msgid "Exclude underlay"
+msgstr "시스템 페이지 제외"
+
+msgid "No system items"
+msgstr "시스템 아이템이 없음"
+
+msgid "Search in all page revisions"
+msgstr "모든 버젼의 문서에서 검색"
+
+msgid "Go get it!"
+msgstr "검색!"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "%(pagename)s에 인용할 문구가 없음."
+
+msgid "Contents"
+msgstr "차례"
+
+#, fuzzy
+msgid "Variable name"
+msgstr "파일이름"
+
+msgid "Default"
+msgstr "기본값"
+
+msgid "Description"
+msgstr ""
+
+#, fuzzy
+msgid "Lexer description"
+msgstr "PyStemmer 버전"
+
+#, fuzzy
+msgid "Lexer names"
+msgstr "사용자"
+
+#, fuzzy
+msgid "File patterns"
+msgstr "파일형식"
+
+msgid "Mimetypes"
+msgstr ""
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "'%(scheme)s'는(은) 지원되지 않습니다."
+
+msgid "No parent page found!"
+msgstr "상위 문서가 없습니다!"
+
+msgid "Slideshow"
+msgstr "슬라이드 쇼"
+
+msgid "Start"
+msgstr "시작"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "슬라이드 총 %(size)d 중 %(pos)d"
+
+#, fuzzy
+msgid "File attachment browser"
+msgstr "새 첨부 이름"
+
+msgid "User account browser"
+msgstr ""
+
+msgid "Search Titles"
+msgstr "제목에서 찾기"
+
+msgid "Display context of search results"
+msgstr "검색 결과의 본문을 보기"
+
+msgid "Case-sensitive searching"
+msgstr "대소문자 구별"
+
+msgid "Search Text"
+msgstr "내용에서 찾기"
+
+#, fuzzy, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "알 수 없는 백업 하위 작업: %s"
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr ""
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "문서로 이동"
+
+msgid "Wiki configuration"
+msgstr ""
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+msgid "Setting"
+msgstr ""
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)02d분 전"
+
+msgid "(no bookmark set)"
+msgstr "(책갈피가 없음)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(현재값은 %s)"
+
+msgid "Delete bookmark"
+msgstr "책갈피 제거"
+
+msgid "Set bookmark"
+msgstr "책갈피 두기"
+
+msgid "[Bookmark reached]"
+msgstr "[여기까지 책갈피]"
+
+msgid "Markup"
+msgstr "위키 부호"
+
+msgid "Display"
+msgstr "보기"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "새 첨부 \"%(filename)s\"를(을) 업로드"
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr "삽입됨"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "\"%s\"는(은) 잘못된 인자입니다!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "\"%s\"는(은) 발견되지 않았습니다."
+
+msgid "Switch user"
+msgstr "사용자 전환"
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr "당신 외에 다른 사용자가 없습니다."
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "사용자 선택"
+
+msgid "Preferences"
+msgstr "사용자 설정"
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "이 jabber 아이디는 이미 다른 사람이 사용 중입니다."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "\"%(theme_name)s\" 테마를 쓸 수 없습니다!"
+
+msgid "User preferences saved!"
+msgstr "계정 환경설정이 저장되었습니다!"
+
+msgid "the one preferred"
+msgstr "선호하는 편집기"
+
+msgid "free choice"
+msgstr "자유 선택"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "Preferred theme"
+msgstr "선호하는 테마"
+
+msgid "Editor Preference"
+msgstr "선호하는 편집기"
+
+msgid "Editor shown on UI"
+msgstr "표시할 편집기"
+
+msgid "Time zone"
+msgstr "시간대"
+
+msgid "Your time is"
+msgstr "기준 시간:"
+
+msgid "Server time is"
+msgstr "서버 시간:"
+
+msgid "Date format"
+msgstr "날짜 형식"
+
+msgid "Preferred language"
+msgstr "선호하는 언어"
+
+msgid "General options"
+msgstr "일반 옵션"
+
+msgid "Quick links"
+msgstr "즐겨찾기"
+
+#, fuzzy
+msgid "Change password"
+msgstr "암호 변경"
+
+msgid "Your password has been changed."
+msgstr "암호가 변경되었습니다."
+
+msgid "To change your password, enter a new password twice."
+msgstr "암호를 변경하기 위해서 새 암호를 두 번 입력하세요."
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!"
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "'''이메일'''"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "구독 중인 사용자"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "메일 알림을 받는 문서들 (한 줄에 정규식 하나씩)"
+
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+msgid "Toggle line numbers"
+msgstr "줄 번호 보이기/숨기기"
+
+#~ msgid "Please use the interactive user interface to move attachments!"
+#~ msgstr "첨부 파일을 옮기기 위해서는 명령행 프로그램을 사용해 주세요!"
+
+#, fuzzy
+#~ msgid "Page Name"
+#~ msgstr "패키지 이름"
+
+#, fuzzy
+#~ msgid "InstallDocs"
+#~ msgstr "설치"
+
+#, fuzzy
+#~ msgid "HelpOnUpdating"
+#~ msgstr "문서형식 도움말"
+
+#, fuzzy
+#~ msgid "you may need to login to edit this page"
+#~ msgstr "이 문서를 고칠 수 있는 권한이 없습니다."
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "테마 파일의 설치는 독립 실행형 서버에서만 지원됩니다."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "위키 부호"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "내용"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "내용"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "시스템 문서 제외"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "문서 %s를(을) 포함하는 패키지 %s를(을) 생성했습니다."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "로그아웃 되었습니다."
+
+#~ msgid ""
+#~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+#~ "Files: %(filecount)d, Directories: %(dircount)d"
+#~ msgstr ""
+#~ "백업: %(filename)s 가(이) 다음 디렉토리로 복원됨: %(targetdir)s.\n"
+#~ "파일: %(filecount)d 개, 디렉토리: %(dircount)d 개"
+
+#~ msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+#~ msgstr ""
+#~ "백업: %(filename)s 를(을) 디렉토리: %(targetdir)s 로 복원하는데 실패했습니"
+#~ "다."
+
+#~ msgid "Wiki Backup / Restore"
+#~ msgstr "위키 백업/복원"
+
+#~ msgid ""
+#~ "Some hints:\n"
+#~ " * To restore a backup:\n"
+#~ "  * Restoring a backup will overwrite existing data, so be careful.\n"
+#~ "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+#~ "stuff).\n"
+#~ "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+#~ "  * Hit the <<GetText(Restore)>> button below.\n"
+#~ "\n"
+#~ " * To make a backup, just hit the <<GetText(Backup)>> button and save the "
+#~ "file\n"
+#~ "   you get to a secure place.\n"
+#~ "\n"
+#~ "Please make sure your wiki configuration backup_* values are correct and "
+#~ "complete.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "도움말:\n"
+#~ " * 백업 데이터를 복원하실 때:\n"
+#~ "  * 복원 데이터는 이미 존재하는 데이터를 덮어쓰므로 주의하셔야 합니다.\n"
+#~ "  * 파일의 이름은 <siteid>.tar.<compression> 형태로 하세요. (--date--"
+#~ "time--UTC 같은 것들은 빼버리세요.).\n"
+#~ "  * 백업 파일을 backup_storage_dir 디렉토리에 두세요 (scp, ftp 등을 사용하"
+#~ "시면 됩니다).\n"
+#~ "  * 아래의 <<GetText(Restore)>> 버튼을 누르세요.\n"
+#~ "\n"
+#~ " * 백업을 하실 때는 <<GetText(Backup)>> 버튼을 누른 후 생성된 파일을\n"
+#~ "   안전한 장소에 보관하시면 됩니다.\n"
+#~ "\n"
+#~ "Please make sure your wiki configuration backup_* values are correct and "
+#~ "complete.\n"
+#~ "\n"
+
+#~ msgid "Restore"
+#~ msgstr "복원"
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian 버젼"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer 버전"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "새 문서 및 첨부 파일"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "새로운 문서에 파일을 업로드하거나 현재 문서에 첨부할 파일을업로드할 수 있"
+#~ "습니다."
+
+#~ msgid "New Name"
+#~ msgstr "새 이름"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "첨부 파일 '%(target)s'이(가) 이미 존재함."
+
+#~ msgid ""
+#~ "An upload will never overwrite an existing file. If there is a name\n"
+#~ "conflict, you have to rename the file that you want to upload.\n"
+#~ "Otherwise, if \"Rename to\" is left blank, the original filename will be "
+#~ "used."
+#~ msgstr ""
+#~ "업로드로는 원래 파일을 덮어 쓸 수 없습니다. 파일이름이 충돌하면,\n"
+#~ "업로드하고자 하는 파일의 이름을 바꾸어야 합니다.\n"
+#~ "\"이름 바꿈\"칸을 비워놓으면 원래의 파일 이름이 사용됩니다."
+
+#~ msgid "overwrite"
+#~ msgstr "덮어쓰기"
+
+#~ msgid ""
+#~ "Somebody has requested to submit your account data to this email "
+#~ "address.\n"
+#~ "\n"
+#~ "If you lost your password, please use the data below and just enter the\n"
+#~ "password AS SHOWN into the wiki's password form field (use copy and "
+#~ "paste\n"
+#~ "for that).\n"
+#~ "\n"
+#~ "After successfully logging in, it is of course a good idea to set a new "
+#~ "and known password.\n"
+#~ msgstr ""
+#~ "누군가 이 메일 주소로 계정 정보를 전송하도록 요청했습니다.\n"
+#~ "\n"
+#~ "만약 암호를 잊었다면 아래 URL로 가서 사용자 이름와 함께 제시된 암호를 \n"
+#~ "써 있는 그대로 입력하고 (복사해서 붙여넣기 하세요) \n"
+#~ "로그인 하세요.\n"
+#~ "\n"
+#~ "성공적으로 로그인하신 후에는 기억하기 쉬운 새로운 암호로 변경할 것을 권장"
+#~ "합니다.\n"
+
+#~ msgid "Found no account matching the given email address '%(email)s'!"
+#~ msgstr "메일 주소가 '%(email)s'(으)로 되어있는 계정이 없습니다!"
+
+#~ msgid "File attachments are not allowed in this wiki!"
+#~ msgstr "이 위키에 파일을 첨부할 수 없습니다.!"
+
+#~ msgid "SendMyPassword"
+#~ msgstr "암호 전송"
+
+#~ msgid "Use UserPreferences to change your settings or create an account."
+#~ msgstr ""
+#~ "계정을 새로 만들거나 계정 정보를 수정하기 위해서는 UserPreferences를 이용"
+#~ "하세요."
+
+#~ msgid "Use UserPreferences to change settings of the selected user account"
+#~ msgstr "선택한 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요."
+
+#~ msgid ""
+#~ "This list does not work, unless you have entered a valid email address!"
+#~ msgstr "메일 알림은 올바른 올바른 주소를 입력하지 않으면 동작하지 않습니다!"
+
+#~ msgid ""
+#~ "To create an account, see the %(userprefslink)s page. To recover a lost "
+#~ "password, go to %(sendmypasswordlink)s."
+#~ msgstr ""
+#~ "계정을 새로 만들려면 %(userprefslink)s 문서를, 암호를 잊어버렸으"
+#~ "면%(sendmypasswordlink)s 문서를 보세요."
+
+#~ msgid ""
+#~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
+#~ "Try a different name."
+#~ msgstr ""
+#~ "'''문서 {{{\"%s\"}}}가(이) 이미 존재합니다.'''\n"
+#~ "\n"
+#~ "다른 이름으로 다시 만들어 보세요."
+
+#~ msgid ""
+#~ "The comment on the change is:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "이번 변경에 대한 설명:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+
+#~ msgid "Status of sending notification mails:"
+#~ msgstr "알림 편지 송신 상태:"
+
+#~ msgid "[%(lang)s] %(recipients)s: %(status)s"
+#~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#~ msgid "Subscribe to trivial changes"
+#~ msgstr "사소한 변경사항도 구독"
+
+#~ msgid "(Only for password change or new account)"
+#~ msgstr "(암호 변경 및 새로운 계정 생성용)"
+
+#~ msgid "ERROR in regex '%s'"
+#~ msgstr "정규식 '%s'의 에러"
+
+#~ msgid "Bad timestamp '%s'"
+#~ msgstr "잘못된 책갈피 시간 '%s'"
+
+#~ msgid "Not supported mimetype of file: %s"
+#~ msgstr "지원되지 않는 mimetype: %s"
+
+#~ msgid "Embedding of object by chosen formatter not possible"
+#~ msgstr "선택한 포맷터로 해당 객체를 삽입할 수 없습니다."
+
+#~ msgid ""
+#~ "Not enough arguments given to EmbedObject macro! Try "
+#~ "<<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate "
+#~ "Text])>>"
+#~ msgstr ""
+#~ "EmbedObject 매크로의 인수가 부족합니다. 사용법: <<EmbedObject(attachment "
+#~ "[,width=width] [,height=height] [,alt=alternate Text])>>"
+
+#~ msgid ""
+#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+#~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+#~ msgstr ""
+#~ "EmbedObject 매크로의 인수가 부족합니다. 사용법: <<EmbedObject(url, "
+#~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+
+#~ msgid "Invalid MonthCalendar calparms \"%s\"!"
+#~ msgstr "\"%s\"는(은) 잘못된 MonthCalendar 인수입니다!"
+
+#~ msgid "Invalid MonthCalendar arguments \"%s\"!"
+#~ msgstr "\"%s\"는(은) 잘못된 MonthCalendar 인수입니다!"
+
+#~ msgid "Sorry, login failed."
+#~ msgstr "로그인에 실패하였습니다."
+
+#~ msgid "belonging to one of the following categories"
+#~ msgstr "다음 분류에 하나 이상 속하는"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian stemming"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-이 양식을 전송하면, 결과값들이 화면에 표시됩니다.\n"
+#~ "이 양식을 다른 문서에서 사용하려면 다음 매크로 호출을 추가하세요.\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
+#~ "-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "{{{\"%s\"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 "
+#~ "다시 입력하세요."
+
+#~ msgid "raw"
+#~ msgstr "원문"
+
+#~ msgid "print"
+#~ msgstr "인쇄"
+
+#~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
+#~ msgstr "## %(date)s에 만들어진 문서 \"%(pagename)s\"의 백업"
+
+#~ msgid "A backup of your changes is [%(backup_url)s here]."
+#~ msgstr "이번 변경 사항에 대한 백업은 [%(backup_url)s 여기]에 있습니다."
+
+#~ msgid "Show chart \"%(title)s\""
+#~ msgstr "\"%(title)s\" 차트 보기"
+
+#~ msgid "set bookmark"
+#~ msgstr "책갈피 두기"
+
+#~ msgid "You are not allowed to do %s on this page."
+#~ msgstr "이 문서에 %s 작업을 할 수 있는 권한이 없습니다."
+
+#~ msgid "%(hits)d results out of about %(pages)d pages."
+#~ msgstr ""
+#~ "전체 %(pages)d 문서 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다."
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "필요한 속성인 \"%(attrname)s\"가(이) 없습니다"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "전송된 양식 데이터:"
+
+#~ msgid "Plain title index"
+#~ msgstr "텍스트 제목 색인"
+
+#~ msgid "XML title index"
+#~ msgstr "XML 제목 색인"
+
+#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+#~ msgstr "설치된 프로세서 (낡음 -- 대신 파서를 쓰세요)"
+
+#~ msgid ""
+#~ "Sorry, someone else saved the page while you edited it.\n"
+#~ "\n"
+#~ "Please do the following: Use the back button of your browser, and "
+#~ "cut&paste\n"
+#~ "your changes from there. Then go forward to here, and click EditText "
+#~ "again.\n"
+#~ "Now re-add your changes to the current page contents.\n"
+#~ "\n"
+#~ "''Do not just replace\n"
+#~ "the content editbox with your version of the page, because that would\n"
+#~ "delete the changes of the other person, which is excessively rude!''\n"
+#~ msgstr ""
+#~ "이 문서를 당신이 수정하는 동안에 다른 사람이 같은 문서를 수정했습니다.\n"
+#~ "\n"
+#~ "다음 지시 사항을 따라주세요: 브라우저의 \"뒤로\" 버튼을 눌러서, 수정한 부"
+#~ "분을\n"
+#~ "복사해 온 후, 다시 문서 수정으로 가서 다른 사람이 고친 내용을 피해\n"
+#~ "방금 수정하려고 했던 내용을 다시 추가해서 저장해 주세요.\n"
+#~ "\n"
+#~ "''자신이 마지막으로 수정한 문서 내용 전체를 그대로 복사해서 덮어쓰기 하지 "
+#~ "마세요.\n"
+#~ "그러면, 다른 사람의 변경 내용이 모두 취소되며,\n"
+#~ "이런 행위는 아주 무례한 것으로 간주됩니다.''\n"
+
+#~ msgid "Jump to last visited page instead of frontpage"
+#~ msgstr "대문 대신 마지막 방문 위치로 이동함"
+
+#~ msgid "(Only when changing passwords)"
+#~ msgstr "(암호 변경 시)"
