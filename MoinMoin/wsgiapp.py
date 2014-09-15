@@ -19,6 +19,7 @@ from MoinMoin.web.utils import check_forbidden, check_surge_protect, fatal_respo
 from MoinMoin.Page import Page
 from MoinMoin import auth, config, i18n, user, wikiutil, xmlrpc, error
 from MoinMoin.action import get_names, get_available_actions
+from MoinMoin.util.abuse import log_attempt
 
 
 def set_umask(new_mask=0777^config.umask):
@@ -133,12 +134,12 @@ def dispatch(request, context, action_name='show'):
         response = redirect_last_visited(context)
     # 2. handle action
     else:
-        response = handle_action(context, pagename, action_name)
+        response = handle_action(request, context, pagename, action_name)
     if isinstance(response, Context):
         response = response.request
     return response
 
-def handle_action(context, pagename, action_name='show'):
+def handle_action(request, context, pagename, action_name='show'):
     """ Actual dispatcher function for non-XMLRPC actions.
 
     Also sets up the Page object for this request, normalizes and
@@ -172,7 +173,11 @@ def handle_action(context, pagename, action_name='show'):
             get_available_actions(cfg, context.page, context.user):
         msg = _("You are not allowed to do %(action_name)s on this page.") % {
                 'action_name': wikiutil.escape(action_name), }
-        if not context.user.valid:
+        if context.user.valid:
+            log_attempt(action_name, False, request,
+                        context.user.name, page=pagename)
+        else:
+            log_attempt(action_name, False, request, page=pagename)
             # Suggest non valid user to login
             msg += " " + _("Login and try again.")
 
@@ -186,7 +191,11 @@ def handle_action(context, pagename, action_name='show'):
         if handler is None:
             msg = _("You are not allowed to do %(action_name)s on this page.") % {
                     'action_name': wikiutil.escape(action_name), }
-            if not context.user.valid:
+            if context.user.valid:
+                log_attempt(action_name, False, request,
+                            context.user.name, page=pagename)
+            else:
+                log_attempt(action_name, False, request, page=pagename)
                 # Suggest non valid user to login
                 msg += " " + _("Login and try again.")
             context.theme.add_msg(msg, "error")
