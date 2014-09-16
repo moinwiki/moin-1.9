@@ -174,10 +174,11 @@ def handle_action(request, context, pagename, action_name='show'):
         msg = _("You are not allowed to do %(action_name)s on this page.") % {
                 'action_name': wikiutil.escape(action_name), }
         if context.user.valid:
-            log_attempt(action_name, False, request,
+            log_attempt(action_name + ': action unavailable', False, request,
                         context.user.name, pagename=pagename)
         else:
-            log_attempt(action_name, False, request, pagename=pagename)
+            log_attempt(action_name + ': action unavailable', False, request,
+                        pagename=pagename)
             # Suggest non valid user to login
             msg += " " + _("Login and try again.")
 
@@ -192,10 +193,11 @@ def handle_action(request, context, pagename, action_name='show'):
             msg = _("You are not allowed to do %(action_name)s on this page.") % {
                     'action_name': wikiutil.escape(action_name), }
             if context.user.valid:
-                log_attempt(action_name, False, request,
+                log_attempt(action_name + ': no handler', False, request,
                             context.user.name, pagename=pagename)
             else:
-                log_attempt(action_name, False, request, pagename=pagename)
+                log_attempt(action_name + ': no handler', False, request,
+                            pagename=pagename)
                 # Suggest non valid user to login
                 msg += " " + _("Login and try again.")
             context.theme.add_msg(msg, "error")

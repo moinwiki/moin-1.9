@@ -66,7 +66,8 @@ class NewPage:
         page = Page(self.request, self.pagename)
         if not (page.isWritable() and self.request.user.may.read(self.pagename)):
             # Same error as the edit page for localization reasons
-            log_attempt('newpage', False, self.request, pagename=self.pagename)
+            log_attempt('newpage: immutable or no permissions', False,
+                        self.request, pagename=self.pagename)
             return _('You are not allowed to edit this page.')
         return ''
 
