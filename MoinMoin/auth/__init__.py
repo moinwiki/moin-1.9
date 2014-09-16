@@ -474,8 +474,7 @@ def setup_setuid(request, userobj):
         uid = request.session['setuid']
         userobj = user.User(request, uid, auth_method='setuid')
         userobj.valid = True
-        log_attempt("auth/login (setuid from %r)" % old_user.name,
-                    True, request, userobj.name)
+        log_attempt("auth/login (setuid from %r)" % old_user.name, True, request, userobj.name)
     logging.debug("setup_suid returns %r, %r" % (userobj, old_user))
     return (userobj, old_user)
 
