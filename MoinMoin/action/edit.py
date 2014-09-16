@@ -23,7 +23,7 @@ def execute(pagename, request):
         return
 
     if not request.user.may.write(pagename):
-        log_attempt('edit: no permissions', False, request, pagename=pagename)
+        log_attempt('edit/no permissions', False, request, pagename=pagename)
         page = wikiutil.getLocalizedPage(request, 'PermissionDeniedPage')
         page.body = _('You are not allowed to edit this page.')
         page.page_name = pagename
