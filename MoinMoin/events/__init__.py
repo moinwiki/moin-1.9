@@ -187,7 +187,7 @@ class UserCreatedEvent(Event):
     req_superuser = True
 
     def __init__(self, request, user):
-        log_attempt('event/newaccount', True, request, user.name)
+        log_attempt('account/created', True, request, user.name)
         Event.__init__(self, request)
         self.user = user
 
