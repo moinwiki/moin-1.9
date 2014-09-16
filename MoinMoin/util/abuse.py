@@ -31,7 +31,7 @@ def log_attempt(system, success, request=None, username=None, pagename=None):
         else:
             username = u'anonymous'
     level = (logging.WARNING, logging.INFO)[success]
-    msg = """%s: status %s: username "%s": ip %s: page %s"""
+    msg = """: %s: status %s: username "%s": ip %s: page %s"""
     status = ("failure", "success")[success]
     ip = request and request.remote_addr or 'unknown'
     logging.log(level, msg, system, status, username, ip, pagename)
