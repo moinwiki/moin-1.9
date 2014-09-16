@@ -561,7 +561,7 @@ file. It should match the actual charset of the configuration file.
             'page_group_regex', 'page_template_regex', 'page_license_page',
             'page_local_spelling_words', 'acl_rights_default',
             'acl_rights_before', 'acl_rights_after', 'mail_from',
-            'quicklinks_default', 'subscribed_pages_default', 
+            'quicklinks_default', 'subscribed_pages_default',
             )
 
         for name in decode_names:
