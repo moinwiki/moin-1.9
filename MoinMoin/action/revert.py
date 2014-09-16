@@ -12,6 +12,7 @@ from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.action import ActionBase
+from MoinMoin.util.abuse import log_attempt
 
 class revert(ActionBase):
     """ revert page action
@@ -32,6 +33,8 @@ class revert(ActionBase):
         _ = self._
         may = self.request.user.may
         allowed = may.write(self.pagename) and may.revert(self.pagename)
+        if not allowed:
+            log_attempt('revert/immutable or no permissions', False, self.request, pagename=self.pagename)
         return allowed, _('You are not allowed to revert this page!')
 
     def check_condition(self):
