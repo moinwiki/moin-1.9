@@ -1,0 +1,24 @@
+Here are some more configuration examples you might find useful.
+
+If the file is called *_snippet*, it means that it is NOT a complete config
+file, but just a part you can use for assembling one yourself).
+
+wikiconfig snippet usage
+========================
+
+Except otherwise noted, you will have to copy the content of the snippet file
+INTO your wiki configuration class.
+
+That means:
+
+a) For a single wiki:
+   Below the "class Config(DefaultConfig):" line in wikiconfig.py.
+
+b) For a wiki farm, if the configuration should be common for all wikis ini
+   the farm:
+   Below the "class FarmConfig(DefaultConfig):" line in farmconfig.py.
+
+c) For a wiki farm, if the configuration should be just for some single,
+   individual wiki in the farm:
+   Below the "class Config(FarmConfig):" line in <yourwikiname>.py.
+

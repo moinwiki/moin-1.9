@@ -1,0 +1,116 @@
+Translators and Developers,
+
+Translators need to deal with the *.po files ONLY - they should do this on
+http://master.moinmo.in/MoinI18n/<language-code>, please do not
+send po updates via email, the stuff from the moinmaster wiki gets processed
+automatically.
+
+The i18n system uses wiki markup in the msgid/msgstr strings, see also the
+the header of your *.po file (and see see de.po for a sample).
+
+Encoding is utf-8 ONLY for the po file (the wiki page automatically uses
+utf-8).
+
+Please search your translation for fuzzy and untranslated strings. If you
+have reviewed the fuzzy stuff, remove the "fuzzy" marker. If you do that
+online on the moinmaster wiki, here are some tips:
+
+ * If you look at MoinMaster:MoinI18n/cc (where cc is your language code),
+   you will see some statistics at the top, you should try to have no untrans-
+   lated strings and also no fuzzy strings.
+ * On normal page view of that page, untranslated stuff is marked with !!!
+   (3 exclamation marks, just use firefox Ctrl-f to find them). Just remember
+   the untranslated phrase (or at least some  non-common words in it).
+ * Now edit the page and use Ctrl-f again. Enter the words you remembered.
+   Then use the highlight function right of the search box to make those words
+   highlighted in yellow color and scroll through the text in the edit box to
+   find the yellow stuff (the search function without highlight won't help you).
+ * For finding fuzzy stuff, just use the same method with "fuzzy".
+
+For using the i18n build system, one needs to have "gettext" installed.
+
+In the source code, there is original english text marked with
+_("english string") - xgettext can extract these strings automatically from
+the files listed in POTFILES.in.
+
+As not all strings appear in the source code, there is an additional
+file i18n/strings.py that contains strings that need to be translated, but
+do not appear in src otherwise or are not found by gettext or need to be
+organized somehow.
+
+
+
+Files
+=====
+
+Makefile: a GNU-Makefile
+
+POTFILES.in: a list of files with translatable strings (automatically created
+             by "make POTFILES"). POTFILES is about the same thing, just in a
+             format suitable for inclusion into the Makefile.
+
+MoinMoin.pot: Master translation file.
+
+*.po: Translations (utf-8 encoding)
+
+
+New Translation (no .po file exists yet)
+========================================
+- copy MoinMoin.pot to <langcode>.po
+- edit the header of <langcode>.po (this is the first entry in the file, it
+  starts with Project-Id-Version)
+  - Project-Id-Version: MoinMoin 1.6
+  - Content-Type: text/plain; charset=utf-8
+  - Language-Team: LANGUAGE mailinglist
+    LANGUAGE should be your language in english, in long form - e.g.:
+    German, French, ...
+  - X-Language: LANGUAGE
+    LANGUAGE should be your language expressed in your language, e.g.:
+    Deutsch, Francais (with c-cedille), ...
+
+Update Translation
+==================
+- run "make <langcode>.po"
+- change the translation
+- update the PO-Revision-Date and Last-Translator entries
+
+Change of translatable strings
+==============================
+If you change any translatable string, please call "make update-po" before
+commit.
+
+Regenerating all
+================
+- run "make" to re-generate everything needed.
+
+
+Non-utf-8 editing
+=================
+
+If you don't like to use a utf-8 capable editor, you could process the po like
+that:
+
+Recode the po file to your preferred encoding (e.g. iso-8859-1). Be very sure
+that this is possible or you will get errors:
+
+> ./recode.py utf-8 iso-8859-1 <de.po >de.po-iso1
+
+Edit that file and do your work:
+
+> $EDITOR de.po-iso1
+
+Recode your work back to utf-8 for submission. This should generally work if
+you specify the "from" encoding (here: iso-8859-1) correctly:
+
+> ./recode.py iso-8859-1 utf-8 <de.po-iso1 >de.po-utf8
+
+Now maybe use this to make sure nothing weird happened:
+
+> diff de.po de.po-utf8
+
+Finally, if everything looked OK:
+
+> mv de.po-utf8 de.po
+
+Also make sure that the Content-Type header in the po file tells charset=utf-8.
+
