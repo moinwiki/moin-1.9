@@ -1090,7 +1090,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             msg = _('You are not allowed to edit this page!')
             raise self.AccessDenied(msg)
         elif not self.isWritable():
-            log_attempt('edit/immutable', False, request,
+            log_attempt('save/immutable', False, request,
                         pagename=self.page_name)
             msg = _('Page is immutable!')
             raise self.Immutable(msg)
