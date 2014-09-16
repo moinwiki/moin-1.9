@@ -12,6 +12,7 @@
 
 import time
 from MoinMoin.Page import Page
+from MoinMoin.util.abuse import log_attempt
 
 class NewPage:
     """ Open editor for a new page, using template """
@@ -65,6 +66,7 @@ class NewPage:
         page = Page(self.request, self.pagename)
         if not (page.isWritable() and self.request.user.may.read(self.pagename)):
             # Same error as the edit page for localization reasons
+            log_attempt('newpage/immutable or no permissions', False, self.request, pagename=self.pagename)
             return _('You are not allowed to edit this page.')
         return ''
 

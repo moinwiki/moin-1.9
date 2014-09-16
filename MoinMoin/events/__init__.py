@@ -14,6 +14,7 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
+from MoinMoin.util.abuse import log_attempt
 from MoinMoin.wikiutil import PluginAttributeError
 
 # Create a list of extension actions from the package directory
@@ -186,6 +187,7 @@ class UserCreatedEvent(Event):
     req_superuser = True
 
     def __init__(self, request, user):
+        log_attempt('account/created', True, request, user.name)
         Event.__init__(self, request)
         self.user = user
 
