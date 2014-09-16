@@ -34,7 +34,7 @@ class revert(ActionBase):
         may = self.request.user.may
         allowed = may.write(self.pagename) and may.revert(self.pagename)
         if not allowed:
-            log_attempt('revert', False, self.request, page=self.pagename)
+            log_attempt('revert', False, self.request, pagename=self.pagename)
         return allowed, _('You are not allowed to revert this page!')
 
     def check_condition(self):

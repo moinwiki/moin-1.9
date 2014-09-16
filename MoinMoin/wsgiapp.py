@@ -175,9 +175,9 @@ def handle_action(request, context, pagename, action_name='show'):
                 'action_name': wikiutil.escape(action_name), }
         if context.user.valid:
             log_attempt(action_name, False, request,
-                        context.user.name, page=pagename)
+                        context.user.name, pagename=pagename)
         else:
-            log_attempt(action_name, False, request, page=pagename)
+            log_attempt(action_name, False, request, pagename=pagename)
             # Suggest non valid user to login
             msg += " " + _("Login and try again.")
 
@@ -193,9 +193,9 @@ def handle_action(request, context, pagename, action_name='show'):
                     'action_name': wikiutil.escape(action_name), }
             if context.user.valid:
                 log_attempt(action_name, False, request,
-                            context.user.name, page=pagename)
+                            context.user.name, pagename=pagename)
             else:
-                log_attempt(action_name, False, request, page=pagename)
+                log_attempt(action_name, False, request, pagename=pagename)
                 # Suggest non valid user to login
                 msg += " " + _("Login and try again.")
             context.theme.add_msg(msg, "error")

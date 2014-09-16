@@ -169,10 +169,11 @@ class PageEditor(Page):
 
         # check edit permissions
         if not request.user.may.write(self.page_name):
-            log_attempt('edit: edit', False, request, name=self.page_name)
+            log_attempt('edit: edit', False, request, pagename=self.page_name)
             msg = _('You are not allowed to edit this page.')
         elif not self.isWritable():
-            log_attempt('edit: immutable', False, request, name=self.page_name)
+            log_attempt('edit: immutable', False, request,
+                        pagename=self.page_name)
             msg = _('Page is immutable!')
         elif self.rev:
             # Trying to edit an old version, this is not possible via
@@ -554,7 +555,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             return False, _("You can't copy to an empty pagename.")
 
         if not self.request.user.may.write(newpagename):
-            log_attempt('edit: copy', False, request, name=self.page_name)
+            log_attempt('edit: copy', False, request, pagename=self.page_name)
             return False, _('You are not allowed to copy this page!')
 
         newpage = PageEditor(request, newpagename)
@@ -607,7 +608,8 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
 
         if not (request.user.may.delete(self.page_name)
                 and request.user.may.write(newpagename)):
-            log_attempt('edit: rename', False, request, name=self.page_name)
+            log_attempt('edit: rename', False, request,
+                        pagename=self.page_name)
             msg = _('You are not allowed to rename this page!')
             raise self.AccessDenied(msg)
 
@@ -715,7 +717,8 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         success = True
         if not (request.user.may.write(self.page_name)
                 and request.user.may.delete(self.page_name)):
-            log_attempt('edit: delete', False, request, name=self.page_name)
+            log_attempt('edit: delete', False, request,
+                        pagename=self.page_name)
             msg = _('You are not allowed to delete this page!')
             raise self.AccessDenied(msg)
 
@@ -1080,11 +1083,12 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
 
         msg = ""
         if not request.user.may.save(self, newtext, rev, **kw):
-            log_attempt('edit: edit', False, request, name=self.page_name)
+            log_attempt('edit: edit', False, request, pagename=self.page_name)
             msg = _('You are not allowed to edit this page!')
             raise self.AccessDenied(msg)
         elif not self.isWritable():
-            log_attempt('edit: immutable', False, request, name=self.page_name)
+            log_attempt('edit: immutable', False, request,
+                        pagename=self.page_name)
             msg = _('Page is immutable!')
             raise self.Immutable(msg)
         elif not newtext:
@@ -1128,7 +1132,8 @@ Please review the page and save then. Do not save this page as it is!""")
             if (not request.user.may.admin(self.page_name) and
                 parseACL(request, newtext).acl != acl.acl and
                 action != "SAVE/REVERT"):
-                log_attempt('edit: acl', False, request, name=self.page_name)
+                log_attempt('edit: acl', False, request,
+                            pagename=self.page_name)
                 msg = _("You can't change ACLs on this page since you have no admin rights on it!")
                 raise self.NoAdmin(msg)
 
