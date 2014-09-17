@@ -51,6 +51,8 @@ Version 1.9.8:
       * "moin" auth
       * "given" auth
       * setuid (when superuser switches to another user)
+    * new user creation
+    * some security/ACL violations (xmlrpc and perhaps others not implemented)
   * surge protection for authentication (currently only for MoinAuth):
     a) surge protect by IP
        This covers the case someone is trying to authenticate way too
