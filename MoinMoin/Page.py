@@ -212,14 +212,15 @@ class Page(object):
                 f = codecs.open(self._text_filename(), 'rb', config.charset)
             except IOError, er:
                 import errno
-                if er.errno == errno.ENOENT:
-                    # just doesn't exist, return empty text (note that we
-                    # never store empty pages, so this is detectable and also
-                    # safe when passed to a function expecting a string)
-                    return ""
+                if er.errno in [errno.ENOENT, errno.ENAMETOOLONG, ]:
+                    # ENOENT: doesn't exist, file not found
+                    # ENAMETOOLONG: can't exist, name too long for this fs
+                    # return empty text (note that we never store empty pages,
+                    # so this is detectable and also safe when passed to a
+                    # function expecting a string)
+                    return u""
                 else:
                     raise
-
             # read file content and make sure it is closed properly
             try:
                 text = f.read()
