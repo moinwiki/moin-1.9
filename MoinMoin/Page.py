@@ -681,7 +681,7 @@ class Page(object):
             return os.path.getsize(self._text_filename(rev=rev))
         except EnvironmentError, e:
             import errno
-            if e.errno == errno.ENOENT:
+            if e.errno in [errno.ENOENT, errno.ENAMETOOLONG, ]:
                 return 0
             raise
 
