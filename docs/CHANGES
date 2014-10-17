@@ -188,6 +188,9 @@ Version 1.9.8:
   * "userdir" caching scope used for userid lookup caches (the previously used
     name2id cache with "wiki" caching scope could have outdated data if you
     share the user_dir between multiple wikis)
+  * catch "filename too long" exception if some crap URL refers to a too long
+    pagename that the filesystem can not represent. It is treated like a not
+    existing page then, so you don't get a traceback in your log file.
 
   Other changes:
   * rss_rc action (RSS feed) is now much faster / much less resource consuming
