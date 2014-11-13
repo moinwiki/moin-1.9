@@ -200,6 +200,9 @@ def copystat(src, dst):
         shutil.copystat(src, dst)
 
 
+copy = shutil.copy
+
+
 def copytree(src, dst, symlinks=False):
     """Recursively copy a directory tree using copy2().
 
