@@ -313,6 +313,40 @@ def move_attachment(request, pagename, dest_pagename, target, dest_target,
     return dest_target, filesize
 
 
+def copy_attachment(request, pagename, dest_pagename, target, dest_target,
+                    overwrite=False):
+    """ copy attachment <target> of page <pagename>
+        to attachment <dest_target> of page <dest_pagename>
+
+        note: this is lowlevel code, acl permissions need to be checked before
+              and also the target page should somehow exist (can be "deleted",
+              but the pagedir should be there)
+    """
+    # replace illegal chars
+    target = wikiutil.taintfilename(target)
+    dest_target = wikiutil.taintfilename(dest_target)
+
+    attachment_path = os.path.join(getAttachDir(request, pagename),
+                                   target).encode(config.charset)
+    dest_attachment_path = os.path.join(getAttachDir(request, dest_pagename, create=1),
+                                        dest_target).encode(config.charset)
+    if not overwrite and os.path.exists(dest_attachment_path):
+        raise DestPathExists
+    if dest_attachment_path == attachment_path:
+        raise SamePath
+    filesize = os.path.getsize(attachment_path)
+    try:
+        filesys.copy(attachment_path, dest_attachment_path)
+    except Exception:
+        raise
+    else:
+        _addLogEntry(request, 'ATTNEW', dest_pagename, dest_target)
+        event = FileAttachedEvent(request, dest_pagename, dest_target, filesize)
+        send_event(event)
+
+    return dest_target, filesize
+
+
 #############################################################################
 ### Internal helpers
 #############################################################################
@@ -483,6 +517,7 @@ function checkAll(bx, targets_name) {
 &nbsp;%(all_files)s&nbsp;|&nbsp;%(sel_files)s
 <input type="radio" name="multifile" value="rm">%(delete)s</input>
 <input type="radio" name="multifile" value="mv">%(move)s</input>
+<input type="radio" name="multifile" value="cp">%(copy)s</input>
 <input type="text" name="multi_dest_pagename" value="%(pagename)s">
 <input type="submit" value="%(submit)s">
 """ % dict(
@@ -490,6 +525,7 @@ function checkAll(bx, targets_name) {
             sel_files=_("Selected Files:"),
             delete=_("delete"),
             move=_("move to page"),
+            copy=_("copy to page"),
             pagename=pagename,
             submit=_("Do it."),
 ))
@@ -526,6 +562,18 @@ def _do_multifile(pagename, request):
         for fn in fnames:
             move_attachment(request, pagename, dest_pagename, fn, fn)
         msg = _("Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%(new_filename)s'.") % dict(
+                pagename=pagename,
+                filename=u'{%s}' % ','.join(fnames),
+                new_pagename=dest_pagename,
+                new_filename=u'*')
+        return upload_form(pagename, request, msg=msg)
+    if action == 'cp':
+        dest_pagename = request.form.get('multi_dest_pagename')
+        if not request.user.may.write(dest_pagename):
+            return _('You are not allowed to attach a file to this page.')
+        for fn in fnames:
+            copy_attachment(request, pagename, dest_pagename, fn, fn)
+        msg = _("Attachment '%(pagename)s/%(filename)s' copied to '%(new_pagename)s/%(new_filename)s'.") % dict(
                 pagename=pagename,
                 filename=u'{%s}' % ','.join(fnames),
                 new_pagename=dest_pagename,
