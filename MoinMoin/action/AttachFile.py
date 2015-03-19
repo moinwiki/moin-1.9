@@ -545,6 +545,7 @@ def _do_multifile(pagename, request):
     _ = request.getText
     action = request.form.get('multifile')
     fnames = request.form.getlist('fn')
+    fails = []
     if action == 'rm':
         if not request.user.may.delete(pagename):
             return _('You are not allowed to delete attachments on this page.')
@@ -560,24 +561,34 @@ def _do_multifile(pagename, request):
         if not request.user.may.write(dest_pagename):
             return _('You are not allowed to attach a file to this page.')
         for fn in fnames:
-            move_attachment(request, pagename, dest_pagename, fn, fn)
+            try:
+                move_attachment(request, pagename, dest_pagename, fn, fn)
+            except (DestPathExists, SamePath):
+                fails.append(fn)
         msg = _("Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%(new_filename)s'.") % dict(
                 pagename=pagename,
                 filename=u'{%s}' % ','.join(fnames),
                 new_pagename=dest_pagename,
                 new_filename=u'*')
+        if fails:
+            msg += " " + _("Failed: %s", ", ".join(fails))
         return upload_form(pagename, request, msg=msg)
     if action == 'cp':
         dest_pagename = request.form.get('multi_dest_pagename')
         if not request.user.may.write(dest_pagename):
             return _('You are not allowed to attach a file to this page.')
         for fn in fnames:
-            copy_attachment(request, pagename, dest_pagename, fn, fn)
+            try:
+                copy_attachment(request, pagename, dest_pagename, fn, fn)
+            except (DestPathExists, SamePath):
+                fails.append(fn)
         msg = _("Attachment '%(pagename)s/%(filename)s' copied to '%(new_pagename)s/%(new_filename)s'.") % dict(
                 pagename=pagename,
                 filename=u'{%s}' % ','.join(fnames),
                 new_pagename=dest_pagename,
                 new_filename=u'*')
+        if fails:
+            msg += " " + _("Failed: %s", ", ".join(fails))
         return upload_form(pagename, request, msg=msg)
     return u'unsupported multifile operation'
 
