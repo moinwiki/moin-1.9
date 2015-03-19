@@ -1,0 +1,179 @@
+Python requirements
+===================
+
+Please use Python 2.6.x, 2.7.x, 2.5.x (in that order, first most
+recommended, last least recommended). See below about Python 2.4.
+
+2.7 is 2nd because it is less long tested than 2.6. If you have 2.7 by default
+then just use it, there is usually no need to get 2.6. But if you have 2.6 by
+default, just use that, because there is also no need to get 2.7.
+
+2.5 is last because it is OLD and not much tested any more.
+
+2.4 was supported "out of the box" until (and including) moin 1.9.3.
+Since 1.9.4 the download release of moin has bundled libraries that need 2.5
+at least. Also, no moin developer still tests moin on 2.4.
+If you are willing to experiment a bit and use older libraries than the
+bundled ones, you might be able to get it working on 2.4 by replacing
+MoinMoin/support/werkzeug with werkzeug version 0.7.x and hope the best.
+Python requirements might be different for (linux or other) distribution
+packages, depending on the werkzeug version they use. Usually you do not have
+to care then, because the package maintainer already did it for you.
+You also can't use the stronger password hashes provided by passlib as it
+requires at least python 2.5 and you need to disable it in your wiki config,
+so moin does not try to use it.
+
+Python 3.x won't work for MoinMoin for now.
+
+Python build options:
+ * zlib support (required)
+ * ucs4 (32bit unicode, recommended)
+ * ucs2 also works for most users (not recommended)
+
+
+Servers
+=======
+You can use anything that speaks WSGI to moin:
+ * the "standalone" wikiserver.py we bundle with moin (recommended for
+   desktop wikis, testing, debugging, development, adhoc-wikis)
+ * apache with mod_wsgi (recommended for bigger/busier wikis), do not use
+   mod_wsgi v2.3 (it has known problems), about any other version is fine.
+ * other WSGI-compatible servers
+ * cgi, fastcgi, scgi, ajp, ... also work via the "flup" middleware bundled with moin
+ * For IIS 6.0 on Windows 2003, you can use a ISAPI-WSGI gateway:
+   http://code.google.com/p/isapi-wsgi/ v0.4.1 has been used successfully.
+
+
+Requirements needed for some moin features
+==========================================
+
+docbook parser: 4suite 1.0a4 or 1.0b1
+
+xslt parser: 4suite 1.0a4 or 1.0b1
+
+rst parser: docutils >= 0.3.10
+
+Xapian indexed search: xapian libs + python bindings >= 1.0.6
+
+Indexing filters for xapian search:
+ * antiword (for indexing of MS Word documents)
+ * xls2csv (for indexing of MS Excel documents, from catdoc package)
+ * catppt (for indexing of MS Powerpoint documents, from catdoc package)
+ * catdoc (for indexing of RTF documents, from catdoc package)
+ * pdftotext (for indexing of PDFs, from xpdf-utils or poppler-utils)
+
+ldap_login auth: python-ldap >=2.0.0pre06
+
+mysql_group auth: MySQLdb python module
+
+openidrp auth: openid python module
+
+stats charts: gdchart python module
+
+jabberbot: pyxmpp SVN revision 665 or release >= 1.0.1
+
+Only if you are using some python < 2.5.1, you likely will need python-xml
+(pyxml) for some features. It should just work with python's standard library
+for more recent python versions. Features needing this:
+ * the RSS feed (action/rss_rc)
+ * GUI editor converter (converter/text_html_text_moin_wiki)
+ * docbook formatter (formatter/text_docbook)
+
+
+Bundled 3rd party code
+======================
+
+Below are some notes about the software we bundle and ship with MoinMoin.
+If you are a Linux distributor and you want to rip out this stuff and
+replace it with packages, this is for you!
+
+We list the shipped version and also the minimum required version.
+The shipped version will work best with moin as usually has some more bug
+fixes than the minimum required version.
+We do not test with the minimum required version, but we try to keep this
+file updated and correct to our best knowledge.
+
+In case you find bugs in this requirements specification, please let us know!
+
+Thanks to all 3rd party software authors!
+
+
+A) Stuff below MoinMoin/support/:
+
+passlib (password hashing library)
+==================================
+shipped: 1.6.2
+minimum: 1.3(?)
+
+Note: moin could work without passlib also (NOT RECOMMENDED), but would not
+support stronger password hashes then, also would not be able to process such
+hashes from existing user profiles (that were made with passlib) and also
+would be less secure due to the weaker builtin hash methods.
+
+
+flup (cgi/fastcgi/scgi/ajp to WSGI adapter)
+===========================================
+shipped: 1.0.2+, from repo: hg clone -r 8d52f88effa3 http://hg.saddi.com/flup-server
+minimum: 1.0.2
+
+
+pygments (highlighting for all sorts of source code and other text files)
+=========================================================================
+shipped: 1.6
+minimum: 1.1.1 will work, maybe even older versions
+
+
+parsedatetime (parse date/time strings)
+=======================================
+shipped: 0.8.7
+minimum: 0.8.7(?)
+
+
+werkzeug (WSGI toolkit)
+=======================
+shipped: 0.8.3  (note: 0.9.x requires python >= 2.6)
+minimum: 0.7.0
+
+Note: >= 0.6.1 will also likely work if the missing "import sys" in
+      posixemulation.py is patched.
+
+
+xappy (High-Level Python library for Xapian)
+============================================
+shipped: 0.5
+minimum: 0.5
+
+
+htmlmarkup.py (safe html rendering)
+===================================
+shipped: copied from TRAC's trac.util.html, revision 3609, merged on 2006-08-20
+minimum: same(?)
+
+
+Replacements for Python stdlib modules
+======================================
+difflib.py (fixes broken Python 2.4.3 difflib, see comment in file)
+HeaderFixed.py ("copied from email.Header because the original is broken")
+tarfile.py (misc. brokenness up to Python 2.6, see comment in file)
+
+
+Other stuff
+===========
+BasicAuthTransport.py (taken from Amos' XML-RPC HowTo)
+python_compatibility.py (to be compatible with older Pythons)
+
+
+B) MoinMoin/web/static/htdocs/applets/FCKEditor/
+shipped: 2.6.8
+required: 2.6.x
+
+
+C) MoinMoin/web/static/htdocs/applets/TWikiDrawPlugin/
+shipped: Using a modified TWikiDrawPlugin see README in contrib/TWikiDrawPlugin 
+required: see shipped
+
+
+D) MoinMoin/web/static/htdocs/applets/anywikidraw/
+shipped: 0.14
+required: 0.14
+

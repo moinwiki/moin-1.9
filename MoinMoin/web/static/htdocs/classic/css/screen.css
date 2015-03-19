@@ -1,0 +1,461 @@
+/*  screen.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+/* debug 
+div, ul {border: 1px dotted blue; }
+*/
+
+a:link {color: #7F2A00;}
+a:visited {color: #7F5F47;}
+a.nonexistent, a.badinterwiki {color: #404040;}
+
+a.download {
+    font-size: 120%; 
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    background: #E7E7E7;
+    border: 1px solid #9C9C9C;
+    padding: 0.5em;
+    text-align: center;
+}
+
+input {
+    font-size: 1em;
+    font-family: Arial, Lucida Grande, sans-serif;
+}
+
+textarea {
+    font-size: 1em;
+    font-family: monospace;
+}
+
+pre {
+    background-color: #FFF8ED;
+}
+
+.footnotes div {
+    width: 5em;
+    border-top: 1px solid gray;
+}
+
+/* user interface styles */
+
+#header {
+    margin: 1px;
+    padding: 1px;
+    line-height: 1.1em;
+}
+
+#logo {
+    /* contains image and/or text link */
+    float: left;
+    font-size: 2em;
+    line-height: 1.2em;
+    font-weight: bold;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+#logo img {
+    /* logo image */
+    vertical-align: middle;
+}
+
+#logo a {
+    /* logo text link */
+    color: black;  
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+*[dir="rtl"] #logo {
+    float: right;
+    margin: 0 0 0 10px;
+}
+
+#searchform {
+    float: right;
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+
+*[dir="rtl"] #searchform {
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+#searchform form div {
+    display: inline;
+}
+
+#username {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    font-size: 0.82em;
+    white-space: nowrap;
+}
+
+*[dir="rtl"] #username {
+    text-align: left;
+}
+
+#username li {
+    display: inline;
+    padding: 0 0.5em 0 0;
+}
+
+#username form {
+    display: inline;
+}
+
+#username input {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: white; /* inherit is broken on IE */
+    color: brown;
+    font-size: 0.82em;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#pagetrail {
+    clear: right;
+    display: block;
+    margin: 0.2em 0;
+    padding: 0;
+    font-size: 0.88em;
+    height: 2em;
+}
+
+*[dir="rtl"] #pagetrail {
+    clear: left;
+}
+
+#interwiki {
+    display: inline;
+    font-size: 1em;
+}
+
+#interwiki span:after {
+    content: ":";
+}
+
+#locationline {
+    clear: right;
+    padding: 3px 0;
+}
+
+*[dir="rtl"] #locationline {
+    clear: left;
+}
+
+#pagelocation {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+}
+
+#pagetrail li, #pagelocation li {
+    display: inline;
+    margin: 0;
+}
+
+/* XXX Warning: non-ascii characters! */
+#pagetrail li:after {
+    content: " » ";
+}
+
+*[dir="rtl"] #pagetrail li:after {
+    content: " « ";
+}
+
+#pagetrail li:last-child:after {
+    content: "";
+}
+
+#pagelocation li:after {
+    content: "/ ";
+}
+
+*[dir="rtl"] #pagelocation li:after {
+    content: " \\ "; /* TODO: check what looks best with RTL */
+}
+
+#pagelocation li:last-child:after {
+    content: "";
+}
+
+#iconbar {
+    clear: both;
+    float: right;
+    margin: 5px 0 5px 10px;
+    padding: 0;
+    white-space: nowrap;
+}
+
+*[dir="rtl"] #iconbar {
+    float: left;
+    margin: 5px 10px 5px 0;
+}
+
+#iconbar li {
+    display: inline;
+    padding: 0;
+    margin: 0 2px;
+}
+
+#navibar {
+    clear: left;
+    margin: 0;
+    padding: 0;
+    font-size: 0.82em;
+    zoom: 1; /* for avoiding a gap between navibar and pageline on IE */
+}
+
+*[dir="rtl"] #navibar {
+    clear: right;
+}
+
+#navibar a {
+    text-decoration: none;
+    display: block;
+}
+
+#navibar li {
+    float: left;
+    display: block;
+    margin: 2px;
+    padding: 2px 5px;
+    border: 2px solid #c0c0c0;
+    background-color: #E5E5E5;
+}
+
+*[dir="rtl"] #navibar li {
+    float: right;
+}
+
+#navibar li.wikilink {
+    background-color: #e5e5e5;
+}
+
+#navibar li.userlink {
+    background-color: #E5DECF;
+}
+
+#navibar li.current {
+    background-color: #EDD097;
+}
+
+#navibar li.current a {
+    font-weight: bold;
+    color: black; 
+}
+
+.editbar {
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.editbar li {
+    display: inline;
+    padding: 0;
+    margin: 0 6px 0 0;
+}
+
+*[dir="rtl"] .editbar li {
+    float: right;
+}
+
+.editbar li p {
+    display: inline;
+}
+
+#message {
+    clear: both;
+    border: 2px solid #c0c0c0;
+    background-color: #E5E5E5;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+#message p{
+    margin: 5px 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+#message div.buttons {
+    font-weight: normal;
+}
+
+form.dialog {
+    margin: 0 15px;
+}
+
+.dialog td {
+    border: none;
+    padding: 5px;
+}
+
+.dialog td.label {
+    text-align: right;
+    font-weight: bold;
+    width: 25%;
+}
+
+*[dir="rtl"] .dialog td.label {
+    text-align: left;
+}
+
+.dialog td.content input {
+    width: 100%;
+}
+
+#page {
+    clear: both;
+    margin: 5px 0;
+    padding: 10px 20px;
+    border: 2px solid #c0c0c0;
+    background-color: white;
+}
+
+/* We use here dumb css1 ids becuase of IE suckiness */
+#editor-comment {width: 70%;}
+#editor-textarea {width: 100%;}
+
+#footer {
+    clear: both;
+    border: 2px solid #c0c0c0;
+    background-color: #E5E5E5;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 0.88em;
+}
+
+#footer p, #footer form {
+    margin: 0.25em 0;
+}
+
+#credits, #version, #timings{
+    margin: 5px 0;
+    padding: 0;
+    text-align: center;
+    font-size: 0.82em;
+    color: gray;
+}
+
+#credits li, #timings li {
+    display: inline;
+    padding: 0 2px;
+}
+
+#credits img {
+    vertical-align: middle;
+}
+
+#preview, #previewbelow {
+    border: 1px solid gray;
+    padding: .5em;
+    background: url(../img/draft.png);
+}
+
+#textcha {
+    font-size: 100%;
+    margin-top: 0.5em;
+    border: 2px solid #FF8888;
+    color: black;
+    vertical-align: middle;
+    padding: 3px 2px;
+}
+
+#textcha-answer {
+    border: 2px solid #000000;
+    padding: 3px 2px;
+}
+
+.diff {
+    width:99%;
+    table-layout: fixed;
+}
+
+.diff-header {
+    font-weight: bold;
+}
+
+.diff-title {
+    background-color: #C0C0C0;
+}
+
+.diff-added {
+    background-color: #E0FFE0;
+    vertical-align: top;
+    width: 50%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: courier, monospace;
+}
+
+.diff-removed {
+    background-color: #FFFFE0;
+    vertical-align: top;
+    width: 50%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: courier, monospace;
+}
+
+.diff-added span {
+    background-color: #80FF80;
+}
+
+.diff-removed span {
+    background-color: #FFFF80;
+}
+
+td.diff-info {
+    vertical-align: top;
+}
+
+div.diff-info {
+    white-space: nowrap;
+}
+
+div.diff-info-rev-comment span.diff-info-value {
+    white-space: normal;
+}
+
+div.diff-info-header {
+    background-color: #E8E8E8;
+    width: 100%;
+    padding: 0.25em 0.5em;
+    margin: -0.25em -0.5em;
+    margin-bottom: 0.25em;
+    text-align: center;
+}
+
+td.diff-same {
+    text-align: center;
+    border: 0;
+}
+
+.searchresult dd span {
+    font-weight: bold;
+}
+
+#openididentifier {
+    background: url(../../common/openid.png) no-repeat;
+    background-position: 0 50%;
+    padding-left: 18px;
+}

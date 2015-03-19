@@ -1,0 +1,26 @@
+    # you can put this into your wiki config, please be careful with
+    # indentation, it needs to be in the Config class, indented as all
+    # the other config attributes.
+    # it will display a red box above your wiki theme then, notifying
+    # not-logged-in users of the password invalidation, point them to
+    # the information page on the MoinMoin project wiki.
+
+    def important_note(self, request):
+        html = ""
+        if not request.user.valid:
+            url = "http://moinmo.in/PasswordReset"
+            reason = """
+<u>Please note:</u>
+All passwords were invalidated, you need to do a password recovery once
+to define a NEW and DIFFERENT password.
+For more information, please <a href="%(url)s">see there</a>.
+""" % locals()
+            html = """
+<div style="border:red; border-style:dotted; padding:0.5em; background-color:#FFCCCC;">
+%(reason)s
+</div>
+""" % locals()
+        return html
+
+    page_header1 = important_note
+

@@ -1,0 +1,78 @@
+    # This is a sample configuration snippet that shows how to configure the
+    # user interface of moin (how moin looks like).
+
+    # Wiki logo. You can use an image, text or both. [Unicode]
+    # For no logo or text, use '' - the default is to show the sitename.
+    # See also url_prefix setting below!
+    #logo_string = u'<img src="/moin_static194/common/moinmoin.png" alt="MoinMoin Logo">'
+
+    # The default theme anonymous or new users get
+    #theme_default = 'modern'
+    #theme_force = False
+
+    page_front_page = u'HelpOnLanguages' # this will make people choose a sane config
+
+    # Add your wikis important pages at the end. It is not recommended to
+    # remove the default links.  Leave room for user links - don't use
+    # more than 6 short items.
+    # You MUST use Unicode strings here, but you need not use localized
+    # page names for system and help pages, those will be used automatically
+    # according to the user selected language. [Unicode]
+    navi_bar = [
+        # If you want to show your page_front_page here:
+        #u'%(page_front_page)s',
+        u'RecentChanges',
+        u'FindPage',
+        u'HelpContents',
+    ]
+
+    #edit_bar = ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu']
+    #editor_default = 'text' # which editor is called when nothing is specified
+    #editor_force = False # force using the default editor
+    #editor_ui = 'freechoice' # which editor links are shown on user interface
+    #edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
+    #edit_rows = 20
+
+    #supplementation_page = False # use supplementation pages (show a link in the edit_bar)?
+    #supplementation_page_name = u'Discussion' # name of suppl. subpage
+    #supplementation_page_template = u'DiscussionTemplate' # name of template used to create suppl. pages
+
+    #page_license_enabled = False
+    #page_license_page = u'WikiLicense'
+
+    #trail_size = 5 # number of recently visited pagenames shown in the trail display
+
+    #search_results_per_page = 10
+
+    # for info/history action:
+    #history_count = (100, 200) # (default_revisions_shown, max_revisions_shown)
+
+    #show_hosts = True # show hostnames on RecentChanges / info/history action
+    #show_interwiki = False # show our interwiki name (usually in front of the page name)
+    #show_names = True # show editor names on RecentChanges / info/history action
+    #show_section_numbers = 0 # enumerate sections (headlines) by default?
+    #show_timings = False # show some timing stats (usually in the footer)
+    #show_version = False # show moin version info / (C) (depends on theme)
+
+    # time/date formats used (defaults shown):
+    #changed_time_fmt = '%H:%M'
+    #date_fmt = '%Y-%m-%d'
+    #datetime_fmt = '%Y-%m-%d %H:%M:%S'
+
+    #html_pagetitle = None
+
+    #stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
+
+    # <head> fragments:
+    #html_head = ''
+    #html_head_queries = '''<meta name="robots" content="noindex,nofollow">\n'''
+    #html_head_posts   = '''<meta name="robots" content="noindex,nofollow">\n'''
+    #html_head_index   = '''<meta name="robots" content="index,follow">\n'''
+    #html_head_normal  = '''<meta name="robots" content="index,nofollow">\n'''
+
+    # you can put some pieces of html at specific places into the theme output:
+    #page_header1 = ''
+    #page_header2 = ''
+    #page_footer1 = ''
+    #page_footer2 = ''
+

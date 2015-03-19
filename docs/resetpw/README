@@ -1,0 +1,105 @@
+Resetting (invalidating) password(s)
+====================================
+
+First make sure E-Mail functionality for your wiki is enabled, something like:
+
+    # the E-Mail address used for From: (consider using an address that
+    # can be directly replied to, at least while doing the pw reset):
+    mail_from = 'wiki@example.org'
+    # your smtp mail server hostname:port (default is 25)
+    mail_smarthost = 'mail.example.org:587'
+    # the login there, if authentication is needed
+    mail_login = 'wiki@example.org SuperSecretSMTPPassword'
+
+Optionally, you can also remind your users that having a valid E-Mail address
+in their user settings is essential for getting a password recovery E-Mail.
+If a active user does somehow not get such a mail, you likely will have to
+manually define a valid E-Mail address (or even password) for that user.
+
+If you had a security breach on your wiki (password hashes stolen) or you want
+to make sure all password hashes use strong algorithms (which is strongly
+recommended), you need to reset ALL users' passwords:
+
+Editing mailtemplate.txt
+========================
+
+If you edit mailtemplate.txt, please be very careful and follow these rules
+(otherwise you might just see the script command crashing):
+
+The contents must be utf-8 (or ascii, which is a subset of utf-8).
+In case of doubt, just use plain English.
+
+Some places you likely should edit are marked with XXX.
+
+Never ever change the AMOUNT or ORDER of the %s placeholders in the template.
+They will get replaced by MoinMoin with specific values in a specific order.
+We know this can be done better in Python, but this restriction is for
+compatibility with existing translations of the builtin texts, thus we
+could not do better without requiring lots of translation updates.
+
+Do not use any % character in your text (except for the placeholders).
+
+That said, feel free to change or add any other text.
+
+It is a very good idea to give some URL (e.g. of a web or wiki page) in
+the text where users can read more information.
+
+Of course the information at that URL should be readable without requiring
+a wiki login (you just have invalidated his/her password!), so the user can
+get informed before clicking links he got from someone via E-Mail.
+
+Instead of creating a web or wiki page with the information, you could
+also write all the stuff into the mail template directly, but please consider
+that E-Mail delivery to some users might fail for misc. reasons, so having
+some information on the web/wiki is usually better.
+
+We have added a wikitemplate.txt you can use to create such a wiki page.
+
+Editing wikitemplate.txt
+========================
+Just copy & paste it to some public page in your wiki, e.g. "PasswordReset".
+
+Some places you likely should edit are marked with XXX.
+
+Doing the password reset
+========================
+
+Maybe first try it with a single user account:
+
+moin ... account resetpw --name JoeDoe --notify --subject 'Wiki password reset' --text-from-file mailtemplate.txt
+
+Use some valid name, maybe a testing account of yourself. You should now have
+mail. If that worked ok, you can now do a global password reset for your wiki:
+
+moin ... account resetpw --all-users --notify --subject 'Wiki password reset' --text-from-file mailtemplate.txt
+
+The subject may contain a placeholder for the sitename, which is useful for
+wiki farms (showing the builtin default here):
+
+    '[%(sitename)s] Your wiki account data'
+
+Please note:
+- Instead of ... you need to give the --config-dir and --wiki-url options with
+  correct values for the wiki you want to operate on.
+- If you have a farm wiki, you need to invoke the command with correct params
+  for each of your farm member wikis.
+
+Helping users who can't do the password recovery
+================================================
+Either they did not get the E-Mail, or deleted it, or never had entered their
+E-Mail address into their user profile, or ...
+
+You can just set an arbitrary password for them (and tell it to them):
+
+moin ... account resetpw --name JoeDoe uIkV9.-a3
+
+Choose a rather complicated password to make sure they change it a minute
+afterwards (to another, hopefully safe password).
+
+Alternatively, if you are in the superuser list, you can go to YOUR user
+settings, switch to the user having troubles and just fix / add a valid
+E-Mail address for that user (if that was the problem). Logout to get back
+to your user account.
+
+Then do the password reset again, but just for that user.
+
