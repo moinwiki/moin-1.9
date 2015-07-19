@@ -1,0 +1,28 @@
+    # This is a sample configuration snippet that shows moin's groups configuration.
+    # See HelpOnConfiguration for more info.
+
+    # WikiGroups backend gets groups from wiki pages and is used by default.
+    def groups(self, request):
+        from MoinMoin.datastruct import WikiGroups
+        return WikiGroups(request)
+
+    # ConfigGroups uses groups defined in the configuration file.
+    def groups(self, request):
+        from MoinMoin.datastruct import ConfigGroups
+        # Groups are defined here.
+        groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1'],
+                  u'AdminGroup': [u'Admin1', u'Admin2', u'John']}
+        return ConfigGroups(request, groups)
+
+    # CompositeGroups to use both ConfigGroups and WikiGroups backends.
+    def groups(self, request):
+        from MoinMoin.datastruct import ConfigGroups, WikiGroups, CompositeGroups
+        groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1'],
+                  u'AdminGroup': [u'Admin1', u'Admin2', u'John']}
+
+        # Here ConfigGroups and WikiGroups backends are used.
+        # Note that order matters! Since ConfigGroups backend is mentioned first
+        # EditorGroup will be retrieved from it, not from WikiGroups.
+        return CompositeGroups(request,
+                               ConfigGroups(request, groups),
+                               WikiGroups(request))

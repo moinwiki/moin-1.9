@@ -1,0 +1,259 @@
+
+>>> from datastructures import *
+>>> from fieldactions import *
+
+
+
+Open a connection for indexing:
+>>> conn = IndexerConnection('foo')
+
+There can only be one IndexerConnection in existence for a given path at a
+time:
+>>> conn = IndexerConnection('foo') #doctest:+ELLIPSIS
+Traceback (most recent call last):
+...
+DatabaseLockError: Unable to acquire database write lock on foo...
+
+
+We should have no documents in the database yet:
+>>> conn.get_doccount()
+0
+
+
+
+Add some field actions to the database:
+>>> conn.add_field_action('author', FieldActions.STORE_CONTENT)
+>>> conn.add_field_action('author', FieldActions.INDEX_EXACT)
+>>> conn.add_field_action('title', FieldActions.INDEX_FREETEXT)
+
+
+We can't index as both EXACT and FREETEXT:
+>>> conn.add_field_action('author', FieldActions.INDEX_FREETEXT, weight=5, language='en')
+Traceback (most recent call last):
+...
+IndexerError: Field 'author' is already marked for indexing as exact text: cannot mark for indexing as free text as well
+>>> conn.add_field_action('title', FieldActions.INDEX_EXACT)
+Traceback (most recent call last):
+...
+IndexerError: Field 'title' is already marked for indexing as free text: cannot mark for indexing as exact text as well
+
+We can add multiple STORE_CONTENT actions though (subsequent ones have no
+further effect).
+>>> conn.add_field_action('author', FieldActions.STORE_CONTENT)
+
+
+Field actions are checked for basic validity:
+>>> conn.add_field_action('author', None)
+Traceback (most recent call last):
+...
+IndexerError: Unknown field action: None
+>>> conn.add_field_action('author', FieldActions.STORE_CONTENT, foo=1)
+Traceback (most recent call last):
+...
+IndexerError: Unknown parameter name for action 'STORE_CONTENT': 'foo'
+
+
+We can ensure there are no actions for a given field by using
+clear_field_actions():
+>>> conn.clear_field_actions('title')
+
+This doesn't complain even if we've never mentioned the field before:
+>>> conn.clear_field_actions('foo')
+
+Then we can add a field action back again:
+>>> conn.add_field_action('title', FieldActions.INDEX_FREETEXT, weight=10, language='en')
+
+
+We have to wipe out any old actions on the field to change the actions:
+>>> conn.clear_field_actions('author')
+>>> conn.add_field_action('author', FieldActions.STORE_CONTENT)
+>>> conn.add_field_action('author', FieldActions.INDEX_FREETEXT, weight=5, language='en')
+>>> conn.clear_field_actions('title')
+>>> conn.add_field_action('title', FieldActions.INDEX_EXACT)
+
+
+
+
+We should have no documents in the database yet:
+>>> conn.get_doccount()
+0
+
+
+Build up a document:
+>>> doc = UnprocessedDocument()
+
+We can add field instances.  Multiple instances of a field are valid.
+>>> doc.fields.append(Field('author', 'Richard Boulton'))
+>>> doc.fields.append(Field('author', 'Charlie Hull'))
+>>> doc.fields.append(Field('title', 'Test document'))
+
+We can get a vaguely pretty display of the contents of an
+UnprocessedDocument():
+>>> print doc
+UnprocessedDocument(None, [Field('author', 'Richard Boulton'), Field('author', 'Charlie Hull'), Field('title', 'Test document')])
+
+
+We can process a document explicitly, if we want to.
+>>> pdoc = conn.process(doc)
+
+Only the "author" field appears in the output, because only it was given the
+action STORE_CONTENT.
+>>> pdoc.data
+{'author': ['Richard Boulton', 'Charlie Hull']}
+
+We can access the xapian document representation of the processed document:
+>>> xdoc = pdoc.prepare()
+>>> import cPickle
+>>> cPickle.loads(xdoc.get_data())
+{'author': ['Richard Boulton', 'Charlie Hull']}
+
+>>> [(term.term, term.wdf, [pos for pos in term.positer]) for term in xdoc.termlist()]
+[('XAboulton', 5, [2]), ('XAcharlie', 5, [13]), ('XAhull', 5, [14]), ('XArichard', 5, [1]), ('XB:Test document', 0, []), ('ZXAboulton', 5, []), ('ZXAcharli', 5, []), ('ZXAhull', 5, []), ('ZXArichard', 5, []), ('Zboulton', 5, []), ('Zcharli', 5, []), ('Zhull', 5, []), ('Zrichard', 5, []), ('boulton', 5, [2]), ('charlie', 5, [13]), ('hull', 5, [14]), ('richard', 5, [1])]
+
+
+Adding the same document multiple times is fine if it doesn't have an id
+assigned to it: a new ID will be allocated for each addition:
+>>> conn.add(doc)
+'0'
+>>> conn.add(doc)
+'1'
+>>> conn.add(doc)
+'2'
+>>> conn.get_doccount()
+3
+
+We can set the unique ID ourselves, if we want:
+>>> print repr(doc.id)
+None
+>>> doc.id = '4'
+>>> print repr(doc.id)
+'4'
+>>> conn.add(doc)
+'4'
+>>> conn.get_doccount()
+4
+
+
+If we try adding a document with a unique ID which already exists we get an
+error:
+>>> doc.id = '1'
+>>> print repr(doc.id)
+'1'
+>>> conn.add(doc)
+Traceback (most recent call last):
+...
+IndexerError: Document ID of document supplied to add() is not unique.
+>>> conn.get_doccount()
+4
+
+
+If we remove the id, it works again:
+>>> doc.id = None
+>>> print repr(doc.id)
+None
+>>> conn.add(doc)
+'3'
+>>> conn.get_doccount()
+5
+
+But it skips ID 4 because we manually added a document with that ID.
+>>> conn.add(doc)
+'5'
+>>> conn.get_doccount()
+6
+
+Unique IDs don't have to be numbers: we can set them to anything we like.
+>>> doc.id = 'SuperFoo'
+>>> print repr(doc.id)
+'SuperFoo'
+>>> conn.add(doc)
+'SuperFoo'
+>>> conn.get_doccount()
+7
+
+We can delete documents by specifying the unique ID.
+>>> conn.delete('5')
+>>> conn.get_doccount()
+6
+
+
+Finally, we have to flush to apply the changes:
+>>> conn.flush()
+
+We can add more documents after the flush:
+>>> doc.id = None
+>>> conn.add(doc)
+'6'
+>>> conn.get_doccount()
+7
+
+We can add fields which don't have any configuration.  These will be ignored.
+>>> doc.fields.append(Field('text', 'Some boring text'))
+>>> conn.add(doc)
+'7'
+>>> conn.get_doccount()
+8
+
+We can also supply fields as an iterator instead of a list:
+>>> fieldlist = [Field('author', 'Richard Boulton')]
+>>> doc.fields = iter(fieldlist)
+>>> conn.add(doc)
+'8'
+>>> conn.get_doccount()
+9
+
+Calling close() will automatically call flush(), too:
+>>> conn.close()
+
+After calling close(), no other methods are valid:
+
+>>> conn.add_field_action('title', FieldActions.INDEX_FREETEXT, weight=10, language='en')
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.clear_field_actions('author')
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.process(doc)
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.add(doc)
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.replace(doc)
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.delete('1')
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.flush()
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.get_doccount()
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.iterids()
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+>>> conn.get_document('1')
+Traceback (most recent call last):
+...
+IndexerError: IndexerConnection has been closed
+
+
+But calling close() multiple times is okay:
+>>> conn.close()
+
+
+Now that we've closed the connection, we can open a new one:
+>>> conn = IndexerConnection('foo')
+>>> conn.get_doccount()
+9
