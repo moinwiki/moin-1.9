@@ -11,7 +11,6 @@ import re, time, datetime
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin.support.python_compatibility import frozenset
 from MoinMoin.security import Permissions
 from MoinMoin import caching, wikiutil
 

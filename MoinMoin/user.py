@@ -21,6 +21,8 @@
 """
 
 import os, time, codecs, base64
+import hashlib
+import hmac
 from copy import deepcopy
 import md5crypt
 
@@ -31,8 +33,6 @@ except ImportError:
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
-
-from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
 from MoinMoin import config, caching, wikiutil, i18n, events
 from werkzeug.security import safe_str_cmp as safe_str_equal
@@ -285,7 +285,7 @@ def encodePassword(cfg, pwd, salt=None, scheme=None):
         if salt is None:
             salt = random_string(20)
         assert isinstance(salt, str)
-        hash = hash_new('sha1', pwd)
+        hash = hashlib.new('sha1', pwd)
         hash.update(salt)
         return '{SSHA}' + base64.encodestring(hash.digest() + salt).rstrip()
     else:
@@ -715,13 +715,13 @@ class User:
                     if scheme == '{SSHA}':
                         d = base64.decodestring(d)
                         salt = d[20:]
-                        hash = hash_new('sha1', password.encode('utf-8'))
+                        hash = hashlib.new('sha1', password.encode('utf-8'))
                         hash.update(salt)
                         enc = base64.encodestring(hash.digest() + salt).rstrip()
 
                     elif scheme == '{SHA}':
                         enc = base64.encodestring(
-                            hash_new('sha1', password.encode('utf-8')).digest()).rstrip()
+                            hashlib.new('sha1', password.encode('utf-8')).digest()).rstrip()
 
                     elif scheme == '{APR1}':
                         # d is of the form "$apr1$<salt>$<hash>"
@@ -1260,7 +1260,7 @@ class User:
     def generate_recovery_token(self):
         key = random_string(64, "abcdefghijklmnopqrstuvwxyz0123456789")
         msg = str(int(time.time()))
-        h = hmac_new(key, msg).hexdigest()
+        h = hmac.new(key, msg).hexdigest()
         self.recoverpass_key = key
         self.save()
         return msg + '-' + h
@@ -1278,7 +1278,7 @@ class User:
             return False
         # check hmac
         # key must be of type string
-        h = hmac_new(str(self.recoverpass_key), str(stamp)).hexdigest()
+        h = hmac.new(str(self.recoverpass_key), str(stamp)).hexdigest()
         if not safe_str_equal(h, parts[1]):
             return False
         self.recoverpass_key = ""

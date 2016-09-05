@@ -25,7 +25,6 @@ from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.mail.sendmail import encodeSpamSafeEmail
-from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.util.abuse import log_attempt
 from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent, PageRevertedEvent

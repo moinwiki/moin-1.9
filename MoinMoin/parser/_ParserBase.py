@@ -24,13 +24,13 @@ pre.codearea span.ConsWord { color: #008080; font-weight: bold; }
 
 """
 
+import hashlib
 import re
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import config, wikiutil
-from MoinMoin.support.python_compatibility import hash_new
 from MoinMoin.parser import parse_start_step
 
 
@@ -220,7 +220,7 @@ class ParserBase:
 
         result = [] # collects output
 
-        self._code_id = hash_new('sha1', self.raw.encode(config.charset)).hexdigest()
+        self._code_id = hashlib.new('sha1', self.raw.encode(config.charset)).hexdigest()
         result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step))
 
         self.lastpos = 0

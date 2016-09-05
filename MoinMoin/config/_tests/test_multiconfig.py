@@ -7,7 +7,6 @@
 """
 
 import py
-from MoinMoin.support.python_compatibility import set
 
 
 class TestPasswordChecker:
