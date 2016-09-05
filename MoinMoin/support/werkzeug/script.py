@@ -67,13 +67,16 @@ r'''
     or as named parameters, pretty much like Python function calls.
 
 
-    :copyright: (c) 2011 by the Werkzeug Team, see AUTHORS for more details.
+    :copyright: (c) 2014 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 '''
+from __future__ import print_function
+
 import sys
 import inspect
 import getopt
 from os.path import basename
+from werkzeug._compat import iteritems
 
 
 argument_types = {
@@ -85,7 +88,7 @@ argument_types = {
 
 
 converters = {
-    'boolean':  lambda x: x.lower() in ('1', 'true', 'yes', 'on'),
+    'boolean': lambda x: x.lower() in ('1', 'true', 'yes', 'on'),
     'string':   str,
     'integer':  int,
     'float':    float
@@ -138,7 +141,7 @@ def run(namespace=None, action_prefix='action_', args=None):
 
     try:
         optlist, posargs = getopt.gnu_getopt(args, formatstring, long_options)
-    except getopt.GetoptError, e:
+    except getopt.GetoptError as e:
         fail(str(e))
 
     specified_arguments = set()
@@ -168,7 +171,7 @@ def run(namespace=None, action_prefix='action_', args=None):
             fail('Invalid value for \'%s\': %s' % (key, value))
 
     newargs = {}
-    for k, v in arguments.iteritems():
+    for k, v in iteritems(arguments):
         newargs[k.startswith('no_') and k[3:] or k] = v
     arguments = newargs
     return func(**arguments)
@@ -176,14 +179,14 @@ def run(namespace=None, action_prefix='action_', args=None):
 
 def fail(message, code=-1):
     """Fail with an error."""
-    print >> sys.stderr, 'Error:', message
+    print('Error: %s' % message, file=sys.stderr)
     sys.exit(code)
 
 
 def find_actions(namespace, action_prefix):
     """Find all the actions in the namespace."""
     actions = {}
-    for key, value in namespace.iteritems():
+    for key, value in iteritems(namespace):
         if key.startswith(action_prefix):
             actions[key[len(action_prefix):]] = analyse_action(value)
     return actions
@@ -191,29 +194,28 @@ def find_actions(namespace, action_prefix):
 
 def print_usage(actions):
     """Print the usage information.  (Help screen)"""
-    actions = actions.items()
-    actions.sort()
-    print 'usage: %s <action> [<options>]' % basename(sys.argv[0])
-    print '       %s --help' % basename(sys.argv[0])
-    print
-    print 'actions:'
+    actions = sorted(iteritems(actions))
+    print('usage: %s <action> [<options>]' % basename(sys.argv[0]))
+    print('       %s --help' % basename(sys.argv[0]))
+    print()
+    print('actions:')
     for name, (func, doc, arguments) in actions:
-        print '  %s:' % name
+        print('  %s:' % name)
         for line in doc.splitlines():
-            print '    %s' % line
+            print('    %s' % line)
         if arguments:
-            print
+            print()
         for arg, shortcut, default, argtype in arguments:
             if isinstance(default, bool):
-                print '    %s' % (
+                print('    %s' % (
                     (shortcut and '-%s, ' % shortcut or '') + '--' + arg
-                )
+                ))
             else:
-                print '    %-30s%-10s%s' % (
+                print('    %-30s%-10s%s' % (
                     (shortcut and '-%s, ' % shortcut or '') + '--' + arg,
                     argtype, default
-                )
-        print
+                ))
+        print()
 
 
 def analyse_action(func):
@@ -257,6 +259,7 @@ def make_shell(init_func=None, banner=None, use_ipython=True):
         banner = 'Interactive Werkzeug Shell'
     if init_func is None:
         init_func = dict
+
     def action(ipython=use_ipython):
         """Start a new interactive python session."""
         namespace = init_func()
@@ -307,7 +310,9 @@ def make_runserver(app_factory, hostname='localhost', port=5000,
         """Start a new development server."""
         from werkzeug.serving import run_simple
         app = app_factory()
-        run_simple(hostname, port, app, reloader, debugger, evalex,
-                   extra_files, 1, threaded, processes,
+        run_simple(hostname, port, app,
+                   use_reloader=reloader, use_debugger=debugger,
+                   use_evalex=evalex, extra_files=extra_files,
+                   reloader_interval=1, threaded=threaded, processes=processes,
                    static_files=static_files, ssl_context=ssl_context)
     return action
