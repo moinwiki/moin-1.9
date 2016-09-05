@@ -7,7 +7,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.support import difflib
+import difflib
+
 from MoinMoin.wikiutil import escape
 
 def indent(line):

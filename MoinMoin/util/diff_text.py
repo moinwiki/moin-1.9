@@ -5,7 +5,7 @@
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-from MoinMoin.support import difflib
+import difflib
 
 def diff(oldlines, newlines, **kw):
     """
