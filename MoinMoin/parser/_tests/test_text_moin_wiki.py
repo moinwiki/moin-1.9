@@ -338,7 +338,7 @@ class TestEscapeWikiTableMarkup(ParserTestCase):
         self.do(test)
 
     def do(self, test):
-        expected = r'&lt;tablewidth="80"&gt;'
+        expected = r'&lt;tablewidth=&quot;80&quot;&gt;'
         result = self.parse(test)
         assert re.search(expected, result)
 
