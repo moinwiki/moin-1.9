@@ -13,7 +13,6 @@ import zipfile
 import time
 from datetime import datetime
 
-from MoinMoin.support.python_compatibility import set
 from MoinMoin import wikiutil
 from MoinMoin.action.AttachFile import _get_files
 from MoinMoin.Page import Page

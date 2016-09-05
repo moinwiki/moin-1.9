@@ -8,6 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import hashlib
 import re
 import os
 import sys
@@ -27,7 +28,6 @@ from MoinMoin.events import PageRevertedEvent, FileAttachedEvent
 import MoinMoin.web.session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
-from MoinMoin.support.python_compatibility import set
 
 _url_re_cache = None
 _farmconfig_mtime = None
@@ -626,7 +626,6 @@ also the spelling of the directory name.
         plugin packages as "moin_plugin_<sha1(path)>.plugin".
         """
         import imp
-        from MoinMoin.support.python_compatibility import hash_new
 
         plugin_dirs = [self.plugin_dir] + self.plugin_dirs
         self._plugin_modules = []
@@ -636,7 +635,7 @@ also the spelling of the directory name.
             imp.acquire_lock()
             try:
                 for pdir in plugin_dirs:
-                    csum = 'p_%s' % hash_new('sha1', pdir).hexdigest()
+                    csum = 'p_%s' % hashlib.new('sha1', pdir).hexdigest()
                     modname = '%s.%s' % (self.siteid, csum)
                     # If the module is not loaded, try to load it
                     if not modname in sys.modules:

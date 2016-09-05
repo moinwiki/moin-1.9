@@ -19,7 +19,6 @@ from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, NotAllowedException
 from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
-from MoinMoin.support.python_compatibility import set
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3, rpc_aggregator
 

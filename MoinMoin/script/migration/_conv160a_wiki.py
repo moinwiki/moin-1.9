@@ -21,7 +21,6 @@ i18n.wikiLanguages = lambda: {}
 from MoinMoin import config, macro, wikiutil
 from MoinMoin.action import AttachFile
 from MoinMoin.Page import Page
-from MoinMoin.support.python_compatibility import rsplit
 
 import wikiutil160a
 from text_moin160a_wiki import Parser
@@ -168,7 +167,7 @@ class Converter(Parser):
         return new_name
 
     def _replace_target(self, target):
-        target_and_anchor = rsplit(target, '#', 1)
+        target_and_anchor = target.rsplit('#', 1)
         if len(target_and_anchor) > 1:
             target, anchor = target_and_anchor
             target = self._replace(('PAGE', target))
