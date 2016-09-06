@@ -1,7 +1,5 @@
 """
-Enhanced subprocess.Popen subclass, supporting:
-    * .communicate() with timeout
-    * kill/terminate/send_signal (like in Py 2.6) for Py 2.4 / 2.5
+Enhanced subprocess.Popen subclass, supporting .communicate() with timeout.
 
 Sample usage:
     out, err = Popen(...).communicate(input, timeout=300)
@@ -10,54 +8,13 @@ Sample usage:
 import os
 import subprocess
 import threading
-import signal
 
-if subprocess.mswindows:
-    try:
-        # Python >= 2.6 should have this:
-        from _subprocess import TerminateProcess
-    except ImportError:
-        # otherwise you need win32 extensions:
-        from win32process import TerminateProcess
-else:
+if not subprocess.mswindows:
     import select
     import errno
 
+
 class Popen(subprocess.Popen):
-    # send_signal, terminate, kill copied from Python 2.6
-    # (we want to support Python >= 2.4)
-    if subprocess.mswindows:
-        def send_signal(self, sig):
-            """Send a signal to the process
-            """
-            if sig == signal.SIGTERM:
-                self.terminate()
-            else:
-                raise ValueError("Only SIGTERM is supported on Windows")
-
-        def terminate(self):
-            """Terminates the process
-            """
-            TerminateProcess(self._handle, 1)
-
-        kill = terminate
-
-    else: # POSIX
-        def send_signal(self, sig):
-            """Send a signal to the process
-            """
-            os.kill(self.pid, sig)
-
-        def terminate(self):
-            """Terminate the process with SIGTERM
-            """
-            self.send_signal(signal.SIGTERM)
-
-        def kill(self):
-            """Kill the process with SIGKILL
-            """
-            self.send_signal(signal.SIGKILL)
-
     def communicate(self, input=None, timeout=None):
         """Interact with process: Send data to stdin.  Read data from
         stdout and stderr, until end-of-file is reached.  Wait for
@@ -249,4 +206,3 @@ def exec_cmd(cmd, input=None, timeout=None):
 if __name__ == '__main__':
     print exec_cmd("python", "import time ; time.sleep(20) ; print 'never!' ;", timeout=10)
     print exec_cmd("python", "import time ; time.sleep(20) ; print '20s gone' ;")
-
