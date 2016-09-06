@@ -3,7 +3,7 @@
     MoinMoin - mod_wsgi driver script
 
     To use this, add those statements to your Apache's VirtualHost definition:
-    
+
     # you will invoke your moin wiki at the root url, like http://servername/FrontPage:
     WSGIScriptAlias / /some/path/moin.wsgi
 
@@ -25,7 +25,7 @@ import sys, os
 
 # a1) Path of the directory where the MoinMoin code package is located.
 #     Needed if you installed with --prefix=PREFIX or you didn't use setup.py.
-#sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
+#sys.path.insert(0, 'PREFIX/lib/python2.7/site-packages')
 
 # a2) Path of the directory where wikiconfig.py / farmconfig.py is located.
 #     See wiki/config/... for some sample config files.

@@ -11,11 +11,10 @@ HTML table.
 The main use of this script will be using the WSGI "application" defined
 below within your production WSGI environment. You will use some code similar
 to what you see at the end of this script to use the application from that
-environment. For the special case of apache2/mod_wsgi, it shoud be possible
+environment. For the special case of apache2/mod_wsgi, it should be possible
 to directly use this file.
 
-If you start this script from the commandline either with python2.5 or with
-and older python + wsgiref module installed, it will serve the content on
+If you start this script from the commandline, it will serve the content on
 http://localhost:8000/ - this is mainly for debugging THIS script.
 
 @copyright: 2008 by MoinMoin:ThomasWaldmann
