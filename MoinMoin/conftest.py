@@ -29,7 +29,6 @@ rootdir = py.magic.autopath().dirpath()
 moindir = rootdir.join("..")
 sys.path.insert(0, str(moindir))
 
-from MoinMoin.support.python_compatibility import set
 from MoinMoin.web.request import TestRequest, Client
 from MoinMoin.wsgiapp import Application, init
 from MoinMoin._tests import maketestwiki, wikiconfig

@@ -23,8 +23,6 @@ import traceback
 from time import sleep
 from StringIO import StringIO
 
-from MoinMoin.support.python_compatibility import set
-
 
 class AbstractMonitor(object):
     def activate_hook(self):

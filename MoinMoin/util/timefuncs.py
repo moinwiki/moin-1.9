@@ -8,7 +8,7 @@
 
 # we guarantee that time is always imported!
 import re, time
-from email.Utils import formatdate
+from email.utils import formatdate
 
 def tmtuple(tmsecs=None):
     """ Return a time tuple.

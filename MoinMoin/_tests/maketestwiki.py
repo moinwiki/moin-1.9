@@ -11,11 +11,10 @@ Usage:
 """
 
 import os, sys, shutil, errno
+import tarfile
 
 filename = globals().get("__file__") or sys.argv[0]
 moinpath = os.path.abspath(os.path.join(os.path.dirname(filename), os.pardir, os.pardir))
-
-from MoinMoin.support import tarfile
 
 WIKI = os.path.abspath(os.path.join(moinpath, 'tests', 'wiki'))
 SHARE = os.path.abspath(os.path.join(moinpath, 'wiki'))

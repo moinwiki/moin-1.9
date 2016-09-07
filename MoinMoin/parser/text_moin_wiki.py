@@ -15,7 +15,6 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
-from MoinMoin.support.python_compatibility import set
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 

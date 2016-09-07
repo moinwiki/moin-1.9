@@ -11,14 +11,13 @@
 
 import sys, re, time
 import email
-from email.Utils import getaddresses, parsedate_tz, mktime_tz
+from email.utils import getaddresses, parsedate_tz, mktime_tz
+from email.header import decode_header
 
 from MoinMoin import wikiutil, user
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-# python, at least up to 2.4, ships a broken parser for headers
-from MoinMoin.support.HeaderFixed import decode_header
 
 infile = sys.stdin
 
