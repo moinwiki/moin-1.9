@@ -132,7 +132,8 @@ class XmlRpcBase:
             else:
                 # overwrite any user there might be, if you need a valid user for
                 # xmlrpc, you have to use multicall and getAuthToken / applyAuthToken
-                request.user = user.User(request, auth_method='xmlrpc:invalid')
+                if request.cfg.xmlrpc_overwrite_user:
+                    request.user = user.User(request, auth_method='xmlrpc:invalid')
 
                 data = request.read()
 

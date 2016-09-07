@@ -16,13 +16,21 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.8:
+Version <not released yet>:
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
   Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
   HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
 
+  New features:
+  * cfg.xmlrpc_overwrite_user is a new setting to control whether the xmlrpc
+    code overwrites an already authenticated user before processing a request.
+    True (default): behaviour as in 1.9.8 and before
+    False: use this if you want to use GivenAuth (e.g. http basic auth) for
+           xmlrpc requests.
+
+Version 1.9.8:
   New features:
   * cfg.recovery_token_lifetime to determine how long the password recovery
     token will be valid, default is 12 [h]. Check this setting to be adequate
