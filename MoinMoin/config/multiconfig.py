@@ -1169,6 +1169,7 @@ options_no_group_name = {
     ('search_results_per_page', 25, "Number of hits shown per page in the search results"),
 
     ('siteid', 'default', None),
+    ('xmlrpc_overwrite_user', True, "Overwrite authenticated user at start of xmlrpc code"),
   )),
 }
 
