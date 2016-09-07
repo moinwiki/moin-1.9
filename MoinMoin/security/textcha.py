@@ -19,7 +19,7 @@
     @copyright: 2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-
+import hmac
 import re
 import random
 
@@ -30,7 +30,6 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil
 from werkzeug.security import safe_str_cmp as safe_str_equal
-from MoinMoin.support.python_compatibility import hmac_new
 
 SHA1_LEN = 40 # length of hexdigest
 TIMESTAMP_LEN = 10 # length of timestamp
@@ -85,7 +84,7 @@ class TextCha(object):
 
     def _compute_signature(self, question, timestamp):
         signature = u"%s%d" % (question, timestamp)
-        return hmac_new(self.secret, signature.encode('utf-8')).hexdigest()
+        return hmac.new(self.secret, signature.encode('utf-8')).hexdigest()
 
     def _init_qa(self, question=None):
         """ Initialize the question / answer.

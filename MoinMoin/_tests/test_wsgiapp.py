@@ -26,7 +26,7 @@ class TestApplication:
                 output = ''.join(appiter)
                 print output
                 assert status[:3] == '200'
-                assert ('Content-Type', 'text/html; charset=utf-8') in headers
+                assert ('Content-Type', 'text/html; charset=utf-8') in list(headers)
                 for needle in (DOC_TYPE, page):
                     assert needle in output
             yield _test_

@@ -32,7 +32,6 @@ import re
 from MoinMoin.util import pysupport
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.support.python_compatibility import set
 
 # create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)

@@ -15,7 +15,6 @@ logging = log.getLogger(__name__)
 
 from MoinMoin.Page import Page
 from MoinMoin.user import User, superusers
-from MoinMoin.support.python_compatibility import set
 from MoinMoin.action.AttachFile import getAttachUrl
 
 import MoinMoin.events.notification as notification

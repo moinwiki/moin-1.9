@@ -12,6 +12,7 @@
 
 import cgi
 import codecs
+import hmac
 import os
 import re
 import time
@@ -21,7 +22,6 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import config
-from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
 from MoinMoin import web # needed so that next lines work:
@@ -2472,7 +2472,7 @@ def split_anchor(pagename):
           pagename part (and no anchor). Also, we need to append #anchor
           at the END of the generated URL (AFTER the query string).
     """
-    parts = rsplit(pagename, '#', 1)
+    parts = pagename.rsplit('#', 1)
     if len(parts) == 2:
         return parts
     else:
@@ -2497,8 +2497,6 @@ def createTicket(request, tm=None, action=None, pagename=None):
                              page than the current one, you MUST specify the
                              page name you use when posting the form.
     """
-
-    from MoinMoin.support.python_compatibility import hmac_new
     if tm is None:
         # for age-check of ticket
         tm = "%010x" % time.time()
@@ -2531,9 +2529,9 @@ def createTicket(request, tm=None, action=None, pagename=None):
             value = value.encode('utf-8')
         hmac_data.append(value)
 
-    hmac = hmac_new(request.cfg.secrets['wikiutil/tickets'],
-                    ''.join(hmac_data))
-    return "%s.%s" % (tm, hmac.hexdigest())
+    h = hmac.new(request.cfg.secrets['wikiutil/tickets'],
+                 ''.join(hmac_data))
+    return "%s.%s" % (tm, h.hexdigest())
 
 
 def checkTicket(request, ticket):

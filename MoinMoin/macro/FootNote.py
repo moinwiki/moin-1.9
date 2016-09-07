@@ -9,10 +9,10 @@
                 2007 Johannes Berg
     @license: GNU GPL, see COPYING for details.
 """
+import hashlib
 
 from MoinMoin import config, wikiutil
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
-from MoinMoin.support.python_compatibility import hash_new
 
 Dependencies = ["time"] # footnote macro cannot be cached
 
@@ -33,7 +33,7 @@ def execute(macro, args):
         idx = request.footnote_ctr
         request.footnote_ctr += 1
 
-        shahex = hash_new('sha1', args.encode(config.charset)).hexdigest()
+        shahex = hashlib.new('sha1', args.encode(config.charset)).hexdigest()
         backlink_id = "fndef-%s-%d" % (shahex, idx)
         fwdlink_id = "fnref-%s" % shahex
 

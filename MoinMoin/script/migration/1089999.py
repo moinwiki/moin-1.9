@@ -14,8 +14,8 @@
 """
 
 import os, errno
+import tarfile
 
-from MoinMoin.support import tarfile
 from MoinMoin.action.AttachFile import getAttachDir
 
 

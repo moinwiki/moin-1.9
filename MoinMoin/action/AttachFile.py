@@ -29,6 +29,7 @@
 
 import os, time, zipfile, errno, datetime
 from StringIO import StringIO
+import tarfile
 
 from werkzeug import http_date
 
@@ -44,7 +45,6 @@ from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
 from MoinMoin.security.textcha import TextCha
 from MoinMoin.events import FileAttachedEvent, FileRemovedEvent, send_event
-from MoinMoin.support import tarfile
 
 action_name = __name__.split('.')[-1]
 

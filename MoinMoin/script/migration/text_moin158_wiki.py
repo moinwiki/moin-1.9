@@ -7,6 +7,7 @@
 """
 
 import os, re
+import hashlib
 from MoinMoin import config, wikiutil
 from MoinMoin import macro as wikimacro
 from MoinMoin.Page import Page
@@ -748,8 +749,6 @@ class Parser:
 
     def _heading_repl(self, word):
         """Handle section headings."""
-        from MoinMoin.support.python_compatibility import hash_new
-
         h = word.strip()
         level = 1
         while h[level:level+1] == '=':
@@ -768,7 +767,7 @@ class Parser:
         if self.titles[pntt] > 1:
             unique_id = '-%d' % self.titles[pntt]
         result = self._closeP()
-        result += self.formatter.heading(1, depth, id="head-"+hash_new('sha1', pntt.encode(config.charset)).hexdigest()+unique_id)
+        result += self.formatter.heading(1, depth, id="head-"+hashlib.new('sha1', pntt.encode(config.charset)).hexdigest()+unique_id)
 
         return (result + self.formatter.text(title_text) +
                 self.formatter.heading(0, depth))

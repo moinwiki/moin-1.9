@@ -13,8 +13,8 @@
 """
 
 import base64
+import hashlib
 import itertools
-from MoinMoin.support.python_compatibility import hash_new
 from pyxmpp.presence import Presence
 
 HASHALIASES = { # IANA Hash Function Textual Names Registry
@@ -45,7 +45,7 @@ def generate_ver(identities, features, algo='sha-1'):
     # only IANA aliases are supported
     if algo not in HASHALIASES:
         raise ValueError("undefined hash algorithm")
-    algo = hash_new(HASHALIASES[algo])
+    algo = hashlib.new(HASHALIASES[algo])
 
     ident = list(identities)
     # default sorting already considers both, category and type

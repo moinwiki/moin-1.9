@@ -17,9 +17,9 @@
 """
 
 import os, re, time
+import tarfile
 
 from MoinMoin import wikiutil
-from MoinMoin.support import tarfile
 
 
 def addFiles(path, tar, exclude_func):

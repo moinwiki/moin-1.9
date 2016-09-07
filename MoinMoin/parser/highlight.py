@@ -5,7 +5,7 @@
     @copyright: 2008 Radomir Dopieralski <moindev@sheep.art.pl>
     @license: GNU GPL, see COPYING for details.
 """
-
+import hashlib
 import re
 
 import pygments
@@ -16,7 +16,6 @@ from pygments.token import Token
 
 from MoinMoin import config, wikiutil
 from MoinMoin.parser import parse_start_step
-from MoinMoin.support.python_compatibility import hash_new
 from MoinMoin.Page import Page
 
 Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
@@ -161,7 +160,7 @@ class Parser:
             fmt.result.append(formatter.line_anchordef(lineno))
 
         fmt.result.append(formatter.div(1, css_class="highlight %s" % self.syntax))
-        self._code_id = hash_new('sha1', self.raw.encode(config.charset)).hexdigest()
+        self._code_id = hashlib.new('sha1', self.raw.encode(config.charset)).hexdigest()
         msg = None
         if self.filename is not None:
             try:
