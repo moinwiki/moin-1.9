@@ -76,12 +76,12 @@
 </cfif>
 
 <cfif isDefined("Config.ConfigAllowedCommands") and not ListFind(Config.ConfigAllowedCommands, url.command)>
-	<cfset SendUploadResults(1, "", "", "The """ & url.command & """ command isn't allowed")>
+	<cfset SendUploadResults(1, "", "", "The requested command isn't allowed")>
 	<cfabort>
 </cfif>
 
 <cfif isDefined("Config.ConfigAllowedTypes") and not ListFind(Config.ConfigAllowedTypes, url.type)>
-	<cfset SendUploadResults(1, "", "", "The """ & url.type &  """ type isn't allowed")>
+	<cfset SendUploadResults(1, "", "", "The requested type isn't allowed")>
 	<cfabort>
 </cfif>
 

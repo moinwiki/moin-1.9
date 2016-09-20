@@ -52,7 +52,7 @@ Sub DoResponse()
 
 	' Check if it is an allowed command
 	if ( Not IsAllowedCommand( sCommand ) ) then
-		SendError 1, "The """ & sCommand & """ command isn't allowed"
+		SendError 1, "The requested command isn't allowed"
 	end if
 
 	' Check if it is an allowed resource type.

@@ -1,4 +1,4 @@
-<cfsetting enablecfoutputonly="yes" showdebugoutput="no">
+﻿<cfsetting enablecfoutputonly="yes" showdebugoutput="no">
 <!---
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2010 Frederico Caldeira Knabben
@@ -58,7 +58,7 @@
 
 	<!--- Check if it is an allowed command --->
 	<cfif not IsAllowedCommand( sCommand ) >
-		<cfset SendError( 1, "The """ & sCommand & """ command isn't allowed" ) >
+		<cfset SendError( 1, "The requested command isn't allowed" ) >
 	</cfif>
 
 	<!--- Check if it is an allowed type. --->

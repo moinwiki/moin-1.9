@@ -103,6 +103,8 @@ sub IsCompatible
 	if(($sAgent =~ /MSIE/i) && !($sAgent =~ /mac/i) && !($sAgent =~ /Opera/i)) {
 		$iVersion = substr($sAgent,index($sAgent,'MSIE') + 5,3);
 		return($iVersion >= 5.5) ;
+	} elsif($sAgent =~ /Gecko\/\d+\.\d+/i) {
+		return true;
 	} elsif($sAgent =~ /Gecko\//i) {
 		$iVersion = substr($sAgent,index($sAgent,'Gecko/') + 6,8);
 		return($iVersion >= 20030210) ;

@@ -52,12 +52,12 @@ End If
 
 	' Is Upload enabled?
 	if ( Not IsAllowedCommand( sCommand ) ) then
-		SendUploadResults "1", "", "", "The """ & sCommand & """ command isn't allowed"
+		SendUploadResults "1", "", "", "The requested command isn't allowed"
 	end if
 
 	' Check if it is an allowed resource type.
 	if ( Not IsAllowedType( sResourceType ) ) Then
-		SendUploadResults "1", "", "", "The " & sResourceType & " resource type isn't allowed"
+		SendUploadResults "1", "", "", "The requested resource type isn't allowed"
 	end if
 
 	FileUpload sResourceType, sCurrentFolder, sCommand
