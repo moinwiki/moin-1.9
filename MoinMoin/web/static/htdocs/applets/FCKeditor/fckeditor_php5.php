@@ -54,6 +54,9 @@ function FCKeditor_IsCompatibleBrowser()
 	}
 	else if ( strpos($sAgent, 'Gecko/') !== false )
 	{
+		// Firefox 17+
+		if (preg_match("|Gecko/\d+\.\d+|", $sAgent))
+			return true;
 		$iVersion = (int)substr($sAgent, strpos($sAgent, 'Gecko/') + 6, 8) ;
 		return ($iVersion >= 20030210) ;
 	}

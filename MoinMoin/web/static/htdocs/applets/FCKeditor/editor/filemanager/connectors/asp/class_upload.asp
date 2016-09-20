@@ -280,10 +280,10 @@ Class NetRube_Upload
 		oRE.Global		= True
 
 		If sDenied = "" Then
-			oRE.Pattern	= sAllowed
+			oRE.Pattern	= "^(" & sAllowed & ")$"
 			IsAllowed	= (sAllowed = "") Or oRE.Test(sExt)
 		Else
-			oRE.Pattern	= sDenied
+			oRE.Pattern	= "^(" & sDenied & ")$"
 			IsAllowed	= Not oRE.Test(sExt)
 		End If
 
@@ -299,7 +299,7 @@ Class NetRube_Upload
 		Set oRE = New RegExp
 		oRE.IgnoreCase	= True
 		oRE.Global		= True
-		oRE.Pattern		= sHtmlExtensions
+		oRE.Pattern		= "^(" & sHtmlExtensions & ")$"
 
 		IsHtmlExtension = oRE.Test(sExt)
 

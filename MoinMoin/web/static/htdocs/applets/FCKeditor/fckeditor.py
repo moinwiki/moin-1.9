@@ -119,6 +119,8 @@ class FCKeditor(object):
 				return True
 			return False
 		elif (sAgent.find("Gecko/") >= 0):
+			if (re.search(r'Gecko\/\d+\.\d+', sAgent)):
+				return True
 			i = sAgent.find("Gecko/")
 			iVersion = int(sAgent[i+6:i+6+8])
 			if (iVersion >= 20030210):

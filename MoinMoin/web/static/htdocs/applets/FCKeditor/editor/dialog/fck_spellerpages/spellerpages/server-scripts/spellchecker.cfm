@@ -18,7 +18,11 @@ others files in certain cases.
 <cfset spellercss   = "../spellerStyle.css">
 <cfset word_win_src = "../wordWindow.js">
 
-<cfset form.checktext = form["textinputs[]"]>
+<cfif StructKeyExists(form, 'textinputs[]')>
+	<cfset form.checktext = form["textinputs[]"]>
+<cfelse>
+	<cfabort>
+</cfif>
 
 <!--- make no difference between URL and FORM scopes --->
 <cfparam name="url.checktext"  default="">

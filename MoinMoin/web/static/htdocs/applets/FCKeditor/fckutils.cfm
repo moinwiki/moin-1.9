@@ -31,7 +31,7 @@ function FCKeditor_IsCompatibleBrowser()
 	if( find( "msie", sAgent ) and not find( "mac", sAgent ) and not find( "opera", sAgent ) )
 	{
 		// try to extract IE version
-		stResult = reFind( "msie ([5-9]\.[0-9])", sAgent, 1, true );
+		stResult = reFind( "msie ([0-9]+\.[0-9]+)", sAgent, 1, true );
 		if( arrayLen( stResult.pos ) eq 2 )
 		{
 			// get IE Version
@@ -40,7 +40,7 @@ function FCKeditor_IsCompatibleBrowser()
 				isCompatibleBrowser = true;
 		}
 	}
-	// check for Gecko ( >= 20030210+ )
+	// check for Gecko ( >= 20030210+ OR >= 17.0 )
 	else if( find( "gecko/", sAgent ) )
 	{
 		// try to extract Gecko version date
@@ -50,6 +50,12 @@ function FCKeditor_IsCompatibleBrowser()
 			// get Gecko build (i18n date)
 			sBrowserVersion = mid( sAgent, stResult.pos[2], stResult.len[2] );
 			if( sBrowserVersion GTE 20030210 )
+				isCompatibleBrowser = true;
+		}
+		stResult = reFind( "gecko/([0-9]+\.[0-9]+)", sAgent, 1, true );
+		if( arrayLen( stResult.pos ) eq 2 )
+		{
+			if ( mid( sAgent, stResult.pos[2], stResult.len[2] ) gte 17.0)
 				isCompatibleBrowser = true;
 		}
 	}

@@ -117,6 +117,9 @@ QuickUploadPath = {}; QuickUploadAbsolutePath = {};
 #		Attention: The above 'QuickUploadPath' must point to the same directory.
 #		Attention: It must end with a slash: '/'
 
+# WARNING: It is recommended to remove swf extension from the list of allowed extensions.
+# SWF files can be used to perform XSS attack.
+
 AllowedExtensions['File'] 		= ['7z','aiff','asf','avi','bmp','csv','doc','fla','flv','gif','gz','gzip','jpeg','jpg','mid','mov','mp3','mp4','mpc','mpeg','mpg','ods','odt','pdf','png','ppt','pxd','qt','ram','rar','rm','rmi','rmvb','rtf','sdc','sitd','swf','sxc','sxw','tar','tgz','tif','tiff','txt','vsd','wav','wma','wmv','xls','xml','zip']
 DeniedExtensions['File'] 		= []
 FileTypesPath['File'] 			= UserFilesPath + 'file/'
