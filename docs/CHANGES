@@ -16,19 +16,42 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version <not released yet>:
+Version 1.9.9rc1:
+
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
   Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
-  HINT: Python >= 2.5 is maybe required! See docs/REQUIREMENTS for details.
+  HINT: Python 2.7 is required! See docs/REQUIREMENTS for details.
+
+  Fixes:
+  * add meta "viewport" for small device viewports
+  * add meta X-UA-Compatible IE=Edge, make IE happy on intranets
 
   New features:
+  * AttachFile multifile operation: support copying multiple files to another page
   * cfg.xmlrpc_overwrite_user is a new setting to control whether the xmlrpc
     code overwrites an already authenticated user before processing a request.
     True (default): behaviour as in 1.9.8 and before
     False: use this if you want to use GivenAuth (e.g. http basic auth) for
            xmlrpc requests.
+
+  Other changes:
+  * upgraded bundled 3rd party code:
+    * werkzeug 0.11.11
+    * passlib 1.6.5
+    * pygments 2.1.3
+    * parsedatetime 2.1
+    * FCKEditor 2.6.11
+  * removed some bundled stuff we needed due to stdlib issues in older Pythons:
+    * MoinMoin.support.difflib
+    * MoinMoin.support.tarfile
+    * MoinMoin.support.HeaderFixed (-> email.header)
+  * SubProcess: reimplement exec_cmd, remove our stdlib hacks
+  * remove own usage of python_compatibility module which we needed to support
+    older Pythons. the module is still there, in case some 3rd party moin
+    extensions used it.
+
 
 Version 1.9.8:
   New features:
