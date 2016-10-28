@@ -527,7 +527,7 @@ function checkAll(bx, targets_name) {
             delete=_("delete"),
             move=_("move to page"),
             copy=_("copy to page"),
-            pagename=pagename,
+            pagename=wikiutil.escape(pagename),
             submit=_("Do it."),
 ))
         html.append("</form>")
