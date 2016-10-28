@@ -381,7 +381,7 @@ def attachment_dialog(request):
     requestedPagename = wikiutil.escape(request.values.get("requestedPagename", ""), quote=True)
     destinationPagename = wikiutil.escape(request.values.get("destinationPagename", request.page.page_name), quote=True)
 
-    attachmentsPagename = requestedPagename or request.page.page_name
+    attachmentsPagename = requestedPagename or wikiutil.escape(request.page.page_name)
     attachments = _get_files(request, attachmentsPagename)
     attachments.sort()
     attachmentList = '''
