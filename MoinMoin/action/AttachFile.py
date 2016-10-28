@@ -494,7 +494,7 @@ function checkAll(bx, targets_name) {
                         links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
                                      fmt.text(label_unzip) +
                                      fmt.url(0))
-            except (RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile):
+            except (IOError, RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile):
                 # We don't want to crash with a traceback here (an exception
                 # here could be caused by an uploaded defective zip file - and
                 # if we crash here, the user does not get a UI to remove the
@@ -504,7 +504,8 @@ function checkAll(bx, targets_name) {
                 # archive).
                 # BadZipfile/LargeZipFile are raised when there are some
                 # specific problems with the archive file.
-                logging.exception("An exception within zip file attachment handling occurred:")
+                logging.exception("An exception within zip file attachment [%r:%r] handling occurred:" % (
+                     pagename, file))
 
             html.append(fmt.listitem(1))
             html.append("[%s]" % "&nbsp;| ".join(links))
@@ -1178,7 +1179,7 @@ def _do_unzip(pagename, request, overwrite=False):
                         'filelist': ', '.join(not_overwritten), }
             else:
                 msg = _("Attachment '%(filename)s' unzipped.") % {'filename': filename}
-    except (RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile), err:
+    except (IOError, RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile), err:
         # We don't want to crash with a traceback here (an exception
         # here could be caused by an uploaded defective zip file - and
         # if we crash here, the user does not get a UI to remove the
@@ -1188,7 +1189,8 @@ def _do_unzip(pagename, request, overwrite=False):
         # archive).
         # BadZipfile/LargeZipFile are raised when there are some
         # specific problems with the archive file.
-        logging.exception("An exception within zip file attachment handling occurred:")
+        logging.exception("An exception within zip file attachment [%r:%r] handling occurred:" % (
+            pagename, filename))
         msg = _("A severe error occurred:") + ' ' + str(err)
 
     upload_form(pagename, request, msg=msg)
@@ -1259,7 +1261,7 @@ def send_viewfile(pagename, request):
                 request.write(wikiutil.escape("%-46s %s %12d\n" % (zinfo.filename, date, zinfo.file_size)))
             request.write("</pre>")
             return
-    except (RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile):
+    except (IOError, RuntimeError, zipfile.BadZipfile, zipfile.LargeZipFile):
         # We don't want to crash with a traceback here (an exception
         # here could be caused by an uploaded defective zip file - and
         # if we crash here, the user does not get a UI to remove the
@@ -1269,7 +1271,8 @@ def send_viewfile(pagename, request):
         # archive).
         # BadZipfile/LargeZipFile are raised when there are some
         # specific problems with the archive file.
-        logging.exception("An exception within zip file attachment handling occurred:")
+        logging.exception("An exception within zip file attachment [%r:%r] handling occurred:" % (
+            pagename, filename))
         return
 
     from MoinMoin import macro
