@@ -16,13 +16,26 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.9rc1:
+Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
   Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
 
   HINT: Python 2.7 is required! See docs/REQUIREMENTS for details.
+
+  Fixes:
+  * security: fix XSS in AttachFile view (multifile related) CVE-2016-7148
+  * security: fix XSS in GUI editor's attachment dialogue CVE-2016-7146
+  * security: fix XSS in GUI editor's link dialogue CVE-2016-9119
+  * catch IOError for zipfile errors (sometimes triggered by zipfile.is_zipfile
+    false positives, see http://bugs.python.org/issue28494 ).
+
+  Other changes:
+  * update moin.spec, setup.py: py27 only
+
+
+Version 1.9.9rc1:
 
   Fixes:
   * add meta "viewport" for small device viewports
