@@ -198,7 +198,7 @@ def page_list(request):
 </table>
 </body>
 </html>
-''' % "".join(["<option>%s</option>\n" % p for p in pages]))
+''' % "".join(["<option>%s</option>\n" % wikiutil.escape(p) for p in pages]))
 
 def link_dialog(request):
     # list of wiki pages
@@ -219,7 +219,7 @@ def link_dialog(request):
            </select>
           <td>
          </tr>
-''' % "\n".join(['<option value="%s">%s</option>' % (page, page)
+''' % "\n".join(['<option value="%s">%s</option>' % (wikiutil.escape(page), wikiutil.escape(page))
                  for page in pages])
     else:
         page_list = ""
@@ -237,13 +237,14 @@ def link_dialog(request):
     else:
         resultlist = iwpreferred[:-1]
     interwiki = "\n".join(
-        ['<option value="%s">%s</option>' % (key, key) for key in resultlist])
+        ['<option value="%s">%s</option>' % (wikiutil.escape(key), wikiutil.escape(key))
+         for key in resultlist])
 
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
     scriptname = request.script_root + '/'
     action = scriptname
-    basepage = request.page.page_name
+    basepage = wikiutil.escape(request.page.page_name)
     request.write(u'''
 <!--
  * FCKeditor - The text editor for internet
