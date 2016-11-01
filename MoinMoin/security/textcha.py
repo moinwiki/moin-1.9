@@ -19,7 +19,7 @@
     @copyright: 2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import hmac
+import hmac, hashlib
 import re
 import random
 
@@ -84,7 +84,7 @@ class TextCha(object):
 
     def _compute_signature(self, question, timestamp):
         signature = u"%s%d" % (question, timestamp)
-        return hmac.new(self.secret, signature.encode('utf-8')).hexdigest()
+        return hmac.new(self.secret, signature.encode('utf-8'), digestmod=hashlib.sha1).hexdigest()
 
     def _init_qa(self, question=None):
         """ Initialize the question / answer.
