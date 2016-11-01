@@ -1260,7 +1260,7 @@ class User:
     def generate_recovery_token(self):
         key = random_string(64, "abcdefghijklmnopqrstuvwxyz0123456789")
         msg = str(int(time.time()))
-        h = hmac.new(key, msg).hexdigest()
+        h = hmac.new(key, msg, digestmod=hashlib.sha1).hexdigest()
         self.recoverpass_key = key
         self.save()
         return msg + '-' + h
@@ -1278,7 +1278,7 @@ class User:
             return False
         # check hmac
         # key must be of type string
-        h = hmac.new(str(self.recoverpass_key), str(stamp)).hexdigest()
+        h = hmac.new(str(self.recoverpass_key), str(stamp), digestmod=hashlib.sha1).hexdigest()
         if not safe_str_equal(h, parts[1]):
             return False
         self.recoverpass_key = ""

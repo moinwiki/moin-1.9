@@ -28,7 +28,7 @@
 """
 
 from datetime import datetime
-import hmac
+import hmac, hashlib
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -99,7 +99,7 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
         raise AssertionError('cache_key called with unsupported parameters')
 
     hmac_data = hmac_data.encode('utf-8')
-    key = hmac.new(secret, hmac_data).hexdigest()
+    key = hmac.new(secret, hmac_data, digestmod=hashlib.sha1).hexdigest()
     return key
 
 

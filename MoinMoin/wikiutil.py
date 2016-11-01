@@ -12,7 +12,7 @@
 
 import cgi
 import codecs
-import hmac
+import hmac, hashlib
 import os
 import re
 import time
@@ -2530,7 +2530,7 @@ def createTicket(request, tm=None, action=None, pagename=None):
         hmac_data.append(value)
 
     h = hmac.new(request.cfg.secrets['wikiutil/tickets'],
-                 ''.join(hmac_data))
+                 ''.join(hmac_data), digestmod=hashlib.sha1)
     return "%s.%s" % (tm, h.hexdigest())
 
 
