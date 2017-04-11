@@ -1,11 +1,10 @@
-"""passlib.utils._blowfish.base - unoptimized pure-python blowfish engine"""
+"""passlib.crypto._blowfish.base - unoptimized pure-python blowfish engine"""
 #=============================================================================
 # imports
 #=============================================================================
 # core
 import struct
 # pkg
-from passlib.utils.compat import bytes
 from passlib.utils import repeat_string
 # local
 __all__ = [
