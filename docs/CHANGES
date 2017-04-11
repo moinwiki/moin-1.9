@@ -23,6 +23,7 @@ Version 1.9.10rc1 2017-04-xx
 
   Other changes:
   * upgrade werkzeug to 0.12.1
+  * upgrade passlib to 1.7.1
 
 
 Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
