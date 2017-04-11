@@ -105,7 +105,7 @@ minimum: 0.8.7(?)
 
 werkzeug (WSGI toolkit)
 =======================
-shipped: 0.11.11
+shipped: 0.12.1
 minimum: 0.7.0
 
 
