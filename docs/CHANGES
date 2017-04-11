@@ -16,6 +16,15 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.9.10rc1 2017-04-xx
+
+  Fixes:
+  * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
+
+  Other changes:
+  * upgrade werkzeug to 0.12.1
+
+
 Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
