@@ -16,13 +16,13 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.10rc1 2017-04-xx
+Version 1.9.10rc1 2017-06-xx
 
   Fixes:
   * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
 
   Other changes:
-  * upgrade werkzeug to 0.12.1
+  * upgrade werkzeug to 0.12.2
   * upgrade passlib to 1.7.1
 
 
