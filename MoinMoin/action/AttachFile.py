@@ -572,7 +572,7 @@ def _do_multifile(pagename, request):
                 new_pagename=dest_pagename,
                 new_filename=u'*')
         if fails:
-            msg += " " + _("Failed: %s", ", ".join(fails))
+            msg += " " + _("Failed: %s") % ", ".join(fails)
         return upload_form(pagename, request, msg=msg)
     if action == 'cp':
         dest_pagename = request.form.get('multi_dest_pagename')
@@ -589,7 +589,7 @@ def _do_multifile(pagename, request):
                 new_pagename=dest_pagename,
                 new_filename=u'*')
         if fails:
-            msg += " " + _("Failed: %s", ", ".join(fails))
+            msg += " " + _("Failed: %s") % ", ".join(fails)
         return upload_form(pagename, request, msg=msg)
     return u'unsupported multifile operation'
 
