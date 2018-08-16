@@ -99,13 +99,13 @@ minimum: 1.1.1 will work, maybe even older versions
 
 parsedatetime (parse date/time strings)
 =======================================
-shipped: 2.1
+shipped: 2.4
 minimum: 0.8.7(?)
 
 
 werkzeug (WSGI toolkit)
 =======================
-shipped: 0.12.1
+shipped: 0.14.1
 minimum: 0.7.0
 
 
