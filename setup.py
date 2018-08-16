@@ -208,10 +208,10 @@ setup_args = {
     'version': release,
     'description': "MoinMoin %s is an easy to use, full-featured and extensible wiki software package" % (release, ),
     'author': "Juergen Hermann et al.",
-    'author_email': "moin-user@lists.sourceforge.net",
+    'author_email': "moin-user@python.org",
     # maintainer(_email) not active because distutils/register can't handle author and maintainer at once
-    'download_url': 'http://static.moinmo.in/files/moin-%s.tar.gz' % (release, ),
-    'url': "http://moinmo.in/",
+    'download_url': 'https://static.moinmo.in/files/moin-%s.tar.gz' % (release, ),
+    'url': "https://moinmo.in/",
     'license': "GNU GPL",
     'long_description': """
     MoinMoin is an easy to use, full-featured and extensible wiki software
@@ -367,4 +367,3 @@ called "python%d.%d-dev(el)".
 Please contact the system administrator to have it installed.
 """ % sys.version_info[:2]
         sys.exit(1)
-
