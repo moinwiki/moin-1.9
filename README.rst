@@ -3,7 +3,7 @@ MoinMoin - a wiki engine in Python
 
 Copyright (c) 2000-2006 by Juergen Hermann <jh@web.de>
 Copyright (c) 2006-2016 The MoinMoin development team, see
-                        http://moinmo.in/MoinCoreTeamGroup
+https://moinmo.in/MoinCoreTeamGroup
 
 All rights reserved, see docs/licenses/COPYING for details.
 
@@ -27,8 +27,7 @@ Documentation
 
 On the Web:
 
-http://purl.net/wiki/moin/       MoinMoin homepage, last seen at:
-                                 http://moinmo.in/
+MoinMoin homepage, last seen at: https://moinmo.in/
 
 This page also points to support resources and informations about MoinMoin
 development status and plans.
