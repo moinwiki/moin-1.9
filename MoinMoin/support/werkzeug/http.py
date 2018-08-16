@@ -17,6 +17,7 @@
     :license: BSD, see LICENSE for more details.
 """
 import re
+import warnings
 from time import time, gmtime
 try:
     from email.utils import parsedate_tz
@@ -61,12 +62,30 @@ _token_chars = frozenset("!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                          '^_`abcdefghijklmnopqrstuvwxyz|~')
 _etag_re = re.compile(r'([Ww]/)?(?:"(.*?)"|(.*?))(?:\s*,\s*|$)')
 _unsafe_header_chars = set('()<>@,;:\"/[]?={} \t')
-_quoted_string_re = r'"[^"\\]*(?:\\.[^"\\]*)*"'
-_option_header_piece_re = re.compile(
-    r';\s*(%s|[^\s;,=\*]+)\s*'
-    r'(?:\*?=\s*(?:([^\s]+?)\'([^\s]*?)\')?(%s|[^;,]+)?)?\s*' %
-    (_quoted_string_re, _quoted_string_re)
-)
+_option_header_piece_re = re.compile(r'''
+    ;\s*
+    (?P<key>
+        "[^"\\]*(?:\\.[^"\\]*)*"  # quoted string
+    |
+        [^\s;,=*]+  # token
+    )
+    \s*
+    (?:  # optionally followed by =value
+        (?:  # equals sign, possibly with encoding
+            \*\s*=\s*  # * indicates extended notation
+            (?P<encoding>[^\s]+?)
+            '(?P<language>[^\s]*?)'
+        |
+            =\s*  # basic notation
+        )
+        (?P<value>
+            "[^"\\]*(?:\\.[^"\\]*)*"  # quoted string
+        |
+            [^;,]+  # token
+        )?
+    )?
+    \s*
+''', flags=re.VERBOSE)
 _option_header_start_mime_type = re.compile(r',\s*([^;,\s]+)([;,]\s*.+)?')
 
 _entity_headers = frozenset([
@@ -284,7 +303,7 @@ def parse_list_header(value):
 def parse_dict_header(value, cls=dict):
     """Parse lists of key, value pairs as described by RFC 2068 Section 2 and
     convert them into a python dict (or any other mapping object created from
-    the type with a dict like interface provided by the `cls` arugment):
+    the type with a dict like interface provided by the `cls` argument):
 
     >>> d = parse_dict_header('foo="is a fish", bar="as well"')
     >>> type(d) is dict
@@ -781,6 +800,49 @@ def http_date(timestamp=None):
     return _dump_date(timestamp, ' ')
 
 
+def parse_age(value=None):
+    """Parses a base-10 integer count of seconds into a timedelta.
+
+    If parsing fails, the return value is `None`.
+
+    :param value: a string consisting of an integer represented in base-10
+    :return: a :class:`datetime.timedelta` object or `None`.
+    """
+    if not value:
+        return None
+    try:
+        seconds = int(value)
+    except ValueError:
+        return None
+    if seconds < 0:
+        return None
+    try:
+        return timedelta(seconds=seconds)
+    except OverflowError:
+        return None
+
+
+def dump_age(age=None):
+    """Formats the duration as a base-10 integer.
+
+    :param age: should be an integer number of seconds,
+                a :class:`datetime.timedelta` object, or,
+                if the age is unknown, `None` (default).
+    """
+    if age is None:
+        return
+    if isinstance(age, timedelta):
+        # do the equivalent of Python 2.7's timedelta.total_seconds(),
+        # but disregarding fractional seconds
+        age = age.seconds + (age.days * 24 * 3600)
+
+    age = int(age)
+    if age < 0:
+        raise ValueError('age cannot be negative')
+
+    return str(age)
+
+
 def is_resource_modified(environ, etag=None, data=None, last_modified=None,
                          ignore_if_range=True):
     """Convenience method for conditional requests.
@@ -836,6 +898,13 @@ def is_resource_modified(environ, etag=None, data=None, last_modified=None,
                 # "A recipient MUST use the weak comparison function when comparing
                 # entity-tags for If-None-Match"
                 unmodified = if_none_match.contains_weak(etag)
+
+            # https://tools.ietf.org/html/rfc7232#section-3.1
+            # "Origin server MUST use the strong comparison function when
+            # comparing entity-tags for If-Match"
+            if_match = parse_etags(environ.get('HTTP_IF_MATCH'))
+            if if_match:
+                unmodified = not if_match.is_strong(etag)
 
     return not unmodified
 
@@ -937,7 +1006,8 @@ def parse_cookie(header, charset='utf-8', errors='replace', cls=None):
 
 def dump_cookie(key, value='', max_age=None, expires=None, path='/',
                 domain=None, secure=False, httponly=False,
-                charset='utf-8', sync_expires=True):
+                charset='utf-8', sync_expires=True, max_size=4093,
+                samesite=None):
     """Creates a new Set-Cookie header without the ``Set-Cookie`` prefix
     The parameters are the same as in the cookie Morsel object in the
     Python standard library but it accepts unicode data, too.
@@ -973,6 +1043,13 @@ def dump_cookie(key, value='', max_age=None, expires=None, path='/',
     :param charset: the encoding for unicode values.
     :param sync_expires: automatically set expires if max_age is defined
                          but expires not.
+    :param max_size: Warn if the final header value exceeds this size. The
+        default, 4093, should be safely `supported by most browsers
+        <cookie_>`_. Set to 0 to disable this check.
+    :param samesite: Limits the scope of the cookie such that it will only
+                     be attached to requests if those requests are "same-site".
+
+    .. _`cookie`: http://browsercookielimits.squawky.net/
     """
     key = to_bytes(key, charset)
     value = to_bytes(value, charset)
@@ -988,6 +1065,10 @@ def dump_cookie(key, value='', max_age=None, expires=None, path='/',
     elif max_age is not None and sync_expires:
         expires = to_bytes(cookie_date(time() + max_age))
 
+    samesite = samesite.title() if samesite else None
+    if samesite not in ('Strict', 'Lax', None):
+        raise ValueError("invalid SameSite value; must be 'Strict', 'Lax' or None")
+
     buf = [key + b'=' + _cookie_quote(value)]
 
     # XXX: In theory all of these parameters that are not marked with `None`
@@ -998,7 +1079,8 @@ def dump_cookie(key, value='', max_age=None, expires=None, path='/',
                     (b'Max-Age', max_age, False),
                     (b'Secure', secure, None),
                     (b'HttpOnly', httponly, None),
-                    (b'Path', path, False)):
+                    (b'Path', path, False),
+                    (b'SameSite', samesite, False)):
         if q is None:
             if v:
                 buf.append(k)
@@ -1021,6 +1103,28 @@ def dump_cookie(key, value='', max_age=None, expires=None, path='/',
     rv = b'; '.join(buf)
     if not PY2:
         rv = rv.decode('latin1')
+
+    # Warn if the final value of the cookie is less than the limit. If the
+    # cookie is too large, then it may be silently ignored, which can be quite
+    # hard to debug.
+    cookie_size = len(rv)
+
+    if max_size and cookie_size > max_size:
+        value_size = len(value)
+        warnings.warn(
+            'The "{key}" cookie is too large: the value was {value_size} bytes'
+            ' but the header required {extra_size} extra bytes. The final size'
+            ' was {cookie_size} bytes but the limit is {max_size} bytes.'
+            ' Browsers may silently ignore cookies larger than this.'.format(
+                key=key,
+                value_size=value_size,
+                extra_size=cookie_size - value_size,
+                cookie_size=cookie_size,
+                max_size=max_size
+            ),
+            stacklevel=2
+        )
+
     return rv
 
 
