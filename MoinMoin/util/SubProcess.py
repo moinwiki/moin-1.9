@@ -16,10 +16,6 @@ def exec_cmd(cmd, stdin=None, timeout=None):
     Execute a shell <cmd>, send <stdin> to it, kill it after <timeout> if it
     is still running. Return stdout, stderr, rc.
     """
-    def preexec_fn():
-        if not subprocess.mswindows:
-            os.setsid()  # start a new session
-
     def kill_it(p):
         if not subprocess.mswindows:
             # kills all the processes of the session,
@@ -31,7 +27,8 @@ def exec_cmd(cmd, stdin=None, timeout=None):
     p = subprocess.Popen(cmd, shell=True,
                          close_fds=not subprocess.mswindows,
                          bufsize=1024,
-                         preexec_fn=preexec_fn,
+                         # start a new session (preexec_fn is UNIX only)
+                         preexec_fn=None if subprocess.mswindows else os.setsid(),
                          stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
