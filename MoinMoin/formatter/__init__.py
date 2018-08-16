@@ -131,7 +131,9 @@ class FormatterBase:
         Parser = wikiutil.getParserForExtension(self.request.cfg, ext)
         if Parser is not None:
             try:
-                content = file(fpath, 'r').read()
+                # rU: universal newline support so that even a \r is considered a valid line separator.
+                # CSV exported by office (on Mac?) has \r line separators.
+                content = file(fpath, 'rU').read()
                 # Try to decode text. It might return junk, but we don't
                 # have enough information with attachments.
                 content = wikiutil.decodeUnknownInput(content)
