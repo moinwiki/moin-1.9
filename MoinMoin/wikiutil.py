@@ -177,7 +177,10 @@ def quoteWikinameURL(pagename, charset=config.charset):
     return werkzeug.url_quote(pagename, charset=charset, safe='/')
 
 
-escape = werkzeug.escape
+def escape(s, quote=None):
+    if not isinstance(s, (str, unicode)):
+        s = str(s)
+    return cgi.escape(s, quote)
 
 
 def clean_input(text, max_len=201):
