@@ -42,9 +42,9 @@ from .warns import pdt20DeprecationWarning
 
 __author__ = 'Mike Taylor'
 __email__ = 'bear@bear.im'
-__copyright__ = 'Copyright (c) 2016 Mike Taylor'
+__copyright__ = 'Copyright (c) 2017 Mike Taylor'
 __license__ = 'Apache License 2.0'
-__version__ = '2.1'
+__version__ = '2.4'
 __url__ = 'https://github.com/bear/parsedatetime'
 __download_url__ = 'https://pypi.python.org/pypi/parsedatetime'
 __description__ = 'Parse human-readable date/time text.'
@@ -915,7 +915,8 @@ class Calendar(object):
                 # day-of-week, we want to start with target as the day
                 # in the current week.
                 dowOffset = offset
-                if modifier not in ['next', 'last', 'prior', 'previous']:
+                relativeModifier = modifier not in ['this', 'next', 'last', 'prior', 'previous']
+                if relativeModifier:
                     dowOffset = 0
 
                 wkdy = self.ptc.WeekdayOffsets[wkdy]
@@ -926,7 +927,7 @@ class Calendar(object):
                                           startMinute, startSecond)
                 target = start + datetime.timedelta(days=diff)
 
-                if chunk1 != '':
+                if chunk1 != '' and relativeModifier:
                     # consider "one day before thursday": we need to parse chunk1 ("one day")
                     # and apply according to the offset ("before"), rather than allowing the
                     # remaining parse step to apply "one day" without the offset direction.
@@ -939,7 +940,7 @@ class Calendar(object):
                 sourceTime = target.timetuple()
             ctx.updateAccuracy(ctx.ACU_DAY)
 
-        elif self.ptc.CRE_TIME.match(unit):
+        elif chunk1 == '' and chunk2 == '' and self.ptc.CRE_TIME.match(unit):
             m = self.ptc.CRE_TIME.match(unit)
             debug and log.debug('CRE_TIME matched')
             (yr, mth, dy, hr, mn, sec, wd, yd, isdst), subctx = \
@@ -1576,6 +1577,9 @@ class Calendar(object):
         parseStr = None
         chunk1 = chunk2 = ''
 
+        ctx = self.currentContext
+        log.debug('eval %s with context - %s, %s', s, ctx.hasDate, ctx.hasTime)
+
         # Weekday
         m = self.ptc.CRE_WEEKDAY.search(s)
         if m is not None:
@@ -1592,7 +1596,7 @@ class Calendar(object):
                     parseStr = s
                     s = ''
 
-        if parseStr:
+        if parseStr and not ctx.hasDate:
             debug and log.debug(
                 'found (weekday) [%s][%s][%s]', parseStr, chunk1, chunk2)
             sourceTime = self._evalWeekday(parseStr, sourceTime)
@@ -2402,12 +2406,13 @@ class Constants(object):
                         adjusted.append(d)
                 return adjusted
 
+            def re_join(g):
+                return '|'.join(re.escape(i) for i in g)
+
             mths = _getLocaleDataAdjusted(self.locale.Months)
             smths = _getLocaleDataAdjusted(self.locale.shortMonths)
             swds = _getLocaleDataAdjusted(self.locale.shortWeekdays)
             wds = _getLocaleDataAdjusted(self.locale.Weekdays)
-
-            re_join = lambda g: '|'.join(re.escape(i) for i in g)
 
             # escape any regex special characters that may be found
             self.locale.re_values['months'] = re_join(mths)
@@ -2471,11 +2476,11 @@ class Constants(object):
                                         (?P<day>\d\d?)
                                         (?P<suffix>{daysuffix})?
                                         (,)?
-                                        (\s)?
+                                        (\s)*
                                     )
                                     (?P<mthname>
                                         \b({months}|{shortmonths})\b
-                                    )\s?
+                                    )\s*
                                     (?P<year>\d\d
                                         (\d\d)?
                                     )?
@@ -2491,17 +2496,17 @@ class Constants(object):
         # when the day is absent from the string
         self.RE_DATE3 = r'''(?P<date>
                                 (?:
-                                    (?:^|\s)
+                                    (?:^|\s+)
                                     (?P<mthname>
                                         {months}|{shortmonths}
                                     )\b
                                     |
-                                    (?:^|\s)
+                                    (?:^|\s+)
                                     (?P<day>[1-9]|[012]\d|3[01])
                                     (?P<suffix>{daysuffix}|)\b
                                     (?!\s*(?:{timecomponents}))
                                     |
-                                    ,?\s
+                                    ,?\s+
                                     (?P<year>\d\d(?:\d\d|))\b
                                     (?!\s*(?:{timecomponents}))
                                 ){{1,3}}
@@ -2510,18 +2515,18 @@ class Constants(object):
 
         # not being used in code, but kept in case others are manually
         # utilizing this regex for their own purposes
-        self.RE_MONTH = r'''(\s|^)
+        self.RE_MONTH = r'''(\s+|^)
                             (?P<month>
                                 (
                                     (?P<mthname>
                                         \b({months}|{shortmonths})\b
                                     )
-                                    (\s?
+                                    (\s*
                                         (?P<year>(\d{{4}}))
                                     )?
                                 )
                             )
-                            (?=\s|$|[^\w])'''.format(**self.locale.re_values)
+                            (?=\s+|$|[^\w])'''.format(**self.locale.re_values)
 
         self.RE_WEEKDAY = r'''\b
                               (?:
@@ -2546,7 +2551,7 @@ class Constants(object):
 
         self.RE_QUNITS = r'''\b(?P<qty>
                                  -?
-                                 (?:\d+(?:{decimal_mark}\d+|)|(?:{numbers})s)\s?
+                                 (?:\d+(?:{decimal_mark}\d+|)|(?:{numbers})\s+)\s*
                                  (?P<qunits>{qunits})
                              )\b'''.format(**self.locale.re_values)
 
@@ -2589,7 +2594,7 @@ class Constants(object):
                                  )'''
 
         if 'meridian' in self.locale.re_values:
-            self.RE_TIMEHMS2 += (r'\s?(?P<meridian>{meridian})\b'
+            self.RE_TIMEHMS2 += (r'\s*(?P<meridian>{meridian})\b'
                                  .format(**self.locale.re_values))
         else:
             self.RE_TIMEHMS2 += r'\b'
@@ -2629,20 +2634,20 @@ class Constants(object):
         self.RE_REMAINING = r'\s+'
 
         # Regex for date/time ranges
-        self.RE_RTIMEHMS = r'''(\s?|^)
+        self.RE_RTIMEHMS = r'''(\s*|^)
                                (\d\d?){timeseparator}
                                (\d\d)
                                ({timeseparator}(\d\d))?
-                               (\s?|$)'''.format(**self.locale.re_values)
+                               (\s*|$)'''.format(**self.locale.re_values)
 
-        self.RE_RTIMEHMS2 = (r'''(\s?|^)
+        self.RE_RTIMEHMS2 = (r'''(\s*|^)
                                  (\d\d?)
                                  ({timeseparator}(\d\d?))?
                                  ({timeseparator}(\d\d?))?'''
                              .format(**self.locale.re_values))
 
         if 'meridian' in self.locale.re_values:
-            self.RE_RTIMEHMS2 += (r'\s?({meridian})'
+            self.RE_RTIMEHMS2 += (r'\s*({meridian})'
                                   .format(**self.locale.re_values))
 
         self.RE_RDATE = r'(\d+([%s]\d+)+)' % dateSeps
@@ -2650,40 +2655,40 @@ class Constants(object):
                                 (
                                     (
                                         \b({months})\b
-                                    )\s?
+                                    )\s*
                                     (
                                         (\d\d?)
                                         (\s?|{daysuffix}|$)+
                                     )?
-                                    (,\s?\d{{4}})?
+                                    (,\s*\d{{4}})?
                                 )
                             )'''.format(**self.locale.re_values)
 
         # "06/07/06 - 08/09/06"
-        self.DATERNG1 = (r'{0}\s?{rangeseparator}\s?{0}'
+        self.DATERNG1 = (r'{0}\s*{rangeseparator}\s*{0}'
                          .format(self.RE_RDATE, **self.locale.re_values))
 
         # "march 31 - june 1st, 2006"
-        self.DATERNG2 = (r'{0}\s?{rangeseparator}\s?{0}'
+        self.DATERNG2 = (r'{0}\s*{rangeseparator}\s*{0}'
                          .format(self.RE_RDATE3, **self.locale.re_values))
 
         # "march 1rd -13th"
-        self.DATERNG3 = (r'{0}\s?{rangeseparator}\s?(\d\d?)\s?(rd|st|nd|th)?'
+        self.DATERNG3 = (r'{0}\s*{rangeseparator}\s*(\d\d?)\s*(rd|st|nd|th)?'
                          .format(self.RE_RDATE3, **self.locale.re_values))
 
         # "4:00:55 pm - 5:90:44 am", '4p-5p'
-        self.TIMERNG1 = (r'{0}\s?{rangeseparator}\s?{0}'
+        self.TIMERNG1 = (r'{0}\s*{rangeseparator}\s*{0}'
                          .format(self.RE_RTIMEHMS2, **self.locale.re_values))
 
-        self.TIMERNG2 = (r'{0}\s?{rangeseparator}\s?{0}'
+        self.TIMERNG2 = (r'{0}\s*{rangeseparator}\s*{0}'
                          .format(self.RE_RTIMEHMS, **self.locale.re_values))
 
         # "4-5pm "
-        self.TIMERNG3 = (r'\d\d?\s?{rangeseparator}\s?{0}'
+        self.TIMERNG3 = (r'\d\d?\s*{rangeseparator}\s*{0}'
                          .format(self.RE_RTIMEHMS2, **self.locale.re_values))
 
         # "4:30-5pm "
-        self.TIMERNG4 = (r'{0}\s?{rangeseparator}\s?{1}'
+        self.TIMERNG4 = (r'{0}\s*{rangeseparator}\s*{1}'
                          .format(self.RE_RTIMEHMS, self.RE_RTIMEHMS2,
                                  **self.locale.re_values))
 
