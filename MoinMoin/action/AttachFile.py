@@ -201,8 +201,9 @@ def _write_stream(content, stream, bufsize=8192):
     elif isinstance(content, str):
         stream.write(content)
     else:
-        logging.error("unsupported content object: %r" % content)
-        raise
+        msg = "unsupported content object: %r" % content
+        logging.error(msg)
+        raise Exception(msg)
 
 def add_attachment(request, pagename, target, filecontent, overwrite=0):
     """ save <filecontent> to an attachment <target> of page <pagename>
@@ -818,8 +819,9 @@ class ContainerItem:
                 content_length = len(content)
             content = StringIO(content) # we need a file obj
         elif not hasattr(content, 'read'):
-            logging.error("unsupported content object: %r" % content)
-            raise
+            msg = "unsupported content object: %r" % content
+            logging.error(msg)
+            raise Exception(msg)
         assert content_length >= 0  # we don't want -1 interpreted as 4G-1
         ti.size = content_length
         tf.addfile(ti, content)
