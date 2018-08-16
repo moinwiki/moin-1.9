@@ -16,14 +16,17 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.10rc1 2017-06-xx
+Version 1.9.10 (not released yet)
 
   Fixes:
   * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
+  * fix broken table attribute processing (wikiutil.escape)
+  * fix AttributeError in multifile action
 
   Other changes:
-  * upgrade werkzeug to 0.12.2
+  * upgrade werkzeug to 0.14.1
   * upgrade passlib to 1.7.1
+  * upgrade parsedatetime to 2.4
 
 
 Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
