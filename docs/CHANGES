@@ -9,12 +9,6 @@ already better than the previous stable release. Our release policy is not
 trying to make a "perfect release" (as that release might NEVER get released),
 but to make progress and don't delay releases too much.
 
-Known main issues:
-
-  * The GUI WYSIWYG editor has still some issues and limitations.
-    If you can't live with those, you can simply switch it off by using:
-    editor_force = True
-    editor_default = 'text'  # internal default, just for completeness
 
 Version 1.9.10 (not released yet)
 
@@ -24,6 +18,21 @@ Version 1.9.10 (not released yet)
   * fix AttributeError in multifile action
 
   Other changes:
+  * disable the gui editor / enforce the text editor by default
+
+    fckeditor 2.6.11 as we bundle it (latest available version, but years
+    old) might have security issues meanwhile as it is not maintained any
+    more.
+
+    also, there ever have been major issues with MoinMoin's integration of
+    that "gui editor" (as our documentation pointed out since long).
+
+    if you want to give wiki users the choice to choose the gui editor
+    nevertheless, you can re-enable it in your wiki config:
+
+    editor_force = False
+    editor_ui = 'freechoice'
+
   * upgrade werkzeug to 0.14.1
   * upgrade passlib to 1.7.1
   * upgrade parsedatetime to 2.4
