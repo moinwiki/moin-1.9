@@ -16,6 +16,9 @@ Version 1.9.10 (not released yet)
   * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
   * fix broken table attribute processing (wikiutil.escape)
   * fix AttributeError in multifile action
+  * read text attachments using universal newlines (including \r line seps)
+  * anywikidraw / twikidraw: check write permissions early
+  * fix exec_cmd for windows: preexec_fn is UNIX only
 
   Other changes:
   * disabled the "newaccount" action by default.
@@ -25,7 +28,6 @@ Version 1.9.10 (not released yet)
 
     See the updated sample configs about how to re-enable "newaccount".
     You can also create users on the shell, using "moin account create".
-
   * safer internal default ACL: Known and All now only have read permissions.
 
     This is to avoid that you accidentally give r/w permissions to the world
@@ -38,7 +40,6 @@ Version 1.9.10 (not released yet)
 
     See also the updated sample configs / the HelpOnAccessControlLists help
     page.
-
   * disable the gui editor / enforce the text editor by default
 
     fckeditor 2.6.11 as we bundle it (latest available version, but years
@@ -53,10 +54,15 @@ Version 1.9.10 (not released yet)
 
     editor_force = False
     editor_ui = 'freechoice'
-
-  * upgrade werkzeug to 0.14.1
-  * upgrade passlib to 1.7.1
-  * upgrade parsedatetime to 2.4
+  * update / upgrade bundled software:
+    * upgrade werkzeug to 0.14.1
+    * upgrade passlib to 1.7.1
+    * upgrade parsedatetime to 2.4
+  * moved MoinMoin 1.9.x development to GitHub:
+    https://github.com/moinwiki/moin-1.9/
+  * update mailing list address and download URL in pypi metadata
+  * enabled Travis CI to run the unit tests for PRs / branches
+  * fixed some stuff found by PyCharm Code Inspection
 
 
 Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
