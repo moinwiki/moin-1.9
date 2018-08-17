@@ -97,6 +97,12 @@ class FarmConfig(multiconfig.DefaultConfig):
     # Adapt it to your needs, consider using an EditorGroup.
     #acl_rights_default = u"Trusted:read,write,delete,revert Known:read All:read"
 
+    # The newaccount action is disabled by default because spammers abuse it.
+    # You can create wiki users on the shell by using "moin account create".
+    # If you need the newaccount action, you can (temporarily) enable it:
+    #actions_excluded = multiConfig.DefaultConfig.actions_excluded[:]
+    #actions_excluded.remove('newaccount')
+
     # Link spam protection for public wikis (uncomment to enable).
     # Needs a reliable internet connection.
     #from MoinMoin.security.antispam import SecurityPolicy
