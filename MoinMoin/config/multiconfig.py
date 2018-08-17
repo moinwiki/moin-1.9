@@ -1005,8 +1005,8 @@ options_no_group_name = {
   # ==========================================================================
   'editor': ('Editor related', None, (
     ('editor_default', 'text', "Editor to use by default, 'text' or 'gui'"),
-    ('editor_force', False, "if True, force using the default editor"),
-    ('editor_ui', 'freechoice', "Editor choice shown on the user interface, 'freechoice' or 'theonepreferred'"),
+    ('editor_force', True, "if True, force using the default editor"),
+    ('editor_ui', 'theonepreferred', "Editor choice shown on the user interface, 'freechoice' or 'theonepreferred'"),
     ('page_license_enabled', False, 'if True, show a license hint in page editor.'),
     ('page_license_page', u'WikiLicense', 'Page linked from the license hint. [Unicode]'),
     ('edit_locking', 'warn 10', "Editor locking policy: `None`, `'warn <timeout in minutes>'`, or `'lock <timeout in minutes>'`"),
