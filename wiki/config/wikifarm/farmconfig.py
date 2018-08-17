@@ -93,6 +93,10 @@ class FarmConfig(multiconfig.DefaultConfig):
     # All acl_rights_xxx options must use unicode [Unicode]
     #acl_rights_before = u"YourName:read,write,delete,revert,admin"
 
+    # This is the default ACL that applies to pages without an ACL.
+    # Adapt it to your needs, consider using an EditorGroup.
+    #acl_rights_default = u"Trusted:read,write,delete,revert Known:read All:read"
+
     # Link spam protection for public wikis (uncomment to enable).
     # Needs a reliable internet connection.
     #from MoinMoin.security.antispam import SecurityPolicy

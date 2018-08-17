@@ -98,6 +98,10 @@ class Config(multiconfig.DefaultConfig):
     # All acl_rights_xxx options must use unicode [Unicode]
     #acl_rights_before = u"YourName:read,write,delete,revert,admin"
 
+    # This is the default ACL that applies to pages without an ACL.
+    # Adapt it to your needs, consider using an EditorGroup.
+    #acl_rights_default = u"Trusted:read,write,delete,revert Known:read All:read"
+
     # The default (ENABLED) password_checker will keep users from choosing too
     # short or too easy passwords. If you don't like this and your site has
     # rather low security requirements, feel free to DISABLE the checker by:
