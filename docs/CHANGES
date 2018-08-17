@@ -18,6 +18,19 @@ Version 1.9.10 (not released yet)
   * fix AttributeError in multifile action
 
   Other changes:
+  * safer internal default ACL: Known and All now only have read permissions.
+
+    This is to avoid that you accidentally give r/w permissions to the world
+    when running a wiki on the internet.
+
+    Considering there are lots of spam bots out there, that can create a ton
+    of spam pages in little time, we advise you to keep the safer default for
+    internet-exposed wikis and only allow specific users / groups read/write
+    access.
+
+    See also the updated sample configs / the HelpOnAccessControlLists help
+    page.
+
   * disable the gui editor / enforce the text editor by default
 
     fckeditor 2.6.11 as we bundle it (latest available version, but years
