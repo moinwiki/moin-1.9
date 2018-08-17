@@ -139,6 +139,9 @@ class AnyWikiDraw(object):
         target = self.target
         if not request.user.may.read(pagename):
             return _('You are not allowed to view attachments of this page.')
+        if not request.user.may.write(pagename):
+            # note: "recycled" a already existing translated string, so we do not need a new string:
+            return _('You are not allowed to save a drawing on this page.')
         if not target:
             return _("Empty target name given.")
 
