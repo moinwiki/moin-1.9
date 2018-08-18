@@ -93,6 +93,16 @@ class Config(multiconfig.DefaultConfig):
     # like despam or PackageInstaller action:
     #superuser = [u"YourName", ]
 
+    # Some actions are by default only enabled for superusers and disabled
+    # for everybody else.
+    # 'newaccount' is one of these (used to let visitors create new accounts).
+    # You can create wiki users on the shell by using "moin account create".
+    # A superuser also can use "Settings" -> "Switch user" to create users.
+    # If you need the newaccount action for everybody (e.g. to create your
+    # very first [superuser] account), you can (temporarily) enable it:
+    #actions_superuser = multiconfig.DefaultConfig.actions_superuser[:]
+    #actions_superuser.remove('newaccount')
+
     # IMPORTANT: grant yourself admin rights! replace YourName with
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]

@@ -43,18 +43,35 @@ class Settings(UserPrefBase):
         if not wikiutil.checkTicket(request, form['ticket']):
             return
 
-        uid = form.get('selected_user', '')
-        if not uid:
-            return 'error', _("No user selected")
-        theuser = user.User(request, uid, auth_method='setuid')
-        if not theuser or not theuser.exists():
-            return 'error', _("No user selected")
+        user_name = form.get('user_name', '')
+        if user_name:
+            uid = user.getUserId(request, user_name)
+            if uid:
+                theuser = user.User(request, uid, auth_method='setuid')
+            else:
+                # Don't allow creating users with invalid names
+                if not user.isValidName(request, user_name):
+                    return 'error', _("""Invalid user name {{{'%s'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.""", wiki=True) % wikiutil.escape(user_name)
+                theuser = user.User(request, auth_method='setuid')
+                theuser.name = user_name
+        else:
+            uid = form.get('selected_user', '')
+            if not uid:
+                return 'error', _("No user selected")
+            theuser = user.User(request, uid, auth_method='setuid')
+            if not theuser or not theuser.exists():
+                return 'error', _("No user selected")
         # set valid to True so superusers can even switch
         # to disable accounts
         theuser.valid = True
         request._setuid_real_user = request.user
         # now continue as the other user
         request.user = theuser
+        if not uid:
+            # create new user
+            theuser.save()
         return  _("You can now change the settings of the selected user account; log out to get back to your account.")
 
     def _user_select(self):
@@ -83,6 +100,7 @@ class Settings(UserPrefBase):
                                           'assume the identity of another user.')))
 
         ticket = wikiutil.createTicket(self.request)
+        self.make_row(_('User'), [html.INPUT(type="text", size="32", name="user_name")], valign="top")
         self.make_row(_('Select User'), [self._user_select()], valign="top")
         form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
         if not self._only:

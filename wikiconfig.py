@@ -32,7 +32,15 @@ class LocalConfig(multiconfig.DefaultConfig):
     # Where system and help pages are (you may exclude this from backup):
     data_underlay_dir = os.path.join(instance_dir, 'underlay', '') # path with trailing /
 
-    DesktopEdition = True # give all local users full powers
+    DesktopEdition = True # give all local users full powers (every user is superuser)
+    # The newaccount action is by default only enabled for superusers because
+    # spammers abuse it.
+    # You can create wiki users on the shell by using "moin account create".
+    # A superuser also can use "Settings" -> "Switch user" to create users.
+    # If you need the newaccount action, you can (temporarily) enable it:
+    actions_superuser = multiconfig.DefaultConfig.actions_superuser[:]
+    actions_superuser.remove('newaccount')
+
     acl_rights_default = u"All:read,write,delete,revert,admin"
     surge_action_limits = None # no surge protection
     sitename = u'MoinMoin DesktopEdition'
