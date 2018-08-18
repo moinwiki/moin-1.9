@@ -20,10 +20,10 @@ and the mailing list before contacting the MoinMoin authors directly.
 
 Local:
 
-See docs/CHANGES                 for a version history. READ THIS!
-See docs/REQUIREMENTS            for a list of requirements.
-See docs/INSTALL.html            for installation instructions.
-See docs/README.migration        for data conversion instructions.
+- docs/CHANGES                 for a version history. READ THIS!
+- docs/REQUIREMENTS            for a list of requirements.
+- docs/INSTALL.html            for installation instructions.
+- docs/README.migration        for data conversion instructions.
 
 Note that the code base contains some experimental or unfinished features.
 Use them at your own risk. Official features are described on the set of
