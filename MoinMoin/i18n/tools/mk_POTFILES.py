@@ -68,6 +68,7 @@ def find_files(startdir, blacklist):
 
     files = []
     os.path.walk(startdir, get_files, (files, prefix, blacklist))
+    files.sort()
     return files
 
 if __name__ == "__main__":
