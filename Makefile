@@ -13,10 +13,10 @@ all:
 
 install-docs:
 	-mkdir build
-	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master19.moinmo.in/InstallDocs?action=print"
+	wget -U MoinMoin/Makefile -O build/INSTALL.html "https://master19.moinmo.in/InstallDocs?action=print"
 	sed \
-		-e 's|http://master19.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
-		-e 's|http://static.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|https://master19.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|https://static.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
 		-e 's|/moin_static..|../MoinMoin/web/static/htdocs|g' \
 		-e 's|/InstallDocs#|#|g' \
 		-e 's|/InstallDocs/QuickInstall#qdlinux|#InstallDocs.2BAC8-QuickInstall.2BAC8-Linux.Linux:_Detailed_Quick_Installation|g' \
@@ -25,19 +25,19 @@ install-docs:
         build/INSTALL.html >docs/INSTALL.html
 	-rm build/INSTALL.html
 
-	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master19.moinmo.in/HelpOnUpdating?action=print"
+	wget -U MoinMoin/Makefile -O build/UPDATE.html "https://master19.moinmo.in/HelpOnUpdating?action=print"
 	sed \
-		-e 's|http://master19.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
-		-e 's|http://static.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|https://master19.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
+		-e 's|https://static.moinmo.in/moin_static..|../MoinMoin/web/static/htdocs|g' \
 		-e 's|/moin_static..|../MoinMoin/web/static/htdocs|g' \
-		-e 's|href=./MoinMoin|href=\"http://master19.moinmo.in/MoinMoin|g' \
-		-e 's|href=./EditedSystemPages|href=\"http://master19.moinmo.in/EditedSystemPages|g' \
+		-e 's|href=./MoinMoin|href=\"https://master19.moinmo.in/MoinMoin|g' \
+		-e 's|href=./EditedSystemPages|href=\"https://master19.moinmo.in/EditedSystemPages|g' \
         build/UPDATE.html >docs/UPDATE.html
 	-rm build/UPDATE.html
 	-rmdir build
 
 interwiki:
-	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master19.moinmo.in/InterWikiMap?action=raw"
+	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "https://master19.moinmo.in/InterWikiMap?action=raw"
 	chmod 664 $(share)/data/intermap.txt
 
 check-tabs:
@@ -45,14 +45,14 @@ check-tabs:
 
 # Create documentation
 epydoc: patchlevel
-	@epydoc --parse-only -o ../html-1.9 --name=MoinMoin --url=http://moinmo.in/ MoinMoin
+	@epydoc --parse-only -o ../html-1.9 --name=MoinMoin --url=https://moinmo.in/ MoinMoin
 
 # Create new underlay directory from MoinMaster
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/cfg/1.9 --wiki-url=http://master19.moinmo.in/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/cfg/1.9 --wiki-url=http://master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/cfg/1.9 --wiki-url=https://master19.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/cfg/1.9 --wiki-url=https://master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap
 	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
