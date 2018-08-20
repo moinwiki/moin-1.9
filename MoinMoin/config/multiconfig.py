@@ -282,6 +282,12 @@ class ConfigFunctionality(object):
                      Please change it in your wiki configuration and try again."""
             raise error.ConfigurationError(msg)
 
+        if not isinstance(self.actions_superuser, list):
+            msg = """The actions_superuser setting in your wiki configuration is not a list
+                     (e.g. ['newaccount', 'some_other_action']).
+                     Please change it in your wiki configuration and try again."""
+            raise error.ConfigurationError(msg)
+
         # moin < 1.9 used cookie_lifetime = <float> (but converted it to int) for logged-in users and
         # anonymous_session_lifetime = <float> or None for anon users
         # moin >= 1.9 uses cookie_lifetime = (<float>, <float>) - first is anon, second is logged-in
@@ -792,12 +798,15 @@ options_no_group_name = {
     ('SecurityPolicy',
      None,
      "Class object hook for implementing security restrictions or relaxations"),
+    ('actions_superuser',
+     ['newaccount',  # spam bots create tons of user accounts, so better allow it only for superuser
+     ],
+     "Restrict actions to superuser only (list of strings)"),
     ('actions_excluded',
      ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
       'MyPages',  # only works when used with a non-default SecurityPolicy (e.g. autoadmin)
       'CopyPage',  # has questionable behaviour regarding subpages a user can't read, but can copy
-      'newaccount',  # spam bots love to create huge amounts of spam accounts with this
-     ],
+      ],
      "Exclude unwanted actions (list of strings)"),
 
     ('allow_xslt', False,

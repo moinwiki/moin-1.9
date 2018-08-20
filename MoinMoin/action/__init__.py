@@ -336,6 +336,9 @@ def getHandler(request, action, identifier="execute"):
     if action in cfg.actions_excluded:
         return None
 
+    if action in cfg.actions_superuser and not request.user.isSuperUser():
+        return None
+
     try:
         handler = wikiutil.importPlugin(cfg, "action", action, identifier)
     except wikiutil.PluginMissingError:

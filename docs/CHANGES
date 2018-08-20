@@ -21,13 +21,6 @@ Version 1.9.10 (not released yet)
   * fix exec_cmd for windows: preexec_fn is UNIX only
 
   Other changes:
-  * disabled the "newaccount" action by default.
-
-    This is to avoid that for internet-exposed wikis spam bots can create lots
-    of user accounts in little time.
-
-    See the updated sample configs about how to re-enable "newaccount".
-    You can also create users on the shell, using "moin account create".
   * safer internal default ACL: Known and All now only have read permissions.
 
     This is to avoid that you accidentally give r/w permissions to the world

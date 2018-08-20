@@ -88,6 +88,16 @@ class FarmConfig(multiconfig.DefaultConfig):
     # like despam or PackageInstaller action:
     #superuser = [u"YourName", ]
 
+    # Some actions are by default only enabled for superusers and disabled
+    # for everybody else.
+    # 'newaccount' is one of these (used to let visitors create new accounts).
+    # You can create wiki users on the shell by using "moin account create".
+    # A superuser also can use "Settings" -> "Switch user" to create users.
+    # If you need the newaccount action for everybody (e.g. to create your
+    # very first [superuser] account), you can (temporarily) enable it:
+    #actions_superuser = multiconfig.DefaultConfig.actions_superuser[:]
+    #actions_superuser.remove('newaccount')
+
     # IMPORTANT: grant yourself admin rights! replace YourName with
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]
@@ -96,12 +106,6 @@ class FarmConfig(multiconfig.DefaultConfig):
     # This is the default ACL that applies to pages without an ACL.
     # Adapt it to your needs, consider using an EditorGroup.
     #acl_rights_default = u"Trusted:read,write,delete,revert Known:read All:read"
-
-    # The newaccount action is disabled by default because spammers abuse it.
-    # You can create wiki users on the shell by using "moin account create".
-    # If you need the newaccount action, you can (temporarily) enable it:
-    #actions_excluded = multiConfig.DefaultConfig.actions_excluded[:]
-    #actions_excluded.remove('newaccount')
 
     # Link spam protection for public wikis (uncomment to enable).
     # Needs a reliable internet connection.
