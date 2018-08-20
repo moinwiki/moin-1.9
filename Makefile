@@ -78,7 +78,7 @@ dist-release: dist-clean
 
 # Create patchlevel module
 patchlevel:
-	@echo -e patchlevel = "\"`hg identify`\"\n" >MoinMoin/patchlevel.py
+	@echo patchlevel = "\"`git describe --abbrev=12 --always --dirty=+`\"\n" >MoinMoin/patchlevel.py
 	@MoinMoin/version.py update
 
 # Report translations status
@@ -87,7 +87,7 @@ check-i18n:
 
 # Update the workdir from the default pull repo
 update:
-	hg pull -u
+	git pull
 	$(MAKE) patchlevel
 
 # Update underlay directory from the tarball
