@@ -4,5 +4,9 @@ sudo: false
 os: linux
 dist: xenial
 
-# the search tests are currently broken by a failing xapian import
-script: ./pytest MoinMoin/ --ignore MoinMoin/support/ --ignore MoinMoin/search/_tests/test_search.py
+addons:
+  apt:
+    packages:
+      - python-xapian
+
+script: ./pytest MoinMoin/ --ignore MoinMoin/support/
