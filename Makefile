@@ -95,8 +95,7 @@ update-underlay:
 	cd $(share); rm -rf underlay; tar xf underlay.tar
 
 test:
-	@echo Testing is now done using \`py.test\`. py.test can be installed by downloading from http://codespeak.net/py/dist/download.html
-	@echo Writing tests is explained on http://codespeak.net/py/dist/test.html
+	./pytest MoinMoin/ --ignore MoinMoin/support/
 
 coverage:
 	@python MoinMoin/_tests/maketestwiki.py
