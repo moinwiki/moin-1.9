@@ -51,7 +51,7 @@ General syntax: moin [options] maint mailtranslators [mailtranslators-options]
         self.init_request()
         request = self.request
 
-        from_address = unicode(self.options.from_address or "tw-public@gmx.de")
+        from_address = unicode(self.options.from_address or "tw@waldmann-edv.de")
         subject = unicode(self.options.subject or "MoinMoin i18n notification")
         text_template = unicode(sys.stdin.read())
 
