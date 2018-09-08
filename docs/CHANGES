@@ -20,6 +20,39 @@ Version 1.9.10 (not released yet)
   * anywikidraw / twikidraw: check write permissions early
   * fix exec_cmd for windows: preexec_fn is UNIX only
 
+  New features:
+  * added a convenient way to create a user account via the superuser's
+    "Settings" -> "Switch User" form:
+
+    just type in the new user's name there, switch to the account and
+    fill out the email address. You do not need to set a password, the
+    account will not be usable until the users claims it via the "forgot
+    my password" functionality on the login page (and sets a password).
+
+  * you now can also type in an existing user's name there to switch to the
+    account, instead of selecting it (convenient if you have many users).
+
+  * newaccount action by default only available for superusers.
+
+    This is to avoid spam bots creating huge amounts of crap users on
+    internet connected wikis.
+
+    This is done via a new cfg.actions_superuser = ['newaccount', ] default.
+
+    If you prefer to have newaccount action available for every visitor (not
+    advisable for internet connected wikis), use this in your wiki config:
+
+    actions_superuser = FarmConfig.actions_superuser[:]
+    actions_superuser.remove('newaccount')
+
+    For internet connected wikis, a safer way is to let potential new users
+    ask for an account. Everyone in the superuser list can easily create new
+    account (wiki username and email address needed). If you run a public
+    MoinMoin wiki on the internet, document the way to get an account on
+    your front page.
+
+  * support tel: urls
+
   Other changes:
   * safer internal default ACL: Known and All now only have read permissions.
 
@@ -47,6 +80,7 @@ Version 1.9.10 (not released yet)
 
     editor_force = False
     editor_ui = 'freechoice'
+  * change log_reverse_dns_lookups default to False.
   * update / upgrade bundled software:
     * upgrade werkzeug to 0.14.1
     * upgrade passlib to 1.7.1
@@ -56,6 +90,7 @@ Version 1.9.10 (not released yet)
   * update mailing list address and download URL in pypi metadata
   * enabled Travis CI to run the unit tests for PRs / branches
   * fixed some stuff found by PyCharm Code Inspection
+  * make build reproducible
 
 
 Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
