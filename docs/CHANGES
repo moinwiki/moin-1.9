@@ -10,7 +10,7 @@ trying to make a "perfect release" (as that release might NEVER get released),
 but to make progress and don't delay releases too much.
 
 
-Version 1.9.10 (not released yet)
+Version 1.9.10 aka "the end of spam release" (not released yet)
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
@@ -40,7 +40,7 @@ Version 1.9.10 (not released yet)
 
   * newaccount action by default only available for superusers.
 
-    This is to avoid spam bots creating huge amounts of crap users on
+    This is to avoid spam bots creating huge amounts of crap accounts on
     internet connected wikis.
 
     This is done via a new cfg.actions_superuser = ['newaccount', ] default.
@@ -52,7 +52,7 @@ Version 1.9.10 (not released yet)
     actions_superuser.remove('newaccount')
 
     For internet connected wikis, a safer way is to let potential new users
-    ask for an account. Everyone in the superuser list can easily create new
+    ask for an account. Everyone in the superuser list can easily create a new
     account (wiki username and email address needed). If you run a public
     MoinMoin wiki on the internet, document the way to get an account on
     your front page.
@@ -67,7 +67,7 @@ Version 1.9.10 (not released yet)
 
     Considering there are lots of spam bots out there, that can create a ton
     of spam pages in little time, we advise you to keep the safer default for
-    internet-exposed wikis and only allow specific users / groups read/write
+    internet connected wikis and only allow specific users / groups read/write
     access.
 
     See also the updated sample configs / the HelpOnAccessControlLists help
