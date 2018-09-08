@@ -203,6 +203,7 @@ def page_list(request):
 def link_dialog(request):
     # list of wiki pages
     name = request.values.get("pagename", "")
+    name_escaped = wikiutil.escape(name)
     if name:
         from MoinMoin import search
         # XXX error handling!
@@ -299,7 +300,7 @@ def link_dialog(request):
         <tr>
          <td>
           <span fckLang="PageDlgName">Page Name</span><br>
-          <input id="txtPagename" name="pagename" size="30" value="%(name)s">
+          <input id="txtPagename" name="pagename" size="30" value="%(name_escaped)s">
          </td>
          <td valign="bottom">
            <input id=btnSearchpage type="submit" value="Search">

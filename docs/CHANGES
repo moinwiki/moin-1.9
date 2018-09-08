@@ -23,6 +23,7 @@ Version 1.9.10 aka "the end of spam release" (not released yet)
         should be aware of beforehands.
 
   Fixes:
+  * security fix for CVE-2017-5934, XSS in GUI editor related code
   * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
   * fix broken table attribute processing (wikiutil.escape)
   * fix AttributeError in multifile action
