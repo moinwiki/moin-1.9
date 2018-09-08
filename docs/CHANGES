@@ -18,6 +18,10 @@ Version 1.9.10 aka "the end of spam release" (not released yet)
 
   HINT: Python 2.7 is required! See docs/REQUIREMENTS for details.
 
+  HINT: please read the changelog below carefully before upgrading to 1.9.10.
+        This release has some fundamental changes you (and your wiki users)
+        should be aware of beforehands.
+
   Fixes:
   * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
   * fix broken table attribute processing (wikiutil.escape)
