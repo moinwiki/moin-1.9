@@ -4,7 +4,7 @@
 # All rights reserved, see COPYING for details.
 
 # additional files not known by setup.py
-include README MANIFEST.in setup.cfg moin.spec
+include README.rst MANIFEST.in setup.cfg moin.spec
 include wikiserver.py wikiserverconfig.py wikiserverlogging.conf wikiconfig.py
 
 # documentation and licenses

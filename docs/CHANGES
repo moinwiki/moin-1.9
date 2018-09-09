@@ -10,15 +10,59 @@ trying to make a "perfect release" (as that release might NEVER get released),
 but to make progress and don't delay releases too much.
 
 
-Version 1.9.10 (not released yet)
+Version 1.9.10 aka "the end of spam release" (2018-09-09)
+
+  SECURITY HINT: make sure you have allow_xslt = False (or just do not use
+  allow_xslt at all in your wiki configs, False is the internal default).
+  Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
+
+  HINT: Python 2.7 is required! See docs/REQUIREMENTS for details.
+
+  HINT: please read the changelog below carefully before upgrading to 1.9.10.
+        This release has some fundamental changes you (and your wiki users)
+        should be aware of beforehands.
 
   Fixes:
+  * security fix for CVE-2017-5934, XSS in GUI editor related code
   * fix wrong digestmod of hmac.new calls (incorporate 1.9.9 patch)
   * fix broken table attribute processing (wikiutil.escape)
   * fix AttributeError in multifile action
   * read text attachments using universal newlines (including \r line seps)
   * anywikidraw / twikidraw: check write permissions early
   * fix exec_cmd for windows: preexec_fn is UNIX only
+
+  New features:
+  * added a convenient way to create a user account via the superuser's
+    "Settings" -> "Switch User" form:
+
+    just type in the new user's name there, switch to the account and
+    fill out the email address. You do not need to set a password, the
+    account will not be usable until the users claims it via the "forgot
+    my password" functionality on the login page (and sets a password).
+
+  * you now can also type in an existing user's name there to switch to the
+    account, instead of selecting it (convenient if you have many users).
+
+  * newaccount action by default only available for superusers.
+
+    This is to avoid spam bots creating huge amounts of crap accounts on
+    internet connected wikis.
+
+    This is done via a new cfg.actions_superuser = ['newaccount', ] default.
+
+    If you prefer to have newaccount action available for every visitor (not
+    advisable for internet connected wikis), use this in your wiki config:
+
+    actions_superuser = FarmConfig.actions_superuser[:]
+    actions_superuser.remove('newaccount')
+
+    For internet connected wikis, a safer way is to let potential new users
+    ask for an account. Everyone in the superuser list can easily create a new
+    account (wiki username and email address needed). If you run a public
+    MoinMoin wiki on the internet, document the way to get an account on
+    your front page.
+
+  * support tel: urls
 
   Other changes:
   * safer internal default ACL: Known and All now only have read permissions.
@@ -28,7 +72,7 @@ Version 1.9.10 (not released yet)
 
     Considering there are lots of spam bots out there, that can create a ton
     of spam pages in little time, we advise you to keep the safer default for
-    internet-exposed wikis and only allow specific users / groups read/write
+    internet connected wikis and only allow specific users / groups read/write
     access.
 
     See also the updated sample configs / the HelpOnAccessControlLists help
@@ -47,6 +91,7 @@ Version 1.9.10 (not released yet)
 
     editor_force = False
     editor_ui = 'freechoice'
+  * change log_reverse_dns_lookups default to False.
   * update / upgrade bundled software:
     * upgrade werkzeug to 0.14.1
     * upgrade passlib to 1.7.1
@@ -56,15 +101,10 @@ Version 1.9.10 (not released yet)
   * update mailing list address and download URL in pypi metadata
   * enabled Travis CI to run the unit tests for PRs / branches
   * fixed some stuff found by PyCharm Code Inspection
+  * make build reproducible
 
 
 Version 1.9.9 aka "The undead MoinMoin Halloween Release" 2016-10-31
-
-  SECURITY HINT: make sure you have allow_xslt = False (or just do not use
-  allow_xslt at all in your wiki configs, False is the internal default).
-  Allowing XSLT/4suite is very dangerous, see HelpOnConfiguration wiki page.
-
-  HINT: Python 2.7 is required! See docs/REQUIREMENTS for details.
 
   Fixes:
   * security: fix XSS in AttachFile view (multifile related) CVE-2016-7148

@@ -1130,8 +1130,8 @@ options_no_group_name = {
 
     ('log_remote_addr', True,
      "if True, log the remote IP address (and maybe hostname)."),
-    ('log_reverse_dns_lookups', True,
-     "if True, do a reverse DNS lookup on page SAVE. If your DNS is broken, set this to False to speed up SAVE."),
+    ('log_reverse_dns_lookups', False,
+     "if True, do a reverse DNS lookup on page SAVE."),
     ('log_timing', False,
      "if True, add timing infos to the log output to analyse load conditions"),
     ('log_events_format', 1,

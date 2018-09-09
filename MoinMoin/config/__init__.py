@@ -89,6 +89,7 @@ url_schemas = ['http', 'https', 'ftp', 'file',
                'gopher',
                'notes',
                'rtp', 'rtsp', 'rtcp',
+               'tel',
               ]
 
 smileys = (r"X-( :D <:( :o :( :) B) :)) ;) /!\ <!> (!) :-? :\ >:> |) " +
