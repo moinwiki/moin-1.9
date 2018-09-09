@@ -5,7 +5,6 @@
 #acl -All:write Default
 #format gettext
 #language sv
-
 #
 # MoinMoin sv system text translation
 #
@@ -13,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-04 22:35+0200\n"
-"PO-Revision-Date: 2010-10-13 22:01+0200\n"
+"POT-Creation-Date: 2018-08-26 00:52+0200\n"
+"PO-Revision-Date: 2018-08-26 07:49+0200\n"
 "Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
-"Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
+"Language-Team: Swedish <moin-user@python.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -25,6 +24,47 @@ msgstr ""
 "X-Language: Svenska\n"
 "X-HasWikiMarkup: True\n"
 "X-Language-in-English: Swedish\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr "Ogiltigt reguliärt uttryck för emfas \"%(regex)s\": %(error)s"
+
+#, python-format
+msgid ""
+"Text matching regular expression \"%(regex)s\" is highlighted. "
+"%(switch_link)s."
+msgstr ""
+"Text som matchar reguliärt uttryck \"%(regex)s\" visas med emfas. "
+"%(switch_link)s."
+
+msgid "Switch to non-highlighted view"
+msgstr "Byt till vy utan emfas"
+
+msgid ""
+"The backed up content of this page is deprecated and will rank lower in "
+"search results!"
+msgstr ""
+"Reservkopians innehåll av den här sidan tas avstånd ifrån och kommer att "
+"rankas lägre i sökresultat!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Version %(rev)d vid datum %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Omdirigerad från sida \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Den här sidan är omdirigerad till \"%(page)s\""
+
+msgid "Create New Page"
+msgstr "Skapa ny sida"
+
+msgid "You are not allowed to view this page."
+msgstr "Du får inte titta på den här sidan."
 
 msgid "Your changes are not saved!"
 msgstr "Dina ändringar sparas inte!"
@@ -304,49 +344,215 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<okänd>"
 
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Din wiki-kontoinformation"
+msgid "Text mode"
+msgstr "Textläge"
 
-msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
-msgstr ""
-"Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
-"\n"
-"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att "
-"återställa den eller\n"
-"gå tillbaka till till återställningssidan och skriv in ditt användarnamn "
-"och\n"
-"token för återställning.\n"
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d bilagor]"
 
 #, python-format
 msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
 msgstr ""
-"Användarnamn: %s\n"
-"\n"
-"Token för att återställa lösenord: %s\n"
-"\n"
-"URL för att återställa lösenord: %s?action=recoverpass&name=%s&token=%s\n"
+"Det finns <a href=\"%(link)s\">%(count)s bifogade filer(s)</a> lagrade på "
+"den här sidan."
+
+msgid "Filename of attachment not specified!"
+msgstr "Filnamnet för bilagan ej angivet!"
 
 #, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Paketet kräver en nyare version av MoinMoin (minst %s)."
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "Bilagan \"%(filename)s\" existerar inte!"
 
-msgid "The theme name is not set."
-msgstr "Temanamnet är inte angivet."
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"För att referera till bilagor på en sida, använd '''{{{attachment:"
+"filename}}}''', \n"
+"som visas nedan i listan av filer. \n"
+"Använd '''INTE''' {{{[get]}}} länkens URL, \n"
+"eftersom den inte är permanent och kan ändras."
+
+msgid "del"
+msgstr "radera"
+
+msgid "move"
+msgstr "flytta"
+
+msgid "get"
+msgstr "hämta"
+
+msgid "edit"
+msgstr "ändra"
+
+msgid "view"
+msgstr "visa"
+
+msgid "unzip"
+msgstr "packa upp"
+
+msgid "install"
+msgstr "installera"
+
+msgid "All files"
+msgstr "Alla filer"
+
+msgid "Selected Files:"
+msgstr "Valda filer:"
+
+msgid "delete"
+msgstr "radera"
+
+msgid "move to page"
+msgstr "flytta till sida"
+
+msgid "copy to page"
+msgstr "kopiera till sida"
+
+msgid "Do it."
+msgstr "Gör det."
 
 #, python-format
-msgid "Theme files not installed! Write rights missing for %s."
-msgstr "Temats filer installerades inte! Saknar rättigheter att skriva på %s."
+msgid "No attachments stored for %(pagename)s"
+msgstr "Inga bifogade filer på %(pagename)s"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Du får inte ta bort bilagor från den här sidan."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Bilagan '%(filename)s' raderad."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "Du får inte flytta bilagor från den här sidan."
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Du får inte bifoga en fil till den här sidan."
+
+#, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr ""
+"Bilagan '%(pagename)s/%(filename)s' flyttats till '%(new_pagename)s/"
+"%(new_filename)s'."
+
+#, python-format
+msgid "Failed: %s"
+msgstr "Fel: %s"
+
+#, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' copied to '%(new_pagename)s/"
+"%(new_filename)s'."
+msgstr ""
+"Bilagan '%(pagename)s/%(filename)s' flyttats till '%(new_pagename)s/"
+"%(new_filename)s'."
+
+msgid "New Attachment"
+msgstr "Ny bilaga"
+
+msgid "File to upload"
+msgstr "Fil att ladda upp"
+
+msgid "Rename to"
+msgstr "Byt namn till"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Skriv över existerande bilaga med samma namn"
+
+msgid "Upload"
+msgstr "Ladda upp"
+
+msgid "Attached Files"
+msgstr "Bifogade filer"
+
+#, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "Ogiltig sub-åtgärd för AttachFile: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "Bilagor till \"%(pagename)s\""
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Var god använd det interaktiva användargränsnittet för att utföra åtgärd "
+"%(actionname)s!"
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Fel svar! Gå tillbaka och försök igen..."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Inget filinnehåll. Ta bort icke-ASCII-tecken från filnamnet och försök igen."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Du får inte skriva över en bilaga på den här sidan."
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Bilagan '%(target)s' (fjärrnamn '%(filename)s') med %(bytes)d byte sparade."
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "Bilagan \"%(target)s\" (fjärrnamn \"%(filename)s\") existerar redan."
+
+#, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr "Bilagan '%(new_pagename)s/%(new_filename)s' finns redan."
+
+msgid "Nothing changed"
+msgstr "Ingen förändring"
+
+#, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr ""
+"Sidan '%(new_pagename)s' finns inte eller så har du inte tillräckliga "
+"rättigheter."
+
+msgid "Move aborted!"
+msgstr "Flytt avbruten!"
+
+msgid "Move aborted because new page name is empty."
+msgstr "Flytt avbruten för att nya namnet är tomt."
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "Var god använd ett giltigt filnamn för bilaga '%(filename)s'."
+
+msgid "Move aborted because new attachment name is empty."
+msgstr "Flytt avbruten för att bilagans nya namn är tomt."
+
+msgid "Move"
+msgstr "Flytta"
+
+msgid "New page name"
+msgstr "Nytt sidonamn"
+
+msgid "New attachment name"
+msgstr "Nya namnet för bilagan"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "Du får inte hämta bilagor från den här sidan."
+
+msgid "You are not allowed to install files."
+msgstr "Du får inte installera filer."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Bilagan '%(filename)s' installerad."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -356,202 +562,1179 @@ msgstr "Installeringen av \"%(filename)s\" misslyckades."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "Filen %s är inte en MoinMoin-paketfil."
 
-#, python-format
-msgid "The page %s does not exist."
-msgstr "Sidan %s existerar inte."
-
-msgid "Invalid package file header."
-msgstr "Ogiltigt paketfilshuvud."
-
-msgid "Package file format unsupported."
-msgstr "Paketfilformatet stöds inte."
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Du får inte packa upp bilagor till den här sidan."
 
 #, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Okänd funktion %(func)s på rad %(lineno)i."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Filen %(filename)s är inte en .zip-fil."
 
 #, python-format
-msgid "The file %s was not found in the package."
-msgstr "Filen %s hittades inte i paketet."
+msgid ""
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit "
+"(%(maxsize_file)d kB)."
+msgstr ""
+"Bilagan '%(filename)s' kunde inte packas upp eftersom några filer i zip-"
+"filen är antingen inte i samma mapp eller överskrider maximala filstorleken "
+"(%(maxsize_file)d kB)."
 
-msgid "The wiki is currently not reachable."
-msgstr "Wikin går för tillfället inte att nå."
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
+"begränsningen på utrymme per sida (%(size)d kB)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
+"maxantalet per sida (%(count)d)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: "
+"%(filelist)s)."
+msgstr "Bilagan '%(filename)s' delvis uppackad (överskrev inte: %(filelist)s)."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Bilagan \"%(filename)s\" uppackad."
+
+msgid "A severe error occurred:"
+msgstr "Ett allvarligt fel uppstod:"
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Bilaga \"%(filename)s\""
+
+msgid "Download"
+msgstr "Ladda ner"
+
+msgid "Package script:"
+msgstr "Paketskript:"
+
+msgid "File Name"
+msgstr "Filnamn"
+
+msgid "Modified"
+msgstr "Modifierad"
+
+msgid "Size"
+msgstr "Storlek"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "Okänd filtyp, kan inte visa bilagan direkt."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Du får inte se bilagor på den här sidan."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "bilaga:%(filename)s för %(pagename)s"
+
+msgid "Copy Page"
+msgstr "Kopiera sida"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Den här sidan är redan raderad eller existerade aldrig!"
+
+msgid "Copy all /subpages too?"
+msgstr "Kopiera även alla /undersidor?"
+
+msgid "New name"
+msgstr "Nytt namn"
+
+msgid "Optional reason for the copying"
+msgstr "Skäl för kopiering (ej obligatoriskt)"
+
+msgid "Really copy this page?"
+msgstr "Kopiera den här sidan, är du säker?"
+
+msgid "Delete"
+msgstr "Radera"
+
+msgid "Delete all /subpages too?"
+msgstr "Radera även alla /undersidor?"
+
+msgid "Optional reason for the deletion"
+msgstr "Anledning för borttagande (valfri)"
+
+msgid "Really delete this page?"
+msgstr "Radera den här sidan, är du säker?"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Pages"
+msgstr "Sidor"
+
+msgid "Select Author"
+msgstr "Välj författare"
+
+msgid "Revert all!"
+msgstr "Återgå allt!"
+
+msgid "You are not allowed to use this action."
+msgstr "Du får inte använda den här åtgärden."
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Inga sidor liknar \"%s\"!"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Exakt en sida som liknar \"%s\" funnen, dirigerar om till sidan."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Sidor som liknar \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s för \"%(title)s\""
+
+msgid "match"
+msgstr "träff"
+
+msgid "matches"
+msgstr "träffar"
+
+msgid "Load"
+msgstr "Ladda"
+
+msgid "Pagename not specified!"
+msgstr "Sidnamn ej angivet!"
+
+msgid "Upload page content"
+msgstr "Ladda upp sidinnehåll"
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+"Du kan ladda upp innehåll för sidan som anges nedan. Om du döper om sidan "
+"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom "
+"bestämsden utgående från filens namn."
+
+msgid "File to load page content from"
+msgstr "Fil för att ladda sidinnehåll ifrån"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Page name"
+msgstr "Sidnamn"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Lokal Sajtkarta för \"%s\""
+
+msgid "Please log in first."
+msgstr "Var god logga in först."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Var god skapa en hemsida innan du skapar övriga sidor."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
+"[[%(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+msgstr ""
+"Du kan lägga till undersidor till din redan existerande hemsida här.\n"
+"\n"
+"Du kan välja hur öppen dessa sidor ska vara för andra läsare och "
+"skribenter.\n"
+"Åtkomst bestäms av medlemskap i motsvarande gruppsida.\n"
+"\n"
+"Ange undersidans namn och tryck på knappen för att skapa en ny sida.\n"
+"\n"
+"Innan du skapar åtkomstskyddade sidor, se till att motsvarande gruppsida\n"
+"existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för\n"
+"att skapa gruppsidor.\n"
+"\n"
+"||'''Lägg till en ny personlig sida:'''||'''Relaterad "
+"åtkomstlistgrupp:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,"
+"%(username)s)>>||[%(username)s/ReadWriteGroup]||\n"
+"||<<NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)>>||"
+"[%(username)s/ReadGroup]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)>>||"
+"%(username)s only||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Hantering av MinaSidor"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Ogiltigt filnamn \"%s\"!"
+
+msgid "Include all attachments?"
+msgstr "Inkludera alla bilagor?"
+
+msgid "Package pages"
+msgstr "Paketsidor"
+
+msgid "Package name"
+msgstr "Paketnamn"
+
+msgid "List of page names - separated by a comma"
+msgstr "Lista på sidnamn - separerade med komma"
+
+msgid "Rename Page"
+msgstr "Byt namn på sida"
+
+msgid "Create redirect for renamed page(s)?"
+msgstr "Skapa omdirigering för sidor som bytt namn?"
+
+msgid "Rename all /subpages too?"
+msgstr "Döp om alla /undersidor också?"
+
+msgid "Create redirect for renamed page?"
+msgstr "Skapa omdirigering för sidan som bytt namn?"
+
+msgid "Really rename this page?"
+msgstr "Döpa om den här sidan, är du säker?"
+
+msgid "Optional reason for the renaming"
+msgstr "Skäl till namnbyte (ej obligatoriskt)"
+
+msgid "Print"
+msgstr "Skriv ut"
+
+msgid "Print slide show"
+msgstr "Skriv ut bildspel"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Edit slide show"
+msgstr "Regigera bildspel"
+
+msgid "Quit"
+msgstr "Avsluta"
+
+msgid "Quit slide show"
+msgstr "Avsluta bildspel"
+
+msgid "Show first slide (up arrow)"
+msgstr "Visa första bilden (piltangenten upp)"
+
+msgid "Show last slide (down arrow)"
+msgstr "Visa sista bilden (piltangenten ner)"
+
+msgid "Show previous slide (left arrow)"
+msgstr "Visa förra bilden (piltangenten vänster)"
+
+msgid "Show next slide (right arrow)"
+msgstr "Visa nästa bilden (piltangenten höger)"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(inklusive %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of "
+"%(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Följande %(badwords)d ord kunde inte hittas i ordlistan av %(totalwords)d "
+"antal ord  s%(localwords)s och de är markerade här under:"
+
+msgid "Add checked words to dictionary"
+msgstr "Addera förkryssade ord till ordlistan"
+
+msgid "No spelling errors found!"
+msgstr "Inga felstavningar funna!"
+
+msgid "You can't save spelling words."
+msgstr "Du kan inte spara stavningsord."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Du kan inte stavningskontrollera en sida som du inte kan läsa."
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Teckna en prenumeration på sidan %s åt användarna"
+
+msgid "Enter user names (comma separated):"
+msgstr "Skriv användarnamnen (avgränsa med komma):"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Prenumererar på %s:"
+
+msgid "Not a user:"
+msgstr "Inte en användare:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Du får inte utföra den här åtgärden."
+
+#, python-format
+msgid "Rolled back changes to the page %s."
+msgstr "Återställde ändringar till sidan %s."
+
+msgid "Exception while calling rollback function:"
+msgstr "Fel i återställnings-funktionen:"
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+"Var god skriv in lösenordet av ditt konto hos den andra wikin. <<BR>> /!\\ "
+"Du borde lita på båda wikis eftersom lösenordet kan i princip läsasav "
+"administratörerna."
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Password"
+msgstr "Lösenord"
+
+msgid "Login"
+msgstr "Logga in"
+
+msgid "Operation was canceled."
+msgstr "Funktionen avbröts."
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr "De enda riktningar som stöds är BÅDA och NER."
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+"Var god ge ett interwikinamn i din wikiconfig (se HjälpMedAnpassning) för "
+"att kunna använda denna funktion."
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+"Fel parameter. Var god ge åtminstånde ''remoteWiki'' parametern. Mer hjälp "
+"finns i HelpOnSynchronisation."
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr "Känner inte igen ''remoteWiki''."
+
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr "Synkronisering avslutat. Se nere för statusmeddelandena."
+
+msgid "Synchronisation started -"
+msgstr "Synkronisering startat -"
+
+#, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
+msgstr ""
+"Fick en lista med %s lokala och %s avlägsna sidor. Detta ger %s sidor att "
+"bearbeta"
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr "Efter filtrering: %s sidor"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr ""
+"Hoppade över sidan %s p.g.a. brist på skrivrättigheter till lokala sidan."
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr "Tog bort sidan %s lokalt."
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr "Fel under borttagandet av lokala sidan %s:"
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr "Tog bort avlägsna sidan %s."
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr "Fel under borttagandet av avlägsna sidan %s:"
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+"Posten %s kan inte bli förenat automatiskt för den har ändrats i båda wikis. "
+"Var god och ta bort den i en av båda wikis och försök igen."
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+"Posten %s har olika mimetyper i båda wikis och kan inte förenas. Var god och "
+"ta bort den i en av båda wikis och försök igen."
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+"%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför har hela "
+"synkronisationshistoria till denna sida förlorats."
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr "Synkroniserar sidan %s med sidan %s på avlägsna sidan ..."
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr "Sidan %s har tagits bort på avlägsna sidan men ändrats lokalt."
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta "
+"stöds inte ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+"Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+"Detta är den första synkroniseringen för sidan %s mellan den lokala och den "
+"avlägsna wikin."
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna "
+"wikin."
+
+#, python-format
+msgid "Page %s successfully merged."
+msgstr "Sidan %s förenades korrekt."
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr "Sidan %s innehåller konflikter som infördes i den avlägsna wikin."
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr "Sidan %s förenat med konflikter."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Utför åtgärd %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Åtgärd %(actionname)s är exkluderad i den här wikin!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Du får inte använda åtgärden %(actionname)s på den här sidan!"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Skapa ny teckning \"%(filename)s (öppnas i nytt fönster)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Redigera teckning %(filename)s (opens in new window)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klickbar teckning %(filename)s"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Du får inte spara en teckning på den här sidan."
+
+msgid "Empty target name given."
+msgstr "Tomt namn för målet angiven."
+
+msgid "Edit drawing"
+msgstr "Redigera teckning"
+
+msgid "Wiki Backup"
+msgstr "Wiki-säkerhetskopia"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+"= Ladda ner en säkerhetskopia =\n"
+"Vänligen notera:\n"
+" * Spara säkerhetskopior på en säker plats - de innehåller känslig "
+"information.\n"
+" * Försäkra dig att inställningsvärden backup_* är korrekta och "
+"fullständiga.\n"
+" * Försäkra dig att det har laddats ner utan problem.\n"
+"\n"
+"För att få en säkerhetskopia, klicka bara här:"
+
+msgid "Backup"
+msgstr "Säkerhetskopiera"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Du får inte göra fjärrbackup."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Okänd backup-underåtgärd: %s."
+
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Du måste logga in för att använda denna åtgärd: %(action)s."
+
+msgid "Charts are not available!"
+msgstr "Diagram ej tillgängliga!"
+
+msgid "You need to provide a chart type!"
+msgstr "Du måste ange en diagramtyp!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Ogiltig diagramtyp \"%s\"!"
+
+msgid "No older revisions available!"
+msgstr "Inga äldre versioner tillgängliga!"
+
+msgid "No log entries found."
+msgstr "Inga loggposter hittades."
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Skillnader för \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Skillnader mellan versionerna %d och %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(sträcker sig över %d versioner)"
+
+msgid "Revert to this revision"
+msgstr "Återgå till denna version"
+
+msgid "Previous change"
+msgstr "Föregående ändring"
+
+msgid "Next change"
+msgstr "Nästa ändring"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Diff with oldest revision in left pane"
+msgstr "Diff med äldsta versionen i vänstra panelen"
+
+msgid "No older revision available for diff"
+msgstr "Ingen äldre version tillgänglig för diff"
+
+msgid "Diff with older revision in left pane"
+msgstr "Diff med äldre version i vänstra panelen"
+
+msgid "Diff with newer revision in left pane"
+msgstr "Diff med nyare version i vänstra panelen"
+
+msgid "Can't change to revision newer than in right pane"
+msgstr "Kan inte byta till nyare version än den i högra panelen"
+
+msgid "N/A"
+msgstr "Ej tillgänglig"
+
+msgid "Diff with older revision in right pane"
+msgstr "Diff med äldre version i högra panelen"
+
+msgid "Can't change to revision older than revision in left pane"
+msgstr "Kan inte byta till äldre version än den i vänstra panelen"
+
+msgid "Diff with newer revision in right pane"
+msgstr "Diff med nyare version i högra panelen"
+
+msgid "No newer revision available for diff"
+msgstr "Ingen nyare version tillgänglig för diff"
+
+msgid "Diff with newest revision in right pane"
+msgstr "Diff med nyaste versionen i högra panelen"
+
+msgid "No differences found!"
+msgstr "Inga skillnader hittades!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Sidan sparades %(count)d gånger, dock!"
+
+msgid "(ignoring whitespace)"
+msgstr "(ignorerar mellanrum)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ignorera ändringar i mängden blanktecken"
+
+msgid "TextCha: Wrong answer! Try again below..."
+msgstr "TextCha: Fel svar! Försök igen nedan..."
+
+msgid ""
+"Supplying a comment is mandatory. Write a comment below and try again..."
+msgstr "Du måste ge en kommentar. Skriv en nedanför och försök igen..."
+
+msgid "Attachment location"
+msgstr "Bilagans plats"
+
+msgid "Attachment name"
+msgstr "Bilagans namn"
+
+msgid "Refresh attachment list"
+msgstr "Ladda om listan över bilagor"
+
+msgid "List of attachments"
+msgstr "Lista över bilagor"
+
+msgid "Available attachments for page"
+msgstr "Bilagor till sida"
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr "(!) Bara sidor som ändrats sedan '''%s''' visas!"
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+"/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför inte "
+"hänsyn till i sökresultaten!"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Var god använd en mer specifik sökterm än {{{\"%s\"}}}"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Titelsökning: \"%s\""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Avancerad sökning: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Fulltextsökning: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
+"för mer information."
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var god "
+"ändra vissa termer och se HelpOnSearching för mer information.%s"
+
+msgid "(!) Consider performing a"
+msgstr "(!) Överväg utföra en"
+
+msgid "full-text search with your search terms"
+msgstr "fulltextsökning med dina söktermer"
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+"(!) Du utför en titelsökning som kanske inte innehåller alla relaterade "
+"resultat för din förfrågan i denna wiki. <<BR>>"
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr "Klicka här för att göra en fulltextsökning med dina sökord!"
+
+msgid "General Information"
+msgstr "Översiktlig information"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Sidstorlek: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "SHA-checksumman för den här sidans innehåll är:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Följande användare prenumerar på den här sidan:"
+
+msgid "This page links to the following pages:"
+msgstr "Den här sidan länkar till följande sidor:"
+
+#, python-format
+msgid ""
+"Showing page edit history entries from '''%(start_offset)d''' to "
+"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
+msgstr ""
+"Visar sidans redigeringshistoria från '''%(start_offset)d''' till "
+"'''%(end_offset)d''' utifrån totalt '''%(total_count)d''' stycken inlägg."
+
+msgid "Newer"
+msgstr "Nyare"
+
+msgid "Older"
+msgstr "Äldre"
+
+#, python-format
+msgid "%s items per page"
+msgstr "%s poster per sida"
+
+msgid "Diff"
+msgstr "Ändringar"
+
+msgid "Action"
+msgstr "Åtgärd"
+
+msgid "to previous"
+msgstr "till föregående"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Återgå till version %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Bytt namn från '%(oldpagename)s'."
+
+msgid "Revision History"
+msgstr "Revisionshistorik"
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Info om \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Visa \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Översiktlig information"
+
+msgid "Page hits and edits"
+msgstr "Sidträffar och ändringar"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Bara administratorn får använda den här åtgärden."
+
+msgid "No page packages found."
+msgstr "Inga sidopaket hittades."
+
+msgid "page package"
+msgstr "sidopaket"
+
+msgid "Choose:"
+msgstr "Välj:"
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr "Installera språkpaket för '%s'"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Full länklista för \"%s\""
+
+msgid "You are now logged out."
+msgstr "Du är nu utloggad."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Tomt användarnamn. Var god ange ett användarnamn."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Ogiltigt användarnamn {{{'%s'}}}.\n"
+"Namnet kan innehålla vilket alfanumeriskt tecken ur Unicode som helst,\n"
+"med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Det här användarnamnet tillhör redan någon annan."
+
+msgid "Passwords don't match!"
+msgstr "Lösenorden är inte likadana!"
+
+msgid "Please specify a password!"
+msgstr "Var god ange ett lösenord!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Lösenord ogiltigt: %s"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Var god ange din epostadress. Om du förlorar dina inloggningsuppgifter kan "
+"du få tillbaka dem via epost."
+
+msgid "This email already belongs to somebody else."
+msgstr "Den här epostadressen tillhör redan någon annan."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Användarkonto skapat! Du kan använda det här kontot för att logga in nu..."
+
+msgid "(Use FirstnameLastname)"
+msgstr "(Använd FörnamnEfternamn)"
+
+msgid "Password repeat"
+msgstr "Upprepa lösenord"
+
+msgid "Email"
+msgstr "Epost"
+
+msgid "TextCha (required)"
+msgstr "TextCha (obligatorisk)"
+
+msgid "Create Profile"
+msgstr "Skapa profil"
+
+msgid "Create Account"
+msgstr "Skapa konto"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
+
+msgid "You must login to add a quicklink."
+msgstr "Du måste logga in för att kunna lägga till en snabblänk."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "En snabblänk till den här sidan har lagts till åt dig."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "En snabblänk till den här sidan kunde inte läggas till åt dig."
+
+msgid "You already have a quicklink to this page."
+msgstr "Du har redan en snabblänk till den här sidan."
+
+msgid "You must login to remove a quicklink."
+msgstr "Du måste logga in för att ta bort en snabblänk."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Din snabblänk till den här sidan har tagits bort."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "Din snabblänk till den här sidan kunde inte tas bort."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Du måste ha en snabblänk till den här sidan för att ta bort den."
+
+msgid "If this account exists an email was sent."
+msgstr "Om detta konto existerar har det skickats en epost."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Den här wikin har inte eposthantering påslagen.\n"
+"För att få eposthantering påslagen, kontakta wikins ägare."
+
+msgid "Please provide a valid email address or a username!"
+msgstr "Var god ange en giltig epostadress eller användarnamn!"
+
+msgid "Username"
+msgstr "Användarnamn"
+
+msgid "Mail me my account data"
+msgstr "Eposta mig information om mitt konto"
+
+msgid "Recovery token"
+msgstr "Token för återställning"
+
+msgid "New password"
+msgstr "Nytt lösenord"
+
+msgid "New password (repeat)"
+msgstr "Nytt lösenord (upprepa)"
+
+msgid "Reset my password"
+msgstr "Återställ mitt lösenord"
+
+msgid "Your password has been changed, you can log in now."
+msgstr "Ditt lösenord har ändrats, du kan logga in nu."
+
+msgid "Your token is invalid!"
+msgstr "Din token är inte giltig!"
+
+msgid "Password reset"
+msgstr "Återställ lösenord"
+
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr ""
+"\n"
+"== Återställ lösenord ==\n"
+"Skriv in ett nytt lösenord nedanför."
+
+msgid "Lost password"
+msgstr "Glömt lösenord"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+"\n"
+"== Återställa ett bortglömt lösenord ==\n"
+"Om du har glömt ditt lösenord, ange din epost-adress eller ditt\n"
+"användarnamn och klicka på '''Eposta mig information om mitt konto'''.\n"
+"Du kommer få en epost med en token för återställning av lösenordet som\n"
+"du kan använda för att ändra lösenordet. Denna epost kommer även innhålla\n"
+"vidare instruktioner."
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
+"\n"
+"=== Återställning av lösenord ===\n"
+"Om du redan har fått epost med en token för återställning, skriv in ditt\n"
+"användarnamn, token och ett nytt lösenord (två gångar) nedan."
+
+msgid "Revert"
+msgstr "Återställ"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Du får inte återställa denna sida!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Den aktuella versionen av sidan visades när du valde att återställa. Om du "
+"vill återgå till en tidigare version, titta först på just denna och sen välj "
+"att återställa till denna (äldre) version igen."
+
+msgid "Optional reason for reverting this page"
+msgstr "Skäl till sidas återställande (ej obligatoriskt)"
+
+msgid "Really revert this page?"
+msgstr "Återställ den här sidan, är du säker?"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Uppladdning av bilaga '%(filename)s'."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Teckningen '%(filename)s' sparad."
+
+msgid "New page:\n"
+msgstr "Ny sida:\n"
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+"Du bör från hand gå till din OpenID leverantörs wiki\n"
+"och logga in innan du kan använda din OpenID. MoinMoin kommer\n"
+"aldrig att låta dig skriva in lösenordet här.\n"
+"\n"
+"När du har loggat in, ladda bara om denna sida."
+
+msgid "OpenID Trust verification"
+msgstr "OpenID Trust verification"
+
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr "Sidan %s har frågat efter din identitet."
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+"\n"
+"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför "
+"att\n"
+"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en "
+"ombudsidentitet\n"
+"kommer sidan själv se till att ombudet löses upp.)"
+
+msgid "Trust root"
+msgstr "Lita på root"
+
+msgid "Identity URL"
+msgstr "Identitets-URL"
+
+msgid "Remember decision"
+msgstr "Kom ihåg detta val"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr "Kom ihåg detta förtroelseval och fråga inte igen"
+
+msgid "Approve"
+msgstr "Godkänn"
+
+msgid "Don't approve"
+msgstr "Godkänn ej"
+
+msgid "OpenID not served"
+msgstr "OpenID levererades inte"
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+"\n"
+"Tyvärr har du inte skapat din hemsida än. Därför kan vi inte\n"
+"leverera en OpenID för dig. Var god skapa först din hemsida och\n"
+"sedan ladda om denna sida eller klicka på knappen nedan för att\n"
+"avbryta verifikationen."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Du får inte prenumerera på en sida du inte kan läsa."
+
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "Den här wikin har inte hantering av mail/Jabber påslagen."
+
+msgid "You must log in to use subscriptions."
+msgstr "Du måste logga in för att kunna prenumerera på sidor."
+
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"Ange din epostadress eller Jabber-ID i AnvändarInställningar för att kunna "
+"prenumerera på sidor."
+
+msgid "You are already subscribed to this page."
+msgstr "Du prenumerar redan på den här sidan."
+
+msgid "You have been subscribed to this page."
+msgstr "Du prenumerar nu på den här sidan."
+
+msgid "You could not get subscribed to this page."
+msgstr "Du kunde inte prenumerar på den här sidan."
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "Du får inte skapa tilläggssidan."
+
+msgid "Your subscription to this page has been removed."
+msgstr "Din prenumeration på den här sidan har avslutats."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Kan inte ta bort reguljär uttrycks-prenumeration!"
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr ""
+"Redigera de reguljära uttrycken för dina prenumerationer i dina "
+"inställningar."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Du måste prenumera för att kunna sluta prenumera."
+
+msgid "Please choose:"
+msgstr "Var god välj:"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
+
+msgid "Missing user name. Please enter user name and password."
+msgstr "Användarnamn saknas. Var god ange användarnamn och lösenord."
 
 msgid "Invalid username or password."
 msgstr "Felaktigt användarnamn eller lösenord."
 
 #, python-format
 msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. "
 msgstr ""
-"Den andra wikin använder ett annorlunda InterWiki namn %(remotename)s) "
-"interntän det du har angivit %(localname)s)."
-
-msgid "Text mode"
-msgstr "Textläge"
+"Om du inte har ett konto, kan du <a href=\"%(userprefslink)s\">skapa ett nu</"
+"a>."
 
 #, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Okänd åtgärd %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Du får inte göra %(action_name)s på den här sidan."
-
-msgid "Login and try again."
-msgstr "Logga in och försök igen."
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Argumentet \"%s\" måste vara ett sanningsvärde, inte \"%s\""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Argumentet måste vara ett sanningsvärde, inte \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Argumentet \"%s\" måste vara ett heltal, inte \"%s\""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Argumentet måste vara ett heltal, inte \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "Argumentet \"%s\" måste vara ett flyttal, inte \"%s\""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Argumentet måste vara ett flyttal, inte \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Argumentet \"%s\" måste vara ett komplext tal, inte \"%s\""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Argumentet måste vara ett komplext tal, inte \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Argumentet \"%s\" måste vara en av \"%s\", inte \"%s\""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Argumentet måste vara en av \"%s\", inte \"%s\""
-
-msgid "Too many arguments"
-msgstr "För många argument"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr "Kan inte ta argument om inte namnet följer namngivna argument"
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Argumentet \"%s\" är obligatoriskt"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Inget argument med namn \"%s\""
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Förväntade \"=\" följa \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Förväntade ett värde för nyckel \"%(token)s\""
-
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr "Ogiltigt reguliärt uttryck för emfas \"%(regex)s\": %(error)s"
-
-#, python-format
-msgid ""
-"Text matching regular expression \"%(regex)s\" is highlighted. "
-"%(switch_link)s."
-msgstr ""
-
-msgid "Switch to non-highlighted view"
-msgstr ""
-
-msgid ""
-"The backed up content of this page is deprecated and will rank lower in "
-"search results!"
-msgstr ""
-"Reservkopians innehåll av den här sidan tas avstånd ifrån och kommer att "
-"rankas lägre i sökresultat!"
-
-#, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr "Version %(rev)d vid datum %(date)s"
-
-#, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "Omdirigerad från sida \"%(page)s\""
-
-#, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Den här sidan är omdirigerad till \"%(page)s\""
-
-msgid "Create New Page"
-msgstr "Skapa ny sida"
-
-msgid "You are not allowed to view this page."
-msgstr "Du får inte titta på den här sidan."
-
-msgid "No recipients, nothing to do"
-msgstr "Inga mottagare, inget att göra"
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Anslutning till mailserver '%(server)s' misslyckades: %(reason)s"
-
-msgid "Mail not sent"
-msgstr "Epost inte skickad"
-
-msgid "Mail sent OK"
-msgstr "Epost skickad korrekt"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "From"
-msgstr "Från"
-
-msgid "To"
-msgstr "Till"
-
-msgid "Content"
-msgstr "Innehåll"
-
-msgid "Attachments"
-msgstr "Bilagor"
-
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Tyvärr, kan inte spara sidan eftersom \"%(content)s\" inte är tillåtet på "
-"den här wikin."
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr "<a href=\"%(sendmypasswordlink)s\">Glömt ditt lösenord?</a>"
 
 msgid "Could not contact botbouncer.com."
 msgstr "Kunde inte kontaktera botbouncer.com."
 
-msgid "Please log in first."
-msgstr "Var god logga in först."
-
-msgid "Failed to connect to database."
-msgstr "Fel att ansluta till databasen."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
-
 #, python-format
 msgid "LDAP server %(server)s failed."
 msgstr "LDAP-server %(server)s misslyckades."
+
+msgid "Failed to connect to database."
+msgstr "Fel att ansluta till databasen."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -561,9 +1744,6 @@ msgstr ""
 "Var god och välj ett namn för kontot nu.\n"
 "Om du väljer ett befintligt namn, kommer du att frågas efter\n"
 "lösenordet och kommer kunna förknippa kontot med din OpenID."
-
-msgid "Name"
-msgstr "Namn"
 
 msgid "Choose this name"
 msgstr "Välj detta namn"
@@ -581,9 +1761,6 @@ msgstr ""
 "Om det är ditt användarnamn, skriv in lösenordet nere för att förknippa\n"
 "användarnamnet med din OpenID. Annars välj ett nytt namn och lämna\n"
 "fältet för lösenord tomt."
-
-msgid "Password"
-msgstr "Lösenord"
 
 msgid "Associate this name"
 msgstr "Förknippa detta namn"
@@ -642,177 +1819,6 @@ msgstr ""
 "Om du inte har ett konto än, så kan du fortfarande logga in med din OpenID "
 "ochskapa ett under inloggningen."
 
-#, fuzzy
-msgid "Missing user name. Please enter user name and password."
-msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. "
-msgstr ""
-"Om du inte har ett konto, kan du <a href=\"%(userprefslink)s\">skapa ett nu</"
-"a>."
-
-#, python-format
-msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr "<a href=\"%(sendmypasswordlink)s\">Glömt ditt lösenord?</a>"
-
-msgid "HelpOnParsers"
-msgstr "HjälpMedParsers"
-
-#, python-format
-msgid ""
-"Syntax highlighting not supported for '%(syntax)s', see "
-"%(highlight_help_page)s."
-msgstr "Syntaxemfas stöds inte för '%(syntax)s', se %(highlight_help_page)s."
-
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
-"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
-"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
-"italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-" Emfas:: <<Verbatim(//)>>''kursiv''<<Verbatim(//)>>; "
-"<<Verbatim(**)>>'''fetstil'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''kursiv "
-"fetstil'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''blandat "
-"''<<Verbatim(**)>>'''''fetstil'''<<Verbatim(**)>> och "
-"kursiv''<<Verbatim(//)>>;\n"
-" Horisontell linje:: <<Verbatim(----)>>\n"
-" Tvinga radbrytning:: <<Verbatim(\\\\)>>\n"
-" Rubriker:: = Rubrik 1 =; == Rubrik 2 ==; === Rubrik 3 ===; ==== Rubrik 4 "
-"====; ===== Rubrik 5 =====.\n"
-" Listor:: * punkter; ** underpunkter; # numrerade punkter; ## undernumrerade "
-"punkter.\n"
-" Länkar:: <<Verbatim([[url]])>>; <<Verbatim([[url|länkens text]])>>.\n"
-" Tabeller:: |= huvudtext | celltext | mer celltext |;\n"
-"\n"
-"(!) För mer hjälp, se HjälpMedÄndringar.\n"
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT-alternativet avstängt, se HjälpMedAnpassning."
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT-konvertering är inte tillgänglig, installera 4suite 1.x."
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "%(errortype)s processfel"
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Rendering av reStructured-text är inte möjlig, installera Docutils först."
-
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-"{{{\n"
-"Emfas: *kursiv* **fetstil** ``monospace``\n"
-"\n"
-"Rubriker: Rubrik 1   Rubrik 2   Rubrik 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horisontell linje: ----\n"
-"\n"
-"Länkar: AvslutandeUnderstrykning_ `flera ord med backticks`_ extern_\n"
-"\n"
-".. _extern: http://extern-sida.exempel.com/foo/\n"
-"\n"
-"Listor: * punkter; 1., a. numrerade punkter.\n"
-"}}}\n"
-"(!) För mer hjälp, se\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maximalt antal tillåtna inkluderingar har överskridits**"
-
-#, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "**Du får inte läsa sidan: %s**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Kunde inte hitta den refererade sidan: %s**"
-
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
-"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
-"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
-"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
-"linktext]])>>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
-msgstr ""
-" Emfas:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; "
-"<<Verbatim(''')>>'''fetstil'''<<Verbatim(''')>>; "
-"<<Verbatim(''''')>>'''''kursiv fetstil'''''<<Verbatim(''''')>>; "
-"<<Verbatim('')>>''blandad "
-"''<<Verbatim(''')>>'''''fetstil'''<<Verbatim(''')>> och "
-"kursiv''<<Verbatim('')>>; <<Verbatim(----)>> horisontell linje.\n"
-" Rubriker:: = Rubrik 1 =; == Rubrik 2 ==; === Rubrik 3 ===; ==== Rubrik 4 "
-"====; ===== Rubrik 5 =====.\n"
-" Listor:: mellanslag plus en av: * punkter; 1., a., A., i., I. numrerade "
-"punkter; 1.#n börja numrering på n; enbart mellanslag indenterar.\n"
-" Länkar:: <<Verbatim(SkrivIhopOrdMedStoraBokstäver)>>; <<Verbatim([[url|"
-"länkens text]])>>.\n"
-" Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;  "
-"inga efterföljande mellanslag är tillåtna efter tabeller och rubriker.\n"
-"\n"
-"(!) För mer hjälp, se HjälpMedÄndringar eller HjälpMedMoinWikiSyntax.\n"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Förväntade \"%(wanted)s\" efter \"%(key)s\", hittade \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Förväntade ett heltal \"%(key)s\" före \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Förväntade ett heltal \"%(arg)s\" efter \"%(key)s\""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Förväntade ett färgvärde \"%(arg)s\" efter \"%(key)s\""
-
 msgid "Password is too short."
 msgstr "Lösenordet är för kort."
 
@@ -832,9 +1838,6 @@ msgstr "Skillnader"
 msgid "Info"
 msgstr "Info"
 
-msgid "Edit"
-msgstr "Redigera"
-
 msgid "UnSubscribe"
 msgstr "Avsluta prenumeration"
 
@@ -846,9 +1849,6 @@ msgstr "Råtext"
 
 msgid "XML"
 msgstr "XML"
-
-msgid "Print"
-msgstr "Skriv ut"
 
 msgid "View"
 msgstr "Visa"
@@ -893,14 +1893,8 @@ msgstr "Kom ihåg inloggningsuppgifter"
 msgid "Disable this account forever"
 msgstr "Stäng av det här kontot för alltid"
 
-msgid "(Use FirstnameLastname)"
-msgstr "(Använd FörnamnEfternamn)"
-
 msgid "Alias-Name"
 msgstr "Alias-namn"
-
-msgid "Email"
-msgstr "Epost"
 
 msgid "Jabber ID"
 msgstr "Jabber-ID"
@@ -1031,217 +2025,6 @@ msgstr ""
 "    Användarnamn: %(username)s\n"
 "    Epost-adress: %(useremail)s"
 
-msgid "anonymous"
-msgstr "anonym"
-
-msgid "Line"
-msgstr "Linje"
-
-msgid "No differences found!"
-msgstr "Inga skillnader hittades!"
-
-msgid "Deletions are marked like this."
-msgstr "Raderingar markeras som den här."
-
-msgid "Additions are marked like this."
-msgstr "Bidrag är markerade som den här."
-
-msgid "DeleteCache"
-msgstr "RaderaCache"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(cachad %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Eller pröva någon av de här åtgärderna:"
-
-msgid "Unsubscribe"
-msgstr "Avsluta prenumeration"
-
-msgid "Home"
-msgstr "Hem"
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[BORTTAGEN]"
-
-msgid "[UPDATED]"
-msgstr "[UPPDATERAD]"
-
-msgid "[RENAMED]"
-msgstr "[DÖPT OM]"
-
-msgid "[CONFLICT]"
-msgstr "[KONFLIKT]"
-
-msgid "[NEW]"
-msgstr "[NY]"
-
-msgid "[DIFF]"
-msgstr "[ÄNDRINGAR]"
-
-msgid "[BOTTOM]"
-msgstr "[SLUT]"
-
-msgid "[TOP]"
-msgstr "[BÖRJAN]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Klicka här för att göra en fulltextsökning på den här titeln"
-
-msgid "Settings"
-msgstr "Inställningar"
-
-msgid "Logout"
-msgstr "Logga ut"
-
-msgid "Login"
-msgstr "Logga in"
-
-msgid "Clear message"
-msgstr "Ta bort meddelande"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "senast redigerad %(time)s av %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "senast ändrad %(time)s"
-
-msgid "Search:"
-msgstr "Sök:"
-
-msgid "Text"
-msgstr "Text"
-
-msgid "Titles"
-msgstr "Titlar"
-
-msgid "Search"
-msgstr "Sök"
-
-msgid "More Actions:"
-msgstr "Fler åtgärder:"
-
-msgid "------------------------"
-msgstr "------------------------"
-
-msgid "Raw Text"
-msgstr "Råtext"
-
-msgid "Print View"
-msgstr "Utskriftsvy"
-
-msgid "Delete Cache"
-msgstr "Radera cache"
-
-msgid "Rename Page"
-msgstr "Byt namn på sida"
-
-msgid "Copy Page"
-msgstr "Kopiera sida"
-
-msgid "Delete Page"
-msgstr "Radera sida"
-
-msgid "Like Pages"
-msgstr "Liknande sidor"
-
-msgid "Local Site Map"
-msgstr "Lokal översiktskarta"
-
-msgid "My Pages"
-msgstr "Mina sidor"
-
-msgid "Subscribe User"
-msgstr "Användarprenumeration"
-
-msgid "Remove Spam"
-msgstr "Ta bort spam"
-
-msgid "Revert to this revision"
-msgstr "Återgå till denna version"
-
-msgid "Package Pages"
-msgstr "Paketsidor"
-
-msgid "Render as Docbook"
-msgstr "Rendera som Docbook"
-
-msgid "Sync Pages"
-msgstr "Synkronisera sidor"
-
-msgid "Do"
-msgstr "Gör"
-
-msgid "Comments"
-msgstr "Kommentarer"
-
-msgid "Edit (Text)"
-msgstr "Redigera (textläge)"
-
-msgid "Edit (GUI)"
-msgstr "Redigera (grafiskt)"
-
-msgid "Immutable Page"
-msgstr "Skrivskyddad sida"
-
-msgid "Remove Link"
-msgstr "Ta bort länk"
-
-msgid "Add Link"
-msgstr "Lägg till länk"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Visa %s dagar."
-
-msgid "Wiki Markup"
-msgstr "Wiki-märkning"
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Page"
-msgstr "Sida"
-
-msgid "User"
-msgstr "Användare"
-
-msgid "[ATTACH]"
-msgstr "[BIFOGA]"
-
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr "Optioner --pages och --search utesluter varandra!"
-
-msgid "You must specify an output file!"
-msgstr "Du måste ange en fil för output!"
-
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr "Inga sidor angivna med --pages eller --search, antar hela paketet."
-
-msgid "All attachments included into the package."
-msgstr "Alla bilagor inkluderade i paketet."
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr "Filen för output finns redan! Jag är feg och vägrar fortsätta!"
-
-msgid "Attachment link"
-msgstr "Länk till bilaga"
-
-msgid "Page link"
-msgstr "Länk till sida"
-
-msgid "Changed page"
-msgstr "Ändrad sida"
-
-msgid "Page changed"
-msgstr "Sidan har förändrats"
-
 msgid "Page has been modified"
 msgstr "Sidan har ändrats"
 
@@ -1272,15 +2055,6 @@ msgstr "En användare prenumerar nu på en sida"
 msgid "A new account has been created"
 msgstr "Ett nytt konto har skapats"
 
-msgid "Trivial "
-msgstr "trivial "
-
-msgid "New page:\n"
-msgstr "Ny sida:\n"
-
-msgid "No differences found!\n"
-msgstr "Inga skillnader funna!\n"
-
 #, python-format
 msgid ""
 "Attachment link: %(attach)s\n"
@@ -1289,1362 +2063,34 @@ msgstr ""
 "Länk till bilagan: %(attach)s\n"
 "Länk till sidan: %(page)s\n"
 
-msgid "[all]"
-msgstr "[alla]"
+msgid "Attachment link"
+msgstr "Länk till bilaga"
 
-msgid "[not empty]"
-msgstr "[ej tom]"
+msgid "Page link"
+msgstr "Länk till sida"
 
-msgid "[empty]"
-msgstr "[tom]"
+msgid "Changed page"
+msgstr "Ändrad sida"
 
-msgid "filter"
-msgstr "filter"
+msgid "Page changed"
+msgstr "Sidan har förändrats"
 
-#, python-format
-msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
-msgstr ""
-"Resultat %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s av %(aboutHits)s %(bs)s"
-"%(hits)d%(be)s resultat av ungefär %(pages)d pages."
-
-msgid "seconds"
-msgstr "sekunder"
-
-msgid "Previous"
-msgstr "Föregående"
-
-msgid "Next"
-msgstr "Nästa"
-
-msgid "rev"
-msgstr "ver"
-
-msgid "current"
-msgstr "nuvarande"
-
-#, python-format
-msgid "last modified: %s"
-msgstr "senast ändrad: %s"
-
-msgid "match"
-msgstr "träff"
-
-msgid "matches"
-msgstr "träffar"
-
-msgid "about"
-msgstr "om"
-
-msgid "This page is already deleted or was never created!"
-msgstr "Den här sidan är redan raderad eller existerade aldrig!"
-
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Ogiltigt filnamn \"%s\"!"
-
-msgid "Include all attachments?"
-msgstr "Inkludera alla bilagor?"
-
-msgid "Package pages"
-msgstr "Paketsidor"
-
-msgid "Package name"
-msgstr "Paketnamn"
-
-msgid "List of page names - separated by a comma"
-msgstr "Lista på sidnamn - separerade med komma"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Inga sidor liknar \"%s\"!"
-
-#, python-format
-msgid "Rolled back changes to the page %s."
-msgstr "Återställde ändringar till sidan %s."
-
-msgid "Exception while calling rollback function:"
-msgstr "Fel i återställnings-funktionen:"
-
-msgid ""
-"Please enter your password of your account at the remote wiki below. "
-"<<BR>> /!\\ You should trust both wikis because the password could be read "
-"by the particular administrators."
-msgstr ""
-"Var god skriv in lösenordet av ditt konto hos den andra wikin. <<BR>> /!\\ "
-"Du borde lita på båda wikis eftersom lösenordet kan i princip läsasav "
-"administratörerna."
-
-msgid "Operation was canceled."
-msgstr "Funktionen avbröts."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Var god använd det interaktiva användargränsnittet för att utföra åtgärd "
-"%(actionname)s!"
-
-msgid "The only supported directions are BOTH and DOWN."
-msgstr "De enda riktningar som stöds är BÅDA och NER."
-
-msgid ""
-"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
-"be able to use this action."
-msgstr ""
-"Var god ge ett interwikinamn i din wikiconfig (se HjälpMedAnpassning) för "
-"att kunna använda denna funktion."
-
-msgid ""
-"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
-"Refer to HelpOnSynchronisation for help."
-msgstr ""
-"Fel parameter. Var god ge åtminstånde ''remoteWiki'' parametern. Mer hjälp "
-"finns i HelpOnSynchronisation."
-
-msgid "The ''remoteWiki'' is unknown."
-msgstr "Känner inte igen ''remoteWiki''."
-
-msgid "A severe error occurred:"
-msgstr "Ett allvarligt fel uppstod:"
-
-msgid "Synchronisation finished. Look below for the status messages."
-msgstr "Synkronisering avslutat. Se nere för statusmeddelandena."
-
-msgid "Synchronisation started -"
-msgstr "Synkronisering startat -"
-
-#, python-format
-msgid ""
-"Got a list of %s local and %s remote pages. This results in %s pages to "
-"process."
-msgstr ""
-"Fick en lista med %s lokala och %s avlägsna sidor. Detta ger %s sidor att "
-"bearbeta"
-
-#, python-format
-msgid "After filtering: %s pages"
-msgstr "Efter filtrering: %s sidor"
-
-#, python-format
-msgid "Skipped page %s because of no write access to local page."
-msgstr ""
-"Hoppade över sidan %s p.g.a. brist på skrivrättigheter till lokala sidan."
-
-#, python-format
-msgid "Deleted page %s locally."
-msgstr "Tog bort sidan %s lokalt."
-
-#, python-format
-msgid "Error while deleting page %s locally:"
-msgstr "Fel under borttagandet av lokala sidan %s:"
-
-#, python-format
-msgid "Deleted page %s remotely."
-msgstr "Tog bort avlägsna sidan %s."
-
-#, python-format
-msgid "Error while deleting page %s remotely:"
-msgstr "Fel under borttagandet av avlägsna sidan %s:"
-
-#, python-format
-msgid ""
-"The item %s cannot be merged automatically but was changed in both wikis. "
-"Please delete it in one of both wikis and try again."
-msgstr ""
-"Posten %s kan inte bli förenat automatiskt för den har ändrats i båda wikis. "
-"Var god och ta bort den i en av båda wikis och försök igen."
-
-#, python-format
-msgid ""
-"The item %s has different mime types in both wikis and cannot be merged. "
-"Please delete it in one of both wikis or unify the mime type, and try again."
-msgstr ""
-"Posten %s har olika mimetyper i båda wikis och kan inte förenas. Var god och "
-"ta bort den i en av båda wikis och försök igen."
-
-#, python-format
-msgid ""
-"The item %s was renamed locally. This is not implemented yet. Therefore the "
-"full synchronisation history is lost for this page."
-msgstr ""
-"%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför har hela "
-"synkronisationshistoria till denna sida förlorats."
-
-#, python-format
-msgid "Synchronising page %s with remote page %s ..."
-msgstr "Synkroniserar sidan %s med sidan %s på avlägsna sidan ..."
-
-#, python-format
-msgid "The page %s was deleted remotely but changed locally."
-msgstr "Sidan %s har tagits bort på avlägsna sidan men ändrats lokalt."
-
-#, python-format
-msgid ""
-"The page %s could not be synced. The remote page was renamed. This is not "
-"supported yet. You may want to delete one of the pages to get it synced."
-msgstr ""
-"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta "
-"stöds inte ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
-
-#, python-format
-msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr ""
-"Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
-
-#, python-format
-msgid ""
-"This is the first synchronisation between the local and the remote wiki for "
-"the page %s."
-msgstr ""
-"Detta är den första synkroniseringen för sidan %s mellan den lokala och den "
-"avlägsna wikin."
-
-#, python-format
-msgid ""
-"The page %s could not be merged because you are not allowed to modify the "
-"page in the remote wiki."
-msgstr ""
-"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna "
-"wikin."
-
-#, python-format
-msgid "Page %s successfully merged."
-msgstr "Sidan %s förenades korrekt."
-
-#, python-format
-msgid "Page %s contains conflicts that were introduced on the remote side."
-msgstr "Sidan %s innehåller konflikter som infördes i den avlägsna wikin."
-
-#, python-format
-msgid "Page %s merged with conflicts."
-msgstr "Sidan %s förenat med konflikter."
-
-msgid "Attachment location"
-msgstr "Bilagans plats"
-
-msgid "Page name"
-msgstr "Sidnamn"
-
-msgid "Attachment name"
-msgstr "Bilagans namn"
-
-msgid "Refresh attachment list"
-msgstr "Ladda om listan över bilagor"
-
-msgid "List of attachments"
-msgstr "Lista över bilagor"
-
-msgid "Available attachments for page"
-msgstr "Bilagor till sida"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Exakt en sida som liknar \"%s\" funnen, dirigerar om till sidan."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Sidor som liknar \"%s\""
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s för \"%(title)s\""
-
-msgid "You must login to remove a quicklink."
-msgstr "Du måste logga in för att ta bort en snabblänk."
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Din snabblänk till den här sidan har tagits bort."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Din snabblänk till den här sidan kunde inte tas bort."
-
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "Du måste ha en snabblänk till den här sidan för att ta bort den."
-
-msgid "Please choose:"
-msgstr "Var god välj:"
-
-#, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Du måste logga in för att använda denna åtgärd: %(action)s."
-
-msgid "Only superuser is allowed to use this action."
-msgstr "Bara administratorn får använda den här åtgärden."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Du får inte prenumerera på en sida du inte kan läsa."
-
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "Den här wikin har inte hantering av mail/Jabber påslagen."
-
-msgid "You must log in to use subscriptions."
-msgstr "Du måste logga in för att kunna prenumerera på sidor."
-
-msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
-msgstr ""
-"Ange din epostadress eller Jabber-ID i AnvändarInställningar för att kunna "
-"prenumerera på sidor."
-
-msgid "You are already subscribed to this page."
-msgstr "Du prenumerar redan på den här sidan."
-
-msgid "You have been subscribed to this page."
-msgstr "Du prenumerar nu på den här sidan."
-
-msgid "You could not get subscribed to this page."
-msgstr "Du kunde inte prenumerar på den här sidan."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Uppladdning av bilaga '%(filename)s'."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Bilagan '%(filename)s' raderad."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Teckningen '%(filename)s' sparad."
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Återgå till version %(rev)d."
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Bytt namn från '%(oldpagename)s'."
-
-#, python-format
-msgid "[%d attachments]"
-msgstr "[%d bilagor]"
-
-#, python-format
-msgid ""
-"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
-"page."
-msgstr ""
-"Det finns <a href=\"%(link)s\">%(count)s bifogade filer(s)</a> lagrade på "
-"den här sidan."
-
-msgid "Filename of attachment not specified!"
-msgstr "Filnamnet för bilagan ej angivet!"
-
-#, python-format
-msgid "Attachment '%(filename)s' does not exist!"
-msgstr "Bilagan \"%(filename)s\" existerar inte!"
-
-msgid ""
-"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
-"as shown below in the list of files. \n"
-"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
-"since this is subject to change and can break easily."
-msgstr ""
-"För att referera till bilagor på en sida, använd '''{{{attachment:"
-"filename}}}''', \n"
-"som visas nedan i listan av filer. \n"
-"Använd '''INTE''' {{{[get]}}} länkens URL, \n"
-"eftersom den inte är permanent och kan ändras."
-
-msgid "del"
-msgstr "radera"
-
-msgid "move"
-msgstr "flytta"
-
-msgid "get"
-msgstr "hämta"
-
-msgid "edit"
-msgstr "ändra"
-
-msgid "view"
-msgstr "visa"
-
-msgid "unzip"
-msgstr "packa upp"
-
-msgid "install"
-msgstr "installera"
-
-msgid "All files"
-msgstr ""
-
-#, fuzzy
-msgid "Selected Files:"
-msgstr "Bifogade filer"
-
-#, fuzzy
-msgid "delete"
-msgstr "Radera"
-
-#, fuzzy
-msgid "move to page"
-msgstr "Antal sidor"
-
-msgid "Do it."
-msgstr "Gör det."
-
-#, python-format
-msgid "No attachments stored for %(pagename)s"
-msgstr "Inga bifogade filer på %(pagename)s"
-
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Du får inte ta bort bilagor från den här sidan."
-
-msgid "You are not allowed to move attachments from this page."
-msgstr "Du får inte flytta bilagor från den här sidan."
-
-msgid "You are not allowed to attach a file to this page."
-msgstr "Du får inte bifoga en fil till den här sidan."
-
-#, python-format
-msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/"
-"%(new_filename)s'."
-msgstr ""
-"Bilagan '%(pagename)s/%(filename)s' flyttats till '%(new_pagename)s/"
-"%(new_filename)s'."
-
-msgid "New Attachment"
-msgstr "Ny bilaga"
-
-msgid "File to upload"
-msgstr "Fil att ladda upp"
-
-msgid "Rename to"
-msgstr "Byt namn till"
-
-msgid "Overwrite existing attachment of same name"
-msgstr "Skriv över existerande bilaga med samma namn"
-
-msgid "Upload"
-msgstr "Ladda upp"
-
-msgid "Attached Files"
-msgstr "Bifogade filer"
-
-#, python-format
-msgid "Unsupported AttachFile sub-action: %s"
-msgstr "Ogiltig sub-åtgärd för AttachFile: %s"
-
-#, python-format
-msgid "Attachments for \"%(pagename)s\""
-msgstr "Bilagor till \"%(pagename)s\""
-
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "TextCha: Fel svar! Gå tillbaka och försök igen..."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Inget filinnehåll. Ta bort icke-ASCII-tecken från filnamnet och försök igen."
-
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Du får inte skriva över en bilaga på den här sidan."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Bilagan '%(target)s' (fjärrnamn '%(filename)s') med %(bytes)d byte sparade."
-
-#, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "Bilagan \"%(target)s\" (fjärrnamn \"%(filename)s\") existerar redan."
-
-#, python-format
-msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
-msgstr "Bilagan '%(new_pagename)s/%(new_filename)s' finns redan."
-
-msgid "Nothing changed"
-msgstr "Ingen förändring"
-
-#, python-format
-msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
-msgstr ""
-"Sidan '%(new_pagename)s' finns inte eller så har du inte tillräckliga "
-"rättigheter."
-
-msgid "Move aborted!"
-msgstr "Flytt avbruten!"
-
-msgid "Move aborted because new page name is empty."
-msgstr "Flytt avbruten för att nya namnet är tomt."
-
-#, python-format
-msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "Var god använd ett giltigt filnamn för bilaga '%(filename)s'."
-
-msgid "Move aborted because new attachment name is empty."
-msgstr "Flytt avbruten för att bilagans nya namn är tomt."
-
-msgid "Move"
-msgstr "Flytta"
-
-msgid "New page name"
-msgstr "Nytt sidonamn"
-
-msgid "New attachment name"
-msgstr "Nya namnet för bilagan"
-
-msgid "You are not allowed to get attachments from this page."
-msgstr "Du får inte hämta bilagor från den här sidan."
-
-msgid "You are not allowed to install files."
-msgstr "Du får inte installera filer."
-
-#, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr "Bilagan '%(filename)s' installerad."
-
-msgid "You are not allowed to unzip attachments of this page."
-msgstr "Du får inte packa upp bilagor till den här sidan."
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Filen %(filename)s är inte en .zip-fil."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because some files in the zip are "
-"either not in the same directory or exceeded the single file size limit "
-"(%(maxsize_file)d kB)."
-msgstr ""
-"Bilagan '%(filename)s' kunde inte packas upp eftersom några filer i zip-"
-"filen är antingen inte i samma mapp eller överskrider maximala filstorleken "
-"(%(maxsize_file)d kB)."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because it would have exceeded the "
-"per page attachment storage size limit (%(size)d kB)."
-msgstr ""
-"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
-"begränsningen på utrymme per sida (%(size)d kB)."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because it would have exceeded the "
-"per page attachment count limit (%(count)d)."
-msgstr ""
-"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
-"maxantalet per sida (%(count)d)."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' partially unzipped (did not overwrite: "
-"%(filelist)s)."
-msgstr "Bilagan '%(filename)s' delvis uppackad (överskrev inte: %(filelist)s)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Bilagan \"%(filename)s\" uppackad."
-
-#, python-format
-msgid "Attachment '%(filename)s'"
-msgstr "Bilaga \"%(filename)s\""
-
-msgid "Download"
-msgstr "Ladda ner"
-
-msgid "Package script:"
-msgstr "Paketskript:"
-
-msgid "File Name"
-msgstr "Filnamn"
-
-msgid "Modified"
-msgstr "Modifierad"
-
-msgid "Size"
-msgstr "Storlek"
-
-msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Okänd filtyp, kan inte visa bilagan direkt."
-
-msgid "You are not allowed to view attachments of this page."
-msgstr "Du får inte se bilagor på den här sidan."
-
-#, python-format
-msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "bilaga:%(filename)s för %(pagename)s"
-
-msgid "General Information"
-msgstr "Översiktlig information"
-
-#, python-format
-msgid "Page size: %d"
-msgstr "Sidstorlek: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "SHA-checksumman för den här sidans innehåll är:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Följande användare prenumerar på den här sidan:"
-
-msgid "This page links to the following pages:"
-msgstr "Den här sidan länkar till följande sidor:"
-
-#, python-format
-msgid ""
-"Showing page edit history entries from '''%(start_offset)d''' to "
-"'''%(end_offset)d''' out of '''%(total_count)d''' entries total."
-msgstr ""
-"Visar sidans redigeringshistoria från '''%(start_offset)d''' till "
-"'''%(end_offset)d''' utifrån totalt '''%(total_count)d''' stycken inlägg."
-
-msgid "Newer"
-msgstr "Nyare"
-
-msgid "Older"
-msgstr "Äldre"
+msgid "Trivial "
+msgstr "trivial "
 
-#, python-format
-msgid "%s items per page"
-msgstr "%s poster per sida"
-
-msgid "Diff"
-msgstr "Ändringar"
-
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Comment"
-msgstr "Kommentar"
-
-msgid "Action"
-msgstr "Åtgärd"
-
-msgid "to previous"
-msgstr "till föregående"
-
-msgid "N/A"
-msgstr "Ej tillgänglig"
-
-msgid "Revision History"
-msgstr "Revisionshistorik"
-
-msgid "No log entries found."
-msgstr "Inga loggposter hittades."
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Info om \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "Visa \"%(title)s\""
-
-msgid "General Page Infos"
-msgstr "Översiktlig information"
-
-msgid "Page hits and edits"
-msgstr "Sidträffar och ändringar"
-
-msgid "Delete"
-msgstr "Radera"
-
-msgid "Delete all /subpages too?"
-msgstr "Radera även alla /undersidor?"
-
-msgid "Optional reason for the deletion"
-msgstr "Anledning för borttagande (valfri)"
-
-msgid "Really delete this page?"
-msgstr "Radera den här sidan, är du säker?"
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr "Var god skapa en hemsida innan du skapar övriga sidor."
-
-#, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||"
-"[[%(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||"
-"%(username)s only||\n"
-"\n"
-msgstr ""
-"Du kan lägga till undersidor till din redan existerande hemsida här.\n"
-"\n"
-"Du kan välja hur öppen dessa sidor ska vara för andra läsare och "
-"skribenter.\n"
-"Åtkomst bestäms av medlemskap i motsvarande gruppsida.\n"
-"\n"
-"Ange undersidans namn och tryck på knappen för att skapa en ny sida.\n"
-"\n"
-"Innan du skapar åtkomstskyddade sidor, se till att motsvarande gruppsida\n"
-"existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för\n"
-"att skapa gruppsidor.\n"
-"\n"
-"||'''Lägg till en ny personlig sida:'''||'''Relaterad "
-"åtkomstlistgrupp:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,"
-"%(username)s)>>||[%(username)s/ReadWriteGroup]||\n"
-"||<<NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)>>||"
-"[%(username)s/ReadGroup]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)>>||"
-"%(username)s only||\n"
-"\n"
-
-msgid "MyPages management"
-msgstr "Hantering av MinaSidor"
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(inklusive %(localwords)d %(pagelink)s)"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of "
-"%(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"Följande %(badwords)d ord kunde inte hittas i ordlistan av %(totalwords)d "
-"antal ord  s%(localwords)s och de är markerade här under:"
-
-msgid "Add checked words to dictionary"
-msgstr "Addera förkryssade ord till ordlistan"
-
-msgid "No spelling errors found!"
-msgstr "Inga felstavningar funna!"
-
-msgid "You can't save spelling words."
-msgstr "Du kan inte spara stavningsord."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "Du kan inte stavningskontrollera en sida som du inte kan läsa."
-
-msgid "You are not allowed to use this action."
-msgstr "Du får inte använda den här åtgärden."
-
-msgid "If this account exists an email was sent."
-msgstr "Om detta konto existerar har det skickats en epost."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Den här wikin har inte eposthantering påslagen.\n"
-"För att få eposthantering påslagen, kontakta wikins ägare."
-
-msgid "Please provide a valid email address or a username!"
-msgstr "Var god ange en giltig epostadress eller användarnamn!"
-
-msgid "Username"
-msgstr "Användarnamn"
-
-msgid "Mail me my account data"
-msgstr "Eposta mig information om mitt konto"
-
-msgid "Recovery token"
-msgstr "Token för återställning"
-
-msgid "New password"
-msgstr "Nytt lösenord"
-
-msgid "New password (repeat)"
-msgstr "Nytt lösenord (upprepa)"
-
-msgid "Reset my password"
-msgstr "Återställ mitt lösenord"
-
-msgid "Passwords don't match!"
-msgstr "Lösenorden är inte likadana!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr "Lösenord ogiltigt: %s"
-
-msgid "Your password has been changed, you can log in now."
-msgstr "Ditt lösenord har ändrats, du kan logga in nu."
-
-msgid "Your token is invalid!"
-msgstr "Din token är inte giltig!"
-
-msgid "Password reset"
-msgstr "Återställ lösenord"
-
-msgid ""
-"\n"
-"== Password reset ==\n"
-"Enter a new password below."
-msgstr ""
-"\n"
-"== Återställ lösenord ==\n"
-"Skriv in ett nytt lösenord nedanför."
-
-msgid "Lost password"
-msgstr "Glömt lösenord"
-
-msgid ""
-"\n"
-"== Recovering a lost password ==\n"
-"If you have forgotten your password, provide your email address or\n"
-"username and click on '''Mail me my account data'''.\n"
-"You will receive an email containing a recovery token that can be\n"
-"used to change your password. The email will also contain further\n"
-"instructions."
-msgstr ""
-"\n"
-"== Återställa ett bortglömt lösenord ==\n"
-"Om du har glömt ditt lösenord, ange din epost-adress eller ditt\n"
-"användarnamn och klicka på '''Eposta mig information om mitt konto'''.\n"
-"Du kommer få en epost med en token för återställning av lösenordet som\n"
-"du kan använda för att ändra lösenordet. Denna epost kommer även innhålla\n"
-"vidare instruktioner."
-
-msgid ""
-"\n"
-"=== Password reset ===\n"
-"If you already have received the email with the recovery token, enter your\n"
-"username, the recovery token and a new password (twice) below."
-msgstr ""
-"\n"
-"=== Återställning av lösenord ===\n"
-"Om du redan har fått epost med en token för återställning, skriv in ditt\n"
-"användarnamn, token och ett nytt lösenord (två gångar) nedan."
-
-msgid ""
-"You need to manually go to your OpenID provider wiki\n"
-"and log in before you can use your OpenID. MoinMoin will\n"
-"never allow you to enter your password here.\n"
-"\n"
-"Once you have logged in, simply reload this page."
-msgstr ""
-"Du bör från hand gå till din OpenID leverantörs wiki\n"
-"och logga in innan du kan använda din OpenID. MoinMoin kommer\n"
-"aldrig att låta dig skriva in lösenordet här.\n"
-"\n"
-"När du har loggat in, ladda bara om denna sida."
-
-msgid "OpenID Trust verification"
-msgstr "OpenID Trust verification"
-
-#, python-format
-msgid "The site %s has asked for your identity."
-msgstr "Sidan %s har frågat efter din identitet."
-
-#, python-format
-msgid ""
-"\n"
-"If you approve, the site represented by the trust root below will be\n"
-"told that you control the identity URL %s. (If you are using a delegated\n"
-"identity, the site will take care of reversing the\n"
-"delegation on its own.)"
-msgstr ""
-"\n"
-"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför "
-"att\n"
-"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en "
-"ombudsidentitet\n"
-"kommer sidan själv se till att ombudet löses upp.)"
-
-msgid "Trust root"
-msgstr "Lita på root"
-
-msgid "Identity URL"
-msgstr "Identitets-URL"
-
-msgid "Remember decision"
-msgstr "Kom ihåg detta val"
-
-msgid "Remember this trust decision and don't ask again"
-msgstr "Kom ihåg detta förtroelseval och fråga inte igen"
-
-msgid "Approve"
-msgstr "Godkänn"
-
-msgid "Don't approve"
-msgstr "Godkänn ej"
-
-msgid "OpenID not served"
-msgstr "OpenID levererades inte"
-
-msgid ""
-"\n"
-"Unfortunately you have not created your homepage yet. Therefore,\n"
-"we cannot serve an OpenID for you. Please create your homepage first\n"
-"and then reload this page or click the button below to cancel this\n"
-"verification."
-msgstr ""
-"\n"
-"Tyvärr har du inte skapat din hemsida än. Därför kan vi inte\n"
-"leverera en OpenID för dig. Var god skapa först din hemsida och\n"
-"sedan ladda om denna sida eller klicka på knappen nedan för att\n"
-"avbryta verifikationen."
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Teckna en prenumeration på sidan %s åt användarna"
-
-msgid "Enter user names (comma separated):"
-msgstr "Skriv användarnamnen (avgränsa med komma):"
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Prenumererar på %s:"
-
-msgid "Not a user:"
-msgstr "Inte en användare:"
-
-msgid "You are not allowed to perform this action."
-msgstr "Du får inte utföra den här åtgärden."
-
-msgid "Print slide show"
-msgstr "Skriv ut bildspel"
-
-msgid "Edit slide show"
-msgstr "Regigera bildspel"
-
-msgid "Quit"
-msgstr "Avsluta"
-
-msgid "Quit slide show"
-msgstr "Avsluta bildspel"
-
-msgid "Show first slide (up arrow)"
-msgstr "Visa första bilden (piltangenten upp)"
-
-msgid "Show last slide (down arrow)"
-msgstr "Visa sista bilden (piltangenten ner)"
-
-msgid "Show previous slide (left arrow)"
-msgstr "Visa förra bilden (piltangenten vänster)"
-
-msgid "Show next slide (right arrow)"
-msgstr "Visa nästa bilden (piltangenten höger)"
-
-msgid "Charts are not available!"
-msgstr "Diagram ej tillgängliga!"
-
-msgid "You need to provide a chart type!"
-msgstr "Du måste ange en diagramtyp!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Ogiltig diagramtyp \"%s\"!"
-
-msgid "Load"
-msgstr "Ladda"
-
-msgid "Pagename not specified!"
-msgstr "Sidnamn ej angivet!"
-
-msgid "Upload page content"
-msgstr "Ladda upp sidinnehåll"
-
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-"Du kan ladda upp innehåll för sidan som anges nedan. Om du döper om sidan "
-"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom "
-"bestämsden utgående från filens namn."
-
-msgid "File to load page content from"
-msgstr "Fil för att ladda sidinnehåll ifrån"
-
-#, python-format
-msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr "(!) Bara sidor som ändrats sedan '''%s''' visas!"
-
-msgid ""
-"/!\\ The modification date you entered was not recognized and is therefore "
-"not considered for the search results!"
-msgstr ""
-"/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför inte "
-"hänsyn till i sökresultaten!"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Var god använd en mer specifik sökterm än {{{\"%s\"}}}"
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Titelsökning: \"%s\""
-
-#, python-format
-msgid "Advanced Search: \"%s\""
-msgstr "Avancerad sökning: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Fulltextsökning: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
-"för mer information."
+msgid "No differences found!\n"
+msgstr "Inga skillnader funna!\n"
 
 #, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
-"terms and refer to HelpOnSearching for more information.%s"
-msgstr ""
-"Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var god "
-"ändra vissa termer och se HelpOnSearching för mer information.%s"
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Ladda upp ny bilaga \"%(filename)s\""
 
-msgid "(!) Consider performing a"
-msgstr "(!) Överväg utföra en"
-
-msgid "full-text search with your search terms"
-msgstr "fulltextsökning med dina söktermer"
-
-msgid ""
-"(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. <<BR>>"
-msgstr ""
-"(!) Du utför en titelsökning som kanske inte innehåller alla relaterade "
-"resultat för din förfrågan i denna wiki. <<BR>>"
-
-msgid "Click here to perform a full-text search with your search terms!"
-msgstr "Klicka här för att göra en fulltextsökning med dina sökord!"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
-
-msgid "Your subscription to this page has been removed."
-msgstr "Din prenumeration på den här sidan har avslutats."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Kan inte ta bort reguljär uttrycks-prenumeration!"
-
-msgid "Edit the subscription regular expressions in your settings."
-msgstr ""
-"Redigera de reguljära uttrycken för dina prenumerationer i dina "
-"inställningar."
-
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Du måste prenumera för att kunna sluta prenumera."
-
-#, fuzzy
-msgid "TextCha: Wrong answer! Try again below..."
-msgstr "TextCha: Fel svar! Gå tillbaka och försök igen..."
-
-msgid ""
-"Supplying a comment is mandatory. Write a comment below and try again..."
-msgstr ""
-
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Skapa ny teckning \"%(filename)s (öppnas i nytt fönster)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Redigera teckning %(filename)s (opens in new window)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klickbar teckning %(filename)s"
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Du får inte spara en teckning på den här sidan."
-
-msgid "Empty target name given."
-msgstr "Tomt namn för målet angiven."
-
-msgid "Edit drawing"
-msgstr "Redigera teckning"
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Utför åtgärd %(actionname)s?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "Åtgärd %(actionname)s är exkluderad i den här wikin!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Du får inte använda åtgärden %(actionname)s på den här sidan!"
-
-msgid "You are not allowed to create the supplementation page."
-msgstr "Du får inte skapa tilläggssidan."
-
-msgid "Pages"
-msgstr "Sidor"
-
-msgid "Select Author"
-msgstr "Välj författare"
-
-msgid "Revert all!"
-msgstr "Återgå allt!"
-
-msgid "Copy all /subpages too?"
-msgstr "Kopiera även alla /undersidor?"
-
-msgid "New name"
-msgstr "Nytt namn"
-
-msgid "Optional reason for the copying"
-msgstr "Skäl för kopiering (ej obligatoriskt)"
-
-msgid "Really copy this page?"
-msgstr "Kopiera den här sidan, är du säker?"
-
-msgid "You are now logged out."
-msgstr "Du är nu utloggad."
-
-msgid "No page packages found."
-msgstr "Inga sidopaket hittades."
-
-msgid "page package"
-msgstr "sidopaket"
-
-msgid "Choose:"
-msgstr "Välj:"
-
-#, python-format
-msgid "Install language packs for '%s'"
-msgstr "Installera språkpaket för '%s'"
-
-#, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Lokal Sajtkarta för \"%s\""
-
-msgid "No older revisions available!"
-msgstr "Inga äldre versioner tillgängliga!"
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "Skillnader för \"%s\""
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Skillnader mellan versionerna %d och %d"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(sträcker sig över %d versioner)"
-
-msgid "Previous change"
-msgstr "Föregående ändring"
-
-msgid "Next change"
-msgstr "Nästa ändring"
-
-msgid "Diff with oldest revision in left pane"
-msgstr "Diff med äldsta versionen i vänstra panelen"
-
-msgid "No older revision available for diff"
-msgstr "Ingen äldre version tillgänglig för diff"
-
-msgid "Diff with older revision in left pane"
-msgstr "Diff med äldre version i vänstra panelen"
-
-msgid "Diff with newer revision in left pane"
-msgstr "Diff med nyare version i vänstra panelen"
-
-msgid "Can't change to revision newer than in right pane"
-msgstr "Kan inte byta till nyare version än den i högra panelen"
-
-msgid "Diff with older revision in right pane"
-msgstr "Diff med äldre version i högra panelen"
-
-msgid "Can't change to revision older than revision in left pane"
-msgstr "Kan inte byta till äldre version än den i vänstra panelen"
-
-msgid "Diff with newer revision in right pane"
-msgstr "Diff med nyare version i högra panelen"
-
-msgid "No newer revision available for diff"
-msgstr "Ingen nyare version tillgänglig för diff"
-
-msgid "Diff with newest revision in right pane"
-msgstr "Diff med nyaste versionen i högra panelen"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Sidan sparades %(count)d gånger, dock!"
-
-msgid "(ignoring whitespace)"
-msgstr "(ignorerar mellanrum)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Ignorera ändringar i mängden blanktecken"
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Tomt användarnamn. Var god ange ett användarnamn."
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Ogiltigt användarnamn {{{'%s'}}}.\n"
-"Namnet kan innehålla vilket alfanumeriskt tecken ur Unicode som helst,\n"
-"med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Det här användarnamnet tillhör redan någon annan."
-
-msgid "Please specify a password!"
-msgstr "Var god ange ett lösenord!"
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Var god ange din epostadress. Om du förlorar dina inloggningsuppgifter kan "
-"du få tillbaka dem via epost."
-
-msgid "This email already belongs to somebody else."
-msgstr "Den här epostadressen tillhör redan någon annan."
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"Användarkonto skapat! Du kan använda det här kontot för att logga in nu..."
-
-msgid "Password repeat"
-msgstr "Upprepa lösenord"
-
-msgid "TextCha (required)"
-msgstr "TextCha (obligatorisk)"
-
-msgid "Create Profile"
-msgstr "Skapa profil"
-
-msgid "Create Account"
-msgstr "Skapa konto"
-
 #, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Full länklista för \"%s\""
-
-msgid "You must login to add a quicklink."
-msgstr "Du måste logga in för att kunna lägga till en snabblänk."
-
-msgid "A quicklink to this page has been added for you."
-msgstr "En snabblänk till den här sidan har lagts till åt dig."
-
-msgid "A quicklink to this page could not be added for you."
-msgstr "En snabblänk till den här sidan kunde inte läggas till åt dig."
-
-msgid "You already have a quicklink to this page."
-msgstr "Du har redan en snabblänk till den här sidan."
-
-msgid "Create redirect for renamed page(s)?"
-msgstr "Skapa omdirigering för sidor som bytt namn?"
-
-msgid "Rename all /subpages too?"
-msgstr "Döp om alla /undersidor också?"
-
-msgid "Create redirect for renamed page?"
-msgstr "Skapa omdirigering för sidan som bytt namn?"
-
-msgid "Really rename this page?"
-msgstr "Döpa om den här sidan, är du säker?"
-
-msgid "Optional reason for the renaming"
-msgstr "Skäl till namnbyte (ej obligatoriskt)"
-
-msgid "Wiki Backup"
-msgstr "Wiki-säkerhetskopia"
-
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-"= Ladda ner en säkerhetskopia =\n"
-"Vänligen notera:\n"
-" * Spara säkerhetskopior på en säker plats - de innehåller känslig "
-"information.\n"
-" * Försäkra dig att inställningsvärden backup_* är korrekta och "
-"fullständiga.\n"
-" * Försäkra dig att det har laddats ner utan problem.\n"
-"\n"
-"För att få en säkerhetskopia, klicka bara här:"
-
-msgid "Backup"
-msgstr "Säkerhetskopiera"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Du får inte göra fjärrbackup."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Okänd backup-underåtgärd: %s."
-
-msgid "Revert"
-msgstr "Återställ"
-
-msgid "You are not allowed to revert this page!"
-msgstr "Du får inte återställa denna sida!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-"Den aktuella versionen av sidan visades när du valde att återställa. Om du "
-"vill återgå till en tidigare version, titta först på just denna och sen välj "
-"att återställa till denna (äldre) version igen."
-
-msgid "Optional reason for reverting this page"
-msgstr "Skäl till sidas återställande (ej obligatoriskt)"
-
-msgid "Really revert this page?"
-msgstr "Återställ den här sidan, är du säker?"
-
-msgid "OpenID"
-msgstr "OpenID"
-
-msgid "Member of Groups"
-msgstr "Medlem i grupper"
-
-msgid "Jabber"
-msgstr "Jabber"
-
-msgid "Disable user"
-msgstr "Avaktivera användare"
-
-msgid "Enable user"
-msgstr "Aktivera användare"
-
-msgid "disabled"
-msgstr "avaktiverad"
+msgid "Inlined image: %(url)s"
+msgstr "Inbäddad bild: %(url)s"
 
-msgid "Mail account data"
-msgstr "Skicka kontoinformation som epost"
+msgid "Toggle line numbers"
+msgstr "Slå av/på radnumrering"
 
 msgid "RecentChanges"
 msgstr "SenasteÄndringar"
@@ -2808,9 +2254,8 @@ msgstr "HjälpMedMoinKommando/ExportTipp"
 msgid "HelpOnNotification"
 msgstr "HjälpMedMeddelande"
 
-#, fuzzy
 msgid "HelpOnRobots"
-msgstr "HjälpMedRegler"
+msgstr "HjälpMedBots"
 
 msgid "HelpOnSessions"
 msgstr "HjälpMedSessioner"
@@ -2931,6 +2376,9 @@ msgstr "HjälpMedSkapaSidor"
 
 msgid "HelpOnPageDeletion"
 msgstr "HjälpMedSidRadering"
+
+msgid "HelpOnParsers"
+msgstr "HjälpMedParsers"
 
 msgid "HelpOnParsers/ReStructuredText"
 msgstr "HjälpMedParsers/ReStruktureradText"
@@ -3130,64 +2578,189 @@ msgstr "StavningsKontroll"
 msgid "Discussion"
 msgstr "Diskussion"
 
-msgid "User agent"
-msgstr "Användaragent"
+msgid "anonymous"
+msgstr "anonym"
 
-msgid "Others"
-msgstr "Övriga"
+msgid "Search for items"
+msgstr "Sök efter poster"
 
-msgid "Distribution of User-Agent Types"
-msgstr "Fördelning av \"User-Agent\"-typer"
+msgid "containing all the following terms"
+msgstr "som innehåller alla följande termer"
 
-msgid "Page Size Distribution"
-msgstr "Sidstorleksfördelning"
+msgid "containing one or more of the following terms"
+msgstr "som innehåller en eller flera av följande termer"
 
-msgid "page size upper bound [bytes]"
-msgstr "övre sidstorleksgräns [byte]"
+msgid "not containing the following terms"
+msgstr "som inte innehåller följande termer"
 
-msgid "# of pages of this size"
-msgstr "# sidor av den här storleken"
+msgid "last modified since (e.g. 2 weeks before)"
+msgstr "senast ändrat sedan (t.ex. 2 veckor)"
 
-msgid "Views/day"
-msgstr "Visningar/dag"
+msgid "any category"
+msgstr "vilken kategori som helst"
 
-msgid "Edits/day"
-msgstr "Redigeringar/dag"
+msgid "any language"
+msgstr "vilket språk som helst"
 
-#, python-format
-msgid "%(chart_title)s for %(filterpage)s"
-msgstr "%(chart_title)s för %(filterpage)s"
+msgid "any mimetype"
+msgstr "vilket mimetype som helst"
 
-msgid ""
-"green=view\n"
-"red=edit"
-msgstr ""
-"grön=visa\n"
-"röd=ändra"
-
-msgid "date"
-msgstr "datum"
-
-msgid "# of hits"
-msgstr "# träffar"
+msgid "Categories"
+msgstr "Kategorier"
 
 msgid "Language"
 msgstr "Språk"
 
-msgid "<Browser setting>"
-msgstr "<Webbläsarinställning>"
+msgid "File Type"
+msgstr "Filtyp"
+
+msgid "Search only in titles"
+msgstr "Sök bara i rubriker"
+
+msgid "Case-sensitive search"
+msgstr "Sökning känslig för gemener/VERSALER"
+
+msgid "Exclude underlay"
+msgstr "Uteslut underlag"
+
+msgid "No system items"
+msgstr "Inga systemsidor"
+
+msgid "Search in all page revisions"
+msgstr "Sök i alla versioner av sidor"
+
+msgid "Go get it!"
+msgstr "Gå och hämta!"
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+"%(extension_name)s %(extension_type)s: Nödvändigt argument %(argument_name)s "
+"saknas."
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
+"%(argument_value)s!"
+msgstr ""
+"%(extension_name)s %(extension_type)s: Ogiltig %(argument_name)s="
+"%(argument_value)s!"
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+"Nuvarande inställningar tillåter inte att bädda in %(file)s på grund av dess "
+"mimetype %(mimetype)s."
+
+msgid "Embedded"
+msgstr "Inbäddad"
+
+msgid "Search Titles"
+msgstr "Sök rubriker"
+
+msgid "Display context of search results"
+msgstr "Visa sökningsträffarnas sammanhang"
+
+msgid "Case-sensitive searching"
+msgstr "Sökning känslig för gemener/VERSALER"
+
+msgid "Search Text"
+msgstr "Sök i text"
+
+#, python-format
+msgid "Unknown macro parameter: %s."
+msgstr "Okänd macro-parameter: %s."
+
+#, python-format
+msgid ""
+"More than one needle with search_macro_parse_args config option enabled "
+"('%(needle)s' found already, '%(arg)s' occurred)"
+msgstr ""
+"Mer än en needle med konfiguration search_macro_parse_args påslagen "
+"('%(needle)s' funna redan, '%(arg)s' förekom)"
+
+msgid "Lexer description"
+msgstr "Lexikalisk beskrivning"
+
+msgid "Lexer names"
+msgstr "Lexikaliska namn"
+
+msgid "File patterns"
+msgstr "Filmönster"
+
+msgid "Mimetypes"
+msgstr "Mime-typer"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Felaktigt inkluderingsargument \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Inget hittat för \"%s\"!"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Inget stöd för navigationsschemat '%(scheme)s'!"
+
+msgid "No parent page found!"
+msgstr "Ingen föräldrasida hittad!"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Slideshow"
+msgstr "Bildspel"
+
+msgid "Start"
+msgstr "Start"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Bild %(pos)d av %(size)d"
 
 msgid "No orphaned pages in this wiki."
 msgstr "Inga ickerefererade sidor i den här wikin."
 
-msgid "Include system pages"
-msgstr "Inkludera systemsidor"
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Inga citattecken på %(pagename)s."
 
-msgid "Exclude system pages"
-msgstr "Exkludera systemsidor"
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm sedan"
 
-msgid "No wanted pages in this wiki."
-msgstr "Inga önskade sidor i den här wikin."
+msgid "(no bookmark set)"
+msgstr "(inget bokmärke satt)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(för närvarande satt till %s)"
+
+msgid "Delete bookmark"
+msgstr "Ta bort bokmärke"
+
+msgid "Set bookmark"
+msgstr "Sätt bokmärke"
+
+msgid "[Bookmark reached]"
+msgstr "[Bokmärke nått]"
+
+msgid "Markup"
+msgstr "Märkning"
+
+msgid "Display"
+msgstr "Visa"
+
+msgid "File attachment browser"
+msgstr "Bläddra i bilagor"
+
+msgid "User account browser"
+msgstr "Bläddra i användarkonton"
 
 msgid "Python Version"
 msgstr "Python-version"
@@ -3258,6 +2831,10 @@ msgstr "index otillgänglig"
 msgid "index available"
 msgstr "index tillgänglig"
 
+#, python-format
+msgid "last modified: %s"
+msgstr "senast ändrad: %s"
+
 msgid "Xapian search"
 msgstr "Xapian-sökning"
 
@@ -3267,138 +2844,17 @@ msgstr "Stemming för Xapian"
 msgid "Active threads"
 msgstr "Aktiva trådar"
 
-msgid "Search for items"
-msgstr "Sök efter poster"
-
-msgid "containing all the following terms"
-msgstr "som innehåller alla följande termer"
-
-msgid "containing one or more of the following terms"
-msgstr "som innehåller en eller flera av följande termer"
-
-msgid "not containing the following terms"
-msgstr "som inte innehåller följande termer"
-
-msgid "last modified since (e.g. 2 weeks before)"
-msgstr "senast ändrat sedan (t.ex. 2 veckor)"
-
-msgid "any category"
-msgstr "vilken kategori som helst"
-
-msgid "any language"
-msgstr "vilket språk som helst"
-
-msgid "any mimetype"
-msgstr "vilket mimetype som helst"
-
-msgid "Categories"
-msgstr "Kategorier"
-
-msgid "File Type"
-msgstr "Filtyp"
-
-msgid "Search only in titles"
-msgstr "Sök bara i rubriker"
-
-msgid "Case-sensitive search"
-msgstr "Sökning känslig för gemener/VERSALER"
-
-msgid "Exclude underlay"
-msgstr "Uteslut underlag"
-
-msgid "No system items"
-msgstr "Inga systemsidor"
-
-msgid "Search in all page revisions"
-msgstr "Sök i alla versioner av sidor"
-
-msgid "Go get it!"
-msgstr "Gå och hämta!"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Inga citattecken på %(pagename)s."
-
 msgid "Contents"
 msgstr "Innehåll"
 
-msgid "Variable name"
-msgstr "Variablenamn"
+msgid "Include system pages"
+msgstr "Inkludera systemsidor"
 
-msgid "Default"
-msgstr "Förval"
+msgid "Exclude system pages"
+msgstr "Exkludera systemsidor"
 
-msgid "Description"
-msgstr "Beskrivning"
-
-msgid "Lexer description"
-msgstr "Lexikalisk beskrivning"
-
-msgid "Lexer names"
-msgstr "Lexikaliska namn"
-
-msgid "File patterns"
-msgstr "Filmönster"
-
-msgid "Mimetypes"
-msgstr "Mime-typer"
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Inget stöd för navigationsschemat '%(scheme)s'!"
-
-msgid "No parent page found!"
-msgstr "Ingen föräldrasida hittad!"
-
-msgid "Slideshow"
-msgstr "Bildspel"
-
-msgid "Start"
-msgstr "Start"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Bild %(pos)d av %(size)d"
-
-msgid "File attachment browser"
-msgstr "Bläddra i bilagor"
-
-msgid "User account browser"
-msgstr "Bläddra i användarkonton"
-
-msgid "Search Titles"
-msgstr "Sök rubriker"
-
-msgid "Display context of search results"
-msgstr "Visa sökningsträffarnas sammanhang"
-
-msgid "Case-sensitive searching"
-msgstr "Sökning känslig för gemener/VERSALER"
-
-msgid "Search Text"
-msgstr "Sök i text"
-
-#, fuzzy, python-format
-msgid "Unknown macro parameter: %s."
-msgstr "Okänd backup-underåtgärd: %s."
-
-#, python-format
-msgid ""
-"More than one needle with search_macro_parse_args config option enabled "
-"('%(needle)s' found already, '%(arg)s' occurred)"
-msgstr ""
-
-#, python-format
-msgid "<<%(macro_name)s: invalid macro name>>"
-msgstr ""
-
-#, python-format
-msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
-"<<%(macro_name)s: gick inte att köra: [%(error_msg)s] (se även loggarna)>>"
-
-msgid "Go To Page"
-msgstr "Gå till sida"
+msgid "No wanted pages in this wiki."
+msgstr "Inga önskade sidor i den här wikin."
 
 msgid "Wiki configuration"
 msgstr "Wikiinställningar"
@@ -3414,149 +2870,540 @@ msgstr ""
 "''kursivt''. Dessa kan komma från tredje-parts insticksmoduler som behöver "
 "konfigureras eller inställningar som har tagits bort ur Moin."
 
+msgid "Variable name"
+msgstr "Variablenamn"
+
 msgid "Setting"
 msgstr "Inställning"
 
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "%(mins)dm sedan"
+msgid "Default"
+msgstr "Förval"
 
-msgid "(no bookmark set)"
-msgstr "(inget bokmärke satt)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(för närvarande satt till %s)"
-
-msgid "Delete bookmark"
-msgstr "Ta bort bokmärke"
-
-msgid "Set bookmark"
-msgstr "Sätt bokmärke"
-
-msgid "[Bookmark reached]"
-msgstr "[Bokmärke nått]"
-
-msgid "Markup"
-msgstr "Märkning"
-
-msgid "Display"
-msgstr "Visa"
+msgid "Description"
+msgstr "Beskrivning"
 
 #, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Ladda upp ny bilaga \"%(filename)s\""
+msgid "<<%(macro_name)s: invalid macro name>>"
+msgstr "<<%(macro_name)s: ogiltigt macronamn>>"
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+"<<%(macro_name)s: gick inte att köra: [%(error_msg)s] (se även loggarna)>>"
+
+msgid "Go To Page"
+msgstr "Gå till sida"
+
+msgid "From"
+msgstr "Från"
+
+msgid "To"
+msgstr "Till"
+
+msgid "Content"
+msgstr "Innehåll"
+
+msgid "Attachments"
+msgstr "Bilagor"
+
+msgid "No recipients, nothing to do"
+msgstr "Inga mottagare, inget att göra"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Anslutning till mailserver '%(server)s' misslyckades: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "Epost inte skickad"
+
+msgid "Mail sent OK"
+msgstr "Epost skickad korrekt"
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Paketet kräver en nyare version av MoinMoin (minst %s)."
+
+msgid "The theme name is not set."
+msgstr "Temanamnet är inte angivet."
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "Temats filer installerades inte! Saknar rättigheter att skriva på %s."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "Sidan %s existerar inte."
+
+msgid "Invalid package file header."
+msgstr "Ogiltigt paketfilshuvud."
+
+msgid "Package file format unsupported."
+msgstr "Paketfilformatet stöds inte."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Okänd funktion %(func)s på rad %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Filen %s hittades inte i paketet."
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
+"Syntax highlighting not supported for '%(syntax)s', see "
+"%(highlight_help_page)s."
+msgstr "Syntaxemfas stöds inte för '%(syntax)s', se %(highlight_help_page)s."
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed "
+"''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and "
+"italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-"%(extension_name)s %(extension_type)s: Nödvändigt argument %(argument_name)s "
-"saknas."
+" Emfas:: <<Verbatim(//)>>''kursiv''<<Verbatim(//)>>; "
+"<<Verbatim(**)>>'''fetstil'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''kursiv "
+"fetstil'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''blandat "
+"''<<Verbatim(**)>>'''''fetstil'''<<Verbatim(**)>> och "
+"kursiv''<<Verbatim(//)>>;\n"
+" Horisontell linje:: <<Verbatim(----)>>\n"
+" Tvinga radbrytning:: <<Verbatim(\\\\)>>\n"
+" Rubriker:: = Rubrik 1 =; == Rubrik 2 ==; === Rubrik 3 ===; ==== Rubrik 4 "
+"====; ===== Rubrik 5 =====.\n"
+" Listor:: * punkter; ** underpunkter; # numrerade punkter; ## undernumrerade "
+"punkter.\n"
+" Länkar:: <<Verbatim([[url]])>>; <<Verbatim([[url|länkens text]])>>.\n"
+" Tabeller:: |= huvudtext | celltext | mer celltext |;\n"
+"\n"
+"(!) För mer hjälp, se HjälpMedÄndringar.\n"
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed "
+"''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and "
+"italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|"
+"linktext]])>>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Emfas:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''fetstil'''<<Verbatim(''')>>; "
+"<<Verbatim(''''')>>'''''kursiv fetstil'''''<<Verbatim(''''')>>; "
+"<<Verbatim('')>>''blandad "
+"''<<Verbatim(''')>>'''''fetstil'''<<Verbatim(''')>> och "
+"kursiv''<<Verbatim('')>>; <<Verbatim(----)>> horisontell linje.\n"
+" Rubriker:: = Rubrik 1 =; == Rubrik 2 ==; === Rubrik 3 ===; ==== Rubrik 4 "
+"====; ===== Rubrik 5 =====.\n"
+" Listor:: mellanslag plus en av: * punkter; 1., a., A., i., I. numrerade "
+"punkter; 1.#n börja numrering på n; enbart mellanslag indenterar.\n"
+" Länkar:: <<Verbatim(SkrivIhopOrdMedStoraBokstäver)>>; <<Verbatim([[url|"
+"länkens text]])>>.\n"
+" Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;  "
+"inga efterföljande mellanslag är tillåtna efter tabeller och rubriker.\n"
+"\n"
+"(!) För mer hjälp, se HjälpMedÄndringar eller HjälpMedMoinWikiSyntax.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Förväntade \"%(wanted)s\" efter \"%(key)s\", hittade \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Förväntade ett heltal \"%(key)s\" före \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Förväntade ett heltal \"%(arg)s\" efter \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Förväntade ett färgvärde \"%(arg)s\" efter \"%(key)s\""
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Rendering av reStructured-text är inte möjlig, installera Docutils först."
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"{{{\n"
+"Emfas: *kursiv* **fetstil** ``monospace``\n"
+"\n"
+"Rubriker: Rubrik 1   Rubrik 2   Rubrik 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horisontell linje: ----\n"
+"\n"
+"Länkar: AvslutandeUnderstrykning_ `flera ord med backticks`_ extern_\n"
+"\n"
+".. _extern: http://extern-sida.exempel.com/foo/\n"
+"\n"
+"Listor: * punkter; 1., a. numrerade punkter.\n"
+"}}}\n"
+"(!) För mer hjälp, se\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maximalt antal tillåtna inkluderingar har överskridits**"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**Du får inte läsa sidan: %s**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Kunde inte hitta den refererade sidan: %s**"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT-alternativet avstängt, se HjälpMedAnpassning."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT-konvertering är inte tillgänglig, installera 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s processfel"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "Optioner --pages och --search utesluter varandra!"
+
+msgid "You must specify an output file!"
+msgstr "Du måste ange en fil för output!"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr "Inga sidor angivna med --pages eller --search, antar hela paketet."
+
+msgid "All attachments included into the package."
+msgstr "Alla bilagor inkluderade i paketet."
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Filen för output finns redan! Jag är feg och vägrar fortsätta!"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Förväntade \"=\" följa \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Förväntade ett värde för nyckel \"%(token)s\""
+
+msgid "about"
+msgstr "om"
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s="
-"%(argument_value)s!"
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 msgstr ""
-"%(extension_name)s %(extension_type)s: Ogiltig %(argument_name)s="
-"%(argument_value)s!"
+"Resultat %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s av %(aboutHits)s %(bs)s"
+"%(hits)d%(be)s resultat av ungefär %(pages)d pages."
+
+msgid "seconds"
+msgstr "sekunder"
+
+msgid "Previous"
+msgstr "Föregående"
+
+msgid "Next"
+msgstr "Nästa"
+
+msgid "rev"
+msgstr "ver"
+
+msgid "current"
+msgstr "nuvarande"
 
 #, python-format
 msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"Nuvarande inställningar tillåter inte att bädda in %(file)s på grund av dess "
-"mimetype %(mimetype)s."
+"Tyvärr, kan inte spara sidan eftersom \"%(content)s\" inte är tillåtet på "
+"den här wikin."
 
-msgid "Embedded"
-msgstr "Inbäddad"
+msgid "Views/day"
+msgstr "Visningar/dag"
+
+msgid "Edits/day"
+msgstr "Redigeringar/dag"
 
 #, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Felaktigt inkluderingsargument \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Inget hittat för \"%s\"!"
-
-msgid "Switch user"
-msgstr "Byt användare"
-
-msgid "No user selected"
-msgstr "Ingen användare vald"
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s för %(filterpage)s"
 
 msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
+"green=view\n"
+"red=edit"
 msgstr ""
-"Du kan nu ändra inställningarna av det valda användarkontot; logga ut för "
-"att komma tillbaka till ditt konto."
+"grön=visa\n"
+"röd=ändra"
 
-msgid "You are the only user."
-msgstr "Du är den enda användare."
+msgid "date"
+msgstr "datum"
 
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-"Som administrator kan du tillfälligt ta på dig en annan avändares indentitet."
+msgid "# of hits"
+msgstr "# träffar"
 
-msgid "Select User"
-msgstr "Välj användare"
+msgid "<Browser setting>"
+msgstr "<Webbläsarinställning>"
 
-msgid "Preferences"
-msgstr "Inställningar"
+msgid "Others"
+msgstr "Övriga"
 
-msgid "This jabber id already belongs to somebody else."
-msgstr "Den här Jabber-IDn tillhör redan någon annan."
+msgid "Page Size Distribution"
+msgstr "Sidstorleksfördelning"
+
+msgid "page size upper bound [bytes]"
+msgstr "övre sidstorleksgräns [byte]"
+
+msgid "# of pages of this size"
+msgstr "# sidor av den här storleken"
+
+msgid "User agent"
+msgstr "Användaragent"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Fördelning av \"User-Agent\"-typer"
+
+msgid "Unsubscribe"
+msgstr "Avsluta prenumeration"
+
+msgid "Home"
+msgstr "Hem"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[BORTTAGEN]"
+
+msgid "[UPDATED]"
+msgstr "[UPPDATERAD]"
+
+msgid "[RENAMED]"
+msgstr "[DÖPT OM]"
+
+msgid "[CONFLICT]"
+msgstr "[KONFLIKT]"
+
+msgid "[NEW]"
+msgstr "[NY]"
+
+msgid "[DIFF]"
+msgstr "[ÄNDRINGAR]"
+
+msgid "[BOTTOM]"
+msgstr "[SLUT]"
+
+msgid "[TOP]"
+msgstr "[BÖRJAN]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Klicka här för att göra en fulltextsökning på den här titeln"
+
+msgid "Logout"
+msgstr "Logga ut"
+
+msgid "Clear message"
+msgstr "Ta bort meddelande"
 
 #, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Temat '%(theme_name)s' kunde inte laddas!"
+msgid "last edited %(time)s by %(editor)s"
+msgstr "senast redigerad %(time)s av %(editor)s"
 
-msgid "User preferences saved!"
-msgstr "Användarinställningar sparade!"
+#, python-format
+msgid "last modified %(time)s"
+msgstr "senast ändrad %(time)s"
 
-msgid "the one preferred"
-msgstr "den som föredras"
+msgid "Search:"
+msgstr "Sök:"
 
-msgid "free choice"
-msgstr "valfritt"
+msgid "Text"
+msgstr "Text"
 
-msgid "Save"
-msgstr "Spara"
+msgid "Titles"
+msgstr "Titlar"
 
-msgid "Preferred theme"
-msgstr "Önskat tema"
+msgid "Search"
+msgstr "Sök"
 
-msgid "Editor Preference"
-msgstr "Editorns inställningar"
+msgid "More Actions:"
+msgstr "Fler åtgärder:"
 
-msgid "Editor shown on UI"
-msgstr "Editor som visas i gränsittet"
+msgid "------------------------"
+msgstr "------------------------"
 
-msgid "Time zone"
-msgstr "Tidszon"
+msgid "Raw Text"
+msgstr "Råtext"
 
-msgid "Your time is"
-msgstr "Din tid är"
+msgid "Print View"
+msgstr "Utskriftsvy"
 
-msgid "Server time is"
-msgstr "Servertiden är"
+msgid "Delete Cache"
+msgstr "Radera cache"
 
-msgid "Date format"
-msgstr "Datumformat"
+msgid "Delete Page"
+msgstr "Radera sida"
 
-msgid "Preferred language"
-msgstr "Önskat språk"
+msgid "Like Pages"
+msgstr "Liknande sidor"
 
-msgid "General options"
-msgstr "Allmänna inställningar"
+msgid "Local Site Map"
+msgstr "Lokal översiktskarta"
 
-msgid "Quick links"
-msgstr "Snabblänkar"
+msgid "My Pages"
+msgstr "Mina sidor"
+
+msgid "Subscribe User"
+msgstr "Användarprenumeration"
+
+msgid "Remove Spam"
+msgstr "Ta bort spam"
+
+msgid "Package Pages"
+msgstr "Paketsidor"
+
+msgid "Render as Docbook"
+msgstr "Rendera som Docbook"
+
+msgid "Sync Pages"
+msgstr "Synkronisera sidor"
+
+msgid "Do"
+msgstr "Gör"
+
+msgid "Comments"
+msgstr "Kommentarer"
+
+msgid "Edit (Text)"
+msgstr "Redigera (textläge)"
+
+msgid "Edit (GUI)"
+msgstr "Redigera (grafiskt)"
+
+msgid "Immutable Page"
+msgstr "Skrivskyddad sida"
+
+msgid "Remove Link"
+msgstr "Ta bort länk"
+
+msgid "Add Link"
+msgstr "Lägg till länk"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Visa %s dagar."
+
+msgid "Wiki Markup"
+msgstr "Wiki-märkning"
+
+msgid "DeleteCache"
+msgstr "RaderaCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(cachad %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Eller pröva någon av de här åtgärderna:"
+
+msgid "[ATTACH]"
+msgstr "[BIFOGA]"
+
+msgid "Page"
+msgstr "Sida"
+
+msgid "User"
+msgstr "Användare"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Din wiki-kontoinformation"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+"Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
+"\n"
+"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att "
+"återställa den eller\n"
+"gå tillbaka till till återställningssidan och skriv in ditt användarnamn "
+"och\n"
+"token för återställning.\n"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"Användarnamn: %s\n"
+"\n"
+"Token för att återställa lösenord: %s\n"
+"\n"
+"URL för att återställa lösenord: %s?action=recoverpass&name=%s&token=%s\n"
+
+msgid "Member of Groups"
+msgstr "Medlem i grupper"
+
+msgid "Jabber"
+msgstr "Jabber"
+
+msgid "Disable user"
+msgstr "Avaktivera användare"
+
+msgid "Enable user"
+msgstr "Aktivera användare"
+
+msgid "disabled"
+msgstr "avaktiverad"
+
+msgid "Mail account data"
+msgstr "Skicka kontoinformation som epost"
+
+msgid "OpenID"
+msgstr "OpenID"
 
 msgid "Change password"
 msgstr "Ändra lösenord"
@@ -3566,36 +3413,6 @@ msgstr "Ditt lösenord har ändrats."
 
 msgid "To change your password, enter a new password twice."
 msgstr "För att ändra ditt lösenord, skriv in ett nytt två gånger."
-
-msgid "OpenID settings"
-msgstr "Inställnignar för OpenID"
-
-msgid "Cannot remove all OpenIDs."
-msgstr "Kan inte ta bort alla OpenIDs."
-
-msgid "The selected OpenIDs have been removed."
-msgstr "De valda OpenIDs har tagits bort."
-
-msgid "No OpenID given."
-msgstr "Ingen OpenID given."
-
-msgid "OpenID is already present."
-msgstr "OpenID finns redan."
-
-msgid "This OpenID is already used for another account."
-msgstr "Denna OpenID används redan för ett annat konto."
-
-msgid "OpenID added successfully."
-msgstr "OpenID tillagt."
-
-msgid "Current OpenIDs"
-msgstr "Nuvarande OpenIDs"
-
-msgid "Remove selected"
-msgstr "Ta bort valda"
-
-msgid "Add OpenID"
-msgstr "Lägg till OpenID"
 
 msgid "Notification"
 msgstr "Meddelande"
@@ -3628,6 +3445,39 @@ msgstr "Prenumererade händelser"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "Prenumererade wikisidor<<BR>>(en regex per rad)"
 
+msgid "Save"
+msgstr "Spara"
+
+msgid "OpenID settings"
+msgstr "Inställnignar för OpenID"
+
+msgid "Cannot remove all OpenIDs."
+msgstr "Kan inte ta bort alla OpenIDs."
+
+msgid "The selected OpenIDs have been removed."
+msgstr "De valda OpenIDs har tagits bort."
+
+msgid "No OpenID given."
+msgstr "Ingen OpenID given."
+
+msgid "OpenID is already present."
+msgstr "OpenID finns redan."
+
+msgid "This OpenID is already used for another account."
+msgstr "Denna OpenID används redan för ett annat konto."
+
+msgid "OpenID added successfully."
+msgstr "OpenID tillagt."
+
+msgid "Current OpenIDs"
+msgstr "Nuvarande OpenIDs"
+
+msgid "Remove selected"
+msgstr "Ta bort valda"
+
+msgid "Add OpenID"
+msgstr "Lägg till OpenID"
+
 msgid "OpenID server"
 msgstr "OpenID-server"
 
@@ -3637,12 +3487,175 @@ msgstr "De valda webbsidor har tagits bort."
 msgid "Trusted websites"
 msgstr "Betrodda webbsidor"
 
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr "Inbäddad bild: %(url)s"
+msgid "Preferences"
+msgstr "Inställningar"
 
-msgid "Toggle line numbers"
-msgstr "Slå av/på radnumrering"
+msgid "This jabber id already belongs to somebody else."
+msgstr "Den här Jabber-IDn tillhör redan någon annan."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Temat '%(theme_name)s' kunde inte laddas!"
+
+msgid "User preferences saved!"
+msgstr "Användarinställningar sparade!"
+
+msgid "the one preferred"
+msgstr "den som föredras"
+
+msgid "free choice"
+msgstr "valfritt"
+
+msgid "Preferred theme"
+msgstr "Önskat tema"
+
+msgid "Editor Preference"
+msgstr "Editorns inställningar"
+
+msgid "Editor shown on UI"
+msgstr "Editor som visas i gränsittet"
+
+msgid "Time zone"
+msgstr "Tidszon"
+
+msgid "Your time is"
+msgstr "Din tid är"
+
+msgid "Server time is"
+msgstr "Servertiden är"
+
+msgid "Date format"
+msgstr "Datumformat"
+
+msgid "Preferred language"
+msgstr "Önskat språk"
+
+msgid "General options"
+msgstr "Allmänna inställningar"
+
+msgid "Quick links"
+msgstr "Snabblänkar"
+
+msgid "Switch user"
+msgstr "Byt användare"
+
+msgid "No user selected"
+msgstr "Ingen användare vald"
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+"Du kan nu ändra inställningarna av det valda användarkontot; logga ut för "
+"att komma tillbaka till ditt konto."
+
+msgid "You are the only user."
+msgstr "Du är den enda användare."
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+"Som administrator kan du tillfälligt ta på dig en annan avändares indentitet."
+
+msgid "Select User"
+msgstr "Välj användare"
+
+msgid "Line"
+msgstr "Linje"
+
+msgid "Deletions are marked like this."
+msgstr "Raderingar markeras som den här."
+
+msgid "Additions are marked like this."
+msgstr "Bidrag är markerade som den här."
+
+msgid "[all]"
+msgstr "[alla]"
+
+msgid "[not empty]"
+msgstr "[ej tom]"
+
+msgid "[empty]"
+msgstr "[tom]"
+
+msgid "filter"
+msgstr "filter"
+
+msgid "The wiki is currently not reachable."
+msgstr "Wikin går för tillfället inte att nå."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+"Den andra wikin använder ett annorlunda InterWiki namn %(remotename)s) "
+"interntän det du har angivit %(localname)s)."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Argumentet \"%s\" måste vara ett sanningsvärde, inte \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Argumentet måste vara ett sanningsvärde, inte \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Argumentet \"%s\" måste vara ett heltal, inte \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Argumentet måste vara ett heltal, inte \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Argumentet \"%s\" måste vara ett flyttal, inte \"%s\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Argumentet måste vara ett flyttal, inte \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Argumentet \"%s\" måste vara ett komplext tal, inte \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Argumentet måste vara ett komplext tal, inte \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Argumentet \"%s\" måste vara en av \"%s\", inte \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Argumentet måste vara en av \"%s\", inte \"%s\""
+
+msgid "Too many arguments"
+msgstr "För många argument"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "Kan inte ta argument om inte namnet följer namngivna argument"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Argumentet \"%s\" är obligatoriskt"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Inget argument med namn \"%s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Okänd åtgärd %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Du får inte göra %(action_name)s på den här sidan."
+
+msgid "Login and try again."
+msgstr "Logga in och försök igen."
 
 #~ msgid "New user account created on %(sitename)s"
 #~ msgstr "Ett nytt användarkonto skapades på %(sitename)s"
