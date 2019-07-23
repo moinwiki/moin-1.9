@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
 """
     MoinMoin installer
 
-    @copyright: 2001-2005 by Jürgen Hermann <jh@web.de>,
-                2006-2018 by MoinMoin:ThomasWaldmann
+    @copyright: 2001-2005 by Juergen Hermann <jh@web.de>,
+                2006-2019 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
