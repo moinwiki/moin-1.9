@@ -28,7 +28,7 @@ def exec_cmd(cmd, stdin=None, timeout=None):
                          close_fds=not subprocess.mswindows,
                          bufsize=1024,
                          # start a new session (preexec_fn is UNIX only)
-                         preexec_fn=None if subprocess.mswindows else os.setsid(),
+                         preexec_fn=None if subprocess.mswindows else os.setsid,
                          stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
