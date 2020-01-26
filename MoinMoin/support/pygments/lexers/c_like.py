@@ -5,7 +5,7 @@
 
     Lexers for other C-like languages.
 
-    :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2019 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
@@ -20,7 +20,7 @@ from pygments.lexers.c_cpp import CLexer, CppLexer
 from pygments.lexers import _mql_builtins
 
 __all__ = ['PikeLexer', 'NesCLexer', 'ClayLexer', 'ECLexer', 'ValaLexer',
-           'CudaLexer', 'SwigLexer', 'MqlLexer', 'ArduinoLexer']
+           'CudaLexer', 'SwigLexer', 'MqlLexer', 'ArduinoLexer', 'CharmciLexer']
 
 
 class PikeLexer(CppLexer):
@@ -105,7 +105,7 @@ class ClayLexer(RegexLexer):
     tokens = {
         'root': [
             (r'\s', Text),
-            (r'//.*?$', Comment.Singleline),
+            (r'//.*?$', Comment.Single),
             (r'/(\\\n)?[*](.|\n)*?[*](\\\n)?/', Comment.Multiline),
             (r'\b(public|private|import|as|record|variant|instance'
              r'|define|overload|default|external|alias'
@@ -245,7 +245,7 @@ class ValaLexer(RegexLexer):
                 'ulong', 'unichar', 'ushort'), suffix=r'\b'),
              Keyword.Type),
             (r'(true|false|null)\b', Name.Builtin),
-            ('[a-zA-Z_]\w*', Name),
+            (r'[a-zA-Z_]\w*', Name),
         ],
         'root': [
             include('whitespace'),
@@ -291,23 +291,23 @@ class CudaLexer(CLexer):
     aliases = ['cuda', 'cu']
     mimetypes = ['text/x-cuda']
 
-    function_qualifiers = set(('__device__', '__global__', '__host__',
-                               '__noinline__', '__forceinline__'))
-    variable_qualifiers = set(('__device__', '__constant__', '__shared__',
-                               '__restrict__'))
-    vector_types = set(('char1', 'uchar1', 'char2', 'uchar2', 'char3', 'uchar3',
-                        'char4', 'uchar4', 'short1', 'ushort1', 'short2', 'ushort2',
-                        'short3', 'ushort3', 'short4', 'ushort4', 'int1', 'uint1',
-                        'int2', 'uint2', 'int3', 'uint3', 'int4', 'uint4', 'long1',
-                        'ulong1', 'long2', 'ulong2', 'long3', 'ulong3', 'long4',
-                        'ulong4', 'longlong1', 'ulonglong1', 'longlong2',
-                        'ulonglong2', 'float1', 'float2', 'float3', 'float4',
-                        'double1', 'double2', 'dim3'))
-    variables = set(('gridDim', 'blockIdx', 'blockDim', 'threadIdx', 'warpSize'))
-    functions = set(('__threadfence_block', '__threadfence', '__threadfence_system',
-                     '__syncthreads', '__syncthreads_count', '__syncthreads_and',
-                     '__syncthreads_or'))
-    execution_confs = set(('<<<', '>>>'))
+    function_qualifiers = {'__device__', '__global__', '__host__',
+                           '__noinline__', '__forceinline__'}
+    variable_qualifiers = {'__device__', '__constant__', '__shared__',
+                           '__restrict__'}
+    vector_types = {'char1', 'uchar1', 'char2', 'uchar2', 'char3', 'uchar3',
+                    'char4', 'uchar4', 'short1', 'ushort1', 'short2', 'ushort2',
+                    'short3', 'ushort3', 'short4', 'ushort4', 'int1', 'uint1',
+                    'int2', 'uint2', 'int3', 'uint3', 'int4', 'uint4', 'long1',
+                    'ulong1', 'long2', 'ulong2', 'long3', 'ulong3', 'long4',
+                    'ulong4', 'longlong1', 'ulonglong1', 'longlong2',
+                    'ulonglong2', 'float1', 'float2', 'float3', 'float4',
+                    'double1', 'double2', 'dim3'}
+    variables = {'gridDim', 'blockIdx', 'blockDim', 'threadIdx', 'warpSize'}
+    functions = {'__threadfence_block', '__threadfence', '__threadfence_system',
+                 '__syncthreads', '__syncthreads_count', '__syncthreads_and',
+                 '__syncthreads_or'}
+    execution_confs = {'<<<', '>>>'}
 
     def get_tokens_unprocessed(self, text):
         for index, token, value in CLexer.get_tokens_unprocessed(self, text):
@@ -344,7 +344,7 @@ class SwigLexer(CppLexer):
             # SWIG directives
             (r'(%[a-z_][a-z0-9_]*)', Name.Function),
             # Special variables
-            ('\$\**\&?\w+', Name),
+            (r'\$\**\&?\w+', Name),
             # Stringification / additional preprocessor directives
             (r'##*[a-zA-Z_]\w*', Comment.Preproc),
             inherit,
@@ -352,7 +352,7 @@ class SwigLexer(CppLexer):
     }
 
     # This is a far from complete set of SWIG directives
-    swig_directives = set((
+    swig_directives = {
         # Most common directives
         '%apply', '%define', '%director', '%enddef', '%exception', '%extend',
         '%feature', '%fragment', '%ignore', '%immutable', '%import', '%include',
@@ -371,7 +371,7 @@ class SwigLexer(CppLexer):
         '%pythoncallback', '%pythoncode', '%pythondynamic', '%pythonmaybecall',
         '%pythonnondynamic', '%pythonprepend', '%refobject', '%shadow', '%sizeof',
         '%trackobjects', '%types', '%unrefobject', '%varargs', '%warn',
-        '%warnfilter'))
+        '%warnfilter'}
 
     def analyse_text(text):
         rv = 0
@@ -412,6 +412,7 @@ class MqlLexer(CppLexer):
         ],
     }
 
+
 class ArduinoLexer(CppLexer):
     """
     For `Arduino(tm) <https://arduino.cc/>`_ source.
@@ -427,115 +428,144 @@ class ArduinoLexer(CppLexer):
     filenames = ['*.ino']
     mimetypes = ['text/x-arduino']
 
-    # Language constants
-    constants = set(('DIGITAL_MESSAGE', 'FIRMATA_STRING', 'ANALOG_MESSAGE',
-                    'REPORT_DIGITAL', 'REPORT_ANALOG', 'INPUT_PULLUP',
-                    'SET_PIN_MODE', 'INTERNAL2V56', 'SYSTEM_RESET', 'LED_BUILTIN',
-                    'INTERNAL1V1', 'SYSEX_START', 'INTERNAL', 'EXTERNAL',
-                    'DEFAULT', 'OUTPUT', 'INPUT', 'HIGH', 'LOW'))
-
     # Language sketch main structure functions
-    structure = set(('setup', 'loop'))
+    structure = {'setup', 'loop'}
 
-    # Language variable types
-    storage = set(('boolean', 'const', 'byte', 'word', 'string', 'String', 'array'))
+    # Language operators
+    operators = {'not', 'or', 'and', 'xor'}
+
+    # Language 'variables'
+    variables = {
+        'DIGITAL_MESSAGE', 'FIRMATA_STRING', 'ANALOG_MESSAGE', 'REPORT_DIGITAL',
+        'REPORT_ANALOG', 'INPUT_PULLUP', 'SET_PIN_MODE', 'INTERNAL2V56', 'SYSTEM_RESET',
+        'LED_BUILTIN', 'INTERNAL1V1', 'SYSEX_START', 'INTERNAL', 'EXTERNAL', 'HIGH',
+        'LOW', 'INPUT', 'OUTPUT', 'INPUT_PULLUP', 'LED_BUILTIN', 'true', 'false',
+        'void', 'boolean', 'char', 'unsigned char', 'byte', 'int', 'unsigned int',
+        'word', 'long', 'unsigned long', 'short', 'float', 'double', 'string', 'String',
+        'array', 'static', 'volatile', 'const', 'boolean', 'byte', 'word', 'string',
+        'String', 'array', 'int', 'float', 'private', 'char', 'virtual', 'operator',
+        'sizeof', 'uint8_t', 'uint16_t', 'uint32_t', 'uint64_t', 'int8_t', 'int16_t',
+        'int32_t', 'int64_t', 'dynamic_cast', 'typedef', 'const_cast', 'const',
+        'struct', 'static_cast', 'union', 'unsigned', 'long', 'volatile', 'static',
+        'protected', 'bool', 'public', 'friend', 'auto', 'void', 'enum', 'extern',
+        'class', 'short', 'reinterpret_cast', 'double', 'register', 'explicit',
+        'signed', 'inline', 'delete', '_Bool', 'complex', '_Complex', '_Imaginary',
+        'atomic_bool', 'atomic_char', 'atomic_schar', 'atomic_uchar', 'atomic_short',
+        'atomic_ushort', 'atomic_int', 'atomic_uint', 'atomic_long', 'atomic_ulong',
+        'atomic_llong', 'atomic_ullong', 'PROGMEM'}
 
     # Language shipped functions and class ( )
-    functions = set(('KeyboardController', 'MouseController', 'SoftwareSerial',
-            'EthernetServer', 'EthernetClient', 'LiquidCrystal',
-            'RobotControl', 'GSMVoiceCall', 'EthernetUDP', 'EsploraTFT',
-            'HttpClient', 'RobotMotor', 'WiFiClient', 'GSMScanner',
-            'FileSystem', 'Scheduler', 'GSMServer', 'YunClient', 'YunServer',
-            'IPAddress', 'GSMClient', 'GSMModem', 'Keyboard', 'Ethernet',
-            'Console', 'GSMBand', 'Esplora', 'Stepper', 'Process',
-            'WiFiUDP', 'GSM_SMS', 'Mailbox', 'USBHost', 'Firmata', 'PImage',
-            'Client', 'Server', 'GSMPIN', 'FileIO', 'Bridge', 'Serial',
-            'EEPROM', 'Stream', 'Mouse', 'Audio', 'Servo', 'File', 'Task',
-            'GPRS', 'WiFi', 'Wire', 'TFT', 'GSM', 'SPI', 'SD',
-            'runShellCommandAsynchronously', 'analogWriteResolution',
-            'retrieveCallingNumber', 'printFirmwareVersion',
-            'analogReadResolution', 'sendDigitalPortPair',
-            'noListenOnLocalhost', 'readJoystickButton', 'setFirmwareVersion',
-            'readJoystickSwitch', 'scrollDisplayRight', 'getVoiceCallStatus',
-            'scrollDisplayLeft', 'writeMicroseconds', 'delayMicroseconds',
-            'beginTransmission', 'getSignalStrength', 'runAsynchronously',
-            'getAsynchronously', 'listenOnLocalhost', 'getCurrentCarrier',
-            'readAccelerometer', 'messageAvailable', 'sendDigitalPorts',
-            'lineFollowConfig', 'countryNameWrite', 'runShellCommand',
-            'readStringUntil', 'rewindDirectory', 'readTemperature',
-            'setClockDivider', 'readLightSensor', 'endTransmission',
-            'analogReference', 'detachInterrupt', 'countryNameRead',
-            'attachInterrupt', 'encryptionType', 'readBytesUntil',
-            'robotNameWrite', 'readMicrophone', 'robotNameRead', 'cityNameWrite',
-            'userNameWrite', 'readJoystickY', 'readJoystickX', 'mouseReleased',
-            'openNextFile', 'scanNetworks', 'noInterrupts', 'digitalWrite',
-            'beginSpeaker', 'mousePressed', 'isActionDone', 'mouseDragged',
-            'displayLogos', 'noAutoscroll', 'addParameter', 'remoteNumber',
-            'getModifiers', 'keyboardRead', 'userNameRead', 'waitContinue',
-            'processInput', 'parseCommand', 'printVersion', 'readNetworks',
-            'writeMessage', 'blinkVersion', 'cityNameRead', 'readMessage',
-            'setDataMode', 'parsePacket', 'isListening', 'setBitOrder',
-            'beginPacket', 'isDirectory', 'motorsWrite', 'drawCompass',
-            'digitalRead', 'clearScreen', 'serialEvent', 'rightToLeft',
-            'setTextSize', 'leftToRight', 'requestFrom', 'keyReleased',
-            'compassRead', 'analogWrite', 'interrupts', 'WiFiServer',
-            'disconnect', 'playMelody', 'parseFloat', 'autoscroll',
-            'getPINUsed', 'setPINUsed', 'setTimeout', 'sendAnalog',
-            'readSlider', 'analogRead', 'beginWrite', 'createChar',
-            'motorsStop', 'keyPressed', 'tempoWrite', 'readButton',
-            'subnetMask', 'debugPrint', 'macAddress', 'writeGreen',
-            'randomSeed', 'attachGPRS', 'readString', 'sendString',
-            'remotePort', 'releaseAll', 'mouseMoved', 'background',
-            'getXChange', 'getYChange', 'answerCall', 'getResult',
-            'voiceCall', 'endPacket', 'constrain', 'getSocket', 'writeJSON',
-            'getButton', 'available', 'connected', 'findUntil', 'readBytes',
-            'exitValue', 'readGreen', 'writeBlue', 'startLoop', 'IPAddress',
-            'isPressed', 'sendSysex', 'pauseMode', 'gatewayIP', 'setCursor',
-            'getOemKey', 'tuneWrite', 'noDisplay', 'loadImage', 'switchPIN',
-            'onRequest', 'onReceive', 'changePIN', 'playFile', 'noBuffer',
-            'parseInt', 'overflow', 'checkPIN', 'knobRead', 'beginTFT',
-            'bitClear', 'updateIR', 'bitWrite', 'position', 'writeRGB',
-            'highByte', 'writeRed', 'setSpeed', 'readBlue', 'noStroke',
-            'remoteIP', 'transfer', 'shutdown', 'hangCall', 'beginSMS',
-            'endWrite', 'attached', 'maintain', 'noCursor', 'checkReg',
-            'checkPUK', 'shiftOut', 'isValid', 'shiftIn', 'pulseIn',
-            'connect', 'println', 'localIP', 'pinMode', 'getIMEI',
-            'display', 'noBlink', 'process', 'getBand', 'running', 'beginSD',
-            'drawBMP', 'lowByte', 'setBand', 'release', 'bitRead', 'prepare',
-            'pointTo', 'readRed', 'setMode', 'noFill', 'remove', 'listen',
-            'stroke', 'detach', 'attach', 'noTone', 'exists', 'buffer',
-            'height', 'bitSet', 'circle', 'config', 'cursor', 'random',
-            'IRread', 'sizeof', 'setDNS', 'endSMS', 'getKey', 'micros',
-            'millis', 'begin', 'print', 'write', 'ready', 'flush', 'width',
-            'isPIN', 'blink', 'clear', 'press', 'mkdir', 'rmdir', 'close',
-            'point', 'yield', 'image', 'float', 'BSSID', 'click', 'delay',
-            'read', 'text', 'move', 'peek', 'beep', 'rect', 'line', 'open',
-            'seek', 'fill', 'size', 'turn', 'stop', 'home', 'find', 'char',
-            'byte', 'step', 'word', 'long', 'tone', 'sqrt', 'RSSI', 'SSID',
-            'end', 'bit', 'tan', 'cos', 'sin', 'pow', 'map', 'abs', 'max',
-            'min', 'int', 'get', 'run', 'put'))
-   
+    functions = {
+        'KeyboardController', 'MouseController', 'SoftwareSerial', 'EthernetServer',
+        'EthernetClient', 'LiquidCrystal', 'RobotControl', 'GSMVoiceCall',
+        'EthernetUDP', 'EsploraTFT', 'HttpClient', 'RobotMotor', 'WiFiClient',
+        'GSMScanner', 'FileSystem', 'Scheduler', 'GSMServer', 'YunClient', 'YunServer',
+        'IPAddress', 'GSMClient', 'GSMModem', 'Keyboard', 'Ethernet', 'Console',
+        'GSMBand', 'Esplora', 'Stepper', 'Process', 'WiFiUDP', 'GSM_SMS', 'Mailbox',
+        'USBHost', 'Firmata', 'PImage', 'Client', 'Server', 'GSMPIN', 'FileIO',
+        'Bridge', 'Serial', 'EEPROM', 'Stream', 'Mouse', 'Audio', 'Servo', 'File',
+        'Task', 'GPRS', 'WiFi', 'Wire', 'TFT', 'GSM', 'SPI', 'SD',
+        'runShellCommandAsynchronously', 'analogWriteResolution',
+        'retrieveCallingNumber', 'printFirmwareVersion', 'analogReadResolution',
+        'sendDigitalPortPair', 'noListenOnLocalhost', 'readJoystickButton',
+        'setFirmwareVersion', 'readJoystickSwitch', 'scrollDisplayRight',
+        'getVoiceCallStatus', 'scrollDisplayLeft', 'writeMicroseconds',
+        'delayMicroseconds', 'beginTransmission', 'getSignalStrength',
+        'runAsynchronously', 'getAsynchronously', 'listenOnLocalhost',
+        'getCurrentCarrier', 'readAccelerometer', 'messageAvailable',
+        'sendDigitalPorts', 'lineFollowConfig', 'countryNameWrite', 'runShellCommand',
+        'readStringUntil', 'rewindDirectory', 'readTemperature', 'setClockDivider',
+        'readLightSensor', 'endTransmission', 'analogReference', 'detachInterrupt',
+        'countryNameRead', 'attachInterrupt', 'encryptionType', 'readBytesUntil',
+        'robotNameWrite', 'readMicrophone', 'robotNameRead', 'cityNameWrite',
+        'userNameWrite', 'readJoystickY', 'readJoystickX', 'mouseReleased',
+        'openNextFile', 'scanNetworks', 'noInterrupts', 'digitalWrite', 'beginSpeaker',
+        'mousePressed', 'isActionDone', 'mouseDragged', 'displayLogos', 'noAutoscroll',
+        'addParameter', 'remoteNumber', 'getModifiers', 'keyboardRead', 'userNameRead',
+        'waitContinue', 'processInput', 'parseCommand', 'printVersion', 'readNetworks',
+        'writeMessage', 'blinkVersion', 'cityNameRead', 'readMessage', 'setDataMode',
+        'parsePacket', 'isListening', 'setBitOrder', 'beginPacket', 'isDirectory',
+        'motorsWrite', 'drawCompass', 'digitalRead', 'clearScreen', 'serialEvent',
+        'rightToLeft', 'setTextSize', 'leftToRight', 'requestFrom', 'keyReleased',
+        'compassRead', 'analogWrite', 'interrupts', 'WiFiServer', 'disconnect',
+        'playMelody', 'parseFloat', 'autoscroll', 'getPINUsed', 'setPINUsed',
+        'setTimeout', 'sendAnalog', 'readSlider', 'analogRead', 'beginWrite',
+        'createChar', 'motorsStop', 'keyPressed', 'tempoWrite', 'readButton',
+        'subnetMask', 'debugPrint', 'macAddress', 'writeGreen', 'randomSeed',
+        'attachGPRS', 'readString', 'sendString', 'remotePort', 'releaseAll',
+        'mouseMoved', 'background', 'getXChange', 'getYChange', 'answerCall',
+        'getResult', 'voiceCall', 'endPacket', 'constrain', 'getSocket', 'writeJSON',
+        'getButton', 'available', 'connected', 'findUntil', 'readBytes', 'exitValue',
+        'readGreen', 'writeBlue', 'startLoop', 'IPAddress', 'isPressed', 'sendSysex',
+        'pauseMode', 'gatewayIP', 'setCursor', 'getOemKey', 'tuneWrite', 'noDisplay',
+        'loadImage', 'switchPIN', 'onRequest', 'onReceive', 'changePIN', 'playFile',
+        'noBuffer', 'parseInt', 'overflow', 'checkPIN', 'knobRead', 'beginTFT',
+        'bitClear', 'updateIR', 'bitWrite', 'position', 'writeRGB', 'highByte',
+        'writeRed', 'setSpeed', 'readBlue', 'noStroke', 'remoteIP', 'transfer',
+        'shutdown', 'hangCall', 'beginSMS', 'endWrite', 'attached', 'maintain',
+        'noCursor', 'checkReg', 'checkPUK', 'shiftOut', 'isValid', 'shiftIn', 'pulseIn',
+        'connect', 'println', 'localIP', 'pinMode', 'getIMEI', 'display', 'noBlink',
+        'process', 'getBand', 'running', 'beginSD', 'drawBMP', 'lowByte', 'setBand',
+        'release', 'bitRead', 'prepare', 'pointTo', 'readRed', 'setMode', 'noFill',
+        'remove', 'listen', 'stroke', 'detach', 'attach', 'noTone', 'exists', 'buffer',
+        'height', 'bitSet', 'circle', 'config', 'cursor', 'random', 'IRread', 'setDNS',
+        'endSMS', 'getKey', 'micros', 'millis', 'begin', 'print', 'write', 'ready',
+        'flush', 'width', 'isPIN', 'blink', 'clear', 'press', 'mkdir', 'rmdir', 'close',
+        'point', 'yield', 'image', 'BSSID', 'click', 'delay', 'read', 'text', 'move',
+        'peek', 'beep', 'rect', 'line', 'open', 'seek', 'fill', 'size', 'turn', 'stop',
+        'home', 'find', 'step', 'tone', 'sqrt', 'RSSI', 'SSID', 'end', 'bit', 'tan',
+        'cos', 'sin', 'pow', 'map', 'abs', 'max', 'min', 'get', 'run', 'put',
+        'isAlphaNumeric', 'isAlpha', 'isAscii', 'isWhitespace', 'isControl', 'isDigit',
+        'isGraph', 'isLowerCase', 'isPrintable', 'isPunct', 'isSpace', 'isUpperCase',
+        'isHexadecimalDigit'}
+
+    # do not highlight
+    suppress_highlight = {
+        'namespace', 'template', 'mutable', 'using', 'asm', 'typeid',
+        'typename', 'this', 'alignof', 'constexpr', 'decltype', 'noexcept',
+        'static_assert', 'thread_local', 'restrict'}
 
     def get_tokens_unprocessed(self, text):
         for index, token, value in CppLexer.get_tokens_unprocessed(self, text):
-            if token is Name:
-                if value in self.constants:
-                    yield index, Keyword.Constant, value
-                elif value in self.functions:
-                    yield index, Name.Function, value
-                elif value in self.storage:
-                    yield index, Keyword.Type, value
-                else:
-                    yield index, token, value
-            elif token is Name.Function:
-                if value in self.structure:
-                    yield index, Name.Other, value
-                else:
-                    yield index, token, value
-            elif token is Keyword:
-                if value in self.storage:
-                    yield index, Keyword.Type, value
-                else:
-                    yield index, token, value
+            if value in self.structure:
+                yield index, Name.Builtin, value
+            elif value in self.operators:
+                yield index, Operator, value
+            elif value in self.variables:
+                yield index, Keyword.Reserved, value
+            elif value in self.suppress_highlight:
+                yield index, Name, value
+            elif value in self.functions:
+                yield index, Name.Function, value
             else:
                 yield index, token, value
+
+
+class CharmciLexer(CppLexer):
+    """
+    For `Charm++ <https://charm.cs.illinois.edu>`_ interface files (.ci).
+
+    .. versionadded:: 2.4
+    """
+
+    name = 'Charmci'
+    aliases = ['charmci']
+    filenames = ['*.ci']
+
+    mimetypes = []
+
+    tokens = {
+        'statements': [
+            (r'(module)(\s+)', bygroups(Keyword, Text), 'classname'),
+            (words(('mainmodule', 'mainchare', 'chare', 'array', 'group',
+                    'nodegroup', 'message', 'conditional')), Keyword),
+            (words(('entry', 'aggregate', 'threaded', 'sync', 'exclusive',
+                    'nokeep', 'notrace', 'immediate', 'expedited', 'inline',
+                    'local', 'python', 'accel', 'readwrite', 'writeonly',
+                    'accelblock', 'memcritical', 'packed', 'varsize',
+                    'initproc', 'initnode', 'initcall', 'stacksize',
+                    'createhere', 'createhome', 'reductiontarget', 'iget',
+                    'nocopy', 'mutable', 'migratable', 'readonly')), Keyword),
+            inherit,
+        ],
+    }

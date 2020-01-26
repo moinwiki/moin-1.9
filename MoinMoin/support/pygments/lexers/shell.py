@@ -5,7 +5,7 @@
 
     Lexers for various shells.
 
-    :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2019 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
@@ -19,7 +19,7 @@ from pygments.util import shebang_matches
 
 
 __all__ = ['BashLexer', 'BashSessionLexer', 'TcshLexer', 'BatchLexer',
-           'MSDOSSessionLexer', 'PowerShellLexer',
+           'SlurmBashLexer', 'MSDOSSessionLexer', 'PowerShellLexer',
            'PowerShellSessionLexer', 'TcshSessionLexer', 'FishShellLexer']
 
 line_re = re.compile('.*?\n')
@@ -27,17 +27,18 @@ line_re = re.compile('.*?\n')
 
 class BashLexer(RegexLexer):
     """
-    Lexer for (ba|k|)sh shell scripts.
+    Lexer for (ba|k|z|)sh shell scripts.
 
     .. versionadded:: 0.6
     """
 
     name = 'Bash'
-    aliases = ['bash', 'sh', 'ksh', 'shell']
+    aliases = ['bash', 'sh', 'ksh', 'zsh', 'shell']
     filenames = ['*.sh', '*.ksh', '*.bash', '*.ebuild', '*.eclass',
-                 '*.exheres-0', '*.exlib',
-                 '.bashrc', 'bashrc', '.bash_*', 'bash_*', 'PKGBUILD']
-    mimetypes = ['application/x-sh', 'application/x-shellscript']
+                 '*.exheres-0', '*.exlib', '*.zsh',
+                 '.bashrc', 'bashrc', '.bash_*', 'bash_*', 'zshrc', '.zshrc',
+                 'PKGBUILD']
+    mimetypes = ['application/x-sh', 'application/x-shellscript', 'text/x-shellscript']
 
     tokens = {
         'root': [
@@ -50,7 +51,7 @@ class BashLexer(RegexLexer):
             (r'\$\(\(', Keyword, 'math'),
             (r'\$\(', Keyword, 'paren'),
             (r'\$\{#?', String.Interpol, 'curly'),
-            (r'\$[a-zA-Z_][a-zA-Z0-9_]*', Name.Variable),  # user variable
+            (r'\$[a-zA-Z_]\w*', Name.Variable),  # user variable
             (r'\$(?:\d+|[#$?!_*@-])', Name.Variable),      # builtin
             (r'\$', Text),
         ],
@@ -68,14 +69,14 @@ class BashLexer(RegexLexer):
             (r'\A#!.+\n', Comment.Hashbang),
             (r'#.*\n', Comment.Single),
             (r'\\[\w\W]', String.Escape),
-            (r'(\b\w+)(\s*)(=)', bygroups(Name.Variable, Text, Operator)),
+            (r'(\b\w+)(\s*)(\+?=)', bygroups(Name.Variable, Text, Operator)),
             (r'[\[\]{}()=]', Operator),
             (r'<<<', Operator),  # here-string
             (r'<<-?\s*(\'?)\\?(\w+)[\w\W]+?\2', String),
             (r'&&|\|\|', Operator),
         ],
         'data': [
-            (r'(?s)\$?"(\\\\|\\[0-7]+|\\.|[^"\\$])*"', String.Double),
+            (r'(?s)\$?"(\\.|[^"\\$])*"', String.Double),
             (r'"', String.Double, 'string'),
             (r"(?s)\$'(\\\\|\\[0-7]+|\\.|[^'\\])*'", String.Single),
             (r"(?s)'.*?'", String.Single),
@@ -83,7 +84,7 @@ class BashLexer(RegexLexer):
             (r'&', Punctuation),
             (r'\|', Punctuation),
             (r'\s+', Text),
-            (r'\d+(?= |\Z)', Number),
+            (r'\d+\b', Number),
             (r'[^=\s\[\]{}()$"\'`\\<&|;]+', Text),
             (r'<', Text),
         ],
@@ -125,22 +126,64 @@ class BashLexer(RegexLexer):
             return 0.2
 
 
+class SlurmBashLexer(BashLexer):
+    """
+    Lexer for (ba|k|z|)sh Slurm scripts.
+
+    .. versionadded:: 2.4
+    """
+
+    name = 'Slurm'
+    aliases = ['slurm', 'sbatch']
+    filenames = ['*.sl']
+    mimetypes = []
+    EXTRA_KEYWORDS = {'srun'}
+
+    def get_tokens_unprocessed(self, text):
+        for index, token, value in BashLexer.get_tokens_unprocessed(self, text):
+            if token is Text and value in self.EXTRA_KEYWORDS:
+                yield index, Name.Builtin, value
+            elif token is Comment.Single and 'SBATCH' in value:
+                yield index, Keyword.Pseudo, value
+            else:
+                yield index, token, value
+
 class ShellSessionBaseLexer(Lexer):
     """
     Base lexer for simplistic shell sessions.
 
     .. versionadded:: 2.1
     """
+
+    _venv = re.compile(r'^(\([^)]*\))(\s*)')
+
     def get_tokens_unprocessed(self, text):
         innerlexer = self._innerLexerCls(**self.options)
 
         pos = 0
         curcode = ''
         insertions = []
+        backslash_continuation = False
 
         for match in line_re.finditer(text):
             line = match.group()
-            m = re.match(self._ps1rgx, line)
+            if backslash_continuation:
+                curcode += line
+                backslash_continuation = curcode.endswith('\\\n')
+                continue
+            
+            venv_match = self._venv.match(line)
+            if venv_match:
+                venv = venv_match.group(1)
+                venv_whitespace = venv_match.group(2)
+                insertions.append((len(curcode),
+                    [(0, Generic.Prompt.VirtualEnv, venv)]))
+                if venv_whitespace:
+                    insertions.append((len(curcode),
+                        [(0, Text, venv_whitespace)]))
+                line = line[venv_match.end():]
+
+            m = self._ps1rgx.match(line)
             if m:
                 # To support output lexers (say diff output), the output
                 # needs to be broken by prompts whenever the output lexer
@@ -151,10 +194,12 @@ class ShellSessionBaseLexer(Lexer):
                 insertions.append((len(curcode),
                                    [(0, Generic.Prompt, m.group(1))]))
                 curcode += m.group(2)
+                backslash_continuation = curcode.endswith('\\\n')
             elif line.startswith(self._ps2):
                 insertions.append((len(curcode),
                                    [(0, Generic.Prompt, line[:len(self._ps2)])]))
                 curcode += line[len(self._ps2):]
+                backslash_continuation = curcode.endswith('\\\n')
             else:
                 if insertions:
                     toks = innerlexer.get_tokens_unprocessed(curcode)
@@ -182,9 +227,9 @@ class BashSessionLexer(ShellSessionBaseLexer):
     mimetypes = ['application/x-shell-session', 'application/x-sh-session']
 
     _innerLexerCls = BashLexer
-    _ps1rgx = \
+    _ps1rgx = re.compile(
         r'^((?:(?:\[.*?\])|(?:\(\S+\))?(?:| |sh\S*?|\w+\S+[@:]\S+(?:\s+\S+)' \
-        r'?|\[\S+[@:][^\n]+\].+))\s*[$#%])(.*\n?)'
+        r'?|\[\S+[@:][^\n]+\].+))\s*[$#%])(.*\n?)')
     _ps2 = '>'
 
 
@@ -452,9 +497,9 @@ class BatchLexer(RegexLexer):
              bygroups(String.Double, using(this, state='string'), Text,
                       Punctuation)),
             (r'"', String.Double, ('#pop', 'for2', 'string')),
-            (r"('(?:%s|[\w\W])*?')([%s%s]*)(\))" % (_variable, _nl, _ws),
+            (r"('(?:%%%%|%s|[\w\W])*?')([%s%s]*)(\))" % (_variable, _nl, _ws),
              bygroups(using(this, state='sqstring'), Text, Punctuation)),
-            (r'(`(?:%s|[\w\W])*?`)([%s%s]*)(\))' % (_variable, _nl, _ws),
+            (r'(`(?:%%%%|%s|[\w\W])*?`)([%s%s]*)(\))' % (_variable, _nl, _ws),
              bygroups(using(this, state='bqstring'), Text, Punctuation)),
             include('for2')
         ],
@@ -472,13 +517,16 @@ class BatchLexer(RegexLexer):
                       using(this, state='variable')), '#pop'),
             (r'(exist%s)(%s%s)' % (_token_terminator, _space, _stoken),
              bygroups(Keyword, using(this, state='text')), '#pop'),
-            (r'(%s%s?)(==)(%s?%s)' % (_stoken, _space, _space, _stoken),
-             bygroups(using(this, state='text'), Operator,
-                      using(this, state='text')), '#pop'),
             (r'(%s%s)(%s)(%s%s)' % (_number, _space, _opword, _space, _number),
              bygroups(using(this, state='arithmetic'), Operator.Word,
                       using(this, state='arithmetic')), '#pop'),
-            (r'(%s%s)(%s)(%s%s)' % (_stoken, _space, _opword, _space, _stoken),
+            (_stoken, using(this, state='text'), ('#pop', 'if2')),
+        ],
+        'if2': [
+            (r'(%s?)(==)(%s?%s)' % (_space, _space, _stoken),
+             bygroups(using(this, state='text'), Operator,
+                      using(this, state='text')), '#pop'),
+            (r'(%s)(%s)(%s%s)' % (_space, _opword, _space, _stoken),
              bygroups(using(this, state='text'), Operator.Word,
                       using(this, state='text')), '#pop')
         ],
@@ -508,7 +556,7 @@ class MSDOSSessionLexer(ShellSessionBaseLexer):
     mimetypes = []
 
     _innerLexerCls = BatchLexer
-    _ps1rgx = r'^([^>]+>)(.*\n?)'
+    _ps1rgx = re.compile(r'^([^>]*>)(.*\n?)')
     _ps2 = 'More? '
 
 
@@ -593,7 +641,7 @@ class TcshSessionLexer(ShellSessionBaseLexer):
     mimetypes = []
 
     _innerLexerCls = TcshLexer
-    _ps1rgx = r'^([^>]+>)(.*\n?)'
+    _ps1rgx = re.compile(r'^([^>]+>)(.*\n?)')
     _ps2 = '? '
 
 
@@ -628,13 +676,29 @@ class PowerShellLexer(RegexLexer):
         'wildcard').split()
 
     verbs = (
-        'write where wait use update unregister undo trace test tee take '
-        'suspend stop start split sort skip show set send select scroll resume '
-        'restore restart resolve resize reset rename remove register receive '
-        'read push pop ping out new move measure limit join invoke import '
-        'group get format foreach export expand exit enter enable disconnect '
-        'disable debug cxnew copy convertto convertfrom convert connect '
-        'complete compare clear checkpoint aggregate add').split()
+        'write where watch wait use update unregister unpublish unprotect '
+        'unlock uninstall undo unblock trace test tee take sync switch '
+        'suspend submit stop step start split sort skip show set send select '
+        'search scroll save revoke resume restore restart resolve resize '
+        'reset request repair rename remove register redo receive read push '
+        'publish protect pop ping out optimize open new move mount merge '
+        'measure lock limit join invoke install initialize import hide group '
+        'grant get format foreach find export expand exit enter enable edit '
+        'dismount disconnect disable deny debug cxnew copy convertto '
+        'convertfrom convert connect confirm compress complete compare close '
+        'clear checkpoint block backup assert approve aggregate add').split()
+
+    aliases_ = (
+        'ac asnp cat cd cfs chdir clc clear clhy cli clp cls clv cnsn '
+        'compare copy cp cpi cpp curl cvpa dbp del diff dir dnsn ebp echo epal '
+        'epcsv epsn erase etsn exsn fc fhx fl foreach ft fw gal gbp gc gci gcm '
+        'gcs gdr ghy gi gjb gl gm gmo gp gps gpv group gsn gsnp gsv gu gv gwmi '
+        'h history icm iex ihy ii ipal ipcsv ipmo ipsn irm ise iwmi iwr kill lp '
+        'ls man md measure mi mount move mp mv nal ndr ni nmo npssc nsn nv ogv '
+        'oh popd ps pushd pwd r rbp rcjb rcsn rd rdr ren ri rjb rm rmdir rmo '
+        'rni rnp rp rsn rsnp rujb rv rvpa rwmi sajb sal saps sasv sbp sc select '
+        'set shcm si sl sleep sls sort sp spjb spps spsv start sujb sv swmi tee '
+        'trcm type wget where wjb write').split()
 
     commenthelp = (
         'component description example externalhelp forwardhelpcategory '
@@ -662,6 +726,7 @@ class PowerShellLexer(RegexLexer):
             (r'(%s)\b' % '|'.join(keywords), Keyword),
             (r'-(%s)\b' % '|'.join(operators), Operator),
             (r'(%s)-[a-z_]\w*\b' % '|'.join(verbs), Name.Builtin),
+            (r'(%s)\s' % '|'.join(aliases_), Name.Builtin),
             (r'\[[a-z_\[][\w. `,\[\]]*\]', Name.Constant),  # .net [type]s
             (r'-[a-z_]\w*', Name),
             (r'\w+', Name),
@@ -707,7 +772,7 @@ class PowerShellSessionLexer(ShellSessionBaseLexer):
     mimetypes = []
 
     _innerLexerCls = PowerShellLexer
-    _ps1rgx = r'^(PS [^>]+> )(.*\n?)'
+    _ps1rgx = re.compile(r'^(PS [^>]+> )(.*\n?)')
     _ps2 = '>> '
 
 

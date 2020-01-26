@@ -5,7 +5,7 @@
 
     Lexers for theorem-proving languages.
 
-    :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2019 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
@@ -98,7 +98,6 @@ class CoqLexer(RegexLexer):
     operators = r'[!$%&*+\./:<=>?@^|~-]'
     prefix_syms = r'[!?~]'
     infix_syms = r'[=<>@^|&+\*/$%-]'
-    primitives = ('unit', 'nat', 'bool', 'string', 'ascii', 'list')
 
     tokens = {
         'root': [
@@ -115,7 +114,6 @@ class CoqLexer(RegexLexer):
             (r'\b([A-Z][\w\']*)', Name),
             (r'(%s)' % '|'.join(keyopts[::-1]), Operator),
             (r'(%s|%s)?%s' % (infix_syms, prefix_syms, operators), Operator),
-            (r'\b(%s)\b' % '|'.join(primitives), Keyword.Type),
 
             (r"[^\W\d][\w']*", Name),
 
@@ -390,20 +388,23 @@ class LeanLexer(RegexLexer):
 
     flags = re.MULTILINE | re.UNICODE
 
-    keywords1 = ('import', 'abbreviation', 'opaque_hint', 'tactic_hint', 'definition', 'renaming',
-                 'inline', 'hiding', 'exposing', 'parameter', 'parameters', 'conjecture',
-                 'hypothesis', 'lemma', 'corollary', 'variable', 'variables', 'print', 'theorem',
-                 'axiom', 'inductive', 'structure', 'universe', 'alias', 'help',
-                 'options', 'precedence', 'postfix', 'prefix', 'calc_trans', 'calc_subst', 'calc_refl',
-                 'infix', 'infixl', 'infixr', 'notation', 'eval', 'check', 'exit', 'coercion', 'end',
-                 'private', 'using', 'namespace', 'including', 'instance', 'section', 'context',
-                 'protected', 'expose', 'export', 'set_option', 'add_rewrite', 'extends',
-                 'open', 'example', 'constant', 'constants', 'print', 'opaque', 'reducible', 'irreducible'
+    keywords1 = (
+        'import', 'abbreviation', 'opaque_hint', 'tactic_hint', 'definition',
+        'renaming', 'inline', 'hiding', 'exposing', 'parameter', 'parameters',
+        'conjecture', 'hypothesis', 'lemma', 'corollary', 'variable', 'variables',
+        'theorem', 'axiom', 'inductive', 'structure', 'universe', 'alias',
+        'help', 'options', 'precedence', 'postfix', 'prefix', 'calc_trans',
+        'calc_subst', 'calc_refl', 'infix', 'infixl', 'infixr', 'notation', 'eval',
+        'check', 'exit', 'coercion', 'end', 'private', 'using', 'namespace',
+        'including', 'instance', 'section', 'context', 'protected', 'expose',
+        'export', 'set_option', 'add_rewrite', 'extends', 'open', 'example',
+        'constant', 'constants', 'print', 'opaque', 'reducible', 'irreducible',
     )
 
     keywords2 = (
-        'forall', 'fun', 'Pi', 'obtain', 'from', 'have', 'show', 'assume', 'take',
-        'let', 'if', 'else', 'then', 'by', 'in', 'with', 'begin', 'proof', 'qed', 'calc', 'match'
+        'forall', 'fun', 'Pi', 'obtain', 'from', 'have', 'show', 'assume',
+        'take', 'let', 'if', 'else', 'then', 'by', 'in', 'with', 'begin',
+        'proof', 'qed', 'calc', 'match',
     )
 
     keywords3 = (
@@ -412,15 +413,16 @@ class LeanLexer(RegexLexer):
     )
 
     operators = (
-        '!=', '#', '&', '&&', '*', '+', '-', '/', '@', '!', '`',
-        '-.', '->', '.', '..', '...', '::', ':>', ';', ';;', '<',
-        '<-', '=', '==', '>', '_', '`', '|', '||', '~', '=>', '<=', '>=',
-        '/\\', '\\/', u'∀', u'Π', u'λ', u'↔', u'∧', u'∨', u'≠', u'≤', u'≥',
-        u'¬', u'⁻¹', u'⬝', u'▸', u'→', u'∃', u'ℕ', u'ℤ', u'≈', u'×', u'⌞', u'⌟', u'≡',
-        u'⟨', u'⟩'
+        u'!=', u'#', u'&', u'&&', u'*', u'+', u'-', u'/', u'@', u'!', u'`',
+        u'-.', u'->', u'.', u'..', u'...', u'::', u':>', u';', u';;', u'<',
+        u'<-', u'=', u'==', u'>', u'_', u'|', u'||', u'~', u'=>', u'<=', u'>=',
+        u'/\\', u'\\/', u'∀', u'Π', u'λ', u'↔', u'∧', u'∨', u'≠', u'≤', u'≥',
+        u'¬', u'⁻¹', u'⬝', u'▸', u'→', u'∃', u'ℕ', u'ℤ', u'≈', u'×', u'⌞',
+        u'⌟', u'≡', u'⟨', u'⟩',
     )
 
-    punctuation = ('(', ')', ':', '{', '}', '[', ']', u'⦃', u'⦄', ':=', ',')
+    punctuation = (u'(', u')', u':', u'{', u'}', u'[', u']', u'⦃', u'⦄',
+                   u':=', u',')
 
     tokens = {
         'root': [
