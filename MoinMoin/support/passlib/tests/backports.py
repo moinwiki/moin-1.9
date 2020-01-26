@@ -14,7 +14,9 @@ from passlib.utils.compat import PY26
 # local
 __all__ = [
     "TestCase",
-    "skip", "skipIf", "skipUnless"
+    "unittest",
+    # TODO: deprecate these exports in favor of "unittest.XXX"
+    "skip", "skipIf", "skipUnless",
 ]
 
 #=============================================================================

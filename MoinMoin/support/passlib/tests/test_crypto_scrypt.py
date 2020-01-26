@@ -560,6 +560,36 @@ class _CommonScryptTest(TestCase):
     # eoc
     #=============================================================================
 
+
+#-----------------------------------------------------------------------
+# check what backends 'should' be available
+#-----------------------------------------------------------------------
+
+def _can_import_cffi_scrypt():
+    try:
+        import scrypt
+    except ImportError as err:
+        if "scrypt" in str(err):
+            return False
+        raise
+    return True
+
+has_cffi_scrypt = _can_import_cffi_scrypt()
+
+
+def _can_import_stdlib_scrypt():
+    try:
+        from hashlib import scrypt
+        return True
+    except ImportError:
+        return False
+
+has_stdlib_scrypt = _can_import_stdlib_scrypt()
+
+#-----------------------------------------------------------------------
+# test individual backends
+#-----------------------------------------------------------------------
+
 # NOTE: builtin version runs VERY slow (except under PyPy, where it's only 11x slower),
 #       so skipping under quick test mode.
 @skipUnless(PYPY or TEST_MODE(min="default"), "skipped under current test mode")
@@ -573,28 +603,31 @@ class BuiltinScryptTest(_CommonScryptTest):
 
     def test_missing_backend(self):
         """backend management -- missing backend"""
-        if _can_import_scrypt():
-            raise self.skipTest("'scrypt' backend is present")
+        if has_stdlib_scrypt or has_cffi_scrypt:
+            raise self.skipTest("non-builtin backend is present")
         self.assertRaises(exc.MissingBackendError, scrypt_mod._set_backend, 'scrypt')
 
-def _can_import_scrypt():
-    """check if scrypt package is importable"""
-    try:
-        import scrypt
-    except ImportError as err:
-        if "scrypt" in str(err):
-            return False
-        raise
-    return True
 
-@skipUnless(_can_import_scrypt(), "'scrypt' package not found")
+@skipUnless(has_cffi_scrypt, "'scrypt' package not found")
 class ScryptPackageTest(_CommonScryptTest):
     backend = "scrypt"
 
     def test_default_backend(self):
         """backend management -- default backend"""
+        if has_stdlib_scrypt:
+            raise self.skipTest("higher priority backend present")
         scrypt_mod._set_backend("default")
         self.assertEqual(scrypt_mod.backend, "scrypt")
+
+
+@skipUnless(has_stdlib_scrypt, "'hashlib.scrypt()' not found")
+class StdlibScryptTest(_CommonScryptTest):
+    backend = "stdlib"
+
+    def test_default_backend(self):
+        """backend management -- default backend"""
+        scrypt_mod._set_backend("default")
+        self.assertEqual(scrypt_mod.backend, "stdlib")
 
 #=============================================================================
 # eof

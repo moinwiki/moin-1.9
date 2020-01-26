@@ -5,10 +5,12 @@
 # core
 import logging
 log = logging.getLogger(__name__)
+import re
 import warnings
 # site
 # pkg
 from passlib import hash
+from passlib.utils.compat import unicode
 from passlib.tests.utils import HandlerCase, TEST_MODE
 from passlib.tests.test_handlers import UPASS_TABLE, PASS_TABLE_UTF8
 # module
@@ -21,6 +23,7 @@ def hashtest(version, t, logM, p, secret, salt, hex_digest, hash):
     return dict(version=version, rounds=t, logM=logM, memory_cost=1<<logM, parallelism=p,
                 secret=secret, salt=salt, hex_digest=hex_digest, hash=hash)
 
+# version 1.3 "I" tests
 version = 0x10
 reference_data = [
     hashtest(version, 2, 16, 1, "password", "somesalt",
@@ -61,6 +64,7 @@ reference_data = [
              "$eaEDuQ/orvhXDLMfyLIiWXeJFvgza3vaw4kladTxxJc"),
 ]
 
+# version 1.9 "I" tests
 version = 0x13
 reference_data.extend([
     hashtest(version, 2, 16, 1, "password", "somesalt",
@@ -101,6 +105,43 @@ reference_data.extend([
              "$sDV8zPvvkfOGCw26RHsjSMvv7K2vmQq/6cxAcmxSEnE"),
 ])
 
+# version 1.9 "ID" tests
+version = 0x13
+reference_data.extend([
+    hashtest(version, 2, 16, 1, "password", "somesalt",
+             "09316115d5cf24ed5a15a31a3ba326e5cf32edc24702987c02b6566f61913cf7",
+             "$argon2id$v=19$m=65536,t=2,p=1$c29tZXNhbHQ"
+             "$CTFhFdXPJO1aFaMaO6Mm5c8y7cJHAph8ArZWb2GRPPc"),
+    hashtest(version, 2, 18, 1, "password", "somesalt",
+             "78fe1ec91fb3aa5657d72e710854e4c3d9b9198c742f9616c2f085bed95b2e8c",
+             "$argon2id$v=19$m=262144,t=2,p=1$c29tZXNhbHQ"
+             "$eP4eyR+zqlZX1y5xCFTkw9m5GYx0L5YWwvCFvtlbLow"),
+    hashtest(version, 2, 8, 1, "password", "somesalt",
+             "9dfeb910e80bad0311fee20f9c0e2b12c17987b4cac90c2ef54d5b3021c68bfe",
+             "$argon2id$v=19$m=256,t=2,p=1$c29tZXNhbHQ"
+             "$nf65EOgLrQMR/uIPnA4rEsF5h7TKyQwu9U1bMCHGi/4"),
+    hashtest(version, 2, 8, 2, "password", "somesalt",
+             "6d093c501fd5999645e0ea3bf620d7b8be7fd2db59c20d9fff9539da2bf57037",
+             "$argon2id$v=19$m=256,t=2,p=2$c29tZXNhbHQ"
+             "$bQk8UB/VmZZF4Oo79iDXuL5/0ttZwg2f/5U52iv1cDc"),
+    hashtest(version, 1, 16, 1, "password", "somesalt",
+             "f6a5adc1ba723dddef9b5ac1d464e180fcd9dffc9d1cbf76cca2fed795d9ca98",
+             "$argon2id$v=19$m=65536,t=1,p=1$c29tZXNhbHQ"
+             "$9qWtwbpyPd3vm1rB1GThgPzZ3/ydHL92zKL+15XZypg"),
+    hashtest(version, 4, 16, 1, "password", "somesalt",
+             "9025d48e68ef7395cca9079da4c4ec3affb3c8911fe4f86d1a2520856f63172c",
+             "$argon2id$v=19$m=65536,t=4,p=1$c29tZXNhbHQ"
+             "$kCXUjmjvc5XMqQedpMTsOv+zyJEf5PhtGiUghW9jFyw"),
+    hashtest(version, 2, 16, 1, "differentpassword", "somesalt",
+             "0b84d652cf6b0c4beaef0dfe278ba6a80df6696281d7e0d2891b817d8c458fde",
+             "$argon2id$v=19$m=65536,t=2,p=1$c29tZXNhbHQ"
+             "$C4TWUs9rDEvq7w3+J4umqA32aWKB1+DSiRuBfYxFj94"),
+    hashtest(version, 2, 16, 1, "password", "diffsalt",
+             "bdf32b05ccc42eb15d58fd19b1f856b113da1e9a5874fdcc544308565aa8141c",
+             "$argon2id$v=19$m=65536,t=2,p=1$ZGlmZnNhbHQ"
+             "$vfMrBczELrFdWP0ZsfhWsRPaHppYdP3MVEMIVlqoFBw"),
+])
+
 #=============================================================================
 # argon2
 #=============================================================================
@@ -127,9 +168,15 @@ class _base_argon2_test(HandlerCase):
         # ensure trailing null bytes handled correctly
         ('password\x00', '$argon2i$v=19$m=512,t=2,p=2$c29tZXNhbHQ$Fb5+nPuLzZvtqKRwqUEtUQ'),
 
+        # sample with type D (generated via argon_cffi2.PasswordHasher)
+        ("password", '$argon2d$v=19$m=102400,t=2,p=8$g2RodLh8j8WbSdCp+lUy/A$zzAJqL/HSjm809PYQu6qkA'),
+
         ]
 
     known_malformed_hashes = [
+        # unknown hash type
+        "$argon2qq$v=19$t=2,p=4$c29tZXNhbHQAAAAAAAAAAA$QWLzI4TY9HkL2ZTLc8g6SinwdhZewYrzz9zxCo0bkGY",
+
         # missing 'm' param
         "$argon2i$v=19$t=2,p=4$c29tZXNhbHQAAAAAAAAAAA$QWLzI4TY9HkL2ZTLc8g6SinwdhZewYrzz9zxCo0bkGY",
 
@@ -144,6 +191,12 @@ class _base_argon2_test(HandlerCase):
 
         # constraint violation: m < 8 * p
         "$argon2i$v=19$m=127,t=2,p=16$c29tZXNhbHQ$IMit9qkFULCMA/ViizL57cnTLOa5DiVM9eMwpAvPwr4",
+    ]
+
+    known_parsehash_results = [
+        ('$argon2i$v=19$m=256,t=2,p=3$c29tZXNhbHQ$AJFIsNZTMKTAewB4+ETN1A',
+         dict(type="i", memory_cost=256, rounds=2, parallelism=3, salt=b'somesalt',
+              checksum=b'\x00\x91H\xb0\xd6S0\xa4\xc0{\x00x\xf8D\xcd\xd4')),
     ]
 
     def setUpWarnings(self):
@@ -239,13 +292,93 @@ class _base_argon2_test(HandlerCase):
                           "$argon2i$v=19$m=65536,t=2,p=4,keyid=ABCD,data=EFGH$c29tZXNhbHQ$"
                           "IMit9qkFULCMA/ViizL57cnTLOa5DiVM9eMwpAvPwr4")
 
+    def test_type_kwd(self):
+        cls = self.handler
+        
+        # XXX: this mirrors test_30_HasManyIdents();
+        #      maybe switch argon2 class to use that mixin instead of "type" kwd?
+        
+        # check settings
+        self.assertTrue("type" in cls.setting_kwds)
+        
+        # check supported type_values
+        for value in cls.type_values:
+            self.assertIsInstance(value, unicode)
+        self.assertTrue("i" in cls.type_values)
+        self.assertTrue("d" in cls.type_values)
+        
+        # check default
+        self.assertTrue(cls.type in cls.type_values)
+        
+        # check constructor validates ident correctly.
+        handler = cls
+        hash = self.get_sample_hash()[1]
+        kwds = handler.parsehash(hash)
+        del kwds['type']
+        
+        # ... accepts good type
+        handler(type=cls.type, **kwds)
+
+        # XXX: this is policy "ident" uses, maybe switch to it?
+        # # ... requires type w/o defaults
+        # self.assertRaises(TypeError, handler, **kwds)
+        handler(**kwds)
+
+        # ... supplies default type
+        handler(use_defaults=True, **kwds)
+
+        # ... rejects bad type
+        self.assertRaises(ValueError, handler, type='xXx', **kwds)
+        
+    def test_type_using(self):
+        handler = self.handler
+
+        # XXX: this mirrors test_has_many_idents_using();
+        #      maybe switch argon2 class to use that mixin instead of "type" kwd?
+        
+        orig_type = handler.type
+        for alt_type in handler.type_values:
+            if alt_type != orig_type:
+                break
+        else:
+            raise AssertionError("expected to find alternate type: default=%r values=%r" %
+                                 (orig_type, handler.type_values))
+        
+        def effective_type(cls):
+            return cls(use_defaults=True).type
+
+        # keep default if nothing else specified
+        subcls = handler.using()
+        self.assertEqual(subcls.type, orig_type)
+
+        # accepts alt type
+        subcls = handler.using(type=alt_type)
+        self.assertEqual(subcls.type, alt_type)
+        self.assertEqual(handler.type, orig_type)
+
+        # check subcls actually *generates* default type,
+        # and that we didn't affect orig handler
+        self.assertEqual(effective_type(subcls), alt_type)
+        self.assertEqual(effective_type(handler), orig_type)
+
+        # rejects bad type
+        self.assertRaises(ValueError, handler.using, type='xXx')
+
+        # honor 'type' alias
+        subcls = handler.using(type=alt_type)
+        self.assertEqual(subcls.type, alt_type)
+        self.assertEqual(handler.type, orig_type)
+
+        # check type aliases are being honored
+        self.assertEqual(effective_type(handler.using(type="I")), "i")
+
     def test_needs_update_w_type(self):
         handler = self.handler
 
         hash = handler.hash("stub")
         self.assertFalse(handler.needs_update(hash))
 
-        hash2 = hash.replace("$argon2i$", "$argon2d$")
+        hash2 = re.sub(r"\$argon2\w+\$", "$argon2d$", hash)
         self.assertTrue(handler.needs_update(hash2))
 
     def test_needs_update_w_version(self):
@@ -268,7 +401,7 @@ class _base_argon2_test(HandlerCase):
         # 8 byte salt
         salt = b'somesalt'
         temp = handler.using(memory_cost=256, time_cost=2, parallelism=2, salt=salt,
-                             checksum_size=32)
+                             checksum_size=32, type="i")
         hash = temp.hash("password")
         self.assertEqual(hash, "$argon2i$v=19$m=256,t=2,p=2"
                                "$c29tZXNhbHQ"
@@ -277,7 +410,7 @@ class _base_argon2_test(HandlerCase):
         # 16 byte salt
         salt = b'somesalt\x00\x00\x00\x00\x00\x00\x00\x00'
         temp = handler.using(memory_cost=256, time_cost=2, parallelism=2, salt=salt,
-                             checksum_size=32)
+                             checksum_size=32, type="i")
         hash = temp.hash("password")
         self.assertEqual(hash, "$argon2i$v=19$m=256,t=2,p=2"
                                "$c29tZXNhbHQAAAAAAAAAAA"
@@ -286,7 +419,10 @@ class _base_argon2_test(HandlerCase):
     class FuzzHashGenerator(HandlerCase.FuzzHashGenerator):
 
         settings_map = HandlerCase.FuzzHashGenerator.settings_map.copy()
-        settings_map.update(memory_cost="random_memory_cost")
+        settings_map.update(memory_cost="random_memory_cost", type="random_type")
+
+        def random_type(self):
+            return self.rng.choice(self.handler.type_values)
 
         def random_memory_cost(self):
             if self.test.backend == "argon2pure":
@@ -321,6 +457,10 @@ class argon2_argon2_cffi_test(_base_argon2_test.create_backend_case("argon2_cffi
         ('password', "$argon2d$v=19$m=65536,t=2,p=4$c29tZXNhbHQ$"
                      "cZn5d+rFh+ZfuRhm2iGUGgcrW5YLeM6q7L3vBsdmFA0"),
 
+        # v1.3, type ID
+        ('password', "$argon2id$v=19$m=65536,t=2,p=4$c29tZXNhbHQ$"
+                     "GpZ3sK/oH9p7VIiV56G/64Zo/8GaUw434IimaPqxwCo"),
+
         #
         # custom
         #
@@ -350,6 +490,7 @@ class argon2_argon2pure_test(_base_argon2_test.create_backend_case("argon2pure")
 
     # add reference hashes from argon2 clib tests
     known_correct_hashes = _base_argon2_test.known_correct_hashes[:]
+
     known_correct_hashes.extend(
         (info['secret'], info['hash']) for info in reference_data
         if info['logM'] < 16

@@ -176,7 +176,8 @@ class _bsdi_crypt_test(HandlerCase):
 
     platform_crypt_support = [
         ("freebsd|openbsd|netbsd|darwin", True),
-        ("linux|solaris", False),
+        ("solaris", False),
+        # linux - may be present in libxcrypt
     ]
 
     def test_77_fuzz_input(self, **kwds):
@@ -1253,7 +1254,8 @@ class _sha1_crypt_test(HandlerCase):
 
     platform_crypt_support = [
         ("netbsd", True),
-        ("freebsd|openbsd|linux|solaris|darwin", False),
+        ("freebsd|openbsd|solaris|darwin", False),
+        # linux - may be present in libxcrypt
     ]
 
 # create test cases for specific backends

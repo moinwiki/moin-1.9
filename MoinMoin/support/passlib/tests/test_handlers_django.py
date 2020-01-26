@@ -33,6 +33,10 @@ class _DjangoHelper(TestCase):
     min_django_version = MIN_DJANGO_VERSION
 
     #: max django version where hash alg is present
+    #: TODO: for a bunch of the tests below, this is just max version where
+    #:       settings.PASSWORD_HASHERS includes it by default -- could add helper to patch
+    #:       desired django hasher back in for duration of test.
+    #: XXX: change this to "disabled_in_django_version" instead?
     max_django_version = None
 
     def _require_django_support(self):
@@ -57,10 +61,7 @@ class _DjangoHelper(TestCase):
             """django/check_password"""
             if self.handler.name == "django_bcrypt" and hash.startswith("bcrypt$$2y$"):
                 hash = hash.replace("$$2y$", "$$2a$")
-            if self.django_has_encoding_glitch and isinstance(secret, bytes):
-                # e.g. unsalted_md5 on 1.5 and higher try to combine
-                # salt + password before encoding to bytes, leading to ascii error.
-                # this works around that issue.
+            if isinstance(secret, bytes):
                 secret = secret.decode("utf-8")
             return check_password(secret, hash)
         return verify_django
@@ -80,8 +81,6 @@ class _DjangoHelper(TestCase):
                             "mangled secret=%r hash=%r incorrect verified" %
                             (secret, hash))
 
-    django_has_encoding_glitch = False
-
     def test_91_django_generation(self):
         """test against output of Django's make_password()"""
         self._require_django_support()
@@ -96,9 +95,7 @@ class _DjangoHelper(TestCase):
             secret, other = generator.random_password_pair()
             if not secret: # django rejects empty passwords.
                 continue
-            if self.django_has_encoding_glitch and isinstance(secret, bytes):
-                # e.g. unsalted_md5 tried to combine salt + password before encoding to bytes,
-                # leading to ascii error. this works around that issue.
+            if isinstance(secret, bytes):
                 secret = secret.decode("utf-8")
             hash = make_password(secret, hasher=name)
             self.assertTrue(self.do_identify(hash))
@@ -168,8 +165,6 @@ class django_salted_md5_test(HandlerCase, _DjangoHelper):
     handler = hash.django_salted_md5
     max_django_version = (1,9)
 
-    django_has_encoding_glitch = True
-
     known_correct_hashes = [
         # test extra large salt
         ("password",    'md5$123abcdef$c8272612932975ee80e8a35995708e80'),
@@ -209,8 +204,6 @@ class django_salted_sha1_test(HandlerCase, _DjangoHelper):
     """test django_salted_sha1"""
     handler = hash.django_salted_sha1
     max_django_version = (1,9)
-
-    django_has_encoding_glitch = True
 
     known_correct_hashes = [
         # test extra large salt
@@ -271,6 +264,8 @@ class django_pbkdf2_sha1_test(HandlerCase, _DjangoHelper):
 class django_bcrypt_test(HandlerCase, _DjangoHelper):
     """test django_bcrypt"""
     handler = hash.django_bcrypt
+    # XXX: not sure when this wasn't in default list anymore. somewhere in [2.0 - 2.2]
+    max_django_version = (2, 0)
     fuzz_salts_need_bcrypt_repair = True
 
     known_correct_hashes = [
@@ -391,6 +386,10 @@ class django_argon2_test(HandlerCase, _DjangoHelper):
         raise self.skipTest("legacy 1.6 workflow not supported")
 
     class FuzzHashGenerator(_base_argon2_test.FuzzHashGenerator):
+
+        def random_type(self):
+            # override default since django only uses type I (see note in class)
+            return "I"
 
         def random_rounds(self):
             # decrease default rounds for fuzz testing to speed up volume.
