@@ -10,7 +10,7 @@ trying to make a "perfect release" (as that release might NEVER get released),
 but to make progress and don't delay releases too much.
 
 
-Version 1.9.10 aka "the end of spam release" (2018-09-09)
+Version 1.9.11 (not released yet)
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
@@ -21,6 +21,20 @@ Version 1.9.10 aka "the end of spam release" (2018-09-09)
   HINT: please read the changelog below carefully before upgrading to 1.9.10.
         This release has some fundamental changes you (and your wiki users)
         should be aware of beforehands.
+
+  Fixes:
+  * make setup.py and .cfg ascii-only, fixes #40
+  * fix SubProcess' os.setsid usage, fixes #44
+  * fix interwiki test fails that crept into 1.9.10 release
+
+  Other changes:
+  * upgrade werkzeug 0.14.1 -> 0.15.6
+  * update pygments 2.1.3 -> 2.5.2
+  * update passlib 1.7.1 -> 1.7.2
+  * update parsedatetime 2.4 -> 2.5
+
+
+Version 1.9.10 aka "the end of spam release" (2018-09-09)
 
   Fixes:
   * security fix for CVE-2017-5934, XSS in GUI editor related code
