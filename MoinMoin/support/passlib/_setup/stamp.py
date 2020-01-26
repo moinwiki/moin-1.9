@@ -4,6 +4,7 @@
 #=============================================================================
 from __future__ import absolute_import, division, print_function
 # core
+import datetime
 from distutils.dist import Distribution
 import os
 import re
@@ -109,7 +110,9 @@ def append_hg_revision(version):
         stamp = stamp.decode("ascii")
     except (OSError, subprocess.CalledProcessError):
         # fallback - just use build date
-        stamp = time.strftime("%Y%m%d%H%M%S")
+        now = int(os.environ.get('SOURCE_DATE_EPOCH') or time.time())
+        build_date = datetime.datetime.utcfromtimestamp(now)
+        stamp = build_date.strftime("%Y%m%d%H%M%S")
 
     # modify version
     if version.endswith((".dev0", ".post0")):

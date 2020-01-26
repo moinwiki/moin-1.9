@@ -303,7 +303,9 @@ pattern = re.compile(r'{{{This is some nested text}}}')
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert "{{{This is some nested text}}}" in output
+        print output
+        # note: recent pygments renders the opening {{{ intermixed into some <span> tags
+        assert "This is some nested text}}}" in output
 
     def testNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the wiki parser

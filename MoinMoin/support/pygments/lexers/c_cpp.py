@@ -5,7 +5,7 @@
 
     Lexers for C/C++ languages.
 
-    :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2019 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
@@ -36,7 +36,7 @@ class CFamilyLexer(RegexLexer):
     tokens = {
         'whitespace': [
             # preprocessor directives: without whitespace
-            ('^#if\s+0', Comment.Preproc, 'if0'),
+            (r'^#if\s+0', Comment.Preproc, 'if0'),
             ('^#', Comment.Preproc, 'macro'),
             # or with whitespace
             ('^(' + _ws1 + r')(#if\s+0)',
@@ -46,12 +46,15 @@ class CFamilyLexer(RegexLexer):
             (r'\n', Text),
             (r'\s+', Text),
             (r'\\\n', Text),  # line continuation
-            (r'//(\n|(.|\n)*?[^\\]\n)', Comment.Single),
-            (r'/(\\\n)?[*](.|\n)*?[*](\\\n)?/', Comment.Multiline),
+            (r'//(\n|[\w\W]*?[^\\]\n)', Comment.Single),
+            (r'/(\\\n)?[*][\w\W]*?[*](\\\n)?/', Comment.Multiline),
+            # Open until EOF, so no ending delimeter
+            (r'/(\\\n)?[*][\w\W]*', Comment.Multiline),
         ],
         'statements': [
-            (r'L?"', String, 'string'),
-            (r"L?'(\\.|\\[0-7]{1,3}|\\x[a-fA-F0-9]{1,2}|[^\\\'\n])'", String.Char),
+            (r'(L?)(")', bygroups(String.Affix, String), 'string'),
+            (r"(L?)(')(\\.|\\[0-7]{1,3}|\\x[a-fA-F0-9]{1,2}|[^\\\'\n])(')",
+             bygroups(String.Affix, String.Char, String.Char, String.Char)),
             (r'(\d+\.\d*|\.\d+|\d+)[eE][+-]?\d+[LlUu]*', Number.Float),
             (r'(\d+\.\d*|\.\d+|\d+[fF])[fF]?', Number.Float),
             (r'0x[0-9a-fA-F]+[LlUu]*', Number.Hex),
@@ -60,10 +63,11 @@ class CFamilyLexer(RegexLexer):
             (r'\*/', Error),
             (r'[~!%^&*+=|?:<>/-]', Operator),
             (r'[()\[\],.]', Punctuation),
-            (words(('auto', 'break', 'case', 'const', 'continue', 'default', 'do',
-                    'else', 'enum', 'extern', 'for', 'goto', 'if', 'register',
-                    'restricted', 'return', 'sizeof', 'static', 'struct',
-                    'switch', 'typedef', 'union', 'volatile', 'while'),
+            (words(('asm', 'auto', 'break', 'case', 'const', 'continue',
+                    'default', 'do', 'else', 'enum', 'extern', 'for', 'goto',
+                    'if', 'register', 'restricted', 'return', 'sizeof',
+                    'static', 'struct', 'switch', 'typedef', 'union',
+                    'volatile', 'while'),
                    suffix=r'\b'), Keyword),
             (r'(bool|int|long|float|short|double|char|unsigned|signed|void)\b',
              Keyword.Type),
@@ -80,7 +84,7 @@ class CFamilyLexer(RegexLexer):
                 prefix=r'__', suffix=r'\b'), Keyword.Reserved),
             (r'(true|false|NULL)\b', Name.Builtin),
             (r'([a-zA-Z_]\w*)(\s*)(:)(?!:)', bygroups(Name.Label, Text, Punctuation)),
-            ('[a-zA-Z_]\w*', Name),
+            (r'[a-zA-Z_]\w*', Name),
         ],
         'root': [
             include('whitespace'),
@@ -123,7 +127,8 @@ class CFamilyLexer(RegexLexer):
             (r'\\', String),  # stray backslash
         ],
         'macro': [
-            (r'(include)(' + _ws1 + ')([^\n]+)', bygroups(Comment.Preproc, Text, Comment.PreprocFile)),
+            (r'(include)(' + _ws1 + r')([^\n]+)',
+             bygroups(Comment.Preproc, Text, Comment.PreprocFile)),
             (r'[^/\n]+', Comment.Preproc),
             (r'/[*](.|\n)*?[*]/', Comment.Multiline),
             (r'//.*?\n', Comment.Single, '#pop'),
@@ -139,21 +144,21 @@ class CFamilyLexer(RegexLexer):
         ]
     }
 
-    stdlib_types = set((
+    stdlib_types = {
         'size_t', 'ssize_t', 'off_t', 'wchar_t', 'ptrdiff_t', 'sig_atomic_t', 'fpos_t',
         'clock_t', 'time_t', 'va_list', 'jmp_buf', 'FILE', 'DIR', 'div_t', 'ldiv_t',
-        'mbstate_t', 'wctrans_t', 'wint_t', 'wctype_t'))
-    c99_types = set((
+        'mbstate_t', 'wctrans_t', 'wint_t', 'wctype_t'}
+    c99_types = {
         '_Bool', '_Complex', 'int8_t', 'int16_t', 'int32_t', 'int64_t', 'uint8_t',
         'uint16_t', 'uint32_t', 'uint64_t', 'int_least8_t', 'int_least16_t',
         'int_least32_t', 'int_least64_t', 'uint_least8_t', 'uint_least16_t',
         'uint_least32_t', 'uint_least64_t', 'int_fast8_t', 'int_fast16_t', 'int_fast32_t',
         'int_fast64_t', 'uint_fast8_t', 'uint_fast16_t', 'uint_fast32_t', 'uint_fast64_t',
-        'intptr_t', 'uintptr_t', 'intmax_t', 'uintmax_t'))
-    linux_types = set((
+        'intptr_t', 'uintptr_t', 'intmax_t', 'uintmax_t'}
+    linux_types = {
         'clockid_t', 'cpu_set_t', 'cpumask_t', 'dev_t', 'gid_t', 'id_t', 'ino_t', 'key_t',
         'mode_t', 'nfds_t', 'pid_t', 'rlim_t', 'sig_t', 'sighandler_t', 'siginfo_t',
-        'sigset_t', 'sigval_t', 'socklen_t', 'timer_t', 'uid_t'))
+        'sigset_t', 'sigval_t', 'socklen_t', 'timer_t', 'uid_t'}
 
     def __init__(self, **options):
         self.stdlibhighlighting = get_bool_opt(options, 'stdlibhighlighting', True)
@@ -185,9 +190,9 @@ class CLexer(CFamilyLexer):
     priority = 0.1
 
     def analyse_text(text):
-        if re.search('^\s*#include [<"]', text, re.MULTILINE):
+        if re.search(r'^\s*#include [<"]', text, re.MULTILINE):
             return 0.1
-        if re.search('^\s*#ifn?def ', text, re.MULTILINE):
+        if re.search(r'^\s*#ifn?def ', text, re.MULTILINE):
             return 0.1
 
 
@@ -206,7 +211,7 @@ class CppLexer(CFamilyLexer):
     tokens = {
         'statements': [
             (words((
-                'asm', 'catch', 'const_cast', 'delete', 'dynamic_cast', 'explicit',
+                'catch', 'const_cast', 'delete', 'dynamic_cast', 'explicit',
                 'export', 'friend', 'mutable', 'namespace', 'new', 'operator',
                 'private', 'protected', 'public', 'reinterpret_cast',
                 'restrict', 'static_cast', 'template', 'this', 'throw', 'throws',
@@ -217,7 +222,11 @@ class CppLexer(CFamilyLexer):
             (r'char(16_t|32_t)\b', Keyword.Type),
             (r'(class)(\s+)', bygroups(Keyword, Text), 'classname'),
             # C++11 raw strings
-            (r'R"\(', String, 'rawstring'),
+            (r'(R)(")([^\\()\s]{,16})(\()((?:.|\n)*?)(\)\3)(")',
+             bygroups(String.Affix, String, String.Delimiter, String.Delimiter,
+                      String, String.Delimiter, String)),
+            # C++11 UTF-8/16/32 strings
+            (r'(u8|u|U)(")', bygroups(String.Affix, String), 'string'),
             inherit,
         ],
         'root': [
@@ -233,11 +242,6 @@ class CppLexer(CFamilyLexer):
             (r'[a-zA-Z_]\w*', Name.Class, '#pop'),
             # template specification
             (r'\s*(?=>)', Text, '#pop'),
-        ],
-        'rawstring': [
-            (r'\)"', String, '#pop'),
-            (r'[^)]+', String),
-            (r'\)', String),
         ],
     }
 

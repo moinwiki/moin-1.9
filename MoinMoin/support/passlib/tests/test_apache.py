@@ -6,16 +6,23 @@ from __future__ import with_statement
 # core
 from logging import getLogger
 import os
+import subprocess
 # site
 # pkg
-from passlib import apache
+from passlib import apache, registry
 from passlib.exc import MissingBackendError
 from passlib.utils.compat import irange
+from passlib.tests.backports import unittest
 from passlib.tests.utils import TestCase, get_file, set_file, ensure_mtime_changed
 from passlib.utils.compat import u
 from passlib.utils import to_bytes
+from passlib.utils.handlers import to_unicode_for_identify
 # module
 log = getLogger(__name__)
+
+#=============================================================================
+# helpers
+#=============================================================================
 
 def backdate_file_mtime(path, offset=10):
     """backdate file's mtime by specified amount"""
@@ -24,6 +31,58 @@ def backdate_file_mtime(path, offset=10):
     atime = os.path.getatime(path)
     mtime = os.path.getmtime(path)-offset
     os.utime(path, (atime, mtime))
+
+#=============================================================================
+# detect external HTPASSWD tool
+#=============================================================================
+
+
+htpasswd_path = os.environ.get("PASSLIB_TEST_HTPASSWD_PATH") or "htpasswd"
+
+
+def _call_htpasswd(args, stdin=None):
+    """
+    helper to run htpasswd cmd
+    """
+    if stdin is not None:
+        stdin = stdin.encode("utf-8")
+    proc = subprocess.Popen([htpasswd_path] + args, stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, stdin=subprocess.PIPE if stdin else None)
+    out, err = proc.communicate(stdin)
+    rc = proc.wait()
+    out = to_unicode_for_identify(out or "")
+    return out, rc
+
+
+def _call_htpasswd_verify(path, user, password):
+    """
+    wrapper for htpasswd verify
+    """
+    out, rc = _call_htpasswd(["-vi", path, user], password)
+    return not rc
+
+
+def _detect_htpasswd():
+    """
+    helper to check if htpasswd is present
+    """
+    try:
+        out, rc = _call_htpasswd([])
+    except OSError:
+        # TODO: under py3, could trap the more specific FileNotFoundError
+        # cmd not found
+        return False, False
+    # when called w/o args, it should print usage to stderr & return rc=2
+    if not rc:
+        log.warning("htpasswd test returned with rc=0")
+    have_bcrypt = " -B " in out
+    return True, have_bcrypt
+
+
+HAVE_HTPASSWD, HAVE_HTPASSWD_BCRYPT = _detect_htpasswd()
+
+requires_htpasswd_cmd = unittest.skipUnless(HAVE_HTPASSWD, "requires `htpasswd` cmdline tool")
+
 
 #=============================================================================
 # htpasswd
@@ -383,6 +442,65 @@ class HtpasswdFileTest(TestCase):
             'user6:althash6\n'
         )
         self.assertEqual(ht.to_string(), target)
+
+    @requires_htpasswd_cmd
+    def test_htpasswd_cmd_verify(self):
+        """
+        verify "htpasswd" command can read output
+        """
+        path = self.mktemp()
+        ht = apache.HtpasswdFile(path=path, new=True)
+
+        def hash_scheme(pwd, scheme):
+            return ht.context.handler(scheme).hash(pwd)
+
+        # base scheme
+        ht.set_hash("user1", hash_scheme("password","apr_md5_crypt"))
+
+        # 2.2-compat scheme
+        host_no_bcrypt = apache.htpasswd_defaults["host_apache_22"]
+        ht.set_hash("user2", hash_scheme("password", host_no_bcrypt))
+
+        # 2.4-compat scheme
+        host_best = apache.htpasswd_defaults["host"]
+        ht.set_hash("user3", hash_scheme("password", host_best))
+
+        # unsupported scheme -- should always fail to verify
+        ht.set_hash("user4", "$xxx$foo$bar$baz")
+
+        # make sure htpasswd properly recognizes hashes
+        ht.save()
+
+        self.assertFalse(_call_htpasswd_verify(path, "user1", "wrong"))
+        self.assertFalse(_call_htpasswd_verify(path, "user2", "wrong"))
+        self.assertFalse(_call_htpasswd_verify(path, "user3", "wrong"))
+        self.assertFalse(_call_htpasswd_verify(path, "user4", "wrong"))
+
+        self.assertTrue(_call_htpasswd_verify(path, "user1", "password"))
+        self.assertTrue(_call_htpasswd_verify(path, "user2", "password"))
+        self.assertTrue(_call_htpasswd_verify(path, "user3", "password"))
+
+    @requires_htpasswd_cmd
+    @unittest.skipUnless(registry.has_backend("bcrypt"), "bcrypt support required")
+    def test_htpasswd_cmd_verify_bcrypt(self):
+        """
+        verify "htpasswd" command can read bcrypt format
+
+        this tests for regression of issue 95, where we output "$2b$" instead of "$2y$";
+        fixed in v1.7.2.
+        """
+        path = self.mktemp()
+        ht = apache.HtpasswdFile(path=path, new=True)
+        def hash_scheme(pwd, scheme):
+            return ht.context.handler(scheme).hash(pwd)
+        ht.set_hash("user1", hash_scheme("password", "bcrypt"))
+        ht.save()
+        self.assertFalse(_call_htpasswd_verify(path, "user1", "wrong"))
+        if HAVE_HTPASSWD_BCRYPT:
+            self.assertTrue(_call_htpasswd_verify(path, "user1", "password"))
+        else:
+            # apache2.2 should fail, acting like it's an unknown hash format
+            self.assertFalse(_call_htpasswd_verify(path, "user1", "password"))
 
     #===================================================================
     # eoc

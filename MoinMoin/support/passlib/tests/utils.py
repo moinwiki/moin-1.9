@@ -2484,6 +2484,84 @@ class HandlerCase(TestCase):
         self.do_identify('abc\x91\x00') # non-utf8
 
     #===================================================================
+    # test parsehash()
+    #===================================================================
+
+    #: optional list of known parse hash results for hasher
+    known_parsehash_results = []
+
+    def require_parsehash(self):
+        if not hasattr(self.handler, "parsehash"):
+            raise SkipTest("parsehash() not implemented")
+
+    def test_70_parsehash(self):
+        """
+        parsehash()
+        """
+        # TODO: would like to enhance what this test covers
+
+        self.require_parsehash()
+        handler = self.handler
+
+        # calls should succeed, and return dict
+        hash = self.do_encrypt("stub")
+        result = handler.parsehash(hash)
+        self.assertIsInstance(result, dict)
+        # TODO: figure out what invariants we can reliably parse,
+        #       or maybe make subclasses specify that?
+
+        # w/ checksum=False, should omit that key
+        result2 = handler.parsehash(hash, checksum=False)
+        correct2 = result.copy()
+        correct2.pop("checksum", None)
+        self.assertEqual(result2, correct2)
+
+        # w/ sanitize=True
+        # correct output should mask salt / checksum;
+        # but all else should be the same
+        result3 = handler.parsehash(hash, sanitize=True)
+        correct3 = result.copy()
+        if PY2:
+            # silence warning about bytes & unicode not comparing
+            # (sanitize may convert bytes into base64 text)
+            warnings.filterwarnings("ignore", ".*unequal comparison failed to convert.*",
+                                    category=UnicodeWarning)
+        for key in ("salt", "checksum"):
+            if key in result3:
+                self.assertNotEqual(result3[key], correct3[key])
+                self.assert_is_masked(result3[key])
+                correct3[key] = result3[key]
+        self.assertEqual(result3, correct3)
+
+    def assert_is_masked(self, value):
+        """
+        check value properly masked by :func:`passlib.utils.mask_value`
+        """
+        if value is None:
+            return
+        self.assertIsInstance(value, unicode)
+        # assumes mask_value() defaults will never show more than <show> chars (4);
+        # and show nothing if size less than 1/<pct> (8).
+        ref = value if len(value) < 8 else value[4:]
+        if set(ref) == set(["*"]):
+            return True
+        raise self.fail("value not masked: %r" % value)
+
+    def test_71_parsehash_results(self):
+        """
+        parsehash() -- known outputs
+        """
+        self.require_parsehash()
+        samples = self.known_parsehash_results
+        if not samples:
+            raise self.skipTest("no samples present")
+        # XXX: expand to test w/ checksum=False and/or sanitize=True?
+        #      or read "_unsafe_settings"?
+        for hash, correct in self.known_parsehash_results:
+            result = self.handler.parsehash(hash)
+            self.assertEqual(result, correct, "hash=%r:" % hash)
+
+    #===================================================================
     # fuzz testing
     #===================================================================
     def test_77_fuzz_input(self, threaded=False):

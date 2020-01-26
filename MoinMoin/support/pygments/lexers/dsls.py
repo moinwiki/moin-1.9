@@ -5,20 +5,20 @@
 
     Lexers for various domain-specific languages.
 
-    :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2019 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
 import re
 
-from pygments.lexer import RegexLexer, bygroups, words, include, default, \
-    this, using, combined
+from pygments.lexer import ExtendedRegexLexer, RegexLexer, bygroups, words, \
+    include, default, this, using, combined
 from pygments.token import Text, Comment, Operator, Keyword, Name, String, \
     Number, Punctuation, Literal, Whitespace
 
-__all__ = ['ProtoBufLexer', 'BroLexer', 'PuppetLexer', 'RslLexer',
+__all__ = ['ProtoBufLexer', 'ZeekLexer', 'PuppetLexer', 'RslLexer',
            'MscgenLexer', 'VGLLexer', 'AlloyLexer', 'PanLexer',
-           'CrmshLexer', 'ThriftLexer']
+           'CrmshLexer', 'ThriftLexer', 'FlatlineLexer', 'SnowballLexer']
 
 
 class ProtoBufLexer(RegexLexer):
@@ -36,13 +36,13 @@ class ProtoBufLexer(RegexLexer):
     tokens = {
         'root': [
             (r'[ \t]+', Text),
-            (r'[,;{}\[\]()]', Punctuation),
+            (r'[,;{}\[\]()<>]', Punctuation),
             (r'/(\\\n)?/(\n|(.|\n)*?[^\\]\n)', Comment.Single),
             (r'/(\\\n)?\*(.|\n)*?\*(\\\n)?/', Comment.Multiline),
             (words((
-                'import', 'option', 'optional', 'required', 'repeated', 'default',
-                'packed', 'ctype', 'extensions', 'to', 'max', 'rpc', 'returns',
-                'oneof'), prefix=r'\b', suffix=r'\b'),
+                'import', 'option', 'optional', 'required', 'repeated',
+                'reserved', 'default', 'packed', 'ctype', 'extensions', 'to',
+                'max', 'rpc', 'returns', 'oneof'), prefix=r'\b', suffix=r'\b'),
              Keyword),
             (words((
                 'int32', 'int64', 'uint32', 'uint64', 'sint32', 'sint64',
@@ -66,7 +66,7 @@ class ProtoBufLexer(RegexLexer):
             (r'[+-=]', Operator),
             (r'([a-zA-Z_][\w.]*)([ \t]*)(=)',
              bygroups(Name.Attribute, Text, Operator)),
-            ('[a-zA-Z_][\w.]*', Name),
+            (r'[a-zA-Z_][\w.]*', Name),
         ],
         'package': [
             (r'[a-zA-Z_]\w*', Name.Namespace, '#pop'),
@@ -111,8 +111,8 @@ class ThriftLexer(RegexLexer):
             include('keywords'),
             include('numbers'),
             (r'[&=]', Operator),
-            (r'[:;\,\{\}\(\)\<>\[\]]', Punctuation),
-            (r'[a-zA-Z_](\.[a-zA-Z_0-9]|[a-zA-Z_0-9])*', Name),
+            (r'[:;,{}()<>\[\]]', Punctuation),
+            (r'[a-zA-Z_](\.\w|\w)*', Name),
         ],
         'whitespace': [
             (r'\n', Text.Whitespace),
@@ -135,7 +135,7 @@ class ThriftLexer(RegexLexer):
             (r'[^\\\'\n]+', String.Single),
         ],
         'namespace': [
-            (r'[a-z\*](\.[a-zA-Z_0-9]|[a-zA-Z_0-9])*', Name.Namespace, '#pop'),
+            (r'[a-z*](\.\w|\w)*', Name.Namespace, '#pop'),
             default('#pop'),
         ],
         'class': [
@@ -156,7 +156,7 @@ class ThriftLexer(RegexLexer):
              Keyword.Namespace),
             (words((
                 'void', 'bool', 'byte', 'i16', 'i32', 'i64', 'double',
-                'string', 'binary', 'void', 'map', 'list', 'set', 'slist',
+                'string', 'binary', 'map', 'list', 'set', 'slist',
                 'senum'), suffix=r'\b'),
              Keyword.Type),
             (words((
@@ -188,82 +188,164 @@ class ThriftLexer(RegexLexer):
     }
 
 
-class BroLexer(RegexLexer):
+class ZeekLexer(RegexLexer):
     """
-    For `Bro <http://bro-ids.org/>`_ scripts.
+    For `Zeek <https://www.zeek.org/>`_ scripts.
 
-    .. versionadded:: 1.5
+    .. versionadded:: 2.5
     """
-    name = 'Bro'
-    aliases = ['bro']
-    filenames = ['*.bro']
+    name = 'Zeek'
+    aliases = ['zeek', 'bro']
+    filenames = ['*.zeek', '*.bro']
 
-    _hex = r'[0-9a-fA-F_]'
+    _hex = r'[0-9a-fA-F]'
     _float = r'((\d*\.?\d+)|(\d+\.?\d*))([eE][-+]?\d+)?'
     _h = r'[A-Za-z0-9][-A-Za-z0-9]*'
 
     tokens = {
         'root': [
-            # Whitespace
-            (r'^@.*?\n', Comment.Preproc),
-            (r'#.*?\n', Comment.Single),
+            include('whitespace'),
+            include('comments'),
+            include('directives'),
+            include('attributes'),
+            include('types'),
+            include('keywords'),
+            include('literals'),
+            include('operators'),
+            include('punctuation'),
+            (r'((?:[A-Za-z_]\w*)(?:::(?:[A-Za-z_]\w*))*)(?=\s*\()',
+                Name.Function),
+            include('identifiers'),
+        ],
+
+        'whitespace': [
             (r'\n', Text),
             (r'\s+', Text),
             (r'\\\n', Text),
-            # Keywords
-            (r'(add|alarm|break|case|const|continue|delete|do|else|enum|event'
-             r'|export|for|function|if|global|hook|local|module|next'
-             r'|of|print|redef|return|schedule|switch|type|when|while)\b', Keyword),
-            (r'(addr|any|bool|count|counter|double|file|int|interval|net'
-             r'|pattern|port|record|set|string|subnet|table|time|timer'
-             r'|vector)\b', Keyword.Type),
+        ],
+
+        'comments': [
+            (r'#.*$', Comment),
+        ],
+
+        'directives': [
+            (r'@(load-plugin|load-sigs|load|unload)\b.*$', Comment.Preproc),
+            (r'@(DEBUG|DIR|FILENAME|deprecated|if|ifdef|ifndef|else|endif)\b', Comment.Preproc),
+            (r'(@prefixes)\s*(\+?=).*$', Comment.Preproc),
+        ],
+
+        'attributes': [
+            (words(('redef', 'priority', 'log', 'optional', 'default', 'add_func',
+                    'delete_func', 'expire_func', 'read_expire', 'write_expire',
+                    'create_expire', 'synchronized', 'persistent', 'rotate_interval',
+                    'rotate_size', 'encrypt', 'raw_output', 'mergeable', 'error_handler',
+                    'type_column', 'deprecated'),
+                prefix=r'&', suffix=r'\b'),
+             Keyword.Pseudo),
+        ],
+
+        'types': [
+            (words(('any',
+                    'enum', 'record', 'set', 'table', 'vector',
+                    'function', 'hook', 'event',
+                    'addr', 'bool', 'count', 'double', 'file', 'int', 'interval',
+                    'pattern', 'port', 'string', 'subnet', 'time'),
+                suffix=r'\b'),
+             Keyword.Type),
+
+            (r'(opaque)(\s+)(of)(\s+)((?:[A-Za-z_]\w*)(?:::(?:[A-Za-z_]\w*))*)\b',
+                bygroups(Keyword.Type, Text, Operator.Word, Text, Keyword.Type)),
+
+            (r'(type)(\s+)((?:[A-Za-z_]\w*)(?:::(?:[A-Za-z_]\w*))*)(\s*)(:)(\s*)\b(record|enum)\b',
+                bygroups(Keyword, Text, Name.Class, Text, Operator, Text, Keyword.Type)),
+
+            (r'(type)(\s+)((?:[A-Za-z_]\w*)(?:::(?:[A-Za-z_]\w*))*)(\s*)(:)',
+                bygroups(Keyword, Text, Name, Text, Operator)),
+
+            (r'(redef)(\s+)(record|enum)(\s+)((?:[A-Za-z_]\w*)(?:::(?:[A-Za-z_]\w*))*)\b',
+                bygroups(Keyword, Text, Keyword.Type, Text, Name.Class)),
+        ],
+
+        'keywords': [
+            (words(('redef', 'export', 'if', 'else', 'for', 'while',
+                    'return', 'break', 'next', 'continue', 'fallthrough',
+                    'switch', 'default', 'case',
+                    'add', 'delete',
+                    'when', 'timeout', 'schedule'),
+                suffix=r'\b'),
+             Keyword),
+            (r'(print)\b', Keyword),
+            (r'(global|local|const|option)\b', Keyword.Declaration),
+            (r'(module)(\s+)(([A-Za-z_]\w*)(?:::([A-Za-z_]\w*))*)\b',
+                bygroups(Keyword.Namespace, Text, Name.Namespace)),
+        ],
+
+        'literals': [
+            (r'"', String, 'string'),
+
+            # Not the greatest match for patterns, but generally helps
+            # disambiguate between start of a pattern and just a division
+            # operator.
+            (r'/(?=.*/)', String.Regex, 'regex'),
+
             (r'(T|F)\b', Keyword.Constant),
-            (r'(&)((?:add|delete|expire)_func|attr|(?:create|read|write)_expire'
-             r'|default|disable_print_hook|raw_output|encrypt|group|log'
-             r'|mergeable|optional|persistent|priority|redef'
-             r'|rotate_(?:interval|size)|synchronized)\b',
-             bygroups(Punctuation, Keyword)),
-            (r'\s+module\b', Keyword.Namespace),
-            # Addresses, ports and networks
-            (r'\d+/(tcp|udp|icmp|unknown)\b', Number),
-            (r'(\d+\.){3}\d+', Number),
-            (r'(' + _hex + r'){7}' + _hex, Number),
-            (r'0x' + _hex + r'(' + _hex + r'|:)*::(' + _hex + r'|:)*', Number),
-            (r'((\d+|:)(' + _hex + r'|:)*)?::(' + _hex + r'|:)*', Number),
-            (r'(\d+\.\d+\.|(\d+\.){2}\d+)', Number),
+
+            # Port
+            (r'\d{1,5}/(udp|tcp|icmp|unknown)\b', Number),
+
+            # IPv4 Address
+            (r'(\d{1,3}.){3}(\d{1,3})\b', Number),
+
+            # IPv6 Address
+            (r'\[([0-9a-fA-F]{0,4}:){2,7}([0-9a-fA-F]{0,4})?((\d{1,3}.){3}(\d{1,3}))?\]', Number),
+
+            # Numeric
+            (r'0[xX]' + _hex + r'+\b', Number.Hex),
+            (_float + r'\s*(day|hr|min|sec|msec|usec)s?\b', Number.Float),
+            (_float + r'\b', Number.Float),
+            (r'(\d+)\b', Number.Integer),
+
             # Hostnames
             (_h + r'(\.' + _h + r')+', String),
-            # Numeric
-            (_float + r'\s+(day|hr|min|sec|msec|usec)s?\b', Literal.Date),
-            (r'0[xX]' + _hex, Number.Hex),
-            (_float, Number.Float),
-            (r'\d+', Number.Integer),
-            (r'/', String.Regex, 'regex'),
-            (r'"', String, 'string'),
-            # Operators
-            (r'[!%*/+:<=>?~|-]', Operator),
+        ],
+
+        'operators': [
+            (r'[!%*/+<=>~|&^-]', Operator),
             (r'([-+=&|]{2}|[+=!><-]=)', Operator),
-            (r'(in|match)\b', Operator.Word),
-            (r'[{}()\[\]$.,;]', Punctuation),
-            # Identfier
-            (r'([_a-zA-Z]\w*)(::)', bygroups(Name, Name.Namespace)),
+            (r'(in|as|is|of)\b', Operator.Word),
+            (r'\??\$', Operator),
+        ],
+
+        'punctuation': [
+            (r'[{}()\[\],;.]', Punctuation),
+            # The "ternary if", which uses '?' and ':', could instead be
+            # treated as an Operator, but colons are more frequently used to
+            # separate field/identifier names from their types, so the (often)
+            # less-prominent Punctuation is used even with '?' for consistency.
+            (r'[?:]', Punctuation),
+        ],
+
+        'identifiers': [
+            (r'([a-zA-Z_]\w*)(::)', bygroups(Name, Punctuation)),
             (r'[a-zA-Z_]\w*', Name)
         ],
+
         'string': [
+            (r'\\.', String.Escape),
+            (r'%-?[0-9]*(\.[0-9]+)?[DTdxsefg]', String.Escape),
             (r'"', String, '#pop'),
-            (r'\\([\\abfnrtv"\']|x[a-fA-F0-9]{2,4}|[0-7]{1,3})', String.Escape),
-            (r'[^\\"\n]+', String),
-            (r'\\\n', String),
-            (r'\\', String)
+            (r'.', String),
         ],
+
         'regex': [
+            (r'\\.', String.Escape),
             (r'/', String.Regex, '#pop'),
-            (r'\\[\\nt/]', String.Regex),  # String.Escape is too intense here.
-            (r'[^\\/\n]+', String.Regex),
-            (r'\\\n', String.Regex),
-            (r'\\', String.Regex)
-        ]
+            (r'.', String.Regex),
+        ],
     }
+
+
+BroLexer = ZeekLexer
 
 
 class PuppetLexer(RegexLexer):
@@ -300,7 +382,7 @@ class PuppetLexer(RegexLexer):
         ],
 
         'names': [
-            ('[a-zA-Z_]\w*', Name.Attribute),
+            (r'[a-zA-Z_]\w*', Name.Attribute),
             (r'(\$\S+)(\[)(\S+)(\])', bygroups(Name.Variable, Punctuation,
                                                String, Punctuation)),
             (r'\$\S+', Name.Variable),
@@ -581,7 +663,7 @@ class PanLexer(RegexLexer):
                 'if', 'for', 'with', 'else', 'type', 'bind', 'while', 'valid', 'final',
                 'prefix', 'unique', 'object', 'foreach', 'include', 'template',
                 'function', 'variable', 'structure', 'extensible', 'declaration'),
-                   prefix=r'\b', suffix=r'\s*\b'),
+                prefix=r'\b', suffix=r'\s*\b'),
              Keyword),
             (words((
                 'file_contents', 'format', 'index', 'length', 'match', 'matches',
@@ -593,7 +675,7 @@ class PanLexer(RegexLexer):
                 'is_number', 'is_property', 'is_resource', 'is_string', 'to_boolean',
                 'to_double', 'to_long', 'to_string', 'clone', 'delete', 'exists',
                 'path_exists', 'if_exists', 'return', 'value'),
-                   prefix=r'\b', suffix=r'\s*\b'),
+                prefix=r'\b', suffix=r'\s*\b'),
              Name.Builtin),
             (r'#.*', Comment),
             (r'\\[\w\W]', String.Escape),
@@ -688,7 +770,191 @@ class CrmshLexer(RegexLexer):
             (r'([\w#$-]+)(?:(:)(%s))?(?![\w#$-])' % rsc_role_action,
              bygroups(Name, Punctuation, Operator.Word)),
             # punctuation
-            (r'(\\(?=\n)|[[\](){}/:@])', Punctuation),
+            (r'(\\(?=\n)|[\[\](){}/:@])', Punctuation),
             (r'\s+|\n', Whitespace),
         ],
     }
+
+
+class FlatlineLexer(RegexLexer):
+    """
+    Lexer for `Flatline <https://github.com/bigmlcom/flatline>`_ expressions.
+
+    .. versionadded:: 2.2
+    """
+    name = 'Flatline'
+    aliases = ['flatline']
+    filenames = []
+    mimetypes = ['text/x-flatline']
+
+    special_forms = ('let',)
+
+    builtins = (
+        "!=", "*", "+", "-", "<", "<=", "=", ">", ">=", "abs", "acos", "all",
+        "all-but", "all-with-defaults", "all-with-numeric-default", "and",
+        "asin", "atan", "avg", "avg-window", "bin-center", "bin-count", "call",
+        "category-count", "ceil", "cond", "cond-window", "cons", "cos", "cosh",
+        "count", "diff-window", "div", "ensure-value", "ensure-weighted-value",
+        "epoch", "epoch-day", "epoch-fields", "epoch-hour", "epoch-millisecond",
+        "epoch-minute", "epoch-month", "epoch-second", "epoch-weekday",
+        "epoch-year", "exp", "f", "field", "field-prop", "fields", "filter",
+        "first", "floor", "head", "if", "in", "integer", "language", "length",
+        "levenshtein", "linear-regression", "list", "ln", "log", "log10", "map",
+        "matches", "matches?", "max", "maximum", "md5", "mean", "median", "min",
+        "minimum", "missing", "missing-count", "missing?", "missing_count",
+        "mod", "mode", "normalize", "not", "nth", "occurrences", "or",
+        "percentile", "percentile-label", "population", "population-fraction",
+        "pow", "preferred", "preferred?", "quantile-label", "rand", "rand-int",
+        "random-value", "re-quote", "real", "replace", "replace-first", "rest",
+        "round", "row-number", "segment-label", "sha1", "sha256", "sin", "sinh",
+        "sqrt", "square", "standard-deviation", "standard_deviation", "str",
+        "subs", "sum", "sum-squares", "sum-window", "sum_squares", "summary",
+        "summary-no", "summary-str", "tail", "tan", "tanh", "to-degrees",
+        "to-radians", "variance", "vectorize", "weighted-random-value", "window",
+        "winnow", "within-percentiles?", "z-score",
+    )
+
+    valid_name = r'(?!#)[\w!$%*+<=>?/.#-]+'
+
+    tokens = {
+        'root': [
+            # whitespaces - usually not relevant
+            (r'[,\s]+', Text),
+
+            # numbers
+            (r'-?\d+\.\d+', Number.Float),
+            (r'-?\d+', Number.Integer),
+            (r'0x-?[a-f\d]+', Number.Hex),
+
+            # strings, symbols and characters
+            (r'"(\\\\|\\"|[^"])*"', String),
+            (r"\\(.|[a-z]+)", String.Char),
+
+            # expression template placeholder
+            (r'_', String.Symbol),
+
+            # highlight the special forms
+            (words(special_forms, suffix=' '), Keyword),
+
+            # highlight the builtins
+            (words(builtins, suffix=' '), Name.Builtin),
+
+            # the remaining functions
+            (r'(?<=\()' + valid_name, Name.Function),
+
+            # find the remaining variables
+            (valid_name, Name.Variable),
+
+            # parentheses
+            (r'(\(|\))', Punctuation),
+        ],
+    }
+
+
+class SnowballLexer(ExtendedRegexLexer):
+    """
+    Lexer for `Snowball <http://snowballstem.org/>`_ source code.
+
+    .. versionadded:: 2.2
+    """
+
+    name = 'Snowball'
+    aliases = ['snowball']
+    filenames = ['*.sbl']
+
+    _ws = r'\n\r\t '
+
+    def __init__(self, **options):
+        self._reset_stringescapes()
+        ExtendedRegexLexer.__init__(self, **options)
+
+    def _reset_stringescapes(self):
+        self._start = "'"
+        self._end = "'"
+
+    def _string(do_string_first):
+        def callback(lexer, match, ctx):
+            s = match.start()
+            text = match.group()
+            string = re.compile(r'([^%s]*)(.)' % re.escape(lexer._start)).match
+            escape = re.compile(r'([^%s]*)(.)' % re.escape(lexer._end)).match
+            pos = 0
+            do_string = do_string_first
+            while pos < len(text):
+                if do_string:
+                    match = string(text, pos)
+                    yield s + match.start(1), String.Single, match.group(1)
+                    if match.group(2) == "'":
+                        yield s + match.start(2), String.Single, match.group(2)
+                        ctx.stack.pop()
+                        break
+                    yield s + match.start(2), String.Escape, match.group(2)
+                    pos = match.end()
+                match = escape(text, pos)
+                yield s + match.start(), String.Escape, match.group()
+                if match.group(2) != lexer._end:
+                    ctx.stack[-1] = 'escape'
+                    break
+                pos = match.end()
+                do_string = True
+            ctx.pos = s + match.end()
+        return callback
+
+    def _stringescapes(lexer, match, ctx):
+        lexer._start = match.group(3)
+        lexer._end = match.group(5)
+        return bygroups(Keyword.Reserved, Text, String.Escape, Text,
+                        String.Escape)(lexer, match, ctx)
+
+    tokens = {
+        'root': [
+            (words(('len', 'lenof'), suffix=r'\b'), Operator.Word),
+            include('root1'),
+        ],
+        'root1': [
+            (r'[%s]+' % _ws, Text),
+            (r'\d+', Number.Integer),
+            (r"'", String.Single, 'string'),
+            (r'[()]', Punctuation),
+            (r'/\*[\w\W]*?\*/', Comment.Multiline),
+            (r'//.*', Comment.Single),
+            (r'[!*+\-/<=>]=|[-=]>|<[+-]|[$*+\-/<=>?\[\]]', Operator),
+            (words(('as', 'get', 'hex', 'among', 'define', 'decimal',
+                    'backwardmode'), suffix=r'\b'),
+             Keyword.Reserved),
+            (words(('strings', 'booleans', 'integers', 'routines', 'externals',
+                    'groupings'), suffix=r'\b'),
+             Keyword.Reserved, 'declaration'),
+            (words(('do', 'or', 'and', 'for', 'hop', 'non', 'not', 'set', 'try',
+                    'fail', 'goto', 'loop', 'next', 'test', 'true',
+                    'false', 'unset', 'atmark', 'attach', 'delete', 'gopast',
+                    'insert', 'repeat', 'sizeof', 'tomark', 'atleast',
+                    'atlimit', 'reverse', 'setmark', 'tolimit', 'setlimit',
+                    'backwards', 'substring'), suffix=r'\b'),
+             Operator.Word),
+            (words(('size', 'limit', 'cursor', 'maxint', 'minint'),
+                   suffix=r'\b'),
+             Name.Builtin),
+            (r'(stringdef\b)([%s]*)([^%s]+)' % (_ws, _ws),
+             bygroups(Keyword.Reserved, Text, String.Escape)),
+            (r'(stringescapes\b)([%s]*)(.)([%s]*)(.)' % (_ws, _ws),
+             _stringescapes),
+            (r'[A-Za-z]\w*', Name),
+        ],
+        'declaration': [
+            (r'\)', Punctuation, '#pop'),
+            (words(('len', 'lenof'), suffix=r'\b'), Name,
+             ('root1', 'declaration')),
+            include('root1'),
+        ],
+        'string': [
+            (r"[^']*'", _string(True)),
+        ],
+        'escape': [
+            (r"[^']*'", _string(False)),
+        ],
+    }
+
+    def get_tokens_unprocessed(self, text=None, context=None):
+        self._reset_stringescapes()
+        return ExtendedRegexLexer.get_tokens_unprocessed(self, text, context)

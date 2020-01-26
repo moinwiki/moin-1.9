@@ -2,7 +2,7 @@
 #
 # vim: sw=2 ts=2 sts=2
 #
-# Copyright 2004-2016 Mike Taylor
+# Copyright 2004-2019 Mike Taylor
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 Parse human-readable date/time text.
 
-Requires Python 2.6 or later
+Requires Python 2.7 or later
 """
 
 from __future__ import with_statement, absolute_import, unicode_literals
@@ -44,7 +44,7 @@ __author__ = 'Mike Taylor'
 __email__ = 'bear@bear.im'
 __copyright__ = 'Copyright (c) 2017 Mike Taylor'
 __license__ = 'Apache License 2.0'
-__version__ = '2.4'
+__version__ = '2.5'
 __url__ = 'https://github.com/bear/parsedatetime'
 __download_url__ = 'https://pypi.python.org/pypi/parsedatetime'
 __description__ = 'Parse human-readable date/time text.'
@@ -193,8 +193,7 @@ def __closure_parse_date_w3dtf():
     __tzd_re = r'(?P<tzd>[-+](?P<tzdhours>\d\d)(?::?(?P<tzdminutes>\d\d))|Z)'
     # __tzd_rx = re.compile(__tzd_re)
     __time_re = (r'(?P<hours>\d\d)(?P<tsep>:|)(?P<minutes>\d\d)'
-                 r'(?:(?P=tsep)(?P<seconds>\d\d(?:[.,]\d+)?))?' +
-                 __tzd_re)
+                 r'(?:(?P=tsep)(?P<seconds>\d\d(?:[.,]\d+)?))?' + __tzd_re)
     __datetime_re = '%s(?:T%s)?' % (__date_re, __time_re)
     __datetime_rx = re.compile(__datetime_re)
 
@@ -790,7 +789,7 @@ class Calendar(object):
             startMinute = mn
             startSecond = sec
         else:
-            startHour = 9
+            startHour = self.ptc.StartHour
             startMinute = 0
             startSecond = 0
 
@@ -1142,7 +1141,7 @@ class Calendar(object):
             startMinute = mn
             startSecond = sec
         else:
-            startHour = 9
+            startHour = self.ptc.StartHour
             startMinute = 0
             startSecond = 0
 
@@ -2134,8 +2133,7 @@ class Calendar(object):
                 # modifier. "Next is the word 'month'" should not parse as a
                 # date while "next month" should
                 if m is not None and \
-                        inputString[startpos:startpos +
-                                    m.start()].strip() == '':
+                        inputString[startpos:startpos + m.start()].strip() == '':
                     debug and log.debug('CRE_UNITS_ONLY matched [%s]',
                                         m.group())
                     if leftmost_match[1] == 0 or \
@@ -2156,8 +2154,7 @@ class Calendar(object):
             else:
                 if leftmost_match[3] > 0:
                     m = self.ptc.CRE_NLP_PREFIX.search(
-                        inputString[:leftmost_match[0]] +
-                        ' ' + str(leftmost_match[3]))
+                        inputString[:leftmost_match[0]] + ' ' + str(leftmost_match[3]))
                     if m is not None:
                         leftmost_match[0] = m.start('nlp_prefix')
                         leftmost_match[2] = inputString[leftmost_match[0]:
@@ -2313,9 +2310,14 @@ class Constants(object):
         self.BirthdayEpoch = 50
 
         # When True the starting time for all relative calculations will come
-        # from the given SourceTime, otherwise it will be 9am
+        # from the given SourceTime, otherwise it will be self.StartHour
 
         self.StartTimeFromSourceTime = False
+
+        # The hour of the day that will be used as the starting time for all
+        # relative calculations when self.StartTimeFromSourceTime is False
+
+        self.StartHour = 9
 
         # YearParseStyle controls how we parse "Jun 12", i.e. dates that do
         # not have a year present.  The default is to compare the date given

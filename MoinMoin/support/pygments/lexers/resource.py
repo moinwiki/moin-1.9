@@ -5,7 +5,7 @@
 
     Lexer for resource definition files.
 
-    :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2019 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
@@ -26,7 +26,7 @@ class ResourceLexer(RegexLexer):
     """
     name = 'ResourceBundle'
     aliases = ['resource', 'resourcebundle']
-    filenames = ['*.txt']
+    filenames = []
 
     _types = (':table', ':array', ':string', ':bin', ':import', ':intvector',
               ':int', ':alias')
@@ -81,4 +81,5 @@ class ResourceLexer(RegexLexer):
     }
 
     def analyse_text(text):
-        return text.startswith('root:table')
+        if text.startswith('root:table'):
+            return 1.0

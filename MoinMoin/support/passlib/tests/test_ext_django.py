@@ -118,7 +118,10 @@ def create_mock_setter():
 
 # build config dict that matches stock django
 # XXX: move these to passlib.apps?
-if DJANGO_VERSION >= (1, 10):
+if DJANGO_VERSION >= (1, 11):
+    stock_config = _apps.django110_context.to_dict()
+    stock_rounds = 36000
+elif DJANGO_VERSION >= (1, 10):
     stock_config = _apps.django110_context.to_dict()
     stock_rounds = 30000
 elif DJANGO_VERSION >= (1, 9):

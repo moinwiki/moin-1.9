@@ -1372,7 +1372,7 @@ class TotpTest(TestCase):
         # with label & issuer
         otp = TOTP(KEY4, alg="sha1", digits=6, period=30)
         self.assertEqual(otp.to_uri("alice@google.com", "Example Org"),
-                         "otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP&"
+                         "otpauth://totp/Example%20Org:alice@google.com?secret=JBSWY3DPEHPK3PXP&"
                          "issuer=Example%20Org")
 
         # label is required
@@ -1390,13 +1390,13 @@ class TotpTest(TestCase):
         # with default label & default issuer from constructor
         otp.issuer = "Example Org"
         self.assertEqual(otp.to_uri(),
-                         "otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP"
+                         "otpauth://totp/Example%20Org:alice@google.com?secret=JBSWY3DPEHPK3PXP"
                          "&issuer=Example%20Org")
 
         # reject invalid label
         self.assertRaises(ValueError, otp.to_uri, "label:with:semicolons")
 
-        # reject invalid issue
+        # reject invalid issuer
         self.assertRaises(ValueError, otp.to_uri, "alice@google.com", "issuer:with:semicolons")
 
         #-------------------------------------------------------------------------
