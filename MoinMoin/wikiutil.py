@@ -115,7 +115,10 @@ def url_unquote(s, want_unicode=None):
         log.exception("call with deprecated want_unicode param, please fix caller")
     if isinstance(s, unicode):
         s = s.encode(config.charset)
-    return werkzeug.url_unquote(s, charset=config.charset, errors='fallback:iso-8859-1')
+    try:
+        return werkzeug.url_unquote(s, charset=config.charset, errors='strict')
+    except UnicodeDecodeError:
+        return werkzeug.url_unquote(s, charset='iso-8859-1', errors='replace')
 
 
 def parseQueryString(qstr, want_unicode=None):
@@ -128,8 +131,13 @@ def parseQueryString(qstr, want_unicode=None):
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.url_decode(qstr, charset=config.charset, errors='fallback:iso-8859-1',
-                               decode_keys=False, include_empty=False)
+    try:
+        return werkzeug.url_decode(qstr, charset=config.charset, errors='strict',
+                                   decode_keys=False, include_empty=False)
+    except UnicodeDecodeError:
+        return werkzeug.url_decode(qstr, charset='iso-8859-1', errors='replace',
+                                   decode_keys=False, include_empty=False)
+
 
 def makeQueryString(qstr=None, want_unicode=None, **kw):
     """ Make a querystring from arguments.
