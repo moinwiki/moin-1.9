@@ -63,10 +63,13 @@ def email_to_markup(request, email):
         markup = realname or mailaddr
     return markup
 
+def _get_addrs(headers):
+    decoded_headers = [decode_2044(header) for header in headers]
+    return getaddresses(decoded_headers)
+
 def get_addrs(message, header):
     """ get a list of tuples (realname, mailaddr) from the specified header """
-    dec_hdr = [decode_2044(hdr) for hdr in message.get_all(header, [])]
-    return getaddresses(dec_hdr)
+    return _get_addrs(message.get_all(header, []))
 
 def process_message(message):
     """ Processes the read message and decodes attachments. """
