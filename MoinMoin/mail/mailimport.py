@@ -63,10 +63,20 @@ def email_to_markup(request, email):
         markup = realname or mailaddr
     return markup
 
+def _get_addrs(headers):
+    # order is important here because the realname part might contain (RFC2044 encoded) commas
+    # or other special chars that would confuse getaddresses():
+    # first we need to split the header into a list of (realname_part, address_part) tuples:
+    addrs = getaddresses(headers)
+    # then we need to decode the parts:
+    # note: maybe the addr part is never RFC2044 encoded, but our decode_2044 function
+    #       also decodes the bytes-string to an unicode object, so we just use it for both parts.
+    decoded_addrs = [(decode_2044(realname), decode_2044(addr)) for realname, addr in addrs]
+    return decoded_addrs
+
 def get_addrs(message, header):
     """ get a list of tuples (realname, mailaddr) from the specified header """
-    dec_hdr = [decode_2044(hdr) for hdr in message.get_all(header, [])]
-    return getaddresses(dec_hdr)
+    return _get_addrs(message.get_all(header, []))
 
 def process_message(message):
     """ Processes the read message and decodes attachments. """
