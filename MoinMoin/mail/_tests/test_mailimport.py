@@ -32,16 +32,16 @@ class TestMailHeaderParsing:
         (['From: =?utf-8?q?Joe_Doe?= <user@example.org>', ],
          [(u'Joe Doe', u'user@example.org'), ]),
         # realname part containing a comma
-        #(['From: =?utf-8?q?Doe=2C_Joe?= <user@example.org>', ],
-        # [(u'Doe, Joe', u'user@example.org'), ]),
+        (['From: =?utf-8?q?Doe=2C_Joe?= <user@example.org>', ],
+         [(u'Doe, Joe', u'user@example.org'), ]),
 
         # realname part has RFC2044-encoded non-ascii chars:
         # no comma
         (['From: =?utf-8?b?SsO2IETDtg==?= <user@example.org>', ],
          [(u'Jö Dö', u'user@example.org'), ]),
         # realname part containing a comma
-        #(['From: =?utf-8?b?RMO2LCBKw7Y=?= <user@example.org>', ],
-        # [(u'Dö, Jö', u'user@example.org'), ]),
+        (['From: =?utf-8?b?RMO2LCBKw7Y=?= <user@example.org>', ],
+         [(u'Dö, Jö', u'user@example.org'), ]),
     )
 
     def test_parsing(self):
@@ -50,4 +50,3 @@ class TestMailHeaderParsing:
 
 
 coverage_modules = ['MoinMoin.mail.mailimport']
-
