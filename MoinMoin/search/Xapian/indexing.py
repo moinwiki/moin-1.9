@@ -357,7 +357,7 @@ class XapianIndex(BaseIndex):
 
             for doc in docs_to_delete:
                 connection.delete(doc.id)
-            logging.debug('page %s (all revs, all attachments) removed from xapian index' % pagename)
+            logging.debug('page %r (all revs, all attachments) removed from xapian index' % pagename)
 
         else:
             if request.cfg.xapian_index_history:
@@ -404,7 +404,7 @@ class XapianIndex(BaseIndex):
         mtime = page.mtime_usecs()
 
         doc = self._get_document(connection, itemid, mtime, mode)
-        logging.debug("%s %s %r" % (pagename, revision, doc))
+        logging.debug("%r %s %r" % (pagename, revision, doc))
         if doc:
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
 
@@ -447,7 +447,7 @@ class XapianIndex(BaseIndex):
         revision = str(revno)
         itemid = "%s:%s:%s" % (wikiname, pagename, revision)
         connection.delete(itemid)
-        logging.debug('page %s, revision %d removed from index' % (pagename, revno))
+        logging.debug('page %r, revision %d removed from index' % (pagename, revno))
 
     def _index_attachment(self, request, connection, pagename, attachmentname, mode='update'):
         """ Index an attachment
@@ -469,7 +469,7 @@ class XapianIndex(BaseIndex):
         if os.path.exists(filename):
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
             doc = self._get_document(connection, itemid, mtime, mode)
-            logging.debug("%s %s %r" % (pagename, attachmentname, doc))
+            logging.debug("%r %r %r" % (pagename, attachmentname, doc))
             if doc:
                 page = Page(request, pagename)
                 mimetype, att_content = self.contentfilter(filename)
@@ -490,12 +490,22 @@ class XapianIndex(BaseIndex):
 
                 self._add_fields_to_document(request, doc, fields, multivalued_fields)
 
-                connection.replace(doc)
-                logging.debug('attachment %s (page %s) updated in index' % (attachmentname, pagename))
+                try:
+                    connection.replace(doc)
+                except xapian.Error, err:
+                    logging.error('attachment %r (page %r) could not be updated in index: %s' % (
+                        attachmentname, pagename, str(err)))
+                else:
+                    logging.debug('attachment %r (page %r) updated in index' % (attachmentname, pagename))
         else:
             # attachment file was deleted, remove it from index also
-            connection.delete(itemid)
-            logging.debug('attachment %s (page %s) removed from index' % (attachmentname, pagename))
+            try:
+                connection.delete(itemid)
+            except xapian.Error, err:
+                logging.error('attachment %r (page %r) could not be removed from index: %s' % (
+                    attachmentname, pagename, str(err)))
+            else:
+                logging.debug('attachment %r (page %r) removed from index' % (attachmentname, pagename))
 
     def _index_file(self, request, connection, filename, mode='update'):
         """ index files (that are NOT attachments, just arbitrary files)
@@ -514,7 +524,7 @@ class XapianIndex(BaseIndex):
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
 
             doc = self._get_document(connection, itemid, mtime, mode)
-            logging.debug("%s %r" % (filename, doc))
+            logging.debug("%r %r" % (filename, doc))
             if doc:
                 mimetype, file_content = self.contentfilter(filename)
 
