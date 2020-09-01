@@ -182,7 +182,7 @@ class Parser:
                                                                                                               }
                 lexer = pygments.lexers.TextLexer()
 
-        fmt.result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step, msg))
+        fmt.result.append(formatter.code_area(1, self._code_id, self.syntax, self.show_nums, self.num_start, self.num_step, msg))
         pygments.highlight(self.raw, lexer, fmt)
         fmt.result.append(formatter.code_area(0, self._code_id))
         fmt.result.append(formatter.div(0))
