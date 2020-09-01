@@ -41,7 +41,6 @@ import signal
 import socket
 import sys
 
-import werkzeug
 from ._compat import PY2
 from ._compat import reraise
 from ._compat import WIN
@@ -174,7 +173,9 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 
     @property
     def server_version(self):
-        return "Werkzeug/" + werkzeug.__version__
+        from . import __version__
+
+        return "Werkzeug/" + __version__
 
     def make_environ(self):
         request_url = url_parse(self.path)
@@ -272,7 +273,9 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
                 self.end_headers()
 
             assert isinstance(data, bytes), "applications must write bytes"
-            self.wfile.write(data)
+            if data:
+                # Only write data if there is any to avoid Python 3.5 SSL bug
+                self.wfile.write(data)
             self.wfile.flush()
 
         def start_response(status, response_headers, exc_info=None):
