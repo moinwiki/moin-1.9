@@ -92,23 +92,23 @@ def decodeUserInput(s, charsets=[config.charset]):
 
 
 def url_quote(s, safe='/', want_unicode=None):
-    """ see werkzeug.url_quote, we use a different safe param default value """
+    """ see werkzeug.urls.url_quote, we use a different safe param default value """
     try:
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.url_quote(s, charset=config.charset, safe=safe)
+    return werkzeug.urls.url_quote(s, charset=config.charset, safe=safe)
 
 def url_quote_plus(s, safe='/', want_unicode=None):
-    """ see werkzeug.url_quote_plus, we use a different safe param default value """
+    """ see werkzeug.urls.url_quote_plus, we use a different safe param default value """
     try:
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.url_quote_plus(s, charset=config.charset, safe=safe)
+    return werkzeug.urls.url_quote_plus(s, charset=config.charset, safe=safe)
 
 def url_unquote(s, want_unicode=None):
-    """ see werkzeug.url_unquote """
+    """ see werkzeug.urls.url_unquote """
     try:
         assert want_unicode is None
     except AssertionError:
@@ -116,13 +116,13 @@ def url_unquote(s, want_unicode=None):
     if isinstance(s, unicode):
         s = s.encode(config.charset)
     try:
-        return werkzeug.url_unquote(s, charset=config.charset, errors='strict')
+        return werkzeug.urls.url_unquote(s, charset=config.charset, errors='strict')
     except UnicodeDecodeError:
-        return werkzeug.url_unquote(s, charset='iso-8859-1', errors='replace')
+        return werkzeug.urls.url_unquote(s, charset='iso-8859-1', errors='replace')
 
 
 def parseQueryString(qstr, want_unicode=None):
-    """ see werkzeug.url_decode
+    """ see werkzeug.urls.url_decode
 
         Please note: this returns a MultiDict, you might need to use .to_dict() on
                      the result if your code expects a "normal" dict.
@@ -132,11 +132,11 @@ def parseQueryString(qstr, want_unicode=None):
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
     try:
-        return werkzeug.url_decode(qstr, charset=config.charset, errors='strict',
-                                   decode_keys=False, include_empty=False)
+        return werkzeug.urls.url_decode(qstr, charset=config.charset, errors='strict',
+                                        decode_keys=False, include_empty=False)
     except UnicodeDecodeError:
-        return werkzeug.url_decode(qstr, charset='iso-8859-1', errors='replace',
-                                   decode_keys=False, include_empty=False)
+        return werkzeug.urls.url_decode(qstr, charset='iso-8859-1', errors='replace',
+                                        decode_keys=False, include_empty=False)
 
 
 def makeQueryString(qstr=None, want_unicode=None, **kw):
@@ -146,7 +146,7 @@ def makeQueryString(qstr=None, want_unicode=None, **kw):
 
     If a string is passed in, it's returned verbatim and keyword parameters are ignored.
 
-    See also: werkzeug.url_encode
+    See also: werkzeug.urls.url_encode
 
     @param qstr: dict to format as query string, using either ascii or unicode
     @param kw: same as dict when using keywords, using ascii or unicode
@@ -163,7 +163,7 @@ def makeQueryString(qstr=None, want_unicode=None, **kw):
         return qstr
     if isinstance(qstr, dict):
         qstr.update(kw)
-        return werkzeug.url_encode(qstr, charset=config.charset, encode_keys=True)
+        return werkzeug.urls.url_encode(qstr, charset=config.charset, encode_keys=True)
     else:
         raise ValueError("Unsupported argument type, should be dict.")
 
@@ -180,9 +180,9 @@ def quoteWikinameURL(pagename, charset=config.charset):
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
-    # XXX please note that urllib.quote and werkzeug.url_quote have
+    # XXX please note that urllib.quote and werkzeug.urls.url_quote have
     # XXX different defaults for safe=...
-    return werkzeug.url_quote(pagename, charset=charset, safe='/')
+    return werkzeug.urls.url_quote(pagename, charset=charset, safe='/')
 
 
 def escape(s, quote=None):

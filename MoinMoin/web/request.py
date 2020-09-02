@@ -9,13 +9,14 @@
 import re
 from StringIO import StringIO
 
-from werkzeug import Request as RequestBase
-from werkzeug import BaseResponse, ETagResponseMixin, \
+from werkzeug.wrappers import Request as RequestBase
+from werkzeug.wrappers import BaseResponse, ETagResponseMixin, \
                      CommonResponseDescriptorsMixin, WWWAuthenticateMixin
 from werkzeug.wrappers import ResponseStream
-from werkzeug import EnvironHeaders, Headers, HeaderSet
-from werkzeug import Href, create_environ, url_encode, cached_property
-from werkzeug import Client # used by tests
+from werkzeug.datastructures import EnvironHeaders, Headers, HeaderSet
+from werkzeug.urls import Href, url_encode
+from werkzeug.test import create_environ, Client
+from werkzeug.utils import cached_property
 
 from MoinMoin import config
 

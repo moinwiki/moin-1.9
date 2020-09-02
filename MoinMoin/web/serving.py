@@ -18,8 +18,7 @@ logging = log.getLogger(__name__)
 import werkzeug._internal
 werkzeug._internal._logger = log.getLogger('werkzeug')
 
-from werkzeug import run_simple
-from werkzeug.serving import BaseRequestHandler
+from werkzeug.serving import run_simple, BaseRequestHandler
 
 class RequestHandler(BaseRequestHandler):
     """
