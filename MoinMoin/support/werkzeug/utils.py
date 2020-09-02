@@ -92,6 +92,36 @@ class cached_property(property):
         return value
 
 
+def invalidate_cached_property(obj, name):
+    """Invalidates the cache for a :class:`cached_property`:
+
+    >>> class Test(object):
+    ...     @cached_property
+    ...     def magic_number(self):
+    ...         print("recalculating...")
+    ...         return 42
+    ...
+    >>> var = Test()
+    >>> var.magic_number
+    recalculating...
+    42
+    >>> var.magic_number
+    42
+    >>> invalidate_cached_property(var, "magic_number")
+    >>> var.magic_number
+    recalculating...
+    42
+
+    You must pass the name of the cached property as the second argument.
+    """
+    if not isinstance(getattr(obj.__class__, name, None), cached_property):
+        raise TypeError(
+            "Attribute {} of object {} is not a cached_property, "
+            "cannot be invalidated".format(name, obj)
+        )
+    obj.__dict__[name] = _missing
+
+
 class environ_property(_DictAccessorProperty):
     """Maps request attributes to environment variables. This works not only
     for the Werzeug request object, but also any other class with an
@@ -273,7 +303,7 @@ def get_content_type(mimetype, charset):
     :param charset: The charset to be appended for text mimetypes.
     :return: The content type.
 
-    .. verionchanged:: 0.15
+    .. versionchanged:: 0.15
         Any type that ends with ``+xml`` gets a charset, not just those
         that start with ``application/``. Known text types such as
         ``application/javascript`` are also given charsets.
@@ -407,7 +437,7 @@ def secure_filename(filename):
     return filename
 
 
-def escape(s, quote=None):
+def escape(s):
     """Replace special characters "&", "<", ">" and (") to HTML-safe sequences.
 
     There is a special handling for `None` which escapes to an empty string.
@@ -422,24 +452,16 @@ def escape(s, quote=None):
         return ""
     elif hasattr(s, "__html__"):
         return text_type(s.__html__())
-    elif not isinstance(s, string_types):
-        s = text_type(s)
-    if quote is not None:
-        from warnings import warn
 
-        warn(
-            "The 'quote' parameter is no longer used as of version 0.9"
-            " and will be removed in version 1.0.",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-    s = (
+    if not isinstance(s, string_types):
+        s = text_type(s)
+
+    return (
         s.replace("&", "&amp;")
         .replace("<", "&lt;")
         .replace(">", "&gt;")
         .replace('"', "&quot;")
     )
-    return s
 
 
 def unescape(s):
@@ -754,21 +776,3 @@ class ImportStringError(ImportError):
             self.import_name,
             self.exception,
         )
-
-
-from werkzeug import _DeprecatedImportModule
-
-_DeprecatedImportModule(
-    __name__,
-    {
-        ".datastructures": [
-            "CombinedMultiDict",
-            "EnvironHeaders",
-            "Headers",
-            "MultiDict",
-        ],
-        ".http": ["dump_cookie", "parse_cookie"],
-    },
-    "Werkzeug 1.0",
-)
-del _DeprecatedImportModule

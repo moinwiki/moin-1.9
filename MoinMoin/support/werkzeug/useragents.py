@@ -18,7 +18,7 @@ class UserAgentParser(object):
     """A simple user agent parser.  Used by the `UserAgent`."""
 
     platforms = (
-        ("cros", "chromeos"),
+        (" cros ", "chromeos"),
         ("iphone|ios", "iphone"),
         ("ipad", "ipad"),
         (r"darwin|mac|os\s*x", "macos"),
@@ -46,7 +46,7 @@ class UserAgentParser(object):
         ("yahoo", "yahoo"),
         ("ask jeeves", "ask"),
         (r"aol|america\s+online\s+browser", "aol"),
-        ("opera", "opera"),
+        (r"opera|opr", "opera"),
         ("edge", "edge"),
         ("chrome|crios", "chrome"),
         ("seamonkey", "seamonkey"),
@@ -112,8 +112,8 @@ class UserAgent(object):
 
     .. attribute:: platform
 
-       the browser platform.  The following platforms are currently
-       recognized:
+       the browser platform. ``None`` if not recognized.
+       The following platforms are currently recognized:
 
        -   `aix`
        -   `amiga`
@@ -139,8 +139,8 @@ class UserAgent(object):
 
     .. attribute:: browser
 
-        the name of the browser.  The following browsers are currently
-        recognized:
+        the name of the browser. ``None`` if not recognized.
+        The following browsers are currently recognized:
 
         -   `aol` *
         -   `ask` *
@@ -170,11 +170,11 @@ class UserAgent(object):
 
     .. attribute:: version
 
-        the version of the browser
+        the version of the browser. ``None`` if not recognized.
 
     .. attribute:: language
 
-        the language of the browser
+        the language of the browser. ``None`` if not recognized.
     """
 
     _parser = UserAgentParser()
@@ -200,11 +200,3 @@ class UserAgent(object):
 
     def __repr__(self):
         return "<%s %r/%s>" % (self.__class__.__name__, self.browser, self.version)
-
-
-from werkzeug import _DeprecatedImportModule
-
-_DeprecatedImportModule(
-    __name__, {".wrappers.user_agent": ["UserAgentMixin"]}, "Werkzeug 1.0"
-)
-del _DeprecatedImportModule
