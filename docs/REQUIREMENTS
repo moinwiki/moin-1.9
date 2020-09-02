@@ -99,14 +99,20 @@ minimum: 1.1.1 will work, maybe even older versions
 
 parsedatetime (parse date/time strings)
 =======================================
-shipped: 2.5
+shipped: 2.6
 minimum: 0.8.7(?)
 
 
 werkzeug (WSGI toolkit)
 =======================
-shipped: 0.15.6
-minimum: 0.7.0
+shipped: 1.0.1
+minimum: 1.0.0
+
+
+secure-cookie
+=============
+shipped: 0.1.0
+minimum: 0.1.0
 
 
 xappy (High-Level Python library for Xapian)
