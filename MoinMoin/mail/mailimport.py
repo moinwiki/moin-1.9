@@ -220,9 +220,12 @@ def import_mail_from_message(request, message):
 
     wiki_addrs = request.cfg.mail_import_wiki_addrs
 
-    request.user = user.get_by_email_address(request, msg['from_addr'][1])
+    u = user.get_by_email_address(request, msg['from_addr'][1])
 
-    if not request.user:
+    if u is not None:
+        request.user = u
+    else:
+        # note: for this case, do not overwrite request.user (which is a User object) with None
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
     d = get_pagename_content(request, msg)
