@@ -13,7 +13,7 @@ from xml.dom import Node
 
 from MoinMoin import config, wikiutil
 from MoinMoin.error import ConvertError
-from werkzeug import url_decode
+from werkzeug.urls import url_decode
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 interwiki_re = re.compile(WikiParser.interwiki_rule, re.VERBOSE|re.UNICODE)
 

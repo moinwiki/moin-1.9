@@ -50,7 +50,7 @@ from os.path import join, abspath, dirname, isdir
 
 from MoinMoin import config
 
-from werkzeug import SharedDataMiddleware
+from werkzeug.middleware.shared_data import SharedDataMiddleware
 
 STATIC_FILES_PATH = join(abspath(dirname(__file__)), 'htdocs')
 

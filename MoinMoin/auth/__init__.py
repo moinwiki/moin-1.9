@@ -137,7 +137,9 @@
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from werkzeug import redirect, abort, url_quote, url_quote_plus
+from werkzeug.utils import redirect
+from werkzeug.exceptions import abort
+from werkzeug.urls import url_quote, url_quote_plus
 
 from MoinMoin import user, wikiutil
 from MoinMoin.web.utils import check_surge_protect

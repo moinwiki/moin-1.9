@@ -87,7 +87,8 @@ class HTTPAuthMoin(BaseAuth):
             logging.debug("user: %r" % u)
 
         if not u or not u.valid:
-            from werkzeug import Response, abort
+            from werkzeug.wrappers import Response
+            from werkzeug.exceptions import abort
             response = Response(_('Please log in first.'), 401,
                                 {'WWW-Authenticate': 'Basic realm="%s"' % self.realm})
             abort(response)

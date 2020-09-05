@@ -10,8 +10,11 @@
 
 import time, inspect, StringIO, sys, warnings
 
-from werkzeug import Headers, http_date, create_environ, redirect, abort
-from werkzeug.exceptions import Unauthorized, NotFound
+from werkzeug.datastructures import Headers
+from werkzeug.http import http_date
+from werkzeug.test import create_environ
+from werkzeug.utils import redirect
+from werkzeug.exceptions import abort, Unauthorized, NotFound
 
 from MoinMoin import i18n, error, user, config, wikiutil
 from MoinMoin.config import multiconfig

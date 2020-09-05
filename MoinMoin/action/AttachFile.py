@@ -31,7 +31,7 @@ import os, time, zipfile, errno, datetime
 from StringIO import StringIO
 import tarfile
 
-from werkzeug import http_date
+from werkzeug.http import http_date
 
 from MoinMoin import log
 logging = log.getLogger(__name__)

@@ -11,7 +11,7 @@ import py
 
 from MoinMoin import config, wikiutil
 
-from werkzeug import MultiDict
+from werkzeug.datastructures import MultiDict
 
 
 class TestQueryStringSupport:

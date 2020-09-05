@@ -13,7 +13,7 @@
 """
 import time
 
-from werkzeug.contrib.sessions import Session, FilesystemSessionStore
+from secure_cookie.session import Session, FilesystemSessionStore
 
 from MoinMoin import config
 from MoinMoin.util import filesys
