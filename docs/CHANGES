@@ -28,10 +28,11 @@ Version 1.9.11 (not released yet)
   * fix interwiki test fails that crept into 1.9.10 release
 
   Other changes:
-  * upgrade werkzeug 0.14.1 -> 0.15.6
+  * upgrade werkzeug 0.14.1 -> 1.0.1, adapt imports
+  * add secure-cookie 0.1.0 (code was formerly part of werkzeug.contrib), adapt imports
   * update pygments 2.1.3 -> 2.5.2
   * update passlib 1.7.1 -> 1.7.2
-  * update parsedatetime 2.4 -> 2.5
+  * update parsedatetime 2.4 -> 2.6
 
 
 Version 1.9.10 aka "the end of spam release" (2018-09-09)
