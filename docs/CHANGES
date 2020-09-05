@@ -23,9 +23,15 @@ Version 1.9.11 (not released yet)
         should be aware of beforehands.
 
   Fixes:
-  * make setup.py and .cfg ascii-only, fixes #40
-  * fix SubProcess' os.setsid usage, fixes #44
+  * make setup.py and .cfg ascii-only, #40
+  * fix SubProcess' os.setsid usage, #44
   * fix interwiki test fails that crept into 1.9.10 release
+  * highlight parser: use language as code_type rather than "highlight"
+  * catch indexer error for too long names, #57
+  * improved indexer logging so logging never crashes due to
+    encoding issues for non-ascii page or attachment names.
+  * fix mailheader parsing, add tests for mailimport, #53
+  * workaround werkzeug errors='fallback:...' regression, #37
 
   Other changes:
   * upgrade werkzeug 0.14.1 -> 1.0.1, adapt imports
