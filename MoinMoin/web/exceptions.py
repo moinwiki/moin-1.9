@@ -20,10 +20,10 @@ class SurgeProtection(exceptions.ServiceUnavailable):
 
     name = 'Surge protection'
     description = (
-        "<strong>Warning:</strong>"
-        "<p>You triggered the wiki's surge protection by doing too many requests in a short time.</p>"
-        "<p>Please make a short break reading the stuff you already got.</p>"
-        "<p>When you restart doing requests AFTER that, slow down or you might get locked out for a longer time!</p>"
+        "Warning:"
+        " You triggered the wiki's surge protection by doing too many requests in a short time."
+        " Please make a short break reading the stuff you already got."
+        " When you restart doing requests AFTER that, slow down or you might get locked out for a longer time!"
     )
 
     def __init__(self, description=None, retry_after=3600):
@@ -40,7 +40,7 @@ class Forbidden(exceptions.Forbidden):
     Override the default description of werkzeug.exceptions.Forbidden to a
     less technical sounding one.
     """
-    description = "<p>You are not allowed to access this!</p>"
+    description = "You are not allowed to access this!"
 
 # handy exception raising
 abort = exceptions.abort
