@@ -32,9 +32,13 @@ Version 1.9.11 (not released yet)
     encoding issues for non-ascii page or attachment names.
   * fix mailheader parsing, add tests for mailimport, #53
   * workaround werkzeug errors='fallback:...' regression, #37
+  * mailimport: fix AttributeError, #55
+  * surge protection / hosts_deny: fix broken html, #60
 
   Other changes:
   * upgrade werkzeug 0.14.1 -> 1.0.1, adapt imports
+    HINT: if you use the ProxyFix code, the required import has changed to:
+          from werkzeug.middleware.proxy_fix import ProxyFix
   * add secure-cookie 0.1.0 (code was formerly part of werkzeug.contrib), adapt imports
   * update pygments 2.1.3 -> 2.5.2
   * update passlib 1.7.1 -> 1.7.2
