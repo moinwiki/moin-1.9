@@ -10,7 +10,7 @@ trying to make a "perfect release" (as that release might NEVER get released),
 but to make progress and don't delay releases too much.
 
 
-Version 1.9.11 (not released yet)
+Version 1.9.11 (2020-11-08)
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
