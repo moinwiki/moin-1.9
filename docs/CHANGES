@@ -23,6 +23,12 @@ Version 1.9.11 (not released yet)
         should be aware of beforehands.
 
   Fixes:
+  * security fix for CVE-2020-25074:
+    fix remote code execution via cache action
+    changeset with fix: d1e5fc7d
+  * security fix for CVE-2020-15275:
+    fix malicious SVG attachment causing stored XSS vulnerability
+    changeset with fix: 64e16037
   * make setup.py and .cfg ascii-only, #40
   * fix SubProcess' os.setsid usage, #44
   * fix interwiki test fails that crept into 1.9.10 release
