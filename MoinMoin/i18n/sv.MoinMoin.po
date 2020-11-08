@@ -5,6 +5,7 @@
 #acl -All:write Default
 #format gettext
 #language sv
+
 #
 # MoinMoin sv system text translation
 #
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-26 00:52+0200\n"
+"POT-Creation-Date: 2018-09-09 18:00+0200\n"
 "PO-Revision-Date: 2018-08-26 07:49+0200\n"
 "Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@python.org>\n"

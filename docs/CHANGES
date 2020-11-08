@@ -10,7 +10,7 @@ trying to make a "perfect release" (as that release might NEVER get released),
 but to make progress and don't delay releases too much.
 
 
-Version 1.9.11 (not released yet)
+Version 1.9.11 (2020-11-08)
 
   SECURITY HINT: make sure you have allow_xslt = False (or just do not use
   allow_xslt at all in your wiki configs, False is the internal default).
@@ -23,6 +23,12 @@ Version 1.9.11 (not released yet)
         should be aware of beforehands.
 
   Fixes:
+  * security fix for CVE-2020-25074:
+    fix remote code execution via cache action
+    changeset with fix: d1e5fc7d
+  * security fix for CVE-2020-15275:
+    fix malicious SVG attachment causing stored XSS vulnerability
+    changeset with fix: 64e16037
   * make setup.py and .cfg ascii-only, #40
   * fix SubProcess' os.setsid usage, #44
   * fix interwiki test fails that crept into 1.9.10 release

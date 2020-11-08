@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-26 00:52+0200\n"
+"POT-Creation-Date: 2018-09-09 18:00+0200\n"
 "PO-Revision-Date: 2018-08-26 17:32+0300\n"
 "Last-Translator: Eugene Syromyatnikov <evgsyr@gmail.com>\n"
 "Language-Team: Russian <moin-user@python.org>\n"
@@ -1062,9 +1062,7 @@ msgstr "Правки на странице «%s» успешно объедин�
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
-msgstr ""
-"Страница %s содержит конфликты правок, добавленных удаленной "
-"стороне."
+msgstr "Страница %s содержит конфликты правок, добавленных удаленной стороне."
 
 #, python-format
 msgid "Page %s merged with conflicts."

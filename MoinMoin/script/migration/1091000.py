@@ -1,12 +1,12 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - dummy migration terminator script
+    MoinMoin - migration from base rev 1091000
 
-    This must be the last migration script.
+    Nothing to do, we just return the new data dir revision.
 
-    @copyright: 2018 by Thomas Waldmann
+    @copyright: 2020 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 def execute(script, data_dir, rev):
-    return None
+    return 1091100

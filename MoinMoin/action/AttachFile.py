@@ -1220,7 +1220,6 @@ def send_viewfile(pagename, request):
 
     mt = wikiutil.MimeType(filename=filename)
 
-    # destinguishs if browser need a plugin in place
     if mt.major == 'image' and mt.minor in config.browser_supported_images:
         url = getAttachUrl(pagename, filename, request)
         request.write('<img src="%s" alt="%s">' % (
