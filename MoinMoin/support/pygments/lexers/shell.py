@@ -67,7 +67,7 @@ class BashLexer(RegexLexer):
              r'ulimit|umask|unalias|unset|wait)(?=[\s)`])',
              Name.Builtin),
             (r'\A#!.+\n', Comment.Hashbang),
-            (r'#.*\n', Comment.Single),
+            (r'#.*(?=\n)', Comment.Single),
             (r'\\[\w\W]', String.Escape),
             (r'(\b\w+)(\s*)(\+?=)', bygroups(Name.Variable, Text, Operator)),
             (r'[\[\]{}()=]', Operator),
