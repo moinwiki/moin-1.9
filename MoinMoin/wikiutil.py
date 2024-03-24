@@ -1506,11 +1506,15 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
                                    seplimit=seplimit)
     for item in l:
         if isinstance(item, tuple):
-            key, value = item
-            if key is None:
-                key = u''
-            keywords[key] = value
-            positional = trailing
+            try:
+                key, value = item
+                if key is None:
+                    key = u''
+                keywords[key] = value
+                positional = trailing
+            except ValueError:
+                logging.error('Poblem %s' item)
+                raise
         else:
             positional.append(item)
 
