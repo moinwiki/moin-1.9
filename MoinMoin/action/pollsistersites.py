@@ -4,7 +4,7 @@
 
     This action fetches lists of page urls and page names from sister sites,
     so we can implement SisterWiki functionality.
-    See: http://usemod.com/cgi-bin/mb.pl?SisterSitesImplementationGuide
+    See: http://meatballwiki.org/wiki/?SisterSitesImplementationGuide
 
     @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
