@@ -5037,7 +5037,7 @@ New features:
     * Added email notification features contributed by Daniel Sa�    * SystemInfo: show "Entries in edit log"
     * Added "RSS" icon to RecentChanges macro and code to generate a
       RecentChanges RSS channel, see
-          http://www.usemod.com/cgi-bin/mb.pl?UnifiedRecentChanges
+          http://meatballwiki.org/wiki/?UnifiedRecentChanges
       for details
     * Added config.sitename and config.interwikiname parameter
     * Better WikiFarm support:

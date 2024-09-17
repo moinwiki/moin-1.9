@@ -3,7 +3,7 @@
     MoinMoin - "titleindex" action
 
     This action generates a plain list of pages, so that other wikis
-    can implement http://www.usemod.com/cgi-bin/mb.pl?MetaWiki more
+    can implement http://meatballwiki.org/wiki/?MetaWiki more
     easily.
 
     @copyright: 2001 Juergen Hermann <jh@web.de>
