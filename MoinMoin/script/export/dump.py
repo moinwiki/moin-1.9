@@ -131,6 +131,14 @@ def _patched_attachment_drawing(self, url, text, **kw):
         text, drawing_url, text
     )
 
+# quote Wikiname in standard IRI way: UTF-8 encoding & quote
+def _quoteWikinameURL_UTF8(pagename, charset=config.charset):
+    return pagename + HTML_SUFFIX
+
+# quote Wikiname in safe way: Just use ASCII characters
+def _quoteWikinameURL_WikiFS(pagename, charset=config.charset):
+    return wikiutil.quoteWikinameFS(pagename, charset) + HTML_SUFFIX
+
 class PluginScript(script.MoinScript):
     """\
 Purpose:
@@ -156,6 +164,9 @@ General syntax: moin [options] export dump [dump-options]
        moin ... export dump --target-dir=/mywiki --username JohnSmith
     3. To use a custom template file 'page_template.html'
        moin ... export dump ... --page-template=./page_template.html
+    4. To set HTML filename encoding to UTF-8 instead of quoteWikinameFS
+       (Filesystem must support UTF-8 encoding)
+       moin ... export dump ... --utf8-fs
 """
 
     def __init__(self, argv=None, def_values=None):
@@ -171,6 +182,10 @@ General syntax: moin [options] export dump [dump-options]
         self.parser.add_option(
             "-p", "--page-template", dest = "page_template",
             help = "Page template file for each wiki page"
+        )
+        self.parser.add_option(
+            "--utf8-fs", action = "store_true", dest = "utf8_fs", default = False,
+            help = "Set HTML filename encoding to UTF-8 instead of quoteWikinameFS"
         )
 
     def mainloop(self):
@@ -199,6 +214,8 @@ General syntax: moin [options] export dump [dump-options]
                 with codecs.open(tplfile, 'r', config.charset) as filein:
                     page_template = filein.read()
 
+        utf8_fs = self.options.utf8_fs
+
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
         if config_dir and os.path.isfile(config_dir):
@@ -218,7 +235,6 @@ General syntax: moin [options] export dump [dump-options]
         logo_html = request.cfg.logo_string
 
         pages = request.rootpage.getPageList(user='') # get list of all pages in wiki
-        pages.sort()
         if self.options.page: # did user request a particular page or group of pages?
             try:
                 namematch = re.compile(self.options.page)
@@ -227,8 +243,10 @@ General syntax: moin [options] export dump [dump-options]
                     pages = [self.options.page]
             except:
                 pages = [self.options.page]
+        pages.sort()
 
-        wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
+        # Override methods
+        wikiutil.quoteWikinameURL = _quoteWikinameURL_UTF8 if utf8_fs else _quoteWikinameURL_WikiFS
         AttachFile.getAttachUrl = lambda pagename, filename, request, **kw: _attachment(request, pagename, filename, outputdir, **kw)
         Formatter.attachment_drawing = _patched_attachment_drawing
 
@@ -246,7 +264,6 @@ General syntax: moin [options] export dump [dump-options]
 
         urlbase = request.url # save wiki base url
         for pagename in pages:
-            # we have the same name in URL and FS
             file = wikiutil.quoteWikinameURL(pagename)
             script.log('Writing "%s"...' % file)
             try:
@@ -291,6 +308,28 @@ General syntax: moin [options] export dump [dump-options]
                         'page_footer2': request.cfg.page_footer2,
                     }
             finally:
+                if utf8_fs:
+                    sub_dirs = os.path.dirname(file).split('/')
+                    cur = outputdir
+                    for dir in sub_dirs:
+                        if not dir: continue
+                        html_src = os.path.join(cur, dir + HTML_SUFFIX)
+                        cur = os.path.join(cur, dir)
+                        try:
+                            os.makedirs(cur)
+                            print "Directory check/create: " + cur
+                        except OSError as e:
+                            if e.errno != errno.EEXIST:
+                                raise
+                        html_dest = os.path.join(cur, 'index' + HTML_SUFFIX)
+                        if os.path.isfile(html_src) and not os.path.exists(html_dest):
+                            with codecs.open(html_dest, 'w', config.charset) as fileout:
+                                fileout.write(redirect_template % {
+                                    'charset': config.charset,
+                                    'target_name': dir,
+                                    'target_url': "../" + dir + HTML_SUFFIX,
+                                })
+                            print "Created:", html_dest
                 filepath = os.path.join(outputdir, file)
                 fileout = codecs.open(filepath, 'w', config.charset)
                 fileout.write(filecontent)
@@ -300,8 +339,10 @@ General syntax: moin [options] export dump [dump-options]
         indexpage = page_front_page
         if self.options.page:
             indexpage = pages[0] # index page has limited use when dumping specific pages, but create one anyway
+
+        indexpage = wikiutil.quoteWikinameURL(indexpage)
         shutil.copyfile(
-            os.path.join(outputdir, wikiutil.quoteWikinameFS(indexpage) + HTML_SUFFIX),
+            os.path.join(outputdir, indexpage),
             os.path.join(outputdir, 'index' + HTML_SUFFIX)
         )
 
