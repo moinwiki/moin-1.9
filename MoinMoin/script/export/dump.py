@@ -15,7 +15,6 @@ from MoinMoin.action import AttachFile
 from MoinMoin.formatter.text_html import Formatter
 
 url_prefix_static = "."
-logo_html = '<img src="logo.png">'
 HTML_SUFFIX = ".html"
 MOINDUMP_FILE = "moindump.tpl"
 
@@ -198,6 +197,7 @@ General syntax: moin [options] export dump [dump-options]
 
         # use this user for permissions checks
         request.user = user.User(request, name=self.options.dump_user)
+        logo_html = request.cfg.logo_string
 
         pages = request.rootpage.getPageList(user='') # get list of all pages in wiki
         pages.sort()
