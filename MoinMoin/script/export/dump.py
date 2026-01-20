@@ -154,6 +154,8 @@ General syntax: moin [options] export dump [dump-options]
     2. To dump all the pages readable by 'JohnSmith' on the wiki to the directory
        '/mywiki'
        moin ... export dump --target-dir=/mywiki --username JohnSmith
+    3. To use a custom template file 'page_template.html'
+       moin ... export dump ... --page-template=./page_template.html
 """
 
     def __init__(self, argv=None, def_values=None):
@@ -165,6 +167,10 @@ General syntax: moin [options] export dump [dump-options]
         self.parser.add_option(
             "-u", "--username", dest = "dump_user",
             help = "User the dump will be performed as (for ACL checks, etc)"
+        )
+        self.parser.add_option(
+            "-p", "--page-template", dest = "page_template",
+            help = "Page template file for each wiki page"
         )
 
     def mainloop(self):
@@ -180,6 +186,18 @@ General syntax: moin [options] export dump [dump-options]
         except OSError, err:
             if err.errno != errno.EEXIST:
                 script.fatal("Cannot create output directory '%s'!" % outputdir)
+
+        global page_template
+        if self.options.page_template:
+            page_template_file = self.options.page_template
+            with codecs.open(page_template_file, 'r', config.charset) as filein:
+                page_template = filein.read()
+        else:
+            # For Jorgen Bodde's template file location: %(outputdir)s/moindump.tpl
+            tplfile = os.path.join(outputdir, MOINDUMP_FILE)
+            if os.path.exists(tplfile):
+                with codecs.open(tplfile, 'r', config.charset) as filein:
+                    page_template = filein.read()
 
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
@@ -225,25 +243,6 @@ General syntax: moin [options] export dump [dump-options]
         navibar_html = ''
         for p in [page_front_page, page_title_index, page_word_index]:
             navibar_html += '[<a href="%s">%s</a>]&nbsp;' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
-
-        # To allow customization of the template, a check is done in the output
-        # directory for the name 'moindump.tpl' and if this exists it will be taken
-        # it is not really possible to pass it as argument because the parser
-        # options are independent of the plugin architecture.
-        global page_template
-        pt = ''
-        tplfile = os.path.join(outputdir, MOINDUMP_FILE)
-        if os.path.exists(tplfile):
-            f = None
-            try:
-                f = codecs.open(tplfile, 'r', config.charset)
-                pt = f.read()
-            except IOError:
-                pass
-            if f:
-                f.close()
-        if pt:
-            page_template = pt
 
         urlbase = request.url # save wiki base url
         for pagename in pages:
