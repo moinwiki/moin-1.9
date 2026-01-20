@@ -289,6 +289,7 @@ General syntax: moin [options] export dump [dump-options]
                         'timestamp': timestamp,
                         'pageinfo': pageinfo,
                         'theme': request.cfg.theme_default,
+                        'page_footer2': request.cfg.page_footer2,
                     }
             finally:
                 filepath = os.path.join(outputdir, file)
