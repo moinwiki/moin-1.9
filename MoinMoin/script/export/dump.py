@@ -279,7 +279,7 @@ General syntax: moin [options] export dump [dump-options]
                     filecontent = redirect_template % {
                         'charset': config.charset,
                         'target_name': target_name,
-                        'target_url': target_url,
+                        'target_url': target_url + '?redirect=' + pagename,
                     }
                 else:
                     pagehtml = ''
