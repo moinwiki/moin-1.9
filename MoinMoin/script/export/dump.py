@@ -219,7 +219,7 @@ General syntax: moin [options] export dump [dump-options]
                 if os.path.exists(tplfile):
                     f = None
                     try:
-                        f = open(tplfile, 'rt')
+                        f = codecs.open(tplfile, 'r', config.charset)
                         pt = f.read()
                     except IOError:
                         pass
