@@ -16,6 +16,7 @@ from MoinMoin.action import AttachFile
 url_prefix_static = "."
 logo_html = '<img src="logo.png">'
 HTML_SUFFIX = ".html"
+MOINDUMP_FILE = "moindump.tpl"
 
 page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -207,8 +208,29 @@ General syntax: moin [options] export dump [dump-options]
             finally:
                 timestamp = time.strftime("%Y-%m-%d %H:%M")
                 filepath = os.path.join(outputdir, file)
+
+                # To allow customization of the template, a check is done in the output
+                # directory for the name 'moindump.tpl' and if this exists it will be taken
+                # it is not really possible to pass it as argument because the parser
+                # options are independent of the plugin architecture.
+
+                pt = ''
+                tplfile = os.path.join(outputdir, MOINDUMP_FILE)
+                if os.path.exists(tplfile):
+                    f = None
+                    try:
+                        f = open(tplfile, 'rt')
+                        pt = f.read()
+                    except IOError:
+                        pass
+                    if f:
+                        f.close()
+
+                if not pt:
+                    pt = page_template
+
                 fileout = codecs.open(filepath, 'w', config.charset)
-                fileout.write(page_template % {
+                fileout.write(pt % {
                     'charset': config.charset,
                     'pagename': pagename,
                     'pagehtml': pagehtml,
