@@ -230,6 +230,7 @@ General syntax: moin [options] export dump [dump-options]
         # directory for the name 'moindump.tpl' and if this exists it will be taken
         # it is not really possible to pass it as argument because the parser
         # options are independent of the plugin architecture.
+        global page_template
         pt = ''
         tplfile = os.path.join(outputdir, MOINDUMP_FILE)
         if os.path.exists(tplfile):
