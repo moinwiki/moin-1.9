@@ -67,6 +67,19 @@ td.noborder {
 </html>
 '''
 
+redirect_template = u'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=%(charset)s">
+<meta http-equiv="refresh" content="0; url=%(target_url)s"/>
+<title>Redirecting...</title>
+</head><body>
+Redirecting to <a href="%(target_url)s">%(target_name)s</a>
+</body>
+</html>
+'''
+
 
 def _attachment(request, pagename, filename, outputdir, **kw):
     filename = filename.encode(config.charset)
@@ -185,62 +198,73 @@ General syntax: moin [options] export dump [dump-options]
         for p in [page_front_page, page_title_index, page_word_index]:
             navibar_html += '[<a href="%s">%s</a>]&nbsp;' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
 
+        # To allow customization of the template, a check is done in the output
+        # directory for the name 'moindump.tpl' and if this exists it will be taken
+        # it is not really possible to pass it as argument because the parser
+        # options are independent of the plugin architecture.
+        pt = ''
+        tplfile = os.path.join(outputdir, MOINDUMP_FILE)
+        if os.path.exists(tplfile):
+            f = None
+            try:
+                f = codecs.open(tplfile, 'r', config.charset)
+                pt = f.read()
+            except IOError:
+                pass
+            if f:
+                f.close()
+        if pt:
+            page_template = pt
+
         urlbase = request.url # save wiki base url
         for pagename in pages:
             # we have the same name in URL and FS
             file = wikiutil.quoteWikinameURL(pagename)
             script.log('Writing "%s"...' % file)
             try:
-                pagehtml = ''
                 request.url = urlbase + pagename # add current pagename to url base
                 page = Page.Page(request, pagename)
-                request.page = page
-                try:
-                    request.reset()
-                    pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
-                    pageinfo = request.theme.pageinfo(page)
-                except:
-                    errcnt = errcnt + 1
-                    print >> sys.stderr, "*** Caught exception while writing page!"
-                    print >> errlog, "~" * 78
-                    print >> errlog, file # page filename
-                    import traceback
-                    traceback.print_exc(None, errlog)
-            finally:
-                timestamp = time.strftime("%Y-%m-%d %H:%M")
-                filepath = os.path.join(outputdir, file)
+                pi = page.parse_processing_instructions()
 
-                # To allow customization of the template, a check is done in the output
-                # directory for the name 'moindump.tpl' and if this exists it will be taken
-                # it is not really possible to pass it as argument because the parser
-                # options are independent of the plugin architecture.
-
-                pt = ''
-                tplfile = os.path.join(outputdir, MOINDUMP_FILE)
-                if os.path.exists(tplfile):
-                    f = None
+                if 'redirect' in pi:
+                    target_name = pi['redirect']
+                    target_url = wikiutil.quoteWikinameURL(target_name)
+                    filepath = os.path.join(outputdir, file)
+                    fileout = codecs.open(filepath, 'w', config.charset)
+                    filecontent = redirect_template % {
+                        'charset': config.charset,
+                        'target_name': target_name,
+                        'target_url': target_url,
+                    }
+                else:
+                    pagehtml = ''
+                    request.page = page
                     try:
-                        f = codecs.open(tplfile, 'r', config.charset)
-                        pt = f.read()
-                    except IOError:
-                        pass
-                    if f:
-                        f.close()
-
-                if not pt:
-                    pt = page_template
-
+                        request.reset()
+                        pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
+                        pageinfo = request.theme.pageinfo(page)
+                    except:
+                        errcnt = errcnt + 1
+                        print >> sys.stderr, "*** Caught exception while writing page!"
+                        print >> errlog, "~" * 78
+                        print >> errlog, file # page filename
+                        import traceback
+                        traceback.print_exc(None, errlog)
+                    timestamp = time.strftime("%Y-%m-%d %H:%M")
+                    filecontent = page_template % {
+                        'charset': config.charset,
+                        'pagename': pagename,
+                        'pagehtml': pagehtml,
+                        'logo_html': logo_html,
+                        'navibar_html': navibar_html,
+                        'timestamp': timestamp,
+                        'pageinfo': pageinfo,
+                        'theme': request.cfg.theme_default,
+                    }
+            finally:
+                filepath = os.path.join(outputdir, file)
                 fileout = codecs.open(filepath, 'w', config.charset)
-                fileout.write(pt % {
-                    'charset': config.charset,
-                    'pagename': pagename,
-                    'pagehtml': pagehtml,
-                    'logo_html': logo_html,
-                    'navibar_html': navibar_html,
-                    'timestamp': timestamp,
-                    'pageinfo': pageinfo,
-                    'theme': request.cfg.theme_default,
-                })
+                fileout.write(filecontent)
                 fileout.close()
 
         # copy FrontPage to "index.html"
