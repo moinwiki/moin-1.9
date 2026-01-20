@@ -82,11 +82,11 @@ Redirecting to <a href="%(target_url)s">%(target_name)s</a>
 
 
 def _attachment(request, pagename, filename, outputdir, **kw):
-    filename_encoded = filename.encode(config.charset)
+    filename = filename.encode(config.charset)
     source_dir = AttachFile.getAttachDir(request, pagename)
-    source_file = os.path.join(source_dir, filename_encoded)
+    source_file = os.path.join(source_dir, filename)
     dest_dir = os.path.join(outputdir, "attachments", wikiutil.quoteWikinameFS(pagename))
-    dest_file = os.path.join(dest_dir, filename_encoded)
+    dest_file = os.path.join(dest_dir, filename)
     dest_url = "attachments/%s/%s" % (wikiutil.quoteWikinameFS(pagename), wikiutil.url_quote(filename))
     if os.access(source_file, os.R_OK):
         if not os.access(dest_dir, os.F_OK):
@@ -104,7 +104,7 @@ def _attachment(request, pagename, filename, outputdir, **kw):
                     m = tar.getmember('drawing.png')
                     f = tar.extractfile(m)
                     if f:
-                        png_filename = filename_encoded + ".png"
+                        png_filename = filename + ".png"
                         png_dest_file = os.path.join(dest_dir, png_filename)
                         with open(png_dest_file, 'wb') as out:
                             out.write(f.read())
@@ -162,8 +162,10 @@ General syntax: moin [options] export dump [dump-options]
     2. To dump all the pages readable by 'JohnSmith' on the wiki to the directory
        '/mywiki'
        moin ... export dump --target-dir=/mywiki --username JohnSmith
+
     3. To use a custom template file 'page_template.html'
        moin ... export dump ... --page-template=./page_template.html
+
     4. To set HTML filename encoding to UTF-8 instead of quoteWikinameFS
        (Filesystem must support UTF-8 encoding)
        moin ... export dump ... --utf8-fs
@@ -303,12 +305,13 @@ General syntax: moin [options] export dump [dump-options]
                         'logo_html': logo_html,
                         'navibar_html': navibar_html,
                         'timestamp': timestamp,
-                        'pageinfo': pageinfo,
                         'theme': request.cfg.theme_default,
+                        'pageinfo': pageinfo,
                         'page_footer2': request.cfg.page_footer2,
                     }
             finally:
                 if utf8_fs:
+                    # create directories for subpages
                     sub_dirs = os.path.dirname(file).split('/')
                     cur = outputdir
                     for dir in sub_dirs:
@@ -321,6 +324,7 @@ General syntax: moin [options] export dump [dump-options]
                         except OSError as e:
                             if e.errno != errno.EEXIST:
                                 raise
+                        # create redirect page if parent page exists
                         html_dest = os.path.join(cur, 'index' + HTML_SUFFIX)
                         if os.path.isfile(html_src) and not os.path.exists(html_dest):
                             with codecs.open(html_dest, 'w', config.charset) as fileout:
@@ -330,19 +334,17 @@ General syntax: moin [options] export dump [dump-options]
                                     'target_url': "../" + dir + HTML_SUFFIX,
                                 })
                             print "Created:", html_dest
+
                 filepath = os.path.join(outputdir, file)
-                fileout = codecs.open(filepath, 'w', config.charset)
-                fileout.write(filecontent)
-                fileout.close()
+                with codecs.open(filepath, 'w', config.charset) as fileout:
+                    fileout.write(filecontent)
 
         # copy FrontPage to "index.html"
         indexpage = page_front_page
         if self.options.page:
             indexpage = pages[0] # index page has limited use when dumping specific pages, but create one anyway
-
-        indexpage = wikiutil.quoteWikinameURL(indexpage)
         shutil.copyfile(
-            os.path.join(outputdir, indexpage),
+            os.path.join(outputdir, wikiutil.quoteWikinameURL(indexpage)),
             os.path.join(outputdir, 'index' + HTML_SUFFIX)
         )
 
