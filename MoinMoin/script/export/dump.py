@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 """
 MoinMoin - Dump a MoinMoin wiki to static pages
 
@@ -7,11 +7,12 @@ MoinMoin - Dump a MoinMoin wiki to static pages
 @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, time, codecs, shutil, re, errno
+import sys, os, time, codecs, shutil, re, errno, tarfile
 
 from MoinMoin import config, wikiutil, Page, user
 from MoinMoin import script
 from MoinMoin.action import AttachFile
+from MoinMoin.formatter.text_html import Formatter
 
 url_prefix_static = "."
 logo_html = '<img src="logo.png">'
@@ -82,11 +83,11 @@ Redirecting to <a href="%(target_url)s">%(target_name)s</a>
 
 
 def _attachment(request, pagename, filename, outputdir, **kw):
-    filename = filename.encode(config.charset)
+    filename_encoded = filename.encode(config.charset)
     source_dir = AttachFile.getAttachDir(request, pagename)
-    source_file = os.path.join(source_dir, filename)
+    source_file = os.path.join(source_dir, filename_encoded)
     dest_dir = os.path.join(outputdir, "attachments", wikiutil.quoteWikinameFS(pagename))
-    dest_file = os.path.join(dest_dir, filename)
+    dest_file = os.path.join(dest_dir, filename_encoded)
     dest_url = "attachments/%s/%s" % (wikiutil.quoteWikinameFS(pagename), wikiutil.url_quote(filename))
     if os.access(source_file, os.R_OK):
         if not os.access(dest_dir, os.F_OK):
@@ -97,12 +98,39 @@ def _attachment(request, pagename, filename, outputdir, **kw):
         elif not os.path.isdir(dest_dir):
             script.fatal("'%s' is not a directory" % dest_dir)
 
-        shutil.copyfile(source_file, dest_file)
+        is_drawing = filename.lower().endswith(('.tdraw', '.adraw'))
+        if is_drawing:
+            try:
+                with tarfile.open(source_file, 'r') as tar:
+                    m = tar.getmember('drawing.png')
+                    f = tar.extractfile(m)
+                    if f:
+                        png_filename = filename_encoded + ".png"
+                        png_dest_file = os.path.join(dest_dir, png_filename)
+                        with open(png_dest_file, 'wb') as out:
+                            out.write(f.read())
+                        dest_url = dest_url + ".png"
+            except Exception as e:
+                script.fatal('Failed to extract drawing.png from %s: %s' % (filename, str(e)))
+        else:
+            shutil.copyfile(source_file, dest_file)
+
         script.log('Writing "%s"...' % dest_url)
         return dest_url
     else:
         return ""
 
+def _patched_attachment_drawing(self, url, text, **kw):
+    pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
+    containername = wikiutil.taintfilename(drawing)
+    ci = AttachFile.ContainerItem(self.request, pagename, containername)
+    if not ci.exists():
+        return self.icon('attachimg')
+
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, do='modify')
+    return '<img alt="%s" class="drawing" src="%s" title="%s">' % (
+        text, drawing_url, text
+    )
 
 class PluginScript(script.MoinScript):
     """\
@@ -183,8 +211,8 @@ General syntax: moin [options] export dump [dump-options]
                 pages = [self.options.page]
 
         wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
-
         AttachFile.getAttachUrl = lambda pagename, filename, request, **kw: _attachment(request, pagename, filename, outputdir, **kw)
+        Formatter.attachment_drawing = _patched_attachment_drawing
 
         errfile = os.path.join(outputdir, 'error.log')
         errlog = open(errfile, 'w')
