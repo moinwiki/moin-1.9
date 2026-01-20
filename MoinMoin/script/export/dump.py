@@ -198,6 +198,7 @@ General syntax: moin [options] export dump [dump-options]
                 try:
                     request.reset()
                     pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
+                    pageinfo = request.theme.pageinfo(page)
                 except:
                     errcnt = errcnt + 1
                     print >> sys.stderr, "*** Caught exception while writing page!"
@@ -237,6 +238,7 @@ General syntax: moin [options] export dump [dump-options]
                     'logo_html': logo_html,
                     'navibar_html': navibar_html,
                     'timestamp': timestamp,
+                    'pageinfo': pageinfo,
                     'theme': request.cfg.theme_default,
                 })
                 fileout.close()
