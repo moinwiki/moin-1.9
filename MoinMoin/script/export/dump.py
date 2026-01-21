@@ -131,9 +131,10 @@ def _patched_attachment_drawing(self, url, text, **kw):
         text, drawing_url, text
     )
 
-# quote Wikiname in standard IRI way: UTF-8 encoding & quote
+# quote Wikiname in standard IRI way except '/': UTF-8 encoding & quote
+original_quoteWikinameURL = wikiutil.quoteWikinameURL
 def _quoteWikinameURL_UTF8(pagename, charset=config.charset):
-    return pagename + HTML_SUFFIX
+    return original_quoteWikinameURL(pagename, charset) + HTML_SUFFIX
 
 # quote Wikiname in safe way: Just use ASCII characters
 def _quoteWikinameURL_WikiFS(pagename, charset=config.charset):
@@ -247,6 +248,7 @@ General syntax: moin [options] export dump [dump-options]
                 pages = [self.options.page]
         pages.sort()
 
+        pagenameToFilename = (lambda pagename: pagename + HTML_SUFFIX) if utf8_fs else _quoteWikinameURL_WikiFS
         # Override methods
         wikiutil.quoteWikinameURL = _quoteWikinameURL_UTF8 if utf8_fs else _quoteWikinameURL_WikiFS
         AttachFile.getAttachUrl = lambda pagename, filename, request, **kw: _attachment(request, pagename, filename, outputdir, **kw)
@@ -266,10 +268,10 @@ General syntax: moin [options] export dump [dump-options]
 
         urlbase = request.url # save wiki base url
         for pagename in pages:
-            file = wikiutil.quoteWikinameURL(pagename)
+            file = pagenameToFilename(pagename)
             script.log('Writing "%s"...' % file)
             try:
-                request.url = urlbase + pagename # add current pagename to url base
+                request.url = urlbase + wikiutil.quoteWikinameURL(pagename) # add current pagename to url base
                 page = Page.Page(request, pagename)
                 pi = page.parse_processing_instructions()
 
@@ -281,7 +283,7 @@ General syntax: moin [options] export dump [dump-options]
                     filecontent = redirect_template % {
                         'charset': config.charset,
                         'target_name': target_name,
-                        'target_url': target_url + '?redirect=' + pagename,
+                        'target_url': target_url + '?redirect=' + wikiutil.quoteWikinameURL(pagename),
                     }
                 else:
                     pagehtml = ''
@@ -300,7 +302,7 @@ General syntax: moin [options] export dump [dump-options]
                     timestamp = time.strftime("%Y-%m-%d %H:%M")
                     filecontent = page_template % {
                         'charset': config.charset,
-                        'pagename': pagename,
+                        'pagename': wikiutil.escape(pagename),
                         'pagehtml': pagehtml,
                         'logo_html': logo_html,
                         'navibar_html': navibar_html,
@@ -320,7 +322,7 @@ General syntax: moin [options] export dump [dump-options]
                         cur = os.path.join(cur, dir)
                         try:
                             os.makedirs(cur)
-                            print "Directory check/create: " + cur
+                            script.log('Directory check/create: "%s"' % cur)
                         except OSError as e:
                             if e.errno != errno.EEXIST:
                                 raise
@@ -333,7 +335,7 @@ General syntax: moin [options] export dump [dump-options]
                                     'target_name': dir,
                                     'target_url': "../" + dir + HTML_SUFFIX,
                                 })
-                            print "Created:", html_dest
+                            script.log('Writing "%s"...' % html_dest)
 
                 filepath = os.path.join(outputdir, file)
                 with codecs.open(filepath, 'w', config.charset) as fileout:
@@ -344,11 +346,10 @@ General syntax: moin [options] export dump [dump-options]
         if self.options.page:
             indexpage = pages[0] # index page has limited use when dumping specific pages, but create one anyway
         shutil.copyfile(
-            os.path.join(outputdir, wikiutil.quoteWikinameURL(indexpage)),
+            os.path.join(outputdir, pagenameToFilename(indexpage)),
             os.path.join(outputdir, 'index' + HTML_SUFFIX)
         )
 
         errlog.close()
         if errcnt:
             print >> sys.stderr, "*** %d error(s) occurred, see '%s'!" % (errcnt, errfile)
-
