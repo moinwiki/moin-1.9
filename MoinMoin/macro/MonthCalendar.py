@@ -106,6 +106,13 @@
           for them. Replaces the old "return nothing if the bot navigated more
           than a year away" handling, which also hid calendars an author had
           deliberately pointed at a far away year.
+    * 2.8:
+        * the navigation range is now measured from the current month rather
+          than from the month the macro was configured to show, and a url
+          asking for a month outside that range is answered with a 403
+          instead of being silently clamped to the nearest allowed month.
+          Clamping still rendered (and thus paid for) a page for every such
+          url; refusing early makes them cheap.
 
     Usage:
         <<MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6,anniversary,template)>>
@@ -178,12 +185,13 @@ from MoinMoin.Page import Page
 # XXX change here ----------------vvvvvv
 calendar.setfirstweekday(calendar.MONDAY)
 
-# How many months the prev/next navigation may move away from the month the
-# macro was configured to show. Beyond that limit the arrows are rendered as
-# plain text instead of links, and an offset given in the url is clamped.
+# How many months the prev/next navigation may move away from the current
+# month. Beyond that limit the arrows are rendered as plain text instead of
+# links, and a url asking for such a month is refused with a 403.
 # This is what keeps the amount of urls this macro generates finite: crawlers
 # ignore rel=nofollow and robots meta tags, but they can not follow a link
-# that is not there.
+# that is not there, and a url they made up themselves costs us a 403 instead
+# of a rendered page.
 # May be overridden in the wiki config as monthcalendar_max_nav_offset.
 MAX_NAV_OFFSET = 18 # 1.5 years
 
@@ -200,15 +208,14 @@ def cliprgb(r, g, b):
 
 def yearmonthplusoffset(year, month, offset):
     """ calculate new year/month from year/month and offset """
-    month += offset
-    # handle offset and under/overflows - quick and dirty, yes!
-    while month < 1:
-        month += 12
-        year -= 1
-    while month > 12:
-        month -= 12
-        year += 1
-    return year, month
+    # note: computed rather than looped, an offset comes from the url and a
+    # loop would let a big one keep the server busy for a long time.
+    yearoffset, month = divmod(month - 1 + offset, 12)
+    return year + yearoffset, month + 1
+
+def monthsbetween(year1, month1, year2, month2):
+    """ how many months is year1/month1 away from year2/month2 (signed) """
+    return (year1 - year2) * 12 + (month1 - month2)
 
 def parseargs(request, args, defpagename, defyear, defmonth, defoffset, defoffset2, defheight6, defanniversary, deftemplate):
     """ parse macro arguments """
@@ -228,14 +235,6 @@ def parseargs(request, args, defpagename, defyear, defmonth, defoffset, defoffse
     parmpagename = re.split(r'\*', parmpagename)
 
     return parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary, parmtemplate
-
-def clampoffset(offset, maxoffset):
-    """ clip a navigation offset into range -maxoffset..maxoffset """
-    if offset < -maxoffset:
-        return -maxoffset
-    elif offset > maxoffset:
-        return maxoffset
-    return offset
 
 def execute(macro, text):
     request = macro.request
@@ -276,19 +275,29 @@ def execute(macro, text):
 
     max_nav_offset = getattr(request.cfg, 'monthcalendar_max_nav_offset', MAX_NAV_OFFSET)
 
+    def navigable(year, month):
+        """ is year/month near enough to the current month to be rendered
+            (and linked) when the url asks for it? """
+        return abs(monthsbetween(year, month, currentyear, currentmonth)) <= max_nav_offset
+
     # move all calendars when using the navigation:
     if has_calparms and cparmpagename == parmpagename:
-        # this offset comes from the url query string, so it is controlled by
-        # whoever requests the page - crawlers included. Clamping it (and the
-        # navigation links built from it below) keeps the amount of distinct
-        # urls of this calendar finite.
-        parmoffset2 = clampoffset(cparmoffset2, max_nav_offset)
+        parmoffset2 = cparmoffset2
         year, month = yearmonthplusoffset(parmyear, parmmonth, parmoffset + parmoffset2)
         parmtemplate = cparmtemplate
+        # this offset comes from the url query string, so it is controlled by
+        # whoever requests the page - crawlers included. We only ever link
+        # months within max_nav_offset of the current one (see navigation()
+        # below), so an url asking for anything else is not one we handed out.
+        # Refusing it here rather than rendering a clamped calendar for it is
+        # what keeps the amount of pages we render for this url finite.
+        if not navigable(year, month):
+            request.makeForbidden(403, 'MonthCalendar: month out of range')
     else:
         # note: parmoffset2 given as macro argument does not move the displayed
-        # month, it only is the starting point of the navigation.
-        parmoffset2 = clampoffset(parmoffset2, max_nav_offset)
+        # month, it only is the starting point of the navigation. The displayed
+        # month is not range checked here: it comes from the page, not from the
+        # url, so an author may point a calendar at a far away year.
         year, month = yearmonthplusoffset(parmyear, parmmonth, parmoffset)
 
     # The navigation is never worth indexing: it shows the same day pages the
@@ -318,8 +327,10 @@ def execute(macro, text):
 
     def navigation(offset, label):
         """ a navigation link moving the calendar to navigation offset <offset>,
-            or just <label> for a bot or if that offset is out of range """
-        if is_spider or abs(offset) > max_nav_offset:
+            or just <label> for a bot or if that offset would lead to a month
+            we would refuse to render anyway """
+        navyear, navmonth = yearmonthplusoffset(parmyear, parmmonth, parmoffset + offset)
+        if is_spider or not navigable(navyear, navmonth):
             return label
         url = p.url(request, querystr % (qpagenames, offset, qtemplate))
         return formatter.url(1, url, 'cal-link', **navattrs) + label + formatter.url(0)
