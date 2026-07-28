@@ -10,7 +10,7 @@ from MoinMoin._tests import become_trusted, create_page, nuke_page, wikiconfig
 
 
 class TestInfoViews:
-    """ the page hits and edits view is gone, the others still work """
+    """ only the revision history is left of what info used to show """
 
     pagename = u'AutoCreatedMoinMoinTemporaryTestPageForInfo'
 
@@ -32,27 +32,29 @@ class TestInfoViews:
                                                    query_string=query)
         return status[:3], ''.join(appiter)
 
-    def test_hitcounts_is_not_served(self):
-        status, body = self._get(hitcounts=1)
-        assert status == '404'
+    def test_retired_views_are_not_served(self):
+        assert self._get(hitcounts=1)[0] == '404'
+        assert self._get(general=1)[0] == '404'
 
-    def test_hitcounts_is_not_served_whatever_it_says(self):
-        # the value is not parsed at all, so this can not be an unhandled
+    def test_retired_views_are_not_served_whatever_they_say(self):
+        # the values are not parsed at all, so this can not be an unhandled
         # ValueError (which is what an unparsable one used to be)
         for value in ('0', 'abc', ''):
-            status, body = self._get(hitcounts=value)
-            assert status == (value and '404' or '200')
+            for view in ('hitcounts', 'general'):
+                status = self._get(**{view: value})[0]
+                assert status == (value and '404' or '200')
 
-    def test_hitcounts_is_not_offered(self):
+    def test_retired_views_are_not_offered(self):
         status, body = self._get()
         assert status == '200'
         assert 'hitcounts' not in body
+        assert 'general' not in body
 
-    def test_other_views_still_work(self):
+    def test_the_history_is_still_served(self):
         status, body = self._get()
         assert status == '200'
-        status, body = self._get(general=1)
-        assert status == '200'
+        # the history listing, not an empty frame
+        assert 'info-paging-info' in body or 'Editor' in body
 
 
 coverage_modules = ['MoinMoin.action.info']
