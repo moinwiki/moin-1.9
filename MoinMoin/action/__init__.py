@@ -27,7 +27,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
+import re, time
 
 from MoinMoin.util import pysupport
 from MoinMoin import config, wikiutil
@@ -38,6 +38,30 @@ modules = pysupport.getPackageModules(__file__)
 
 # builtin-stuff (see do_<name> below):
 names = ['show', 'recall', 'raw', 'format', 'content', 'print', 'refresh', 'goto', ]
+
+# Sub pages named like a date are what the MonthCalendar macro links its day
+# pages as. Crawlers walk a lot of them, with years far away from now, and
+# showing one that does not exist is not cheap: we render the whole "this page
+# does not exist" view for it, which costs more than rendering a real page.
+# Bots we recognize already get an empty 404 (see Page.send_page), but the
+# ones that do not identify themselves as such do not, so refuse a day page
+# with an implausible year unless it really exists.
+# May be overridden in the wiki config as date_page_max_years.
+DATE_PAGE_MAX_YEARS = 2
+DATE_PAGE_RE = re.compile(r'/(\d{4,})-\d\d-\d\d$')
+
+def date_page_worth_showing(request, pagename):
+    """ may we spend a page rendering on this (possibly nonexisting) page? """
+    match = DATE_PAGE_RE.search(pagename)
+    if match is None:
+        return True # not a day page, not our business
+    max_years = getattr(request.cfg, 'date_page_max_years', DATE_PAGE_MAX_YEARS)
+    year = match.group(1)
+    # year granularity, so the user's timezone does not matter here
+    if len(year) <= 4 and abs(int(year) - time.localtime()[0]) <= max_years:
+        return True
+    # far away, but somebody may have written such a page on purpose
+    return Page(request, pagename).exists()
 
 class ActionBase:
     """ action base class with some generic stuff to inherit
@@ -253,6 +277,9 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
     """ show a page, either current revision or the revision given by "rev=" value.
         if count_hit is non-zero, we count the request for statistics.
     """
+    if not date_page_worth_showing(request, pagename):
+        request.makeForbidden(403, 'no such page, and its date is far away')
+
     # We must check if the current page has different ACLs.
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
