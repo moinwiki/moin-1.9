@@ -15,6 +15,19 @@ from MoinMoin import wikiutil
 from MoinMoin.logfile import editlog
 from MoinMoin.Page import Page
 
+# A diff url names two revisions, so a page with n revisions has n*(n-1)/2 of
+# them and serving one of them means rendering two revisions (plus the whole
+# page below the diff, for fancy diffs). Crawlers ignore rel=nofollow, so
+# instead of offering that many urls we only serve the diffs worth having:
+# * any comparison within the most recent DIFF_RECENT_REVS revisions, and
+# * comparisons spanning at most DIFF_MAX_SPAN revisions, anywhere in the
+#   history.
+# Neither set grows faster than linearly with the amount of revisions. A
+# request for anything else is refused with a 403.
+# May be overridden in the wiki config as diff_recent_revs / diff_max_span.
+DIFF_RECENT_REVS = 20
+DIFF_MAX_SPAN = 5
+
 def execute(pagename, request):
     """ Handle "action=diff"
         checking for either a "rev=formerrevision" parameter
@@ -90,6 +103,16 @@ def execute(pagename, request):
     else:
         newrev = rev2
         newpage = Page(request, pagename, rev=newrev)
+
+    # which revisions we compare is controlled by whoever requests the page,
+    # so refuse the ones we do not offer a way to reach (see above) before
+    # doing any work for them.
+    recent_revs = getattr(request.cfg, 'diff_recent_revs', DIFF_RECENT_REVS)
+    max_span = getattr(request.cfg, 'diff_max_span', DIFF_MAX_SPAN)
+    oldest_recent_rev = currentrev - recent_revs + 1
+    if ((oldrev < oldest_recent_rev or newrev < oldest_recent_rev) and
+        abs(newrev - oldrev) > max_span):
+        request.makeForbidden(403, 'diff: revisions too old and too far apart')
 
     oldlog = oldpage.editlog_entry()
     newlog = newpage.editlog_entry()
