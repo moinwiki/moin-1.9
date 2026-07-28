@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 """
 MoinMoin - Dump a MoinMoin wiki to static pages
 
@@ -7,15 +7,16 @@ MoinMoin - Dump a MoinMoin wiki to static pages
 @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, time, codecs, shutil, re, errno
+import sys, os, time, codecs, shutil, re, errno, tarfile
 
 from MoinMoin import config, wikiutil, Page, user
 from MoinMoin import script
 from MoinMoin.action import AttachFile
+from MoinMoin.formatter.text_html import Formatter
 
 url_prefix_static = "."
-logo_html = '<img src="logo.png">'
 HTML_SUFFIX = ".html"
+MOINDUMP_FILE = "moindump.tpl"
 
 page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -66,6 +67,19 @@ td.noborder {
 </html>
 '''
 
+redirect_template = u'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=%(charset)s">
+<meta http-equiv="refresh" content="0; url=%(target_url)s"/>
+<title>Redirecting...</title>
+</head><body>
+Redirecting to <a href="%(target_url)s">%(target_name)s</a>
+</body>
+</html>
+'''
+
 
 def _attachment(request, pagename, filename, outputdir, **kw):
     filename = filename.encode(config.charset)
@@ -83,12 +97,48 @@ def _attachment(request, pagename, filename, outputdir, **kw):
         elif not os.path.isdir(dest_dir):
             script.fatal("'%s' is not a directory" % dest_dir)
 
-        shutil.copyfile(source_file, dest_file)
+        is_drawing = filename.lower().endswith(('.tdraw', '.adraw'))
+        if is_drawing:
+            try:
+                with tarfile.open(source_file, 'r') as tar:
+                    m = tar.getmember('drawing.png')
+                    f = tar.extractfile(m)
+                    if f:
+                        png_filename = filename + ".png"
+                        png_dest_file = os.path.join(dest_dir, png_filename)
+                        with open(png_dest_file, 'wb') as out:
+                            out.write(f.read())
+                        dest_url = dest_url + ".png"
+            except Exception as e:
+                script.fatal('Failed to extract drawing.png from %s: %s' % (filename, str(e)))
+        else:
+            shutil.copyfile(source_file, dest_file)
+
         script.log('Writing "%s"...' % dest_url)
         return dest_url
     else:
         return ""
 
+def _patched_attachment_drawing(self, url, text, **kw):
+    pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
+    containername = wikiutil.taintfilename(drawing)
+    ci = AttachFile.ContainerItem(self.request, pagename, containername)
+    if not ci.exists():
+        return self.icon('attachimg')
+
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, do='modify')
+    return '<img alt="%s" class="drawing" src="%s" title="%s">' % (
+        text, drawing_url, text
+    )
+
+# quote Wikiname in standard IRI way except '/': UTF-8 encoding & quote
+original_quoteWikinameURL = wikiutil.quoteWikinameURL
+def _quoteWikinameURL_UTF8(pagename, charset=config.charset):
+    return original_quoteWikinameURL(pagename, charset) + HTML_SUFFIX
+
+# quote Wikiname in safe way: Just use ASCII characters
+def _quoteWikinameURL_WikiFS(pagename, charset=config.charset):
+    return wikiutil.quoteWikinameFS(pagename, charset) + HTML_SUFFIX
 
 class PluginScript(script.MoinScript):
     """\
@@ -113,6 +163,13 @@ General syntax: moin [options] export dump [dump-options]
     2. To dump all the pages readable by 'JohnSmith' on the wiki to the directory
        '/mywiki'
        moin ... export dump --target-dir=/mywiki --username JohnSmith
+
+    3. To use a custom template file 'page_template.html'
+       moin ... export dump ... --page-template=./page_template.html
+
+    4. To set HTML filename encoding to UTF-8 instead of quoteWikinameFS
+       (Filesystem must support UTF-8 encoding)
+       moin ... export dump ... --utf8-fs
 """
 
     def __init__(self, argv=None, def_values=None):
@@ -124,6 +181,14 @@ General syntax: moin [options] export dump [dump-options]
         self.parser.add_option(
             "-u", "--username", dest = "dump_user",
             help = "User the dump will be performed as (for ACL checks, etc)"
+        )
+        self.parser.add_option(
+            "-p", "--page-template", dest = "page_template",
+            help = "Page template file for each wiki page"
+        )
+        self.parser.add_option(
+            "--utf8-fs", action = "store_true", dest = "utf8_fs", default = False,
+            help = "Set HTML filename encoding to UTF-8 instead of quoteWikinameFS"
         )
 
     def mainloop(self):
@@ -139,6 +204,20 @@ General syntax: moin [options] export dump [dump-options]
         except OSError, err:
             if err.errno != errno.EEXIST:
                 script.fatal("Cannot create output directory '%s'!" % outputdir)
+
+        global page_template
+        if self.options.page_template:
+            page_template_file = self.options.page_template
+            with codecs.open(page_template_file, 'r', config.charset) as filein:
+                page_template = filein.read()
+        else:
+            # For Jorgen Bodde's template file location: %(outputdir)s/moindump.tpl
+            tplfile = os.path.join(outputdir, MOINDUMP_FILE)
+            if os.path.exists(tplfile):
+                with codecs.open(tplfile, 'r', config.charset) as filein:
+                    page_template = filein.read()
+
+        utf8_fs = self.options.utf8_fs
 
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
@@ -156,9 +235,9 @@ General syntax: moin [options] export dump [dump-options]
 
         # use this user for permissions checks
         request.user = user.User(request, name=self.options.dump_user)
+        logo_html = request.cfg.logo_string
 
         pages = request.rootpage.getPageList(user='') # get list of all pages in wiki
-        pages.sort()
         if self.options.page: # did user request a particular page or group of pages?
             try:
                 namematch = re.compile(self.options.page)
@@ -167,10 +246,13 @@ General syntax: moin [options] export dump [dump-options]
                     pages = [self.options.page]
             except:
                 pages = [self.options.page]
+        pages.sort()
 
-        wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
-
+        pagenameToFilename = (lambda pagename: pagename + HTML_SUFFIX) if utf8_fs else _quoteWikinameURL_WikiFS
+        # Override methods
+        wikiutil.quoteWikinameURL = _quoteWikinameURL_UTF8 if utf8_fs else _quoteWikinameURL_WikiFS
         AttachFile.getAttachUrl = lambda pagename, filename, request, **kw: _attachment(request, pagename, filename, outputdir, **kw)
+        Formatter.attachment_drawing = _patched_attachment_drawing
 
         errfile = os.path.join(outputdir, 'error.log')
         errlog = open(errfile, 'w')
@@ -186,49 +268,88 @@ General syntax: moin [options] export dump [dump-options]
 
         urlbase = request.url # save wiki base url
         for pagename in pages:
-            # we have the same name in URL and FS
-            file = wikiutil.quoteWikinameURL(pagename)
+            file = pagenameToFilename(pagename)
             script.log('Writing "%s"...' % file)
             try:
-                pagehtml = ''
-                request.url = urlbase + pagename # add current pagename to url base
+                request.url = urlbase + wikiutil.quoteWikinameURL(pagename) # add current pagename to url base
                 page = Page.Page(request, pagename)
-                request.page = page
-                try:
-                    request.reset()
-                    pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
-                except:
-                    errcnt = errcnt + 1
-                    print >> sys.stderr, "*** Caught exception while writing page!"
-                    print >> errlog, "~" * 78
-                    print >> errlog, file # page filename
-                    import traceback
-                    traceback.print_exc(None, errlog)
+                pi = page.parse_processing_instructions()
+
+                if 'redirect' in pi:
+                    target_name = pi['redirect']
+                    target_url = wikiutil.quoteWikinameURL(target_name)
+                    filepath = os.path.join(outputdir, file)
+                    fileout = codecs.open(filepath, 'w', config.charset)
+                    filecontent = redirect_template % {
+                        'charset': config.charset,
+                        'target_name': target_name,
+                        'target_url': target_url + '?redirect=' + wikiutil.quoteWikinameURL(pagename),
+                    }
+                else:
+                    pagehtml = ''
+                    request.page = page
+                    try:
+                        request.reset()
+                        pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
+                        pageinfo = request.theme.pageinfo(page)
+                    except:
+                        errcnt = errcnt + 1
+                        print >> sys.stderr, "*** Caught exception while writing page!"
+                        print >> errlog, "~" * 78
+                        print >> errlog, file # page filename
+                        import traceback
+                        traceback.print_exc(None, errlog)
+                    timestamp = time.strftime("%Y-%m-%d %H:%M")
+                    filecontent = page_template % {
+                        'charset': config.charset,
+                        'pagename': wikiutil.escape(pagename),
+                        'pagehtml': pagehtml,
+                        'logo_html': logo_html,
+                        'navibar_html': navibar_html,
+                        'timestamp': timestamp,
+                        'theme': request.cfg.theme_default,
+                        'pageinfo': pageinfo,
+                        'page_footer2': request.cfg.page_footer2,
+                    }
             finally:
-                timestamp = time.strftime("%Y-%m-%d %H:%M")
+                if utf8_fs:
+                    # create directories for subpages
+                    sub_dirs = os.path.dirname(file).split('/')
+                    cur = outputdir
+                    for dir in sub_dirs:
+                        if not dir: continue
+                        html_src = os.path.join(cur, dir + HTML_SUFFIX)
+                        cur = os.path.join(cur, dir)
+                        try:
+                            os.makedirs(cur)
+                            script.log('Directory check/create: "%s"' % cur)
+                        except OSError as e:
+                            if e.errno != errno.EEXIST:
+                                raise
+                        # create redirect page if parent page exists
+                        html_dest = os.path.join(cur, 'index' + HTML_SUFFIX)
+                        if os.path.isfile(html_src) and not os.path.exists(html_dest):
+                            with codecs.open(html_dest, 'w', config.charset) as fileout:
+                                fileout.write(redirect_template % {
+                                    'charset': config.charset,
+                                    'target_name': dir,
+                                    'target_url': "../" + dir + HTML_SUFFIX,
+                                })
+                            script.log('Writing "%s"...' % html_dest)
+
                 filepath = os.path.join(outputdir, file)
-                fileout = codecs.open(filepath, 'w', config.charset)
-                fileout.write(page_template % {
-                    'charset': config.charset,
-                    'pagename': pagename,
-                    'pagehtml': pagehtml,
-                    'logo_html': logo_html,
-                    'navibar_html': navibar_html,
-                    'timestamp': timestamp,
-                    'theme': request.cfg.theme_default,
-                })
-                fileout.close()
+                with codecs.open(filepath, 'w', config.charset) as fileout:
+                    fileout.write(filecontent)
 
         # copy FrontPage to "index.html"
         indexpage = page_front_page
         if self.options.page:
             indexpage = pages[0] # index page has limited use when dumping specific pages, but create one anyway
         shutil.copyfile(
-            os.path.join(outputdir, wikiutil.quoteWikinameFS(indexpage) + HTML_SUFFIX),
+            os.path.join(outputdir, pagenameToFilename(indexpage)),
             os.path.join(outputdir, 'index' + HTML_SUFFIX)
         )
 
         errlog.close()
         if errcnt:
             print >> sys.stderr, "*** %d error(s) occurred, see '%s'!" % (errcnt, errfile)
-
