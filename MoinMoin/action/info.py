@@ -2,15 +2,14 @@
 """
     MoinMoin - info action
 
-    Displays page history, some general page infos and statistics.
+    Displays the page history. It used to show some general page infos and
+    statistics as well, see the comment in execute() for why it does not.
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import hashlib
-
-from MoinMoin import config, wikiutil, action
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.logfile import editlog
 from MoinMoin.widget import html
@@ -18,59 +17,20 @@ from MoinMoin.action import AttachFile
 
 def execute(pagename, request):
     """ show misc. infos about a page """
+    # The "Page hits and edits" and "General Page Infos" views are not served
+    # any more, info only shows the revision history now. Each of them was an
+    # url per page of the wiki for a crawler to find, and neither is cheap:
+    # hitcounts puts a chart on the page whose image url makes us walk the
+    # whole event log, and general hashes the page body and collects its
+    # attachments, subscribers and outgoing links. There is nothing to show
+    # instead of them, so this is a 404 rather than a redirect to the history.
+    # Note we do not int() the values: whatever they say, these views are gone.
+    if request.values.get('hitcounts') or request.values.get('general'):
+        request.makeForbidden(404, 'this info view is gone, only the history is left')
+
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
         return
-
-    def general(page, pagename, request):
-        _ = request.getText
-        f = request.formatter
-
-        request.write(f.heading(1, 1),
-                      f.text(_('General Information')),
-                      f.heading(0, 1))
-
-        request.write(f.paragraph(1),
-                      f.text(_("Page size: %d") % page.size()),
-                      f.paragraph(0))
-
-        digest = hashlib.new('sha1', page.get_raw_body().encode(config.charset)).hexdigest().upper()
-        request.write(f.paragraph(1),
-                      f.rawHTML('%(label)s <tt>%(value)s</tt>' % {
-                          'label': _("SHA digest of this page's content is:"),
-                          'value': digest, }),
-                      f.paragraph(0))
-
-        # show attachments (if allowed)
-        attachment_info = action.getHandler(request, 'AttachFile', 'info')
-        if attachment_info:
-            request.write(attachment_info(pagename, request))
-
-        # show subscribers
-        subscribers = page.getSubscribers(request, include_self=1, return_users=1)
-        if subscribers:
-            request.write(f.paragraph(1))
-            request.write(f.text(_('The following users subscribed to this page:')))
-            for lang in subscribers:
-                request.write(f.linebreak(), f.text('[%s] ' % lang))
-                for user in subscribers[lang]:
-                    # do NOT disclose email addr, only WikiName
-                    userhomepage = Page(request, user.name)
-                    if userhomepage.exists():
-                        request.write(f.rawHTML(userhomepage.link_to(request) + ' '))
-                    else:
-                        request.write(f.text(user.name + ' '))
-            request.write(f.paragraph(0))
-
-        # show links
-        links = page.getPageLinks(request)
-        if links:
-            request.write(f.paragraph(1))
-            request.write(f.text(_('This page links to the following pages:')))
-            request.write(f.linebreak())
-            for linkedpage in links:
-                request.write(f.rawHTML("%s%s " % (Page(request, linkedpage).link_to(request), ",."[linkedpage == links[-1]])))
-            request.write(f.paragraph(0))
 
     def history(page, pagename, request):
         # show history as default
@@ -356,40 +316,13 @@ def execute(pagename, request):
     f = request.formatter
 
     request.theme.send_title(_('Info for "%s"') % (title, ), page=page)
-    # (label, name of the parameter that selects this view - the revision
-    # history is what info shows when neither of the others is asked for)
-    menu_items = [
-        (_('Show "%(title)s"') % {'title': _('Revision History')}, None),
-        (_('Show "%(title)s"') % {'title': _('General Page Infos')}, 'general'),
-        (_('Show "%(title)s"') % {'title': _('Page hits and edits')}, 'hitcounts'),
-    ]
     request.write(f.div(1, id="content")) # start content div
-    # These used to be links, giving a crawler three urls on every page of the
-    # wiki - and the first of them leads on to the whole page history. A GET
-    # form shows the same three views to a reader, and crawlers do not submit
-    # forms. The button that shows the history needs no name of its own, it
-    # just leaves general and hitcounts unset.
-    request.write(f.rawHTML('<form method="GET" action="%s"><div>'
-                            '<input type="hidden" name="action" value="info">'
-                            % wikiutil.escape(page.url(request), True)))
-    for text, name in menu_items:
-        if name:
-            button = '<button type="submit" name="%s" value="1">%s</button> ' % (name, wikiutil.escape(text))
-        else:
-            button = '<button type="submit">%s</button> ' % wikiutil.escape(text)
-        request.write(f.rawHTML(button))
-    request.write(f.rawHTML('</div></form>'))
-
-    show_hitcounts = int(request.values.get('hitcounts', 0)) != 0
-    show_general = int(request.values.get('general', 0)) != 0
-
-    if show_hitcounts:
-        from MoinMoin.stats import hitcounts
-        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote(pagename)))
-    elif show_general:
-        general(page, pagename, request)
-    else:
-        history(page, pagename, request)
+    # There used to be a menu of the three views info offered, first as links
+    # (an url per view on every page of the wiki, and the history one leads on
+    # to the whole page history), then as a GET form that crawlers do not
+    # submit. The revision history is the only view left, so a menu to pick it
+    # would only ever re-request the page it is on.
+    history(page, pagename, request)
 
     request.write(f.div(0)) # end content div
     request.theme.send_footer(pagename)

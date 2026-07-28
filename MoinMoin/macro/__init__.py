@@ -25,6 +25,7 @@ from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.datastruct.backends.wiki_dicts import WikiDict
+from MoinMoin.web.exceptions import HTTPException
 
 
 names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
@@ -127,6 +128,12 @@ class Macro:
                     raise ImportError("Cannot load macro %s" % macro_name)
         try:
             return execute(self, args)
+        except HTTPException:
+            # a macro may deliberately abort the request, e.g. because the
+            # url asks it for something it refuses to render (403). That is
+            # not a faulty macro, so let it through to the wsgi app, which
+            # turns it into the corresponding http response.
+            raise
         except Exception, err:
             # we do not want that a faulty macro aborts rendering of the page
             # and makes the wiki UI unusable (by emitting a Server Error),
