@@ -18,6 +18,15 @@ from MoinMoin.action import AttachFile
 
 def execute(pagename, request):
     """ show misc. infos about a page """
+    # The "Page hits and edits" view is not served any more: it puts a chart
+    # on the page whose image url makes us walk the whole event log, and it
+    # was one url per page of the wiki for a crawler to find. There is nothing
+    # to show instead of it, so this is a 404 rather than a redirect to one of
+    # the other views. Note we do not int() the value: whatever it says, this
+    # view is gone.
+    if request.values.get('hitcounts'):
+        request.makeForbidden(404, 'the page hits and edits view is gone')
+
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
         return
@@ -361,14 +370,13 @@ def execute(pagename, request):
     menu_items = [
         (_('Show "%(title)s"') % {'title': _('Revision History')}, None),
         (_('Show "%(title)s"') % {'title': _('General Page Infos')}, 'general'),
-        (_('Show "%(title)s"') % {'title': _('Page hits and edits')}, 'hitcounts'),
     ]
     request.write(f.div(1, id="content")) # start content div
-    # These used to be links, giving a crawler three urls on every page of the
-    # wiki - and the first of them leads on to the whole page history. A GET
-    # form shows the same three views to a reader, and crawlers do not submit
+    # These used to be links, giving a crawler an url per view on every page
+    # of the wiki - and the history one leads on to the whole page history. A
+    # GET form shows the same views to a reader, and crawlers do not submit
     # forms. The button that shows the history needs no name of its own, it
-    # just leaves general and hitcounts unset.
+    # just leaves general unset.
     request.write(f.rawHTML('<form method="GET" action="%s"><div>'
                             '<input type="hidden" name="action" value="info">'
                             % wikiutil.escape(page.url(request), True)))
@@ -380,13 +388,9 @@ def execute(pagename, request):
         request.write(f.rawHTML(button))
     request.write(f.rawHTML('</div></form>'))
 
-    show_hitcounts = int(request.values.get('hitcounts', 0)) != 0
     show_general = int(request.values.get('general', 0)) != 0
 
-    if show_hitcounts:
-        from MoinMoin.stats import hitcounts
-        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote(pagename)))
-    elif show_general:
+    if show_general:
         general(page, pagename, request)
     else:
         history(page, pagename, request)
