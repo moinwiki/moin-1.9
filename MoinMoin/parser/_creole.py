@@ -198,7 +198,7 @@ class Parser:
             self.text.content += groups.get('url_target')
     _url_target_repl = _url_repl
     _url_proto_repl = _url_repl
-    _escaped_url = _url_repl
+    _escaped_url_repl = _url_repl
 
     def _link_repl(self, groups):
         """Handle all kinds of links."""

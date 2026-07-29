@@ -609,25 +609,28 @@ class Parser:
 
     def _word_repl(self, word, groups):
         """Handle WikiNames."""
+        # note: do not use <word>, it depends on the dict ordering of
+        # match.groupdict() which of the (nested) groups we get dispatched on.
+        # <word> includes the ! (if present), <word_name> never does.
+        name = groups.get('word_name')
         bang = ''
         bang_present = groups.get('word_bang')
         if bang_present:
             if self.cfg.bang_meta:
                 # handle !NotWikiNames
-                return self.formatter.nowikiword(word)
+                return self.formatter.nowikiword(name)
             else:
                 bang = self.formatter.text('!')
-        name = groups.get('word_name')
         current_page = self.formatter.page.page_name
         abs_name = wikiutil.AbsPageName(current_page, name)
         # if a simple, self-referencing link, emit it as plain text
         if abs_name == current_page:
-            return self.formatter.text(word)
+            return self.formatter.text(name)
         else:
             abs_name, anchor = wikiutil.split_anchor(abs_name)
             return (bang +
                     self.formatter.pagelink(1, abs_name, anchor=anchor) +
-                    self.formatter.text(word) +
+                    self.formatter.text(name) +
                     self.formatter.pagelink(0, abs_name))
     _word_bang_repl = _word_repl
     _word_name_repl = _word_repl
@@ -814,7 +817,9 @@ class Parser:
             else:
                 desc = self._transclude_description(desc, target)
                 return self.formatter.text('{{%s|%s|%s}}' % (target, desc, params))
-        return word +'???'
+        # <word> depends on the dict ordering of match.groupdict(), use the
+        # full markup from <transclude> so this is reproducible.
+        return groups.get('transclude', word) + u'???'
     _transclude_target_repl = _transclude_repl
     _transclude_desc_repl = _transclude_repl
     _transclude_params_repl = _transclude_repl

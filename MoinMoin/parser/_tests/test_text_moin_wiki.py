@@ -539,6 +539,61 @@ class TestLinkingMarkup(ParserTestCase):
         assert 'some+file.png' in html
 
 
+class TestNoWikiNameMarkup(ParserTestCase):
+    """ Test !WikiName (bang_meta) markup
+
+    A ! in front of a WikiName suppresses the link. With bang_meta enabled
+    (that is the default), the ! itself must not show up in the output.
+
+    Regression test for the dict ordering dependency in Parser.replace():
+    <word> includes the !, <word_name> does not, and which of the (nested)
+    groups _word_repl gets dispatched on depends on the ordering of
+    match.groupdict() - which differs between CPython and PyPy.
+    """
+
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+    _tests = [
+        # test,                          expected
+        ('!SomeNonExistentPage', 'SomeNonExistentPage'),
+        ('!SomeNonExistentPage#anchor', 'SomeNonExistentPage#anchor'),
+        ('!MoinMoin', 'MoinMoin'),
+        ]
+
+    def testNoWikiNameFormating(self):
+        """ parser.wiki: !WikiName renders as text, without the ! """
+        for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            assert result == expected
+
+    def testNoWikiNameIsNotLinked(self):
+        """ parser.wiki: !WikiName does not create a link """
+        html = self.parse(self.text % '!SomeNonExistentPage')
+        assert '<a ' not in html
+
+
+class TestNoWikiNameMarkupBangMetaOff(ParserTestCase):
+    """ Test !WikiName markup with bang_meta disabled
+
+    With bang_meta off, the ! is kept and the WikiName is still linked.
+    """
+
+    from MoinMoin._tests import wikiconfig
+    class Config(wikiconfig.Config):
+        bang_meta = False
+
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+
+    def testBangIsKeptOnce(self):
+        """ parser.wiki: with bang_meta off, ! is kept once and name is linked """
+        html = self.parse(self.text % '!SomeNonExistentPage')
+        result = self.needle.search(html).group(1)
+        assert result == ('!<a class="nonexistent" href="/SomeNonExistentPage">'
+                          'SomeNonExistentPage</a>')
+
+
 class TestTransclusionMarkup(ParserTestCase):
     """ Test wiki markup """
 
