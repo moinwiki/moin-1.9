@@ -1440,7 +1440,11 @@ class Page(object):
 
     def format(self, parser):
         """ Format and write page content without caching """
-        parser.format(self.formatter)
+        try:
+            parser.format(self.formatter)
+        except ValueError:
+            logging.error('======================> %s <==========================' % self.page_name)
+            raise
 
     def execute(self, request, parser, code):
         """ Write page content by executing cache code """
